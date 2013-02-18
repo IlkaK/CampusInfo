@@ -148,7 +148,7 @@
 
 
 
--(void) setNewScheduleWithAcronym:(NSString *)newAcronym:(NSString *)newAcronymType
+-(void) setNewScheduleWithAcronym:(NSString *)newAcronym withAcronymType:(NSString *)newAcronymType
 {
     self._actualShownAcronymTrials = 1;
     self._actualShownAcronymString = newAcronym;
@@ -420,7 +420,7 @@
         _ownStoredAcronymLabel.text = [NSString stringWithFormat:@"eigenes Kürzel: %@",_ownStoredAcronymString];
         
         // SET NEW ACRONYM WITH ACTUAL DATE
-        [self setNewScheduleWithAcronym:_ownStoredAcronymString:_ownStoredAcronymType];
+        [self setNewScheduleWithAcronym:_ownStoredAcronymString withAcronymType:_ownStoredAcronymType];
     
         //NSLog(@"setAcronymLabel new acronym %@",_ownStoredAcronymString);
     }    
@@ -447,7 +447,7 @@
 
 
 
--(void) setNewAcronym:(NSString *)newAcronym:(NSString *)newAcronymType
+-(void) setNewAcronym:(NSString *)newAcronym withAcronymType:(NSString *)newAcronymType
 {
     //NSLog(@"setNewAcronym");
     self._acronymLabel.text  = [NSString stringWithFormat:@"von %@ (%@)"
@@ -462,7 +462,7 @@
                                        ];
     
     // SET NEW ACRONYM WITH ACTUAL DATE
-    [self setNewScheduleWithAcronym:newAcronym :newAcronymType];
+    [self setNewScheduleWithAcronym:newAcronym withAcronymType:newAcronymType];
     
 }
 
@@ -633,7 +633,7 @@
     if (motion == UIEventSubtypeMotionShake)
     {
         [self setTitleToActualDate];
-        [self setNewAcronym:self._ownStoredAcronymString:self._ownStoredAcronymType];
+        [self setNewAcronym:self._ownStoredAcronymString withAcronymType:self._ownStoredAcronymType];
     }
 }
 
@@ -767,9 +767,7 @@
 
 
 
-
-//-(void) changeToRoomSchedule:(id)sender event:(id)event:(int)realizationIndex
--(void) changeToRoomSchedule:(id)sender :(id)event:(int)realizationIndex
+-(void) changeToRoomSchedule:(id)sender withEvent:(id)event withRealizationIndex:(int)realizationIndex
 {
     NSSet       *_touches              = [event    allTouches];
     UITouch     *_touch                = [_touches anyObject ];
@@ -788,48 +786,48 @@
         _acronymLabel.text  = [NSString stringWithFormat:@"von %@ (Raum)",_roomString];
         
         // SET NEW ACRONYM WITH ACTUAL DATE
-        [self setNewScheduleWithAcronym:_roomString :@"rooms"];
+        [self setNewScheduleWithAcronym:_roomString withAcronymType:@"rooms"];
     }
 }
 
 -(void) changeToRoomSchedule1:(id)sender event:(id)event
 {   
-    [self changeToRoomSchedule:sender:event:0];
+    [self changeToRoomSchedule:sender withEvent:event withRealizationIndex:0];
 }
 
 -(void) changeToRoomSchedule2:(id)sender event:(id)event
 {   
-    [self changeToRoomSchedule:sender:event:1];
+    [self changeToRoomSchedule:sender withEvent:event withRealizationIndex:1];
 }
 
 -(void) changeToRoomSchedule3:(id)sender event:(id)event
 {   
-    [self changeToRoomSchedule:sender:event:2];
+    [self changeToRoomSchedule:sender withEvent:event withRealizationIndex:2];
 }
 
 -(void) changeToRoomSchedule4:(id)sender event:(id)event
 {   
-    [self changeToRoomSchedule:sender:event:3];
+    [self changeToRoomSchedule:sender withEvent:event withRealizationIndex:3];
 }
 
 -(void) changeToRoomSchedule5:(id)sender event:(id)event
 {   
-    [self changeToRoomSchedule:sender:event:4];
+    [self changeToRoomSchedule:sender withEvent:event withRealizationIndex:4];
 }
 
 -(void) changeToRoomSchedule6:(id)sender event:(id)event
 {   
-    [self changeToRoomSchedule:sender:event:5];
+    [self changeToRoomSchedule:sender withEvent:event withRealizationIndex:5];
 }
 
 -(void) changeToRoomSchedule7:(id)sender event:(id)event
 {   
-    [self changeToRoomSchedule:sender:event:6];
+    [self changeToRoomSchedule:sender withEvent:event withRealizationIndex:6];
 }
 
 -(void) changeToRoomSchedule8:(id)sender event:(id)event
 {   
-    [self changeToRoomSchedule:sender:event:7];
+    [self changeToRoomSchedule:sender withEvent:event withRealizationIndex:7];
 }
 
 
@@ -851,7 +849,7 @@
         _acronymLabel.text  = [NSString stringWithFormat:@"von %@ (Kurs)",_courseString];
         
         // SET NEW ACRONYM WITH ACTUAL DATE
-        [self setNewScheduleWithAcronym:_courseString :@"courses"];
+        [self setNewScheduleWithAcronym:_courseString withAcronymType:@"courses"];
     }
 }
 

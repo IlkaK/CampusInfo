@@ -290,7 +290,7 @@
     
     //if([self._timeTableDetailViewDelegate respondsToSelector:@selector(setNewAcronym:)])
     //{
-    [self._timeTableDetailViewDelegate setNewAcronym:_newAcronymString:_newAcronymType];
+    [self._timeTableDetailViewDelegate setNewAcronym:_newAcronymString withAcronymType:_newAcronymType];
     //}
     [self dismissModalViewControllerAnimated:YES];
     
