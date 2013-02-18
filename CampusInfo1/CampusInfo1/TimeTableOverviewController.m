@@ -3183,89 +3183,61 @@
             {  
                 // depending on how many rooms and time slots there are take cell
                 
-                // only one room and one time slot => take normal hight cell
-                
-                if (   [_scheduleEvent._slots                     count] == 1
-                    && [_scheduleEvent._scheduleEventRealizations count] == 1)
-                {
-                    return 44;
-                }
-                if ((   [_scheduleEvent._slots                     count] == 2
-                     && [_scheduleEvent._scheduleEventRealizations count] == 1
+                if (   [_scheduleEvent._slots                     count] == 8
+                    || [_scheduleEvent._scheduleEventRealizations count] == 8
                     )
-                || (    [_scheduleEvent._slots                     count] == 1
-                     && [_scheduleEvent._scheduleEventRealizations count] == 2
-                    )
-                || (    [_scheduleEvent._slots                     count] == 2
-                     && [_scheduleEvent._scheduleEventRealizations count] == 2
-                   )
-                 )
-
-                {
-                    return 70;
-                }
-                if ((    [_scheduleEvent._slots                     count] == 3
-                      && [_scheduleEvent._scheduleEventRealizations count] == 1
-                    )
-                || (    [_scheduleEvent._slots                     count] == 1
-                     && [_scheduleEvent._scheduleEventRealizations count] == 3
-                    )
-                || (    [_scheduleEvent._slots                     count] == 3
-                     && [_scheduleEvent._scheduleEventRealizations count] == 2
-                   )
-                || (    [_scheduleEvent._slots                     count] == 3
-                     && [_scheduleEvent._scheduleEventRealizations count] == 3
-                   )
-                )
-                {
-                    return 104;
-                }
-                if ((   [_scheduleEvent._slots                     count] == 4
-                     && [_scheduleEvent._scheduleEventRealizations count] == 1
-                    )
-                 || (   [_scheduleEvent._slots                     count] == 4
-                     && [_scheduleEvent._scheduleEventRealizations count] == 2
-                    )
-                 || (   [_scheduleEvent._slots                     count] == 4
-                     && [_scheduleEvent._scheduleEventRealizations count] == 3
-                    )
-                 || (   [_scheduleEvent._slots                     count] == 1
-                     && [_scheduleEvent._scheduleEventRealizations count] == 4
-                    )
-                )
-                {
-                    return 140;
-                }
-                if ((  [_scheduleEvent._slots                     count] == 1
-                    && [_scheduleEvent._scheduleEventRealizations count] == 5
-                    )
-                 || (  [_scheduleEvent._slots                     count] == 5
-                    && [_scheduleEvent._scheduleEventRealizations count] == 1
-                    )
-                  )
-                {
-                    return 175;
-                }
-                if (   [_scheduleEvent._slots                     count] == 1
-                    && [_scheduleEvent._scheduleEventRealizations count] == 6)
-                {
-                    return 210;
-                }
-                if (   [_scheduleEvent._slots                     count] == 1
-                    && [_scheduleEvent._scheduleEventRealizations count] == 7)
-                {
-                    return 245;
-                }
-                if ((  [_scheduleEvent._slots                     count] == 1
-                    && [_scheduleEvent._scheduleEventRealizations count] == 8
-                    )
-                || (   [_scheduleEvent._slots                     count] == 8
-                    && [_scheduleEvent._scheduleEventRealizations count] == 1
-                    )
-                )
                 {
                     return 280;
                 }
+                
+                if (   [_scheduleEvent._slots                     count] == 7
+                    || [_scheduleEvent._scheduleEventRealizations count] == 7
+                   )
+                {
+                    return 245;
+                }
+                
+                if (   [_scheduleEvent._slots                     count] == 6
+                    || [_scheduleEvent._scheduleEventRealizations count] == 6
+                    )
+                {
+                    return 210;
+                }
+                
+                if (    [_scheduleEvent._slots                     count] == 5
+                     || [_scheduleEvent._scheduleEventRealizations count] == 5
+                   )                    
+                {
+                    return 175;
+                }
+
+                if (   [_scheduleEvent._slots                     count] == 4
+                    || [_scheduleEvent._scheduleEventRealizations count] == 4
+                   )
+                {
+                  return 140;
+                }
+            
+                if (    [_scheduleEvent._slots                     count] == 3
+                     || [_scheduleEvent._scheduleEventRealizations count] == 3
+                   )
+                {
+                    return 104;
+                }
+                
+                if (   [_scheduleEvent._slots                     count] == 2
+                    || [_scheduleEvent._scheduleEventRealizations count] == 2
+                   )
+                {
+                    return 70;
+                }
+    
+                if (   [_scheduleEvent._slots                     count] == 1
+                    || [_scheduleEvent._scheduleEventRealizations count] == 1)
+                {
+                    return 44;
+                }
+
             }
         }
     }
