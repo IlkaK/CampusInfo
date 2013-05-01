@@ -436,8 +436,8 @@
 
     //----- Navigation Bar ----
     // set current day
-    //self._actualDate = [NSDate date];
-    self._actualDate    = [[self dayFormatter] dateFromString:@"17.12.2012"];
+    self._actualDate = [NSDate date];
+    //self._actualDate    = [[self dayFormatter] dateFromString:@"17.12.2012"];
     _dayNavigator.title = [NSString stringWithFormat:@"%@, %@"
                            ,[[self weekDayFormatter] stringFromDate:self._actualDate]
                            ,[[self dayFormatter]     stringFromDate:self._actualDate]];
@@ -1187,10 +1187,7 @@
 }
 
 
-
-
-
-- (BOOL) isActualDayAndTime: (NSDate *)actualDate:(NSUInteger )cellSelection{
+- (BOOL) isActualDayAndTime: (NSDate *)actualDate withCellSelection:(NSUInteger )cellSelection{
 
     NSDate *_today = [NSDate date];
     //NSDate *_today    = [[self dayFormatter] dateFromString:@"19.03.2012"];
@@ -1228,6 +1225,36 @@
 }
 
 
+
+- (void) setLectureButtonWithCell:(UITableViewCell *)cell
+        withTag            :(int)       indexTag
+        withActualSelection:(NSUInteger)actualSelection
+        withTitle          :(NSString *)title
+        doEnable           :(BOOL)      enable
+{
+
+    UIButton  *_lectureButton = (UIButton *)[cell viewWithTag:indexTag];
+    
+    [_lectureButton setTitle:title     forState:UIControlStateNormal];
+    [_lectureButton setBackgroundColor:[UIColor clearColor]];
+    
+    if ([self isActualDayAndTime:_actualDate withCellSelection:actualSelection])
+    {
+        [_lectureButton setBackgroundColor:[UIColor lightGrayColor]];
+    }
+    
+    _lectureButton.enabled = enable;
+    
+    if (enable)
+    {
+       [_lectureButton addTarget:self action:@selector(changeToCourseSchedule  :event:) forControlEvents:UIControlEventTouchUpInside];
+    }
+    
+}
+
+
+
+
 - (UITableViewCell *)emptyCell
     :(UITableView      *)actualTableView
     :(NSUInteger        )actualSelection
@@ -1243,21 +1270,21 @@
     }
 
     UILabel          *_labelDate     = (UILabel  *)[_cell viewWithTag:1];
-    UIButton         *_lectureButton = (UIButton *)[_cell viewWithTag:2];  
+
+    [self setLectureButtonWithCell:_cell withTag:2 withActualSelection:actualSelection withTitle:@"" doEnable:NO];
+
     UIButton         *_roomButton    = (UIButton *)[_cell viewWithTag:3];  
     UIButton         *_detailButton  = (UIButton *)[_cell viewWithTag:4];  // with arrow image, leading to detail page
     
     // initially always disable detail button
     _detailButton.enabled  = FALSE;
     _detailButton.hidden   = YES;
-    _lectureButton.enabled = FALSE;
     _roomButton.enabled    = FALSE;
     
     // initialize values for buttons and labels
-    [_lectureButton setTitle:@"" forState:UIControlStateNormal];
+
     [_roomButton    setTitle:@"" forState:UIControlStateNormal];
     [_labelDate     setBackgroundColor:[UIColor clearColor]];
-    [_lectureButton setBackgroundColor:[UIColor clearColor]];
     [_roomButton    setBackgroundColor:[UIColor clearColor]];
     [_cell          setBackgroundColor:[UIColor clearColor]];
     
@@ -1274,15 +1301,11 @@
     }
     
     // for actual day and time slot mark with background colour
-    if ([self isActualDayAndTime:_actualDate:actualSelection]) 
+    if ([self isActualDayAndTime:_actualDate withCellSelection:actualSelection])
     {    
         [_labelDate     setBackgroundColor:[UIColor lightGrayColor]];
-        [_lectureButton setBackgroundColor:[UIColor lightGrayColor]];
         [_roomButton    setBackgroundColor:[UIColor lightGrayColor]];
     }
-    
-    [_lectureButton  setTitle:@"" forState:UIControlStateNormal];
-    
     return _cell;
 }
 
@@ -1300,20 +1323,19 @@
     }
     
     UILabel          *_labelDate     = (UILabel  *)[_cell viewWithTag:1];
-    UIButton         *_lectureButton = (UIButton *)[_cell viewWithTag:2];  
-    UIButton         *_roomButton    = (UIButton *)[_cell viewWithTag:3];  
+
+    [self setLectureButtonWithCell:_cell withTag:2 withActualSelection:actualSelection withTitle:actualScheduleEvent._name doEnable:TRUE];
+    
+    UIButton         *_roomButton    = (UIButton *)[_cell viewWithTag:3];
     UIButton         *_detailButton  = (UIButton *)[_cell viewWithTag:4];  // with arrow image, leading to detail page
     
     // initially always disable detail button
     _detailButton.enabled  = FALSE;
-    _lectureButton.enabled = FALSE;
     _roomButton.enabled    = FALSE;
     
     // initialize values for buttons and labels
-    [_lectureButton setTitle:@"" forState:UIControlStateNormal];
     [_roomButton    setTitle:@"" forState:UIControlStateNormal];
     [_labelDate     setBackgroundColor:[UIColor clearColor]];
-    [_lectureButton setBackgroundColor:[UIColor clearColor]];
     [_roomButton    setBackgroundColor:[UIColor clearColor]];
     [_cell          setBackgroundColor:[UIColor clearColor]];
     
@@ -1323,24 +1345,20 @@
                        ];  
     
     // for actual day and time slot mark with background colour
-    if ([self isActualDayAndTime:_actualDate:actualSelection]) 
+    if ([self isActualDayAndTime:_actualDate withCellSelection:actualSelection]) 
     {    
         [_labelDate     setBackgroundColor:[UIColor lightGrayColor]];
-        [_lectureButton setBackgroundColor:[UIColor lightGrayColor]];
         [_roomButton    setBackgroundColor:[UIColor lightGrayColor]];
     }
     
-    _lectureButton.enabled  = TRUE;
+    //_lectureButton.enabled  = TRUE;
     _roomButton.enabled     = TRUE;
     _detailButton.enabled   = TRUE;
     _detailButton.hidden    = NO;
 
     ScheduleEventRealizationDto *_localRealization = [actualScheduleEvent._scheduleEventRealizations objectAtIndex:0];
     [_roomButton    setTitle:_localRealization._room._name  forState:UIControlStateNormal];
-    [_lectureButton setTitle:actualScheduleEvent._name      forState:UIControlStateNormal];
-    
     [_detailButton  addTarget:self action:@selector(showScheduleDetails     :event:) forControlEvents:UIControlEventTouchUpInside];
-    [_lectureButton addTarget:self action:@selector(changeToCourseSchedule  :event:) forControlEvents:UIControlEventTouchUpInside];
     [_roomButton    addTarget:self action:@selector(changeToRoomSchedule1   :event:) forControlEvents:UIControlEventTouchUpInside];
     return _cell;
 }
@@ -1361,30 +1379,34 @@
 
     UILabel          *_labelTimeSlot1 = (UILabel  *)[_cell viewWithTag:1];
     UILabel          *_labelTimeSlot2 = (UILabel  *)[_cell viewWithTag:2];
-    UIButton         *_lectureButton  = (UIButton *)[_cell viewWithTag:3];  
+
+    [self setLectureButtonWithCell:_cell withTag:3 withActualSelection:actualSelection withTitle:actualScheduleEvent._name doEnable:TRUE];
+    
+    
+    //UIButton         *_lectureButton  = (UIButton *)[_cell viewWithTag:3];
     UIButton         *_roomButton     = (UIButton *)[_cell viewWithTag:4];  
     UIButton         *_detailButton   = (UIButton *)[_cell viewWithTag:5];  // with arrow image, leading to detail page
 
     // initially always disable detail button
     _detailButton.enabled  = FALSE;
-    _lectureButton.enabled = FALSE;
+    //_lectureButton.enabled = FALSE;
     _roomButton.enabled    = FALSE;
 
     // initialize values for buttons and labels
-    [_lectureButton setTitle:@"" forState:UIControlStateNormal];
+    //[_lectureButton setTitle:@"" forState:UIControlStateNormal];
     [_roomButton    setTitle:@"" forState:UIControlStateNormal];
     
     [_labelTimeSlot1 setBackgroundColor:[UIColor clearColor]];
     [_labelTimeSlot2 setBackgroundColor:[UIColor clearColor]];
-    [_lectureButton  setBackgroundColor:[UIColor clearColor]];
+    //[_lectureButton  setBackgroundColor:[UIColor clearColor]];
     [_roomButton     setBackgroundColor:[UIColor clearColor]];
     [_cell           setBackgroundColor:[UIColor clearColor]];
 
-    if ([self isActualDayAndTime:_actualDate:actualSelection]) 
+    if ([self isActualDayAndTime:_actualDate withCellSelection:actualSelection]) 
     {    
         [_labelTimeSlot1 setBackgroundColor:[UIColor lightGrayColor]];
         [_labelTimeSlot2 setBackgroundColor:[UIColor lightGrayColor]];
-        [_lectureButton  setBackgroundColor:[UIColor lightGrayColor]];
+        //[_lectureButton  setBackgroundColor:[UIColor lightGrayColor]];
         [_roomButton     setBackgroundColor:[UIColor lightGrayColor]];
     }
 
@@ -1402,15 +1424,15 @@
     
     ScheduleEventRealizationDto *_localRealization = [actualScheduleEvent._scheduleEventRealizations objectAtIndex:0];
     
-    _lectureButton.enabled  = TRUE;
+    //_lectureButton.enabled  = TRUE;
     _roomButton.enabled     = TRUE;    
     _detailButton.enabled   = TRUE;
     
-    [_lectureButton setTitle:actualScheduleEvent._name      forState:UIControlStateNormal];
+    //[_lectureButton setTitle:actualScheduleEvent._name      forState:UIControlStateNormal];
     [_roomButton    setTitle:_localRealization._room._name  forState:UIControlStateNormal];
     
     [_roomButton    addTarget:self action:@selector(changeToRoomSchedule1   :event:) forControlEvents:UIControlEventTouchUpInside];
-    [_lectureButton addTarget:self action:@selector(changeToCourseSchedule  :event:) forControlEvents:UIControlEventTouchUpInside];
+    //[_lectureButton addTarget:self action:@selector(changeToCourseSchedule  :event:) forControlEvents:UIControlEventTouchUpInside];
     [_detailButton  addTarget:self action:@selector(showScheduleDetails     :event:) forControlEvents:UIControlEventTouchUpInside];
             
     return _cell;        
@@ -1452,7 +1474,7 @@
     [_roomButton     setBackgroundColor:[UIColor clearColor]];
     [_cell           setBackgroundColor:[UIColor clearColor]];
     
-    if ([self isActualDayAndTime:_actualDate:actualSelection]) 
+    if ([self isActualDayAndTime:_actualDate withCellSelection:actualSelection]) 
     {    
         [_labelTimeSlot1 setBackgroundColor:[UIColor lightGrayColor]];
         [_labelTimeSlot2 setBackgroundColor:[UIColor lightGrayColor]];
@@ -1529,7 +1551,7 @@
     [_room2Button    setBackgroundColor:[UIColor clearColor]];
     [_cell           setBackgroundColor:[UIColor clearColor]];
     
-    if ([self isActualDayAndTime:_actualDate:actualSelection]) 
+    if ([self isActualDayAndTime:_actualDate withCellSelection:actualSelection]) 
     {    
         [_labelTimeSlot1 setBackgroundColor:[UIColor lightGrayColor]];
         [_lectureButton  setBackgroundColor:[UIColor lightGrayColor]];
@@ -1602,7 +1624,7 @@
     [_room2Button    setBackgroundColor:[UIColor clearColor]];
     [_cell           setBackgroundColor:[UIColor clearColor]];
     
-    if ([self isActualDayAndTime:_actualDate:actualSelection]) 
+    if ([self isActualDayAndTime:_actualDate withCellSelection:actualSelection]) 
     {    
         [_labelTimeSlot1 setBackgroundColor:[UIColor lightGrayColor]];
         [_labelTimeSlot2 setBackgroundColor:[UIColor lightGrayColor]];
@@ -1686,7 +1708,7 @@
     [_room3Button    setBackgroundColor:[UIColor clearColor]];
     [_cell           setBackgroundColor:[UIColor clearColor]];
 
-    if ([self isActualDayAndTime:_actualDate:actualSelection]) 
+    if ([self isActualDayAndTime:_actualDate withCellSelection:actualSelection]) 
     {    
         [_labelTimeSlot1 setBackgroundColor:[UIColor lightGrayColor]];
         [_lectureButton  setBackgroundColor:[UIColor lightGrayColor]];
@@ -1776,7 +1798,7 @@
     [_cell           setBackgroundColor:[UIColor clearColor]];
     
     
-    if ([self isActualDayAndTime:_actualDate:actualSelection])
+    if ([self isActualDayAndTime:_actualDate withCellSelection:actualSelection])
     {
         [_labelTimeSlot  setBackgroundColor:[UIColor lightGrayColor]];
         [_lectureButton  setBackgroundColor:[UIColor lightGrayColor]];
@@ -1876,7 +1898,7 @@
     [_cell           setBackgroundColor:[UIColor clearColor]];
     
     
-    if ([self isActualDayAndTime:_actualDate:actualSelection]) 
+    if ([self isActualDayAndTime:_actualDate withCellSelection:actualSelection]) 
     {    
         [_labelTimeSlot  setBackgroundColor:[UIColor lightGrayColor]];
         [_lectureButton  setBackgroundColor:[UIColor lightGrayColor]];
@@ -1978,7 +2000,7 @@
     [_cell           setBackgroundColor:[UIColor clearColor]];
     
     
-    if ([self isActualDayAndTime:_actualDate:actualSelection]) 
+    if ([self isActualDayAndTime:_actualDate withCellSelection:actualSelection]) 
     {    
         [_labelTimeSlot  setBackgroundColor:[UIColor lightGrayColor]];
         [_lectureButton  setBackgroundColor:[UIColor lightGrayColor]];
@@ -2094,7 +2116,7 @@
     [_cell           setBackgroundColor:[UIColor clearColor]];
     
     
-    if ([self isActualDayAndTime:_actualDate:actualSelection])
+    if ([self isActualDayAndTime:_actualDate withCellSelection:actualSelection])
     {
         [_labelTimeSlot  setBackgroundColor:[UIColor lightGrayColor]];
         [_lectureButton  setBackgroundColor:[UIColor lightGrayColor]];
@@ -2220,7 +2242,7 @@
     [_cell           setBackgroundColor:[UIColor clearColor]];
     
     
-    if ([self isActualDayAndTime:_actualDate:actualSelection]) 
+    if ([self isActualDayAndTime:_actualDate withCellSelection:actualSelection]) 
     {    
         [_labelTimeSlot  setBackgroundColor:[UIColor lightGrayColor]];
         [_lectureButton  setBackgroundColor:[UIColor lightGrayColor]];
@@ -2326,7 +2348,7 @@
     [_room2Button    setBackgroundColor:[UIColor clearColor]];
     [_cell           setBackgroundColor:[UIColor clearColor]];
     
-    if ([self isActualDayAndTime:_actualDate:actualSelection])
+    if ([self isActualDayAndTime:_actualDate withCellSelection:actualSelection])
     {
         [_labelTimeSlot1 setBackgroundColor:[UIColor lightGrayColor]];
         [_labelTimeSlot2 setBackgroundColor:[UIColor lightGrayColor]];
@@ -2423,7 +2445,7 @@
     [_cell           setBackgroundColor:[UIColor clearColor]];
     
     
-    if ([self isActualDayAndTime:_actualDate:actualSelection]) 
+    if ([self isActualDayAndTime:_actualDate withCellSelection:actualSelection]) 
     {    
         [_labelTimeSlot1 setBackgroundColor:[UIColor lightGrayColor]];
         [_labelTimeSlot2 setBackgroundColor:[UIColor lightGrayColor]];
@@ -2512,7 +2534,7 @@
     [_roomButton     setBackgroundColor:[UIColor clearColor]];
     [_cell           setBackgroundColor:[UIColor clearColor]];
     
-    if ([self isActualDayAndTime:_actualDate:actualSelection]) 
+    if ([self isActualDayAndTime:_actualDate withCellSelection:actualSelection]) 
     {    
         [_labelTimeSlot1 setBackgroundColor:[UIColor lightGrayColor]];
         [_labelTimeSlot2 setBackgroundColor:[UIColor lightGrayColor]];
@@ -2610,7 +2632,7 @@
     [_room2Button    setBackgroundColor:[UIColor clearColor]];
     [_cell           setBackgroundColor:[UIColor clearColor]];
     
-    if ([self isActualDayAndTime:_actualDate:actualSelection]) 
+    if ([self isActualDayAndTime:_actualDate withCellSelection:actualSelection]) 
     {    
         [_labelTimeSlot1 setBackgroundColor:[UIColor lightGrayColor]];
         [_labelTimeSlot2 setBackgroundColor:[UIColor lightGrayColor]];
@@ -2707,7 +2729,7 @@
     [_room3Button    setBackgroundColor:[UIColor clearColor]];
     [_cell           setBackgroundColor:[UIColor clearColor]];
     
-    if ([self isActualDayAndTime:_actualDate:actualSelection])
+    if ([self isActualDayAndTime:_actualDate withCellSelection:actualSelection])
     {
         [_labelTimeSlot1 setBackgroundColor:[UIColor lightGrayColor]];
         [_labelTimeSlot2 setBackgroundColor:[UIColor lightGrayColor]];
@@ -2806,7 +2828,7 @@
     [_room3Button    setBackgroundColor:[UIColor clearColor]];
     [_cell           setBackgroundColor:[UIColor clearColor]];
     
-    if ([self isActualDayAndTime:_actualDate:actualSelection]) 
+    if ([self isActualDayAndTime:_actualDate withCellSelection:actualSelection]) 
     {    
         [_labelTimeSlot1 setBackgroundColor:[UIColor lightGrayColor]];
         [_labelTimeSlot2 setBackgroundColor:[UIColor lightGrayColor]];
@@ -2912,7 +2934,7 @@
     [_roomButton     setBackgroundColor:[UIColor clearColor]];
     [_cell           setBackgroundColor:[UIColor clearColor]];
     
-    if ([self isActualDayAndTime:_actualDate:actualSelection])
+    if ([self isActualDayAndTime:_actualDate withCellSelection:actualSelection])
     {
         [_labelTimeSlot1 setBackgroundColor:[UIColor lightGrayColor]];
         [_labelTimeSlot2 setBackgroundColor:[UIColor lightGrayColor]];
@@ -3029,10 +3051,7 @@
             if (_scheduleEvent != nil) 
             {  
                 // depending on how many rooms and time slots there are take cell
-                
-                // only one room and one time slot => take normal hight cell
-                
-
+            
                 
                 if (   [_scheduleEvent._slots                     count] == 0
                     && [_scheduleEvent._scheduleEventRealizations count] == 0)
@@ -3164,7 +3183,6 @@
         // VERY IMPORTANT, OTHERWISE, NO NEW DATA
         [self viewWillAppear:YES];
     }
-    
     
     // ONE CELL = ONE SCHEDULE_EVENT
     // kind of cell depending on the scheduleEvent

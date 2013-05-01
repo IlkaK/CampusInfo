@@ -500,7 +500,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Ilka Kokemor (KDNLZ5NT2X)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -522,7 +522,11 @@
 					"-all_load",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
+<<<<<<< HEAD
 				PROVISIONING_PROFILE = "5855BB82-E30E-4999-94D2-0A5DF05A9EA9";
+=======
+				PROVISIONING_PROFILE = "";
+>>>>>>> developer
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = 1;
 				WRAPPER_EXTENSION = app;
@@ -533,7 +537,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Ilka Kokemor (KDNLZ5NT2X)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				COPY_PHASE_STRIP = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -554,7 +558,11 @@
 					"-all_load",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
+<<<<<<< HEAD
 				PROVISIONING_PROFILE = "5855BB82-E30E-4999-94D2-0A5DF05A9EA9";
+=======
+				PROVISIONING_PROFILE = "";
+>>>>>>> developer
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = 1;
 				VALIDATE_PRODUCT = YES;
