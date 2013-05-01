@@ -37,7 +37,6 @@
 
 - (void)viewDidUnload
 {
-    [_searchTextField release];
     _searchTextField = nil;
     [super viewDidUnload];
 
@@ -45,12 +44,6 @@
     // e.g. self.myOutlet = nil;
 }
 
-
-- (void)dealloc
-{
-    [_searchTextField release];
-    [super dealloc];
-}
 
 - (IBAction)_startSearch:(id)sender {
 }

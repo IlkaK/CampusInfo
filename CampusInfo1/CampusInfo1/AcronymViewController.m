@@ -26,14 +26,6 @@
 }
 
 
-- (void)dealloc
-{
-    [_acronymTextField      release];
-    [_acronymNavigationItem release];
-    [_warningLabel release];
-    [super dealloc];
-}
-
 
 - (void)didReceiveMemoryWarning
 {
@@ -127,17 +119,13 @@
     [_acronymNavigationItem setLeftBarButtonItem :_leftButton animated :true];    
 
     _warningLabel.text = @"";
-    
-    [_leftButton  release];
 }
 
 
 - (void)viewDidUnload
 {
     [self set_acronymTextField:nil];
-    [_acronymNavigationItem release];
     _acronymNavigationItem = nil;
-    [_warningLabel release];
     _warningLabel = nil;
     [super viewDidUnload];
     // Release any retained subviews of the main view.

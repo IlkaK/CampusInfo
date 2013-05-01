@@ -40,20 +40,6 @@
 }
 
 
-- (void)dealloc
-{
-    [_timeTableDetailViewDelegate release];
-    [_detailTable                 release];
-    [_detailTableCell             release];
-    [_timeLabel                   release];
-    [_scheduleEvent               release];
-    [_timeString                  release];
-    [_dayAndAcronymString         release];
-    [_titleNavigationItem         release];
-    [_detailTableCellWithButton   release];
-    [super dealloc];
-}
-
 
 - (void) backToTimeTableOverview:(id)sender 
 {    
@@ -84,7 +70,6 @@
 	[label setTextColor:[UIColor whiteColor]];
 	[label sizeToFit];
 	[_titleNavigationItem setTitleView:label];
-	[label release];
     
     UIImage         *_leftButtonImage = [UIImage imageNamed:@"arrowLeft_small.png"];
     UIBarButtonItem *_leftButton      = [[UIBarButtonItem alloc] initWithImage: _leftButtonImage
@@ -93,7 +78,6 @@
                                                                     action:@selector(backToTimeTableOverview:)];  
     
     [_titleNavigationItem setLeftBarButtonItem :_leftButton animated :true];    
-    [_leftButton  release];
     
     [_detailTable reloadData];    
     [super viewDidLoad];
@@ -101,15 +85,7 @@
 
 
 - (void)viewDidUnload
-{
-    [_detailTable               release];
-    [_detailTableCell           release];
-    [_timeLabel                 release];
-    [_timeString                release];
-    [_dayAndAcronymString       release];
-    [_titleNavigationItem       release];
-    [_detailTableCellWithButton release];
-    
+{    
     _detailTable                = nil;
     _detailTableCell            = nil;
     _timeLabel                  = nil;

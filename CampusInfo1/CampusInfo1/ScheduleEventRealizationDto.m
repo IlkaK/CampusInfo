@@ -29,12 +29,4 @@
 }
 
 
--(void) dealloc {
-    self._room          = nil; 
-    self._lecturers     = nil;
-    self._schoolClasses = nil;
-    [super dealloc];
-}
-
-
 @end

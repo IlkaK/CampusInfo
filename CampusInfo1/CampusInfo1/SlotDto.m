@@ -25,11 +25,5 @@
     return self;
 }
 
--(void) dealloc {
-    self._startTime   = nil;
-    self._endTime     = nil;
-    [super dealloc];
-}
-
 @end
 

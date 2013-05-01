@@ -74,63 +74,16 @@
 }
 
 
-- (void)dealloc
-{
-    [_timeTable                release];
-    [_actualDate               release];
-    [_schedule                 release];
-    [_dayNavigator             release];
-    [_acronymLabel             release];
-    [_detailsVC                release];
-    [_actualDayDto             release];
-    
-    [_ownStoredAcronymString   release];
-    [_ownStoredAcronymType     release];
-    [_actualShownAcronymString release];
-    [_actualShownAcronymType   release];
-    
-    [_oneSlotOneRoomTableCell    release];
-    [_oneSlotTwoRoomsTableCell   release];
-    [_oneSlotThreeRoomsTableCell release];
-    [_oneSlotFourRoomsTableCell  release];
-    [_oneSlotFiveRoomsTableCell  release];
-    [_oneSlotSixRoomsTableCell   release];
-    [_oneSlotSevenRoomsTableCell release];
-    [_oneSlotEightRoomsTableCell release];
-    
-    [_twoSlotsOneRoomTableCell   release];
-    [_twoSlotsTwoRoomsTableCell  release];
-    
-    [_threeSlotsOneRoomTableCell release];
-    [_threeSlotsTwoRoomsTableCell release];
-    [_threeSlotsThreeRoomsTableCell release];
-    
-    [_fourSlotsOneRoomTableCell    release];
-    [_fourSlotsTwoRoomsTableCell   release];
-    [_fourSlotsThreeRoomsTableCell release];
-
-    [_fiveSlotsOneRoomTableCell    release];
-    
-    [_noConnectionButton       release];
-    [_ownStoredAcronymLabel    release];
-    
-    [_eightSlotsOneRoomTableCell release];
-    [_oneSlotFourRoomsTableCell release];
-    [_oneSlotSevenRoomsTableCell release];
-    [_threeSlotsTwoRoomsTableCell release];
-    [_threeSlotsThreeRoomsTableCell release];
-    [super dealloc];
-}
 
 - (NSDateFormatter *)dayFormatter {
-    NSDateFormatter *_dayFormatter = [[[NSDateFormatter alloc]init]autorelease];
+    NSDateFormatter *_dayFormatter = [[NSDateFormatter alloc]init];
     [_dayFormatter setTimeZone:[NSTimeZone timeZoneWithName:@"CEST"]];
     [_dayFormatter setDateFormat:@"dd.MM.yyyy"]; 
     return _dayFormatter;
 } 
 
 - (NSDateFormatter *)weekDayFormatter {
-    NSDateFormatter *_weekDayFormatter = [[[NSDateFormatter alloc] init] autorelease];
+    NSDateFormatter *_weekDayFormatter = [[NSDateFormatter alloc] init] ;
     [_weekDayFormatter setFormatterBehavior:NSDateFormatterBehavior10_4];
     [_weekDayFormatter setTimeZone:[NSTimeZone timeZoneWithName:@"CEST"]];    
     [_weekDayFormatter setDateFormat:@"EEEE"];
@@ -139,7 +92,7 @@
 
 
 - (NSDateFormatter *)timeFormatter {
-    NSDateFormatter *timeFormatter = [[[NSDateFormatter alloc]init]autorelease];
+    NSDateFormatter *timeFormatter = [[NSDateFormatter alloc]init];
     [timeFormatter setTimeZone:[NSTimeZone timeZoneWithName:@"CEST"]];
 	[timeFormatter setDateFormat:@"HH:mm"]; 
     [timeFormatter setDefaultDate:[NSDate date]];
@@ -217,9 +170,9 @@
         if (_compareDate == 1)
         {
             //NSLog(@"load schedule for %@ -7",_newDateString);
-            NSDateComponents *_components         = [[[NSDateComponents alloc] init] autorelease];
+            NSDateComponents *_components         = [[NSDateComponents alloc] init];
             [_components setDay:-7];
-            NSCalendar       *_gregorian          = [[[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar] autorelease];
+            NSCalendar       *_gregorian          = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
             NSDate           *_newDateForSchedule = [_gregorian dateByAddingComponents:_components toDate:newDate options:0];
             self._schedule = [[ScheduleDto alloc] initWithAcronym:_actualShownAcronymString:_actualShownAcronymType:_newDateForSchedule];
             _actualDayDto  = [self getDayDto];
@@ -299,10 +252,10 @@
     int daysToAdd = -1;  
     
     // set up date components
-    NSDateComponents *_components = [[[NSDateComponents alloc] init] autorelease];
+    NSDateComponents *_components = [[NSDateComponents alloc] init];
     [_components setDay:daysToAdd];
     
-    NSCalendar *_gregorian = [[[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar] autorelease];
+    NSCalendar *_gregorian = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
     NSDate     *_newDate   = [_gregorian dateByAddingComponents:_components toDate:self._actualDate options:0];
     
     self._actualDate      = _newDate;
@@ -430,7 +383,7 @@
 
 - (void) setTitleToActualDate 
 {
-    NSDateFormatter* df_local = [[[NSDateFormatter alloc] init] autorelease];
+    NSDateFormatter* df_local = [[NSDateFormatter alloc] init];
     [df_local setTimeZone:[NSTimeZone timeZoneWithName:@"CEST"]];
     [df_local setDateFormat:@"yyyy.MM.dd G 'at' HH:mm:ss zzz"];    
 
@@ -502,9 +455,6 @@
     
     [_dayNavigator setLeftBarButtonItem :_leftButton animated :true];
     [_dayNavigator setRightBarButtonItem:_rightButton animated:true];
-
-    [_leftButton  release];
-    [_rightButton release];
     
     // ----- DETAIL PAGE -----
     if (_detailsVC == nil) 
@@ -640,32 +590,11 @@
 
 - (void)viewDidUnload
 {
-    [_dayNavigator release];
     _dayNavigator = nil;
-    [_acronymLabel release];
     _acronymLabel = nil;
-    [_acronymVC release];
     _acronymVC = nil;
-    [_detailsVC release];
     _detailsVC = nil;
     
-    [_oneSlotOneRoomTableCell    release];
-    [_oneSlotTwoRoomsTableCell   release];
-    [_oneSlotThreeRoomsTableCell release];
-    [_oneSlotFiveRoomsTableCell  release];
-    [_oneSlotSixRoomsTableCell   release];
-    [_oneSlotEightRoomsTableCell release];
-
-    [_twoSlotsOneRoomTableCell   release];
-    [_twoSlotsTwoRoomsTableCell  release];
-
-    [_threeSlotsOneRoomTableCell release];
-    
-    [_fourSlotsOneRoomTableCell    release];
-    [_fourSlotsTwoRoomsTableCell   release];
-    [_fourSlotsThreeRoomsTableCell release];
-
-    [_fiveSlotsOneRoomTableCell    release];
     
     _oneSlotOneRoomTableCell    = nil;
     _oneSlotTwoRoomsTableCell   = nil;
@@ -686,20 +615,13 @@
 
     _fiveSlotsOneRoomTableCell    = nil;
     
-    [_noConnectionButton release];
     _noConnectionButton = nil;
-    [_ownStoredAcronymLabel release];
     _ownStoredAcronymLabel = nil;
 
-    [_eightSlotsOneRoomTableCell release];
     _eightSlotsOneRoomTableCell = nil;
-    [_oneSlotFourRoomsTableCell release];
     _oneSlotFourRoomsTableCell = nil;
-    [_oneSlotSevenRoomsTableCell release];
     _oneSlotSevenRoomsTableCell = nil;
-    [_threeSlotsTwoRoomsTableCell release];
     _threeSlotsTwoRoomsTableCell = nil;
-    [_threeSlotsThreeRoomsTableCell release];
     _threeSlotsThreeRoomsTableCell = nil;
     [super viewDidUnload];
 }
@@ -874,7 +796,7 @@
 }
  
 
-- (ScheduleEventDto *)getCurrentScheduleEvent:(DayDto *)currentDay: (NSDate *)fromTime:(NSDate *)toTime:(ScheduleEventDto *)formerScheduleEvent    
+- (ScheduleEventDto *)getCurrentScheduleEvent:(DayDto *)currentDay: (NSDate *)fromTime:(NSDate *)toTime:(ScheduleEventDto *)formerScheduleEvent
 {   
     ScheduleEventDto *_localScheduleEvent   = nil;
     ScheduleEventDto *_goalScheduleEvent    = nil;
@@ -899,7 +821,7 @@
         _fromLocalScheduleEvent = [[self timeFormatter] stringFromDate: _localScheduleEvent._startTime];
         
         if (formerScheduleEvent != nil) 
-        {
+        {            
             _formerToEvent   = [[self timeFormatter] stringFromDate: formerScheduleEvent._endTime];
             _formerFromEvent = [[self timeFormatter] stringFromDate: formerScheduleEvent._startTime];
             
@@ -992,127 +914,162 @@
     ScheduleEventDto *_firstScheduleEvent = nil;    
     ScheduleEventDto *_nextScheduleEvent  = nil;    
     NSDate           *_fromTime           = nil;
-    NSDate           *_toTime             = nil;    
+    NSDate           *_toTime             = nil;
+    BOOL            _foundHoliday         = NO;
     
-    _fromTime           = [[self timeFormatter] dateFromString:@"08:00"];
-    _toTime             = [[self timeFormatter] dateFromString:@"08:45"]; 
-    _firstScheduleEvent = [self getCurrentScheduleEvent:currentDay:_fromTime:_toTime:nil];
-    [_sortedEvents addObject:_firstScheduleEvent];
+    // check for exceptional holiday first
+    // also consider problem for days where there are no events, but neither holidays
+    if ([currentDay._events count] > 0)
+    {   int eventArrayI = 0;
+        ScheduleEventDto *_holidayEvent = [currentDay._events objectAtIndex:eventArrayI];
     
-    _fromTime           = [[self timeFormatter] dateFromString:@"08:50"];
-    _toTime             = [[self timeFormatter] dateFromString:@"09:35"];
-    _nextScheduleEvent  = [self getCurrentScheduleEvent:currentDay:_fromTime:_toTime:_firstScheduleEvent];
-    if ([_nextScheduleEvent._name compare: @"same"] != NSOrderedSame)
+        //NSLog(@"event._type: %@", _holidayEvent._type);
+        if ([_holidayEvent._type isEqualToString:@"Holiday"])
+        {
+            //NSMutableArray *_timeArray  = [self getTimeArray:cellSelection];
+            
+            _fromTime           = [[self timeFormatter] dateFromString:@"00:00"];
+            _toTime             = [[self timeFormatter] dateFromString:@"23:59"];
+            NSString       *_fromString = [[self timeFormatter] stringFromDate: _fromTime];
+            NSString       *_toString   = [[self timeFormatter] stringFromDate: _toTime];
+            
+            _firstScheduleEvent = [currentDay._events objectAtIndex:0];
+            NSString       *_fromHoliday = [[self timeFormatter] stringFromDate: _firstScheduleEvent._startTime];
+            NSString       *_toHoliday   = [[self timeFormatter] stringFromDate: _firstScheduleEvent._endTime];
+            
+            NSLog(@"(_fromHoliday) %@ = (_fromString) %@, (_toHoliday) %@ = (_toString) %@ _toString", _fromHoliday, _fromString, _toHoliday, _toString);
+            
+            if ([_fromHoliday isEqualToString:_fromString] &&
+                [_toHoliday   isEqualToString:_toString])
+            {
+                [_sortedEvents addObject:_holidayEvent];
+                _foundHoliday = YES;
+            }
+        }
+    }
+    
+    if (!_foundHoliday)
     {
-        [_sortedEvents addObject:_nextScheduleEvent];
+        _fromTime           = [[self timeFormatter] dateFromString:@"08:00"];
+        _toTime             = [[self timeFormatter] dateFromString:@"08:45"];
+        _firstScheduleEvent = [self getCurrentScheduleEvent:currentDay:_fromTime:_toTime:nil];
+        [_sortedEvents addObject:_firstScheduleEvent];
+    
+        _fromTime           = [[self timeFormatter] dateFromString:@"08:50"];
+        _toTime             = [[self timeFormatter] dateFromString:@"09:35"];
+        _nextScheduleEvent  = [self getCurrentScheduleEvent:currentDay:_fromTime:_toTime:_firstScheduleEvent];
+        if ([_nextScheduleEvent._name compare: @"same"] != NSOrderedSame)
+        {
+            [_sortedEvents addObject:_nextScheduleEvent];
+            _firstScheduleEvent = _nextScheduleEvent;
+        }
+    
+        _fromTime   = [[self timeFormatter] dateFromString:@"10:00"];
+        _toTime     = [[self timeFormatter] dateFromString:@"10:45"];
+        _nextScheduleEvent  = [self getCurrentScheduleEvent:currentDay:_fromTime:_toTime:_firstScheduleEvent];
+        if ([_nextScheduleEvent._name compare: @"same"] != NSOrderedSame)
+        {
+            [_sortedEvents addObject:_nextScheduleEvent];
+            _firstScheduleEvent = _nextScheduleEvent;
+        }
+    
+        _fromTime   = [[self timeFormatter] dateFromString:@"10:50"];
+        _toTime     = [[self timeFormatter] dateFromString:@"11:35"];
+        _nextScheduleEvent  = [self getCurrentScheduleEvent:currentDay:_fromTime:_toTime:_firstScheduleEvent];
+        if ([_nextScheduleEvent._name compare: @"same"] != NSOrderedSame)
+        {
+            [_sortedEvents addObject:_nextScheduleEvent];
+            _firstScheduleEvent = _nextScheduleEvent;
+        }
+    
+        _fromTime   = [[self timeFormatter] dateFromString:@"12:00"];
+        _toTime     = [[self timeFormatter] dateFromString:@"12:45"];
+        _nextScheduleEvent  = [self getCurrentScheduleEvent:currentDay:_fromTime:_toTime:_firstScheduleEvent];
+        if ([_nextScheduleEvent._name compare: @"same"] != NSOrderedSame)
+        {
+            [_sortedEvents addObject:_nextScheduleEvent];
+            _firstScheduleEvent = _nextScheduleEvent;
+        }
+    
+        _fromTime   = [[self timeFormatter] dateFromString:@"12:50"];
+        _toTime     = [[self timeFormatter] dateFromString:@"13:35"];
+        _nextScheduleEvent  = [self getCurrentScheduleEvent:currentDay:_fromTime:_toTime:_firstScheduleEvent];
+        if ([_nextScheduleEvent._name compare: @"same"] != NSOrderedSame)
+        {
+            [_sortedEvents addObject:_nextScheduleEvent];
+        }
         _firstScheduleEvent = _nextScheduleEvent;
-    }
     
-    _fromTime   = [[self timeFormatter] dateFromString:@"10:00"];
-    _toTime     = [[self timeFormatter] dateFromString:@"10:45"];
-    _nextScheduleEvent  = [self getCurrentScheduleEvent:currentDay:_fromTime:_toTime:_firstScheduleEvent];
-    if ([_nextScheduleEvent._name compare: @"same"] != NSOrderedSame)
-    {
-        [_sortedEvents addObject:_nextScheduleEvent];
+        _fromTime   = [[self timeFormatter] dateFromString:@"14:00"];
+        _toTime     = [[self timeFormatter] dateFromString:@"14:45"];
+        _nextScheduleEvent  = [self getCurrentScheduleEvent:currentDay:_fromTime:_toTime:_firstScheduleEvent];
+        if ([_nextScheduleEvent._name compare: @"same"] != NSOrderedSame)
+        {
+            [_sortedEvents addObject:_nextScheduleEvent];
+        }
         _firstScheduleEvent = _nextScheduleEvent;
-    }
     
-    _fromTime   = [[self timeFormatter] dateFromString:@"10:50"];
-    _toTime     = [[self timeFormatter] dateFromString:@"11:35"];
-    _nextScheduleEvent  = [self getCurrentScheduleEvent:currentDay:_fromTime:_toTime:_firstScheduleEvent];
-    if ([_nextScheduleEvent._name compare: @"same"] != NSOrderedSame)
-    {
-        [_sortedEvents addObject:_nextScheduleEvent];
+        _fromTime   = [[self timeFormatter] dateFromString:@"14:50"];
+        _toTime     = [[self timeFormatter] dateFromString:@"15:35"];
+        _nextScheduleEvent  = [self getCurrentScheduleEvent:currentDay:_fromTime:_toTime:_firstScheduleEvent];
+        if ([_nextScheduleEvent._name compare: @"same"] != NSOrderedSame)
+        {
+            [_sortedEvents addObject:_nextScheduleEvent];
+        }
         _firstScheduleEvent = _nextScheduleEvent;
-    }
     
-    _fromTime   = [[self timeFormatter] dateFromString:@"12:00"];
-    _toTime     = [[self timeFormatter] dateFromString:@"12:45"];
-    _nextScheduleEvent  = [self getCurrentScheduleEvent:currentDay:_fromTime:_toTime:_firstScheduleEvent];
-    if ([_nextScheduleEvent._name compare: @"same"] != NSOrderedSame)
-    {
-        [_sortedEvents addObject:_nextScheduleEvent];
+        _fromTime   = [[self timeFormatter] dateFromString:@"16:00"];
+        _toTime     = [[self timeFormatter] dateFromString:@"16:45"];
+        _nextScheduleEvent  = [self getCurrentScheduleEvent:currentDay:_fromTime:_toTime:_firstScheduleEvent];
+        if ([_nextScheduleEvent._name compare: @"same"] != NSOrderedSame)
+        {
+            [_sortedEvents addObject:_nextScheduleEvent];
+        }
         _firstScheduleEvent = _nextScheduleEvent;
-    }
     
-    _fromTime   = [[self timeFormatter] dateFromString:@"12:50"];
-    _toTime     = [[self timeFormatter] dateFromString:@"13:35"];
-    _nextScheduleEvent  = [self getCurrentScheduleEvent:currentDay:_fromTime:_toTime:_firstScheduleEvent];
-    if ([_nextScheduleEvent._name compare: @"same"] != NSOrderedSame)
-    {
-        [_sortedEvents addObject:_nextScheduleEvent];
-    }
-    _firstScheduleEvent = _nextScheduleEvent;
+        _fromTime   = [[self timeFormatter] dateFromString:@"16:50"];
+        _toTime     = [[self timeFormatter] dateFromString:@"17:35"];
+        _nextScheduleEvent  = [self getCurrentScheduleEvent:currentDay:_fromTime:_toTime:_firstScheduleEvent];
+        if ([_nextScheduleEvent._name compare: @"same"] != NSOrderedSame)
+        {
+            [_sortedEvents addObject:_nextScheduleEvent];
+        }
+        _firstScheduleEvent = _nextScheduleEvent;
     
-    _fromTime   = [[self timeFormatter] dateFromString:@"14:00"];
-    _toTime     = [[self timeFormatter] dateFromString:@"14:45"];
-    _nextScheduleEvent  = [self getCurrentScheduleEvent:currentDay:_fromTime:_toTime:_firstScheduleEvent];
-    if ([_nextScheduleEvent._name compare: @"same"] != NSOrderedSame)
-    {
-        [_sortedEvents addObject:_nextScheduleEvent];
-    }
-    _firstScheduleEvent = _nextScheduleEvent;
+        _fromTime   = [[self timeFormatter] dateFromString:@"18:00"];
+        _toTime     = [[self timeFormatter] dateFromString:@"18:45"];
+        _nextScheduleEvent  = [self getCurrentScheduleEvent:currentDay:_fromTime:_toTime:_firstScheduleEvent];
+        if ([_nextScheduleEvent._name compare: @"same"] != NSOrderedSame)
+        {
+            [_sortedEvents addObject:_nextScheduleEvent];
+        }
+        _firstScheduleEvent = _nextScheduleEvent;
     
-    _fromTime   = [[self timeFormatter] dateFromString:@"14:50"];
-    _toTime     = [[self timeFormatter] dateFromString:@"15:35"];
-    _nextScheduleEvent  = [self getCurrentScheduleEvent:currentDay:_fromTime:_toTime:_firstScheduleEvent];
-    if ([_nextScheduleEvent._name compare: @"same"] != NSOrderedSame)
-    {
-        [_sortedEvents addObject:_nextScheduleEvent];
-    }
-    _firstScheduleEvent = _nextScheduleEvent;
+        _fromTime   = [[self timeFormatter] dateFromString:@"18:50"];
+        _toTime     = [[self timeFormatter] dateFromString:@"19:35"];
+        _nextScheduleEvent  = [self getCurrentScheduleEvent:currentDay:_fromTime:_toTime:_firstScheduleEvent];
+        if ([_nextScheduleEvent._name compare: @"same"] != NSOrderedSame)
+        {
+            [_sortedEvents addObject:_nextScheduleEvent];
+        }
+        _firstScheduleEvent = _nextScheduleEvent;
     
-    _fromTime   = [[self timeFormatter] dateFromString:@"16:00"];
-    _toTime     = [[self timeFormatter] dateFromString:@"16:45"];
-    _nextScheduleEvent  = [self getCurrentScheduleEvent:currentDay:_fromTime:_toTime:_firstScheduleEvent];
-    if ([_nextScheduleEvent._name compare: @"same"] != NSOrderedSame)
-    {
-        [_sortedEvents addObject:_nextScheduleEvent];
-    }
-    _firstScheduleEvent = _nextScheduleEvent;
+        _fromTime   = [[self timeFormatter] dateFromString:@"19:45"];
+        _toTime     = [[self timeFormatter] dateFromString:@"20:30"];
+        _nextScheduleEvent  = [self getCurrentScheduleEvent:currentDay:_fromTime:_toTime:_firstScheduleEvent];
+        if ([_nextScheduleEvent._name compare: @"same"] != NSOrderedSame)
+        {
+            [_sortedEvents addObject:_nextScheduleEvent];
+        }
+        _firstScheduleEvent = _nextScheduleEvent;
     
-    _fromTime   = [[self timeFormatter] dateFromString:@"16:50"];
-    _toTime     = [[self timeFormatter] dateFromString:@"17:35"];
-    _nextScheduleEvent  = [self getCurrentScheduleEvent:currentDay:_fromTime:_toTime:_firstScheduleEvent];
-    if ([_nextScheduleEvent._name compare: @"same"] != NSOrderedSame)
-    {
-        [_sortedEvents addObject:_nextScheduleEvent];
-    }
-    _firstScheduleEvent = _nextScheduleEvent;
-    
-    _fromTime   = [[self timeFormatter] dateFromString:@"18:00"];
-    _toTime     = [[self timeFormatter] dateFromString:@"18:45"];
-    _nextScheduleEvent  = [self getCurrentScheduleEvent:currentDay:_fromTime:_toTime:_firstScheduleEvent];
-    if ([_nextScheduleEvent._name compare: @"same"] != NSOrderedSame)
-    {
-        [_sortedEvents addObject:_nextScheduleEvent];
-    }
-    _firstScheduleEvent = _nextScheduleEvent;
-    
-    _fromTime   = [[self timeFormatter] dateFromString:@"18:50"];
-    _toTime     = [[self timeFormatter] dateFromString:@"19:35"];
-    _nextScheduleEvent  = [self getCurrentScheduleEvent:currentDay:_fromTime:_toTime:_firstScheduleEvent];
-    if ([_nextScheduleEvent._name compare: @"same"] != NSOrderedSame)
-    {
-        [_sortedEvents addObject:_nextScheduleEvent];
-    }
-    _firstScheduleEvent = _nextScheduleEvent;
-    
-    _fromTime   = [[self timeFormatter] dateFromString:@"19:45"];
-    _toTime     = [[self timeFormatter] dateFromString:@"20:30"];
-    _nextScheduleEvent  = [self getCurrentScheduleEvent:currentDay:_fromTime:_toTime:_firstScheduleEvent];
-    if ([_nextScheduleEvent._name compare: @"same"] != NSOrderedSame)
-    {
-        [_sortedEvents addObject:_nextScheduleEvent];
-    }
-    _firstScheduleEvent = _nextScheduleEvent;
-    
-    _fromTime   = [[self timeFormatter] dateFromString:@"20:35"];
-    _toTime     = [[self timeFormatter] dateFromString:@"21:20"];
-    _nextScheduleEvent  = [self getCurrentScheduleEvent:currentDay:_fromTime:_toTime:_firstScheduleEvent];
-    if ([_nextScheduleEvent._name compare: @"same"] != NSOrderedSame)
-    {
-        [_sortedEvents addObject:_nextScheduleEvent];
+        _fromTime   = [[self timeFormatter] dateFromString:@"20:35"];
+        _toTime     = [[self timeFormatter] dateFromString:@"21:20"];
+        _nextScheduleEvent  = [self getCurrentScheduleEvent:currentDay:_fromTime:_toTime:_firstScheduleEvent];
+        if ([_nextScheduleEvent._name compare: @"same"] != NSOrderedSame)
+        {
+            [_sortedEvents addObject:_nextScheduleEvent];
+        }
     }
     //NSLog(@"getSortedScheduleEvent %i", [_sortedEvents count] );
     return _sortedEvents;
@@ -1128,8 +1085,7 @@
     NSMutableArray *_newEvents = [[NSMutableArray alloc]init];
     NSMutableArray *_newSlots  = [[NSMutableArray alloc]init];
     
-    //NSLog(@" how many days %i", [_schedule._days count]);
-    
+    //NSLog(@"how many days %i", [_schedule._days count]);
     int      dayCount;
     for (dayCount = 0; dayCount < [_schedule._days count]; dayCount++) 
     {
@@ -1138,7 +1094,7 @@
       NSString *_oneDayString    = [[self dayFormatter] stringFromDate:_oneDay._date];
       NSString *_actualDayString = [[self dayFormatter] stringFromDate:_actualDate];
       
-       // NSLog(@"getDayDto %@ = %@?", _oneDayString, _actualDayString);
+      //NSLog(@"getDayDto %@ = %@?", _oneDayString, _actualDayString);
       
       if ([_oneDayString isEqualToString: _actualDayString]) 
       {
@@ -1157,7 +1113,7 @@
 
 
 
-- (NSMutableArray *)getTimeArray: (NSUInteger )cellSelection 
+- (NSMutableArray *)getTimeArray: (NSUInteger )cellSelection
 {
     NSMutableArray *_timeArray = [[NSMutableArray alloc]init];
     
@@ -1255,7 +1211,7 @@
 
 
 
-- (UITableViewCell *)emptyCell
+- (UITableViewCell *)emptyCellOrHoliday
     :(UITableView      *)actualTableView
     :(NSUInteger        )actualSelection
     :(ScheduleEventDto *)actualScheduleEvent
@@ -1270,21 +1226,21 @@
     }
 
     UILabel          *_labelDate     = (UILabel  *)[_cell viewWithTag:1];
-
-    [self setLectureButtonWithCell:_cell withTag:2 withActualSelection:actualSelection withTitle:@"" doEnable:NO];
-
-    UIButton         *_roomButton    = (UIButton *)[_cell viewWithTag:3];  
+    UIButton         *_lectureButton = (UIButton *)[_cell viewWithTag:2];
+    UIButton         *_roomButton    = (UIButton *)[_cell viewWithTag:3];
     UIButton         *_detailButton  = (UIButton *)[_cell viewWithTag:4];  // with arrow image, leading to detail page
     
     // initially always disable detail button
     _detailButton.enabled  = FALSE;
     _detailButton.hidden   = YES;
+    _lectureButton.enabled = FALSE;
     _roomButton.enabled    = FALSE;
     
     // initialize values for buttons and labels
-
+    [_lectureButton setTitle:@"" forState:UIControlStateNormal];
     [_roomButton    setTitle:@"" forState:UIControlStateNormal];
     [_labelDate     setBackgroundColor:[UIColor clearColor]];
+    [_lectureButton setBackgroundColor:[UIColor clearColor]];
     [_roomButton    setBackgroundColor:[UIColor clearColor]];
     [_cell          setBackgroundColor:[UIColor clearColor]];
     
@@ -1294,18 +1250,34 @@
     }
     else
     {
-        _labelDate.text = [NSString stringWithFormat:@"%@ - %@",  
-                            [[self timeFormatter] stringFromDate:actualScheduleEvent._startTime],  
-                            [[self timeFormatter] stringFromDate:actualScheduleEvent._endTime  ]
-                           ];  
+        
+       // NSLog(@"actualScheduleEvent._type: %@", actualScheduleEvent._type);
+        //NSLog(@"actualScheduleEvent._name: %@", actualScheduleEvent._name);
+
+        // exception: holiday and therefore no scheduleEvents on this day
+        if ([actualScheduleEvent._type  isEqualToString:@"Holiday"])
+        {
+            [_lectureButton    setTitle:actualScheduleEvent._name  forState:UIControlStateNormal];
+            _labelDate.text = [NSString stringWithFormat:@""];
+        }
+        else
+        {
+           [_lectureButton  setTitle:@"" forState:UIControlStateNormal];
+            _labelDate.text = [NSString stringWithFormat:@"%@ - %@",
+                               [[self timeFormatter] stringFromDate:actualScheduleEvent._startTime],
+                               [[self timeFormatter] stringFromDate:actualScheduleEvent._endTime  ]
+                               ];
+        }
     }
     
     // for actual day and time slot mark with background colour
     if ([self isActualDayAndTime:_actualDate withCellSelection:actualSelection])
-    {    
+    {
         [_labelDate     setBackgroundColor:[UIColor lightGrayColor]];
+        [_lectureButton setBackgroundColor:[UIColor lightGrayColor]];
         [_roomButton    setBackgroundColor:[UIColor lightGrayColor]];
     }
+    
     return _cell;
 }
 
@@ -3016,15 +2988,12 @@
 {   
     
     //_detailsVC._schedule                 = [[ScheduleDto alloc] initWithURL]; 
-    //_actualDayDto             = [self getDayDto];    
+    //_actualDayDto             = [self getDayDto];
     
     NSUInteger        _cellSelection = indexPath.section;
     ScheduleEventDto *_scheduleEvent = nil;
     //_scheduleEvent = [self getScheduleEventDto:_cellSelection];
 
-    //NSLog(@"_cellSelection %i", _cellSelection);
-
-    
     if (    _schedule._type                  == nil 
         || [_schedule._type length]          == 0
         ||  _schedule._connectionEstablished == nil
@@ -3035,28 +3004,34 @@
         [self viewWillAppear:YES];
     }
     
-    
     // ONE CELL = ONE SCHEDULE_EVENT
-    // kind of cell depending on the scheduleEvent
+    // kind of cell depends on the scheduleEvent
     
     // no lectures at all
     if (_actualDayDto != nil) 
     {
+        //NSLog(@"_cellSelection: %i, event count: %i", _cellSelection, [_actualDayDto._events count]);
         if ([_actualDayDto._events count] >= _cellSelection)
         {
-        
             //_scheduleEvent = [self getScheduleEventDto:_cellSelection];
             _scheduleEvent   = [_actualDayDto._events objectAtIndex:_cellSelection];
             
             if (_scheduleEvent != nil) 
-            {  
-                // depending on how many rooms and time slots there are take cell
-            
+            {
+                //NSLog(@"scheduleEvent IS NOT NIL");
                 
+                // check for holidays first
+                if ([_scheduleEvent._type isEqualToString:@"Holiday"])
+                {
+                    return [self emptyCellOrHoliday:tableView:_cellSelection:_scheduleEvent];
+                }
+                
+                
+                // depending on how many rooms and time slots there are take cell
                 if (   [_scheduleEvent._slots                     count] == 0
                     && [_scheduleEvent._scheduleEventRealizations count] == 0)
                 {
-                    return [self emptyCell:tableView:_cellSelection:_scheduleEvent];
+                    return [self emptyCellOrHoliday:tableView:_cellSelection:_scheduleEvent];
                 }
                 if (   [_scheduleEvent._slots                     count] == 1
                     && [_scheduleEvent._scheduleEventRealizations count] == 1)
@@ -3159,12 +3134,12 @@
             }
         }
     }
-    NSLog(@" _scheduleEvent %@ _slot count %i realization count %i",
-          _scheduleEvent._name,
-          [_scheduleEvent._slots count],
-          [_scheduleEvent._scheduleEventRealizations count]
-          );
-    return [self emptyCell:tableView:_cellSelection:nil];    
+    //NSLog(@" _scheduleEvent %@ _slot count %i realization count %i",
+    //      _scheduleEvent._name,
+    //      [_scheduleEvent._slots count],
+    //      [_scheduleEvent._scheduleEventRealizations count]
+    //      );
+    return [self emptyCellOrHoliday:tableView:_cellSelection:nil];
 }
 
 

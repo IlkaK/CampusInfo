@@ -17,7 +17,6 @@
 // called by schedule.downloadData via schedule.init
 -(void) downloadData:(NSURL*) url 
 {  
-    NSAutoreleasePool * pool     = [[NSAutoreleasePool alloc] init];  
    // NSLog(@" download data with url %@", [url absoluteString]);
     
 
@@ -43,7 +42,7 @@
     
     if (_connection) 
     {
-        self._receivedData        = [[NSMutableData data] retain];  
+        self._receivedData        = [NSMutableData data]; 
         //NSString *_receivedString = [[NSString alloc] initWithData:_receivedData encoding:NSASCIIStringEncoding];
         //NSLog(@"2 DO downloadData %@", _receivedString);
         
@@ -55,7 +54,6 @@
         NSLog(@"Did not download data");
     }  
     CFRunLoopRun(); // Avoid thread exiting
-    [pool release];
 } 
 
 
@@ -86,7 +84,8 @@
 
 - (void)connectionDidFinishLoading:(NSURLConnection *)connection
 {
-    self._receivedData = [[NSMutableData data] retain];  
+    self._receivedData = [NSMutableData data];
+    
     NSString *receivedString = nil;
     receivedString = [[NSString alloc] initWithData:_receivedData encoding:NSASCIIStringEncoding];
     //NSLog(@"connectionDidFinishLoading %@", receivedString);
@@ -99,18 +98,12 @@
     }
     CFRunLoopStop(CFRunLoopGetCurrent());
     
-    [connection release];
-    [_receivedData release];
 }
 
 
 
 - (void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error
 {
-    // release the connection, and the data object
-    // receivedData is declared as a method instance elsewhere
-    [connection release];
-    [_receivedData release];
 
     /*
     // inform the user

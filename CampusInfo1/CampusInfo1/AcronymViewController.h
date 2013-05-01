@@ -23,7 +23,7 @@
     IBOutlet UINavigationItem *_acronymNavigationItem;
 }
 
-@property (nonatomic, assign) id<AcronymViewDelegate>      _acronymViewDelegate;
+@property (nonatomic, retain) id<AcronymViewDelegate>      _acronymViewDelegate;
 @property (nonatomic, retain) IBOutlet UITextField        *_acronymTextField;
 @property (nonatomic, retain) IBOutlet UINavigationItem   *_acronymNavigationItem;
 @property (nonatomic, retain) IBOutlet UILabel            *_warningLabel;

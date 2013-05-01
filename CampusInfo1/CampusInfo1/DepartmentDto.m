@@ -21,9 +21,4 @@
     return self;
 }
 
--(void) dealloc {
-    self._name = nil;
-    [super dealloc];
-}
-
 @end

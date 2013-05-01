@@ -25,12 +25,5 @@
     return self;
 }
 
--(void) dealloc {
-    self._date   = nil;
-    self._events = nil;
-    self._slots  = nil;
-    [super dealloc];
-}
-
 @end
 

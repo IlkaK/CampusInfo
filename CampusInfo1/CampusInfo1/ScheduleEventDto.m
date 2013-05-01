@@ -36,15 +36,5 @@
     return self;
 }
 
--(void) dealloc {
-    self._description               = nil;
-    self._startTime                 = nil;
-    self._endTime                   = nil;
-    self._name                      = nil;
-    self._slots                     = nil;
-    self._type                      = nil;
-    self._scheduleEventRealizations = nil;
-    [super dealloc];
-}
 
 @end

@@ -26,11 +26,5 @@
 }
 
 
--(void) dealloc {
-    self._name        = nil; 
-    self._description = nil;
-    [super dealloc];
-}
-
 
 @end

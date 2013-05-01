@@ -38,7 +38,7 @@
 
 }
 
-@property (nonatomic, assign) id<TimeTableDetailViewDelegate> _timeTableDetailViewDelegate;
+@property (nonatomic, retain) id<TimeTableDetailViewDelegate> _timeTableDetailViewDelegate;
 @property (nonatomic, retain) ScheduleEventDto               *_scheduleEvent;
 @property (nonatomic, retain) IBOutlet UITableView           *_detailTable;
 @property (nonatomic, retain) IBOutlet UITableViewCell       *_detailTableCell;

@@ -38,37 +38,23 @@
 
 
 
--(void) dealloc {
-    self._days           = nil;
-    self._type           = nil;
-    self._acronym        = nil;
-    self._student        = nil;
-    self._lecturer       = nil;
-    self._room           = nil;
-    self._scheduleCourse = nil;
-    self._schoolClass    = nil;
-    self._dataFromUrl    = nil;
-    [_asyncTimeTableRequest release];
-    [super dealloc];
-}
-
 
 - (NSDateFormatter *)dayFormatter {
-    NSDateFormatter *_dayFormatter = [[[NSDateFormatter alloc]init]autorelease];
+    NSDateFormatter *_dayFormatter = [[NSDateFormatter alloc]init];
     [_dayFormatter setTimeZone:[NSTimeZone timeZoneWithName:@"CEST"]];
     [_dayFormatter setDateFormat:@"yyyy-MM-dd"]; 
     return _dayFormatter;
 } 
 
 - (NSDateFormatter *)timeFormatter {
-    NSDateFormatter *timeFormatter = [[[NSDateFormatter alloc]init]autorelease];
+    NSDateFormatter *timeFormatter = [[NSDateFormatter alloc]init];
     [timeFormatter setTimeZone:[NSTimeZone timeZoneWithName:@"CEST"]];
 	[timeFormatter setDateFormat:@"HH:mm"]; 
     return timeFormatter;
 }
 
 - (NSDateFormatter *)timeAndDayFormatter {
-    NSDateFormatter *timeAndDayFormatter = [[[NSDateFormatter alloc]init]autorelease];
+    NSDateFormatter *timeAndDayFormatter = [[NSDateFormatter alloc]init];
     [timeAndDayFormatter setTimeZone:[NSTimeZone timeZoneWithName:@"CEST"]];
 	[timeAndDayFormatter setDateFormat:@"yyyy-MM-dd HH:mm"]; 
     return timeAndDayFormatter;
@@ -378,7 +364,7 @@
         if ([eventKey isEqualToString:@"name"]) 
         {
             _eventName = [eventDictionary objectForKey:eventKey];
-           //  NSLog(@"_eventName: %@",_eventName);
+             //NSLog(@"_eventName: %@",_eventName);
         }
 
         
@@ -492,7 +478,7 @@
             }
             
             //NSLog(@"slot array count: %i",[_slotArrayToStore count]);
-        } 
+        }
     } 
     //NSLog(@"end parsing day");
 
@@ -1058,17 +1044,17 @@
                       self._days = [self getDaysWithDictionary:_scheduleDictionary withKey:scheduleKey];
                     
                     //int dayArrayI;
-                    //for (dayArrayI = 0; dayArrayI < [_days count]; dayArrayI++) 
+                    //for (dayArrayI = 0; dayArrayI < [_days count]; dayArrayI++)
                     //{
                     //    DayDto   *_oneDay        = [_days objectAtIndex:dayArrayI];
                     //    NSString *_oneDateString = [[self dayFormatter] stringFromDate:_oneDay._date];
                     //    NSLog(@"initWithAcronym _oneDateString => %@", _oneDateString);
                     //    int eventArrayI;
-                    //    for (eventArrayI = 0; eventArrayI < [_oneDay._events count]; eventArrayI++) 
+                    //    for (eventArrayI = 0; eventArrayI < [_oneDay._events count]; eventArrayI++)
                     //    {
                     //        ScheduleEventDto *_localEvent = [_oneDay._events objectAtIndex:eventArrayI];
-                    //        NSLog(@"initWithAcronym => %i event in table cell: %@", eventArrayI,  _localEvent._name);
-                    //    }
+                    //        NSLog(@"initWithAcronym => %i event in table cell: %@ (%@)", eventArrayI,  _localEvent._name, _localEvent._type);
+                     //   }
                     //}
                   }
                   [self setTypeDetailsWithDictionary:_scheduleDictionary withKey:scheduleKey];

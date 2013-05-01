@@ -32,14 +32,6 @@
     return self;
 }
 
--(void) dealloc {
-    self._shortName  = nil;
-    self._firstName  = nil;
-    self._lastName   = nil;
-    self._type       = nil;
-    self._department = nil;
-    [super dealloc];
-}
 
 @end
 
