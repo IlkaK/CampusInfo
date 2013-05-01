@@ -13,8 +13,8 @@
 @class ScheduleEventRealizationDto;
 
 @protocol TimeTableDetailViewDelegate <NSObject>
-
--(void) setNewAcronym:(NSString *)newAcronym:(NSString *)newAcronymType;
+    
+-(void)setNewAcronym:(NSString *)newAcronym withAcronymType:(NSString *)newAcronymType;
 
 @end
 

@@ -87,10 +87,10 @@
 }
 
 
-- (DepartmentDto *)getDepartment:(NSDictionary *)personDictionary:(id) personKey{
+- (DepartmentDto *)getDepartmentWithDictionary:(NSDictionary *)dictionary withPersonKey:(id)key{
     DepartmentDto *_localDepartment      = nil;
     NSString      *_name                 = nil;
-    NSDictionary  *_departmentDictionary = [personDictionary objectForKey:personKey];
+    NSDictionary  *_departmentDictionary = [dictionary objectForKey:key];
     
     for (id departmentKey in _departmentDictionary) 
     {
@@ -105,10 +105,10 @@
 }
 
 
-- (RoomDto *) getRoom:(NSDictionary *)scheduleDictionary:(id) scheduleKey{
+- (RoomDto *) getRoomWithDictionary:(NSDictionary *)dictionary withScheduleKey:(id) key{
     RoomDto       *_localRoom      = nil;
     NSString      *_name           = nil;
-    NSDictionary  *_roomDictionary = [scheduleDictionary objectForKey:scheduleKey];
+    NSDictionary  *_roomDictionary = [dictionary objectForKey:key];
     
     if (_roomDictionary != (id)[NSNull null])
     {
@@ -124,7 +124,7 @@
 }
 
 
-- (SchoolClassDto *) getClass:(NSDictionary *)scheduleDictionary:(id) scheduleKey
+- (SchoolClassDto *) getClassWithDictionary:(NSDictionary *)scheduleDictionary withKey:(id) scheduleKey
 {
     SchoolClassDto *_localClass      = nil;
     NSString       *_className       = nil;
@@ -153,12 +153,12 @@
 }
 
 
-- (ScheduleCourseDto *) getScheduleCourse:(NSDictionary *)scheduleDictionary:(id) scheduleKey
+- (ScheduleCourseDto *) getScheduleCourseWithDictionary:(NSDictionary *)dictionary withKey:(id) key
 {
     ScheduleCourseDto *_localCourse       = nil;
     NSString          *_courseName        = nil;
     NSString          *_courseDescription = nil;
-    NSDictionary      *_courseDictionary  = [scheduleDictionary objectForKey:scheduleKey];
+    NSDictionary      *_courseDictionary  = [dictionary objectForKey:key];
     
      if (_courseDictionary != (id)[NSNull null])  
      {
@@ -181,7 +181,7 @@
 
 
 
-- (PersonDto *) getPerson:(NSDictionary *)scheduleDictionary:(id) scheduleKey
+- (PersonDto *) getPersonWithDictionary:(NSDictionary *)dictionary withKey:(id) key
 {
     PersonDto     *_localPerson      = nil;
     NSString      *_firstName        = nil;
@@ -192,13 +192,13 @@
     NSDictionary  *_personDictionary = nil;
     
     
-    if (scheduleKey == nil) 
+    if (key == nil)
     {
-        _personDictionary = scheduleDictionary;
+        _personDictionary = dictionary;
     }
     else
     {
-        _personDictionary = [scheduleDictionary objectForKey:scheduleKey];
+        _personDictionary = [dictionary objectForKey:key];
     }
 
     if (_personDictionary != (id)[NSNull null])  
@@ -228,7 +228,7 @@
         if ([personKey isEqualToString:@"department"]) {
             if ([_personDictionary objectForKey:personKey] != (id)[NSNull null])  
             {
-                _department = [self getDepartment:_personDictionary:personKey];
+                _department = [self getDepartmentWithDictionary:_personDictionary withPersonKey:personKey];
                 //NSLog(@"_department._name: %@",_department._name);
             }
         }
@@ -254,7 +254,7 @@
         {
             if ([realizationDictionary objectForKey:realizationKey] != (id)[NSNull null])  
             {
-                _realizationRoom = [self getRoom:realizationDictionary:realizationKey];
+                _realizationRoom = [self getRoomWithDictionary:realizationDictionary withScheduleKey:realizationKey];
                 //NSLog(@"_realizationRoom._name: %@",_realizationRoom._name);
             }
         }
@@ -270,7 +270,7 @@
             {   
                 NSDictionary *_personDictionary = [_lecturersArray objectAtIndex:lecturerArrayI];
                 
-                PersonDto *_lectuerPerson = [self getPerson:_personDictionary:nil];
+                PersonDto *_lectuerPerson = [self getPersonWithDictionary:_personDictionary withKey:nil];
                 //NSLog(@"_lectuerPerson._shortName: %@",_lectuerPerson._shortName);
                 
                 [_lecturerArrayToStore addObject:_lectuerPerson];
@@ -284,7 +284,7 @@
             {   
                 NSDictionary *_classDictionary = [_classesArray objectAtIndex:classesArrayI];
                 
-                SchoolClassDto *_realizationClass = [self getClass:_classDictionary:nil];
+                SchoolClassDto *_realizationClass = [self getClassWithDictionary:_classDictionary withKey:nil];
                 
                 //NSLog(@"_realizationClass._name: %@",_realizationClass._name);
                 [_classesArrayToStore addObject:_realizationClass];
@@ -501,10 +501,10 @@
 
 
 
-- (NSMutableArray *) getDays:(NSDictionary *)scheduleDictionary:(id)scheduleKey
+- (NSMutableArray *) getDaysWithDictionary:(NSDictionary *)dictionary withKey:(id)key
 {
     NSMutableArray *_dayArrayToStore = [[NSMutableArray alloc]init];
-    NSArray        *_dayArray        = [scheduleDictionary objectForKey:scheduleKey];
+    NSArray        *_dayArray        = [dictionary objectForKey:key];
     
     //NSLog(@"day array count: %i",[_dayArray count]);
     
@@ -539,21 +539,15 @@
 
 
 
-- (NSDate *) getStartDate:(NSDictionary *)scheduleDictionary:(id)scheduleKey
+/* TODO: do we need that?
+- (NSDate *) getDateWithDictionary:(NSDictionary *)dictionary withKey:(id)key
 {  
-    NSString *_subType = [scheduleDictionary objectForKey:scheduleKey];
+    NSString *_subType = [dictionary objectForKey:key];
     NSDate   *_startDateToStore = [self parseDate:_subType];
     return _startDateToStore;
 }
+ */
 
-
-- (NSDate *) getEndDate:(NSDictionary *)scheduleDictionary:(id)scheduleKey
-{  
-    NSString *_subType = [scheduleDictionary objectForKey:scheduleKey];
-    //NSLog(@"endDate %@", _subType);
-    NSDate   *_endDateToStore = [self parseDate:_subType];
-    return _endDateToStore;
-}
 
 
 
@@ -952,36 +946,36 @@
 
 
 
--(void)setTypeDetails:(id)scheduleKey:(NSDictionary *)scheduleDictionary
+-(void)setTypeDetailsWithDictionary:(NSDictionary *)dictionary withKey:(id)key
 {
     // get student information
-    if ([scheduleKey isEqualToString:@"student"]) 
+    if ([key isEqualToString:@"student"]) 
     {
-        self._student = [self getPerson:scheduleDictionary:scheduleKey];
+        self._student = [self getPersonWithDictionary:dictionary withKey:key];
     } 
     
     // get lecturer information
-    if ([scheduleKey isEqualToString:@"lecturer"]) 
+    if ([key isEqualToString:@"lecturer"]) 
     {
-        self._lecturer = [self getPerson:scheduleDictionary:scheduleKey];
+        self._lecturer = [self getPersonWithDictionary:dictionary withKey:key];
     }  
     
     // get course information            
-    if ([scheduleKey isEqualToString:@"course"]) 
+    if ([key isEqualToString:@"course"]) 
     {
-        self._scheduleCourse = [self getScheduleCourse:scheduleDictionary:scheduleKey];
+        self._scheduleCourse = [self getScheduleCourseWithDictionary:dictionary withKey:key];
     }  
     
     // get class information
-    if ([scheduleKey isEqualToString:@"class"]) 
+    if ([key isEqualToString:@"class"]) 
     {
-        self._schoolClass  = [self getClass:scheduleDictionary:scheduleKey];
+        self._schoolClass  = [self getClassWithDictionary:dictionary withKey:key];
     }  
     
     // get room information
-    if ([scheduleKey isEqualToString:@"room"]) 
+    if ([key isEqualToString:@"room"]) 
     {
-        self._room = [self getRoom:scheduleDictionary:scheduleKey];
+        self._room = [self getRoomWithDictionary:dictionary withScheduleKey:key];
     }           
 
 }
@@ -1061,7 +1055,7 @@
                   }
                   if ([scheduleKey isEqualToString:@"days"])
                   {
-                      self._days = [self getDays:_scheduleDictionary:scheduleKey];
+                      self._days = [self getDaysWithDictionary:_scheduleDictionary withKey:scheduleKey];
                     
                     //int dayArrayI;
                     //for (dayArrayI = 0; dayArrayI < [_days count]; dayArrayI++) 
@@ -1077,7 +1071,7 @@
                     //    }
                     //}
                   }
-                  [self setTypeDetails:scheduleKey:_scheduleDictionary];
+                  [self setTypeDetailsWithDictionary:_scheduleDictionary withKey:scheduleKey];
                 }
             }
         }
