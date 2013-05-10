@@ -49,7 +49,7 @@
 
 - (void)viewDidLoad
 {
-    //NSLog(@"TimeTableDetail _allocation._name %@", _allocation._name);
+    //NSLog(@"TimeTableDetail viewDidLoad");
 
     // set table controller
     if (_detailTable == nil) {
@@ -65,6 +65,9 @@
 
     UILabel *label = [[UILabel alloc] init];
 	label.font     = [UIFont fontWithName:@"Helvetica" size: 15.0];
+    
+    //NSLog(@"while viewDidLoad _dayAndAcronymString: %@", _dayAndAcronymString);
+    
 	label.text     = _dayAndAcronymString;
 	[label setBackgroundColor:[UIColor clearColor]];
 	[label setTextColor:[UIColor whiteColor]];
@@ -333,7 +336,11 @@
         
         _labelDescription.text  = [_descriptionArray objectAtIndex:indexPath.section];
 
-        [_valueButton setTitle:[_detailArray objectAtIndex:indexPath.section] forState:UIControlStateNormal];
+        NSMutableAttributedString *_titleValueButton = [[NSMutableAttributedString alloc] initWithString:[_detailArray objectAtIndex:indexPath.section]];
+        
+        [_titleValueButton addAttribute:NSUnderlineStyleAttributeName value:[NSNumber numberWithInteger:NSUnderlineStyleSingle] range:NSMakeRange(0, [_titleValueButton length])];
+        
+        [_valueButton setAttributedTitle:_titleValueButton forState:UIControlStateNormal];
         [_valueButton addTarget:self action:@selector(changeToSchedule:event:) forControlEvents:UIControlEventTouchUpInside];
         
         _detailButton.enabled   = FALSE;

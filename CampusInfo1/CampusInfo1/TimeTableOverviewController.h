@@ -64,6 +64,7 @@ UIViewController
 
     IBOutlet UITableViewCell  *_twoSlotsOneRoomTableCell;
     IBOutlet UITableViewCell  *_twoSlotsTwoRoomsTableCell;
+    IBOutlet UITableViewCell  *_twoSlotsSixRoomsTableCell;
 
     IBOutlet UITableViewCell  *_threeSlotsOneRoomTableCell;
     IBOutlet UITableViewCell  *_threeSlotsTwoRoomsTableCell;
@@ -75,9 +76,15 @@ UIViewController
     
     IBOutlet UITableViewCell  *_fiveSlotsOneRoomTableCell;
     
+    IBOutlet UITableViewCell  *_sixSlotsOneRoomTableCell;
+    IBOutlet UITableViewCell  *_sixSlotsTwoRoomsTableCell;
+    
     IBOutlet UITableViewCell  *_eightSlotsOneRoomTableCell;
     
+    IBOutlet UITableViewCell  *_emptyTableCell;
+    
     IBOutlet UIButton         *_noConnectionButton;
+    IBOutlet UILabel          *_noConnectionLabel;
 }
 
 @property (nonatomic, retain) IBOutlet TimeTableDetailController *_detailsVC;
@@ -101,6 +108,7 @@ UIViewController
 
 @property (nonatomic, retain) IBOutlet UITableViewCell           *_twoSlotsOneRoomTableCell;
 @property (nonatomic, retain) IBOutlet UITableViewCell           *_twoSlotsTwoRoomsTableCell;
+@property (nonatomic, retain) IBOutlet UITableViewCell           *_twoSlotsSixRoomsTableCell;
 
 @property (nonatomic, retain) IBOutlet UITableViewCell           *_threeSlotsOneRoomTableCell;
 @property (nonatomic, retain) IBOutlet UITableViewCell           *_threeSlotsTwoRoomsTableCell;
@@ -112,9 +120,15 @@ UIViewController
 
 @property (nonatomic, retain) IBOutlet UITableViewCell           *_fiveSlotsOneRoomTableCell;
 
+@property (nonatomic, retain) IBOutlet UITableViewCell           *_sixSlotsOneRoomTableCell;
+@property (nonatomic, retain) IBOutlet UITableViewCell           *_sixSlotsTwoRoomsTableCell;
+
 @property (nonatomic, retain) IBOutlet UITableViewCell           *_eightSlotsOneRoomTableCell;
 
+@property (nonatomic, retain) IBOutlet UITableViewCell           *_emptyTableCell;
+
 @property (nonatomic, retain) IBOutlet UIButton                  *_noConnectionButton;
+@property (nonatomic, retain) IBOutlet UILabel                   *_noConnectionLabel;
 
 @property (nonatomic, retain)          NSDate                    *_actualDate;
 @property (nonatomic, retain)          ScheduleDto               *_schedule;

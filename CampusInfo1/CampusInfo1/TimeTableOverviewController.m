@@ -50,6 +50,7 @@
 
 @synthesize _twoSlotsOneRoomTableCell;
 @synthesize _twoSlotsTwoRoomsTableCell;
+@synthesize _twoSlotsSixRoomsTableCell;
 
 @synthesize _threeSlotsOneRoomTableCell;
 @synthesize _threeSlotsTwoRoomsTableCell;
@@ -61,10 +62,15 @@
 
 @synthesize _fiveSlotsOneRoomTableCell;
 
+@synthesize _sixSlotsOneRoomTableCell;
+@synthesize _sixSlotsTwoRoomsTableCell;
+
 @synthesize _eightSlotsOneRoomTableCell;
 
-@synthesize _noConnectionButton;
+@synthesize _emptyTableCell;
 
+@synthesize _noConnectionButton;
+@synthesize _noConnectionLabel;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {   
@@ -109,12 +115,15 @@
     self._schedule                 = nil;
     self._schedule                 = [[ScheduleDto alloc] initWithAcronym:newAcronym:newAcronymType:_actualDate];
     self._actualDayDto             = [self getDayDto];
-    [_timeTable reloadData];
+
+    
+    NSLog(@"2 showScheduleDetails acronym: %@", self._actualShownAcronymString);
     _detailsVC._dayAndAcronymString = [NSString stringWithFormat:@" für den %@ von %@ (%@)"
                                        ,[[self dayFormatter] stringFromDate:_actualDate]
-                                       , self._actualShownAcronymString
-                                       ,[self getGermanTypeTranslation:self._actualShownAcronymType]
+                                       ,newAcronym //self._actualShownAcronymString
+                                       ,[self getGermanTypeTranslation:newAcronymType] //self._actualShownAcronymType]
                                        ];
+    [_timeTable reloadData];
 }
 
 
@@ -200,6 +209,7 @@
         if ([self._schedule._days count] > 0)
         {
             _noConnectionButton.hidden = YES;
+            _noConnectionLabel.hidden = YES;
         }
     }
 }
@@ -259,6 +269,7 @@
     NSDate     *_newDate   = [_gregorian dateByAddingComponents:_components toDate:self._actualDate options:0];
     
     self._actualDate      = _newDate;
+    
     [self setNewScheduleWithDate:_newDate];
 
     //NSLog(@"Day before: %@", timeTableViewController._actualDate);
@@ -279,6 +290,7 @@
     
     NSDate *_newDate = [self._actualDate dateByAddingTimeInterval:(1*24*60*60)];
     self._actualDate = _newDate;
+    
     [self setNewScheduleWithDate:_newDate];
 
     _dayNavigator.title = [NSString stringWithFormat:@"%@, %@"
@@ -407,13 +419,6 @@
                            ,newAcronym
                            ,[self getGermanTypeTranslation:newAcronymType]
                           ];
-    
-    self._detailsVC._dayAndAcronymString = [NSString stringWithFormat:@" für den %@ von %@ (%@)"
-                                       ,[[self dayFormatter] stringFromDate:_actualDate]
-                                       , newAcronym
-                                       ,[self getGermanTypeTranslation:newAcronymType]
-                                       ];
-    
     // SET NEW ACRONYM WITH ACTUAL DATE
     [self setNewScheduleWithAcronym:newAcronym withAcronymType:newAcronymType];
     
@@ -492,9 +497,10 @@
     
     if (_noConnectionButton == nil) {
 		_noConnectionButton = [[UIButton alloc] init];
+        _noConnectionLabel = [[UILabel alloc] init];
 	}
     _noConnectionButton.hidden = YES;
-    
+    _noConnectionLabel.hidden = YES;
 }
 
 
@@ -522,6 +528,7 @@
           self._schedule             = [_schedule initWithAcronym:_actualShownAcronymString:_actualShownAcronymType:_actualDate];
           _actualDayDto              = [self getDayDto];            
           _noConnectionButton.hidden = YES;
+          _noConnectionLabel.hidden = YES;
           [_timeTable reloadData];
             
            // NSLog(@"time table is reloaded");
@@ -530,6 +537,7 @@
         {
             //NSLog(@"50 mal versucht mit diesem Kürzel.");
             _noConnectionButton.hidden = NO;
+            _noConnectionLabel.hidden = NO;
             //[self popUpAcronymView:@"Kein valides Kürzel."];
         }
     }
@@ -616,6 +624,7 @@
     _fiveSlotsOneRoomTableCell    = nil;
     
     _noConnectionButton = nil;
+    _noConnectionLabel = nil;
     _ownStoredAcronymLabel = nil;
 
     _eightSlotsOneRoomTableCell = nil;
@@ -623,6 +632,11 @@
     _oneSlotSevenRoomsTableCell = nil;
     _threeSlotsTwoRoomsTableCell = nil;
     _threeSlotsThreeRoomsTableCell = nil;
+    _noConnectionLabel = nil;
+    _emptyTableCell = nil;
+    _sixSlotsTwoRoomsTableCell = nil;
+    _sixSlotsOneRoomTableCell = nil;
+    _twoSlotsSixRoomsTableCell = nil;
     [super viewDidUnload];
 }
 
@@ -666,7 +680,7 @@
         
         //NSLog(@"schedule event name %@", _detailsVC._scheduleEvent._name);
         //NSLog(@"showScheduleDetails date   : %@",[[self dayFormatter] stringFromDate:_actualDate]);
-        //NSLog(@"showScheduleDetails acronym: %@", _acronymString);
+        NSLog(@"1 showScheduleDetails acronym: %@", self._actualShownAcronymString);
     
         _detailsVC._dayAndAcronymString = [NSString stringWithFormat:@" für den %@ von %@ (%@)"
                                            ,[[self dayFormatter] stringFromDate:_actualDate]
@@ -681,7 +695,17 @@
         
         _detailsVC._timeString          = [NSString stringWithFormat:@"Modul von %@ bis %@",_fromString, _toString];
         _detailsVC._timeLabel.text      = _detailsVC._timeString;
+        
         [_detailsVC._detailTable reloadData];
+        
+        UILabel *label = [[UILabel alloc] init];
+        label.font     = [UIFont fontWithName:@"Helvetica" size: 15.0];
+        label.text     = _detailsVC._dayAndAcronymString;
+        [label setBackgroundColor:[UIColor clearColor]];
+        [label setTextColor:[UIColor whiteColor]];
+        [label sizeToFit];
+        [_detailsVC._titleNavigationItem setTitleView:label];
+        
         [self presentModalViewController:_detailsVC animated:YES];
     }
 }
@@ -709,47 +733,8 @@
         
         // SET NEW ACRONYM WITH ACTUAL DATE
         [self setNewScheduleWithAcronym:_roomString withAcronymType:@"rooms"];
+        //NSLog(@"new room schedule is set");
     }
-}
-
--(void) changeToRoomSchedule1:(id)sender event:(id)event
-{   
-    [self changeToRoomSchedule:sender withEvent:event withRealizationIndex:0];
-}
-
--(void) changeToRoomSchedule2:(id)sender event:(id)event
-{   
-    [self changeToRoomSchedule:sender withEvent:event withRealizationIndex:1];
-}
-
--(void) changeToRoomSchedule3:(id)sender event:(id)event
-{   
-    [self changeToRoomSchedule:sender withEvent:event withRealizationIndex:2];
-}
-
--(void) changeToRoomSchedule4:(id)sender event:(id)event
-{   
-    [self changeToRoomSchedule:sender withEvent:event withRealizationIndex:3];
-}
-
--(void) changeToRoomSchedule5:(id)sender event:(id)event
-{   
-    [self changeToRoomSchedule:sender withEvent:event withRealizationIndex:4];
-}
-
--(void) changeToRoomSchedule6:(id)sender event:(id)event
-{   
-    [self changeToRoomSchedule:sender withEvent:event withRealizationIndex:5];
-}
-
--(void) changeToRoomSchedule7:(id)sender event:(id)event
-{   
-    [self changeToRoomSchedule:sender withEvent:event withRealizationIndex:6];
-}
-
--(void) changeToRoomSchedule8:(id)sender event:(id)event
-{   
-    [self changeToRoomSchedule:sender withEvent:event withRealizationIndex:7];
 }
 
 
@@ -776,6 +761,48 @@
 }
 
 
+- (void) changeToRoomSchedule1:(id)sender event:(id)event
+{
+    [self changeToRoomSchedule:sender withEvent:event withRealizationIndex:0];
+}
+
+- (void) changeToRoomSchedule2:(id)sender event:(id)event
+{
+    [self changeToRoomSchedule:sender withEvent:event withRealizationIndex:1];
+}
+
+- (void) changeToRoomSchedule3:(id)sender event:(id)event
+{
+    [self changeToRoomSchedule:sender withEvent:event withRealizationIndex:2];
+}
+
+- (void) changeToRoomSchedule4:(id)sender event:(id)event
+{
+    [self changeToRoomSchedule:sender withEvent:event withRealizationIndex:3];
+}
+
+- (void) changeToRoomSchedule5:(id)sender event:(id)event
+{
+    [self changeToRoomSchedule:sender withEvent:event withRealizationIndex:4];
+}
+
+- (void) changeToRoomSchedule6:(id)sender event:(id)event
+{
+    [self changeToRoomSchedule:sender withEvent:event withRealizationIndex:5];
+}
+
+- (void) changeToRoomSchedule7:(id)sender event:(id)event
+{
+    [self changeToRoomSchedule:sender withEvent:event withRealizationIndex:6];
+}
+
+- (void) changeToRoomSchedule8:(id)sender event:(id)event
+{
+    [self changeToRoomSchedule:sender withEvent:event withRealizationIndex:7];
+}
+
+
+
 // --------------------------------
 
 
@@ -796,7 +823,10 @@
 }
  
 
-- (ScheduleEventDto *)getCurrentScheduleEvent:(DayDto *)currentDay: (NSDate *)fromTime:(NSDate *)toTime:(ScheduleEventDto *)formerScheduleEvent
+- (ScheduleEventDto *)getCurrentScheduleEventWithDay            :(DayDto *)          currentDay
+                                            withFromTime        :(NSDate *)          fromTime
+                                            withToTime          :(NSDate *)          toTime
+                                            withScheduleEvent   :(ScheduleEventDto *)formerScheduleEvent
 {   
     ScheduleEventDto *_localScheduleEvent   = nil;
     ScheduleEventDto *_goalScheduleEvent    = nil;
@@ -952,12 +982,18 @@
     {
         _fromTime           = [[self timeFormatter] dateFromString:@"08:00"];
         _toTime             = [[self timeFormatter] dateFromString:@"08:45"];
-        _firstScheduleEvent = [self getCurrentScheduleEvent:currentDay:_fromTime:_toTime:nil];
+        _firstScheduleEvent = [self getCurrentScheduleEventWithDay  :currentDay
+                                                withFromTime        :_fromTime
+                                                withToTime          :_toTime
+                                                withScheduleEvent   :nil];
         [_sortedEvents addObject:_firstScheduleEvent];
     
         _fromTime           = [[self timeFormatter] dateFromString:@"08:50"];
         _toTime             = [[self timeFormatter] dateFromString:@"09:35"];
-        _nextScheduleEvent  = [self getCurrentScheduleEvent:currentDay:_fromTime:_toTime:_firstScheduleEvent];
+        _nextScheduleEvent  = [self getCurrentScheduleEventWithDay  :currentDay
+                                                withFromTime        :_fromTime
+                                                withToTime          :_toTime
+                                                withScheduleEvent   :_firstScheduleEvent];
         if ([_nextScheduleEvent._name compare: @"same"] != NSOrderedSame)
         {
             [_sortedEvents addObject:_nextScheduleEvent];
@@ -966,7 +1002,10 @@
     
         _fromTime   = [[self timeFormatter] dateFromString:@"10:00"];
         _toTime     = [[self timeFormatter] dateFromString:@"10:45"];
-        _nextScheduleEvent  = [self getCurrentScheduleEvent:currentDay:_fromTime:_toTime:_firstScheduleEvent];
+        _nextScheduleEvent  = [self getCurrentScheduleEventWithDay  :currentDay
+                                                withFromTime        :_fromTime
+                                                withToTime          :_toTime
+                                                withScheduleEvent   :_firstScheduleEvent];
         if ([_nextScheduleEvent._name compare: @"same"] != NSOrderedSame)
         {
             [_sortedEvents addObject:_nextScheduleEvent];
@@ -975,7 +1014,10 @@
     
         _fromTime   = [[self timeFormatter] dateFromString:@"10:50"];
         _toTime     = [[self timeFormatter] dateFromString:@"11:35"];
-        _nextScheduleEvent  = [self getCurrentScheduleEvent:currentDay:_fromTime:_toTime:_firstScheduleEvent];
+        _nextScheduleEvent  = [self getCurrentScheduleEventWithDay  :currentDay
+                                                withFromTime        :_fromTime
+                                                withToTime          :_toTime
+                                                withScheduleEvent   :_firstScheduleEvent];
         if ([_nextScheduleEvent._name compare: @"same"] != NSOrderedSame)
         {
             [_sortedEvents addObject:_nextScheduleEvent];
@@ -984,7 +1026,10 @@
     
         _fromTime   = [[self timeFormatter] dateFromString:@"12:00"];
         _toTime     = [[self timeFormatter] dateFromString:@"12:45"];
-        _nextScheduleEvent  = [self getCurrentScheduleEvent:currentDay:_fromTime:_toTime:_firstScheduleEvent];
+        _nextScheduleEvent  = [self getCurrentScheduleEventWithDay  :currentDay
+                                                withFromTime        :_fromTime
+                                                withToTime          :_toTime
+                                                withScheduleEvent   :_firstScheduleEvent];
         if ([_nextScheduleEvent._name compare: @"same"] != NSOrderedSame)
         {
             [_sortedEvents addObject:_nextScheduleEvent];
@@ -993,7 +1038,10 @@
     
         _fromTime   = [[self timeFormatter] dateFromString:@"12:50"];
         _toTime     = [[self timeFormatter] dateFromString:@"13:35"];
-        _nextScheduleEvent  = [self getCurrentScheduleEvent:currentDay:_fromTime:_toTime:_firstScheduleEvent];
+        _nextScheduleEvent  = [self getCurrentScheduleEventWithDay  :currentDay
+                                                withFromTime        :_fromTime
+                                                withToTime          :_toTime
+                                                withScheduleEvent   :_firstScheduleEvent];
         if ([_nextScheduleEvent._name compare: @"same"] != NSOrderedSame)
         {
             [_sortedEvents addObject:_nextScheduleEvent];
@@ -1002,7 +1050,10 @@
     
         _fromTime   = [[self timeFormatter] dateFromString:@"14:00"];
         _toTime     = [[self timeFormatter] dateFromString:@"14:45"];
-        _nextScheduleEvent  = [self getCurrentScheduleEvent:currentDay:_fromTime:_toTime:_firstScheduleEvent];
+        _nextScheduleEvent  = [self getCurrentScheduleEventWithDay  :currentDay
+                                                withFromTime        :_fromTime
+                                                withToTime          :_toTime
+                                                withScheduleEvent   :_firstScheduleEvent];
         if ([_nextScheduleEvent._name compare: @"same"] != NSOrderedSame)
         {
             [_sortedEvents addObject:_nextScheduleEvent];
@@ -1011,7 +1062,10 @@
     
         _fromTime   = [[self timeFormatter] dateFromString:@"14:50"];
         _toTime     = [[self timeFormatter] dateFromString:@"15:35"];
-        _nextScheduleEvent  = [self getCurrentScheduleEvent:currentDay:_fromTime:_toTime:_firstScheduleEvent];
+        _nextScheduleEvent  = [self getCurrentScheduleEventWithDay  :currentDay
+                                                withFromTime        :_fromTime
+                                                withToTime          :_toTime
+                                                withScheduleEvent   :_firstScheduleEvent];
         if ([_nextScheduleEvent._name compare: @"same"] != NSOrderedSame)
         {
             [_sortedEvents addObject:_nextScheduleEvent];
@@ -1020,7 +1074,10 @@
     
         _fromTime   = [[self timeFormatter] dateFromString:@"16:00"];
         _toTime     = [[self timeFormatter] dateFromString:@"16:45"];
-        _nextScheduleEvent  = [self getCurrentScheduleEvent:currentDay:_fromTime:_toTime:_firstScheduleEvent];
+        _nextScheduleEvent  = [self getCurrentScheduleEventWithDay  :currentDay
+                                                withFromTime        :_fromTime
+                                                withToTime          :_toTime
+                                                withScheduleEvent   :_firstScheduleEvent];
         if ([_nextScheduleEvent._name compare: @"same"] != NSOrderedSame)
         {
             [_sortedEvents addObject:_nextScheduleEvent];
@@ -1029,7 +1086,10 @@
     
         _fromTime   = [[self timeFormatter] dateFromString:@"16:50"];
         _toTime     = [[self timeFormatter] dateFromString:@"17:35"];
-        _nextScheduleEvent  = [self getCurrentScheduleEvent:currentDay:_fromTime:_toTime:_firstScheduleEvent];
+        _nextScheduleEvent  = [self getCurrentScheduleEventWithDay  :currentDay
+                                                withFromTime        :_fromTime
+                                                withToTime          :_toTime
+                                                withScheduleEvent   :_firstScheduleEvent];
         if ([_nextScheduleEvent._name compare: @"same"] != NSOrderedSame)
         {
             [_sortedEvents addObject:_nextScheduleEvent];
@@ -1038,7 +1098,10 @@
     
         _fromTime   = [[self timeFormatter] dateFromString:@"18:00"];
         _toTime     = [[self timeFormatter] dateFromString:@"18:45"];
-        _nextScheduleEvent  = [self getCurrentScheduleEvent:currentDay:_fromTime:_toTime:_firstScheduleEvent];
+        _nextScheduleEvent  = [self getCurrentScheduleEventWithDay  :currentDay
+                                                withFromTime        :_fromTime
+                                                withToTime          :_toTime
+                                                withScheduleEvent   :_firstScheduleEvent];
         if ([_nextScheduleEvent._name compare: @"same"] != NSOrderedSame)
         {
             [_sortedEvents addObject:_nextScheduleEvent];
@@ -1047,7 +1110,10 @@
     
         _fromTime   = [[self timeFormatter] dateFromString:@"18:50"];
         _toTime     = [[self timeFormatter] dateFromString:@"19:35"];
-        _nextScheduleEvent  = [self getCurrentScheduleEvent:currentDay:_fromTime:_toTime:_firstScheduleEvent];
+        _nextScheduleEvent  = [self getCurrentScheduleEventWithDay  :currentDay
+                                                withFromTime        :_fromTime
+                                                withToTime          :_toTime
+                                                withScheduleEvent   :_firstScheduleEvent];
         if ([_nextScheduleEvent._name compare: @"same"] != NSOrderedSame)
         {
             [_sortedEvents addObject:_nextScheduleEvent];
@@ -1056,7 +1122,10 @@
     
         _fromTime   = [[self timeFormatter] dateFromString:@"19:45"];
         _toTime     = [[self timeFormatter] dateFromString:@"20:30"];
-        _nextScheduleEvent  = [self getCurrentScheduleEvent:currentDay:_fromTime:_toTime:_firstScheduleEvent];
+        _nextScheduleEvent  = [self getCurrentScheduleEventWithDay  :currentDay
+                                                withFromTime        :_fromTime
+                                                withToTime          :_toTime
+                                                withScheduleEvent   :_firstScheduleEvent];
         if ([_nextScheduleEvent._name compare: @"same"] != NSOrderedSame)
         {
             [_sortedEvents addObject:_nextScheduleEvent];
@@ -1065,7 +1134,10 @@
     
         _fromTime   = [[self timeFormatter] dateFromString:@"20:35"];
         _toTime     = [[self timeFormatter] dateFromString:@"21:20"];
-        _nextScheduleEvent  = [self getCurrentScheduleEvent:currentDay:_fromTime:_toTime:_firstScheduleEvent];
+        _nextScheduleEvent  = [self getCurrentScheduleEventWithDay  :currentDay
+                                                withFromTime        :_fromTime
+                                                withToTime          :_toTime
+                                                withScheduleEvent   :_firstScheduleEvent];
         if ([_nextScheduleEvent._name compare: @"same"] != NSOrderedSame)
         {
             [_sortedEvents addObject:_nextScheduleEvent];
@@ -1191,7 +1263,11 @@
 
     UIButton  *_lectureButton = (UIButton *)[cell viewWithTag:indexTag];
     
-    [_lectureButton setTitle:title     forState:UIControlStateNormal];
+    NSMutableAttributedString *_titleString = [[NSMutableAttributedString alloc] initWithString:title];
+    
+    [_titleString addAttribute:NSUnderlineStyleAttributeName value:[NSNumber numberWithInteger:NSUnderlineStyleSingle] range:NSMakeRange(0, [_titleString length])];
+    
+    [_lectureButton setAttributedTitle:_titleString forState:UIControlStateNormal];
     [_lectureButton setBackgroundColor:[UIColor clearColor]];
     
     if ([self isActualDayAndTime:_actualDate withCellSelection:actualSelection])
@@ -1209,6 +1285,96 @@
 }
 
 
+- (void) setRoomButtonWithCell:(UITableViewCell *)cell
+              withTag            :(int)       indexTag
+              withActualSelection:(NSUInteger)actualSelection
+              withTitle          :(NSString *)title
+              withSelector       :(int)       selector
+{
+     UIButton *_roomButton = (UIButton *)[cell viewWithTag:indexTag];
+    [_roomButton    setTitle:@"" forState:UIControlStateNormal];
+    [_roomButton    setBackgroundColor:[UIColor clearColor]];
+    
+    if ([self isActualDayAndTime:_actualDate withCellSelection:actualSelection])
+    {
+        [_roomButton setBackgroundColor:[UIColor lightGrayColor]];
+    }
+    
+    _roomButton.enabled     = TRUE;
+    
+    NSMutableAttributedString *_titleString = [[NSMutableAttributedString alloc] initWithString:title];
+    [_titleString addAttribute:NSUnderlineStyleAttributeName value:[NSNumber numberWithInteger:NSUnderlineStyleSingle] range:NSMakeRange(0, [_titleString length])];
+    [_roomButton    setAttributedTitle:_titleString forState:UIControlStateNormal];
+    
+    if (selector == 1)
+    {
+        [_roomButton    addTarget:self action:@selector(changeToRoomSchedule1   :event:) forControlEvents:UIControlEventTouchUpInside];
+    }
+    if (selector == 2)
+    {
+        [_roomButton   addTarget:self action:@selector(changeToRoomSchedule2   :event:) forControlEvents:UIControlEventTouchUpInside];
+    }
+    if (selector == 3)
+    {
+        [_roomButton   addTarget:self action:@selector(changeToRoomSchedule3   :event:) forControlEvents:UIControlEventTouchUpInside];
+    }
+    if (selector == 4)
+    {
+        [_roomButton   addTarget:self action:@selector(changeToRoomSchedule4   :event:) forControlEvents:UIControlEventTouchUpInside];
+    }
+    if (selector == 5)
+    {
+        [_roomButton   addTarget:self action:@selector(changeToRoomSchedule5   :event:) forControlEvents:UIControlEventTouchUpInside];
+    }
+    if (selector == 6)
+    {
+        [_roomButton   addTarget:self action:@selector(changeToRoomSchedule6   :event:) forControlEvents:UIControlEventTouchUpInside];
+    }
+    if (selector == 7)
+    {
+        [_roomButton   addTarget:self action:@selector(changeToRoomSchedule7   :event:) forControlEvents:UIControlEventTouchUpInside];
+    }
+    if (selector == 8)
+    {
+        [_roomButton   addTarget:self action:@selector(changeToRoomSchedule8   :event:) forControlEvents:UIControlEventTouchUpInside];
+    }
+    
+}
+
+
+- (void) setDetailButtonWithCell:(UITableViewCell *)cell
+              withTag            :(int)       indexTag
+{
+    UIButton  *_detailButton  = (UIButton *)[cell viewWithTag:indexTag];  // with arrow image, leading to detail page
+    
+    _detailButton.enabled   = TRUE;
+    _detailButton.hidden    = NO;
+    
+    [_detailButton  addTarget:self action:@selector(showScheduleDetails     :event:) forControlEvents:UIControlEventTouchUpInside];
+}
+
+
+- (void) setDateLabelWithCell:(UITableViewCell *)cell
+             withTag            :(int)       indexTag
+             withActualSelection:(NSUInteger)actualSelection
+             withStartTime      :(NSDate *)  startTime
+             withEndTime        :(NSDate *)  endTime
+{
+    UILabel          *_labelDate     = (UILabel  *)[cell viewWithTag:indexTag];
+    [_labelDate     setBackgroundColor:[UIColor clearColor]];
+
+    _labelDate.text = [NSString stringWithFormat:@"%@ - %@",
+                       [[self timeFormatter] stringFromDate:startTime],
+                       [[self timeFormatter] stringFromDate:endTime  ]
+                       ];
+    
+    // for actual day and time slot mark with background colour
+    if ([self isActualDayAndTime:_actualDate withCellSelection:actualSelection])
+    {
+        [_labelDate     setBackgroundColor:[UIColor lightGrayColor]];
+    }
+}
+
 
 
 - (UITableViewCell *)emptyCellOrHoliday
@@ -1216,37 +1382,31 @@
     :(NSUInteger        )actualSelection
     :(ScheduleEventDto *)actualScheduleEvent
 {
-    static NSString *_cellIdentifier = @"OneSlotOneRoomTableCell";
+    static NSString *_cellIdentifier = @"EmptyTableCell";
     UITableViewCell *_cell           = [actualTableView dequeueReusableCellWithIdentifier:_cellIdentifier];
     if (_cell == nil) 
     {
-        [[NSBundle mainBundle] loadNibNamed:@"OneSlotOneRoomTableCell" owner:self options:nil];
-        _cell = _oneSlotOneRoomTableCell;
-        self._oneSlotOneRoomTableCell = nil;
+        [[NSBundle mainBundle] loadNibNamed:@"EmptyTableCell" owner:self options:nil];
+        _cell = _emptyTableCell;
+        self._emptyTableCell = nil;
     }
 
     UILabel          *_labelDate     = (UILabel  *)[_cell viewWithTag:1];
     UIButton         *_lectureButton = (UIButton *)[_cell viewWithTag:2];
-    UIButton         *_roomButton    = (UIButton *)[_cell viewWithTag:3];
-    UIButton         *_detailButton  = (UIButton *)[_cell viewWithTag:4];  // with arrow image, leading to detail page
     
     // initially always disable detail button
-    _detailButton.enabled  = FALSE;
-    _detailButton.hidden   = YES;
     _lectureButton.enabled = FALSE;
-    _roomButton.enabled    = FALSE;
     
     // initialize values for buttons and labels
     [_lectureButton setTitle:@"" forState:UIControlStateNormal];
-    [_roomButton    setTitle:@"" forState:UIControlStateNormal];
     [_labelDate     setBackgroundColor:[UIColor clearColor]];
     [_lectureButton setBackgroundColor:[UIColor clearColor]];
-    [_roomButton    setBackgroundColor:[UIColor clearColor]];
     [_cell          setBackgroundColor:[UIColor clearColor]];
     
     if (actualScheduleEvent == nil)
     {
         _labelDate.text = [NSString stringWithFormat:@"xxx - xxx"];
+        NSLog(@"return xxx because actualScheduleEvent is nil");
     }
     else
     {
@@ -1275,7 +1435,6 @@
     {
         [_labelDate     setBackgroundColor:[UIColor lightGrayColor]];
         [_lectureButton setBackgroundColor:[UIColor lightGrayColor]];
-        [_roomButton    setBackgroundColor:[UIColor lightGrayColor]];
     }
     
     return _cell;
@@ -1283,7 +1442,9 @@
 
 
 
-- (UITableViewCell *)oneSlotOneRoom:(UITableView *)actualTableView:(NSUInteger)actualSelection:(ScheduleEventDto *)actualScheduleEvent
+- (UITableViewCell *)oneSlotOneRoomWithView:(UITableView *)actualTableView
+    withSelection       :(NSUInteger)        actualSelection
+    withScheduleEvent   :(ScheduleEventDto *)actualScheduleEvent
 {
     static NSString *_cellIdentifier = @"OneSlotOneRoomTableCell";
     UITableViewCell *_cell           = [actualTableView dequeueReusableCellWithIdentifier:_cellIdentifier];
@@ -1293,51 +1454,28 @@
         _cell = _oneSlotOneRoomTableCell;
         self._oneSlotOneRoomTableCell = nil;
     }
-    
-    UILabel          *_labelDate     = (UILabel  *)[_cell viewWithTag:1];
-
-    [self setLectureButtonWithCell:_cell withTag:2 withActualSelection:actualSelection withTitle:actualScheduleEvent._name doEnable:TRUE];
-    
-    UIButton         *_roomButton    = (UIButton *)[_cell viewWithTag:3];
-    UIButton         *_detailButton  = (UIButton *)[_cell viewWithTag:4];  // with arrow image, leading to detail page
-    
-    // initially always disable detail button
-    _detailButton.enabled  = FALSE;
-    _roomButton.enabled    = FALSE;
-    
-    // initialize values for buttons and labels
-    [_roomButton    setTitle:@"" forState:UIControlStateNormal];
-    [_labelDate     setBackgroundColor:[UIColor clearColor]];
-    [_roomButton    setBackgroundColor:[UIColor clearColor]];
-    [_cell          setBackgroundColor:[UIColor clearColor]];
-    
-    _labelDate.text = [NSString stringWithFormat:@"%@ - %@",  
-                       [[self timeFormatter] stringFromDate:actualScheduleEvent._startTime],  
-                       [[self timeFormatter] stringFromDate:actualScheduleEvent._endTime  ]
-                       ];  
-    
-    // for actual day and time slot mark with background colour
-    if ([self isActualDayAndTime:_actualDate withCellSelection:actualSelection]) 
-    {    
-        [_labelDate     setBackgroundColor:[UIColor lightGrayColor]];
-        [_roomButton    setBackgroundColor:[UIColor lightGrayColor]];
-    }
-    
-    //_lectureButton.enabled  = TRUE;
-    _roomButton.enabled     = TRUE;
-    _detailButton.enabled   = TRUE;
-    _detailButton.hidden    = NO;
 
     ScheduleEventRealizationDto *_localRealization = [actualScheduleEvent._scheduleEventRealizations objectAtIndex:0];
-    [_roomButton    setTitle:_localRealization._room._name  forState:UIControlStateNormal];
-    [_detailButton  addTarget:self action:@selector(showScheduleDetails     :event:) forControlEvents:UIControlEventTouchUpInside];
-    [_roomButton    addTarget:self action:@selector(changeToRoomSchedule1   :event:) forControlEvents:UIControlEventTouchUpInside];
+    
+    [self setDateLabelWithCell:_cell withTag:1 withActualSelection:actualSelection withStartTime:actualScheduleEvent._startTime withEndTime:actualScheduleEvent._endTime];
+    
+    [self setLectureButtonWithCell:_cell withTag:2 withActualSelection:actualSelection withTitle:actualScheduleEvent._name doEnable:TRUE];
+    
+    [self setRoomButtonWithCell:_cell withTag:3 withActualSelection:actualSelection withTitle:_localRealization._room._name withSelector:1];    
+
+    [self setDetailButtonWithCell:_cell withTag:4];
+
+    // initialize values for buttons and labels
+    [_cell          setBackgroundColor:[UIColor clearColor]];
+    
     return _cell;
 }
 
 
 
-- (UITableViewCell *)twoSlotsOneRoom:(UITableView *)actualTableView:(NSUInteger)actualSelection:(ScheduleEventDto *)actualScheduleEvent
+- (UITableViewCell *)twoSlotsOneRoomWithView:(UITableView *)actualTableView
+                            withSelection       :(NSUInteger)        actualSelection
+                            withScheduleEvent   :(ScheduleEventDto *)actualScheduleEvent
 {
     static NSString *_cellIdentifier = @"TwoSlotsOneRoomTableCell";
     UITableViewCell *_cell           = [actualTableView dequeueReusableCellWithIdentifier:_cellIdentifier];
@@ -1348,70 +1486,29 @@
         _cell = _twoSlotsOneRoomTableCell;
         self._twoSlotsOneRoomTableCell = nil;
     }
-
-    UILabel          *_labelTimeSlot1 = (UILabel  *)[_cell viewWithTag:1];
-    UILabel          *_labelTimeSlot2 = (UILabel  *)[_cell viewWithTag:2];
+    
+    ScheduleEventRealizationDto *_localRealization = [actualScheduleEvent._scheduleEventRealizations objectAtIndex:0];
+    SlotDto *_timeSlot1 = [actualScheduleEvent._slots objectAtIndex:0];
+    SlotDto *_timeSlot2 = [actualScheduleEvent._slots objectAtIndex:1];
+    
+    [self setDateLabelWithCell:_cell withTag:1 withActualSelection:actualSelection withStartTime:_timeSlot1._startTime withEndTime:_timeSlot1._endTime];
+    [self setDateLabelWithCell:_cell withTag:2 withActualSelection:actualSelection withStartTime:_timeSlot2._startTime withEndTime:_timeSlot2._endTime];
 
     [self setLectureButtonWithCell:_cell withTag:3 withActualSelection:actualSelection withTitle:actualScheduleEvent._name doEnable:TRUE];
     
+    [self setRoomButtonWithCell:_cell withTag:4 withActualSelection:actualSelection withTitle:_localRealization._room._name withSelector:1];
     
-    //UIButton         *_lectureButton  = (UIButton *)[_cell viewWithTag:3];
-    UIButton         *_roomButton     = (UIButton *)[_cell viewWithTag:4];  
-    UIButton         *_detailButton   = (UIButton *)[_cell viewWithTag:5];  // with arrow image, leading to detail page
-
-    // initially always disable detail button
-    _detailButton.enabled  = FALSE;
-    //_lectureButton.enabled = FALSE;
-    _roomButton.enabled    = FALSE;
-
-    // initialize values for buttons and labels
-    //[_lectureButton setTitle:@"" forState:UIControlStateNormal];
-    [_roomButton    setTitle:@"" forState:UIControlStateNormal];
+    [self setDetailButtonWithCell:_cell withTag:5];
     
-    [_labelTimeSlot1 setBackgroundColor:[UIColor clearColor]];
-    [_labelTimeSlot2 setBackgroundColor:[UIColor clearColor]];
-    //[_lectureButton  setBackgroundColor:[UIColor clearColor]];
-    [_roomButton     setBackgroundColor:[UIColor clearColor]];
     [_cell           setBackgroundColor:[UIColor clearColor]];
 
-    if ([self isActualDayAndTime:_actualDate withCellSelection:actualSelection]) 
-    {    
-        [_labelTimeSlot1 setBackgroundColor:[UIColor lightGrayColor]];
-        [_labelTimeSlot2 setBackgroundColor:[UIColor lightGrayColor]];
-        //[_lectureButton  setBackgroundColor:[UIColor lightGrayColor]];
-        [_roomButton     setBackgroundColor:[UIColor lightGrayColor]];
-    }
-
-    SlotDto *_timeSlot1 = [actualScheduleEvent._slots objectAtIndex:0];
-    SlotDto *_timeSlot2 = [actualScheduleEvent._slots objectAtIndex:1];
-
-    _labelTimeSlot1.text = [NSString stringWithFormat:@"%@ - %@",  
-                            [[self timeFormatter] stringFromDate:_timeSlot1._startTime],  
-                            [[self timeFormatter] stringFromDate:_timeSlot1._endTime  ]
-                            ];  
-    _labelTimeSlot2.text = [NSString stringWithFormat:@"%@ - %@",  
-                            [[self timeFormatter] stringFromDate:_timeSlot2._startTime],  
-                            [[self timeFormatter] stringFromDate:_timeSlot2._endTime  ]
-                            ];  
-    
-    ScheduleEventRealizationDto *_localRealization = [actualScheduleEvent._scheduleEventRealizations objectAtIndex:0];
-    
-    //_lectureButton.enabled  = TRUE;
-    _roomButton.enabled     = TRUE;    
-    _detailButton.enabled   = TRUE;
-    
-    //[_lectureButton setTitle:actualScheduleEvent._name      forState:UIControlStateNormal];
-    [_roomButton    setTitle:_localRealization._room._name  forState:UIControlStateNormal];
-    
-    [_roomButton    addTarget:self action:@selector(changeToRoomSchedule1   :event:) forControlEvents:UIControlEventTouchUpInside];
-    //[_lectureButton addTarget:self action:@selector(changeToCourseSchedule  :event:) forControlEvents:UIControlEventTouchUpInside];
-    [_detailButton  addTarget:self action:@selector(showScheduleDetails     :event:) forControlEvents:UIControlEventTouchUpInside];
-            
     return _cell;        
 }
 
 
-- (UITableViewCell *)threeSlotsOneRoom:(UITableView *)actualTableView:(NSUInteger)actualSelection:(ScheduleEventDto *)actualScheduleEvent
+- (UITableViewCell *)threeSlotsOneRoomWithView:(UITableView *)actualTableView
+                                withSelection       :(NSUInteger)        actualSelection
+                                withScheduleEvent   :(ScheduleEventDto *)actualScheduleEvent
 {
     static NSString *_cellIdentifier = @"ThreeSlotsOneRoomTableCell";
     UITableViewCell *_cell           = [actualTableView dequeueReusableCellWithIdentifier:_cellIdentifier];
@@ -1423,72 +1520,29 @@
         self._threeSlotsOneRoomTableCell = nil;
     }
     
-    UILabel          *_labelTimeSlot1 = (UILabel  *)[_cell viewWithTag:1];
-    UILabel          *_labelTimeSlot2 = (UILabel  *)[_cell viewWithTag:2];
-    UILabel          *_labelTimeSlot3 = (UILabel  *)[_cell viewWithTag:3];
-    UIButton         *_lectureButton  = (UIButton *)[_cell viewWithTag:4];  
-    UIButton         *_roomButton     = (UIButton *)[_cell viewWithTag:5];  
-    UIButton         *_detailButton   = (UIButton *)[_cell viewWithTag:6];  // with arrow image, leading to detail page
-    
-    // initially always disable detail button
-    _detailButton.enabled  = FALSE;
-    _lectureButton.enabled = FALSE;
-    _roomButton.enabled    = FALSE;
-    
-    // initialize values for buttons and labels
-    [_lectureButton setTitle:@"" forState:UIControlStateNormal];
-    [_roomButton    setTitle:@"" forState:UIControlStateNormal];
-    
-    [_labelTimeSlot1 setBackgroundColor:[UIColor clearColor]];
-    [_labelTimeSlot2 setBackgroundColor:[UIColor clearColor]];
-    [_labelTimeSlot3 setBackgroundColor:[UIColor clearColor]];
-    [_lectureButton  setBackgroundColor:[UIColor clearColor]];
-    [_roomButton     setBackgroundColor:[UIColor clearColor]];
-    [_cell           setBackgroundColor:[UIColor clearColor]];
-    
-    if ([self isActualDayAndTime:_actualDate withCellSelection:actualSelection]) 
-    {    
-        [_labelTimeSlot1 setBackgroundColor:[UIColor lightGrayColor]];
-        [_labelTimeSlot2 setBackgroundColor:[UIColor lightGrayColor]];
-        [_labelTimeSlot3 setBackgroundColor:[UIColor lightGrayColor]];
-        [_lectureButton  setBackgroundColor:[UIColor lightGrayColor]];
-        [_roomButton     setBackgroundColor:[UIColor lightGrayColor]];
-    }
-    
+    ScheduleEventRealizationDto *_localRealization = [actualScheduleEvent._scheduleEventRealizations objectAtIndex:0];
     SlotDto *_timeSlot1 = [actualScheduleEvent._slots objectAtIndex:0];
     SlotDto *_timeSlot2 = [actualScheduleEvent._slots objectAtIndex:1];
     SlotDto *_timeSlot3 = [actualScheduleEvent._slots objectAtIndex:2];
     
-    _labelTimeSlot1.text = [NSString stringWithFormat:@"%@ - %@",  
-                            [[self timeFormatter] stringFromDate:_timeSlot1._startTime],  
-                            [[self timeFormatter] stringFromDate:_timeSlot1._endTime  ]
-                            ];  
-    _labelTimeSlot2.text = [NSString stringWithFormat:@"%@ - %@",  
-                            [[self timeFormatter] stringFromDate:_timeSlot2._startTime],  
-                            [[self timeFormatter] stringFromDate:_timeSlot2._endTime  ]
-                            ];  
-    _labelTimeSlot3.text = [NSString stringWithFormat:@"%@ - %@",  
-                            [[self timeFormatter] stringFromDate:_timeSlot3._startTime],  
-                            [[self timeFormatter] stringFromDate:_timeSlot3._endTime  ]
-                            ];  
+    [self setDateLabelWithCell:_cell withTag:1 withActualSelection:actualSelection withStartTime:_timeSlot1._startTime withEndTime:_timeSlot1._endTime];
+    [self setDateLabelWithCell:_cell withTag:2 withActualSelection:actualSelection withStartTime:_timeSlot2._startTime withEndTime:_timeSlot2._endTime];
+    [self setDateLabelWithCell:_cell withTag:3 withActualSelection:actualSelection withStartTime:_timeSlot3._startTime withEndTime:_timeSlot3._endTime];
     
-    _lectureButton.enabled  = TRUE;
-    _roomButton.enabled     = TRUE;    
-    _detailButton.enabled   = TRUE;
+    [self setLectureButtonWithCell:_cell withTag:4 withActualSelection:actualSelection withTitle:actualScheduleEvent._name doEnable:TRUE];
     
-    ScheduleEventRealizationDto *_localRealization = [actualScheduleEvent._scheduleEventRealizations objectAtIndex:0];
-    [_roomButton    setTitle:_localRealization._room._name  forState:UIControlStateNormal];
-    [_lectureButton setTitle:actualScheduleEvent._name      forState:UIControlStateNormal];
+    [self setRoomButtonWithCell:_cell withTag:5 withActualSelection:actualSelection withTitle:_localRealization._room._name withSelector:1];
     
-    [_roomButton    addTarget:self action:@selector(changeToRoomSchedule1   :event:) forControlEvents:UIControlEventTouchUpInside];
-    [_lectureButton addTarget:self action:@selector(changeToCourseSchedule  :event:) forControlEvents:UIControlEventTouchUpInside];
-    [_detailButton  addTarget:self action:@selector(showScheduleDetails     :event:) forControlEvents:UIControlEventTouchUpInside];
+    [self setDetailButtonWithCell:_cell withTag:6];
     
+    [_cell           setBackgroundColor:[UIColor clearColor]];
     return _cell;        
 }
 
 
-- (UITableViewCell *)oneSlotTwoRooms:(UITableView *)actualTableView:(NSUInteger)actualSelection:(ScheduleEventDto *)actualScheduleEvent
+- (UITableViewCell *)oneSlotTwoRoomsWithView:(UITableView *)actualTableView
+                                            withSelection       :(NSUInteger)        actualSelection
+                                            withScheduleEvent   :(ScheduleEventDto *)actualScheduleEvent
 {
     static NSString *_cellIdentifier = @"OneSlotTwoRoomsTableCell";
     UITableViewCell *_cell           = [actualTableView dequeueReusableCellWithIdentifier:_cellIdentifier];
@@ -1500,66 +1554,28 @@
         self._oneSlotTwoRoomsTableCell = nil;
     }
     
-    UILabel          *_labelTimeSlot1 = (UILabel  *)[_cell viewWithTag:1];
-    UIButton         *_lectureButton  = (UIButton *)[_cell viewWithTag:2];  
-    UIButton         *_room1Button    = (UIButton *)[_cell viewWithTag:3];  
-    UIButton         *_room2Button    = (UIButton *)[_cell viewWithTag:4];  
-    UIButton         *_detailButton   = (UIButton *)[_cell viewWithTag:5];  // with arrow image, leading to detail page
-    
-    // initially always disable detail button
-    _detailButton.enabled  = FALSE;
-    _lectureButton.enabled = FALSE;
-    _room1Button.enabled   = FALSE;
-    _room2Button.enabled   = FALSE;
-    
-    // initialize values for buttons and labels
-    [_lectureButton setTitle:@"" forState:UIControlStateNormal];
-    [_room1Button   setTitle:@"" forState:UIControlStateNormal];
-    [_room2Button   setTitle:@"" forState:UIControlStateNormal];
-    
-    [_labelTimeSlot1 setBackgroundColor:[UIColor clearColor]];
-    [_lectureButton  setBackgroundColor:[UIColor clearColor]];
-    [_room1Button    setBackgroundColor:[UIColor clearColor]];
-    [_room2Button    setBackgroundColor:[UIColor clearColor]];
-    [_cell           setBackgroundColor:[UIColor clearColor]];
-    
-    if ([self isActualDayAndTime:_actualDate withCellSelection:actualSelection]) 
-    {    
-        [_labelTimeSlot1 setBackgroundColor:[UIColor lightGrayColor]];
-        [_lectureButton  setBackgroundColor:[UIColor lightGrayColor]];
-        [_room1Button    setBackgroundColor:[UIColor lightGrayColor]];
-        [_room2Button    setBackgroundColor:[UIColor lightGrayColor]];
-    }
-    
-    SlotDto *_timeSlot1 = [actualScheduleEvent._slots objectAtIndex:0];
-    
-    _labelTimeSlot1.text = [NSString stringWithFormat:@"%@ - %@",  
-                            [[self timeFormatter] stringFromDate:_timeSlot1._startTime],  
-                            [[self timeFormatter] stringFromDate:_timeSlot1._endTime  ]
-                            ];  
-    
     ScheduleEventRealizationDto *_localRealization1 = [actualScheduleEvent._scheduleEventRealizations objectAtIndex:0];
     ScheduleEventRealizationDto *_localRealization2 = [actualScheduleEvent._scheduleEventRealizations objectAtIndex:1];
+    SlotDto *_timeSlot1 = [actualScheduleEvent._slots objectAtIndex:0];
     
-    [_room1Button   setTitle:_localRealization1._room._name  forState:UIControlStateNormal];
-    [_room2Button   setTitle:_localRealization2._room._name  forState:UIControlStateNormal];
-    [_lectureButton setTitle:actualScheduleEvent._name       forState:UIControlStateNormal];
+    [self setDateLabelWithCell:_cell withTag:1 withActualSelection:actualSelection withStartTime:_timeSlot1._startTime withEndTime:_timeSlot1._endTime];
     
-    _lectureButton.enabled  = TRUE;
-    _room1Button.enabled    = TRUE;    
-    _room2Button.enabled    = TRUE;    
-    _detailButton.enabled   = TRUE;
+    [self setLectureButtonWithCell:_cell withTag:2 withActualSelection:actualSelection withTitle:actualScheduleEvent._name doEnable:TRUE];
     
-    [_room1Button   addTarget:self action:@selector(changeToRoomSchedule1   :event:) forControlEvents:UIControlEventTouchUpInside];
-    [_room2Button   addTarget:self action:@selector(changeToRoomSchedule2   :event:) forControlEvents:UIControlEventTouchUpInside];
-    [_lectureButton addTarget:self action:@selector(changeToCourseSchedule  :event:) forControlEvents:UIControlEventTouchUpInside];
-    [_detailButton  addTarget:self action:@selector(showScheduleDetails     :event:) forControlEvents:UIControlEventTouchUpInside];
+    [self setRoomButtonWithCell:_cell withTag:3 withActualSelection:actualSelection withTitle:_localRealization1._room._name withSelector:1];
+
+    [self setRoomButtonWithCell:_cell withTag:4 withActualSelection:actualSelection withTitle:_localRealization2._room._name withSelector:2];
     
-    return _cell;        
+    [self setDetailButtonWithCell:_cell withTag:5];
+    
+    [_cell           setBackgroundColor:[UIColor clearColor]];
+    return _cell;
 }
 
 
-- (UITableViewCell *)twoSlotsTwoRooms:(UITableView *)actualTableView:(NSUInteger)actualSelection:(ScheduleEventDto *)actualScheduleEvent
+- (UITableViewCell *)twoSlotsTwoRoomsWithView           :(UITableView *)     actualTableView
+                                    withSelection       :(NSUInteger)        actualSelection
+                                    withScheduleEvent   :(ScheduleEventDto *)actualScheduleEvent
 {
     static NSString *_cellIdentifier = @"TwoSlotsTwoRoomsTableCell";
     UITableViewCell *_cell           = [actualTableView dequeueReusableCellWithIdentifier:_cellIdentifier];
@@ -1571,77 +1587,32 @@
         self._twoSlotsTwoRoomsTableCell = nil;
     }
     
-    UILabel          *_labelTimeSlot1 = (UILabel  *)[_cell viewWithTag:1];
-    UILabel          *_labelTimeSlot2 = (UILabel  *)[_cell viewWithTag:2];
-    UIButton         *_lectureButton  = (UIButton *)[_cell viewWithTag:3];  
-    UIButton         *_room1Button    = (UIButton *)[_cell viewWithTag:4];  
-    UIButton         *_room2Button    = (UIButton *)[_cell viewWithTag:5];  
-    UIButton         *_detailButton   = (UIButton *)[_cell viewWithTag:6];  // with arrow image, leading to detail page
-    
-    // initially always disable detail button
-    _detailButton.enabled  = FALSE;
-    _lectureButton.enabled = FALSE;
-    _room1Button.enabled   = FALSE;
-    _room2Button.enabled   = FALSE;
-    
-    // initialize values for buttons and labels
-    [_lectureButton setTitle:@"" forState:UIControlStateNormal];
-    [_room1Button   setTitle:@"" forState:UIControlStateNormal];
-    [_room2Button   setTitle:@"" forState:UIControlStateNormal];
-    
-    [_labelTimeSlot1 setBackgroundColor:[UIColor clearColor]];
-    [_labelTimeSlot2 setBackgroundColor:[UIColor clearColor]];
-    [_lectureButton  setBackgroundColor:[UIColor clearColor]];
-    [_room1Button    setBackgroundColor:[UIColor clearColor]];
-    [_room2Button    setBackgroundColor:[UIColor clearColor]];
-    [_cell           setBackgroundColor:[UIColor clearColor]];
-    
-    if ([self isActualDayAndTime:_actualDate withCellSelection:actualSelection]) 
-    {    
-        [_labelTimeSlot1 setBackgroundColor:[UIColor lightGrayColor]];
-        [_labelTimeSlot2 setBackgroundColor:[UIColor lightGrayColor]];
-        [_lectureButton  setBackgroundColor:[UIColor lightGrayColor]];
-        [_room1Button    setBackgroundColor:[UIColor lightGrayColor]];
-        [_room2Button    setBackgroundColor:[UIColor lightGrayColor]];
-    }
-    
+    ScheduleEventRealizationDto *_localRealization1 = [actualScheduleEvent._scheduleEventRealizations objectAtIndex:0];
+    ScheduleEventRealizationDto *_localRealization2 = [actualScheduleEvent._scheduleEventRealizations objectAtIndex:1];
     SlotDto *_timeSlot1 = [actualScheduleEvent._slots objectAtIndex:0];
     SlotDto *_timeSlot2 = [actualScheduleEvent._slots objectAtIndex:1];
     
-    _labelTimeSlot1.text = [NSString stringWithFormat:@"%@ - %@",  
-                            [[self timeFormatter] stringFromDate:_timeSlot1._startTime],  
-                            [[self timeFormatter] stringFromDate:_timeSlot1._endTime  ]
-                            ];  
-    _labelTimeSlot2.text = [NSString stringWithFormat:@"%@ - %@",  
-                            [[self timeFormatter] stringFromDate:_timeSlot2._startTime],  
-                            [[self timeFormatter] stringFromDate:_timeSlot2._endTime  ]
-                            ];  
+    [self setDateLabelWithCell:_cell withTag:1 withActualSelection:actualSelection withStartTime:_timeSlot1._startTime withEndTime:_timeSlot1._endTime];
+    [self setDateLabelWithCell:_cell withTag:2 withActualSelection:actualSelection withStartTime:_timeSlot2._startTime withEndTime:_timeSlot2._endTime];
     
-    ScheduleEventRealizationDto *_localRealization1 = [actualScheduleEvent._scheduleEventRealizations objectAtIndex:0];
-    ScheduleEventRealizationDto *_localRealization2 = [actualScheduleEvent._scheduleEventRealizations objectAtIndex:1];
+    [self setLectureButtonWithCell:_cell withTag:3 withActualSelection:actualSelection withTitle:actualScheduleEvent._name doEnable:TRUE];
     
-    [_room1Button   setTitle:_localRealization1._room._name  forState:UIControlStateNormal];
-    [_room2Button   setTitle:_localRealization2._room._name  forState:UIControlStateNormal];
-    [_lectureButton setTitle:actualScheduleEvent._name       forState:UIControlStateNormal];
+    [self setRoomButtonWithCell:_cell withTag:4 withActualSelection:actualSelection withTitle:_localRealization1._room._name withSelector:1];
     
-    _lectureButton.enabled  = TRUE;
-    _room1Button.enabled    = TRUE;    
-    _room2Button.enabled    = TRUE;    
-    _detailButton.enabled   = TRUE;
+    [self setRoomButtonWithCell:_cell withTag:5 withActualSelection:actualSelection withTitle:_localRealization2._room._name withSelector:2];
     
-    [_room1Button   addTarget:self action:@selector(changeToRoomSchedule1   :event:) forControlEvents:UIControlEventTouchUpInside];
-    [_room2Button   addTarget:self action:@selector(changeToRoomSchedule2   :event:) forControlEvents:UIControlEventTouchUpInside];
-    [_lectureButton addTarget:self action:@selector(changeToCourseSchedule  :event:) forControlEvents:UIControlEventTouchUpInside];
-    [_detailButton  addTarget:self action:@selector(showScheduleDetails     :event:) forControlEvents:UIControlEventTouchUpInside];
+    [self setDetailButtonWithCell:_cell withTag:6];
     
+    [_cell           setBackgroundColor:[UIColor clearColor]];
     return _cell;        
 }
 
 
 
 
-
-- (UITableViewCell *)oneSlotThreeRooms:(UITableView *)actualTableView:(NSUInteger)actualSelection:(ScheduleEventDto *)actualScheduleEvent
+- (UITableViewCell *)oneSlotThreeRoomsWithView:(UITableView *)actualTableView
+                                        withSelection       :(NSUInteger)        actualSelection
+                                        withScheduleEvent   :(ScheduleEventDto *)actualScheduleEvent
 {
     static NSString *_cellIdentifier = @"OneSlotThreeRoomsTableCell";
     UITableViewCell *_cell           = [actualTableView dequeueReusableCellWithIdentifier:_cellIdentifier];
@@ -1652,75 +1623,70 @@
         _cell = _oneSlotThreeRoomsTableCell;
         self._oneSlotThreeRoomsTableCell = nil;
     }
-
-    UILabel          *_labelTimeSlot1 = (UILabel  *)[_cell viewWithTag:1];
-    UIButton         *_lectureButton  = (UIButton *)[_cell viewWithTag:2];  
-    UIButton         *_room1Button    = (UIButton *)[_cell viewWithTag:3];  
-    UIButton         *_room2Button    = (UIButton *)[_cell viewWithTag:4];  
-    UIButton         *_room3Button    = (UIButton *)[_cell viewWithTag:5];  
-    UIButton         *_detailButton   = (UIButton *)[_cell viewWithTag:6];  // with arrow image, leading to detail page
-
-    // initially always disable detail button
-    _detailButton.enabled  = FALSE;
-    _lectureButton.enabled = FALSE;
-    _room1Button.enabled   = FALSE;
-    _room2Button.enabled   = FALSE;
-    _room3Button.enabled   = FALSE;
-
-    // initialize values for buttons and labels
-    [_lectureButton setTitle:@"" forState:UIControlStateNormal];
-    [_room1Button   setTitle:@"" forState:UIControlStateNormal];
-    [_room2Button   setTitle:@"" forState:UIControlStateNormal];
-    [_room3Button   setTitle:@"" forState:UIControlStateNormal];
-
-    [_labelTimeSlot1 setBackgroundColor:[UIColor clearColor]];
-    [_lectureButton  setBackgroundColor:[UIColor clearColor]];
-    [_room1Button    setBackgroundColor:[UIColor clearColor]];
-    [_room2Button    setBackgroundColor:[UIColor clearColor]];
-    [_room3Button    setBackgroundColor:[UIColor clearColor]];
-    [_cell           setBackgroundColor:[UIColor clearColor]];
-
-    if ([self isActualDayAndTime:_actualDate withCellSelection:actualSelection]) 
-    {    
-        [_labelTimeSlot1 setBackgroundColor:[UIColor lightGrayColor]];
-        [_lectureButton  setBackgroundColor:[UIColor lightGrayColor]];
-        [_room1Button    setBackgroundColor:[UIColor lightGrayColor]];
-        [_room2Button    setBackgroundColor:[UIColor lightGrayColor]];
-        [_room3Button    setBackgroundColor:[UIColor lightGrayColor]];
-    }
-
-    SlotDto *_timeSlot1 = [actualScheduleEvent._slots objectAtIndex:0];
-
-    _labelTimeSlot1.text = [NSString stringWithFormat:@"%@ - %@",  
-                        [[self timeFormatter] stringFromDate:_timeSlot1._startTime],  
-                        [[self timeFormatter] stringFromDate:_timeSlot1._endTime  ]
-                        ];  
-
+    
     ScheduleEventRealizationDto *_localRealization1 = [actualScheduleEvent._scheduleEventRealizations objectAtIndex:0];
     ScheduleEventRealizationDto *_localRealization2 = [actualScheduleEvent._scheduleEventRealizations objectAtIndex:1];
     ScheduleEventRealizationDto *_localRealization3 = [actualScheduleEvent._scheduleEventRealizations objectAtIndex:2];
+    SlotDto *_timeSlot1 = [actualScheduleEvent._slots objectAtIndex:0];
     
-    [_room1Button   setTitle:_localRealization1._room._name  forState:UIControlStateNormal];
-    [_room2Button   setTitle:_localRealization2._room._name  forState:UIControlStateNormal];
-    [_room3Button   setTitle:_localRealization3._room._name  forState:UIControlStateNormal];
-    [_lectureButton setTitle:actualScheduleEvent._name       forState:UIControlStateNormal];
+    [self setDateLabelWithCell:_cell withTag:1 withActualSelection:actualSelection withStartTime:_timeSlot1._startTime withEndTime:_timeSlot1._endTime];    
+     
+    [self setLectureButtonWithCell:_cell withTag:2 withActualSelection:actualSelection withTitle:actualScheduleEvent._name doEnable:TRUE];
+    
+    [self setRoomButtonWithCell:_cell withTag:3 withActualSelection:actualSelection withTitle:_localRealization1._room._name withSelector:1];
+    [self setRoomButtonWithCell:_cell withTag:4 withActualSelection:actualSelection withTitle:_localRealization2._room._name withSelector:2];
+    [self setRoomButtonWithCell:_cell withTag:5 withActualSelection:actualSelection withTitle:_localRealization3._room._name withSelector:3];
+    
+    [self setDetailButtonWithCell:_cell withTag:6];
 
-    _lectureButton.enabled  = TRUE;
-    _room1Button.enabled    = TRUE;    
-    _room2Button.enabled    = TRUE;    
-    _room3Button.enabled    = TRUE;    
-    _detailButton.enabled   = TRUE;
-
-    [_room1Button   addTarget:self action:@selector(changeToRoomSchedule1   :event:) forControlEvents:UIControlEventTouchUpInside];
-    [_room2Button   addTarget:self action:@selector(changeToRoomSchedule2   :event:) forControlEvents:UIControlEventTouchUpInside];
-    [_room3Button   addTarget:self action:@selector(changeToRoomSchedule3   :event:) forControlEvents:UIControlEventTouchUpInside];
-    [_lectureButton addTarget:self action:@selector(changeToCourseSchedule  :event:) forControlEvents:UIControlEventTouchUpInside];
-    [_detailButton  addTarget:self action:@selector(showScheduleDetails     :event:) forControlEvents:UIControlEventTouchUpInside];
-
+    [_cell           setBackgroundColor:[UIColor clearColor]];
     return _cell;        
 }
 
-- (UITableViewCell *)oneSlotFiveRooms:(UITableView *)actualTableView:(NSUInteger)actualSelection:(ScheduleEventDto *)actualScheduleEvent
+
+
+- (UITableViewCell *)oneSlotFourRoomsWithView:(UITableView *)actualTableView
+                                    withSelection       :(NSUInteger)        actualSelection
+                                    withScheduleEvent   :(ScheduleEventDto *)actualScheduleEvent
+{
+    static NSString *_cellIdentifier = @"OneSlotFourRoomsTableCell";
+    UITableViewCell *_cell           = [actualTableView dequeueReusableCellWithIdentifier:_cellIdentifier];
+    
+    if (_cell == nil)
+    {
+        [[NSBundle mainBundle] loadNibNamed:@"OneSlotFourRoomsTableCell" owner:self options:nil];
+        _cell = _oneSlotFourRoomsTableCell;
+        self._oneSlotFourRoomsTableCell = nil;
+    }
+    
+    ScheduleEventRealizationDto *_localRealization1 = [actualScheduleEvent._scheduleEventRealizations objectAtIndex:0];
+    ScheduleEventRealizationDto *_localRealization2 = [actualScheduleEvent._scheduleEventRealizations objectAtIndex:1];
+    ScheduleEventRealizationDto *_localRealization3 = [actualScheduleEvent._scheduleEventRealizations objectAtIndex:2];
+    ScheduleEventRealizationDto *_localRealization4 = [actualScheduleEvent._scheduleEventRealizations objectAtIndex:3];
+    SlotDto *_timeSlot = [actualScheduleEvent._slots objectAtIndex:0];    
+    
+    [self setDateLabelWithCell:_cell withTag:1 withActualSelection:actualSelection withStartTime:_timeSlot._startTime withEndTime:_timeSlot._endTime];        
+    
+    [self setLectureButtonWithCell:_cell withTag:2 withActualSelection:actualSelection withTitle:actualScheduleEvent._name doEnable:TRUE];
+    
+    [self setRoomButtonWithCell:_cell withTag:3 withActualSelection:actualSelection withTitle:_localRealization1._room._name withSelector:1];
+    [self setRoomButtonWithCell:_cell withTag:4 withActualSelection:actualSelection withTitle:_localRealization2._room._name withSelector:2];
+    [self setRoomButtonWithCell:_cell withTag:5 withActualSelection:actualSelection withTitle:_localRealization3._room._name withSelector:3];
+    [self setRoomButtonWithCell:_cell withTag:6 withActualSelection:actualSelection withTitle:_localRealization4._room._name withSelector:4];
+    
+    [self setDetailButtonWithCell:_cell withTag:7];
+    
+    [_cell           setBackgroundColor:[UIColor clearColor]];
+    return _cell;
+}
+
+
+
+
+
+- (UITableViewCell *)oneSlotFiveRoomsWithView       :(UITableView *)     actualTableView
+                                withSelection       :(NSUInteger)        actualSelection
+                                withScheduleEvent   :(ScheduleEventDto *)actualScheduleEvent
 {
     static NSString *_cellIdentifier = @"OneSlotFiveRoomsTableCell";
     UITableViewCell *_cell           = [actualTableView dequeueReusableCellWithIdentifier:_cellIdentifier];
@@ -1732,194 +1698,34 @@
         self._oneSlotFiveRoomsTableCell = nil;
     }
     
-    UILabel          *_labelTimeSlot  = (UILabel  *)[_cell viewWithTag:1];
-    
-    UIButton         *_lectureButton  = (UIButton *)[_cell viewWithTag:2];
-    UIButton         *_room1Button    = (UIButton *)[_cell viewWithTag:3];
-    UIButton         *_room2Button    = (UIButton *)[_cell viewWithTag:4];
-    UIButton         *_room3Button    = (UIButton *)[_cell viewWithTag:5];
-    UIButton         *_room4Button    = (UIButton *)[_cell viewWithTag:6];
-    UIButton         *_room5Button    = (UIButton *)[_cell viewWithTag:7];
-    UIButton         *_detailButton   = (UIButton *)[_cell viewWithTag:8];  // with arrow image, leading to detail page
-    
-    
-    // initially always disable detail button
-    _detailButton.enabled  = FALSE;
-    _lectureButton.enabled = FALSE;
-    _room1Button.enabled   = FALSE;
-    _room2Button.enabled   = FALSE;
-    _room3Button.enabled   = FALSE;
-    _room4Button.enabled   = FALSE;
-    _room5Button.enabled   = FALSE;
-    
-    // initialize values for buttons and labels
-    [_lectureButton setTitle:@"" forState:UIControlStateNormal];
-    [_room1Button   setTitle:@"" forState:UIControlStateNormal];
-    [_room2Button   setTitle:@"" forState:UIControlStateNormal];
-    [_room3Button   setTitle:@"" forState:UIControlStateNormal];
-    [_room4Button   setTitle:@"" forState:UIControlStateNormal];
-    [_room5Button   setTitle:@"" forState:UIControlStateNormal];
-    
-    [_labelTimeSlot  setBackgroundColor:[UIColor clearColor]];
-    [_lectureButton  setBackgroundColor:[UIColor clearColor]];
-    [_room1Button    setBackgroundColor:[UIColor clearColor]];
-    [_room2Button    setBackgroundColor:[UIColor clearColor]];
-    [_room3Button    setBackgroundColor:[UIColor clearColor]];
-    [_room4Button    setBackgroundColor:[UIColor clearColor]];
-    [_room5Button    setBackgroundColor:[UIColor clearColor]];
-    [_cell           setBackgroundColor:[UIColor clearColor]];
-    
-    
-    if ([self isActualDayAndTime:_actualDate withCellSelection:actualSelection])
-    {
-        [_labelTimeSlot  setBackgroundColor:[UIColor lightGrayColor]];
-        [_lectureButton  setBackgroundColor:[UIColor lightGrayColor]];
-        [_room1Button    setBackgroundColor:[UIColor lightGrayColor]];
-        [_room2Button    setBackgroundColor:[UIColor lightGrayColor]];
-        [_room3Button    setBackgroundColor:[UIColor lightGrayColor]];
-        [_room4Button    setBackgroundColor:[UIColor lightGrayColor]];
-        [_room5Button    setBackgroundColor:[UIColor lightGrayColor]];
-    }
-    
-    SlotDto *_timeSlot = [actualScheduleEvent._slots objectAtIndex:0];
-    
-    
-    _labelTimeSlot.text = [NSString stringWithFormat:@"%@ - %@",
-                           [[self timeFormatter] stringFromDate:_timeSlot._startTime],
-                           [[self timeFormatter] stringFromDate:_timeSlot._endTime  ]
-                           ];
-    
     ScheduleEventRealizationDto *_localRealization1 = [actualScheduleEvent._scheduleEventRealizations objectAtIndex:0];
     ScheduleEventRealizationDto *_localRealization2 = [actualScheduleEvent._scheduleEventRealizations objectAtIndex:1];
     ScheduleEventRealizationDto *_localRealization3 = [actualScheduleEvent._scheduleEventRealizations objectAtIndex:2];
     ScheduleEventRealizationDto *_localRealization4 = [actualScheduleEvent._scheduleEventRealizations objectAtIndex:3];
     ScheduleEventRealizationDto *_localRealization5 = [actualScheduleEvent._scheduleEventRealizations objectAtIndex:4];
+    SlotDto *_timeSlot = [actualScheduleEvent._slots objectAtIndex:0];
     
-    [_room1Button   setTitle:_localRealization1._room._name  forState:UIControlStateNormal];
-    [_room2Button   setTitle:_localRealization2._room._name  forState:UIControlStateNormal];
-    [_room3Button   setTitle:_localRealization3._room._name  forState:UIControlStateNormal];
-    [_room4Button   setTitle:_localRealization4._room._name  forState:UIControlStateNormal];
-    [_room5Button   setTitle:_localRealization5._room._name  forState:UIControlStateNormal];
+    [self setDateLabelWithCell:_cell withTag:1 withActualSelection:actualSelection withStartTime:_timeSlot._startTime withEndTime:_timeSlot._endTime];
     
-    [_lectureButton setTitle:actualScheduleEvent._name       forState:UIControlStateNormal];
+    [self setLectureButtonWithCell:_cell withTag:2 withActualSelection:actualSelection withTitle:actualScheduleEvent._name doEnable:TRUE];
     
-    _lectureButton.enabled  = TRUE;
-    _room1Button.enabled    = TRUE;
-    _room2Button.enabled    = TRUE;
-    _room3Button.enabled    = TRUE;
-    _room4Button.enabled    = TRUE;
-    _room5Button.enabled    = TRUE;
-    _detailButton.enabled   = TRUE;
+    [self setRoomButtonWithCell:_cell withTag:3 withActualSelection:actualSelection withTitle:_localRealization1._room._name withSelector:1];
+    [self setRoomButtonWithCell:_cell withTag:4 withActualSelection:actualSelection withTitle:_localRealization2._room._name withSelector:2];
+    [self setRoomButtonWithCell:_cell withTag:5 withActualSelection:actualSelection withTitle:_localRealization3._room._name withSelector:3];
+    [self setRoomButtonWithCell:_cell withTag:6 withActualSelection:actualSelection withTitle:_localRealization4._room._name withSelector:4];
+    [self setRoomButtonWithCell:_cell withTag:7 withActualSelection:actualSelection withTitle:_localRealization5._room._name withSelector:5];
     
-    [_room1Button   addTarget:self action:@selector(changeToRoomSchedule1   :event:) forControlEvents:UIControlEventTouchUpInside];
-    [_room2Button   addTarget:self action:@selector(changeToRoomSchedule2   :event:) forControlEvents:UIControlEventTouchUpInside];
-    [_room3Button   addTarget:self action:@selector(changeToRoomSchedule3   :event:) forControlEvents:UIControlEventTouchUpInside];
-    [_room4Button   addTarget:self action:@selector(changeToRoomSchedule4   :event:) forControlEvents:UIControlEventTouchUpInside];
-    [_room5Button   addTarget:self action:@selector(changeToRoomSchedule5   :event:) forControlEvents:UIControlEventTouchUpInside];
+    [self setDetailButtonWithCell:_cell withTag:8];
     
-    [_lectureButton addTarget:self action:@selector(changeToCourseSchedule  :event:) forControlEvents:UIControlEventTouchUpInside];
-    [_detailButton  addTarget:self action:@selector(showScheduleDetails     :event:) forControlEvents:UIControlEventTouchUpInside];
-    
+    [_cell           setBackgroundColor:[UIColor clearColor]];
     return _cell;
 }
 
 
 
-- (UITableViewCell *)oneSlotFourRooms:(UITableView *)actualTableView:(NSUInteger)actualSelection:(ScheduleEventDto *)actualScheduleEvent
-{
-    static NSString *_cellIdentifier = @"OneSlotFourRoomsTableCell";
-    UITableViewCell *_cell           = [actualTableView dequeueReusableCellWithIdentifier:_cellIdentifier];
-    
-    if (_cell == nil) 
-    {
-        [[NSBundle mainBundle] loadNibNamed:@"OneSlotFourRoomsTableCell" owner:self options:nil];
-        _cell = _oneSlotFourRoomsTableCell;
-        self._oneSlotFourRoomsTableCell = nil;
-    }
-    
-    UILabel          *_labelTimeSlot  = (UILabel  *)[_cell viewWithTag:1];
-    UIButton         *_lectureButton  = (UIButton *)[_cell viewWithTag:2];  
-    UIButton         *_room1Button    = (UIButton *)[_cell viewWithTag:3];  
-    UIButton         *_room2Button    = (UIButton *)[_cell viewWithTag:4];  
-    UIButton         *_room3Button    = (UIButton *)[_cell viewWithTag:5];  
-    UIButton         *_room4Button    = (UIButton *)[_cell viewWithTag:6];  
-    UIButton         *_detailButton   = (UIButton *)[_cell viewWithTag:7];
-    
-    
-    // initially always disable detail button
-    _detailButton.enabled  = FALSE;
-    _lectureButton.enabled = FALSE;
-    _room1Button.enabled   = FALSE;
-    _room2Button.enabled   = FALSE;
-    _room3Button.enabled   = FALSE;
-    _room4Button.enabled   = FALSE;
-    
-    // initialize values for buttons and labels
-    [_lectureButton setTitle:@"" forState:UIControlStateNormal];
-    [_room1Button   setTitle:@"" forState:UIControlStateNormal];
-    [_room2Button   setTitle:@"" forState:UIControlStateNormal];
-    [_room3Button   setTitle:@"" forState:UIControlStateNormal];
-    [_room4Button   setTitle:@"" forState:UIControlStateNormal];
-    
-    [_labelTimeSlot  setBackgroundColor:[UIColor clearColor]];
-    [_lectureButton  setBackgroundColor:[UIColor clearColor]];
-    [_room1Button    setBackgroundColor:[UIColor clearColor]];
-    [_room2Button    setBackgroundColor:[UIColor clearColor]];
-    [_room3Button    setBackgroundColor:[UIColor clearColor]];
-    [_room4Button    setBackgroundColor:[UIColor clearColor]];
-    [_cell           setBackgroundColor:[UIColor clearColor]];
-    
-    
-    if ([self isActualDayAndTime:_actualDate withCellSelection:actualSelection]) 
-    {    
-        [_labelTimeSlot  setBackgroundColor:[UIColor lightGrayColor]];
-        [_lectureButton  setBackgroundColor:[UIColor lightGrayColor]];
-        [_room1Button    setBackgroundColor:[UIColor lightGrayColor]];
-        [_room2Button    setBackgroundColor:[UIColor lightGrayColor]];
-        [_room3Button    setBackgroundColor:[UIColor lightGrayColor]];
-        [_room4Button    setBackgroundColor:[UIColor lightGrayColor]];
-    }
-    
-    SlotDto *_timeSlot = [actualScheduleEvent._slots objectAtIndex:0];
-    
-    
-    _labelTimeSlot.text = [NSString stringWithFormat:@"%@ - %@",  
-                           [[self timeFormatter] stringFromDate:_timeSlot._startTime],  
-                           [[self timeFormatter] stringFromDate:_timeSlot._endTime  ]
-                           ];  
-    
-    ScheduleEventRealizationDto *_localRealization1 = [actualScheduleEvent._scheduleEventRealizations objectAtIndex:0];
-    ScheduleEventRealizationDto *_localRealization2 = [actualScheduleEvent._scheduleEventRealizations objectAtIndex:1];
-    ScheduleEventRealizationDto *_localRealization3 = [actualScheduleEvent._scheduleEventRealizations objectAtIndex:2];
-    ScheduleEventRealizationDto *_localRealization4 = [actualScheduleEvent._scheduleEventRealizations objectAtIndex:3];
-    
-    [_room1Button   setTitle:_localRealization1._room._name  forState:UIControlStateNormal];
-    [_room2Button   setTitle:_localRealization2._room._name  forState:UIControlStateNormal];
-    [_room3Button   setTitle:_localRealization3._room._name  forState:UIControlStateNormal];
-    [_room4Button   setTitle:_localRealization4._room._name  forState:UIControlStateNormal];
-    
-    [_lectureButton setTitle:actualScheduleEvent._name       forState:UIControlStateNormal];
-    
-    _lectureButton.enabled  = TRUE;
-    _room1Button.enabled    = TRUE;    
-    _room2Button.enabled    = TRUE;    
-    _room3Button.enabled    = TRUE;    
-    _room4Button.enabled    = TRUE;    
-    _detailButton.enabled   = TRUE;
-    
-    [_room1Button   addTarget:self action:@selector(changeToRoomSchedule1   :event:) forControlEvents:UIControlEventTouchUpInside];
-    [_room2Button   addTarget:self action:@selector(changeToRoomSchedule2   :event:) forControlEvents:UIControlEventTouchUpInside];
-    [_room3Button   addTarget:self action:@selector(changeToRoomSchedule3   :event:) forControlEvents:UIControlEventTouchUpInside];
-    [_room4Button   addTarget:self action:@selector(changeToRoomSchedule4   :event:) forControlEvents:UIControlEventTouchUpInside];
-    
-    [_lectureButton addTarget:self action:@selector(changeToCourseSchedule  :event:) forControlEvents:UIControlEventTouchUpInside];
-    [_detailButton  addTarget:self action:@selector(showScheduleDetails     :event:) forControlEvents:UIControlEventTouchUpInside];
-    
-    return _cell;        
-}
-
-
-- (UITableViewCell *)oneSlotSixRooms:(UITableView *)actualTableView:(NSUInteger)actualSelection:(ScheduleEventDto *)actualScheduleEvent
+- (UITableViewCell *)oneSlotSixRoomsWithView            :(UITableView *)     actualTableView
+                                    withSelection       :(NSUInteger)        actualSelection
+                                    withScheduleEvent   :(ScheduleEventDto *)actualScheduleEvent
 {
     static NSString *_cellIdentifier = @"OneSlotSixRoomsTableCell";
     UITableViewCell *_cell           = [actualTableView dequeueReusableCellWithIdentifier:_cellIdentifier];
@@ -1931,66 +1737,45 @@
         self._oneSlotSixRoomsTableCell = nil;
     }
     
-    UILabel          *_labelTimeSlot  = (UILabel  *)[_cell viewWithTag:1];
-    UIButton         *_lectureButton  = (UIButton *)[_cell viewWithTag:2];  
-    UIButton         *_room1Button    = (UIButton *)[_cell viewWithTag:3];  
-    UIButton         *_room2Button    = (UIButton *)[_cell viewWithTag:4];  
-    UIButton         *_room3Button    = (UIButton *)[_cell viewWithTag:5];  
-    UIButton         *_room4Button    = (UIButton *)[_cell viewWithTag:6];  
-    UIButton         *_room5Button    = (UIButton *)[_cell viewWithTag:7];  
-    UIButton         *_room6Button    = (UIButton *)[_cell viewWithTag:8];   
-    UIButton         *_detailButton   = (UIButton *)[_cell viewWithTag:9];  // with arrow image, leading to detail page
-    
-    
-    // initially always disable detail button
-    _detailButton.enabled  = FALSE;
-    _lectureButton.enabled = FALSE;
-    _room1Button.enabled   = FALSE;
-    _room2Button.enabled   = FALSE;
-    _room3Button.enabled   = FALSE;
-    _room4Button.enabled   = FALSE;
-    _room5Button.enabled   = FALSE;
-    _room6Button.enabled   = FALSE;
-    
-    // initialize values for buttons and labels
-    [_lectureButton setTitle:@"" forState:UIControlStateNormal];
-    [_room1Button   setTitle:@"" forState:UIControlStateNormal];
-    [_room2Button   setTitle:@"" forState:UIControlStateNormal];
-    [_room3Button   setTitle:@"" forState:UIControlStateNormal];
-    [_room4Button   setTitle:@"" forState:UIControlStateNormal];
-    [_room5Button   setTitle:@"" forState:UIControlStateNormal];
-    [_room6Button   setTitle:@"" forState:UIControlStateNormal];
-    
-    [_labelTimeSlot  setBackgroundColor:[UIColor clearColor]];
-    [_lectureButton  setBackgroundColor:[UIColor clearColor]];
-    [_room1Button    setBackgroundColor:[UIColor clearColor]];
-    [_room2Button    setBackgroundColor:[UIColor clearColor]];
-    [_room3Button    setBackgroundColor:[UIColor clearColor]];
-    [_room4Button    setBackgroundColor:[UIColor clearColor]];
-    [_room5Button    setBackgroundColor:[UIColor clearColor]];
-    [_room6Button    setBackgroundColor:[UIColor clearColor]];
-    [_cell           setBackgroundColor:[UIColor clearColor]];
-    
-    
-    if ([self isActualDayAndTime:_actualDate withCellSelection:actualSelection]) 
-    {    
-        [_labelTimeSlot  setBackgroundColor:[UIColor lightGrayColor]];
-        [_lectureButton  setBackgroundColor:[UIColor lightGrayColor]];
-        [_room1Button    setBackgroundColor:[UIColor lightGrayColor]];
-        [_room2Button    setBackgroundColor:[UIColor lightGrayColor]];
-        [_room3Button    setBackgroundColor:[UIColor lightGrayColor]];
-        [_room4Button    setBackgroundColor:[UIColor lightGrayColor]];
-        [_room5Button    setBackgroundColor:[UIColor lightGrayColor]];
-        [_room6Button    setBackgroundColor:[UIColor lightGrayColor]];
-    }
-    
+    ScheduleEventRealizationDto *_localRealization1 = [actualScheduleEvent._scheduleEventRealizations objectAtIndex:0];
+    ScheduleEventRealizationDto *_localRealization2 = [actualScheduleEvent._scheduleEventRealizations objectAtIndex:1];
+    ScheduleEventRealizationDto *_localRealization3 = [actualScheduleEvent._scheduleEventRealizations objectAtIndex:2];
+    ScheduleEventRealizationDto *_localRealization4 = [actualScheduleEvent._scheduleEventRealizations objectAtIndex:3];
+    ScheduleEventRealizationDto *_localRealization5 = [actualScheduleEvent._scheduleEventRealizations objectAtIndex:4];
+    ScheduleEventRealizationDto *_localRealization6 = [actualScheduleEvent._scheduleEventRealizations objectAtIndex:5];
     SlotDto *_timeSlot = [actualScheduleEvent._slots objectAtIndex:0];
+
+    [self setDateLabelWithCell:_cell withTag:1 withActualSelection:actualSelection withStartTime:_timeSlot._startTime withEndTime:_timeSlot._endTime];
     
+    [self setLectureButtonWithCell:_cell withTag:2 withActualSelection:actualSelection withTitle:actualScheduleEvent._name doEnable:TRUE];
+
+    [self setRoomButtonWithCell:_cell withTag:3 withActualSelection:actualSelection withTitle:_localRealization1._room._name withSelector:1];
+    [self setRoomButtonWithCell:_cell withTag:4 withActualSelection:actualSelection withTitle:_localRealization2._room._name withSelector:2];
+    [self setRoomButtonWithCell:_cell withTag:5 withActualSelection:actualSelection withTitle:_localRealization3._room._name withSelector:3];
+    [self setRoomButtonWithCell:_cell withTag:6 withActualSelection:actualSelection withTitle:_localRealization4._room._name withSelector:4];
+    [self setRoomButtonWithCell:_cell withTag:7 withActualSelection:actualSelection withTitle:_localRealization5._room._name withSelector:5];
+    [self setRoomButtonWithCell:_cell withTag:8 withActualSelection:actualSelection withTitle:_localRealization6._room._name withSelector:6];
     
-    _labelTimeSlot.text = [NSString stringWithFormat:@"%@ - %@",  
-                           [[self timeFormatter] stringFromDate:_timeSlot._startTime],  
-                           [[self timeFormatter] stringFromDate:_timeSlot._endTime  ]
-                           ];  
+    [self setDetailButtonWithCell:_cell withTag:9];
+    
+    [_cell           setBackgroundColor:[UIColor clearColor]];
+    return _cell;        
+}
+
+
+- (UITableViewCell *)twoSlotSixRoomsWithView            :(UITableView *)     actualTableView
+                                    withSelection       :(NSUInteger)        actualSelection
+                                    withScheduleEvent   :(ScheduleEventDto *)actualScheduleEvent
+{
+    static NSString *_cellIdentifier = @"TwoSlotSixRoomsTableCell";
+    UITableViewCell *_cell           = [actualTableView dequeueReusableCellWithIdentifier:_cellIdentifier];
+    
+    if (_cell == nil)
+    {
+        [[NSBundle mainBundle] loadNibNamed:@"TwoSlotSixRoomsTableCell" owner:self options:nil];
+        _cell = _twoSlotsSixRoomsTableCell;
+        self._twoSlotsSixRoomsTableCell = nil;
+    }
     
     ScheduleEventRealizationDto *_localRealization1 = [actualScheduleEvent._scheduleEventRealizations objectAtIndex:0];
     ScheduleEventRealizationDto *_localRealization2 = [actualScheduleEvent._scheduleEventRealizations objectAtIndex:1];
@@ -1998,41 +1783,32 @@
     ScheduleEventRealizationDto *_localRealization4 = [actualScheduleEvent._scheduleEventRealizations objectAtIndex:3];
     ScheduleEventRealizationDto *_localRealization5 = [actualScheduleEvent._scheduleEventRealizations objectAtIndex:4];
     ScheduleEventRealizationDto *_localRealization6 = [actualScheduleEvent._scheduleEventRealizations objectAtIndex:5];
+    SlotDto *_timeSlot1 = [actualScheduleEvent._slots objectAtIndex:0];
+    SlotDto *_timeSlot2 = [actualScheduleEvent._slots objectAtIndex:1];
     
-    [_room1Button   setTitle:_localRealization1._room._name  forState:UIControlStateNormal];
-    [_room2Button   setTitle:_localRealization2._room._name  forState:UIControlStateNormal];
-    [_room3Button   setTitle:_localRealization3._room._name  forState:UIControlStateNormal];
-    [_room4Button   setTitle:_localRealization4._room._name  forState:UIControlStateNormal];
-    [_room5Button   setTitle:_localRealization5._room._name  forState:UIControlStateNormal];
-    [_room6Button   setTitle:_localRealization6._room._name  forState:UIControlStateNormal];
+    [self setDateLabelWithCell:_cell withTag:1 withActualSelection:actualSelection withStartTime:_timeSlot1._startTime withEndTime:_timeSlot1._endTime];
+    [self setDateLabelWithCell:_cell withTag:2 withActualSelection:actualSelection withStartTime:_timeSlot2._startTime withEndTime:_timeSlot2._endTime];
     
-    [_lectureButton setTitle:actualScheduleEvent._name       forState:UIControlStateNormal];
+    [self setLectureButtonWithCell:_cell withTag:3 withActualSelection:actualSelection withTitle:actualScheduleEvent._name doEnable:TRUE];
     
-    _lectureButton.enabled  = TRUE;
-    _room1Button.enabled    = TRUE;    
-    _room2Button.enabled    = TRUE;    
-    _room3Button.enabled    = TRUE;    
-    _room4Button.enabled    = TRUE;    
-    _room5Button.enabled    = TRUE;    
-    _room6Button.enabled    = TRUE;    
-    _detailButton.enabled   = TRUE;
+    [self setRoomButtonWithCell:_cell withTag:4 withActualSelection:actualSelection withTitle:_localRealization1._room._name withSelector:1];
+    [self setRoomButtonWithCell:_cell withTag:5 withActualSelection:actualSelection withTitle:_localRealization2._room._name withSelector:2];
+    [self setRoomButtonWithCell:_cell withTag:6 withActualSelection:actualSelection withTitle:_localRealization3._room._name withSelector:3];
+    [self setRoomButtonWithCell:_cell withTag:7 withActualSelection:actualSelection withTitle:_localRealization4._room._name withSelector:4];
+    [self setRoomButtonWithCell:_cell withTag:8 withActualSelection:actualSelection withTitle:_localRealization5._room._name withSelector:5];
+    [self setRoomButtonWithCell:_cell withTag:9 withActualSelection:actualSelection withTitle:_localRealization6._room._name withSelector:6];
     
-    [_room1Button   addTarget:self action:@selector(changeToRoomSchedule1   :event:) forControlEvents:UIControlEventTouchUpInside];
-    [_room2Button   addTarget:self action:@selector(changeToRoomSchedule2   :event:) forControlEvents:UIControlEventTouchUpInside];
-    [_room3Button   addTarget:self action:@selector(changeToRoomSchedule3   :event:) forControlEvents:UIControlEventTouchUpInside];
-    [_room4Button   addTarget:self action:@selector(changeToRoomSchedule4   :event:) forControlEvents:UIControlEventTouchUpInside];
-    [_room5Button   addTarget:self action:@selector(changeToRoomSchedule5   :event:) forControlEvents:UIControlEventTouchUpInside];
-    [_room6Button   addTarget:self action:@selector(changeToRoomSchedule6   :event:) forControlEvents:UIControlEventTouchUpInside];
+    [self setDetailButtonWithCell:_cell withTag:10];
     
-    [_lectureButton addTarget:self action:@selector(changeToCourseSchedule  :event:) forControlEvents:UIControlEventTouchUpInside];
-    [_detailButton  addTarget:self action:@selector(showScheduleDetails     :event:) forControlEvents:UIControlEventTouchUpInside];
-    
-    return _cell;        
+    [_cell           setBackgroundColor:[UIColor clearColor]];
+    return _cell;
 }
 
 
 
-- (UITableViewCell *)oneSlotSevenRooms:(UITableView *)actualTableView:(NSUInteger)actualSelection:(ScheduleEventDto *)actualScheduleEvent
+- (UITableViewCell *)oneSlotSevenRoomsWithView  :(UITableView *)     actualTableView
+                            withSelection       :(NSUInteger)        actualSelection
+                            withScheduleEvent   :(ScheduleEventDto *)actualScheduleEvent
 {
     static NSString *_cellIdentifier = @"OneSlotSevenRoomsTableCell";
     UITableViewCell *_cell           = [actualTableView dequeueReusableCellWithIdentifier:_cellIdentifier];
@@ -2044,71 +1820,6 @@
         self._oneSlotSevenRoomsTableCell = nil;
     }
     
-    UILabel          *_labelTimeSlot  = (UILabel  *)[_cell viewWithTag:1];
-    UIButton         *_lectureButton  = (UIButton *)[_cell viewWithTag:2];
-    UIButton         *_room1Button    = (UIButton *)[_cell viewWithTag:3];
-    UIButton         *_room2Button    = (UIButton *)[_cell viewWithTag:4];
-    UIButton         *_room3Button    = (UIButton *)[_cell viewWithTag:5];
-    UIButton         *_room4Button    = (UIButton *)[_cell viewWithTag:6];
-    UIButton         *_room5Button    = (UIButton *)[_cell viewWithTag:7];
-    UIButton         *_room6Button    = (UIButton *)[_cell viewWithTag:8];
-    UIButton         *_room7Button    = (UIButton *)[_cell viewWithTag:9];
-    UIButton         *_detailButton   = (UIButton *)[_cell viewWithTag:10];
-    
-    // initially always disable detail button
-    _detailButton.enabled  = FALSE;
-    _lectureButton.enabled = FALSE;
-    _room1Button.enabled   = FALSE;
-    _room2Button.enabled   = FALSE;
-    _room3Button.enabled   = FALSE;
-    _room4Button.enabled   = FALSE;
-    _room5Button.enabled   = FALSE;
-    _room6Button.enabled   = FALSE;
-    _room7Button.enabled   = FALSE;
-    
-    // initialize values for buttons and labels
-    [_lectureButton setTitle:@"" forState:UIControlStateNormal];
-    [_room1Button   setTitle:@"" forState:UIControlStateNormal];
-    [_room2Button   setTitle:@"" forState:UIControlStateNormal];
-    [_room3Button   setTitle:@"" forState:UIControlStateNormal];
-    [_room4Button   setTitle:@"" forState:UIControlStateNormal];
-    [_room5Button   setTitle:@"" forState:UIControlStateNormal];
-    [_room6Button   setTitle:@"" forState:UIControlStateNormal];
-    [_room7Button   setTitle:@"" forState:UIControlStateNormal];
-    
-    [_labelTimeSlot  setBackgroundColor:[UIColor clearColor]];
-    [_lectureButton  setBackgroundColor:[UIColor clearColor]];
-    [_room1Button    setBackgroundColor:[UIColor clearColor]];
-    [_room2Button    setBackgroundColor:[UIColor clearColor]];
-    [_room3Button    setBackgroundColor:[UIColor clearColor]];
-    [_room4Button    setBackgroundColor:[UIColor clearColor]];
-    [_room5Button    setBackgroundColor:[UIColor clearColor]];
-    [_room6Button    setBackgroundColor:[UIColor clearColor]];
-    [_room7Button    setBackgroundColor:[UIColor clearColor]];
-    [_cell           setBackgroundColor:[UIColor clearColor]];
-    
-    
-    if ([self isActualDayAndTime:_actualDate withCellSelection:actualSelection])
-    {
-        [_labelTimeSlot  setBackgroundColor:[UIColor lightGrayColor]];
-        [_lectureButton  setBackgroundColor:[UIColor lightGrayColor]];
-        [_room1Button    setBackgroundColor:[UIColor lightGrayColor]];
-        [_room2Button    setBackgroundColor:[UIColor lightGrayColor]];
-        [_room3Button    setBackgroundColor:[UIColor lightGrayColor]];
-        [_room4Button    setBackgroundColor:[UIColor lightGrayColor]];
-        [_room5Button    setBackgroundColor:[UIColor lightGrayColor]];
-        [_room6Button    setBackgroundColor:[UIColor lightGrayColor]];
-        [_room7Button    setBackgroundColor:[UIColor lightGrayColor]];
-    }
-    
-    SlotDto *_timeSlot = [actualScheduleEvent._slots objectAtIndex:0];
-    
-    
-    _labelTimeSlot.text = [NSString stringWithFormat:@"%@ - %@",
-                           [[self timeFormatter] stringFromDate:_timeSlot._startTime],
-                           [[self timeFormatter] stringFromDate:_timeSlot._endTime  ]
-                           ];
-    
     ScheduleEventRealizationDto *_localRealization1 = [actualScheduleEvent._scheduleEventRealizations objectAtIndex:0];
     ScheduleEventRealizationDto *_localRealization2 = [actualScheduleEvent._scheduleEventRealizations objectAtIndex:1];
     ScheduleEventRealizationDto *_localRealization3 = [actualScheduleEvent._scheduleEventRealizations objectAtIndex:2];
@@ -2116,43 +1827,31 @@
     ScheduleEventRealizationDto *_localRealization5 = [actualScheduleEvent._scheduleEventRealizations objectAtIndex:4];
     ScheduleEventRealizationDto *_localRealization6 = [actualScheduleEvent._scheduleEventRealizations objectAtIndex:5];
     ScheduleEventRealizationDto *_localRealization7 = [actualScheduleEvent._scheduleEventRealizations objectAtIndex:6];
+    SlotDto *_timeSlot = [actualScheduleEvent._slots objectAtIndex:0];
     
-    [_room1Button   setTitle:_localRealization1._room._name  forState:UIControlStateNormal];
-    [_room2Button   setTitle:_localRealization2._room._name  forState:UIControlStateNormal];
-    [_room3Button   setTitle:_localRealization3._room._name  forState:UIControlStateNormal];
-    [_room4Button   setTitle:_localRealization4._room._name  forState:UIControlStateNormal];
-    [_room5Button   setTitle:_localRealization5._room._name  forState:UIControlStateNormal];
-    [_room6Button   setTitle:_localRealization6._room._name  forState:UIControlStateNormal];
-    [_room7Button   setTitle:_localRealization7._room._name  forState:UIControlStateNormal];
+    [self setDateLabelWithCell:_cell withTag:1 withActualSelection:actualSelection withStartTime:_timeSlot._startTime withEndTime:_timeSlot._endTime];
     
-    [_lectureButton setTitle:actualScheduleEvent._name       forState:UIControlStateNormal];
+    [self setLectureButtonWithCell:_cell withTag:2 withActualSelection:actualSelection withTitle:actualScheduleEvent._name doEnable:TRUE];
     
-    _lectureButton.enabled  = TRUE;
-    _room1Button.enabled    = TRUE;
-    _room2Button.enabled    = TRUE;
-    _room3Button.enabled    = TRUE;
-    _room4Button.enabled    = TRUE;
-    _room5Button.enabled    = TRUE;
-    _room6Button.enabled    = TRUE;
-    _room7Button.enabled    = TRUE;
-    _detailButton.enabled   = TRUE;
+    [self setRoomButtonWithCell:_cell withTag:3 withActualSelection:actualSelection withTitle:_localRealization1._room._name withSelector:1];
+    [self setRoomButtonWithCell:_cell withTag:4 withActualSelection:actualSelection withTitle:_localRealization2._room._name withSelector:2];
+    [self setRoomButtonWithCell:_cell withTag:5 withActualSelection:actualSelection withTitle:_localRealization3._room._name withSelector:3];
+    [self setRoomButtonWithCell:_cell withTag:6 withActualSelection:actualSelection withTitle:_localRealization4._room._name withSelector:4];
+    [self setRoomButtonWithCell:_cell withTag:7 withActualSelection:actualSelection withTitle:_localRealization5._room._name withSelector:5];
+    [self setRoomButtonWithCell:_cell withTag:8 withActualSelection:actualSelection withTitle:_localRealization6._room._name withSelector:6];
+    [self setRoomButtonWithCell:_cell withTag:9 withActualSelection:actualSelection withTitle:_localRealization7._room._name withSelector:7];
     
-    [_room1Button   addTarget:self action:@selector(changeToRoomSchedule1   :event:) forControlEvents:UIControlEventTouchUpInside];
-    [_room2Button   addTarget:self action:@selector(changeToRoomSchedule2   :event:) forControlEvents:UIControlEventTouchUpInside];
-    [_room3Button   addTarget:self action:@selector(changeToRoomSchedule3   :event:) forControlEvents:UIControlEventTouchUpInside];
-    [_room4Button   addTarget:self action:@selector(changeToRoomSchedule4   :event:) forControlEvents:UIControlEventTouchUpInside];
-    [_room5Button   addTarget:self action:@selector(changeToRoomSchedule5   :event:) forControlEvents:UIControlEventTouchUpInside];
-    [_room6Button   addTarget:self action:@selector(changeToRoomSchedule6   :event:) forControlEvents:UIControlEventTouchUpInside];
-    [_room7Button   addTarget:self action:@selector(changeToRoomSchedule7   :event:) forControlEvents:UIControlEventTouchUpInside];
-    [_lectureButton addTarget:self action:@selector(changeToCourseSchedule  :event:) forControlEvents:UIControlEventTouchUpInside];
-    [_detailButton  addTarget:self action:@selector(showScheduleDetails     :event:) forControlEvents:UIControlEventTouchUpInside];
+    [self setDetailButtonWithCell:_cell withTag:10];
     
+    [_cell           setBackgroundColor:[UIColor clearColor]];
     return _cell;
 }
 
 
 
-- (UITableViewCell *)oneSlotEightRooms:(UITableView *)actualTableView:(NSUInteger)actualSelection:(ScheduleEventDto *)actualScheduleEvent
+- (UITableViewCell *)oneSlotEightRoomsWithView      :(UITableView *)     actualTableView
+                                withSelection       :(NSUInteger)        actualSelection
+                                withScheduleEvent   :(ScheduleEventDto *)actualScheduleEvent
 {
     static NSString *_cellIdentifier = @"OneSlotEightRoomsTableCell";
     UITableViewCell *_cell           = [actualTableView dequeueReusableCellWithIdentifier:_cellIdentifier];
@@ -2164,78 +1863,6 @@
         self._oneSlotEightRoomsTableCell = nil;
     }
     
-    UILabel          *_labelTimeSlot  = (UILabel  *)[_cell viewWithTag:1];
-    
-    UIButton         *_lectureButton  = (UIButton *)[_cell viewWithTag:2];  
-    UIButton         *_room1Button    = (UIButton *)[_cell viewWithTag:3];  
-    UIButton         *_room2Button    = (UIButton *)[_cell viewWithTag:4];  
-    UIButton         *_room3Button    = (UIButton *)[_cell viewWithTag:5];  
-    UIButton         *_room4Button    = (UIButton *)[_cell viewWithTag:6];  
-    UIButton         *_room5Button    = (UIButton *)[_cell viewWithTag:7];  
-    UIButton         *_room6Button    = (UIButton *)[_cell viewWithTag:8];  
-    UIButton         *_room7Button    = (UIButton *)[_cell viewWithTag:9];  
-    UIButton         *_room8Button    = (UIButton *)[_cell viewWithTag:10];  
-    UIButton         *_detailButton   = (UIButton *)[_cell viewWithTag:11];  // with arrow image, leading to detail page
-    
-    
-    // initially always disable detail button
-    _detailButton.enabled  = FALSE;
-    _lectureButton.enabled = FALSE;
-    _room1Button.enabled   = FALSE;
-    _room2Button.enabled   = FALSE;
-    _room3Button.enabled   = FALSE;
-    _room4Button.enabled   = FALSE;
-    _room5Button.enabled   = FALSE;
-    _room6Button.enabled   = FALSE;
-    _room7Button.enabled   = FALSE;
-    _room8Button.enabled   = FALSE;
-    
-    // initialize values for buttons and labels
-    [_lectureButton setTitle:@"" forState:UIControlStateNormal];
-    [_room1Button   setTitle:@"" forState:UIControlStateNormal];
-    [_room2Button   setTitle:@"" forState:UIControlStateNormal];
-    [_room3Button   setTitle:@"" forState:UIControlStateNormal];
-    [_room4Button   setTitle:@"" forState:UIControlStateNormal];
-    [_room5Button   setTitle:@"" forState:UIControlStateNormal];
-    [_room6Button   setTitle:@"" forState:UIControlStateNormal];
-    [_room7Button   setTitle:@"" forState:UIControlStateNormal];
-    [_room8Button   setTitle:@"" forState:UIControlStateNormal];
-    
-    [_labelTimeSlot  setBackgroundColor:[UIColor clearColor]];
-    [_lectureButton  setBackgroundColor:[UIColor clearColor]];
-    [_room1Button    setBackgroundColor:[UIColor clearColor]];
-    [_room2Button    setBackgroundColor:[UIColor clearColor]];
-    [_room3Button    setBackgroundColor:[UIColor clearColor]];
-    [_room4Button    setBackgroundColor:[UIColor clearColor]];
-    [_room5Button    setBackgroundColor:[UIColor clearColor]];
-    [_room6Button    setBackgroundColor:[UIColor clearColor]];
-    [_room7Button    setBackgroundColor:[UIColor clearColor]];
-    [_room8Button    setBackgroundColor:[UIColor clearColor]];
-    [_cell           setBackgroundColor:[UIColor clearColor]];
-    
-    
-    if ([self isActualDayAndTime:_actualDate withCellSelection:actualSelection]) 
-    {    
-        [_labelTimeSlot  setBackgroundColor:[UIColor lightGrayColor]];
-        [_lectureButton  setBackgroundColor:[UIColor lightGrayColor]];
-        [_room1Button    setBackgroundColor:[UIColor lightGrayColor]];
-        [_room2Button    setBackgroundColor:[UIColor lightGrayColor]];
-        [_room3Button    setBackgroundColor:[UIColor lightGrayColor]];
-        [_room4Button    setBackgroundColor:[UIColor lightGrayColor]];
-        [_room5Button    setBackgroundColor:[UIColor lightGrayColor]];
-        [_room6Button    setBackgroundColor:[UIColor lightGrayColor]];
-        [_room7Button    setBackgroundColor:[UIColor lightGrayColor]];
-        [_room8Button    setBackgroundColor:[UIColor lightGrayColor]];
-    }
-    
-    SlotDto *_timeSlot = [actualScheduleEvent._slots objectAtIndex:0];
-    
-    
-    _labelTimeSlot.text = [NSString stringWithFormat:@"%@ - %@",  
-                            [[self timeFormatter] stringFromDate:_timeSlot._startTime],  
-                            [[self timeFormatter] stringFromDate:_timeSlot._endTime  ]
-                            ];  
-    
     ScheduleEventRealizationDto *_localRealization1 = [actualScheduleEvent._scheduleEventRealizations objectAtIndex:0];
     ScheduleEventRealizationDto *_localRealization2 = [actualScheduleEvent._scheduleEventRealizations objectAtIndex:1];
     ScheduleEventRealizationDto *_localRealization3 = [actualScheduleEvent._scheduleEventRealizations objectAtIndex:2];
@@ -2244,44 +1871,30 @@
     ScheduleEventRealizationDto *_localRealization6 = [actualScheduleEvent._scheduleEventRealizations objectAtIndex:5];
     ScheduleEventRealizationDto *_localRealization7 = [actualScheduleEvent._scheduleEventRealizations objectAtIndex:6];
     ScheduleEventRealizationDto *_localRealization8 = [actualScheduleEvent._scheduleEventRealizations objectAtIndex:7];
+    SlotDto *_timeSlot = [actualScheduleEvent._slots objectAtIndex:0];
     
-    [_room1Button   setTitle:_localRealization1._room._name  forState:UIControlStateNormal];
-    [_room2Button   setTitle:_localRealization2._room._name  forState:UIControlStateNormal];
-    [_room3Button   setTitle:_localRealization3._room._name  forState:UIControlStateNormal];
-    [_room4Button   setTitle:_localRealization4._room._name  forState:UIControlStateNormal];
-    [_room5Button   setTitle:_localRealization5._room._name  forState:UIControlStateNormal];
-    [_room6Button   setTitle:_localRealization6._room._name  forState:UIControlStateNormal];
-    [_room7Button   setTitle:_localRealization7._room._name  forState:UIControlStateNormal];
-    [_room8Button   setTitle:_localRealization8._room._name  forState:UIControlStateNormal];
-
-    [_lectureButton setTitle:actualScheduleEvent._name       forState:UIControlStateNormal];
+    [self setDateLabelWithCell:_cell withTag:1 withActualSelection:actualSelection withStartTime:_timeSlot._startTime withEndTime:_timeSlot._endTime];
     
-    _lectureButton.enabled  = TRUE;
-    _room1Button.enabled    = TRUE;    
-    _room2Button.enabled    = TRUE;    
-    _room3Button.enabled    = TRUE;    
-    _room4Button.enabled    = TRUE;    
-    _room5Button.enabled    = TRUE;    
-    _room6Button.enabled    = TRUE;    
-    _room7Button.enabled    = TRUE;    
-    _room8Button.enabled    = TRUE;    
-    _detailButton.enabled   = TRUE;
+    [self setLectureButtonWithCell:_cell withTag:2 withActualSelection:actualSelection withTitle:actualScheduleEvent._name doEnable:TRUE];
     
-    [_room1Button   addTarget:self action:@selector(changeToRoomSchedule1   :event:) forControlEvents:UIControlEventTouchUpInside];
-    [_room2Button   addTarget:self action:@selector(changeToRoomSchedule2   :event:) forControlEvents:UIControlEventTouchUpInside];
-    [_room3Button   addTarget:self action:@selector(changeToRoomSchedule3   :event:) forControlEvents:UIControlEventTouchUpInside];
-    [_room4Button   addTarget:self action:@selector(changeToRoomSchedule4   :event:) forControlEvents:UIControlEventTouchUpInside];
-    [_room5Button   addTarget:self action:@selector(changeToRoomSchedule5   :event:) forControlEvents:UIControlEventTouchUpInside];
-    [_room6Button   addTarget:self action:@selector(changeToRoomSchedule6   :event:) forControlEvents:UIControlEventTouchUpInside];
-    [_room7Button   addTarget:self action:@selector(changeToRoomSchedule7   :event:) forControlEvents:UIControlEventTouchUpInside];
-    [_room8Button   addTarget:self action:@selector(changeToRoomSchedule8   :event:) forControlEvents:UIControlEventTouchUpInside];
-    [_lectureButton addTarget:self action:@selector(changeToCourseSchedule  :event:) forControlEvents:UIControlEventTouchUpInside];
-    [_detailButton  addTarget:self action:@selector(showScheduleDetails     :event:) forControlEvents:UIControlEventTouchUpInside];
+    [self setRoomButtonWithCell:_cell withTag:3 withActualSelection:actualSelection withTitle:_localRealization1._room._name withSelector:1];
+    [self setRoomButtonWithCell:_cell withTag:4 withActualSelection:actualSelection withTitle:_localRealization2._room._name withSelector:2];
+    [self setRoomButtonWithCell:_cell withTag:5 withActualSelection:actualSelection withTitle:_localRealization3._room._name withSelector:3];
+    [self setRoomButtonWithCell:_cell withTag:6 withActualSelection:actualSelection withTitle:_localRealization4._room._name withSelector:4];
+    [self setRoomButtonWithCell:_cell withTag:7 withActualSelection:actualSelection withTitle:_localRealization5._room._name withSelector:5];
+    [self setRoomButtonWithCell:_cell withTag:8 withActualSelection:actualSelection withTitle:_localRealization6._room._name withSelector:6];
+    [self setRoomButtonWithCell:_cell withTag:9 withActualSelection:actualSelection withTitle:_localRealization7._room._name withSelector:7];
+    [self setRoomButtonWithCell:_cell withTag:10 withActualSelection:actualSelection withTitle:_localRealization8._room._name withSelector:8];
     
+    [self setDetailButtonWithCell:_cell withTag:11];
+        
+    [_cell           setBackgroundColor:[UIColor clearColor]];
     return _cell;        
 }
 
-- (UITableViewCell *)threeSlotsTwoRooms:(UITableView *)actualTableView:(NSUInteger)actualSelection:(ScheduleEventDto *)actualScheduleEvent
+- (UITableViewCell *)threeSlotsTwoRoomsWithView     :(UITableView *)     actualTableView
+                                withSelection       :(NSUInteger)        actualSelection
+                                withScheduleEvent   :(ScheduleEventDto *)actualScheduleEvent
 {
     static NSString *_cellIdentifier = @"ThreeSlotsTwoRoomsTableCell";
     UITableViewCell *_cell           = [actualTableView dequeueReusableCellWithIdentifier:_cellIdentifier];
@@ -2293,84 +1906,33 @@
         self._threeSlotsTwoRoomsTableCell = nil;
     }
     
-    UILabel          *_labelTimeSlot1 = (UILabel  *)[_cell viewWithTag:1];
-    UILabel          *_labelTimeSlot2 = (UILabel  *)[_cell viewWithTag:2];
-    UILabel          *_labelTimeSlot3 = (UILabel  *)[_cell viewWithTag:3];
-    UIButton         *_lectureButton  = (UIButton *)[_cell viewWithTag:4];
-    UIButton         *_room1Button    = (UIButton *)[_cell viewWithTag:5];
-    UIButton         *_room2Button    = (UIButton *)[_cell viewWithTag:6];
-    UIButton         *_detailButton   = (UIButton *)[_cell viewWithTag:7];  // with arrow image, leading to detail page
-    
-    // initially always disable detail button
-    _detailButton.enabled  = FALSE;
-    _lectureButton.enabled = FALSE;
-    _room1Button.enabled   = FALSE;
-    _room2Button.enabled   = FALSE;
-    
-    // initialize values for buttons and labels
-    [_lectureButton setTitle:@"" forState:UIControlStateNormal];
-    [_room1Button   setTitle:@"" forState:UIControlStateNormal];
-    [_room2Button   setTitle:@"" forState:UIControlStateNormal];
-    
-    [_labelTimeSlot1 setBackgroundColor:[UIColor clearColor]];
-    [_labelTimeSlot2 setBackgroundColor:[UIColor clearColor]];
-    [_labelTimeSlot3 setBackgroundColor:[UIColor clearColor]];
-    [_lectureButton  setBackgroundColor:[UIColor clearColor]];
-    [_room1Button    setBackgroundColor:[UIColor clearColor]];
-    [_room2Button    setBackgroundColor:[UIColor clearColor]];
-    [_cell           setBackgroundColor:[UIColor clearColor]];
-    
-    if ([self isActualDayAndTime:_actualDate withCellSelection:actualSelection])
-    {
-        [_labelTimeSlot1 setBackgroundColor:[UIColor lightGrayColor]];
-        [_labelTimeSlot2 setBackgroundColor:[UIColor lightGrayColor]];
-        [_labelTimeSlot3 setBackgroundColor:[UIColor lightGrayColor]];
-        [_lectureButton  setBackgroundColor:[UIColor lightGrayColor]];
-        [_room1Button    setBackgroundColor:[UIColor lightGrayColor]];
-        [_room2Button    setBackgroundColor:[UIColor lightGrayColor]];
-    }
-    
+    ScheduleEventRealizationDto *_localRealization1 = [actualScheduleEvent._scheduleEventRealizations objectAtIndex:0];
+    ScheduleEventRealizationDto *_localRealization2 = [actualScheduleEvent._scheduleEventRealizations objectAtIndex:1];
     SlotDto *_timeSlot1 = [actualScheduleEvent._slots objectAtIndex:0];
     SlotDto *_timeSlot2 = [actualScheduleEvent._slots objectAtIndex:1];
     SlotDto *_timeSlot3 = [actualScheduleEvent._slots objectAtIndex:2];
     
-    _labelTimeSlot1.text = [NSString stringWithFormat:@"%@ - %@",
-                            [[self timeFormatter] stringFromDate:_timeSlot1._startTime],
-                            [[self timeFormatter] stringFromDate:_timeSlot1._endTime  ]
-                            ];
-    _labelTimeSlot2.text = [NSString stringWithFormat:@"%@ - %@",
-                            [[self timeFormatter] stringFromDate:_timeSlot2._startTime],
-                            [[self timeFormatter] stringFromDate:_timeSlot2._endTime  ]
-                            ];
-    _labelTimeSlot3.text = [NSString stringWithFormat:@"%@ - %@",
-                            [[self timeFormatter] stringFromDate:_timeSlot3._startTime],
-                            [[self timeFormatter] stringFromDate:_timeSlot3._endTime  ]
-                            ];
+    [self setDateLabelWithCell:_cell withTag:1 withActualSelection:actualSelection withStartTime:_timeSlot1._startTime withEndTime:_timeSlot1._endTime];
+    [self setDateLabelWithCell:_cell withTag:2 withActualSelection:actualSelection withStartTime:_timeSlot2._startTime withEndTime:_timeSlot2._endTime];
+    [self setDateLabelWithCell:_cell withTag:3 withActualSelection:actualSelection withStartTime:_timeSlot3._startTime withEndTime:_timeSlot3._endTime];
     
-    ScheduleEventRealizationDto *_localRealization1 = [actualScheduleEvent._scheduleEventRealizations objectAtIndex:0];
-    ScheduleEventRealizationDto *_localRealization2 = [actualScheduleEvent._scheduleEventRealizations objectAtIndex:1];
+    [self setLectureButtonWithCell:_cell withTag:4 withActualSelection:actualSelection withTitle:actualScheduleEvent._name doEnable:TRUE];
     
-    [_room1Button   setTitle:_localRealization1._room._name  forState:UIControlStateNormal];
-    [_room2Button   setTitle:_localRealization2._room._name  forState:UIControlStateNormal];
-    [_lectureButton setTitle:actualScheduleEvent._name       forState:UIControlStateNormal];
+    [self setRoomButtonWithCell:_cell withTag:5 withActualSelection:actualSelection withTitle:_localRealization1._room._name withSelector:1];
+    [self setRoomButtonWithCell:_cell withTag:6 withActualSelection:actualSelection withTitle:_localRealization2._room._name withSelector:2];
     
-    _lectureButton.enabled  = TRUE;
-    _room1Button.enabled    = TRUE;
-    _room2Button.enabled    = TRUE;
-    _detailButton.enabled   = TRUE;
-    
-    [_room1Button   addTarget:self action:@selector(changeToRoomSchedule1   :event:) forControlEvents:UIControlEventTouchUpInside];
-    [_room2Button   addTarget:self action:@selector(changeToRoomSchedule2   :event:) forControlEvents:UIControlEventTouchUpInside];
-    [_lectureButton addTarget:self action:@selector(changeToCourseSchedule  :event:) forControlEvents:UIControlEventTouchUpInside];
-    [_detailButton  addTarget:self action:@selector(showScheduleDetails     :event:) forControlEvents:UIControlEventTouchUpInside];
-    
+    [self setDetailButtonWithCell:_cell withTag:7];
+        
+    [_cell           setBackgroundColor:[UIColor clearColor]];
     return _cell;
 }
 
 
 
 
-- (UITableViewCell *)fourSlots:(UITableView *)actualTableView:(NSUInteger)actualSelection:(ScheduleEventDto *)actualScheduleEvent
+- (UITableViewCell *)fourSlotsOneRoomWithView       :(UITableView *)actualTableView
+                                withSelection       :(NSUInteger)actualSelection
+                                withScheduleEvent   :(ScheduleEventDto *)actualScheduleEvent
 {
     static NSString *_cellIdentifier = @"FourSlotsOneRoomTableCell";
     UITableViewCell *_cell           = [actualTableView dequeueReusableCellWithIdentifier:_cellIdentifier];
@@ -2389,85 +1951,32 @@
     // 4 => _roomButton     -> short room
     // 5 => _detailButton   -> leads to detail page
     
-    UILabel          *_labelTimeSlot1 = (UILabel  *)[_cell viewWithTag:1];
-    UILabel          *_labelTimeSlot2 = (UILabel  *)[_cell viewWithTag:2];
-    UILabel          *_labelTimeSlot3 = (UILabel  *)[_cell viewWithTag:3];
-    UILabel          *_labelTimeSlot4 = (UILabel  *)[_cell viewWithTag:4];
-
-    UIButton         *_lectureButton  = (UIButton *)[_cell viewWithTag:5];  
-    UIButton         *_roomButton     = (UIButton *)[_cell viewWithTag:6];  
-    UIButton         *_detailButton   = (UIButton *)[_cell viewWithTag:7];  // with arrow image, leading to detail page
-    
-    
-    // initially always disable detail button
-    _detailButton.enabled  = FALSE;
-    _lectureButton.enabled = FALSE;
-    _roomButton.enabled    = FALSE;
-    
-    // initialize values for buttons and labels
-    [_lectureButton setTitle:@"" forState:UIControlStateNormal];
-    [_roomButton    setTitle:@"" forState:UIControlStateNormal];
-    
-    [_labelTimeSlot1 setBackgroundColor:[UIColor clearColor]];
-    [_labelTimeSlot2 setBackgroundColor:[UIColor clearColor]];
-    [_labelTimeSlot3 setBackgroundColor:[UIColor clearColor]];
-    [_labelTimeSlot4 setBackgroundColor:[UIColor clearColor]];
-    [_lectureButton  setBackgroundColor:[UIColor clearColor]];
-    [_roomButton     setBackgroundColor:[UIColor clearColor]];
-    [_cell           setBackgroundColor:[UIColor clearColor]];
-    
-    
-    if ([self isActualDayAndTime:_actualDate withCellSelection:actualSelection]) 
-    {    
-        [_labelTimeSlot1 setBackgroundColor:[UIColor lightGrayColor]];
-        [_labelTimeSlot2 setBackgroundColor:[UIColor lightGrayColor]];
-        [_labelTimeSlot3 setBackgroundColor:[UIColor lightGrayColor]];
-        [_labelTimeSlot4 setBackgroundColor:[UIColor lightGrayColor]];
-        [_lectureButton  setBackgroundColor:[UIColor lightGrayColor]];
-        [_roomButton     setBackgroundColor:[UIColor lightGrayColor]];
-    }
-    
+    ScheduleEventRealizationDto *_localRealization = [actualScheduleEvent._scheduleEventRealizations objectAtIndex:0];
     SlotDto *_timeSlot1 = [actualScheduleEvent._slots objectAtIndex:0];
     SlotDto *_timeSlot2 = [actualScheduleEvent._slots objectAtIndex:1];
     SlotDto *_timeSlot3 = [actualScheduleEvent._slots objectAtIndex:2];
     SlotDto *_timeSlot4 = [actualScheduleEvent._slots objectAtIndex:3];
     
-    
-    _labelTimeSlot1.text = [NSString stringWithFormat:@"%@ - %@",  
-                            [[self timeFormatter] stringFromDate:_timeSlot1._startTime],  
-                            [[self timeFormatter] stringFromDate:_timeSlot1._endTime  ]
-                            ];  
-    _labelTimeSlot2.text = [NSString stringWithFormat:@"%@ - %@",  
-                            [[self timeFormatter] stringFromDate:_timeSlot2._startTime],  
-                            [[self timeFormatter] stringFromDate:_timeSlot2._endTime  ]
-                            ];  
-    _labelTimeSlot3.text = [NSString stringWithFormat:@"%@ - %@",  
-                            [[self timeFormatter] stringFromDate:_timeSlot3._startTime],  
-                            [[self timeFormatter] stringFromDate:_timeSlot3._endTime  ]
-                            ];  
-    _labelTimeSlot4.text = [NSString stringWithFormat:@"%@ - %@",  
-                            [[self timeFormatter] stringFromDate:_timeSlot4._startTime],  
-                            [[self timeFormatter] stringFromDate:_timeSlot4._endTime  ]
-                            ];  
+    [self setDateLabelWithCell:_cell withTag:1 withActualSelection:actualSelection withStartTime:_timeSlot1._startTime withEndTime:_timeSlot1._endTime];
+    [self setDateLabelWithCell:_cell withTag:2 withActualSelection:actualSelection withStartTime:_timeSlot2._startTime withEndTime:_timeSlot2._endTime];
+    [self setDateLabelWithCell:_cell withTag:3 withActualSelection:actualSelection withStartTime:_timeSlot3._startTime withEndTime:_timeSlot3._endTime];
+    [self setDateLabelWithCell:_cell withTag:4 withActualSelection:actualSelection withStartTime:_timeSlot4._startTime withEndTime:_timeSlot4._endTime];
 
-    _lectureButton.enabled  = TRUE;
-    _roomButton.enabled     = TRUE;    
-    _detailButton.enabled   = TRUE;
+    [self setLectureButtonWithCell:_cell withTag:5 withActualSelection:actualSelection withTitle:actualScheduleEvent._name doEnable:TRUE];
     
-    ScheduleEventRealizationDto *_localRealization = [actualScheduleEvent._scheduleEventRealizations objectAtIndex:0];
-    [_roomButton    setTitle:_localRealization._room._name  forState:UIControlStateNormal];
-    [_lectureButton setTitle:actualScheduleEvent._name      forState:UIControlStateNormal];
-
-    [_roomButton    addTarget:self action:@selector(changeToRoomSchedule1   :event:) forControlEvents:UIControlEventTouchUpInside];
-    [_lectureButton addTarget:self action:@selector(changeToCourseSchedule  :event:) forControlEvents:UIControlEventTouchUpInside];
-    [_detailButton  addTarget:self action:@selector(showScheduleDetails     :event:) forControlEvents:UIControlEventTouchUpInside];
+    [self setRoomButtonWithCell:_cell withTag:6 withActualSelection:actualSelection withTitle:_localRealization._room._name withSelector:1];
     
+    [self setDetailButtonWithCell:_cell withTag:7];
+    
+    [_cell           setBackgroundColor:[UIColor clearColor]];
     return _cell;        
 }
 
 
 
-- (UITableViewCell *)fiveSlotsOneRoom:(UITableView *)actualTableView:(NSUInteger)actualSelection:(ScheduleEventDto *)actualScheduleEvent
+- (UITableViewCell *)fiveSlotsOneRoomWithView       :(UITableView *)     actualTableView
+                                withSelection       :(NSUInteger)        actualSelection
+                                withScheduleEvent   :(ScheduleEventDto *)actualScheduleEvent
 {
     static NSString *_cellIdentifier = @"FiveSlotsOneRoomTableCell";
     UITableViewCell *_cell           = [actualTableView dequeueReusableCellWithIdentifier:_cellIdentifier];
@@ -2479,91 +1988,117 @@
         self._fiveSlotsOneRoomTableCell = nil;
     }
     
-    UILabel          *_labelTimeSlot1 = (UILabel  *)[_cell viewWithTag:1];
-    UILabel          *_labelTimeSlot2 = (UILabel  *)[_cell viewWithTag:2];
-    UILabel          *_labelTimeSlot3 = (UILabel  *)[_cell viewWithTag:3];
-    UILabel          *_labelTimeSlot4 = (UILabel  *)[_cell viewWithTag:4];
-    UILabel          *_labelTimeSlot5 = (UILabel  *)[_cell viewWithTag:5];
-    UIButton         *_lectureButton  = (UIButton *)[_cell viewWithTag:6];  
-    UIButton         *_roomButton     = (UIButton *)[_cell viewWithTag:7];  
-    UIButton         *_detailButton   = (UIButton *)[_cell viewWithTag:8];  // with arrow image, leading to detail page
-    
-    // initially always disable detail button
-    _detailButton.enabled  = FALSE;
-    _lectureButton.enabled = FALSE;
-    _roomButton.enabled    = FALSE;
-    
-    // initialize values for buttons and labels
-    [_lectureButton setTitle:@"" forState:UIControlStateNormal];
-    [_roomButton    setTitle:@"" forState:UIControlStateNormal];
-    
-    [_labelTimeSlot1 setBackgroundColor:[UIColor clearColor]];
-    [_labelTimeSlot2 setBackgroundColor:[UIColor clearColor]];
-    [_labelTimeSlot3 setBackgroundColor:[UIColor clearColor]];
-    [_labelTimeSlot4 setBackgroundColor:[UIColor clearColor]];
-    [_labelTimeSlot5 setBackgroundColor:[UIColor clearColor]];
-    [_lectureButton  setBackgroundColor:[UIColor clearColor]];
-    [_roomButton     setBackgroundColor:[UIColor clearColor]];
-    [_cell           setBackgroundColor:[UIColor clearColor]];
-    
-    if ([self isActualDayAndTime:_actualDate withCellSelection:actualSelection]) 
-    {    
-        [_labelTimeSlot1 setBackgroundColor:[UIColor lightGrayColor]];
-        [_labelTimeSlot2 setBackgroundColor:[UIColor lightGrayColor]];
-        [_labelTimeSlot3 setBackgroundColor:[UIColor lightGrayColor]];
-        [_labelTimeSlot4 setBackgroundColor:[UIColor lightGrayColor]];
-        [_labelTimeSlot5 setBackgroundColor:[UIColor lightGrayColor]];
-        [_lectureButton  setBackgroundColor:[UIColor lightGrayColor]];
-        [_roomButton     setBackgroundColor:[UIColor lightGrayColor]];
-    }
-    
+    ScheduleEventRealizationDto *_localRealization = [actualScheduleEvent._scheduleEventRealizations objectAtIndex:0];
     SlotDto *_timeSlot1 = [actualScheduleEvent._slots objectAtIndex:0];
     SlotDto *_timeSlot2 = [actualScheduleEvent._slots objectAtIndex:1];
     SlotDto *_timeSlot3 = [actualScheduleEvent._slots objectAtIndex:2];
     SlotDto *_timeSlot4 = [actualScheduleEvent._slots objectAtIndex:3];
     SlotDto *_timeSlot5 = [actualScheduleEvent._slots objectAtIndex:4];
     
-    _labelTimeSlot1.text = [NSString stringWithFormat:@"%@ - %@",  
-                            [[self timeFormatter] stringFromDate:_timeSlot1._startTime],  
-                            [[self timeFormatter] stringFromDate:_timeSlot1._endTime  ]
-                            ];  
-    _labelTimeSlot2.text = [NSString stringWithFormat:@"%@ - %@",  
-                            [[self timeFormatter] stringFromDate:_timeSlot2._startTime],  
-                            [[self timeFormatter] stringFromDate:_timeSlot2._endTime  ]
-                            ];  
-    _labelTimeSlot3.text = [NSString stringWithFormat:@"%@ - %@",  
-                            [[self timeFormatter] stringFromDate:_timeSlot3._startTime],  
-                            [[self timeFormatter] stringFromDate:_timeSlot3._endTime  ]
-                            ];  
-    _labelTimeSlot4.text = [NSString stringWithFormat:@"%@ - %@",  
-                            [[self timeFormatter] stringFromDate:_timeSlot4._startTime],  
-                            [[self timeFormatter] stringFromDate:_timeSlot4._endTime  ]
-                            ];     
-
-    _labelTimeSlot5.text = [NSString stringWithFormat:@"%@ - %@",  
-                            [[self timeFormatter] stringFromDate:_timeSlot5._startTime],  
-                            [[self timeFormatter] stringFromDate:_timeSlot5._endTime  ]
-                            ];         
+    [self setDateLabelWithCell:_cell withTag:1 withActualSelection:actualSelection withStartTime:_timeSlot1._startTime withEndTime:_timeSlot1._endTime];
+    [self setDateLabelWithCell:_cell withTag:2 withActualSelection:actualSelection withStartTime:_timeSlot2._startTime withEndTime:_timeSlot2._endTime];
+    [self setDateLabelWithCell:_cell withTag:3 withActualSelection:actualSelection withStartTime:_timeSlot3._startTime withEndTime:_timeSlot3._endTime];
+    [self setDateLabelWithCell:_cell withTag:4 withActualSelection:actualSelection withStartTime:_timeSlot4._startTime withEndTime:_timeSlot4._endTime];
+    [self setDateLabelWithCell:_cell withTag:5 withActualSelection:actualSelection withStartTime:_timeSlot5._startTime withEndTime:_timeSlot5._endTime];
     
-    ScheduleEventRealizationDto *_localRealization = [actualScheduleEvent._scheduleEventRealizations objectAtIndex:0];
+    [self setLectureButtonWithCell:_cell withTag:6 withActualSelection:actualSelection withTitle:actualScheduleEvent._name doEnable:TRUE];
     
-    [_roomButton    setTitle:_localRealization._room._name  forState:UIControlStateNormal];
-    [_lectureButton setTitle:actualScheduleEvent._name       forState:UIControlStateNormal];
+    [self setRoomButtonWithCell:_cell withTag:7 withActualSelection:actualSelection withTitle:_localRealization._room._name withSelector:1];
     
-    _lectureButton.enabled  = TRUE;
-    _roomButton.enabled     = TRUE;      
-    _detailButton.enabled   = TRUE;
+    [self setDetailButtonWithCell:_cell withTag:8];
     
-    [_roomButton    addTarget:self action:@selector(changeToRoomSchedule1   :event:) forControlEvents:UIControlEventTouchUpInside];
-    [_lectureButton addTarget:self action:@selector(changeToCourseSchedule  :event:) forControlEvents:UIControlEventTouchUpInside];
-    [_detailButton  addTarget:self action:@selector(showScheduleDetails     :event:) forControlEvents:UIControlEventTouchUpInside];
-    
+    [_cell           setBackgroundColor:[UIColor clearColor]]; 
     return _cell;        
 }
 
 
+- (UITableViewCell *)sixSlotsOneRoomWithView        :(UITableView *)     actualTableView
+                                withSelection       :(NSUInteger)        actualSelection
+                                withScheduleEvent   :(ScheduleEventDto *)actualScheduleEvent
+{
+    static NSString *_cellIdentifier = @"SixSlotsOneRoomTableCell";
+    UITableViewCell *_cell           = [actualTableView dequeueReusableCellWithIdentifier:_cellIdentifier];
+    
+    if (_cell == nil)
+    {
+        [[NSBundle mainBundle] loadNibNamed:@"SixSlotsOneRoomTableCell" owner:self options:nil];
+        _cell = _sixSlotsOneRoomTableCell;
+        self._sixSlotsOneRoomTableCell = nil;
+    }
+    
+    ScheduleEventRealizationDto *_localRealization1 = [actualScheduleEvent._scheduleEventRealizations objectAtIndex:0];
+    SlotDto *_timeSlot1 = [actualScheduleEvent._slots objectAtIndex:0];
+    SlotDto *_timeSlot2 = [actualScheduleEvent._slots objectAtIndex:1];
+    SlotDto *_timeSlot3 = [actualScheduleEvent._slots objectAtIndex:2];
+    SlotDto *_timeSlot4 = [actualScheduleEvent._slots objectAtIndex:3];
+    SlotDto *_timeSlot5 = [actualScheduleEvent._slots objectAtIndex:4];
+    SlotDto *_timeSlot6 = [actualScheduleEvent._slots objectAtIndex:5];
+    
+    [self setDateLabelWithCell:_cell withTag:1 withActualSelection:actualSelection withStartTime:_timeSlot1._startTime withEndTime:_timeSlot1._endTime];
+    [self setDateLabelWithCell:_cell withTag:2 withActualSelection:actualSelection withStartTime:_timeSlot2._startTime withEndTime:_timeSlot2._endTime];
+    [self setDateLabelWithCell:_cell withTag:3 withActualSelection:actualSelection withStartTime:_timeSlot3._startTime withEndTime:_timeSlot3._endTime];
+    [self setDateLabelWithCell:_cell withTag:4 withActualSelection:actualSelection withStartTime:_timeSlot4._startTime withEndTime:_timeSlot4._endTime];
+    [self setDateLabelWithCell:_cell withTag:5 withActualSelection:actualSelection withStartTime:_timeSlot5._startTime withEndTime:_timeSlot5._endTime];
+    [self setDateLabelWithCell:_cell withTag:6 withActualSelection:actualSelection withStartTime:_timeSlot6._startTime withEndTime:_timeSlot6._endTime];
+    
+    [self setLectureButtonWithCell:_cell withTag:7 withActualSelection:actualSelection withTitle:actualScheduleEvent._name doEnable:TRUE];
+    
+    [self setRoomButtonWithCell:_cell withTag:8 withActualSelection:actualSelection withTitle:_localRealization1._room._name withSelector:1];
+    
+    [self setDetailButtonWithCell:_cell withTag:9];
+    
+    [_cell           setBackgroundColor:[UIColor clearColor]];
+    return _cell;
+}
 
-- (UITableViewCell *)fourSlotsTwoRooms:(UITableView *)actualTableView:(NSUInteger)actualSelection:(ScheduleEventDto *)actualScheduleEvent
+
+
+- (UITableViewCell *)sixSlotsTwoRoomsWithView       :(UITableView *)     actualTableView
+                                withSelection       :(NSUInteger)        actualSelection
+                                withScheduleEvent   :(ScheduleEventDto *)actualScheduleEvent
+{
+    static NSString *_cellIdentifier = @"SixSlotsTwoRoomsTableCell";
+    UITableViewCell *_cell           = [actualTableView dequeueReusableCellWithIdentifier:_cellIdentifier];
+    
+    if (_cell == nil)
+    {
+        [[NSBundle mainBundle] loadNibNamed:@"SixSlotsTwoRoomsTableCell" owner:self options:nil];
+        _cell = _sixSlotsTwoRoomsTableCell;
+        self._sixSlotsTwoRoomsTableCell = nil;
+    }
+    
+    ScheduleEventRealizationDto *_localRealization1 = [actualScheduleEvent._scheduleEventRealizations objectAtIndex:0];
+    ScheduleEventRealizationDto *_localRealization2 = [actualScheduleEvent._scheduleEventRealizations objectAtIndex:1];
+
+    SlotDto *_timeSlot1 = [actualScheduleEvent._slots objectAtIndex:0];
+    SlotDto *_timeSlot2 = [actualScheduleEvent._slots objectAtIndex:1];
+    SlotDto *_timeSlot3 = [actualScheduleEvent._slots objectAtIndex:2];
+    SlotDto *_timeSlot4 = [actualScheduleEvent._slots objectAtIndex:3];
+    SlotDto *_timeSlot5 = [actualScheduleEvent._slots objectAtIndex:4];
+    SlotDto *_timeSlot6 = [actualScheduleEvent._slots objectAtIndex:5];
+    
+    [self setDateLabelWithCell:_cell withTag:1 withActualSelection:actualSelection withStartTime:_timeSlot1._startTime withEndTime:_timeSlot1._endTime];
+    [self setDateLabelWithCell:_cell withTag:2 withActualSelection:actualSelection withStartTime:_timeSlot2._startTime withEndTime:_timeSlot2._endTime];
+    [self setDateLabelWithCell:_cell withTag:3 withActualSelection:actualSelection withStartTime:_timeSlot3._startTime withEndTime:_timeSlot3._endTime];
+    [self setDateLabelWithCell:_cell withTag:4 withActualSelection:actualSelection withStartTime:_timeSlot4._startTime withEndTime:_timeSlot4._endTime];
+    [self setDateLabelWithCell:_cell withTag:5 withActualSelection:actualSelection withStartTime:_timeSlot5._startTime withEndTime:_timeSlot5._endTime];
+    [self setDateLabelWithCell:_cell withTag:6 withActualSelection:actualSelection withStartTime:_timeSlot6._startTime withEndTime:_timeSlot6._endTime];
+    
+    [self setLectureButtonWithCell:_cell withTag:7 withActualSelection:actualSelection withTitle:actualScheduleEvent._name doEnable:TRUE];
+    
+    [self setRoomButtonWithCell:_cell withTag:8 withActualSelection:actualSelection withTitle:_localRealization1._room._name withSelector:1];
+    [self setRoomButtonWithCell:_cell withTag:9 withActualSelection:actualSelection withTitle:_localRealization2._room._name withSelector:2];
+    
+    [self setDetailButtonWithCell:_cell withTag:10];
+    
+    [_cell           setBackgroundColor:[UIColor clearColor]];
+    return _cell;
+}
+
+
+- (UITableViewCell *)fourSlotsTwoRoomsWithView      :(UITableView *)     actualTableView
+                                withSelection       :(NSUInteger)        actualSelection
+                                withScheduleEvent   :(ScheduleEventDto *)actualScheduleEvent
 {
     static NSString *_cellIdentifier = @"FourSlotsTwoRoomsTableCell";
     UITableViewCell *_cell           = [actualTableView dequeueReusableCellWithIdentifier:_cellIdentifier];
@@ -2575,90 +2110,33 @@
         self._fourSlotsTwoRoomsTableCell = nil;
     }
     
-    UILabel          *_labelTimeSlot1 = (UILabel  *)[_cell viewWithTag:1];
-    UILabel          *_labelTimeSlot2 = (UILabel  *)[_cell viewWithTag:2];
-    UILabel          *_labelTimeSlot3 = (UILabel  *)[_cell viewWithTag:3];
-    UILabel          *_labelTimeSlot4 = (UILabel  *)[_cell viewWithTag:4];
-    UIButton         *_lectureButton  = (UIButton *)[_cell viewWithTag:5];  
-    UIButton         *_room1Button    = (UIButton *)[_cell viewWithTag:6];  
-    UIButton         *_room2Button    = (UIButton *)[_cell viewWithTag:7];  
-    UIButton         *_detailButton   = (UIButton *)[_cell viewWithTag:8];  // with arrow image, leading to detail page
-    
-    // initially always disable detail button
-    _detailButton.enabled  = FALSE;
-    _lectureButton.enabled = FALSE;
-    _room1Button.enabled   = FALSE;
-    _room2Button.enabled   = FALSE;
-    
-    // initialize values for buttons and labels
-    [_lectureButton setTitle:@"" forState:UIControlStateNormal];
-    [_room1Button   setTitle:@"" forState:UIControlStateNormal];
-    [_room2Button   setTitle:@"" forState:UIControlStateNormal];
-    
-    [_labelTimeSlot1 setBackgroundColor:[UIColor clearColor]];
-    [_labelTimeSlot2 setBackgroundColor:[UIColor clearColor]];
-    [_labelTimeSlot3 setBackgroundColor:[UIColor clearColor]];
-    [_labelTimeSlot4 setBackgroundColor:[UIColor clearColor]];
-    [_lectureButton  setBackgroundColor:[UIColor clearColor]];
-    [_room1Button    setBackgroundColor:[UIColor clearColor]];
-    [_room2Button    setBackgroundColor:[UIColor clearColor]];
-    [_cell           setBackgroundColor:[UIColor clearColor]];
-    
-    if ([self isActualDayAndTime:_actualDate withCellSelection:actualSelection]) 
-    {    
-        [_labelTimeSlot1 setBackgroundColor:[UIColor lightGrayColor]];
-        [_labelTimeSlot2 setBackgroundColor:[UIColor lightGrayColor]];
-        [_labelTimeSlot3 setBackgroundColor:[UIColor lightGrayColor]];
-        [_labelTimeSlot4 setBackgroundColor:[UIColor lightGrayColor]];
-        [_lectureButton  setBackgroundColor:[UIColor lightGrayColor]];
-        [_room1Button    setBackgroundColor:[UIColor lightGrayColor]];
-        [_room2Button    setBackgroundColor:[UIColor lightGrayColor]];
-    }
-    
+    ScheduleEventRealizationDto *_localRealization1 = [actualScheduleEvent._scheduleEventRealizations objectAtIndex:0];
+    ScheduleEventRealizationDto *_localRealization2 = [actualScheduleEvent._scheduleEventRealizations objectAtIndex:1];
     SlotDto *_timeSlot1 = [actualScheduleEvent._slots objectAtIndex:0];
     SlotDto *_timeSlot2 = [actualScheduleEvent._slots objectAtIndex:1];
     SlotDto *_timeSlot3 = [actualScheduleEvent._slots objectAtIndex:2];
     SlotDto *_timeSlot4 = [actualScheduleEvent._slots objectAtIndex:3];
     
-    _labelTimeSlot1.text = [NSString stringWithFormat:@"%@ - %@",  
-                            [[self timeFormatter] stringFromDate:_timeSlot1._startTime],  
-                            [[self timeFormatter] stringFromDate:_timeSlot1._endTime  ]
-                            ];  
-    _labelTimeSlot2.text = [NSString stringWithFormat:@"%@ - %@",  
-                            [[self timeFormatter] stringFromDate:_timeSlot2._startTime],  
-                            [[self timeFormatter] stringFromDate:_timeSlot2._endTime  ]
-                            ];  
-    _labelTimeSlot3.text = [NSString stringWithFormat:@"%@ - %@",  
-                            [[self timeFormatter] stringFromDate:_timeSlot3._startTime],  
-                            [[self timeFormatter] stringFromDate:_timeSlot3._endTime  ]
-                            ];  
-    _labelTimeSlot4.text = [NSString stringWithFormat:@"%@ - %@",  
-                            [[self timeFormatter] stringFromDate:_timeSlot4._startTime],  
-                            [[self timeFormatter] stringFromDate:_timeSlot4._endTime  ]
-                            ];     
+    [self setDateLabelWithCell:_cell withTag:1 withActualSelection:actualSelection withStartTime:_timeSlot1._startTime withEndTime:_timeSlot1._endTime];
+    [self setDateLabelWithCell:_cell withTag:2 withActualSelection:actualSelection withStartTime:_timeSlot2._startTime withEndTime:_timeSlot2._endTime];
+    [self setDateLabelWithCell:_cell withTag:3 withActualSelection:actualSelection withStartTime:_timeSlot3._startTime withEndTime:_timeSlot3._endTime];
+    [self setDateLabelWithCell:_cell withTag:4 withActualSelection:actualSelection withStartTime:_timeSlot4._startTime withEndTime:_timeSlot4._endTime];
     
-    ScheduleEventRealizationDto *_localRealization1 = [actualScheduleEvent._scheduleEventRealizations objectAtIndex:0];
-    ScheduleEventRealizationDto *_localRealization2 = [actualScheduleEvent._scheduleEventRealizations objectAtIndex:1];
+    [self setLectureButtonWithCell:_cell withTag:5 withActualSelection:actualSelection withTitle:actualScheduleEvent._name doEnable:TRUE];
     
-    [_room1Button   setTitle:_localRealization1._room._name  forState:UIControlStateNormal];
-    [_room2Button   setTitle:_localRealization2._room._name  forState:UIControlStateNormal];
-    [_lectureButton setTitle:actualScheduleEvent._name       forState:UIControlStateNormal];
+    [self setRoomButtonWithCell:_cell withTag:6 withActualSelection:actualSelection withTitle:_localRealization1._room._name withSelector:1];
+    [self setRoomButtonWithCell:_cell withTag:7 withActualSelection:actualSelection withTitle:_localRealization2._room._name withSelector:2];
+
+    [self setDetailButtonWithCell:_cell withTag:8];
     
-    _lectureButton.enabled  = TRUE;
-    _room1Button.enabled    = TRUE;    
-    _room2Button.enabled    = TRUE;    
-    _detailButton.enabled   = TRUE;
-    
-    [_room1Button   addTarget:self action:@selector(changeToRoomSchedule1   :event:) forControlEvents:UIControlEventTouchUpInside];
-    [_room2Button   addTarget:self action:@selector(changeToRoomSchedule2   :event:) forControlEvents:UIControlEventTouchUpInside];
-    [_lectureButton addTarget:self action:@selector(changeToCourseSchedule  :event:) forControlEvents:UIControlEventTouchUpInside];
-    [_detailButton  addTarget:self action:@selector(showScheduleDetails     :event:) forControlEvents:UIControlEventTouchUpInside];
-    
+    [_cell           setBackgroundColor:[UIColor clearColor]];
     return _cell;        
 }
 
 
-- (UITableViewCell *)threeSlotsThreeRooms:(UITableView *)actualTableView:(NSUInteger)actualSelection:(ScheduleEventDto *)actualScheduleEvent
+- (UITableViewCell *)threeSlotsThreeRoomsWithView       :(UITableView *)     actualTableView
+                           withSelection                :(NSUInteger)        actualSelection
+                           withScheduleEvent            :(ScheduleEventDto *)actualScheduleEvent
 {
     static NSString *_cellIdentifier = @"ThreeSlotsThreeRoomsTableCell";
     UITableViewCell *_cell           = [actualTableView dequeueReusableCellWithIdentifier:_cellIdentifier];
@@ -2670,92 +2148,34 @@
         self._threeSlotsThreeRoomsTableCell = nil;
     }
     
-    UILabel          *_labelTimeSlot1 = (UILabel  *)[_cell viewWithTag:1];
-    UILabel          *_labelTimeSlot2 = (UILabel  *)[_cell viewWithTag:2];
-    UILabel          *_labelTimeSlot3 = (UILabel  *)[_cell viewWithTag:3];
-    UIButton         *_lectureButton  = (UIButton *)[_cell viewWithTag:4];
-    UIButton         *_room1Button    = (UIButton *)[_cell viewWithTag:5];
-    UIButton         *_room2Button    = (UIButton *)[_cell viewWithTag:6];
-    UIButton         *_room3Button    = (UIButton *)[_cell viewWithTag:7];
-    UIButton         *_detailButton   = (UIButton *)[_cell viewWithTag:8]; 
-    
-    // initially always disable detail button
-    _detailButton.enabled  = FALSE;
-    _lectureButton.enabled = FALSE;
-    _room1Button.enabled   = FALSE;
-    _room2Button.enabled   = FALSE;
-    _room3Button.enabled   = FALSE;
-    
-    // initialize values for buttons and labels
-    [_lectureButton setTitle:@"" forState:UIControlStateNormal];
-    [_room1Button   setTitle:@"" forState:UIControlStateNormal];
-    [_room2Button   setTitle:@"" forState:UIControlStateNormal];
-    [_room3Button   setTitle:@"" forState:UIControlStateNormal];
-    
-    [_labelTimeSlot1 setBackgroundColor:[UIColor clearColor]];
-    [_labelTimeSlot2 setBackgroundColor:[UIColor clearColor]];
-    [_labelTimeSlot3 setBackgroundColor:[UIColor clearColor]];
-    [_lectureButton  setBackgroundColor:[UIColor clearColor]];
-    [_room1Button    setBackgroundColor:[UIColor clearColor]];
-    [_room2Button    setBackgroundColor:[UIColor clearColor]];
-    [_room3Button    setBackgroundColor:[UIColor clearColor]];
-    [_cell           setBackgroundColor:[UIColor clearColor]];
-    
-    if ([self isActualDayAndTime:_actualDate withCellSelection:actualSelection])
-    {
-        [_labelTimeSlot1 setBackgroundColor:[UIColor lightGrayColor]];
-        [_labelTimeSlot2 setBackgroundColor:[UIColor lightGrayColor]];
-        [_labelTimeSlot3 setBackgroundColor:[UIColor lightGrayColor]];
-        [_lectureButton  setBackgroundColor:[UIColor lightGrayColor]];
-        [_room1Button    setBackgroundColor:[UIColor lightGrayColor]];
-        [_room2Button    setBackgroundColor:[UIColor lightGrayColor]];
-        [_room3Button    setBackgroundColor:[UIColor lightGrayColor]];
-    }
-    
+    ScheduleEventRealizationDto *_localRealization1 = [actualScheduleEvent._scheduleEventRealizations objectAtIndex:0];
+    ScheduleEventRealizationDto *_localRealization2 = [actualScheduleEvent._scheduleEventRealizations objectAtIndex:1];
+    ScheduleEventRealizationDto *_localRealization3 = [actualScheduleEvent._scheduleEventRealizations objectAtIndex:2];
     SlotDto *_timeSlot1 = [actualScheduleEvent._slots objectAtIndex:0];
     SlotDto *_timeSlot2 = [actualScheduleEvent._slots objectAtIndex:1];
     SlotDto *_timeSlot3 = [actualScheduleEvent._slots objectAtIndex:2];
     
-    _labelTimeSlot1.text = [NSString stringWithFormat:@"%@ - %@",
-                            [[self timeFormatter] stringFromDate:_timeSlot1._startTime],
-                            [[self timeFormatter] stringFromDate:_timeSlot1._endTime  ]
-                            ];
-    _labelTimeSlot2.text = [NSString stringWithFormat:@"%@ - %@",
-                            [[self timeFormatter] stringFromDate:_timeSlot2._startTime],
-                            [[self timeFormatter] stringFromDate:_timeSlot2._endTime  ]
-                            ];
-    _labelTimeSlot3.text = [NSString stringWithFormat:@"%@ - %@",
-                            [[self timeFormatter] stringFromDate:_timeSlot3._startTime],
-                            [[self timeFormatter] stringFromDate:_timeSlot3._endTime  ]
-                            ];
+    [self setDateLabelWithCell:_cell withTag:1 withActualSelection:actualSelection withStartTime:_timeSlot1._startTime withEndTime:_timeSlot1._endTime];
+    [self setDateLabelWithCell:_cell withTag:2 withActualSelection:actualSelection withStartTime:_timeSlot2._startTime withEndTime:_timeSlot2._endTime];
+    [self setDateLabelWithCell:_cell withTag:3 withActualSelection:actualSelection withStartTime:_timeSlot3._startTime withEndTime:_timeSlot3._endTime];
     
-    ScheduleEventRealizationDto *_localRealization1 = [actualScheduleEvent._scheduleEventRealizations objectAtIndex:0];
-    ScheduleEventRealizationDto *_localRealization2 = [actualScheduleEvent._scheduleEventRealizations objectAtIndex:1];
-    ScheduleEventRealizationDto *_localRealization3 = [actualScheduleEvent._scheduleEventRealizations objectAtIndex:2];
+    [self setLectureButtonWithCell:_cell withTag:4 withActualSelection:actualSelection withTitle:actualScheduleEvent._name doEnable:TRUE];
+
+    [self setRoomButtonWithCell:_cell withTag:5 withActualSelection:actualSelection withTitle:_localRealization1._room._name withSelector:1];
+    [self setRoomButtonWithCell:_cell withTag:6 withActualSelection:actualSelection withTitle:_localRealization2._room._name withSelector:2];
+    [self setRoomButtonWithCell:_cell withTag:7 withActualSelection:actualSelection withTitle:_localRealization3._room._name withSelector:3];
     
-    [_room1Button   setTitle:_localRealization1._room._name  forState:UIControlStateNormal];
-    [_room2Button   setTitle:_localRealization2._room._name  forState:UIControlStateNormal];
-    [_room3Button   setTitle:_localRealization3._room._name  forState:UIControlStateNormal];
-    [_lectureButton setTitle:actualScheduleEvent._name       forState:UIControlStateNormal];
+    [self setDetailButtonWithCell:_cell withTag:8];
     
-    _lectureButton.enabled  = TRUE;
-    _room1Button.enabled    = TRUE;
-    _room2Button.enabled    = TRUE;
-    _room3Button.enabled    = TRUE;
-    _detailButton.enabled   = TRUE;
-    
-    [_room1Button   addTarget:self action:@selector(changeToRoomSchedule1   :event:) forControlEvents:UIControlEventTouchUpInside];
-    [_room2Button   addTarget:self action:@selector(changeToRoomSchedule2   :event:) forControlEvents:UIControlEventTouchUpInside];
-    [_room3Button   addTarget:self action:@selector(changeToRoomSchedule3   :event:) forControlEvents:UIControlEventTouchUpInside];
-    [_lectureButton addTarget:self action:@selector(changeToCourseSchedule  :event:) forControlEvents:UIControlEventTouchUpInside];
-    [_detailButton  addTarget:self action:@selector(showScheduleDetails     :event:) forControlEvents:UIControlEventTouchUpInside];
-    
+    [_cell           setBackgroundColor:[UIColor clearColor]];
     return _cell;
 }
 
 
 
-- (UITableViewCell *)fourSlotsThreeRooms:(UITableView *)actualTableView:(NSUInteger)actualSelection:(ScheduleEventDto *)actualScheduleEvent
+- (UITableViewCell *)fourSlotsThreeRoomsWithView      :(UITableView *)     actualTableView
+                                  withSelection       :(NSUInteger)        actualSelection
+                                  withScheduleEvent   :(ScheduleEventDto *)actualScheduleEvent
 {
     static NSString *_cellIdentifier = @"FourSlotsThreeRoomsTableCell";
     UITableViewCell *_cell           = [actualTableView dequeueReusableCellWithIdentifier:_cellIdentifier];
@@ -2767,99 +2187,35 @@
         self._fourSlotsThreeRoomsTableCell = nil;
     }
     
-    UILabel          *_labelTimeSlot1 = (UILabel  *)[_cell viewWithTag:1];
-    UILabel          *_labelTimeSlot2 = (UILabel  *)[_cell viewWithTag:2];
-    UILabel          *_labelTimeSlot3 = (UILabel  *)[_cell viewWithTag:3];
-    UILabel          *_labelTimeSlot4 = (UILabel  *)[_cell viewWithTag:4];
-    UIButton         *_lectureButton  = (UIButton *)[_cell viewWithTag:5];  
-    UIButton         *_room1Button    = (UIButton *)[_cell viewWithTag:6];  
-    UIButton         *_room2Button    = (UIButton *)[_cell viewWithTag:7];  
-    UIButton         *_room3Button    = (UIButton *)[_cell viewWithTag:8];  
-    UIButton         *_detailButton   = (UIButton *)[_cell viewWithTag:9];  // with arrow image, leading to detail page
-    
-    // initially always disable detail button
-    _detailButton.enabled  = FALSE;
-    _lectureButton.enabled = FALSE;
-    _room1Button.enabled   = FALSE;
-    _room2Button.enabled   = FALSE;
-    _room3Button.enabled   = FALSE;
-    
-    // initialize values for buttons and labels
-    [_lectureButton setTitle:@"" forState:UIControlStateNormal];
-    [_room1Button   setTitle:@"" forState:UIControlStateNormal];
-    [_room2Button   setTitle:@"" forState:UIControlStateNormal];
-    [_room3Button   setTitle:@"" forState:UIControlStateNormal];
-    
-    [_labelTimeSlot1 setBackgroundColor:[UIColor clearColor]];
-    [_labelTimeSlot2 setBackgroundColor:[UIColor clearColor]];
-    [_labelTimeSlot3 setBackgroundColor:[UIColor clearColor]];
-    [_labelTimeSlot4 setBackgroundColor:[UIColor clearColor]];
-    [_lectureButton  setBackgroundColor:[UIColor clearColor]];
-    [_room1Button    setBackgroundColor:[UIColor clearColor]];
-    [_room2Button    setBackgroundColor:[UIColor clearColor]];
-    [_room3Button    setBackgroundColor:[UIColor clearColor]];
-    [_cell           setBackgroundColor:[UIColor clearColor]];
-    
-    if ([self isActualDayAndTime:_actualDate withCellSelection:actualSelection]) 
-    {    
-        [_labelTimeSlot1 setBackgroundColor:[UIColor lightGrayColor]];
-        [_labelTimeSlot2 setBackgroundColor:[UIColor lightGrayColor]];
-        [_labelTimeSlot3 setBackgroundColor:[UIColor lightGrayColor]];
-        [_labelTimeSlot4 setBackgroundColor:[UIColor lightGrayColor]];
-        [_lectureButton  setBackgroundColor:[UIColor lightGrayColor]];
-        [_room1Button    setBackgroundColor:[UIColor lightGrayColor]];
-        [_room2Button    setBackgroundColor:[UIColor lightGrayColor]];
-        [_room3Button    setBackgroundColor:[UIColor lightGrayColor]];
-    }
-    
+    ScheduleEventRealizationDto *_localRealization1 = [actualScheduleEvent._scheduleEventRealizations objectAtIndex:0];
+    ScheduleEventRealizationDto *_localRealization2 = [actualScheduleEvent._scheduleEventRealizations objectAtIndex:1];
+    ScheduleEventRealizationDto *_localRealization3 = [actualScheduleEvent._scheduleEventRealizations objectAtIndex:2];
     SlotDto *_timeSlot1 = [actualScheduleEvent._slots objectAtIndex:0];
     SlotDto *_timeSlot2 = [actualScheduleEvent._slots objectAtIndex:1];
     SlotDto *_timeSlot3 = [actualScheduleEvent._slots objectAtIndex:2];
     SlotDto *_timeSlot4 = [actualScheduleEvent._slots objectAtIndex:3];
     
-    _labelTimeSlot1.text = [NSString stringWithFormat:@"%@ - %@",  
-                            [[self timeFormatter] stringFromDate:_timeSlot1._startTime],  
-                            [[self timeFormatter] stringFromDate:_timeSlot1._endTime  ]
-                            ];  
-    _labelTimeSlot2.text = [NSString stringWithFormat:@"%@ - %@",  
-                            [[self timeFormatter] stringFromDate:_timeSlot2._startTime],  
-                            [[self timeFormatter] stringFromDate:_timeSlot2._endTime  ]
-                            ];  
-    _labelTimeSlot3.text = [NSString stringWithFormat:@"%@ - %@",  
-                            [[self timeFormatter] stringFromDate:_timeSlot3._startTime],  
-                            [[self timeFormatter] stringFromDate:_timeSlot3._endTime  ]
-                            ];  
-    _labelTimeSlot4.text = [NSString stringWithFormat:@"%@ - %@",  
-                            [[self timeFormatter] stringFromDate:_timeSlot4._startTime],  
-                            [[self timeFormatter] stringFromDate:_timeSlot4._endTime  ]
-                            ];     
+    [self setDateLabelWithCell:_cell withTag:1 withActualSelection:actualSelection withStartTime:_timeSlot1._startTime withEndTime:_timeSlot1._endTime];
+    [self setDateLabelWithCell:_cell withTag:2 withActualSelection:actualSelection withStartTime:_timeSlot2._startTime withEndTime:_timeSlot2._endTime];
+    [self setDateLabelWithCell:_cell withTag:3 withActualSelection:actualSelection withStartTime:_timeSlot3._startTime withEndTime:_timeSlot3._endTime];
+    [self setDateLabelWithCell:_cell withTag:4 withActualSelection:actualSelection withStartTime:_timeSlot4._startTime withEndTime:_timeSlot4._endTime];
     
-    ScheduleEventRealizationDto *_localRealization1 = [actualScheduleEvent._scheduleEventRealizations objectAtIndex:0];
-    ScheduleEventRealizationDto *_localRealization2 = [actualScheduleEvent._scheduleEventRealizations objectAtIndex:1];
-    ScheduleEventRealizationDto *_localRealization3 = [actualScheduleEvent._scheduleEventRealizations objectAtIndex:2];
+    [self setLectureButtonWithCell:_cell withTag:5 withActualSelection:actualSelection withTitle:actualScheduleEvent._name doEnable:TRUE];
+
+    [self setRoomButtonWithCell:_cell withTag:6 withActualSelection:actualSelection withTitle:_localRealization1._room._name withSelector:1];
+    [self setRoomButtonWithCell:_cell withTag:7 withActualSelection:actualSelection withTitle:_localRealization2._room._name withSelector:2];
+    [self setRoomButtonWithCell:_cell withTag:8 withActualSelection:actualSelection withTitle:_localRealization3._room._name withSelector:3];
     
-    [_room1Button   setTitle:_localRealization1._room._name  forState:UIControlStateNormal];
-    [_room2Button   setTitle:_localRealization2._room._name  forState:UIControlStateNormal];
-    [_room3Button   setTitle:_localRealization3._room._name  forState:UIControlStateNormal];
-    [_lectureButton setTitle:actualScheduleEvent._name       forState:UIControlStateNormal];
+    [self setDetailButtonWithCell:_cell withTag:9];
     
-    _lectureButton.enabled  = TRUE;
-    _room1Button.enabled    = TRUE;    
-    _room2Button.enabled    = TRUE;    
-    _room3Button.enabled    = TRUE;    
-    _detailButton.enabled   = TRUE;
-    
-    [_room1Button   addTarget:self action:@selector(changeToRoomSchedule1   :event:) forControlEvents:UIControlEventTouchUpInside];
-    [_room2Button   addTarget:self action:@selector(changeToRoomSchedule2   :event:) forControlEvents:UIControlEventTouchUpInside];
-    [_room3Button   addTarget:self action:@selector(changeToRoomSchedule3   :event:) forControlEvents:UIControlEventTouchUpInside];
-    [_lectureButton addTarget:self action:@selector(changeToCourseSchedule  :event:) forControlEvents:UIControlEventTouchUpInside];
-    [_detailButton  addTarget:self action:@selector(showScheduleDetails     :event:) forControlEvents:UIControlEventTouchUpInside];
-    
+    [_cell           setBackgroundColor:[UIColor clearColor]];
     return _cell;        
 }
 
 
-- (UITableViewCell *)eightSlotsOneRoom:(UITableView *)actualTableView:(NSUInteger)actualSelection:(ScheduleEventDto *)actualScheduleEvent
+- (UITableViewCell *)eightSlotsOneRoomWithView      :(UITableView *)     actualTableView
+                                withSelection       :(NSUInteger)        actualSelection
+                                withScheduleEvent   :(ScheduleEventDto *)actualScheduleEvent
 {
     static NSString *_cellIdentifier = @"EightSlotsOneRoomTableCell";
     UITableViewCell *_cell           = [actualTableView dequeueReusableCellWithIdentifier:_cellIdentifier];
@@ -2871,55 +2227,7 @@
         self._eightSlotsOneRoomTableCell = nil;
     }
     
-    UILabel          *_labelTimeSlot1 = (UILabel  *)[_cell viewWithTag:1];
-    UILabel          *_labelTimeSlot2 = (UILabel  *)[_cell viewWithTag:2];
-    UILabel          *_labelTimeSlot3 = (UILabel  *)[_cell viewWithTag:3];
-    UILabel          *_labelTimeSlot4 = (UILabel  *)[_cell viewWithTag:4];
-    UILabel          *_labelTimeSlot5 = (UILabel  *)[_cell viewWithTag:5];
-    UILabel          *_labelTimeSlot6 = (UILabel  *)[_cell viewWithTag:6];
-    UILabel          *_labelTimeSlot7 = (UILabel  *)[_cell viewWithTag:7];
-    UILabel          *_labelTimeSlot8 = (UILabel  *)[_cell viewWithTag:8];
-
-    UIButton         *_lectureButton  = (UIButton *)[_cell viewWithTag:9];
-    UIButton         *_roomButton     = (UIButton *)[_cell viewWithTag:10];
-    UIButton         *_detailButton   = (UIButton *)[_cell viewWithTag:11];  // with arrow image, leading to detail page
-    
-    // initially always disable detail button
-    _detailButton.enabled  = FALSE;
-    _lectureButton.enabled = FALSE;
-    _roomButton.enabled    = FALSE;
-    
-    // initialize values for buttons and labels
-    [_lectureButton setTitle:@"" forState:UIControlStateNormal];
-    [_roomButton    setTitle:@"" forState:UIControlStateNormal];
-    
-    [_labelTimeSlot1 setBackgroundColor:[UIColor clearColor]];
-    [_labelTimeSlot2 setBackgroundColor:[UIColor clearColor]];
-    [_labelTimeSlot3 setBackgroundColor:[UIColor clearColor]];
-    [_labelTimeSlot4 setBackgroundColor:[UIColor clearColor]];
-    [_labelTimeSlot5 setBackgroundColor:[UIColor clearColor]];
-    [_labelTimeSlot6 setBackgroundColor:[UIColor clearColor]];
-    [_labelTimeSlot7 setBackgroundColor:[UIColor clearColor]];
-    [_labelTimeSlot8 setBackgroundColor:[UIColor clearColor]];
-
-    [_lectureButton  setBackgroundColor:[UIColor clearColor]];
-    [_roomButton     setBackgroundColor:[UIColor clearColor]];
-    [_cell           setBackgroundColor:[UIColor clearColor]];
-    
-    if ([self isActualDayAndTime:_actualDate withCellSelection:actualSelection])
-    {
-        [_labelTimeSlot1 setBackgroundColor:[UIColor lightGrayColor]];
-        [_labelTimeSlot2 setBackgroundColor:[UIColor lightGrayColor]];
-        [_labelTimeSlot3 setBackgroundColor:[UIColor lightGrayColor]];
-        [_labelTimeSlot4 setBackgroundColor:[UIColor lightGrayColor]];
-        [_labelTimeSlot5 setBackgroundColor:[UIColor lightGrayColor]];
-        [_labelTimeSlot6 setBackgroundColor:[UIColor lightGrayColor]];
-        [_labelTimeSlot7 setBackgroundColor:[UIColor lightGrayColor]];
-        [_labelTimeSlot8 setBackgroundColor:[UIColor lightGrayColor]];
-        [_lectureButton  setBackgroundColor:[UIColor lightGrayColor]];
-        [_roomButton     setBackgroundColor:[UIColor lightGrayColor]];
-    }
-    
+    ScheduleEventRealizationDto *_localRealization = [actualScheduleEvent._scheduleEventRealizations objectAtIndex:0];
     SlotDto *_timeSlot1 = [actualScheduleEvent._slots objectAtIndex:0];
     SlotDto *_timeSlot2 = [actualScheduleEvent._slots objectAtIndex:1];
     SlotDto *_timeSlot3 = [actualScheduleEvent._slots objectAtIndex:2];
@@ -2929,56 +2237,22 @@
     SlotDto *_timeSlot7 = [actualScheduleEvent._slots objectAtIndex:6];
     SlotDto *_timeSlot8 = [actualScheduleEvent._slots objectAtIndex:7];
     
-    _labelTimeSlot1.text = [NSString stringWithFormat:@"%@ - %@",
-                            [[self timeFormatter] stringFromDate:_timeSlot1._startTime],
-                            [[self timeFormatter] stringFromDate:_timeSlot1._endTime  ]
-                            ];
-    _labelTimeSlot2.text = [NSString stringWithFormat:@"%@ - %@",
-                            [[self timeFormatter] stringFromDate:_timeSlot2._startTime],
-                            [[self timeFormatter] stringFromDate:_timeSlot2._endTime  ]
-                            ];
-    _labelTimeSlot3.text = [NSString stringWithFormat:@"%@ - %@",
-                            [[self timeFormatter] stringFromDate:_timeSlot3._startTime],
-                            [[self timeFormatter] stringFromDate:_timeSlot3._endTime  ]
-                            ];
-    _labelTimeSlot4.text = [NSString stringWithFormat:@"%@ - %@",
-                            [[self timeFormatter] stringFromDate:_timeSlot4._startTime],
-                            [[self timeFormatter] stringFromDate:_timeSlot4._endTime  ]
-                            ];
+    [self setDateLabelWithCell:_cell withTag:1 withActualSelection:actualSelection withStartTime:_timeSlot1._startTime withEndTime:_timeSlot1._endTime];
+    [self setDateLabelWithCell:_cell withTag:2 withActualSelection:actualSelection withStartTime:_timeSlot2._startTime withEndTime:_timeSlot2._endTime];
+    [self setDateLabelWithCell:_cell withTag:3 withActualSelection:actualSelection withStartTime:_timeSlot3._startTime withEndTime:_timeSlot3._endTime];
+    [self setDateLabelWithCell:_cell withTag:4 withActualSelection:actualSelection withStartTime:_timeSlot4._startTime withEndTime:_timeSlot4._endTime];
+    [self setDateLabelWithCell:_cell withTag:5 withActualSelection:actualSelection withStartTime:_timeSlot5._startTime withEndTime:_timeSlot5._endTime];
+    [self setDateLabelWithCell:_cell withTag:6 withActualSelection:actualSelection withStartTime:_timeSlot6._startTime withEndTime:_timeSlot6._endTime];
+    [self setDateLabelWithCell:_cell withTag:7 withActualSelection:actualSelection withStartTime:_timeSlot7._startTime withEndTime:_timeSlot7._endTime];
+    [self setDateLabelWithCell:_cell withTag:8 withActualSelection:actualSelection withStartTime:_timeSlot8._startTime withEndTime:_timeSlot8._endTime];
     
-    _labelTimeSlot5.text = [NSString stringWithFormat:@"%@ - %@",
-                            [[self timeFormatter] stringFromDate:_timeSlot5._startTime],
-                            [[self timeFormatter] stringFromDate:_timeSlot5._endTime  ]
-                            ];
-
-    _labelTimeSlot6.text = [NSString stringWithFormat:@"%@ - %@",
-                            [[self timeFormatter] stringFromDate:_timeSlot6._startTime],
-                            [[self timeFormatter] stringFromDate:_timeSlot6._endTime  ]
-                            ];
-
-    _labelTimeSlot7.text = [NSString stringWithFormat:@"%@ - %@",
-                            [[self timeFormatter] stringFromDate:_timeSlot7._startTime],
-                            [[self timeFormatter] stringFromDate:_timeSlot7._endTime  ]
-                            ];
-
-    _labelTimeSlot8.text = [NSString stringWithFormat:@"%@ - %@",
-                            [[self timeFormatter] stringFromDate:_timeSlot8._startTime],
-                            [[self timeFormatter] stringFromDate:_timeSlot8._endTime  ]
-                            ];
+    [self setLectureButtonWithCell:_cell withTag:9 withActualSelection:actualSelection withTitle:actualScheduleEvent._name doEnable:TRUE];
     
-    ScheduleEventRealizationDto *_localRealization = [actualScheduleEvent._scheduleEventRealizations objectAtIndex:0];
+    [self setRoomButtonWithCell:_cell withTag:10 withActualSelection:actualSelection withTitle:_localRealization._room._name withSelector:1];
     
-    [_roomButton    setTitle:_localRealization._room._name  forState:UIControlStateNormal];
-    [_lectureButton setTitle:actualScheduleEvent._name      forState:UIControlStateNormal];
+    [self setDetailButtonWithCell:_cell withTag:11];
     
-    _lectureButton.enabled  = TRUE;
-    _roomButton.enabled     = TRUE;
-    _detailButton.enabled   = TRUE;
-    
-    [_roomButton    addTarget:self action:@selector(changeToRoomSchedule1   :event:) forControlEvents:UIControlEventTouchUpInside];
-    [_lectureButton addTarget:self action:@selector(changeToCourseSchedule  :event:) forControlEvents:UIControlEventTouchUpInside];
-    [_detailButton  addTarget:self action:@selector(showScheduleDetails     :event:) forControlEvents:UIControlEventTouchUpInside];
-    
+    [_cell           setBackgroundColor:[UIColor clearColor]];
     return _cell;
 }
 
@@ -3026,119 +2300,178 @@
                     return [self emptyCellOrHoliday:tableView:_cellSelection:_scheduleEvent];
                 }
                 
-                
                 // depending on how many rooms and time slots there are take cell
                 if (   [_scheduleEvent._slots                     count] == 0
                     && [_scheduleEvent._scheduleEventRealizations count] == 0)
                 {
+                    NSLog(@"slots and events are null => emptyCellOrHoliday is called");
                     return [self emptyCellOrHoliday:tableView:_cellSelection:_scheduleEvent];
                 }
                 if (   [_scheduleEvent._slots                     count] == 1
                     && [_scheduleEvent._scheduleEventRealizations count] == 1)
                 {
-                    return [self oneSlotOneRoom:tableView:_cellSelection:_scheduleEvent];
+                    return [self oneSlotOneRoomWithView :tableView
+                                      withSelection     :_cellSelection
+                                      withScheduleEvent :_scheduleEvent];
                 }
                 if (   [_scheduleEvent._slots                     count] == 1
                     && [_scheduleEvent._scheduleEventRealizations count] == 2
                     )
                 {
-                    return [self oneSlotTwoRooms:tableView:_cellSelection:_scheduleEvent];
+                    return [self oneSlotTwoRoomsWithView:tableView
+                                    withSelection       :_cellSelection
+                                    withScheduleEvent   :_scheduleEvent];
                 }
                 if (   [_scheduleEvent._slots                     count] == 2
                     && [_scheduleEvent._scheduleEventRealizations count] == 2
                     )
                 {
-                    return [self twoSlotsTwoRooms:tableView:_cellSelection:_scheduleEvent];
+                    return [self twoSlotsTwoRoomsWithView:tableView
+                                    withSelection       :_cellSelection
+                                    withScheduleEvent   :_scheduleEvent];
                 }
                 if (   [_scheduleEvent._slots                     count] == 1
                     && [_scheduleEvent._scheduleEventRealizations count] == 3
                     )
                 {
-                    return [self oneSlotThreeRooms:tableView:_cellSelection:_scheduleEvent];
+                    return [self oneSlotThreeRoomsWithView  :tableView
+                                    withSelection           :_cellSelection
+                                    withScheduleEvent       :_scheduleEvent];
                 }
                 if (   [_scheduleEvent._slots                     count] == 2
                     && [_scheduleEvent._scheduleEventRealizations count] == 1)
                 {
-                    return [self twoSlotsOneRoom:tableView:_cellSelection:_scheduleEvent];
+                    return [self twoSlotsOneRoomWithView:tableView
+                                       withSelection    :_cellSelection
+                                       withScheduleEvent:_scheduleEvent];
                 }
                 if (   [_scheduleEvent._slots                     count] == 3
                     && [_scheduleEvent._scheduleEventRealizations count] == 1)
                 {
-                    return [self threeSlotsOneRoom:tableView:_cellSelection:_scheduleEvent];
+                    return [self threeSlotsOneRoomWithView  :tableView
+                                        withSelection       :_cellSelection
+                                        withScheduleEvent   :_scheduleEvent];
                 }
                 if (   [_scheduleEvent._slots                     count] == 3
                     && [_scheduleEvent._scheduleEventRealizations count] == 2
                     )
                 {
-                    return [self threeSlotsTwoRooms:tableView:_cellSelection:_scheduleEvent];
+                    return [self threeSlotsTwoRoomsWithView     :tableView
+                                        withSelection           :_cellSelection
+                                        withScheduleEvent       :_scheduleEvent];
                 }
                 if (   [_scheduleEvent._slots                     count] == 3
                     && [_scheduleEvent._scheduleEventRealizations count] == 3
                     )
                 {
-                    return [self threeSlotsThreeRooms:tableView:_cellSelection:_scheduleEvent];
+                    return [self threeSlotsThreeRoomsWithView     :tableView
+                                          withSelection           :_cellSelection
+                                          withScheduleEvent       :_scheduleEvent];
                 }
                 if (   [_scheduleEvent._slots                     count] == 4
                     && [_scheduleEvent._scheduleEventRealizations count] == 1)
                 {
-                    return [self fourSlots:tableView:_cellSelection:_scheduleEvent];
+                    return [self fourSlotsOneRoomWithView   :tableView
+                                        withSelection       :_cellSelection
+                                        withScheduleEvent   :_scheduleEvent];
                 }
                 if (   [_scheduleEvent._slots                     count] == 1
                     && [_scheduleEvent._scheduleEventRealizations count] == 4)
                 {
-                    return [self oneSlotFourRooms:tableView:_cellSelection:_scheduleEvent];
+                    return [self oneSlotFourRoomsWithView   :tableView
+                                        withSelection       :_cellSelection
+                                        withScheduleEvent   :_scheduleEvent];
                 }
                 if (   [_scheduleEvent._slots                     count] == 4
                     && [_scheduleEvent._scheduleEventRealizations count] == 2
                    )
                 {
-                  return [self fourSlotsTwoRooms:tableView:_cellSelection:_scheduleEvent];
+                    return [self fourSlotsTwoRoomsWithView   :tableView
+                                         withSelection       :_cellSelection
+                                         withScheduleEvent   :_scheduleEvent];
                 }
                 if (   [_scheduleEvent._slots                     count] == 4
                     && [_scheduleEvent._scheduleEventRealizations count] == 3
                     )
                 {
-                    return [self fourSlotsThreeRooms:tableView:_cellSelection:_scheduleEvent];
+                    return [self fourSlotsThreeRoomsWithView   :tableView
+                                           withSelection       :_cellSelection
+                                           withScheduleEvent   :_scheduleEvent];
                 }
                 if (   [_scheduleEvent._slots                     count] == 1
                     && [_scheduleEvent._scheduleEventRealizations count] == 5)
                 {
-                    return [self oneSlotFiveRooms:tableView:_cellSelection:_scheduleEvent];
+                    return [self oneSlotFiveRoomsWithView   :tableView
+                                            withSelection   :_cellSelection
+                                           withScheduleEvent:_scheduleEvent];
                 }
                 if (   [_scheduleEvent._slots                     count] == 5
                     && [_scheduleEvent._scheduleEventRealizations count] == 1
                     )
                 {
-                    return [self fiveSlotsOneRoom:tableView:_cellSelection:_scheduleEvent];
+                    return [self fiveSlotsOneRoomWithView       :tableView
+                                            withSelection       :_cellSelection
+                                            withScheduleEvent   :_scheduleEvent];
+                }
+                if (   [_scheduleEvent._slots                     count] == 6
+                    && [_scheduleEvent._scheduleEventRealizations count] == 1
+                    )
+                {
+                    return [self sixSlotsOneRoomWithView       :tableView
+                                            withSelection       :_cellSelection
+                                            withScheduleEvent   :_scheduleEvent];
+                }
+                if (   [_scheduleEvent._slots                     count] == 6
+                    && [_scheduleEvent._scheduleEventRealizations count] == 2
+                    )
+                {
+                    return [self sixSlotsTwoRoomsWithView       :tableView
+                                            withSelection       :_cellSelection
+                                            withScheduleEvent   :_scheduleEvent];
                 }
                 if (   [_scheduleEvent._slots                     count] == 1
                     && [_scheduleEvent._scheduleEventRealizations count] == 6)
                 {
-                    return [self oneSlotSixRooms:tableView:_cellSelection:_scheduleEvent];
+                    return [self oneSlotSixRoomsWithView    :tableView
+                                        withSelection       :_cellSelection
+                                        withScheduleEvent   :_scheduleEvent];
+                }
+                if (   [_scheduleEvent._slots                     count] == 2
+                    && [_scheduleEvent._scheduleEventRealizations count] == 6)
+                {
+                    return [self twoSlotSixRoomsWithView    :tableView
+                                        withSelection       :_cellSelection
+                                        withScheduleEvent   :_scheduleEvent];
                 }
                 if (   [_scheduleEvent._slots                     count] == 1
                     && [_scheduleEvent._scheduleEventRealizations count] == 7)
                 {
-                    return [self oneSlotSevenRooms:tableView:_cellSelection:_scheduleEvent];
+                    return [self oneSlotSevenRoomsWithView  :tableView
+                                        withSelection       :_cellSelection
+                                        withScheduleEvent   :_scheduleEvent];
                 }
                 if (   [_scheduleEvent._slots                     count] == 1
                     && [_scheduleEvent._scheduleEventRealizations count] == 8)
                 {
-                    return [self oneSlotEightRooms:tableView:_cellSelection:_scheduleEvent];
+                    return [self oneSlotEightRoomsWithView  :tableView
+                                    withSelection           :_cellSelection
+                                    withScheduleEvent       :_scheduleEvent];
                 }
                 if (   [_scheduleEvent._slots                     count] == 8
                     && [_scheduleEvent._scheduleEventRealizations count] == 1)
                 {
-                    return [self eightSlotsOneRoom:tableView:_cellSelection:_scheduleEvent];
+                    return [self eightSlotsOneRoomWithView  :tableView
+                                    withSelection           :_cellSelection
+                                    withScheduleEvent       :_scheduleEvent];
                 }
             }
         }
     }
-    //NSLog(@" _scheduleEvent %@ _slot count %i realization count %i",
-    //      _scheduleEvent._name,
-    //      [_scheduleEvent._slots count],
-    //      [_scheduleEvent._scheduleEventRealizations count]
-    //      );
+    NSLog(@" _scheduleEvent %@ _slot count %i realization count %i",
+          _scheduleEvent._name,
+          [_scheduleEvent._slots count],
+          [_scheduleEvent._scheduleEventRealizations count]
+          );
     return [self emptyCellOrHoliday:tableView:_cellSelection:nil];
 }
 
@@ -3234,6 +2567,8 @@
             }
         }
     }
+    
+    NSLog(@"found no match for cell size slot count: %i event count: %i", [_scheduleEvent._slots count], [_scheduleEvent._scheduleEventRealizations count]);
     return 44;
 }
 
