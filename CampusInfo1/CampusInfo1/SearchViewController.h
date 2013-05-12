@@ -9,11 +9,22 @@
 #import <UIKit/UIKit.h>
 
 
-@interface SearchViewController : UIViewController {
+@interface SearchViewController : UIViewController<UIPickerViewDelegate,UIPickerViewDataSource> {
     
     IBOutlet UITextField *_searchTextField;
+
+    IBOutlet UIPickerView *_chooseSearchType;
+    NSArray               *_searchTypeArray;
+    NSString              *_searchType;
+    
 }
 
+@property (nonatomic, retain) IBOutlet UITextField *_searchTextField;
+@property (nonatomic, retain) IBOutlet UIPickerView *_chooseSearchType;
+@property (nonatomic, retain) NSString *_searchType;
+@property (strong, nonatomic) NSArray *_searchTypeArray;
+
+// Button to start searching
 - (IBAction)_startSearch:(id)sender;
 
 @end

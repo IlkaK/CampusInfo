@@ -11,13 +11,23 @@
 
 @implementation SearchViewController
 
-/*
+@synthesize _chooseSearchType;
+@synthesize _searchTextField;
+@synthesize _searchTypeArray;
+@synthesize _searchType;
+
+
 // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
 - (void)viewDidLoad
 {
-    [super viewDidLoad];
+    [super viewDidLoad];    
+    self._searchTypeArray = [[NSArray alloc] initWithObjects:
+                         @"Kurs", @"Dozent", @"Student",
+                         @"Raum", @"Klasse", nil];
+    _searchType = @"Dozent";
+    [_chooseSearchType selectRow:1 inComponent:0 animated:NO];
 }
-*/
+
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
@@ -38,6 +48,7 @@
 - (void)viewDidUnload
 {
     _searchTextField = nil;
+    _chooseSearchType = nil;
     [super viewDidUnload];
 
     // Release any retained subviews of the main view.
@@ -45,6 +56,45 @@
 }
 
 
-- (IBAction)_startSearch:(id)sender {
+
+// methods for Picker for types
+- (NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView
+{
+  // course, room, class, teacher, student
+    return 1;
 }
+
+- (NSInteger)pickerView: (UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component
+{
+    // course, room, class, teacher, student
+    return [_searchTypeArray count];
+}
+
+- (NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component
+{
+    return [self._searchTypeArray objectAtIndex:row];
+}
+
+-(void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row
+      inComponent:(NSInteger)component
+{
+    NSLog(@"%@",[_searchTypeArray objectAtIndex:row]);
+    _searchType = [_searchTypeArray objectAtIndex:row];
+}
+
+
+// handling the search button
+- (IBAction)_startSearch:(id)sender
+{
+    NSLog(@"search type: %@, search text: %@",_searchType, _searchTextField.text);
+   // [self setNewScheduleWithDate:_actualDate];
+    
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"SearchType" object:_searchType];
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"SearchText" object:_searchTextField.text];
+    
+    self.tabBarController.selectedIndex = 0;
+    [self dismissModalViewControllerAnimated:YES];
+}
+
+
 @end

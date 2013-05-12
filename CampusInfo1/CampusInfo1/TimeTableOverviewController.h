@@ -85,6 +85,9 @@ UIViewController
     
     IBOutlet UIButton         *_noConnectionButton;
     IBOutlet UILabel          *_noConnectionLabel;
+    
+    NSString                  *_searchText;
+    NSString                  *_searchType;
 }
 
 @property (nonatomic, retain) IBOutlet TimeTableDetailController *_detailsVC;
@@ -142,6 +145,10 @@ UIViewController
 @property (nonatomic, retain)          NSString                  *_actualShownAcronymString;
 @property (nonatomic, retain)          NSString                  *_actualShownAcronymType;
 @property (nonatomic, assign)          int                        _actualShownAcronymTrials;
+
+@property (nonatomic, retain)          NSString                  *_searchText;
+@property (nonatomic, retain)          NSString                  *_searchType;
+
 
 
 - (IBAction)enterAcronym:(id)sender;

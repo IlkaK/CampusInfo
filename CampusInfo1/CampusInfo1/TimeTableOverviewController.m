@@ -72,6 +72,9 @@
 @synthesize _noConnectionButton;
 @synthesize _noConnectionLabel;
 
+@synthesize _searchText;
+@synthesize _searchType;
+
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {   
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -194,7 +197,7 @@
             self._schedule = [[ScheduleDto alloc] initWithAcronym:_actualShownAcronymString:_actualShownAcronymType:newDate];
             _actualDayDto  = [self getDayDto];
             [_timeTable reloadData];
-            NSLog(@"done loading schedule!");
+            //NSLog(@"done loading schedule!");
         }
         
         // no connection at all
@@ -255,6 +258,33 @@
     return _localTranslation;
 }
 
+
+- (NSString *)getEnglishTypeTranslation:(NSString*)acronymType
+{
+    NSString *_localTranslation;
+    
+    if ([acronymType isEqualToString:@"Klasse"])
+    {
+        _localTranslation = @"classes";
+    }
+    if ([acronymType isEqualToString:@"Student"])
+    {
+        _localTranslation = @"students";
+    }
+    if ([acronymType isEqualToString:@"Raum"])
+    {
+        _localTranslation = @"rooms";
+    }
+    if ([acronymType isEqualToString:@"Dozent"])
+    {
+        _localTranslation = @"lecturers";
+    }
+    if ([acronymType isEqualToString:@"Kurs"])
+    {
+        _localTranslation = @"courses";
+    }
+    return _localTranslation;
+}
 
 
 - (void) dayBefore:(id)sender 
@@ -485,15 +515,21 @@
     [self setAcronymLabel:(NSString *)_acronym];
     
     
-    //NSLog(@"current acronym length: %i", [_storedAcronym length]);
+    // if coming from search tab
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(handleSearchType:)
+                                                 name:@"SearchType"
+                                               object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(handleSearchText:)
+                                                 name:@"SearchText"
+                                               object:nil];
+    //NSArray *_viewArray = [self.tabBarController viewControllers];
+    //UIViewController *_searchViewController = (UIViewController*) [_viewArray objectAtIndex:1];
+    //NSLog(@"%@ found something?",_searchViewController._searchType);
     
-    // go to acronym page to enforce setting an acronym
-    if (_ownStoredAcronymString == nil || [_ownStoredAcronymString length] == 0)
-    {   
-        //NSLog(@"viewDidLoad noch kein Kürzel für den Stundenplan");
-        //[self popUpAcronymView:@"Kürzel für den Stundenplan"];
-         [self presentModalViewController:_acronymVC animated:YES];
-    }
+    
+    //NSLog(@"current acronym length: %i", [_storedAcronym length]);
     
     if (_noConnectionButton == nil) {
 		_noConnectionButton = [[UIButton alloc] init];
@@ -503,7 +539,23 @@
     _noConnectionLabel.hidden = YES;
 }
 
+- (void)handleSearchType:(id)object {
+    //NSLog(@"%@ found something object?",object);
+    NSString *txt = [object object]; // gets string from within notification object
+    //NSLog(@"%@ found something text?",txt);
+    self._searchType = txt;
+}
 
+
+- (void)handleSearchText:(id)object {
+    //NSLog(@"%@ found something object?",object);
+    NSString *txt = [object object]; // gets string from within notification object
+    //NSLog(@"%@ found something text?",txt);
+    self._searchText = txt;
+    _acronymLabel.text  = [NSString stringWithFormat:@"von %@ (%@)",self._searchText, self._searchType];
+    
+    [self setNewScheduleWithAcronym:self._searchText withAcronymType:[self getEnglishTypeTranslation:self._searchType]];
+}
 
 
 // IMPORTANT, OTHERWISE DATA WILL NOT BE UPDATED, WHEN APP IS STARTED FIRST TIME
@@ -575,6 +627,16 @@
 -(void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
     [self becomeFirstResponder];
+    
+    // go to acronym page to enforce setting an acronym
+    if (_ownStoredAcronymString == nil || [_ownStoredAcronymString length] == 0)
+    {
+        NSLog(@"viewDidLoad noch kein Kürzel für den Stundenplan");
+        //[self popUpAcronymView:@"Kürzel für den Stundenplan"];
+        [self presentModalViewController:_acronymVC animated:YES];
+        NSLog(@"cannot load acronym view");
+    }
+    
 }
 
 // also needed for shaking
@@ -680,7 +742,7 @@
         
         //NSLog(@"schedule event name %@", _detailsVC._scheduleEvent._name);
         //NSLog(@"showScheduleDetails date   : %@",[[self dayFormatter] stringFromDate:_actualDate]);
-        NSLog(@"1 showScheduleDetails acronym: %@", self._actualShownAcronymString);
+        //NSLog(@"1 showScheduleDetails acronym: %@", self._actualShownAcronymString);
     
         _detailsVC._dayAndAcronymString = [NSString stringWithFormat:@" für den %@ von %@ (%@)"
                                            ,[[self dayFormatter] stringFromDate:_actualDate]
@@ -898,6 +960,7 @@
                     ScheduleEventRealizationDto *_localRealization = 
                     [_localScheduleEvent._scheduleEventRealizations objectAtIndex:0];    
                     
+                    //NSLog(@"room name 1: %@ room name 2: %@", _formerRealization._room._name, _localRealization._room._name);
                     if  ([_formerRealization._room._name compare: _localRealization._room._name] == NSOrderedSame)
                     {
                         NSMutableArray *_emptyArray = [[NSMutableArray alloc]init];
@@ -908,6 +971,8 @@
                 }
                 else 
                 {
+                    //NSLog(@"room count 1: %i room count 2: %i", [_localScheduleEvent._scheduleEventRealizations count], [formerScheduleEvent._scheduleEventRealizations count]);
+
                     NSMutableArray *_emptyArray = [[NSMutableArray alloc]init];
                     _goalScheduleEvent = [[ScheduleEventDto alloc]init:@"":fromTime:toTime:@"same":_emptyArray:@"same":_emptyArray];
                     _sameEventAgain    = YES;
@@ -967,7 +1032,7 @@
             NSString       *_fromHoliday = [[self timeFormatter] stringFromDate: _firstScheduleEvent._startTime];
             NSString       *_toHoliday   = [[self timeFormatter] stringFromDate: _firstScheduleEvent._endTime];
             
-            NSLog(@"(_fromHoliday) %@ = (_fromString) %@, (_toHoliday) %@ = (_toString) %@ _toString", _fromHoliday, _fromString, _toHoliday, _toString);
+            //NSLog(@"(_fromHoliday) %@ = (_fromString) %@, (_toHoliday) %@ = (_toString) %@ _toString", _fromHoliday, _fromString, _toHoliday, _toString);
             
             if ([_fromHoliday isEqualToString:_fromString] &&
                 [_toHoliday   isEqualToString:_toString])
@@ -1114,8 +1179,10 @@
                                                 withFromTime        :_fromTime
                                                 withToTime          :_toTime
                                                 withScheduleEvent   :_firstScheduleEvent];
+        //NSLog(@"next schedule event %@ at 18:50", _nextScheduleEvent._name);
         if ([_nextScheduleEvent._name compare: @"same"] != NSOrderedSame)
         {
+            //NSLog(@"add new event to 18:50");
             [_sortedEvents addObject:_nextScheduleEvent];
         }
         _firstScheduleEvent = _nextScheduleEvent;
@@ -2304,7 +2371,7 @@
                 if (   [_scheduleEvent._slots                     count] == 0
                     && [_scheduleEvent._scheduleEventRealizations count] == 0)
                 {
-                    NSLog(@"slots and events are null => emptyCellOrHoliday is called");
+                    //NSLog(@"slots and events are null => emptyCellOrHoliday is called");
                     return [self emptyCellOrHoliday:tableView:_cellSelection:_scheduleEvent];
                 }
                 if (   [_scheduleEvent._slots                     count] == 1
@@ -2425,6 +2492,7 @@
                     && [_scheduleEvent._scheduleEventRealizations count] == 2
                     )
                 {
+                    NSLog(@"6 slots and 2 rooms!");
                     return [self sixSlotsTwoRoomsWithView       :tableView
                                             withSelection       :_cellSelection
                                             withScheduleEvent   :_scheduleEvent];
@@ -2568,7 +2636,7 @@
         }
     }
     
-    NSLog(@"found no match for cell size slot count: %i event count: %i", [_scheduleEvent._slots count], [_scheduleEvent._scheduleEventRealizations count]);
+    //NSLog(@"found no match for cell size slot count: %i event count: %i", [_scheduleEvent._slots count], [_scheduleEvent._scheduleEventRealizations count]);
     return 44;
 }
 

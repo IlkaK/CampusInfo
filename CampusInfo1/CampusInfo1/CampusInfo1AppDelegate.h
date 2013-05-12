@@ -11,7 +11,7 @@
 
 @interface CampusInfo1AppDelegate : NSObject <UIApplicationDelegate, UITabBarControllerDelegate> 
 {
-
+    
 }
 
 @property (nonatomic, retain) IBOutlet UIWindow           *window;
