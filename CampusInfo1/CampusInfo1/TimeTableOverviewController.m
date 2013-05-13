@@ -335,31 +335,6 @@
 }
 
 
-/*
-- (void) popUpAcronymView:(NSString *)newMessage
-{
-    UIAlertView *_acronymAlertView = [[UIAlertView alloc] 
-                                      initWithTitle:@"Kürzeleingabe"
-                                      message:newMessage
-                                      delegate:self
-                                      cancelButtonTitle:@"OK"
-                                      otherButtonTitles:nil];
-    
-    UITextField *_acronymTextField = [[UITextField alloc] initWithFrame:CGRectMake(12.0, 45.0, 260.0, 25.0)];
-    _acronymTextField.placeholder=@"Bitte Kürzel eingeben:";
-    [_acronymTextField becomeFirstResponder];
-    [_acronymTextField setBackgroundColor:[UIColor whiteColor]];
-    _acronymTextField.autocorrectionType = UITextAutocorrectionTypeNo;
-    
-    _acronymTextField.textAlignment=UITextAlignmentCenter;
-    _acronymTextField.tag = 1001;
-    
-    [_acronymAlertView addSubview:_acronymTextField];        
-    [_acronymAlertView show];
-    [_acronymAlertView release];
-}
- */
-
 
 - (NSString *)getAcronymType:(NSString *)_newAcronym
 {
@@ -491,6 +466,30 @@
     [_dayNavigator setLeftBarButtonItem :_leftButton animated :true];
     [_dayNavigator setRightBarButtonItem:_rightButton animated:true];
     
+/*
+    
+    // recognise taps on navigation bar to hide
+    UITapGestureRecognizer *gestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(navSingleTap)];
+    [gestureRecognizer setNumberOfTapsRequired:1];
+    [gestureRecognizer setNumberOfTouchesRequired:1];
+    
+    [self.navigationController.navigationBar setUserInteractionEnabled:YES];
+    
+    // create a view which covers most of the tap bar to
+    // manage the gestures - if we use the navigation bar
+    // it interferes with the nav buttons
+    CGRect frame = CGRectMake(self.view.frame.size.width/4, 0, self.view.frame.size.width/2, 44);
+    UIView *navBarTapView = [[UIView alloc] initWithFrame:frame];
+    [self.navigationController.navigationBar addSubview:navBarTapView];
+    navBarTapView.backgroundColor = [UIColor clearColor];
+  
+    [navBarTapView setUserInteractionEnabled:YES];
+    [navBarTapView addGestureRecognizer:gestureRecognizer];
+    
+*/
+    
+    
+    
     // ----- DETAIL PAGE -----
     if (_detailsVC == nil) 
     {
@@ -510,10 +509,12 @@
     
     //----- USER DEFAULTS -----
     // get acronym from user defaults
-    NSUserDefaults *_acronymUserDefaults = [NSUserDefaults standardUserDefaults];
-    NSString       *_acronym             = [_acronymUserDefaults stringForKey:@"TimeTableAcronym"];
-    [self setAcronymLabel:(NSString *)_acronym];
+    //NSUserDefaults *_acronymUserDefaults = [NSUserDefaults standardUserDefaults];
+    //NSString       *_acronym             = [_acronymUserDefaults stringForKey:@"TimeTableAcronym"];
     
+    //NSLog(@"acronym: %@", _acronym);
+    
+    //[self setAcronymLabel:(NSString *)_acronym];
     
     // if coming from search tab
     [[NSNotificationCenter defaultCenter] addObserver:self
@@ -538,6 +539,13 @@
     _noConnectionButton.hidden = YES;
     _noConnectionLabel.hidden = YES;
 }
+
+/*
+-(void)navSingleTap{
+    NSLog(@"tab on navigation bar title");
+
+}
+*/
 
 - (void)handleSearchType:(id)object {
     //NSLog(@"%@ found something object?",object);
@@ -628,13 +636,24 @@
     [super viewDidAppear:animated];
     [self becomeFirstResponder];
     
+    NSUserDefaults *_acronymUserDefaults = [NSUserDefaults standardUserDefaults];
+    NSString       *_acronym             = [_acronymUserDefaults stringForKey:@"TimeTableAcronym"];
+    
     // go to acronym page to enforce setting an acronym
-    if (_ownStoredAcronymString == nil || [_ownStoredAcronymString length] == 0)
+    if (_acronym == nil || [_acronym length] == 0)
     {
         NSLog(@"viewDidLoad noch kein Kürzel für den Stundenplan");
         //[self popUpAcronymView:@"Kürzel für den Stundenplan"];
-        [self presentModalViewController:_acronymVC animated:YES];
+        
+        self.tabBarController.selectedIndex = 2;
+        [self dismissModalViewControllerAnimated:YES];
+        
+       // [self presentModalViewController:_acronymVC animated:YES];
         NSLog(@"cannot load acronym view");
+    }
+    else
+    {
+        [self setAcronymLabel:_acronym];
     }
     
 }
@@ -2492,7 +2511,7 @@
                     && [_scheduleEvent._scheduleEventRealizations count] == 2
                     )
                 {
-                    NSLog(@"6 slots and 2 rooms!");
+                    //NSLog(@"6 slots and 2 rooms!");
                     return [self sixSlotsTwoRoomsWithView       :tableView
                                             withSelection       :_cellSelection
                                             withScheduleEvent   :_scheduleEvent];

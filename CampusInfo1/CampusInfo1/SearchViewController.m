@@ -26,7 +26,15 @@
                          @"Raum", @"Klasse", nil];
     _searchType = @"Dozent";
     [_chooseSearchType selectRow:1 inComponent:0 animated:NO];
+    self._searchTextField.delegate = self;
 }
+
+
+- (BOOL)textFieldShouldReturn:(UITextField *)textField {
+    [textField resignFirstResponder];
+    return NO;
+}
+
 
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
@@ -78,7 +86,7 @@
 -(void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row
       inComponent:(NSInteger)component
 {
-    NSLog(@"%@",[_searchTypeArray objectAtIndex:row]);
+    //NSLog(@"%@",[_searchTypeArray objectAtIndex:row]);
     _searchType = [_searchTypeArray objectAtIndex:row];
 }
 
@@ -86,7 +94,7 @@
 // handling the search button
 - (IBAction)_startSearch:(id)sender
 {
-    NSLog(@"search type: %@, search text: %@",_searchType, _searchTextField.text);
+    //NSLog(@"search type: %@, search text: %@",_searchType, _searchTextField.text);
    // [self setNewScheduleWithDate:_actualDate];
     
     [[NSNotificationCenter defaultCenter] postNotificationName:@"SearchType" object:_searchType];

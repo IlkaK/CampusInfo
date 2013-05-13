@@ -73,6 +73,14 @@
      */
 }
 
+/*
+- (void)tabBarController:(UITabBarController *)tabBarController
+ didSelectViewController:(UIViewController *)viewController
+{
+    NSLog(@"controller class: %@", NSStringFromClass([viewController class]));
+    NSLog(@"controller title: %@", viewController.title);
+}
+ */
 
 /*
 // Optional UITabBarControllerDelegate method.

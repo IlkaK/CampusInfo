@@ -65,6 +65,8 @@
 		A3A551461525EB8B00BCAF3D /* SlotDto.m in Sources */ = {isa = PBXBuildFile; fileRef = A3A551451525EB8B00BCAF3D /* SlotDto.m */; };
 		A3A8654C1520A0C90074FFE5 /* TimeTableOverviewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A3A8654A1520A0C90074FFE5 /* TimeTableOverviewController.m */; };
 		A3A8654D1520A0C90074FFE5 /* TimeTableOverviewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A3A8654B1520A0C90074FFE5 /* TimeTableOverviewController.xib */; };
+		E1DA967C1740E41C00CA206F /* SettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E1DA967A1740E41C00CA206F /* SettingsViewController.m */; };
+		E1DA967D1740E41C00CA206F /* SettingsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E1DA967B1740E41C00CA206F /* SettingsViewController.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -146,6 +148,9 @@
 		A3A865491520A0C90074FFE5 /* TimeTableOverviewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TimeTableOverviewController.h; sourceTree = "<group>"; };
 		A3A8654A1520A0C90074FFE5 /* TimeTableOverviewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TimeTableOverviewController.m; sourceTree = "<group>"; };
 		A3A8654B1520A0C90074FFE5 /* TimeTableOverviewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TimeTableOverviewController.xib; sourceTree = "<group>"; };
+		E1DA96791740E41C00CA206F /* SettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingsViewController.h; sourceTree = "<group>"; };
+		E1DA967A1740E41C00CA206F /* SettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingsViewController.m; sourceTree = "<group>"; };
+		E1DA967B1740E41C00CA206F /* SettingsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SettingsViewController.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -244,6 +249,9 @@
 				27FBF7251551A83600C09ED9 /* StartpageViewController.h */,
 				27FBF7261551A83600C09ED9 /* StartpageViewController.m */,
 				27FBF7271551A83600C09ED9 /* StartpageViewController.xib */,
+				E1DA96791740E41C00CA206F /* SettingsViewController.h */,
+				E1DA967A1740E41C00CA206F /* SettingsViewController.m */,
+				E1DA967B1740E41C00CA206F /* SettingsViewController.xib */,
 			);
 			path = CampusInfo1;
 			sourceTree = "<group>";
@@ -413,6 +421,7 @@
 				275ACACD173D36C90091B266 /* SixSlotsTwoRoomsTableCell.xib in Resources */,
 				275ACACF173D3BB60091B266 /* SixSlotsOneRoomTableCell.xib in Resources */,
 				275ACAD1173D4AD20091B266 /* TwoSlotSixRoomsTableCell.xib in Resources */,
+				E1DA967D1740E41C00CA206F /* SettingsViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -441,6 +450,7 @@
 				27795E001558498300D0F350 /* ScheduleEventDto.m in Sources */,
 				27E8229E155D214A006EA12D /* ScheduleEventRealizationDto.m in Sources */,
 				277EDF79155D60DC002BCE1F /* ScheduleCourseDto.m in Sources */,
+				E1DA967C1740E41C00CA206F /* SettingsViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 
 
-@interface SearchViewController : UIViewController<UIPickerViewDelegate,UIPickerViewDataSource> {
+@interface SearchViewController : UIViewController<UIPickerViewDelegate,UIPickerViewDataSource,UITextFieldDelegate> {
     
     IBOutlet UITextField *_searchTextField;
 
