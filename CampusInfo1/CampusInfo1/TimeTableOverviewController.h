@@ -7,7 +7,6 @@
 //
 
 #import <UIKit/UIKit.h>
-#import <AcronymViewController.h>
 #import <TimeTableAsyncRequest.h>
 #import <TimeTableDetailController.h>
 #import <ChooseDateViewController.h>
@@ -19,14 +18,11 @@
 
 @interface TimeTableOverviewController : 
 UIViewController 
-<AcronymViewDelegate, TimeTableDetailViewDelegate, ChooseDateViewDelegate, UITableViewDataSource, UITableViewDelegate, UIAlertViewDelegate>
+<TimeTableDetailViewDelegate, ChooseDateViewDelegate, UITableViewDataSource, UITableViewDelegate, UIAlertViewDelegate>
 {
     
     // taking care of the whole view
     IBOutlet UIView           *timeTableView;
-    
-    // taking care of the button to acronym
-    AcronymViewController     *_acronymVC;
     
     // choose dates for navigator
     IBOutlet ChooseDateViewController *_chooseDateVC;
@@ -53,7 +49,7 @@ UIViewController
     
     // acronym for timetable
     IBOutlet UILabel          *_acronymLabel;
-    IBOutlet UILabel          *_ownStoredAcronymLabel;
+    IBOutlet UIButton         *_acronymButton;
     
     // taking care of the button to time table details    
     IBOutlet TimeTableDetailController *_detailsVC;
@@ -96,7 +92,6 @@ UIViewController
 }
 
 @property (nonatomic, retain) IBOutlet TimeTableDetailController *_detailsVC;
-@property (nonatomic, retain) IBOutlet AcronymViewController     *_acronymVC;
 @property (nonatomic, retain) IBOutlet ChooseDateViewController  *_chooseDateVC;
 
 @property (nonatomic, retain) IBOutlet UITableView               *_timeTable;
@@ -105,8 +100,7 @@ UIViewController
 @property (nonatomic, retain) IBOutlet UILabel                   *_dateLabel;
 
 @property (nonatomic, retain) IBOutlet UILabel                   *_acronymLabel;
-@property (nonatomic, retain) IBOutlet UILabel                   *_ownStoredAcronymLabel;
-
+@property (nonatomic, retain) IBOutlet UIButton                  *_acronymButton;
 
 @property (nonatomic, retain) IBOutlet UITableViewCell           *_oneSlotOneRoomTableCell;
 @property (nonatomic, retain) IBOutlet UITableViewCell           *_oneSlotTwoRoomsTableCell;
@@ -157,9 +151,6 @@ UIViewController
 @property (nonatomic, retain)          NSString                  *_searchText;
 @property (nonatomic, retain)          NSString                  *_searchType;
 
-
-
-- (IBAction)enterAcronym:(id)sender;
 
 - (IBAction)tryConnectionAgain:(id)sender;
 

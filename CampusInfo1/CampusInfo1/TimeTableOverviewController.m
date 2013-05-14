@@ -8,7 +8,6 @@
 
 #import "TimeTableOverviewController.h"
 #import "ChooseDateViewController.h"
-#import "AcronymViewController.h"
 #import "ScheduleDto.h"
 #import "TimeTableDetailController.h"
 #import "ScheduleEventDto.h"
@@ -25,15 +24,14 @@
 @synthesize _timeTable;
 @synthesize _actualDate;
 @synthesize _schedule;
-@synthesize _actualDayDto; 
-@synthesize _acronymVC;
+@synthesize _actualDayDto;
 @synthesize _dayNavigator;
 @synthesize _dateLabel;
 @synthesize _detailsVC;
 @synthesize _chooseDateVC;
 
-@synthesize _ownStoredAcronymLabel;
 @synthesize _acronymLabel;
+@synthesize _acronymButton;
 
 @synthesize _ownStoredAcronymString;
 @synthesize _ownStoredAcronymType;
@@ -113,8 +111,12 @@
 
 
 
--(void) setNewScheduleWithAcronym:(NSString *)newAcronym withAcronymType:(NSString *)newAcronymType
+-(void) setNewScheduleWithAcronym:(NSString *)newAcronym
+                withAcronymType  :(NSString *)newAcronymType
+                withAcronymText  :(NSString *)newAcronymText
 {
+    self._acronymLabel.text          = newAcronymText;
+    
     self._actualShownAcronymTrials = 1;
     self._actualShownAcronymString = newAcronym;
     self._actualShownAcronymType   = newAcronymType;
@@ -385,14 +387,24 @@
         [_acronymUserDefaults setObject:_ownStoredAcronymString forKey:@"TimeTableAcronym"];
         [_acronymUserDefaults synchronize];
        
-        _acronymLabel.text          = [NSString stringWithFormat:@"von %@ (%@)"            
+        _acronymLabel.text          = [NSString stringWithFormat:@"von %@ (%@)"
                                        ,_ownStoredAcronymString
                                        ,[self getGermanTypeTranslation:_ownStoredAcronymType]
                                       ];
-        _ownStoredAcronymLabel.text = [NSString stringWithFormat:@"eigenes Kürzel: %@",_ownStoredAcronymString];
+        
+        NSString *_acronymButtonTitle = [NSString stringWithFormat:@"Kürzel von:\n%@"
+                                         ,_ownStoredAcronymString];
+        
+        [_acronymButton setTitle:_acronymButtonTitle forState: UIControlStateNormal];
         
         // SET NEW ACRONYM WITH ACTUAL DATE
-        [self setNewScheduleWithAcronym:_ownStoredAcronymString withAcronymType:_ownStoredAcronymType];
+        [self setNewScheduleWithAcronym:_ownStoredAcronymString
+         withAcronymType:_ownStoredAcronymType
+         withAcronymText:[NSString stringWithFormat:@"von %@ (%@)"
+                                         ,_ownStoredAcronymString
+                                         ,[self getGermanTypeTranslation:_ownStoredAcronymType]
+                                         ]
+         ];
     
         //NSLog(@"setAcronymLabel new acronym %@",_ownStoredAcronymString);
     }    
@@ -424,12 +436,14 @@
 -(void) setNewAcronym:(NSString *)newAcronym withAcronymType:(NSString *)newAcronymType
 {
     //NSLog(@"setNewAcronym");
-    self._acronymLabel.text  = [NSString stringWithFormat:@"von %@ (%@)"
-                           ,newAcronym
-                           ,[self getGermanTypeTranslation:newAcronymType]
-                          ];
     // SET NEW ACRONYM WITH ACTUAL DATE
-    [self setNewScheduleWithAcronym:newAcronym withAcronymType:newAcronymType];
+    [self setNewScheduleWithAcronym:newAcronym
+                    withAcronymType:newAcronymType
+                    withAcronymText:[NSString stringWithFormat:@"von %@ (%@)"
+                                     ,newAcronym
+                                     ,[self getGermanTypeTranslation:newAcronymType]
+                                     ]
+     ];
     
 }
 
@@ -484,12 +498,13 @@
     _detailsVC.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
     
     // ----- ACRONYM -----
-    if (_acronymVC == nil) 
+    if (_acronymButton == nil)
     {
-		_acronymVC = [[AcronymViewController alloc] init];
+		_acronymButton = [[UIButton alloc] init];
 	}
-    _acronymVC._acronymViewDelegate = self;
-    _acronymVC.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
+    _acronymButton.titleLabel.lineBreakMode = NSLineBreakByWordWrapping;
+    _acronymButton.titleLabel.textAlignment = NSTextAlignmentCenter;
+    [_acronymButton addTarget:self action:@selector(backToOwnAcronym:)forControlEvents:UIControlEventTouchDown];
     
     
     // ------ CHOOSE DATE FREELY ----
@@ -560,9 +575,23 @@
     NSString *txt = [object object]; // gets string from within notification object
     //NSLog(@"%@ found something text?",txt);
     self._searchText = txt;
-    _acronymLabel.text  = [NSString stringWithFormat:@"von %@ (%@)",self._searchText, self._searchType];
     
-    [self setNewScheduleWithAcronym:self._searchText withAcronymType:[self getEnglishTypeTranslation:self._searchType]];
+    [self setNewScheduleWithAcronym:self._searchText
+                    withAcronymType:[self getEnglishTypeTranslation:self._searchType]
+                    withAcronymText:[NSString stringWithFormat:@"von %@ (%@)",self._searchText, self._searchType]
+     ];
+}
+
+
+-(void)backToOwnAcronym:(id)sender
+{
+    [self setNewScheduleWithAcronym:self._ownStoredAcronymString
+                    withAcronymType:self._ownStoredAcronymType
+                    withAcronymText:[NSString stringWithFormat:@"von %@ (%@)"
+                                     ,_ownStoredAcronymString
+                                     ,[self getGermanTypeTranslation:_ownStoredAcronymType]
+                                     ]
+     ];
 }
 
 
@@ -643,12 +672,11 @@
     if (_acronym == nil || [_acronym length] == 0)
     {
         NSLog(@"viewDidLoad noch kein Kürzel für den Stundenplan");
-        //[self popUpAcronymView:@"Kürzel für den Stundenplan"];
         
+        // switch to settings tab
         self.tabBarController.selectedIndex = 2;
         [self dismissModalViewControllerAnimated:YES];
         
-       // [self presentModalViewController:_acronymVC animated:YES];
         NSLog(@"cannot load acronym view");
     }
     else
@@ -681,9 +709,7 @@
 {
     _dayNavigator = nil;
     _acronymLabel = nil;
-    _acronymVC = nil;
     _detailsVC = nil;
-    
     
     _oneSlotOneRoomTableCell    = nil;
     _oneSlotTwoRoomsTableCell   = nil;
@@ -706,7 +732,6 @@
     
     _noConnectionButton = nil;
     _noConnectionLabel = nil;
-    _ownStoredAcronymLabel = nil;
 
     _eightSlotsOneRoomTableCell = nil;
     _oneSlotFourRoomsTableCell = nil;
@@ -720,6 +745,7 @@
     _twoSlotsSixRoomsTableCell = nil;
     _dateLabel = nil;
     _chooseDateVC = nil;
+    _acronymButton = nil;
     [super viewDidUnload];
 }
 
@@ -730,16 +756,6 @@
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
 }
 
-
-
-// ----- ACRONYM HANDLING -----
-- (IBAction)enterAcronym:(id)sender 
-{
-    [self presentModalViewController:_acronymVC animated:YES];
-}
-
-
-// ---------------------------
 
 
 
@@ -807,10 +823,12 @@
         _localRealization   = [_localScheduleEvent._scheduleEventRealizations objectAtIndex:realizationIndex];
         
         _roomString         = _localRealization._room._name;
-        _acronymLabel.text  = [NSString stringWithFormat:@"von %@ (Raum)",_roomString];
         
         // SET NEW ACRONYM WITH ACTUAL DATE
-        [self setNewScheduleWithAcronym:_roomString withAcronymType:@"rooms"];
+        [self setNewScheduleWithAcronym:_roomString
+                        withAcronymType:@"rooms"
+                        withAcronymText:[NSString stringWithFormat:@"von %@ (Raum)",_roomString]
+         ];
         //NSLog(@"new room schedule is set");
     }
 }
@@ -831,10 +849,11 @@
         _localScheduleEvent = [_actualDayDto._events objectAtIndex:_indexPath.section];
         
         _courseString       = _localScheduleEvent._name;
-        _acronymLabel.text  = [NSString stringWithFormat:@"von %@ (Kurs)",_courseString];
         
         // SET NEW ACRONYM WITH ACTUAL DATE
-        [self setNewScheduleWithAcronym:_courseString withAcronymType:@"courses"];
+        [self setNewScheduleWithAcronym:_courseString
+                        withAcronymType:@"courses"
+                        withAcronymText:[NSString stringWithFormat:@"von %@ (Kurs)",_courseString]];
     }
 }
 
