@@ -413,7 +413,6 @@
 
 
 
-
 - (void) setTitleToActualDate 
 {
     NSDateFormatter* df_local = [[NSDateFormatter alloc] init];
@@ -444,7 +443,6 @@
                                      ,[self getGermanTypeTranslation:newAcronymType]
                                      ]
      ];
-    
 }
 
 
@@ -516,17 +514,7 @@
     _chooseDateVC.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
     
     
-    
-    //----- USER DEFAULTS -----
-    // get acronym from user defaults
-    //NSUserDefaults *_acronymUserDefaults = [NSUserDefaults standardUserDefaults];
-    //NSString       *_acronym             = [_acronymUserDefaults stringForKey:@"TimeTableAcronym"];
-    
-    //NSLog(@"acronym: %@", _acronym);
-    
-    //[self setAcronymLabel:(NSString *)_acronym];
-    
-    // if coming from search tab
+    //----- SET ACRONYM WHEN COMING FROM SEARCH TAB -----
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(handleSearchType:)
                                                  name:@"SearchType"
@@ -535,13 +523,9 @@
                                              selector:@selector(handleSearchText:)
                                                  name:@"SearchText"
                                                object:nil];
-    //NSArray *_viewArray = [self.tabBarController viewControllers];
-    //UIViewController *_searchViewController = (UIViewController*) [_viewArray objectAtIndex:1];
-    //NSLog(@"%@ found something?",_searchViewController._searchType);
+
     
-    
-    //NSLog(@"current acronym length: %i", [_storedAcronym length]);
-    
+    // ------ INITIALIZE NO CONNECTION BUTTON ------
     if (_noConnectionButton == nil) {
 		_noConnectionButton = [[UIButton alloc] init];
         _noConnectionLabel = [[UILabel alloc] init];
@@ -627,7 +611,6 @@
             //NSLog(@"50 mal versucht mit diesem Kürzel.");
             _noConnectionButton.hidden = NO;
             _noConnectionLabel.hidden = NO;
-            //[self popUpAcronymView:@"Kein valides Kürzel."];
         }
     }
 }
@@ -653,6 +636,7 @@
        // NSLog(@"ok button is pushed: %@ %@", _textField.text, _acronymString);
     }
 }
+
 
 
 // needed for shaking
@@ -1355,6 +1339,20 @@
 }
 
 
+-(void)setButtonBackgroundColor:(UIButton *)oneButton
+                withDateToCheck:(NSDate *)dateToCheck
+            withActualSelection:(NSUInteger)actualSelection
+{
+    if ([self isActualDayAndTime:dateToCheck withCellSelection:actualSelection])
+    {
+        [oneButton setBackgroundColor:[UIColor lightGrayColor]];
+    }
+    else
+    {
+        [oneButton setBackgroundColor:[UIColor colorWithRed:0.0 green:0.0 blue:1.0 alpha:0.1]];
+    }
+}
+
 
 - (void) setLectureButtonWithCell:(UITableViewCell *)cell
         withTag            :(int)       indexTag
@@ -1372,10 +1370,7 @@
     [_lectureButton setAttributedTitle:_titleString forState:UIControlStateNormal];
     [_lectureButton setBackgroundColor:[UIColor clearColor]];
     
-    if ([self isActualDayAndTime:_actualDate withCellSelection:actualSelection])
-    {
-        [_lectureButton setBackgroundColor:[UIColor lightGrayColor]];
-    }
+    [self setButtonBackgroundColor:_lectureButton withDateToCheck:_actualDate withActualSelection:actualSelection];
     
     _lectureButton.enabled = enable;
     
@@ -1397,10 +1392,7 @@
     [_roomButton    setTitle:@"" forState:UIControlStateNormal];
     [_roomButton    setBackgroundColor:[UIColor clearColor]];
     
-    if ([self isActualDayAndTime:_actualDate withCellSelection:actualSelection])
-    {
-        [_roomButton setBackgroundColor:[UIColor lightGrayColor]];
-    }
+    [self setButtonBackgroundColor:_roomButton withDateToCheck:_actualDate withActualSelection:actualSelection];
     
     _roomButton.enabled     = TRUE;
     
@@ -1446,14 +1438,18 @@
 
 - (void) setDetailButtonWithCell:(UITableViewCell *)cell
               withTag            :(int)       indexTag
+             withActualSelection:(NSUInteger)actualSelection
 {
     UIButton  *_detailButton  = (UIButton *)[cell viewWithTag:indexTag];  // with arrow image, leading to detail page
     
     _detailButton.enabled   = TRUE;
     _detailButton.hidden    = NO;
     
+    [self setButtonBackgroundColor:_detailButton withDateToCheck:_actualDate withActualSelection:actualSelection];
+    
     [_detailButton  addTarget:self action:@selector(showScheduleDetails     :event:) forControlEvents:UIControlEventTouchUpInside];
 }
+
 
 
 - (void) setDateLabelWithCell:(UITableViewCell *)cell
@@ -1565,7 +1561,7 @@
     
     [self setRoomButtonWithCell:_cell withTag:3 withActualSelection:actualSelection withTitle:_localRealization._room._name withSelector:1];    
 
-    [self setDetailButtonWithCell:_cell withTag:4];
+    [self setDetailButtonWithCell:_cell withTag:4 withActualSelection:actualSelection];
 
     // initialize values for buttons and labels
     [_cell          setBackgroundColor:[UIColor clearColor]];
@@ -1600,7 +1596,7 @@
     
     [self setRoomButtonWithCell:_cell withTag:4 withActualSelection:actualSelection withTitle:_localRealization._room._name withSelector:1];
     
-    [self setDetailButtonWithCell:_cell withTag:5];
+    [self setDetailButtonWithCell:_cell withTag:5 withActualSelection:actualSelection];
     
     [_cell           setBackgroundColor:[UIColor clearColor]];
 
@@ -1635,7 +1631,7 @@
     
     [self setRoomButtonWithCell:_cell withTag:5 withActualSelection:actualSelection withTitle:_localRealization._room._name withSelector:1];
     
-    [self setDetailButtonWithCell:_cell withTag:6];
+    [self setDetailButtonWithCell:_cell withTag:6 withActualSelection:actualSelection];
     
     [_cell           setBackgroundColor:[UIColor clearColor]];
     return _cell;        
@@ -1668,7 +1664,7 @@
 
     [self setRoomButtonWithCell:_cell withTag:4 withActualSelection:actualSelection withTitle:_localRealization2._room._name withSelector:2];
     
-    [self setDetailButtonWithCell:_cell withTag:5];
+    [self setDetailButtonWithCell:_cell withTag:5 withActualSelection:actualSelection];
     
     [_cell           setBackgroundColor:[UIColor clearColor]];
     return _cell;
@@ -1703,7 +1699,7 @@
     
     [self setRoomButtonWithCell:_cell withTag:5 withActualSelection:actualSelection withTitle:_localRealization2._room._name withSelector:2];
     
-    [self setDetailButtonWithCell:_cell withTag:6];
+    [self setDetailButtonWithCell:_cell withTag:6 withActualSelection:actualSelection];
     
     [_cell           setBackgroundColor:[UIColor clearColor]];
     return _cell;        
@@ -1739,7 +1735,7 @@
     [self setRoomButtonWithCell:_cell withTag:4 withActualSelection:actualSelection withTitle:_localRealization2._room._name withSelector:2];
     [self setRoomButtonWithCell:_cell withTag:5 withActualSelection:actualSelection withTitle:_localRealization3._room._name withSelector:3];
     
-    [self setDetailButtonWithCell:_cell withTag:6];
+    [self setDetailButtonWithCell:_cell withTag:6 withActualSelection:actualSelection];
 
     [_cell           setBackgroundColor:[UIColor clearColor]];
     return _cell;        
@@ -1776,7 +1772,7 @@
     [self setRoomButtonWithCell:_cell withTag:5 withActualSelection:actualSelection withTitle:_localRealization3._room._name withSelector:3];
     [self setRoomButtonWithCell:_cell withTag:6 withActualSelection:actualSelection withTitle:_localRealization4._room._name withSelector:4];
     
-    [self setDetailButtonWithCell:_cell withTag:7];
+    [self setDetailButtonWithCell:_cell withTag:7 withActualSelection:actualSelection];
     
     [_cell           setBackgroundColor:[UIColor clearColor]];
     return _cell;
@@ -1817,7 +1813,7 @@
     [self setRoomButtonWithCell:_cell withTag:6 withActualSelection:actualSelection withTitle:_localRealization4._room._name withSelector:4];
     [self setRoomButtonWithCell:_cell withTag:7 withActualSelection:actualSelection withTitle:_localRealization5._room._name withSelector:5];
     
-    [self setDetailButtonWithCell:_cell withTag:8];
+    [self setDetailButtonWithCell:_cell withTag:8 withActualSelection:actualSelection];
     
     [_cell           setBackgroundColor:[UIColor clearColor]];
     return _cell;
@@ -1858,7 +1854,7 @@
     [self setRoomButtonWithCell:_cell withTag:7 withActualSelection:actualSelection withTitle:_localRealization5._room._name withSelector:5];
     [self setRoomButtonWithCell:_cell withTag:8 withActualSelection:actualSelection withTitle:_localRealization6._room._name withSelector:6];
     
-    [self setDetailButtonWithCell:_cell withTag:9];
+    [self setDetailButtonWithCell:_cell withTag:9 withActualSelection:actualSelection];
     
     [_cell           setBackgroundColor:[UIColor clearColor]];
     return _cell;        
@@ -1900,7 +1896,7 @@
     [self setRoomButtonWithCell:_cell withTag:8 withActualSelection:actualSelection withTitle:_localRealization5._room._name withSelector:5];
     [self setRoomButtonWithCell:_cell withTag:9 withActualSelection:actualSelection withTitle:_localRealization6._room._name withSelector:6];
     
-    [self setDetailButtonWithCell:_cell withTag:10];
+    [self setDetailButtonWithCell:_cell withTag:10 withActualSelection:actualSelection];
     
     [_cell           setBackgroundColor:[UIColor clearColor]];
     return _cell;
@@ -1943,7 +1939,7 @@
     [self setRoomButtonWithCell:_cell withTag:8 withActualSelection:actualSelection withTitle:_localRealization6._room._name withSelector:6];
     [self setRoomButtonWithCell:_cell withTag:9 withActualSelection:actualSelection withTitle:_localRealization7._room._name withSelector:7];
     
-    [self setDetailButtonWithCell:_cell withTag:10];
+    [self setDetailButtonWithCell:_cell withTag:10 withActualSelection:actualSelection];
     
     [_cell           setBackgroundColor:[UIColor clearColor]];
     return _cell;
@@ -1988,7 +1984,7 @@
     [self setRoomButtonWithCell:_cell withTag:9 withActualSelection:actualSelection withTitle:_localRealization7._room._name withSelector:7];
     [self setRoomButtonWithCell:_cell withTag:10 withActualSelection:actualSelection withTitle:_localRealization8._room._name withSelector:8];
     
-    [self setDetailButtonWithCell:_cell withTag:11];
+    [self setDetailButtonWithCell:_cell withTag:11 withActualSelection:actualSelection];
         
     [_cell           setBackgroundColor:[UIColor clearColor]];
     return _cell;        
@@ -2023,7 +2019,7 @@
     [self setRoomButtonWithCell:_cell withTag:5 withActualSelection:actualSelection withTitle:_localRealization1._room._name withSelector:1];
     [self setRoomButtonWithCell:_cell withTag:6 withActualSelection:actualSelection withTitle:_localRealization2._room._name withSelector:2];
     
-    [self setDetailButtonWithCell:_cell withTag:7];
+    [self setDetailButtonWithCell:_cell withTag:7 withActualSelection:actualSelection];
         
     [_cell           setBackgroundColor:[UIColor clearColor]];
     return _cell;
@@ -2068,7 +2064,7 @@
     
     [self setRoomButtonWithCell:_cell withTag:6 withActualSelection:actualSelection withTitle:_localRealization._room._name withSelector:1];
     
-    [self setDetailButtonWithCell:_cell withTag:7];
+    [self setDetailButtonWithCell:_cell withTag:7 withActualSelection:actualSelection];
     
     [_cell           setBackgroundColor:[UIColor clearColor]];
     return _cell;        
@@ -2107,7 +2103,7 @@
     
     [self setRoomButtonWithCell:_cell withTag:7 withActualSelection:actualSelection withTitle:_localRealization._room._name withSelector:1];
     
-    [self setDetailButtonWithCell:_cell withTag:8];
+    [self setDetailButtonWithCell:_cell withTag:8 withActualSelection:actualSelection];
     
     [_cell           setBackgroundColor:[UIColor clearColor]]; 
     return _cell;        
@@ -2147,7 +2143,7 @@
     
     [self setRoomButtonWithCell:_cell withTag:8 withActualSelection:actualSelection withTitle:_localRealization1._room._name withSelector:1];
     
-    [self setDetailButtonWithCell:_cell withTag:9];
+    [self setDetailButtonWithCell:_cell withTag:9 withActualSelection:actualSelection];
     
     [_cell           setBackgroundColor:[UIColor clearColor]];
     return _cell;
@@ -2191,7 +2187,7 @@
     [self setRoomButtonWithCell:_cell withTag:8 withActualSelection:actualSelection withTitle:_localRealization1._room._name withSelector:1];
     [self setRoomButtonWithCell:_cell withTag:9 withActualSelection:actualSelection withTitle:_localRealization2._room._name withSelector:2];
     
-    [self setDetailButtonWithCell:_cell withTag:10];
+    [self setDetailButtonWithCell:_cell withTag:10 withActualSelection:actualSelection];
     
     [_cell           setBackgroundColor:[UIColor clearColor]];
     return _cell;
@@ -2229,7 +2225,7 @@
     [self setRoomButtonWithCell:_cell withTag:6 withActualSelection:actualSelection withTitle:_localRealization1._room._name withSelector:1];
     [self setRoomButtonWithCell:_cell withTag:7 withActualSelection:actualSelection withTitle:_localRealization2._room._name withSelector:2];
 
-    [self setDetailButtonWithCell:_cell withTag:8];
+    [self setDetailButtonWithCell:_cell withTag:8 withActualSelection:actualSelection];
     
     [_cell           setBackgroundColor:[UIColor clearColor]];
     return _cell;        
@@ -2267,7 +2263,7 @@
     [self setRoomButtonWithCell:_cell withTag:6 withActualSelection:actualSelection withTitle:_localRealization2._room._name withSelector:2];
     [self setRoomButtonWithCell:_cell withTag:7 withActualSelection:actualSelection withTitle:_localRealization3._room._name withSelector:3];
     
-    [self setDetailButtonWithCell:_cell withTag:8];
+    [self setDetailButtonWithCell:_cell withTag:8 withActualSelection:actualSelection];
     
     [_cell           setBackgroundColor:[UIColor clearColor]];
     return _cell;
@@ -2308,7 +2304,7 @@
     [self setRoomButtonWithCell:_cell withTag:7 withActualSelection:actualSelection withTitle:_localRealization2._room._name withSelector:2];
     [self setRoomButtonWithCell:_cell withTag:8 withActualSelection:actualSelection withTitle:_localRealization3._room._name withSelector:3];
     
-    [self setDetailButtonWithCell:_cell withTag:9];
+    [self setDetailButtonWithCell:_cell withTag:9 withActualSelection:actualSelection];
     
     [_cell           setBackgroundColor:[UIColor clearColor]];
     return _cell;        
@@ -2352,7 +2348,7 @@
     
     [self setRoomButtonWithCell:_cell withTag:10 withActualSelection:actualSelection withTitle:_localRealization._room._name withSelector:1];
     
-    [self setDetailButtonWithCell:_cell withTag:11];
+    [self setDetailButtonWithCell:_cell withTag:11 withActualSelection:actualSelection];
     
     [_cell           setBackgroundColor:[UIColor clearColor]];
     return _cell;
