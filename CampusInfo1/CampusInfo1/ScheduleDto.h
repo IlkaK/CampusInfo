@@ -63,7 +63,7 @@
    :(NSString *)newAcronymType
    :(NSDate   *)newScheduleDate;
 
--(void):loadScheduleWithAcronym
+-(void)loadScheduleWithAcronym
     :(NSString *)newAcronymString
     :(NSString *)newAcronymType
     :(NSDate   *)newScheduleDate;

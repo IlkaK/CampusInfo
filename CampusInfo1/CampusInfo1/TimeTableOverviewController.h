@@ -10,6 +10,7 @@
 #import <AcronymViewController.h>
 #import <TimeTableAsyncRequest.h>
 #import <TimeTableDetailController.h>
+#import <ChooseDateViewController.h>
 
 @class ScheduleDto;
 @class DayDto;
@@ -18,7 +19,7 @@
 
 @interface TimeTableOverviewController : 
 UIViewController 
-<AcronymViewDelegate, TimeTableDetailViewDelegate, UITableViewDataSource, UITableViewDelegate, UIAlertViewDelegate>
+<AcronymViewDelegate, TimeTableDetailViewDelegate, ChooseDateViewDelegate, UITableViewDataSource, UITableViewDelegate, UIAlertViewDelegate>
 {
     
     // taking care of the whole view
@@ -26,6 +27,9 @@ UIViewController
     
     // taking care of the button to acronym
     AcronymViewController     *_acronymVC;
+    
+    // choose dates for navigator
+    IBOutlet ChooseDateViewController *_chooseDateVC;
     
     // setting the table with timetable data
     IBOutlet UITableView      *_timeTable;
@@ -45,6 +49,7 @@ UIViewController
     
     // setting the navigation bar
     IBOutlet UINavigationItem *_dayNavigator;
+    IBOutlet UILabel          *_dateLabel;
     
     // acronym for timetable
     IBOutlet UILabel          *_acronymLabel;
@@ -92,10 +97,13 @@ UIViewController
 
 @property (nonatomic, retain) IBOutlet TimeTableDetailController *_detailsVC;
 @property (nonatomic, retain) IBOutlet AcronymViewController     *_acronymVC;
+@property (nonatomic, retain) IBOutlet ChooseDateViewController  *_chooseDateVC;
 
 @property (nonatomic, retain) IBOutlet UITableView               *_timeTable;
 
 @property (nonatomic, retain) IBOutlet UINavigationItem          *_dayNavigator;
+@property (nonatomic, retain) IBOutlet UILabel                   *_dateLabel;
+
 @property (nonatomic, retain) IBOutlet UILabel                   *_acronymLabel;
 @property (nonatomic, retain) IBOutlet UILabel                   *_ownStoredAcronymLabel;
 

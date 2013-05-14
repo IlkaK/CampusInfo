@@ -7,6 +7,7 @@
 //
 
 #import "TimeTableOverviewController.h"
+#import "ChooseDateViewController.h"
 #import "AcronymViewController.h"
 #import "ScheduleDto.h"
 #import "TimeTableDetailController.h"
@@ -27,7 +28,9 @@
 @synthesize _actualDayDto; 
 @synthesize _acronymVC;
 @synthesize _dayNavigator;
+@synthesize _dateLabel;
 @synthesize _detailsVC;
+@synthesize _chooseDateVC;
 
 @synthesize _ownStoredAcronymLabel;
 @synthesize _acronymLabel;
@@ -120,7 +123,7 @@
     self._actualDayDto             = [self getDayDto];
 
     
-    NSLog(@"2 showScheduleDetails acronym: %@", self._actualShownAcronymString);
+    //NSLog(@"2 showScheduleDetails acronym: %@", self._actualShownAcronymString);
     _detailsVC._dayAndAcronymString = [NSString stringWithFormat:@" für den %@ von %@ (%@)"
                                        ,[[self dayFormatter] stringFromDate:_actualDate]
                                        ,newAcronym //self._actualShownAcronymString
@@ -287,6 +290,30 @@
 }
 
 
+
+- (void)setActualDate:(NSDate *)newDate
+{
+    self._actualDate      = newDate;
+    [self setNewScheduleWithDate:newDate];
+    [self setDateInNavigatorWithActualDate:_actualDate];
+    _actualDayDto        = [self getDayDto];
+    [_timeTable reloadData];
+}
+
+
+
+- (void) setDateInNavigatorWithActualDate:(NSDate *)showDate
+{
+    NSString *_dateString = [NSString stringWithFormat:@"%@, %@"
+                             ,[[self weekDayFormatter] stringFromDate:showDate]
+                             ,[[self dayFormatter]     stringFromDate:showDate]];
+    
+    [_dateLabel setTextColor:[UIColor whiteColor]];
+    _dateLabel.text = _dateString;
+    _dayNavigator.title = @"";
+}
+
+
 - (void) dayBefore:(id)sender 
 {
     int daysToAdd = -1;  
@@ -298,40 +325,15 @@
     NSCalendar *_gregorian = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
     NSDate     *_newDate   = [_gregorian dateByAddingComponents:_components toDate:self._actualDate options:0];
     
-    self._actualDate      = _newDate;
-    
-    [self setNewScheduleWithDate:_newDate];
-
-    //NSLog(@"Day before: %@", timeTableViewController._actualDate);
-    
-    _dayNavigator.title = [NSString stringWithFormat:@"%@, %@"
-                           ,[[self weekDayFormatter] stringFromDate:self._actualDate]
-                           ,[[self dayFormatter]     stringFromDate:self._actualDate]];
-    _actualDayDto        = [self getDayDto];
-
-    //[self viewWillAppear:YES];
-    [_timeTable reloadData];
+    [self setActualDate:_newDate];
 }
 
 
 
 - (void) dayAfter:(id)sender
 {
-    
     NSDate *_newDate = [self._actualDate dateByAddingTimeInterval:(1*24*60*60)];
-    self._actualDate = _newDate;
-    
-    [self setNewScheduleWithDate:_newDate];
-
-    _dayNavigator.title = [NSString stringWithFormat:@"%@, %@"
-                           ,[[self weekDayFormatter] stringFromDate:self._actualDate]
-                           ,[[self dayFormatter]     stringFromDate:self._actualDate]];
-    
-    //NSLog(@"title: %@", _dayNavigator.title);
-    
-    _actualDayDto       = [self getDayDto];
-    //[self viewWillAppear:YES];
-    [_timeTable reloadData];
+    [self setActualDate:_newDate];
 }
 
 
@@ -398,6 +400,8 @@
 
 
 
+
+
 - (void) setTitleToActualDate 
 {
     NSDateFormatter* df_local = [[NSDateFormatter alloc] init];
@@ -408,10 +412,10 @@
     // set current day
     self._actualDate = [NSDate date];
     //self._actualDate    = [[self dayFormatter] dateFromString:@"17.12.2012"];
-    _dayNavigator.title = [NSString stringWithFormat:@"%@, %@"
-                           ,[[self weekDayFormatter] stringFromDate:self._actualDate]
-                           ,[[self dayFormatter]     stringFromDate:self._actualDate]];
-    NSLog(@"set actual Date: %@", [[self dayFormatter] stringFromDate:self._actualDate]);
+    
+    [self setDateInNavigatorWithActualDate:_actualDate];
+    
+    //NSLog(@"set actual Date: %@", [[self dayFormatter] stringFromDate:self._actualDate]);
     
 }
 
@@ -466,28 +470,9 @@
     [_dayNavigator setLeftBarButtonItem :_leftButton animated :true];
     [_dayNavigator setRightBarButtonItem:_rightButton animated:true];
     
-/*
-    
-    // recognise taps on navigation bar to hide
-    UITapGestureRecognizer *gestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(navSingleTap)];
-    [gestureRecognizer setNumberOfTapsRequired:1];
-    [gestureRecognizer setNumberOfTouchesRequired:1];
-    
-    [self.navigationController.navigationBar setUserInteractionEnabled:YES];
-    
-    // create a view which covers most of the tap bar to
-    // manage the gestures - if we use the navigation bar
-    // it interferes with the nav buttons
-    CGRect frame = CGRectMake(self.view.frame.size.width/4, 0, self.view.frame.size.width/2, 44);
-    UIView *navBarTapView = [[UIView alloc] initWithFrame:frame];
-    [self.navigationController.navigationBar addSubview:navBarTapView];
-    navBarTapView.backgroundColor = [UIColor clearColor];
-  
-    [navBarTapView setUserInteractionEnabled:YES];
-    [navBarTapView addGestureRecognizer:gestureRecognizer];
-    
-*/
-    
+    _dateLabel.userInteractionEnabled = YES;
+    UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(openChooseDateView)];
+    [_dateLabel addGestureRecognizer:tapGesture];
     
     
     // ----- DETAIL PAGE -----
@@ -503,9 +488,19 @@
     {
 		_acronymVC = [[AcronymViewController alloc] init];
 	}
-    
     _acronymVC._acronymViewDelegate = self;
     _acronymVC.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
+    
+    
+    // ------ CHOOSE DATE FREELY ----
+    if (_chooseDateVC == nil)
+    {
+		_chooseDateVC = [[ChooseDateViewController alloc] init];
+	}
+    _chooseDateVC._chooseDateViewDelegate = self;
+    _chooseDateVC.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
+    
+    
     
     //----- USER DEFAULTS -----
     // get acronym from user defaults
@@ -540,12 +535,17 @@
     _noConnectionLabel.hidden = YES;
 }
 
-/*
--(void)navSingleTap{
-    NSLog(@"tab on navigation bar title");
+
+-(void) openChooseDateView
+{
+    [self presentModalViewController:_chooseDateVC animated:YES];
+}
+
+-(void)tapGesture{
+    NSLog(@"tapGesture tab on navigation bar title");
 
 }
-*/
+
 
 - (void)handleSearchType:(id)object {
     //NSLog(@"%@ found something object?",object);
@@ -718,6 +718,8 @@
     _sixSlotsTwoRoomsTableCell = nil;
     _sixSlotsOneRoomTableCell = nil;
     _twoSlotsSixRoomsTableCell = nil;
+    _dateLabel = nil;
+    _chooseDateVC = nil;
     [super viewDidUnload];
 }
 
@@ -779,13 +781,8 @@
         
         [_detailsVC._detailTable reloadData];
         
-        UILabel *label = [[UILabel alloc] init];
-        label.font     = [UIFont fontWithName:@"Helvetica" size: 15.0];
-        label.text     = _detailsVC._dayAndAcronymString;
-        [label setBackgroundColor:[UIColor clearColor]];
-        [label setTextColor:[UIColor whiteColor]];
-        [label sizeToFit];
-        [_detailsVC._titleNavigationItem setTitleView:label];
+        
+        [_detailsVC setNavigationTitle:_detailsVC._dayAndAcronymString];
         
         [self presentModalViewController:_detailsVC animated:YES];
     }

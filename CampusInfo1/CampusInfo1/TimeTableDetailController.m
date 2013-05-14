@@ -28,6 +28,7 @@
 @synthesize _dayAndAcronymString;
 @synthesize _titleNavigationItem;
 @synthesize _detailTableCellWithButton;
+@synthesize _titelLabel;
 
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -47,6 +48,17 @@
 }
 
 
+-(void)setNavigationTitle:(NSString *)titleString
+{
+
+    [self.view bringSubviewToFront:_titelLabel];
+    [_titelLabel setTextColor:[UIColor whiteColor]];
+    _titelLabel.text = titleString;
+    _titleNavigationItem.title = @"";
+
+}
+
+
 - (void)viewDidLoad
 {
     //NSLog(@"TimeTableDetail viewDidLoad");
@@ -59,20 +71,9 @@
     _detailTable.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
     
     _timeLabel.text          = _timeString;
-    //_dayAndAcronymLabel.text = _dayAndAcronymString;
-
-    //_titleNavigationItem.title = _dayAndAcronymString; 
-
-    UILabel *label = [[UILabel alloc] init];
-	label.font     = [UIFont fontWithName:@"Helvetica" size: 15.0];
     
-    //NSLog(@"while viewDidLoad _dayAndAcronymString: %@", _dayAndAcronymString);
+    [self setNavigationTitle:_dayAndAcronymString];
     
-	label.text     = _dayAndAcronymString;
-	[label setBackgroundColor:[UIColor clearColor]];
-	[label setTextColor:[UIColor whiteColor]];
-	[label sizeToFit];
-	[_titleNavigationItem setTitleView:label];
     
     UIImage         *_leftButtonImage = [UIImage imageNamed:@"arrowLeft_small.png"];
     UIBarButtonItem *_leftButton      = [[UIBarButtonItem alloc] initWithImage: _leftButtonImage
@@ -97,6 +98,7 @@
     _titleNavigationItem        = nil;
     _detailTableCellWithButton  = nil;
     
+    _titelLabel = nil;
     [super viewDidUnload];
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;

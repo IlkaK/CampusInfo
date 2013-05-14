@@ -18,6 +18,7 @@
 
 @end
 
+
 @interface TimeTableDetailController : UIViewController <UITableViewDataSource, UITableViewDelegate>
 {
     id                         _timeTableDetailViewDelegate;
@@ -34,7 +35,9 @@
     NSString                  *_timeString;
     NSString                  *_dayAndAcronymString;
     
+    // navigation bar handling
     IBOutlet UINavigationItem *_titleNavigationItem;
+    IBOutlet UILabel          *_titelLabel;
 
 }
 
@@ -45,7 +48,13 @@
 @property (nonatomic, retain) IBOutlet UITableViewCell       *_detailTableCellWithButton;
 @property (nonatomic, retain) IBOutlet UILabel               *_timeLabel;
 @property (nonatomic, retain) IBOutlet UINavigationItem      *_titleNavigationItem;
+@property (nonatomic, retain) IBOutlet UILabel               *_titelLabel;
+
 @property (nonatomic, retain) NSString                       *_timeString;
 @property (nonatomic, retain) NSString                       *_dayAndAcronymString;
+
+
+-(void)setNavigationTitle
+:(NSString *)titleString;
 
 @end

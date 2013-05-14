@@ -32,6 +32,10 @@
     // Do any additional setup after loading the view from its nib.
     
     self._acronymTextField.delegate = self;
+    
+    NSUserDefaults *_acronymUserDefaults = [NSUserDefaults standardUserDefaults];
+    _acronymTextField.text                = [_acronymUserDefaults stringForKey:@"TimeTableAcronym"];
+    
 }
 
 - (void)didReceiveMemoryWarning
