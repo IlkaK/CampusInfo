@@ -43,8 +43,6 @@
 		27EDD1831695F7F00021BA7F /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 27EDD1821695F7F00021BA7F /* Default-568h@2x.png */; };
 		27FBF7281551A83600C09ED9 /* StartpageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 27FBF7261551A83600C09ED9 /* StartpageViewController.m */; };
 		27FBF7291551A83600C09ED9 /* StartpageViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 27FBF7271551A83600C09ED9 /* StartpageViewController.xib */; };
-		A3542E911520FB720072B28E /* AcronymViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A3542E8F1520FB720072B28E /* AcronymViewController.m */; };
-		A3542E921520FB720072B28E /* AcronymViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A3542E901520FB720072B28E /* AcronymViewController.xib */; };
 		A35A34191520814800181E3F /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A35A34181520814800181E3F /* UIKit.framework */; };
 		A35A341B1520814800181E3F /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A35A341A1520814800181E3F /* Foundation.framework */; };
 		A35A341D1520814800181E3F /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A35A341C1520814800181E3F /* CoreGraphics.framework */; };
@@ -115,9 +113,6 @@
 		27FBF7251551A83600C09ED9 /* StartpageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StartpageViewController.h; sourceTree = "<group>"; };
 		27FBF7261551A83600C09ED9 /* StartpageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StartpageViewController.m; sourceTree = "<group>"; };
 		27FBF7271551A83600C09ED9 /* StartpageViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = StartpageViewController.xib; sourceTree = "<group>"; };
-		A3542E8E1520FB720072B28E /* AcronymViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AcronymViewController.h; sourceTree = "<group>"; };
-		A3542E8F1520FB720072B28E /* AcronymViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AcronymViewController.m; sourceTree = "<group>"; };
-		A3542E901520FB720072B28E /* AcronymViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AcronymViewController.xib; sourceTree = "<group>"; };
 		A35A34141520814800181E3F /* CampusInfo1.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CampusInfo1.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A35A34181520814800181E3F /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		A35A341A1520814800181E3F /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -300,9 +295,6 @@
 				A3A865491520A0C90074FFE5 /* TimeTableOverviewController.h */,
 				A3A8654A1520A0C90074FFE5 /* TimeTableOverviewController.m */,
 				A3A8654B1520A0C90074FFE5 /* TimeTableOverviewController.xib */,
-				A3542E8E1520FB720072B28E /* AcronymViewController.h */,
-				A3542E8F1520FB720072B28E /* AcronymViewController.m */,
-				A3542E901520FB720072B28E /* AcronymViewController.xib */,
 				27B66925153AE0D8004D3ABC /* TimeTableAsyncRequest.h */,
 				27B66926153AE0D8004D3ABC /* TimeTableAsyncRequest.m */,
 				27CCE302154414180057D9F8 /* TimeTableDetailController.h */,
@@ -398,7 +390,6 @@
 				A35A34521520839400181E3F /* today.png in Resources */,
 				A35A34541520839E00181E3F /* search.png in Resources */,
 				A3A8654D1520A0C90074FFE5 /* TimeTableOverviewController.xib in Resources */,
-				A3542E921520FB720072B28E /* AcronymViewController.xib in Resources */,
 				A398BA65152383D900F98450 /* OneSlotOneRoomTableCell.xib in Resources */,
 				277DDD801534A509006136B5 /* arrowLeft_small.png in Resources */,
 				277DDD821534A54B006136B5 /* arrowRight_small.png in Resources */,
@@ -445,7 +436,6 @@
 				A35A34291520814800181E3F /* CampusInfo1AppDelegate.m in Sources */,
 				A35A34321520814800181E3F /* SearchViewController.m in Sources */,
 				A3A8654C1520A0C90074FFE5 /* TimeTableOverviewController.m in Sources */,
-				A3542E911520FB720072B28E /* AcronymViewController.m in Sources */,
 				A3A5513A1525DDB700BCAF3D /* SchoolClassDto.m in Sources */,
 				A3A5513D1525E29F00BCAF3D /* RoomDto.m in Sources */,
 				A3A551401525E33900BCAF3D /* PersonDto.m in Sources */,
