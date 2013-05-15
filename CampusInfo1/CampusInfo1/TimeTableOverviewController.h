@@ -65,6 +65,7 @@ UIViewController
 
     IBOutlet UITableViewCell  *_twoSlotsOneRoomTableCell;
     IBOutlet UITableViewCell  *_twoSlotsTwoRoomsTableCell;
+    IBOutlet UITableViewCell  *_twoSlotsFourRoomsTableCell;
     IBOutlet UITableViewCell  *_twoSlotsSixRoomsTableCell;
 
     IBOutlet UITableViewCell  *_threeSlotsOneRoomTableCell;
@@ -89,7 +90,10 @@ UIViewController
     
     NSString                  *_searchText;
     NSString                  *_searchType;
+    
+    
 }
+
 
 @property (nonatomic, retain) IBOutlet TimeTableDetailController *_detailsVC;
 @property (nonatomic, retain) IBOutlet ChooseDateViewController  *_chooseDateVC;
@@ -113,6 +117,7 @@ UIViewController
 
 @property (nonatomic, retain) IBOutlet UITableViewCell           *_twoSlotsOneRoomTableCell;
 @property (nonatomic, retain) IBOutlet UITableViewCell           *_twoSlotsTwoRoomsTableCell;
+@property (nonatomic, retain) IBOutlet UITableViewCell           *_twoSlotsFourRoomsTableCell;
 @property (nonatomic, retain) IBOutlet UITableViewCell           *_twoSlotsSixRoomsTableCell;
 
 @property (nonatomic, retain) IBOutlet UITableViewCell           *_threeSlotsOneRoomTableCell;

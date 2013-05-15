@@ -51,6 +51,7 @@
 
 @synthesize _twoSlotsOneRoomTableCell;
 @synthesize _twoSlotsTwoRoomsTableCell;
+@synthesize _twoSlotsFourRoomsTableCell;
 @synthesize _twoSlotsSixRoomsTableCell;
 
 @synthesize _threeSlotsOneRoomTableCell;
@@ -75,6 +76,7 @@
 
 @synthesize _searchText;
 @synthesize _searchType;
+
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {   
@@ -331,13 +333,11 @@
 }
 
 
-
 - (void) dayAfter:(id)sender
 {
     NSDate *_newDate = [self._actualDate dateByAddingTimeInterval:(1*24*60*60)];
     [self setActualDate:_newDate];
 }
-
 
 
 - (NSString *)getAcronymType:(NSString *)_newAcronym
@@ -375,7 +375,6 @@
 }
 
 
-
 - (void)setAcronymLabel:(NSString *)newAcronym
 {
     if (_ownStoredAcronymString == nil || [_ownStoredAcronymString  compare: newAcronym ] != NSOrderedSame)
@@ -411,8 +410,6 @@
 }
 
 
-
-
 - (void) setTitleToActualDate 
 {
     NSDateFormatter* df_local = [[NSDateFormatter alloc] init];
@@ -426,8 +423,7 @@
     
     [self setDateInNavigatorWithActualDate:_actualDate];
     
-    //NSLog(@"set actual Date: %@", [[self dayFormatter] stringFromDate:self._actualDate]);
-    
+    //NSLog(@"set actual Date: %@", [[self dayFormatter] stringFromDate:self._actualDate]);    
 }
 
 
@@ -458,9 +454,7 @@
 		_timeTable = [[UITableView alloc] init];
 	}
     // clear border colour between table cells
-    //_timeTable.separatorColor = [UIColor clearColor];    
-    //_timeTable.style = UITableViewStylePlain;
-    //_timeTable.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
+    _timeTable.separatorColor = [UIColor lightGrayColor];
     
     //----- Navigation Bar ----
     // set current day
@@ -476,7 +470,7 @@
                                       action:@selector(dayBefore:)];  
     UIBarButtonItem *_rightButton = [[UIBarButtonItem alloc] initWithImage: _rightButtonImage
                                     style:UIBarButtonItemStylePlain 
-                                    target:self 
+                                    target:self
                                     action:@selector(dayAfter:)];  
     
     [_dayNavigator setLeftBarButtonItem :_leftButton animated :true];
@@ -538,11 +532,6 @@
 -(void) openChooseDateView
 {
     [self presentModalViewController:_chooseDateVC animated:YES];
-}
-
--(void)tapGesture{
-    NSLog(@"tapGesture tab on navigation bar title");
-
 }
 
 
@@ -730,6 +719,7 @@
     _dateLabel = nil;
     _chooseDateVC = nil;
     _acronymButton = nil;
+    _twoSlotsFourRoomsTableCell = nil;
     [super viewDidUnload];
 }
 
@@ -1306,12 +1296,11 @@
     NSDate *_today = [NSDate date];
     //NSDate *_today    = [[self dayFormatter] dateFromString:@"19.03.2012"];
 
-
-    //NSLog(@"set actual Date: %@",timeTableViewController._actualDate);
-    //NSLog(@"set actual Date: %@", [[self dayFormatter] stringFromDate:self._actualDate]);
-
     NSString *_actualDayString    = [[self dayFormatter] stringFromDate:_actualDate];
     NSString *_todayString        = [[self dayFormatter] stringFromDate:_today];
+    
+    NSLog(@"get actual Date: %@ and today: %@", _actualDayString, _todayString);
+
     
     
     // compare dates
@@ -1330,7 +1319,7 @@
         if ([_fromString      compare: _todayTimeString] == NSOrderedAscending && 
             [_todayTimeString compare: _toString]        == NSOrderedAscending) 
         {
-         // NSLog(@"YES _fromString: %@ _toString: %@ _todayTimeString: %@", _fromString, _toString, _todayTimeString);
+          NSLog(@"YES _fromString: %@ _toString: %@ _todayTimeString: %@", _fromString, _toString, _todayTimeString);
           return YES;
         }
     }
@@ -1338,20 +1327,6 @@
     return NO;
 }
 
-
--(void)setButtonBackgroundColor:(UIButton *)oneButton
-                withDateToCheck:(NSDate *)dateToCheck
-            withActualSelection:(NSUInteger)actualSelection
-{
-    if ([self isActualDayAndTime:dateToCheck withCellSelection:actualSelection])
-    {
-        [oneButton setBackgroundColor:[UIColor lightGrayColor]];
-    }
-    else
-    {
-        [oneButton setBackgroundColor:[UIColor colorWithRed:0.0 green:0.0 blue:1.0 alpha:0.1]];
-    }
-}
 
 
 - (void) setLectureButtonWithCell:(UITableViewCell *)cell
@@ -1368,9 +1343,6 @@
     [_titleString addAttribute:NSUnderlineStyleAttributeName value:[NSNumber numberWithInteger:NSUnderlineStyleSingle] range:NSMakeRange(0, [_titleString length])];
     
     [_lectureButton setAttributedTitle:_titleString forState:UIControlStateNormal];
-    [_lectureButton setBackgroundColor:[UIColor clearColor]];
-    
-    [self setButtonBackgroundColor:_lectureButton withDateToCheck:_actualDate withActualSelection:actualSelection];
     
     _lectureButton.enabled = enable;
     
@@ -1390,10 +1362,6 @@
 {
      UIButton *_roomButton = (UIButton *)[cell viewWithTag:indexTag];
     [_roomButton    setTitle:@"" forState:UIControlStateNormal];
-    [_roomButton    setBackgroundColor:[UIColor clearColor]];
-    
-    [self setButtonBackgroundColor:_roomButton withDateToCheck:_actualDate withActualSelection:actualSelection];
-    
     _roomButton.enabled     = TRUE;
     
     NSMutableAttributedString *_titleString = [[NSMutableAttributedString alloc] initWithString:title];
@@ -1445,8 +1413,6 @@
     _detailButton.enabled   = TRUE;
     _detailButton.hidden    = NO;
     
-    [self setButtonBackgroundColor:_detailButton withDateToCheck:_actualDate withActualSelection:actualSelection];
-    
     [_detailButton  addTarget:self action:@selector(showScheduleDetails     :event:) forControlEvents:UIControlEventTouchUpInside];
 }
 
@@ -1459,20 +1425,45 @@
              withEndTime        :(NSDate *)  endTime
 {
     UILabel          *_labelDate     = (UILabel  *)[cell viewWithTag:indexTag];
-    [_labelDate     setBackgroundColor:[UIColor clearColor]];
-
     _labelDate.text = [NSString stringWithFormat:@"%@ - %@",
                        [[self timeFormatter] stringFromDate:startTime],
                        [[self timeFormatter] stringFromDate:endTime  ]
                        ];
-    
-    // for actual day and time slot mark with background colour
-    if ([self isActualDayAndTime:_actualDate withCellSelection:actualSelection])
-    {
-        [_labelDate     setBackgroundColor:[UIColor lightGrayColor]];
-    }
 }
 
+
+- (void) setBackgroundColorOfCell:(UITableViewCell *)cell
+              withActualSelection:(NSUInteger)actualSelection
+                    withIsLecture:(BOOL)isLecture
+{
+
+    //lightsteelblue 1	#CAE1FF	202	225	255	16769482
+    UIColor *_lectureBackgroundColor = [UIColor colorWithRed:202.0/255.0 green:225.0/255.0 blue:255.0/255.0 alpha:1.0];
+    
+    // lightblue 1	#BFEFFF	191	239	255	16773055
+    //UIColor *_lectureBackgroundColor= [UIColor colorWithRed:191.0/255.0 green:239.0/255.0 blue:255.0/255.0 alpha:1.0];
+    
+    //darkseagreen 1	#C1FFC1	193	255	193	12713921
+    //UIColor *_actualSelectionBackgroundColor = [UIColor colorWithRed:193.0/255.0 green:225.0/255.0 blue:193.0/255.0 alpha:1.0];
+    
+    
+//    if ([self isActualDayAndTime:_actualDate withCellSelection:actualSelection])
+//    {
+//        cell.contentView.backgroundColor = _actualSelectionBackgroundColor;
+//        cell.backgroundColor = cell.contentView.backgroundColor;
+//    }
+//    else
+        if (isLecture)
+    {
+        cell.contentView.backgroundColor = _lectureBackgroundColor;
+        cell.backgroundColor = cell.contentView.backgroundColor;
+    }
+    else
+    {
+        cell.contentView.backgroundColor = [UIColor clearColor];  
+        cell.backgroundColor = cell.contentView.backgroundColor;
+    }
+}
 
 
 - (UITableViewCell *)emptyCellOrHoliday
@@ -1497,9 +1488,6 @@
     
     // initialize values for buttons and labels
     [_lectureButton setTitle:@"" forState:UIControlStateNormal];
-    [_labelDate     setBackgroundColor:[UIColor clearColor]];
-    [_lectureButton setBackgroundColor:[UIColor clearColor]];
-    [_cell          setBackgroundColor:[UIColor clearColor]];
     
     if (actualScheduleEvent == nil)
     {
@@ -1528,13 +1516,9 @@
         }
     }
     
-    // for actual day and time slot mark with background colour
-    if ([self isActualDayAndTime:_actualDate withCellSelection:actualSelection])
-    {
-        [_labelDate     setBackgroundColor:[UIColor lightGrayColor]];
-        [_lectureButton setBackgroundColor:[UIColor lightGrayColor]];
-    }
-    
+    [self setBackgroundColorOfCell:_cell
+               withActualSelection:actualSelection
+                     withIsLecture:NO];
     return _cell;
 }
 
@@ -1563,9 +1547,9 @@
 
     [self setDetailButtonWithCell:_cell withTag:4 withActualSelection:actualSelection];
 
-    // initialize values for buttons and labels
-    [_cell          setBackgroundColor:[UIColor clearColor]];
-    
+    [self setBackgroundColorOfCell:_cell
+               withActualSelection:actualSelection
+                     withIsLecture:YES];
     return _cell;
 }
 
@@ -1598,8 +1582,9 @@
     
     [self setDetailButtonWithCell:_cell withTag:5 withActualSelection:actualSelection];
     
-    [_cell           setBackgroundColor:[UIColor clearColor]];
-
+    [self setBackgroundColorOfCell:_cell
+               withActualSelection:actualSelection
+                     withIsLecture:YES];
     return _cell;        
 }
 
@@ -1633,7 +1618,9 @@
     
     [self setDetailButtonWithCell:_cell withTag:6 withActualSelection:actualSelection];
     
-    [_cell           setBackgroundColor:[UIColor clearColor]];
+    [self setBackgroundColorOfCell:_cell
+               withActualSelection:actualSelection
+                     withIsLecture:YES];
     return _cell;        
 }
 
@@ -1666,7 +1653,10 @@
     
     [self setDetailButtonWithCell:_cell withTag:5 withActualSelection:actualSelection];
     
-    [_cell           setBackgroundColor:[UIColor clearColor]];
+    [self setBackgroundColorOfCell:_cell
+               withActualSelection:actualSelection
+                     withIsLecture:YES];
+
     return _cell;
 }
 
@@ -1701,7 +1691,10 @@
     
     [self setDetailButtonWithCell:_cell withTag:6 withActualSelection:actualSelection];
     
-    [_cell           setBackgroundColor:[UIColor clearColor]];
+    [self setBackgroundColorOfCell:_cell
+               withActualSelection:actualSelection
+                     withIsLecture:YES];
+
     return _cell;        
 }
 
@@ -1737,7 +1730,10 @@
     
     [self setDetailButtonWithCell:_cell withTag:6 withActualSelection:actualSelection];
 
-    [_cell           setBackgroundColor:[UIColor clearColor]];
+    [self setBackgroundColorOfCell:_cell
+               withActualSelection:actualSelection
+                     withIsLecture:YES];
+
     return _cell;        
 }
 
@@ -1774,7 +1770,10 @@
     
     [self setDetailButtonWithCell:_cell withTag:7 withActualSelection:actualSelection];
     
-    [_cell           setBackgroundColor:[UIColor clearColor]];
+    [self setBackgroundColorOfCell:_cell
+               withActualSelection:actualSelection
+                     withIsLecture:YES];
+
     return _cell;
 }
 
@@ -1815,7 +1814,10 @@
     
     [self setDetailButtonWithCell:_cell withTag:8 withActualSelection:actualSelection];
     
-    [_cell           setBackgroundColor:[UIColor clearColor]];
+    [self setBackgroundColorOfCell:_cell
+               withActualSelection:actualSelection
+                     withIsLecture:YES];
+
     return _cell;
 }
 
@@ -1856,12 +1858,56 @@
     
     [self setDetailButtonWithCell:_cell withTag:9 withActualSelection:actualSelection];
     
-    [_cell           setBackgroundColor:[UIColor clearColor]];
+    [self setBackgroundColorOfCell:_cell
+               withActualSelection:actualSelection
+                     withIsLecture:YES];
+
     return _cell;        
 }
 
 
-- (UITableViewCell *)twoSlotSixRoomsWithView            :(UITableView *)     actualTableView
+- (UITableViewCell *)twoSlotsFourRoomsWithView           :(UITableView *)     actualTableView
+                                     withSelection       :(NSUInteger)        actualSelection
+                                     withScheduleEvent   :(ScheduleEventDto *)actualScheduleEvent
+{
+    static NSString *_cellIdentifier = @"TwoSlotsFourRoomsTableCell";
+    UITableViewCell *_cell           = [actualTableView dequeueReusableCellWithIdentifier:_cellIdentifier];
+    
+    if (_cell == nil)
+    {
+        [[NSBundle mainBundle] loadNibNamed:@"TwoSlotsFourRoomsTableCell" owner:self options:nil];
+        _cell = _twoSlotsFourRoomsTableCell;
+        self._twoSlotsFourRoomsTableCell = nil;
+    }
+    
+    ScheduleEventRealizationDto *_localRealization1 = [actualScheduleEvent._scheduleEventRealizations objectAtIndex:0];
+    ScheduleEventRealizationDto *_localRealization2 = [actualScheduleEvent._scheduleEventRealizations objectAtIndex:1];
+    ScheduleEventRealizationDto *_localRealization3 = [actualScheduleEvent._scheduleEventRealizations objectAtIndex:2];
+    ScheduleEventRealizationDto *_localRealization4 = [actualScheduleEvent._scheduleEventRealizations objectAtIndex:3];
+    SlotDto *_timeSlot1 = [actualScheduleEvent._slots objectAtIndex:0];
+    SlotDto *_timeSlot2 = [actualScheduleEvent._slots objectAtIndex:1];
+    
+    [self setDateLabelWithCell:_cell withTag:1 withActualSelection:actualSelection withStartTime:_timeSlot1._startTime withEndTime:_timeSlot1._endTime];
+    [self setDateLabelWithCell:_cell withTag:2 withActualSelection:actualSelection withStartTime:_timeSlot2._startTime withEndTime:_timeSlot2._endTime];
+    
+    [self setLectureButtonWithCell:_cell withTag:3 withActualSelection:actualSelection withTitle:actualScheduleEvent._name doEnable:TRUE];
+    
+    [self setRoomButtonWithCell:_cell withTag:4 withActualSelection:actualSelection withTitle:_localRealization1._room._name withSelector:1];
+    [self setRoomButtonWithCell:_cell withTag:5 withActualSelection:actualSelection withTitle:_localRealization2._room._name withSelector:2];
+    [self setRoomButtonWithCell:_cell withTag:6 withActualSelection:actualSelection withTitle:_localRealization3._room._name withSelector:3];
+    [self setRoomButtonWithCell:_cell withTag:7 withActualSelection:actualSelection withTitle:_localRealization4._room._name withSelector:4];
+    
+    [self setDetailButtonWithCell:_cell withTag:8 withActualSelection:actualSelection];
+    
+    [self setBackgroundColorOfCell:_cell
+               withActualSelection:actualSelection
+                     withIsLecture:YES];
+    
+    return _cell;
+}
+
+
+- (UITableViewCell *)twoSlotsSixRoomsWithView            :(UITableView *)     actualTableView
                                     withSelection       :(NSUInteger)        actualSelection
                                     withScheduleEvent   :(ScheduleEventDto *)actualScheduleEvent
 {
@@ -1898,7 +1944,10 @@
     
     [self setDetailButtonWithCell:_cell withTag:10 withActualSelection:actualSelection];
     
-    [_cell           setBackgroundColor:[UIColor clearColor]];
+    [self setBackgroundColorOfCell:_cell
+               withActualSelection:actualSelection
+                     withIsLecture:YES];
+
     return _cell;
 }
 
@@ -1941,7 +1990,10 @@
     
     [self setDetailButtonWithCell:_cell withTag:10 withActualSelection:actualSelection];
     
-    [_cell           setBackgroundColor:[UIColor clearColor]];
+    [self setBackgroundColorOfCell:_cell
+               withActualSelection:actualSelection
+                     withIsLecture:YES];
+
     return _cell;
 }
 
@@ -1986,7 +2038,10 @@
     
     [self setDetailButtonWithCell:_cell withTag:11 withActualSelection:actualSelection];
         
-    [_cell           setBackgroundColor:[UIColor clearColor]];
+    [self setBackgroundColorOfCell:_cell
+               withActualSelection:actualSelection
+                     withIsLecture:YES];
+
     return _cell;        
 }
 
@@ -2021,7 +2076,10 @@
     
     [self setDetailButtonWithCell:_cell withTag:7 withActualSelection:actualSelection];
         
-    [_cell           setBackgroundColor:[UIColor clearColor]];
+    [self setBackgroundColorOfCell:_cell
+               withActualSelection:actualSelection
+                     withIsLecture:YES];
+
     return _cell;
 }
 
@@ -2066,7 +2124,10 @@
     
     [self setDetailButtonWithCell:_cell withTag:7 withActualSelection:actualSelection];
     
-    [_cell           setBackgroundColor:[UIColor clearColor]];
+    [self setBackgroundColorOfCell:_cell
+               withActualSelection:actualSelection
+                     withIsLecture:YES];
+
     return _cell;        
 }
 
@@ -2105,7 +2166,10 @@
     
     [self setDetailButtonWithCell:_cell withTag:8 withActualSelection:actualSelection];
     
-    [_cell           setBackgroundColor:[UIColor clearColor]]; 
+    [self setBackgroundColorOfCell:_cell
+               withActualSelection:actualSelection
+                     withIsLecture:YES];
+
     return _cell;        
 }
 
@@ -2145,7 +2209,10 @@
     
     [self setDetailButtonWithCell:_cell withTag:9 withActualSelection:actualSelection];
     
-    [_cell           setBackgroundColor:[UIColor clearColor]];
+    [self setBackgroundColorOfCell:_cell
+               withActualSelection:actualSelection
+                     withIsLecture:YES];
+
     return _cell;
 }
 
@@ -2189,7 +2256,10 @@
     
     [self setDetailButtonWithCell:_cell withTag:10 withActualSelection:actualSelection];
     
-    [_cell           setBackgroundColor:[UIColor clearColor]];
+    [self setBackgroundColorOfCell:_cell
+               withActualSelection:actualSelection
+                     withIsLecture:YES];
+
     return _cell;
 }
 
@@ -2227,7 +2297,10 @@
 
     [self setDetailButtonWithCell:_cell withTag:8 withActualSelection:actualSelection];
     
-    [_cell           setBackgroundColor:[UIColor clearColor]];
+    [self setBackgroundColorOfCell:_cell
+               withActualSelection:actualSelection
+                     withIsLecture:YES];
+
     return _cell;        
 }
 
@@ -2265,7 +2338,10 @@
     
     [self setDetailButtonWithCell:_cell withTag:8 withActualSelection:actualSelection];
     
-    [_cell           setBackgroundColor:[UIColor clearColor]];
+    [self setBackgroundColorOfCell:_cell
+               withActualSelection:actualSelection
+                     withIsLecture:YES];
+
     return _cell;
 }
 
@@ -2306,7 +2382,10 @@
     
     [self setDetailButtonWithCell:_cell withTag:9 withActualSelection:actualSelection];
     
-    [_cell           setBackgroundColor:[UIColor clearColor]];
+    [self setBackgroundColorOfCell:_cell
+               withActualSelection:actualSelection
+                     withIsLecture:YES];
+
     return _cell;        
 }
 
@@ -2350,7 +2429,9 @@
     
     [self setDetailButtonWithCell:_cell withTag:11 withActualSelection:actualSelection];
     
-    [_cell           setBackgroundColor:[UIColor clearColor]];
+    [self setBackgroundColorOfCell:_cell
+               withActualSelection:actualSelection
+                     withIsLecture:YES];
     return _cell;
 }
 
@@ -2405,6 +2486,9 @@
                     //NSLog(@"slots and events are null => emptyCellOrHoliday is called");
                     return [self emptyCellOrHoliday:tableView:_cellSelection:_scheduleEvent];
                 }
+                
+                //----------------------------
+                // one slot, one or more rooms
                 if (   [_scheduleEvent._slots                     count] == 1
                     && [_scheduleEvent._scheduleEventRealizations count] == 1)
                 {
@@ -2420,14 +2504,6 @@
                                     withSelection       :_cellSelection
                                     withScheduleEvent   :_scheduleEvent];
                 }
-                if (   [_scheduleEvent._slots                     count] == 2
-                    && [_scheduleEvent._scheduleEventRealizations count] == 2
-                    )
-                {
-                    return [self twoSlotsTwoRoomsWithView:tableView
-                                    withSelection       :_cellSelection
-                                    withScheduleEvent   :_scheduleEvent];
-                }
                 if (   [_scheduleEvent._slots                     count] == 1
                     && [_scheduleEvent._scheduleEventRealizations count] == 3
                     )
@@ -2436,6 +2512,45 @@
                                     withSelection           :_cellSelection
                                     withScheduleEvent       :_scheduleEvent];
                 }
+                
+                if (   [_scheduleEvent._slots                     count] == 1
+                    && [_scheduleEvent._scheduleEventRealizations count] == 4)
+                {
+                    return [self oneSlotFourRoomsWithView   :tableView
+                                        withSelection       :_cellSelection
+                                        withScheduleEvent   :_scheduleEvent];
+                }
+                if (   [_scheduleEvent._slots                     count] == 1
+                    && [_scheduleEvent._scheduleEventRealizations count] == 5)
+                {
+                    return [self oneSlotFiveRoomsWithView   :tableView
+                                            withSelection   :_cellSelection
+                                           withScheduleEvent:_scheduleEvent];
+                }
+                if (   [_scheduleEvent._slots                     count] == 1
+                    && [_scheduleEvent._scheduleEventRealizations count] == 6)
+                {
+                    return [self oneSlotSixRoomsWithView    :tableView
+                                        withSelection       :_cellSelection
+                                        withScheduleEvent   :_scheduleEvent];
+                }
+                if (   [_scheduleEvent._slots                     count] == 1
+                    && [_scheduleEvent._scheduleEventRealizations count] == 7)
+                {
+                    return [self oneSlotSevenRoomsWithView  :tableView
+                                        withSelection       :_cellSelection
+                                        withScheduleEvent   :_scheduleEvent];
+                }
+                if (   [_scheduleEvent._slots                     count] == 1
+                    && [_scheduleEvent._scheduleEventRealizations count] == 8)
+                {
+                    return [self oneSlotEightRoomsWithView  :tableView
+                                    withSelection           :_cellSelection
+                                    withScheduleEvent       :_scheduleEvent];
+                }
+                
+                //----------------------------
+                // two slots, one or more rooms
                 if (   [_scheduleEvent._slots                     count] == 2
                     && [_scheduleEvent._scheduleEventRealizations count] == 1)
                 {
@@ -2443,6 +2558,31 @@
                                        withSelection    :_cellSelection
                                        withScheduleEvent:_scheduleEvent];
                 }
+                if (   [_scheduleEvent._slots                     count] == 2
+                    && [_scheduleEvent._scheduleEventRealizations count] == 2
+                    )
+                {
+                    return [self twoSlotsTwoRoomsWithView:tableView
+                                    withSelection       :_cellSelection
+                                    withScheduleEvent   :_scheduleEvent];
+                }
+                if (   [_scheduleEvent._slots                     count] == 2
+                    && [_scheduleEvent._scheduleEventRealizations count] == 4)
+                {
+                    return [self twoSlotsFourRoomsWithView:tableView
+                                       withSelection    :_cellSelection
+                                       withScheduleEvent:_scheduleEvent];
+                }
+                if (   [_scheduleEvent._slots                     count] == 2
+                    && [_scheduleEvent._scheduleEventRealizations count] == 6)
+                {
+                    return [self twoSlotsSixRoomsWithView    :tableView
+                                        withSelection       :_cellSelection
+                                        withScheduleEvent   :_scheduleEvent];
+                }
+                
+                //----------------------------
+                // three slots, one or more rooms
                 if (   [_scheduleEvent._slots                     count] == 3
                     && [_scheduleEvent._scheduleEventRealizations count] == 1)
                 {
@@ -2466,6 +2606,9 @@
                                           withSelection           :_cellSelection
                                           withScheduleEvent       :_scheduleEvent];
                 }
+                
+                //----------------------------
+                // four slots, one or more rooms
                 if (   [_scheduleEvent._slots                     count] == 4
                     && [_scheduleEvent._scheduleEventRealizations count] == 1)
                 {
@@ -2473,13 +2616,7 @@
                                         withSelection       :_cellSelection
                                         withScheduleEvent   :_scheduleEvent];
                 }
-                if (   [_scheduleEvent._slots                     count] == 1
-                    && [_scheduleEvent._scheduleEventRealizations count] == 4)
-                {
-                    return [self oneSlotFourRoomsWithView   :tableView
-                                        withSelection       :_cellSelection
-                                        withScheduleEvent   :_scheduleEvent];
-                }
+
                 if (   [_scheduleEvent._slots                     count] == 4
                     && [_scheduleEvent._scheduleEventRealizations count] == 2
                    )
@@ -2496,13 +2633,10 @@
                                            withSelection       :_cellSelection
                                            withScheduleEvent   :_scheduleEvent];
                 }
-                if (   [_scheduleEvent._slots                     count] == 1
-                    && [_scheduleEvent._scheduleEventRealizations count] == 5)
-                {
-                    return [self oneSlotFiveRoomsWithView   :tableView
-                                            withSelection   :_cellSelection
-                                           withScheduleEvent:_scheduleEvent];
-                }
+                
+                
+                //----------------------------
+                // five slots, one or more rooms
                 if (   [_scheduleEvent._slots                     count] == 5
                     && [_scheduleEvent._scheduleEventRealizations count] == 1
                     )
@@ -2511,6 +2645,9 @@
                                             withSelection       :_cellSelection
                                             withScheduleEvent   :_scheduleEvent];
                 }
+                
+                //----------------------------
+                // six slots, one or more rooms
                 if (   [_scheduleEvent._slots                     count] == 6
                     && [_scheduleEvent._scheduleEventRealizations count] == 1
                     )
@@ -2523,39 +2660,14 @@
                     && [_scheduleEvent._scheduleEventRealizations count] == 2
                     )
                 {
-                    //NSLog(@"6 slots and 2 rooms!");
                     return [self sixSlotsTwoRoomsWithView       :tableView
                                             withSelection       :_cellSelection
                                             withScheduleEvent   :_scheduleEvent];
                 }
-                if (   [_scheduleEvent._slots                     count] == 1
-                    && [_scheduleEvent._scheduleEventRealizations count] == 6)
-                {
-                    return [self oneSlotSixRoomsWithView    :tableView
-                                        withSelection       :_cellSelection
-                                        withScheduleEvent   :_scheduleEvent];
-                }
-                if (   [_scheduleEvent._slots                     count] == 2
-                    && [_scheduleEvent._scheduleEventRealizations count] == 6)
-                {
-                    return [self twoSlotSixRoomsWithView    :tableView
-                                        withSelection       :_cellSelection
-                                        withScheduleEvent   :_scheduleEvent];
-                }
-                if (   [_scheduleEvent._slots                     count] == 1
-                    && [_scheduleEvent._scheduleEventRealizations count] == 7)
-                {
-                    return [self oneSlotSevenRoomsWithView  :tableView
-                                        withSelection       :_cellSelection
-                                        withScheduleEvent   :_scheduleEvent];
-                }
-                if (   [_scheduleEvent._slots                     count] == 1
-                    && [_scheduleEvent._scheduleEventRealizations count] == 8)
-                {
-                    return [self oneSlotEightRoomsWithView  :tableView
-                                    withSelection           :_cellSelection
-                                    withScheduleEvent       :_scheduleEvent];
-                }
+
+
+                //----------------------------
+                // eight slots, one or more rooms
                 if (   [_scheduleEvent._slots                     count] == 8
                     && [_scheduleEvent._scheduleEventRealizations count] == 1)
                 {

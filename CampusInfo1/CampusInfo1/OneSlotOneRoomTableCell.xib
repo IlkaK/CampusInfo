@@ -315,20 +315,31 @@
 			<object class="NSMutableArray" key="referencedPartialClassDescriptions">
 				<bool key="EncodedWithXMLCoder">YES</bool>
 				<object class="IBPartialClassDescription">
-					<string key="className">AcronymViewController</string>
+					<string key="className">ChooseDateViewController</string>
 					<string key="superclassName">UIViewController</string>
+					<object class="NSMutableDictionary" key="actions">
+						<string key="NS.key.0">setPickerToToday:</string>
+						<string key="NS.object.0">id</string>
+					</object>
+					<object class="NSMutableDictionary" key="actionInfosByName">
+						<string key="NS.key.0">setPickerToToday:</string>
+						<object class="IBActionInfo" key="NS.object.0">
+							<string key="name">setPickerToToday:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+					</object>
 					<object class="NSMutableDictionary" key="outlets">
 						<bool key="EncodedWithXMLCoder">YES</bool>
 						<object class="NSArray" key="dict.sortedKeys">
 							<bool key="EncodedWithXMLCoder">YES</bool>
-							<string>_acronymNavigationItem</string>
-							<string>_acronymTextField</string>
-							<string>_warningLabel</string>
+							<string>_chooseDateNavigationItem</string>
+							<string>_datePicker</string>
+							<string>_navigatorTitle</string>
 						</object>
 						<object class="NSArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<string>UINavigationItem</string>
-							<string>UITextField</string>
+							<string>UIDatePicker</string>
 							<string>UILabel</string>
 						</object>
 					</object>
@@ -336,29 +347,29 @@
 						<bool key="EncodedWithXMLCoder">YES</bool>
 						<object class="NSArray" key="dict.sortedKeys">
 							<bool key="EncodedWithXMLCoder">YES</bool>
-							<string>_acronymNavigationItem</string>
-							<string>_acronymTextField</string>
-							<string>_warningLabel</string>
+							<string>_chooseDateNavigationItem</string>
+							<string>_datePicker</string>
+							<string>_navigatorTitle</string>
 						</object>
 						<object class="NSArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<object class="IBToOneOutletInfo">
-								<string key="name">_acronymNavigationItem</string>
+								<string key="name">_chooseDateNavigationItem</string>
 								<string key="candidateClassName">UINavigationItem</string>
 							</object>
 							<object class="IBToOneOutletInfo">
-								<string key="name">_acronymTextField</string>
-								<string key="candidateClassName">UITextField</string>
+								<string key="name">_datePicker</string>
+								<string key="candidateClassName">UIDatePicker</string>
 							</object>
 							<object class="IBToOneOutletInfo">
-								<string key="name">_warningLabel</string>
+								<string key="name">_navigatorTitle</string>
 								<string key="candidateClassName">UILabel</string>
 							</object>
 						</object>
 					</object>
 					<object class="IBClassDescriptionSource" key="sourceIdentifier">
 						<string key="majorKey">IBProjectSource</string>
-						<string key="minorKey">./Classes/AcronymViewController.h</string>
+						<string key="minorKey">./Classes/ChooseDateViewController.h</string>
 					</object>
 				</object>
 				<object class="IBPartialClassDescription">
@@ -372,6 +383,7 @@
 							<string>_detailTableCell</string>
 							<string>_detailTableCellWithButton</string>
 							<string>_timeLabel</string>
+							<string>_titelLabel</string>
 							<string>_titleNavigationItem</string>
 						</object>
 						<object class="NSArray" key="dict.values">
@@ -379,6 +391,7 @@
 							<string>UITableView</string>
 							<string>UITableViewCell</string>
 							<string>UITableViewCell</string>
+							<string>UILabel</string>
 							<string>UILabel</string>
 							<string>UINavigationItem</string>
 						</object>
@@ -391,6 +404,7 @@
 							<string>_detailTableCell</string>
 							<string>_detailTableCellWithButton</string>
 							<string>_timeLabel</string>
+							<string>_titelLabel</string>
 							<string>_titleNavigationItem</string>
 						</object>
 						<object class="NSArray" key="dict.values">
@@ -412,6 +426,10 @@
 								<string key="candidateClassName">UILabel</string>
 							</object>
 							<object class="IBToOneOutletInfo">
+								<string key="name">_titelLabel</string>
+								<string key="candidateClassName">UILabel</string>
+							</object>
+							<object class="IBToOneOutletInfo">
 								<string key="name">_titleNavigationItem</string>
 								<string key="candidateClassName">UINavigationItem</string>
 							</object>
@@ -426,46 +444,28 @@
 					<string key="className">TimeTableOverviewController</string>
 					<string key="superclassName">UIViewController</string>
 					<object class="NSMutableDictionary" key="actions">
-						<bool key="EncodedWithXMLCoder">YES</bool>
-						<object class="NSArray" key="dict.sortedKeys">
-							<bool key="EncodedWithXMLCoder">YES</bool>
-							<string>enterAcronym:</string>
-							<string>tryConnectionAgain:</string>
-						</object>
-						<object class="NSArray" key="dict.values">
-							<bool key="EncodedWithXMLCoder">YES</bool>
-							<string>id</string>
-							<string>id</string>
-						</object>
+						<string key="NS.key.0">tryConnectionAgain:</string>
+						<string key="NS.object.0">id</string>
 					</object>
 					<object class="NSMutableDictionary" key="actionInfosByName">
-						<bool key="EncodedWithXMLCoder">YES</bool>
-						<object class="NSArray" key="dict.sortedKeys">
-							<bool key="EncodedWithXMLCoder">YES</bool>
-							<string>enterAcronym:</string>
-							<string>tryConnectionAgain:</string>
-						</object>
-						<object class="NSArray" key="dict.values">
-							<bool key="EncodedWithXMLCoder">YES</bool>
-							<object class="IBActionInfo">
-								<string key="name">enterAcronym:</string>
-								<string key="candidateClassName">id</string>
-							</object>
-							<object class="IBActionInfo">
-								<string key="name">tryConnectionAgain:</string>
-								<string key="candidateClassName">id</string>
-							</object>
+						<string key="NS.key.0">tryConnectionAgain:</string>
+						<object class="IBActionInfo" key="NS.object.0">
+							<string key="name">tryConnectionAgain:</string>
+							<string key="candidateClassName">id</string>
 						</object>
 					</object>
 					<object class="NSMutableDictionary" key="outlets">
 						<bool key="EncodedWithXMLCoder">YES</bool>
 						<object class="NSArray" key="dict.sortedKeys">
 							<bool key="EncodedWithXMLCoder">YES</bool>
+							<string>_acronymButton</string>
 							<string>_acronymLabel</string>
-							<string>_acronymVC</string>
+							<string>_chooseDateVC</string>
+							<string>_dateLabel</string>
 							<string>_dayNavigator</string>
 							<string>_detailsVC</string>
 							<string>_eightSlotsOneRoomTableCell</string>
+							<string>_emptyTableCell</string>
 							<string>_fiveSlotsOneRoomTableCell</string>
 							<string>_fourSlotsOneRoomTableCell</string>
 							<string>_fourSlotsThreeRoomsTableCell</string>
@@ -480,21 +480,26 @@
 							<string>_oneSlotSixRoomsTableCell</string>
 							<string>_oneSlotThreeRoomsTableCell</string>
 							<string>_oneSlotTwoRoomsTableCell</string>
-							<string>_ownStoredAcronymLabel</string>
+							<string>_sixSlotsOneRoomTableCell</string>
+							<string>_sixSlotsTwoRoomsTableCell</string>
 							<string>_threeSlotsOneRoomTableCell</string>
 							<string>_threeSlotsThreeRoomsTableCell</string>
 							<string>_threeSlotsTwoRoomsTableCell</string>
 							<string>_timeTable</string>
 							<string>_twoSlotsOneRoomTableCell</string>
+							<string>_twoSlotsSixRoomsTableCell</string>
 							<string>_twoSlotsTwoRoomsTableCell</string>
 							<string>timeTableView</string>
 						</object>
 						<object class="NSArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
+							<string>UIButton</string>
 							<string>UILabel</string>
-							<string>AcronymViewController</string>
+							<string>ChooseDateViewController</string>
+							<string>UILabel</string>
 							<string>UINavigationItem</string>
 							<string>TimeTableDetailController</string>
+							<string>UITableViewCell</string>
 							<string>UITableViewCell</string>
 							<string>UITableViewCell</string>
 							<string>UITableViewCell</string>
@@ -510,11 +515,13 @@
 							<string>UITableViewCell</string>
 							<string>UITableViewCell</string>
 							<string>UITableViewCell</string>
-							<string>UILabel</string>
+							<string>UITableViewCell</string>
+							<string>UITableViewCell</string>
 							<string>UITableViewCell</string>
 							<string>UITableViewCell</string>
 							<string>UITableViewCell</string>
 							<string>UITableView</string>
+							<string>UITableViewCell</string>
 							<string>UITableViewCell</string>
 							<string>UITableViewCell</string>
 							<string>UIView</string>
@@ -524,11 +531,14 @@
 						<bool key="EncodedWithXMLCoder">YES</bool>
 						<object class="NSArray" key="dict.sortedKeys">
 							<bool key="EncodedWithXMLCoder">YES</bool>
+							<string>_acronymButton</string>
 							<string>_acronymLabel</string>
-							<string>_acronymVC</string>
+							<string>_chooseDateVC</string>
+							<string>_dateLabel</string>
 							<string>_dayNavigator</string>
 							<string>_detailsVC</string>
 							<string>_eightSlotsOneRoomTableCell</string>
+							<string>_emptyTableCell</string>
 							<string>_fiveSlotsOneRoomTableCell</string>
 							<string>_fourSlotsOneRoomTableCell</string>
 							<string>_fourSlotsThreeRoomsTableCell</string>
@@ -543,24 +553,34 @@
 							<string>_oneSlotSixRoomsTableCell</string>
 							<string>_oneSlotThreeRoomsTableCell</string>
 							<string>_oneSlotTwoRoomsTableCell</string>
-							<string>_ownStoredAcronymLabel</string>
+							<string>_sixSlotsOneRoomTableCell</string>
+							<string>_sixSlotsTwoRoomsTableCell</string>
 							<string>_threeSlotsOneRoomTableCell</string>
 							<string>_threeSlotsThreeRoomsTableCell</string>
 							<string>_threeSlotsTwoRoomsTableCell</string>
 							<string>_timeTable</string>
 							<string>_twoSlotsOneRoomTableCell</string>
+							<string>_twoSlotsSixRoomsTableCell</string>
 							<string>_twoSlotsTwoRoomsTableCell</string>
 							<string>timeTableView</string>
 						</object>
 						<object class="NSArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<object class="IBToOneOutletInfo">
+								<string key="name">_acronymButton</string>
+								<string key="candidateClassName">UIButton</string>
+							</object>
+							<object class="IBToOneOutletInfo">
 								<string key="name">_acronymLabel</string>
 								<string key="candidateClassName">UILabel</string>
 							</object>
 							<object class="IBToOneOutletInfo">
-								<string key="name">_acronymVC</string>
-								<string key="candidateClassName">AcronymViewController</string>
+								<string key="name">_chooseDateVC</string>
+								<string key="candidateClassName">ChooseDateViewController</string>
+							</object>
+							<object class="IBToOneOutletInfo">
+								<string key="name">_dateLabel</string>
+								<string key="candidateClassName">UILabel</string>
 							</object>
 							<object class="IBToOneOutletInfo">
 								<string key="name">_dayNavigator</string>
@@ -572,6 +592,10 @@
 							</object>
 							<object class="IBToOneOutletInfo">
 								<string key="name">_eightSlotsOneRoomTableCell</string>
+								<string key="candidateClassName">UITableViewCell</string>
+							</object>
+							<object class="IBToOneOutletInfo">
+								<string key="name">_emptyTableCell</string>
 								<string key="candidateClassName">UITableViewCell</string>
 							</object>
 							<object class="IBToOneOutletInfo">
@@ -631,8 +655,12 @@
 								<string key="candidateClassName">UITableViewCell</string>
 							</object>
 							<object class="IBToOneOutletInfo">
-								<string key="name">_ownStoredAcronymLabel</string>
-								<string key="candidateClassName">UILabel</string>
+								<string key="name">_sixSlotsOneRoomTableCell</string>
+								<string key="candidateClassName">UITableViewCell</string>
+							</object>
+							<object class="IBToOneOutletInfo">
+								<string key="name">_sixSlotsTwoRoomsTableCell</string>
+								<string key="candidateClassName">UITableViewCell</string>
 							</object>
 							<object class="IBToOneOutletInfo">
 								<string key="name">_threeSlotsOneRoomTableCell</string>
@@ -652,6 +680,10 @@
 							</object>
 							<object class="IBToOneOutletInfo">
 								<string key="name">_twoSlotsOneRoomTableCell</string>
+								<string key="candidateClassName">UITableViewCell</string>
+							</object>
+							<object class="IBToOneOutletInfo">
+								<string key="name">_twoSlotsSixRoomsTableCell</string>
 								<string key="candidateClassName">UITableViewCell</string>
 							</object>
 							<object class="IBToOneOutletInfo">

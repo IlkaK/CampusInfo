@@ -65,6 +65,7 @@
 		A3A8654D1520A0C90074FFE5 /* TimeTableOverviewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A3A8654B1520A0C90074FFE5 /* TimeTableOverviewController.xib */; };
 		E13D3B5B17412F0500F534DB /* ChooseDateViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E13D3B5917412F0500F534DB /* ChooseDateViewController.m */; };
 		E13D3B5C17412F0500F534DB /* ChooseDateViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E13D3B5A17412F0500F534DB /* ChooseDateViewController.xib */; };
+		E1C9B22A1743894F00BD3DAE /* TwoSlotsFourRoomsTableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E1C9B2291743894F00BD3DAE /* TwoSlotsFourRoomsTableCell.xib */; };
 		E1DA967C1740E41C00CA206F /* SettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E1DA967A1740E41C00CA206F /* SettingsViewController.m */; };
 		E1DA967D1740E41C00CA206F /* SettingsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E1DA967B1740E41C00CA206F /* SettingsViewController.xib */; };
 /* End PBXBuildFile section */
@@ -148,6 +149,7 @@
 		E13D3B5817412F0500F534DB /* ChooseDateViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChooseDateViewController.h; sourceTree = "<group>"; };
 		E13D3B5917412F0500F534DB /* ChooseDateViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChooseDateViewController.m; sourceTree = "<group>"; };
 		E13D3B5A17412F0500F534DB /* ChooseDateViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ChooseDateViewController.xib; sourceTree = "<group>"; };
+		E1C9B2291743894F00BD3DAE /* TwoSlotsFourRoomsTableCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TwoSlotsFourRoomsTableCell.xib; sourceTree = "<group>"; };
 		E1DA96791740E41C00CA206F /* SettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingsViewController.h; sourceTree = "<group>"; };
 		E1DA967A1740E41C00CA206F /* SettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingsViewController.m; sourceTree = "<group>"; };
 		E1DA967B1740E41C00CA206F /* SettingsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SettingsViewController.xib; sourceTree = "<group>"; };
@@ -170,6 +172,7 @@
 		27C1ED19157A51AC000DF028 /* TimeTableCells */ = {
 			isa = PBXGroup;
 			children = (
+				276ED473173BE5CA00EF79D5 /* EmptyTableCell.xib */,
 				A398BA64152383D900F98450 /* OneSlotOneRoomTableCell.xib */,
 				27761DA21578EF0400477BC0 /* OneSlotTwoRoomsTableCell.xib */,
 				27761D9C1578E39F00477BC0 /* OneSlotThreeRoomsTableCell.xib */,
@@ -180,18 +183,18 @@
 				27761DA5157914D200477BC0 /* OneSlotEightRoomsTableCell.xib */,
 				27BEC5D31567845A00F9AA4E /* TwoSlotsOneRoomTableCell.xib */,
 				27761DB01579333100477BC0 /* TwoSlotsTwoRoomsTableCell.xib */,
+				E1C9B2291743894F00BD3DAE /* TwoSlotsFourRoomsTableCell.xib */,
+				275ACAD0173D4AD20091B266 /* TwoSlotSixRoomsTableCell.xib */,
 				27761D991578C1C200477BC0 /* ThreeSlotsOneRoomTableCell.xib */,
 				2700DD2C1699F2C4002906D0 /* ThreeSlotsTwoRoomsTableCell.xib */,
 				2700DD2E1699F854002906D0 /* ThreeSlotsThreeRoomsTableCell.xib */,
+				27650DEE156D749E004B0FA2 /* FourSlotsOneRoomTableCell.xib */,
 				27761DB21579427500477BC0 /* FourSlotsTwoRoomsTableCell.xib */,
 				27761DB415794AB900477BC0 /* FourSlotsThreeRoomsTableCell.xib */,
-				27650DEE156D749E004B0FA2 /* FourSlotsOneRoomTableCell.xib */,
 				27C1ED1C157A6867000DF028 /* FiveSlotsOneRoomTableCell.xib */,
-				2700DD201699DD1A002906D0 /* EightSlotsOneRoomTableCell.xib */,
-				276ED473173BE5CA00EF79D5 /* EmptyTableCell.xib */,
 				275ACACC173D36C90091B266 /* SixSlotsTwoRoomsTableCell.xib */,
 				275ACACE173D3BB50091B266 /* SixSlotsOneRoomTableCell.xib */,
-				275ACAD0173D4AD20091B266 /* TwoSlotSixRoomsTableCell.xib */,
+				2700DD201699DD1A002906D0 /* EightSlotsOneRoomTableCell.xib */,
 			);
 			name = TimeTableCells;
 			sourceTree = "<group>";
@@ -422,6 +425,7 @@
 				275ACAD1173D4AD20091B266 /* TwoSlotSixRoomsTableCell.xib in Resources */,
 				E1DA967D1740E41C00CA206F /* SettingsViewController.xib in Resources */,
 				E13D3B5C17412F0500F534DB /* ChooseDateViewController.xib in Resources */,
+				E1C9B22A1743894F00BD3DAE /* TwoSlotsFourRoomsTableCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
