@@ -31,7 +31,6 @@
 @synthesize _chooseDateVC;
 
 @synthesize _acronymLabel;
-@synthesize _acronymButton;
 
 @synthesize _ownStoredAcronymString;
 @synthesize _ownStoredAcronymType;
@@ -230,6 +229,17 @@
     [self setNewScheduleWithDate:_actualDate];
 }
 
+- (IBAction)backToOwnAcronym:(id)sender
+{
+    [self setNewScheduleWithAcronym:self._ownStoredAcronymString
+                    withAcronymType:self._ownStoredAcronymType
+                    withAcronymText:[NSString stringWithFormat:@"von %@ (%@)"
+                                     ,_ownStoredAcronymString
+                                     ,[self getGermanTypeTranslation:_ownStoredAcronymType]
+                                     ]
+     ];
+}
+
 
 - (void)didReceiveMemoryWarning
 {
@@ -391,11 +401,6 @@
                                        ,[self getGermanTypeTranslation:_ownStoredAcronymType]
                                       ];
         
-        NSString *_acronymButtonTitle = [NSString stringWithFormat:@"Kürzel von:\n%@"
-                                         ,_ownStoredAcronymString];
-        
-        [_acronymButton setTitle:_acronymButtonTitle forState: UIControlStateNormal];
-        
         // SET NEW ACRONYM WITH ACTUAL DATE
         [self setNewScheduleWithAcronym:_ownStoredAcronymString
          withAcronymType:_ownStoredAcronymType
@@ -489,15 +494,6 @@
     _detailsVC._timeTableDetailViewDelegate = self;
     _detailsVC.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
     
-    // ----- ACRONYM -----
-    if (_acronymButton == nil)
-    {
-		_acronymButton = [[UIButton alloc] init];
-	}
-    _acronymButton.titleLabel.lineBreakMode = NSLineBreakByWordWrapping;
-    _acronymButton.titleLabel.textAlignment = NSTextAlignmentCenter;
-    [_acronymButton addTarget:self action:@selector(backToOwnAcronym:)forControlEvents:UIControlEventTouchDown];
-    
     
     // ------ CHOOSE DATE FREELY ----
     if (_chooseDateVC == nil)
@@ -552,18 +548,6 @@
     [self setNewScheduleWithAcronym:self._searchText
                     withAcronymType:[self getEnglishTypeTranslation:self._searchType]
                     withAcronymText:[NSString stringWithFormat:@"von %@ (%@)",self._searchText, self._searchType]
-     ];
-}
-
-
--(void)backToOwnAcronym:(id)sender
-{
-    [self setNewScheduleWithAcronym:self._ownStoredAcronymString
-                    withAcronymType:self._ownStoredAcronymType
-                    withAcronymText:[NSString stringWithFormat:@"von %@ (%@)"
-                                     ,_ownStoredAcronymString
-                                     ,[self getGermanTypeTranslation:_ownStoredAcronymType]
-                                     ]
      ];
 }
 
@@ -718,7 +702,6 @@
     _twoSlotsSixRoomsTableCell = nil;
     _dateLabel = nil;
     _chooseDateVC = nil;
-    _acronymButton = nil;
     _twoSlotsFourRoomsTableCell = nil;
     [super viewDidUnload];
 }

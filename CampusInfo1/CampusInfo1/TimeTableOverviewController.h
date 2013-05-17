@@ -49,7 +49,6 @@ UIViewController
     
     // acronym for timetable
     IBOutlet UILabel          *_acronymLabel;
-    IBOutlet UIButton         *_acronymButton;
     
     // taking care of the button to time table details    
     IBOutlet TimeTableDetailController *_detailsVC;
@@ -104,7 +103,6 @@ UIViewController
 @property (nonatomic, retain) IBOutlet UILabel                   *_dateLabel;
 
 @property (nonatomic, retain) IBOutlet UILabel                   *_acronymLabel;
-@property (nonatomic, retain) IBOutlet UIButton                  *_acronymButton;
 
 @property (nonatomic, retain) IBOutlet UITableViewCell           *_oneSlotOneRoomTableCell;
 @property (nonatomic, retain) IBOutlet UITableViewCell           *_oneSlotTwoRoomsTableCell;
@@ -159,5 +157,6 @@ UIViewController
 
 - (IBAction)tryConnectionAgain:(id)sender;
 
+- (IBAction)backToOwnAcronym:(id)sender;
 
 @end

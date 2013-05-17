@@ -97,8 +97,12 @@
     //NSLog(@"search type: %@, search text: %@",_searchType, _searchTextField.text);
    // [self setNewScheduleWithDate:_actualDate];
     
+    // trim space in front of and after the string
+    NSString *_stringWithoutSpaces = [_searchTextField.text stringByTrimmingCharactersInSet:
+     [NSCharacterSet whitespaceAndNewlineCharacterSet]];
+    
     [[NSNotificationCenter defaultCenter] postNotificationName:@"SearchType" object:_searchType];
-    [[NSNotificationCenter defaultCenter] postNotificationName:@"SearchText" object:_searchTextField.text];
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"SearchText" object:_stringWithoutSpaces];
     
     self.tabBarController.selectedIndex = 0;
     [self dismissModalViewControllerAnimated:YES];
