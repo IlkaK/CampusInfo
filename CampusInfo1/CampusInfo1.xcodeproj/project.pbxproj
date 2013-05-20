@@ -32,6 +32,7 @@
 		277DDD801534A509006136B5 /* arrowLeft_small.png in Resources */ = {isa = PBXBuildFile; fileRef = 277DDD7F1534A509006136B5 /* arrowLeft_small.png */; };
 		277DDD821534A54B006136B5 /* arrowRight_small.png in Resources */ = {isa = PBXBuildFile; fileRef = 277DDD811534A54B006136B5 /* arrowRight_small.png */; };
 		277EDF79155D60DC002BCE1F /* ScheduleCourseDto.m in Sources */ = {isa = PBXBuildFile; fileRef = 277EDF78155D60DC002BCE1F /* ScheduleCourseDto.m */; };
+		27943588174686E40077923D /* settings.png in Resources */ = {isa = PBXBuildFile; fileRef = 27943587174686E40077923D /* settings.png */; };
 		27B66927153AE0D8004D3ABC /* TimeTableAsyncRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 27B66926153AE0D8004D3ABC /* TimeTableAsyncRequest.m */; };
 		27BEC5D41567845A00F9AA4E /* TwoSlotsOneRoomTableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 27BEC5D31567845A00F9AA4E /* TwoSlotsOneRoomTableCell.xib */; };
 		27C1ED1D157A6867000DF028 /* FiveSlotsOneRoomTableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 27C1ED1C157A6867000DF028 /* FiveSlotsOneRoomTableCell.xib */; };
@@ -99,6 +100,7 @@
 		277DDD811534A54B006136B5 /* arrowRight_small.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = arrowRight_small.png; path = CampusInfo1/resources/icons/arrowRight_small.png; sourceTree = "<group>"; };
 		277EDF77155D60DB002BCE1F /* ScheduleCourseDto.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ScheduleCourseDto.h; sourceTree = "<group>"; };
 		277EDF78155D60DC002BCE1F /* ScheduleCourseDto.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ScheduleCourseDto.m; sourceTree = "<group>"; };
+		27943587174686E40077923D /* settings.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = settings.png; path = CampusInfo1/resources/icons/settings.png; sourceTree = "<group>"; };
 		27B66925153AE0D8004D3ABC /* TimeTableAsyncRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TimeTableAsyncRequest.h; sourceTree = "<group>"; };
 		27B66926153AE0D8004D3ABC /* TimeTableAsyncRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TimeTableAsyncRequest.m; sourceTree = "<group>"; };
 		27BEC5D31567845A00F9AA4E /* TwoSlotsOneRoomTableCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TwoSlotsOneRoomTableCell.xib; sourceTree = "<group>"; };
@@ -282,6 +284,7 @@
 		A35A34501520830700181E3F /* Icon */ = {
 			isa = PBXGroup;
 			children = (
+				27943587174686E40077923D /* settings.png */,
 				277DDD811534A54B006136B5 /* arrowRight_small.png */,
 				277DDD7F1534A509006136B5 /* arrowLeft_small.png */,
 				A35A34531520839E00181E3F /* search.png */,
@@ -426,6 +429,7 @@
 				E1DA967D1740E41C00CA206F /* SettingsViewController.xib in Resources */,
 				E13D3B5C17412F0500F534DB /* ChooseDateViewController.xib in Resources */,
 				E1C9B22A1743894F00BD3DAE /* TwoSlotsFourRoomsTableCell.xib in Resources */,
+				27943588174686E40077923D /* settings.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
