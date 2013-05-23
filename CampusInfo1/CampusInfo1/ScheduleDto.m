@@ -36,7 +36,7 @@
 @synthesize _asyncTimeTableRequest;
 @synthesize _dataFromUrl;
 
-
+@synthesize _errorMessage;
 
 
 - (NSDateFormatter *)dayFormatter {
@@ -1030,10 +1030,12 @@
                 if ([scheduleKey isEqualToString:@"Message"])
                 {
                     NSString *_message = [_scheduleDictionary objectForKey:scheduleKey];
+                    self._errorMessage = _message;
                     NSLog(@"Message: %@",_message);
                 }
                 else
                 {
+                  self._errorMessage = nil;
                   // define type of schedule
                   if ([scheduleKey isEqualToString:@"type"])
                   {
