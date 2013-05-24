@@ -233,7 +233,7 @@
 
 - (IBAction)backToOwnAcronym:(id)sender
 {
-    if (_ownStoredAcronymString == nil)
+    if (self._ownStoredAcronymString == nil)
     {
         self.tabBarController.selectedIndex = 2;
         [self dismissModalViewControllerAnimated:YES];
@@ -659,10 +659,11 @@
     [self becomeFirstResponder];
     
     NSUserDefaults *_acronymUserDefaults = [NSUserDefaults standardUserDefaults];
-    NSString       *_acronym             = [_acronymUserDefaults stringForKey:@"TimeTableAcronym"];
+    self._ownStoredAcronymString         = [_acronymUserDefaults stringForKey:@"TimeTableAcronym"];
+    self._ownStoredAcronymType           = [self getAcronymType:_ownStoredAcronymString];
     
     // go to acronym page to enforce setting an acronym
-    if (_acronym == nil && self._searchText == nil)
+    if (self._ownStoredAcronymString == nil && self._searchText == nil)
     {
         //NSLog(@"viewDidLoad noch kein Kürzel für den Stundenplan");
         
