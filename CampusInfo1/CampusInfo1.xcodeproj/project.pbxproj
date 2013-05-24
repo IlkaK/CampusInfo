@@ -12,9 +12,11 @@
 		2700DD2A1699EC2C002906D0 /* OneSlotSevenRoomsTableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2700DD291699EC2C002906D0 /* OneSlotSevenRoomsTableCell.xib */; };
 		2700DD2D1699F2C4002906D0 /* ThreeSlotsTwoRoomsTableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2700DD2C1699F2C4002906D0 /* ThreeSlotsTwoRoomsTableCell.xib */; };
 		2700DD2F1699F854002906D0 /* ThreeSlotsThreeRoomsTableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2700DD2E1699F854002906D0 /* ThreeSlotsThreeRoomsTableCell.xib */; };
+		270ACE1D174EA09D00F72E2A /* TwoSlotsThreeRoomsTableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 270ACE1C174EA09D00F72E2A /* TwoSlotsThreeRoomsTableCell.xib */; };
 		275ACACD173D36C90091B266 /* SixSlotsTwoRoomsTableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 275ACACC173D36C90091B266 /* SixSlotsTwoRoomsTableCell.xib */; };
 		275ACACF173D3BB60091B266 /* SixSlotsOneRoomTableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 275ACACE173D3BB50091B266 /* SixSlotsOneRoomTableCell.xib */; };
 		275ACAD1173D4AD20091B266 /* TwoSlotSixRoomsTableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 275ACAD0173D4AD20091B266 /* TwoSlotSixRoomsTableCell.xib */; };
+		2763A9E8174E62B10051255C /* ErrorMessageCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2763A9E7174E62B10051255C /* ErrorMessageCell.xib */; };
 		27650DEF156D749E004B0FA2 /* FourSlotsOneRoomTableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 27650DEE156D749E004B0FA2 /* FourSlotsOneRoomTableCell.xib */; };
 		276ED474173BE5CA00EF79D5 /* EmptyTableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 276ED473173BE5CA00EF79D5 /* EmptyTableCell.xib */; };
 		27761D9A1578C1C200477BC0 /* ThreeSlotsOneRoomTableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 27761D991578C1C200477BC0 /* ThreeSlotsOneRoomTableCell.xib */; };
@@ -77,9 +79,11 @@
 		2700DD291699EC2C002906D0 /* OneSlotSevenRoomsTableCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OneSlotSevenRoomsTableCell.xib; sourceTree = "<group>"; };
 		2700DD2C1699F2C4002906D0 /* ThreeSlotsTwoRoomsTableCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ThreeSlotsTwoRoomsTableCell.xib; sourceTree = "<group>"; };
 		2700DD2E1699F854002906D0 /* ThreeSlotsThreeRoomsTableCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ThreeSlotsThreeRoomsTableCell.xib; sourceTree = "<group>"; };
+		270ACE1C174EA09D00F72E2A /* TwoSlotsThreeRoomsTableCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TwoSlotsThreeRoomsTableCell.xib; sourceTree = "<group>"; };
 		275ACACC173D36C90091B266 /* SixSlotsTwoRoomsTableCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SixSlotsTwoRoomsTableCell.xib; sourceTree = "<group>"; };
 		275ACACE173D3BB50091B266 /* SixSlotsOneRoomTableCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SixSlotsOneRoomTableCell.xib; sourceTree = "<group>"; };
 		275ACAD0173D4AD20091B266 /* TwoSlotSixRoomsTableCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TwoSlotSixRoomsTableCell.xib; sourceTree = "<group>"; };
+		2763A9E7174E62B10051255C /* ErrorMessageCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ErrorMessageCell.xib; sourceTree = "<group>"; };
 		27650DEE156D749E004B0FA2 /* FourSlotsOneRoomTableCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FourSlotsOneRoomTableCell.xib; sourceTree = "<group>"; };
 		276ED473173BE5CA00EF79D5 /* EmptyTableCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EmptyTableCell.xib; sourceTree = "<group>"; };
 		27761D991578C1C200477BC0 /* ThreeSlotsOneRoomTableCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ThreeSlotsOneRoomTableCell.xib; sourceTree = "<group>"; };
@@ -175,6 +179,7 @@
 			isa = PBXGroup;
 			children = (
 				276ED473173BE5CA00EF79D5 /* EmptyTableCell.xib */,
+				2763A9E7174E62B10051255C /* ErrorMessageCell.xib */,
 				A398BA64152383D900F98450 /* OneSlotOneRoomTableCell.xib */,
 				27761DA21578EF0400477BC0 /* OneSlotTwoRoomsTableCell.xib */,
 				27761D9C1578E39F00477BC0 /* OneSlotThreeRoomsTableCell.xib */,
@@ -185,6 +190,7 @@
 				27761DA5157914D200477BC0 /* OneSlotEightRoomsTableCell.xib */,
 				27BEC5D31567845A00F9AA4E /* TwoSlotsOneRoomTableCell.xib */,
 				27761DB01579333100477BC0 /* TwoSlotsTwoRoomsTableCell.xib */,
+				270ACE1C174EA09D00F72E2A /* TwoSlotsThreeRoomsTableCell.xib */,
 				E1C9B2291743894F00BD3DAE /* TwoSlotsFourRoomsTableCell.xib */,
 				275ACAD0173D4AD20091B266 /* TwoSlotSixRoomsTableCell.xib */,
 				27761D991578C1C200477BC0 /* ThreeSlotsOneRoomTableCell.xib */,
@@ -430,6 +436,8 @@
 				E13D3B5C17412F0500F534DB /* ChooseDateViewController.xib in Resources */,
 				E1C9B22A1743894F00BD3DAE /* TwoSlotsFourRoomsTableCell.xib in Resources */,
 				27943588174686E40077923D /* settings.png in Resources */,
+				2763A9E8174E62B10051255C /* ErrorMessageCell.xib in Resources */,
+				270ACE1D174EA09D00F72E2A /* TwoSlotsThreeRoomsTableCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

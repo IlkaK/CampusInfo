@@ -64,6 +64,7 @@ UIViewController
 
     IBOutlet UITableViewCell  *_twoSlotsOneRoomTableCell;
     IBOutlet UITableViewCell  *_twoSlotsTwoRoomsTableCell;
+    IBOutlet UITableViewCell  *_twoSlotsThreeRoomsTableCell;
     IBOutlet UITableViewCell  *_twoSlotsFourRoomsTableCell;
     IBOutlet UITableViewCell  *_twoSlotsSixRoomsTableCell;
 
@@ -83,6 +84,7 @@ UIViewController
     IBOutlet UITableViewCell  *_eightSlotsOneRoomTableCell;
     
     IBOutlet UITableViewCell  *_emptyTableCell;
+    IBOutlet UITableViewCell  *_errorMessageCell;
     
     IBOutlet UIButton         *_noConnectionButton;
     IBOutlet UILabel          *_noConnectionLabel;
@@ -115,6 +117,7 @@ UIViewController
 
 @property (nonatomic, retain) IBOutlet UITableViewCell           *_twoSlotsOneRoomTableCell;
 @property (nonatomic, retain) IBOutlet UITableViewCell           *_twoSlotsTwoRoomsTableCell;
+@property (nonatomic, retain) IBOutlet UITableViewCell           *_twoSlotsThreeRoomsTableCell;
 @property (nonatomic, retain) IBOutlet UITableViewCell           *_twoSlotsFourRoomsTableCell;
 @property (nonatomic, retain) IBOutlet UITableViewCell           *_twoSlotsSixRoomsTableCell;
 
@@ -134,6 +137,7 @@ UIViewController
 @property (nonatomic, retain) IBOutlet UITableViewCell           *_eightSlotsOneRoomTableCell;
 
 @property (nonatomic, retain) IBOutlet UITableViewCell           *_emptyTableCell;
+@property (nonatomic, retain) IBOutlet UITableViewCell           *_errorMessageCell;
 
 @property (nonatomic, retain) IBOutlet UIButton                  *_noConnectionButton;
 @property (nonatomic, retain) IBOutlet UILabel                   *_noConnectionLabel;

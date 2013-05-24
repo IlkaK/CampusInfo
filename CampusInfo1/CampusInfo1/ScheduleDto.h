@@ -37,7 +37,7 @@
     // holding data gained from url
     NSData                *_dataFromUrl;
     
-
+    NSString              *_errorMessage;
 }
 
 @property (nonatomic, retain) NSMutableArray                 *_days;
@@ -56,6 +56,8 @@
 
 @property (nonatomic, retain) IBOutlet TimeTableAsyncRequest *_asyncTimeTableRequest;
 @property (nonatomic, retain) NSData                         *_dataFromUrl;
+
+@property (nonatomic, retain) NSString                       *_errorMessage;
 
 
 -(id) initWithAcronym

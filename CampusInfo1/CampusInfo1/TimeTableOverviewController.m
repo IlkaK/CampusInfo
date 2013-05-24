@@ -50,6 +50,7 @@
 
 @synthesize _twoSlotsOneRoomTableCell;
 @synthesize _twoSlotsTwoRoomsTableCell;
+@synthesize _twoSlotsThreeRoomsTableCell;
 @synthesize _twoSlotsFourRoomsTableCell;
 @synthesize _twoSlotsSixRoomsTableCell;
 
@@ -69,6 +70,7 @@
 @synthesize _eightSlotsOneRoomTableCell;
 
 @synthesize _emptyTableCell;
+@synthesize _errorMessageCell;
 
 @synthesize _noConnectionButton;
 @synthesize _noConnectionLabel;
@@ -231,13 +233,21 @@
 
 - (IBAction)backToOwnAcronym:(id)sender
 {
-    [self setNewScheduleWithAcronym:self._ownStoredAcronymString
-                    withAcronymType:self._ownStoredAcronymType
-                    withAcronymText:[NSString stringWithFormat:@"von %@ (%@)"
-                                     ,_ownStoredAcronymString
-                                     ,[self getGermanTypeTranslation:_ownStoredAcronymType]
-                                     ]
-     ];
+    if (_ownStoredAcronymString == nil)
+    {
+        self.tabBarController.selectedIndex = 2;
+        [self dismissModalViewControllerAnimated:YES];
+    }
+    else
+    {
+        [self setNewScheduleWithAcronym:self._ownStoredAcronymString
+                        withAcronymType:self._ownStoredAcronymType
+                        withAcronymText:[NSString stringWithFormat:@"von %@ (%@)"
+                                         ,_ownStoredAcronymString
+                                         ,[self getGermanTypeTranslation:_ownStoredAcronymType]
+                                         ]
+         ];
+    }
 }
 
 
@@ -303,6 +313,32 @@
     return _localTranslation;
 }
 
+
+- (NSString *)getGermanErrorMessageTranslation:(NSString *)errorMessage
+{
+    NSString *_localTranslation = @"";
+    if ([errorMessage isEqualToString:@"Schedule for given course name could not be found."])
+    {
+        _localTranslation = @"Der Stundenplan für den gesuchten Kurs konnte nicht gefunden werden. Bitte Schreibweise beachten (z.B. t.MARI-V)";
+    }
+    if ([errorMessage isEqualToString:@"Schedule for given lecturer id could not be found."])
+    {
+        _localTranslation = @"Der Stundenplan für den gesuchten Dozent konnte nicht gefunden werden. Bitte Schreibweise beachten (z.B. huhp, rege)";
+    }
+    if ([errorMessage isEqualToString:@"Schedule for given room name could not be found."])
+    {
+        _localTranslation = @"Der Stundenplan für den gesuchten Raum konnte nicht gefunden werden. Bitte Schreibweise beachten (z.B. te 223, th 344)";
+    }
+    if ([errorMessage isEqualToString:@"Schedule for given school class could not be found."])
+    {
+        _localTranslation = @"Der Stundenplan für den gesuchte Klasse konnte nicht gefunden werden. Bitte Schreibweise beachten (z.B. T_WI11a.BA)";
+    }
+    if ([errorMessage isEqualToString:@"Schedule for given students id could not be found."])
+    {
+        _localTranslation = @"Der Stundenplan für den gesuchten Studenten konnte nicht gefunden werden. Bitte Schreibweise beachten.";
+    }    
+    return _localTranslation;
+}
 
 
 - (void)setActualDate:(NSDate *)newDate
@@ -626,21 +662,16 @@
     NSString       *_acronym             = [_acronymUserDefaults stringForKey:@"TimeTableAcronym"];
     
     // go to acronym page to enforce setting an acronym
-    if (_acronym == nil || [_acronym length] == 0)
+    if (_acronym == nil && self._searchText == nil)
     {
-        NSLog(@"viewDidLoad noch kein Kürzel für den Stundenplan");
+        //NSLog(@"viewDidLoad noch kein Kürzel für den Stundenplan");
         
         // switch to settings tab
-        self.tabBarController.selectedIndex = 2;
+        self.tabBarController.selectedIndex = 1;
         [self dismissModalViewControllerAnimated:YES];
         
-        NSLog(@"cannot load acronym view");
+        //NSLog(@"cannot load acronym view");
     }
-    else
-    {
-        [self setAcronymLabel:_acronym];
-    }
-    
 }
 
 // also needed for shaking
@@ -657,7 +688,10 @@
     if (motion == UIEventSubtypeMotionShake)
     {
         [self setTitleToActualDate];
-        [self setNewAcronym:self._ownStoredAcronymString withAcronymType:self._ownStoredAcronymType];
+        if (self._ownStoredAcronymString != nil)
+        {
+            [self setNewAcronym:self._ownStoredAcronymString withAcronymType:self._ownStoredAcronymType];
+        }
     }
 }
 
@@ -703,6 +737,9 @@
     _dateLabel = nil;
     _chooseDateVC = nil;
     _twoSlotsFourRoomsTableCell = nil;
+    [self set_errorMessageCell:nil];
+    _errorMessageCell = nil;
+    _twoSlotsThreeRoomsTableCell = nil;
     [super viewDidUnload];
 }
 
@@ -864,7 +901,14 @@
 // ------- MANAGE TABLE CELLS ----
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return [_actualDayDto._events count];
+    if (self._schedule._errorMessage != nil)
+    {
+        return 1;
+    }
+    else
+    {
+        return [_actualDayDto._events count];
+    }
 }
 
 
@@ -1449,6 +1493,37 @@
 }
 
 
+- (UITableViewCell *)cellErrorMessage
+    :(UITableView      *)actualTableView
+    :(NSUInteger        )actualSelection
+    :(NSString         *)errorMessage
+{
+    static NSString *_cellIdentifier = @"ErrorMessageCell";
+    UITableViewCell *_cell           = [actualTableView dequeueReusableCellWithIdentifier:_cellIdentifier];
+    if (_cell == nil)
+    {
+        [[NSBundle mainBundle] loadNibNamed:@"ErrorMessageCell" owner:self options:nil];
+        _cell = _errorMessageCell;
+        self._errorMessageCell = nil;
+    }
+
+    UILabel          *_messageLabel     = (UILabel  *)[_cell viewWithTag:1];
+    
+    if (actualSelection == 0)
+    {
+        _messageLabel.text = [self getGermanErrorMessageTranslation:errorMessage];
+    }
+    else
+    {
+        _messageLabel.text = [NSString stringWithFormat:@""];
+    }
+    [self setBackgroundColorOfCell:_cell
+               withActualSelection:actualSelection
+                     withIsLecture:NO];
+    return _cell;
+}
+
+
 - (UITableViewCell *)emptyCellOrHoliday
     :(UITableView      *)actualTableView
     :(NSUInteger        )actualSelection
@@ -1847,6 +1922,47 @@
 
     return _cell;        
 }
+
+
+
+- (UITableViewCell *)twoSlotsThreeRoomsWithView           :(UITableView *)     actualTableView
+                                     withSelection       :(NSUInteger)        actualSelection
+                                     withScheduleEvent   :(ScheduleEventDto *)actualScheduleEvent
+{
+    static NSString *_cellIdentifier = @"TwoSlotsThreeRoomsTableCell";
+    UITableViewCell *_cell           = [actualTableView dequeueReusableCellWithIdentifier:_cellIdentifier];
+    
+    if (_cell == nil)
+    {
+        [[NSBundle mainBundle] loadNibNamed:@"TwoSlotsThreeRoomsTableCell" owner:self options:nil];
+        _cell = _twoSlotsThreeRoomsTableCell;
+        self._twoSlotsThreeRoomsTableCell = nil;
+    }
+    
+    ScheduleEventRealizationDto *_localRealization1 = [actualScheduleEvent._scheduleEventRealizations objectAtIndex:0];
+    ScheduleEventRealizationDto *_localRealization2 = [actualScheduleEvent._scheduleEventRealizations objectAtIndex:1];
+    ScheduleEventRealizationDto *_localRealization3 = [actualScheduleEvent._scheduleEventRealizations objectAtIndex:2];
+    SlotDto *_timeSlot1 = [actualScheduleEvent._slots objectAtIndex:0];
+    SlotDto *_timeSlot2 = [actualScheduleEvent._slots objectAtIndex:1];
+    
+    [self setDateLabelWithCell:_cell withTag:1 withActualSelection:actualSelection withStartTime:_timeSlot1._startTime withEndTime:_timeSlot1._endTime];
+    [self setDateLabelWithCell:_cell withTag:2 withActualSelection:actualSelection withStartTime:_timeSlot2._startTime withEndTime:_timeSlot2._endTime];
+    
+    [self setLectureButtonWithCell:_cell withTag:3 withActualSelection:actualSelection withTitle:actualScheduleEvent._name doEnable:TRUE];
+    
+    [self setRoomButtonWithCell:_cell withTag:4 withActualSelection:actualSelection withTitle:_localRealization1._room._name withSelector:1];
+    [self setRoomButtonWithCell:_cell withTag:5 withActualSelection:actualSelection withTitle:_localRealization2._room._name withSelector:2];
+    [self setRoomButtonWithCell:_cell withTag:6 withActualSelection:actualSelection withTitle:_localRealization3._room._name withSelector:3];
+    
+    [self setDetailButtonWithCell:_cell withTag:7 withActualSelection:actualSelection];
+    
+    [self setBackgroundColorOfCell:_cell
+               withActualSelection:actualSelection
+                     withIsLecture:YES];
+    
+    return _cell;
+}
+
 
 
 - (UITableViewCell *)twoSlotsFourRoomsWithView           :(UITableView *)     actualTableView
@@ -2455,7 +2571,11 @@
             if (_scheduleEvent != nil) 
             {
                 //NSLog(@"scheduleEvent IS NOT NIL");
-                
+                if (_schedule._errorMessage != nil)
+                {
+                    return [self cellErrorMessage:tableView:_cellSelection:_schedule._errorMessage];
+                }
+
                 // check for holidays first
                 if ([_scheduleEvent._type isEqualToString:@"Holiday"])
                 {
@@ -2548,6 +2668,14 @@
                     return [self twoSlotsTwoRoomsWithView:tableView
                                     withSelection       :_cellSelection
                                     withScheduleEvent   :_scheduleEvent];
+                }
+                if (   [_scheduleEvent._slots                     count] == 2
+                    && [_scheduleEvent._scheduleEventRealizations count] == 3
+                    )
+                {
+                    return [self twoSlotsThreeRoomsWithView:tableView
+                                     withSelection       :_cellSelection
+                                     withScheduleEvent   :_scheduleEvent];
                 }
                 if (   [_scheduleEvent._slots                     count] == 2
                     && [_scheduleEvent._scheduleEventRealizations count] == 4)
@@ -2733,6 +2861,7 @@
 
                 if (   [_scheduleEvent._slots                     count] == 4
                     || [_scheduleEvent._scheduleEventRealizations count] == 4
+                    || _schedule._errorMessage != nil
                    )
                 {
                   return 140;
