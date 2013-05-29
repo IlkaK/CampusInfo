@@ -323,7 +323,7 @@
     }
     if ([errorMessage isEqualToString:@"Schedule for given lecturer id could not be found."])
     {
-        _localTranslation = @"Der Stundenplan für den gesuchten Dozent konnte nicht gefunden werden. Bitte Schreibweise beachten (z.B. huhp, rege)";
+        _localTranslation = @"Der Stundenplan für den gesuchten Dozenten konnte nicht gefunden werden. Bitte Schreibweise beachten (z.B. huhp, rege)";
     }
     if ([errorMessage isEqualToString:@"Schedule for given room name could not be found."])
     {
@@ -331,7 +331,7 @@
     }
     if ([errorMessage isEqualToString:@"Schedule for given school class could not be found."])
     {
-        _localTranslation = @"Der Stundenplan für den gesuchte Klasse konnte nicht gefunden werden. Bitte Schreibweise beachten (z.B. T_WI11a.BA)";
+        _localTranslation = @"Der Stundenplan für die gesuchte Klasse konnte nicht gefunden werden. Bitte Schreibweise beachten (z.B. T_WI11a.BA)";
     }
     if ([errorMessage isEqualToString:@"Schedule for given students id could not be found."])
     {

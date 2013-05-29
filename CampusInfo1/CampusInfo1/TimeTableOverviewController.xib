@@ -162,7 +162,7 @@
 						<int key="IBUIContentMode">4</int>
 						<bool key="IBUIUserInteractionEnabled">NO</bool>
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
-						<string key="IBUIText">acronym</string>
+						<string key="IBUIText"/>
 						<nil key="IBUITextColor"/>
 						<nil key="IBUIHighlightedColor"/>
 						<int key="IBUIBaselineAdjustment">1</int>
@@ -785,6 +785,7 @@
 							<string>_detailsVC</string>
 							<string>_eightSlotsOneRoomTableCell</string>
 							<string>_emptyTableCell</string>
+							<string>_errorMessageCell</string>
 							<string>_fiveSlotsOneRoomTableCell</string>
 							<string>_fourSlotsOneRoomTableCell</string>
 							<string>_fourSlotsThreeRoomsTableCell</string>
@@ -808,6 +809,7 @@
 							<string>_twoSlotsFourRoomsTableCell</string>
 							<string>_twoSlotsOneRoomTableCell</string>
 							<string>_twoSlotsSixRoomsTableCell</string>
+							<string>_twoSlotsThreeRoomsTableCell</string>
 							<string>_twoSlotsTwoRoomsTableCell</string>
 							<string>timeTableView</string>
 						</object>
@@ -818,6 +820,7 @@
 							<string>UILabel</string>
 							<string>UINavigationItem</string>
 							<string>TimeTableDetailController</string>
+							<string>UITableViewCell</string>
 							<string>UITableViewCell</string>
 							<string>UITableViewCell</string>
 							<string>UITableViewCell</string>
@@ -844,6 +847,7 @@
 							<string>UITableViewCell</string>
 							<string>UITableViewCell</string>
 							<string>UITableViewCell</string>
+							<string>UITableViewCell</string>
 							<string>UIView</string>
 						</object>
 					</object>
@@ -858,6 +862,7 @@
 							<string>_detailsVC</string>
 							<string>_eightSlotsOneRoomTableCell</string>
 							<string>_emptyTableCell</string>
+							<string>_errorMessageCell</string>
 							<string>_fiveSlotsOneRoomTableCell</string>
 							<string>_fourSlotsOneRoomTableCell</string>
 							<string>_fourSlotsThreeRoomsTableCell</string>
@@ -881,6 +886,7 @@
 							<string>_twoSlotsFourRoomsTableCell</string>
 							<string>_twoSlotsOneRoomTableCell</string>
 							<string>_twoSlotsSixRoomsTableCell</string>
+							<string>_twoSlotsThreeRoomsTableCell</string>
 							<string>_twoSlotsTwoRoomsTableCell</string>
 							<string>timeTableView</string>
 						</object>
@@ -912,6 +918,10 @@
 							</object>
 							<object class="IBToOneOutletInfo">
 								<string key="name">_emptyTableCell</string>
+								<string key="candidateClassName">UITableViewCell</string>
+							</object>
+							<object class="IBToOneOutletInfo">
+								<string key="name">_errorMessageCell</string>
 								<string key="candidateClassName">UITableViewCell</string>
 							</object>
 							<object class="IBToOneOutletInfo">
@@ -1004,6 +1014,10 @@
 							</object>
 							<object class="IBToOneOutletInfo">
 								<string key="name">_twoSlotsSixRoomsTableCell</string>
+								<string key="candidateClassName">UITableViewCell</string>
+							</object>
+							<object class="IBToOneOutletInfo">
+								<string key="name">_twoSlotsThreeRoomsTableCell</string>
 								<string key="candidateClassName">UITableViewCell</string>
 							</object>
 							<object class="IBToOneOutletInfo">
