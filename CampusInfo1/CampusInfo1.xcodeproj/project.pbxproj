@@ -43,7 +43,6 @@
 		27CCE306154414190057D9F8 /* TimeTableDetailController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 27CCE304154414180057D9F8 /* TimeTableDetailController.xib */; };
 		27E0AA9C1550420C00D83EC1 /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 27E0AA9B1550420C00D83EC1 /* Icon.png */; };
 		27E8229E155D214A006EA12D /* ScheduleEventRealizationDto.m in Sources */ = {isa = PBXBuildFile; fileRef = 27E8229D155D214A006EA12D /* ScheduleEventRealizationDto.m */; };
-		27EDD1831695F7F00021BA7F /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 27EDD1821695F7F00021BA7F /* Default-568h@2x.png */; };
 		27FBF7281551A83600C09ED9 /* StartpageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 27FBF7261551A83600C09ED9 /* StartpageViewController.m */; };
 		27FBF7291551A83600C09ED9 /* StartpageViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 27FBF7271551A83600C09ED9 /* StartpageViewController.xib */; };
 		A35A34191520814800181E3F /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A35A34181520814800181E3F /* UIKit.framework */; };
@@ -70,6 +69,8 @@
 		E13D3B5C17412F0500F534DB /* ChooseDateViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E13D3B5A17412F0500F534DB /* ChooseDateViewController.xib */; };
 		E1C9B22A1743894F00BD3DAE /* TwoSlotsFourRoomsTableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E1C9B2291743894F00BD3DAE /* TwoSlotsFourRoomsTableCell.xib */; };
 		E1D48A5B1757856400BB1652 /* GradientButton.m in Sources */ = {isa = PBXBuildFile; fileRef = E1D48A5A1757856400BB1652 /* GradientButton.m */; };
+		E1D48A5D17579AA500BB1652 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = E1D48A5C17579AA500BB1652 /* Default.png */; };
+		E1D48A5F17579C5D00BB1652 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E1D48A5E17579C5D00BB1652 /* Default-568h@2x.png */; };
 		E1DA967C1740E41C00CA206F /* SettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E1DA967A1740E41C00CA206F /* SettingsViewController.m */; };
 		E1DA967D1740E41C00CA206F /* SettingsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E1DA967B1740E41C00CA206F /* SettingsViewController.xib */; };
 /* End PBXBuildFile section */
@@ -117,7 +118,6 @@
 		27E0AA9B1550420C00D83EC1 /* Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Icon.png; path = CampusInfo1/resources/Icon.png; sourceTree = "<group>"; };
 		27E8229C155D214A006EA12D /* ScheduleEventRealizationDto.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ScheduleEventRealizationDto.h; sourceTree = "<group>"; };
 		27E8229D155D214A006EA12D /* ScheduleEventRealizationDto.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ScheduleEventRealizationDto.m; sourceTree = "<group>"; };
-		27EDD1821695F7F00021BA7F /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		27FBF7251551A83600C09ED9 /* StartpageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StartpageViewController.h; sourceTree = "<group>"; };
 		27FBF7261551A83600C09ED9 /* StartpageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StartpageViewController.m; sourceTree = "<group>"; };
 		27FBF7271551A83600C09ED9 /* StartpageViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = StartpageViewController.xib; sourceTree = "<group>"; };
@@ -159,6 +159,8 @@
 		E1C9B2291743894F00BD3DAE /* TwoSlotsFourRoomsTableCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TwoSlotsFourRoomsTableCell.xib; sourceTree = "<group>"; };
 		E1D48A591757856400BB1652 /* GradientButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GradientButton.h; sourceTree = "<group>"; };
 		E1D48A5A1757856400BB1652 /* GradientButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GradientButton.m; sourceTree = "<group>"; };
+		E1D48A5C17579AA500BB1652 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
+		E1D48A5E17579C5D00BB1652 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		E1DA96791740E41C00CA206F /* SettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingsViewController.h; sourceTree = "<group>"; };
 		E1DA967A1740E41C00CA206F /* SettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingsViewController.m; sourceTree = "<group>"; };
 		E1DA967B1740E41C00CA206F /* SettingsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SettingsViewController.xib; sourceTree = "<group>"; };
@@ -222,7 +224,8 @@
 		A35A34091520814700181E3F = {
 			isa = PBXGroup;
 			children = (
-				27EDD1821695F7F00021BA7F /* Default-568h@2x.png */,
+				E1D48A5E17579C5D00BB1652 /* Default-568h@2x.png */,
+				E1D48A5C17579AA500BB1652 /* Default.png */,
 				A35A344E152082F600181E3F /* Resources */,
 				A35A341E1520814800181E3F /* CampusInfo1 */,
 				A35A34171520814800181E3F /* Frameworks */,
@@ -427,7 +430,6 @@
 				27761DB31579427500477BC0 /* FourSlotsTwoRoomsTableCell.xib in Resources */,
 				27761DB515794AB900477BC0 /* FourSlotsThreeRoomsTableCell.xib in Resources */,
 				27C1ED1D157A6867000DF028 /* FiveSlotsOneRoomTableCell.xib in Resources */,
-				27EDD1831695F7F00021BA7F /* Default-568h@2x.png in Resources */,
 				2700DD211699DD1A002906D0 /* EightSlotsOneRoomTableCell.xib in Resources */,
 				2700DD241699E730002906D0 /* OneSlotFourRoomsTableCell.xib in Resources */,
 				2700DD2A1699EC2C002906D0 /* OneSlotSevenRoomsTableCell.xib in Resources */,
@@ -443,6 +445,8 @@
 				27943588174686E40077923D /* settings.png in Resources */,
 				2763A9E8174E62B10051255C /* ErrorMessageCell.xib in Resources */,
 				270ACE1D174EA09D00F72E2A /* TwoSlotsThreeRoomsTableCell.xib in Resources */,
+				E1D48A5D17579AA500BB1652 /* Default.png in Resources */,
+				E1D48A5F17579C5D00BB1652 /* Default-568h@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

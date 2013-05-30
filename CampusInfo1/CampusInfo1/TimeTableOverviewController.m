@@ -2861,6 +2861,15 @@
                                     withSelection           :_cellSelection
                                     withScheduleEvent       :_scheduleEvent];
                 }
+                
+                //----------------------------
+                // workaround for more than eight slots
+                if (   [_scheduleEvent._slots                     count] > 8)
+                {
+                    return [self eightSlotsOneRoomWithView  :tableView
+                                    withSelection           :_cellSelection
+                                    withScheduleEvent       :_scheduleEvent];
+                }
             }
         }
     }

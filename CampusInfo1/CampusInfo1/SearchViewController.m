@@ -28,7 +28,7 @@
     _searchType = @"Dozent";
     
     // set picker view
-    self._chooseSearchType.frame = CGRectMake(20.0, 134.0, 140.0, 60.0);
+    self._chooseSearchType.frame = CGRectMake(20.0, 134.0, 140.0, 162.0);
     [_chooseSearchType selectRow:1 inComponent:0 animated:NO];
     
     self._searchTextField.delegate = self;

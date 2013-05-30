@@ -25,6 +25,9 @@
     // Add the tab bar controller's current view as a subview of the window
     //NSLog(@"Start Application");
     
+    // sleep to test launch screen
+    //[NSThread sleepForTimeInterval:10.0];
+    
     // those two lines are needed for shaking 
     application.applicationSupportsShakeToEdit = YES;
      [self.window setRootViewController:self.tabBarController];
