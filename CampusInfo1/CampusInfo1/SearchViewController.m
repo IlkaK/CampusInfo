@@ -26,7 +26,11 @@
                          @"Kurs", @"Dozent", @"Student",
                          @"Raum", @"Klasse", nil];
     _searchType = @"Dozent";
+    
+    // set picker view
+    self._chooseSearchType.frame = CGRectMake(20.0, 134.0, 140.0, 60.0);
     [_chooseSearchType selectRow:1 inComponent:0 animated:NO];
+    
     self._searchTextField.delegate = self;
     [_searchButton useAlertStyle];
 }

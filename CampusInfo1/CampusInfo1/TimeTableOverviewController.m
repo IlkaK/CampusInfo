@@ -2879,6 +2879,7 @@
     NSUInteger        _cellSelection = indexPath.section;
     ScheduleEventDto *_scheduleEvent = nil;
     
+    /*
     if (    _schedule._type                  == nil 
         || [_schedule._type length]          == 0
         ||  _schedule._connectionEstablished == nil
@@ -2888,6 +2889,7 @@
         // VERY IMPORTANT, OTHERWISE, NO NEW DATA
         [self viewWillAppear:YES];
     }
+     */
     
     // ONE CELL = ONE SCHEDULE_EVENT
     // kind of cell depending on the scheduleEvent
