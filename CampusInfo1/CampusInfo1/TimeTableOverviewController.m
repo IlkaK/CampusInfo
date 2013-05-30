@@ -593,7 +593,6 @@
 {
     [super viewWillAppear:animated];    
 
-    
     //NSLog(@"viewWillAppear schedule type %@",_schedule._type);
     
     // only reload, if acronym or date has changed
@@ -603,58 +602,79 @@
      || ([_schedule._connectionEstablished compare: @"NO"] == NSOrderedSame)
      ) 
     {
-        if (_actualShownAcronymTrials < 20)
+        //NSLog(@"viewWillAppear _actualShownAcronymString %@",_actualShownAcronymString);
+        if (self._actualShownAcronymString == nil || [self._actualShownAcronymString length] == 0)
         {
-          //NSLog(@"viewWillAppear try connecting");
-          _actualShownAcronymTrials++;
-          self._schedule             = [_schedule initWithAcronym:_actualShownAcronymString:_actualShownAcronymType:_actualDate];
-          _actualDayDto              = [self getDayDto];            
-          _noConnectionButton.hidden = YES;
-          _noConnectionLabel.hidden = YES;
-          [_timeTable reloadData];
+            if (self._searchText != nil && [self._searchText length] > 0)
+            {
+                self._actualShownAcronymString       = self._searchText;
+                self._actualShownAcronymType         = self._searchType;
+            }
+            else
+            {
             
-           // NSLog(@"time table is reloaded");
+                if (self._ownStoredAcronymString == nil || [_ownStoredAcronymString length] == 0)
+                {
+                    NSUserDefaults *_acronymUserDefaults = [NSUserDefaults standardUserDefaults];
+                    self._ownStoredAcronymString         = [_acronymUserDefaults stringForKey:@"TimeTableAcronym"];
+                    self._ownStoredAcronymType           = [self getAcronymType:_ownStoredAcronymString];
+                }
+                self._actualShownAcronymString       = self._ownStoredAcronymString;
+                self._actualShownAcronymType         = self._ownStoredAcronymType;
+            }
         }
-        else
-        {
-            //NSLog(@"50 mal versucht mit diesem Kürzel.");
-            _noConnectionButton.hidden = NO;
-            _noConnectionLabel.hidden = NO;
-        }
-    }
-}
-
-
-// gets values from acronym alert view
-- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
-    NSString *buttonTitle=[alertView buttonTitleAtIndex:buttonIndex];
-    if([buttonTitle isEqualToString:@"OK"]) 
-    {
-        UITextField *_textField = (UITextField*)[alertView viewWithTag:1001];
         
-        if (_actualShownAcronymString == nil ||
-            [_actualShownAcronymString  compare: _textField.text ]!= NSOrderedSame)
+        if (self._actualShownAcronymString != nil && [_actualShownAcronymString length] > 0)
         {
-            self._actualShownAcronymString       = _textField.text;
-            _actualShownAcronymTrials            = 1;
-            _acronymLabel.text                   = [NSString stringWithFormat:@"von %@",_actualShownAcronymString];
-            NSUserDefaults *_acronymUserDefaults = [NSUserDefaults standardUserDefaults];
-            [_acronymUserDefaults setObject:_actualShownAcronymString forKey:@"TimeTableAcronym"];
-            [_acronymUserDefaults synchronize];
+            self._acronymLabel.text          = [NSString stringWithFormat:@"von %@ (%@)"
+                                                ,self._actualShownAcronymString
+                                                ,[self getGermanTypeTranslation:self._actualShownAcronymType]
+                                                ];
+                        
+            //self._schedule                 = [[ScheduleDto alloc] initWithAcronym:_actualShownAcronymString:_actualShownAcronymType:_actualDate];
+            
+            
+            //NSLog(@"2 showScheduleDetails acronym: %@", self._actualShownAcronymString);
+            _detailsVC._dayAndAcronymString = [NSString stringWithFormat:@" für den %@ von %@ (%@)"
+                                               ,[[self dayFormatter] stringFromDate:_actualDate]
+                                               ,self._actualShownAcronymString
+                                               ,[self getGermanTypeTranslation:self._actualShownAcronymType]
+                                               ];
+            
+            
+            if (_actualShownAcronymTrials < 20)
+            {
+                //NSLog(@"viewWillAppear try connecting");
+                _actualShownAcronymTrials++;
+                if (self._schedule == nil)
+                {
+                    self._schedule = [[ScheduleDto alloc] initWithAcronym:_actualShownAcronymString:_actualShownAcronymType:_actualDate];
+                }
+                else
+                {
+                    self._schedule             = [_schedule initWithAcronym:_actualShownAcronymString:_actualShownAcronymType:_actualDate];
+                }
+                self._actualDayDto              = [self getDayDto];
+                self._noConnectionButton.hidden = YES;
+                self._noConnectionLabel.hidden = YES;
+                [_timeTable reloadData];
+            }
+            else
+            {
+                //NSLog(@"50 mal versucht mit diesem Kürzel.");
+                _noConnectionButton.hidden = NO;
+                _noConnectionLabel.hidden = NO;
+            }
         }
-       // NSLog(@"ok button is pushed: %@ %@", _textField.text, _acronymString);
     }
 }
 
 
-
-// needed for shaking
--(BOOL)canBecomeFirstResponder {
-    return YES;
-}
 
 // also needed for shaking
--(void)viewDidAppear:(BOOL)animated {
+-(void)viewDidAppear:(BOOL)animated
+{
+    
     [super viewDidAppear:animated];
     [self becomeFirstResponder];
     
@@ -681,6 +701,36 @@
     [self resignFirstResponder];
     [super viewWillDisappear:animated];
 }
+
+// gets values from acronym alert view
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
+    NSString *buttonTitle=[alertView buttonTitleAtIndex:buttonIndex];
+    if([buttonTitle isEqualToString:@"OK"])
+    {
+        UITextField *_textField = (UITextField*)[alertView viewWithTag:1001];
+        
+        if (_actualShownAcronymString == nil ||
+            [_actualShownAcronymString  compare: _textField.text ]!= NSOrderedSame)
+        {
+            self._actualShownAcronymString       = _textField.text;
+            _actualShownAcronymTrials            = 1;
+            _acronymLabel.text                   = [NSString stringWithFormat:@"von %@",_actualShownAcronymString];
+            NSUserDefaults *_acronymUserDefaults = [NSUserDefaults standardUserDefaults];
+            [_acronymUserDefaults setObject:_actualShownAcronymString forKey:@"TimeTableAcronym"];
+            [_acronymUserDefaults synchronize];
+        }
+        // NSLog(@"ok button is pushed: %@ %@", _textField.text, _acronymString);
+    }
+}
+
+
+
+// needed for shaking
+-(BOOL)canBecomeFirstResponder {
+    return YES;
+}
+
+
 
 
 //this one is also needed for shaking
