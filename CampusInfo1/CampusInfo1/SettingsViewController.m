@@ -15,6 +15,7 @@
 @implementation SettingsViewController
 @synthesize _acronymTextField;
 @synthesize _warningLabel;
+@synthesize _backToScheduleButton;
 
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -35,7 +36,7 @@
     
     NSUserDefaults *_acronymUserDefaults = [NSUserDefaults standardUserDefaults];
     _acronymTextField.text                = [_acronymUserDefaults stringForKey:@"TimeTableAcronym"];
-    
+    [_backToScheduleButton useAlertStyle];
 }
 
 - (void)didReceiveMemoryWarning
@@ -48,6 +49,7 @@
     [self set_acronymTextField:nil];
     _acronymTextField = nil;
     _warningLabel = nil;
+    _backToScheduleButton = nil;
     [super viewDidUnload];
 }
 

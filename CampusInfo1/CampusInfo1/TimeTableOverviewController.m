@@ -78,6 +78,9 @@
 @synthesize _searchText;
 @synthesize _searchType;
 
+@synthesize _homeButton;
+@synthesize _todayButton;
+
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {   
@@ -250,6 +253,12 @@
     }
 }
 
+- (IBAction)backToToday:(id)sender
+{    
+    NSDate *_today = [NSDate date];
+   [self setActualDate:_today];
+}
+
 
 - (void)didReceiveMemoryWarning
 {
@@ -319,23 +328,23 @@
     NSString *_localTranslation = @"";
     if ([errorMessage isEqualToString:@"Schedule for given course name could not be found."])
     {
-        _localTranslation = @"Der Stundenplan für den gesuchten Kurs konnte nicht gefunden werden. Bitte Schreibweise beachten (z.B. t.MARI-V)";
+        _localTranslation = @"Der Stundenplan für den gesuchten Kurs konnte nicht gefunden werden. Bitte Schreibweise beachten (z.B. t.MARI-V) und kein Datum wählen, welches zu weit in der Zukunft oder in der Vergangenheit liegt.";
     }
     if ([errorMessage isEqualToString:@"Schedule for given lecturer id could not be found."])
     {
-        _localTranslation = @"Der Stundenplan für den gesuchten Dozenten konnte nicht gefunden werden. Bitte Schreibweise beachten (z.B. huhp, rege)";
+        _localTranslation = @"Der Stundenplan für den gesuchten Dozenten konnte nicht gefunden werden. Bitte Schreibweise beachten (z.B. huhp, rege) und kein Datum wählen, welches zu weit in der Zukunft oder in der Vergangenheit liegt.";
     }
     if ([errorMessage isEqualToString:@"Schedule for given room name could not be found."])
     {
-        _localTranslation = @"Der Stundenplan für den gesuchten Raum konnte nicht gefunden werden. Bitte Schreibweise beachten (z.B. te 223, th 344)";
+        _localTranslation = @"Der Stundenplan für den gesuchten Raum konnte nicht gefunden werden. Bitte Schreibweise beachten (z.B. te 223, th 344) und kein Datum wählen, welches zu weit in der Zukunft oder in der Vergangenheit liegt.";
     }
     if ([errorMessage isEqualToString:@"Schedule for given school class could not be found."])
     {
-        _localTranslation = @"Der Stundenplan für die gesuchte Klasse konnte nicht gefunden werden. Bitte Schreibweise beachten (z.B. T_WI11a.BA)";
+        _localTranslation = @"Der Stundenplan für die gesuchte Klasse konnte nicht gefunden werden. Bitte Schreibweise beachten (z.B. T_WI11a.BA) und kein Datum wählen, welches zu weit in der Zukunft oder in der Vergangenheit liegt.";
     }
     if ([errorMessage isEqualToString:@"Schedule for given students id could not be found."])
     {
-        _localTranslation = @"Der Stundenplan für den gesuchten Studenten konnte nicht gefunden werden. Bitte Schreibweise beachten.";
+        _localTranslation = @"Der Stundenplan für den gesuchten Studenten konnte nicht gefunden werden. Bitte Schreibweise beachten und kein Datum wählen, welches zu weit in der Zukunft oder in der Vergangenheit liegt.";
     }    
     return _localTranslation;
 }
@@ -558,6 +567,10 @@
 	}
     _noConnectionButton.hidden = YES;
     _noConnectionLabel.hidden = YES;
+    
+    // set style of buttons next to title
+     [_homeButton useAlertStyle];
+     [_todayButton useAlertStyle];
 }
 
 
@@ -800,6 +813,8 @@
     [self set_errorMessageCell:nil];
     _errorMessageCell = nil;
     _twoSlotsThreeRoomsTableCell = nil;
+    _homeButton = nil;
+    _todayButton = nil;
     [super viewDidUnload];
 }
 

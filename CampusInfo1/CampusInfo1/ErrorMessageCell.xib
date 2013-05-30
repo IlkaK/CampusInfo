@@ -60,7 +60,7 @@
 									<bytes key="NSWhite">MQA</bytes>
 								</object>
 								<int key="IBUIBaselineAdjustment">0</int>
-								<int key="IBUINumberOfLines">4</int>
+								<int key="IBUINumberOfLines">6</int>
 								<object class="IBUIFontDescription" key="IBUIFontDescription">
 									<int key="type">2</int>
 									<double key="pointSize">12</double>
@@ -278,6 +278,7 @@
 						<string key="_chooseDateNavigationItem">UINavigationItem</string>
 						<string key="_datePicker">UIDatePicker</string>
 						<string key="_navigatorTitle">UILabel</string>
+						<string key="_todayButton">GradientButton</string>
 					</dictionary>
 					<dictionary class="NSMutableDictionary" key="toOneOutletInfosByName">
 						<object class="IBToOneOutletInfo" key="_chooseDateNavigationItem">
@@ -292,10 +293,22 @@
 							<string key="name">_navigatorTitle</string>
 							<string key="candidateClassName">UILabel</string>
 						</object>
+						<object class="IBToOneOutletInfo" key="_todayButton">
+							<string key="name">_todayButton</string>
+							<string key="candidateClassName">GradientButton</string>
+						</object>
 					</dictionary>
 					<object class="IBClassDescriptionSource" key="sourceIdentifier">
 						<string key="majorKey">IBProjectSource</string>
 						<string key="minorKey">./Classes/ChooseDateViewController.h</string>
+					</object>
+				</object>
+				<object class="IBPartialClassDescription">
+					<string key="className">GradientButton</string>
+					<string key="superclassName">UIButton</string>
+					<object class="IBClassDescriptionSource" key="sourceIdentifier">
+						<string key="majorKey">IBProjectSource</string>
+						<string key="minorKey">./Classes/GradientButton.h</string>
 					</object>
 				</object>
 				<object class="IBPartialClassDescription">
@@ -353,11 +366,16 @@
 					<string key="superclassName">UIViewController</string>
 					<dictionary class="NSMutableDictionary" key="actions">
 						<string key="backToOwnAcronym:">id</string>
+						<string key="backToToday:">id</string>
 						<string key="tryConnectionAgain:">id</string>
 					</dictionary>
 					<dictionary class="NSMutableDictionary" key="actionInfosByName">
 						<object class="IBActionInfo" key="backToOwnAcronym:">
 							<string key="name">backToOwnAcronym:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+						<object class="IBActionInfo" key="backToToday:">
+							<string key="name">backToToday:</string>
 							<string key="candidateClassName">id</string>
 						</object>
 						<object class="IBActionInfo" key="tryConnectionAgain:">
@@ -378,6 +396,7 @@
 						<string key="_fourSlotsOneRoomTableCell">UITableViewCell</string>
 						<string key="_fourSlotsThreeRoomsTableCell">UITableViewCell</string>
 						<string key="_fourSlotsTwoRoomsTableCell">UITableViewCell</string>
+						<string key="_homeButton">UIButton</string>
 						<string key="_noConnectionButton">UIButton</string>
 						<string key="_noConnectionLabel">UILabel</string>
 						<string key="_oneSlotEightRoomsTableCell">UITableViewCell</string>
@@ -394,9 +413,11 @@
 						<string key="_threeSlotsThreeRoomsTableCell">UITableViewCell</string>
 						<string key="_threeSlotsTwoRoomsTableCell">UITableViewCell</string>
 						<string key="_timeTable">UITableView</string>
+						<string key="_todayButton">UIButton</string>
 						<string key="_twoSlotsFourRoomsTableCell">UITableViewCell</string>
 						<string key="_twoSlotsOneRoomTableCell">UITableViewCell</string>
 						<string key="_twoSlotsSixRoomsTableCell">UITableViewCell</string>
+						<string key="_twoSlotsThreeRoomsTableCell">UITableViewCell</string>
 						<string key="_twoSlotsTwoRoomsTableCell">UITableViewCell</string>
 						<string key="timeTableView">UIView</string>
 					</dictionary>
@@ -448,6 +469,10 @@
 						<object class="IBToOneOutletInfo" key="_fourSlotsTwoRoomsTableCell">
 							<string key="name">_fourSlotsTwoRoomsTableCell</string>
 							<string key="candidateClassName">UITableViewCell</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="_homeButton">
+							<string key="name">_homeButton</string>
+							<string key="candidateClassName">UIButton</string>
 						</object>
 						<object class="IBToOneOutletInfo" key="_noConnectionButton">
 							<string key="name">_noConnectionButton</string>
@@ -513,6 +538,10 @@
 							<string key="name">_timeTable</string>
 							<string key="candidateClassName">UITableView</string>
 						</object>
+						<object class="IBToOneOutletInfo" key="_todayButton">
+							<string key="name">_todayButton</string>
+							<string key="candidateClassName">UIButton</string>
+						</object>
 						<object class="IBToOneOutletInfo" key="_twoSlotsFourRoomsTableCell">
 							<string key="name">_twoSlotsFourRoomsTableCell</string>
 							<string key="candidateClassName">UITableViewCell</string>
@@ -523,6 +552,10 @@
 						</object>
 						<object class="IBToOneOutletInfo" key="_twoSlotsSixRoomsTableCell">
 							<string key="name">_twoSlotsSixRoomsTableCell</string>
+							<string key="candidateClassName">UITableViewCell</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="_twoSlotsThreeRoomsTableCell">
+							<string key="name">_twoSlotsThreeRoomsTableCell</string>
 							<string key="candidateClassName">UITableViewCell</string>
 						</object>
 						<object class="IBToOneOutletInfo" key="_twoSlotsTwoRoomsTableCell">

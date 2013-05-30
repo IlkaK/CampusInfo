@@ -18,6 +18,7 @@
 @synthesize _chooseDateNavigationItem;
 @synthesize _chooseDateViewDelegate;
 @synthesize _navigatorTitle;
+@synthesize _todayButton;
 
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -57,6 +58,8 @@
     _navigatorTitle.text = @"Wähle ein Datum";
     _chooseDateNavigationItem.title = @"";
     
+    [_todayButton useAlertStyle];
+    
 }
 
 - (void)didReceiveMemoryWarning
@@ -70,6 +73,7 @@
     _datePicker = nil;
     _chooseDateNavigationItem = nil;
     _navigatorTitle = nil;
+    _todayButton = nil;
     [super viewDidUnload];
 }
 

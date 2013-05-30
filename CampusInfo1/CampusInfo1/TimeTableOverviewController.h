@@ -10,6 +10,7 @@
 #import <TimeTableAsyncRequest.h>
 #import <TimeTableDetailController.h>
 #import <ChooseDateViewController.h>
+#import <GradientButton.h>
 
 @class ScheduleDto;
 @class DayDto;
@@ -92,7 +93,8 @@ UIViewController
     NSString                  *_searchText;
     NSString                  *_searchType;
     
-    
+    IBOutlet GradientButton     *_homeButton;
+    IBOutlet GradientButton     *_todayButton;
 }
 
 
@@ -158,9 +160,12 @@ UIViewController
 @property (nonatomic, retain)          NSString                  *_searchText;
 @property (nonatomic, retain)          NSString                  *_searchType;
 
+@property (nonatomic, retain) IBOutlet UIButton                  *_homeButton;
+@property (nonatomic, retain) IBOutlet UIButton                  *_todayButton;
 
 - (IBAction)tryConnectionAgain:(id)sender;
 
 - (IBAction)backToOwnAcronym:(id)sender;
+- (IBAction)backToToday:(id)sender;
 
 @end

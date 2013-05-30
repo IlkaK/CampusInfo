@@ -15,6 +15,7 @@
 @synthesize _searchTextField;
 @synthesize _searchTypeArray;
 @synthesize _searchType;
+@synthesize _searchButton;
 
 
 // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
@@ -27,6 +28,7 @@
     _searchType = @"Dozent";
     [_chooseSearchType selectRow:1 inComponent:0 animated:NO];
     self._searchTextField.delegate = self;
+    [_searchButton useAlertStyle];
 }
 
 
@@ -57,6 +59,7 @@
 {
     _searchTextField = nil;
     _chooseSearchType = nil;
+    _searchButton = nil;
     [super viewDidUnload];
 
     // Release any retained subviews of the main view.
