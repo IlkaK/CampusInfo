@@ -687,6 +687,15 @@
     {
         //NSLog(@"viewDidLoad noch kein Kürzel für den Stundenplan");
         
+        UIAlertView *_acronymAlertView = [[UIAlertView alloc]
+                                          initWithTitle:@"Stundenplan"
+                                          message:@"Bitte ein Kürzel in Suche oder Einstellungen eingeben."
+                                          delegate:self
+                                          cancelButtonTitle:@"OK"
+                                          otherButtonTitles:nil];
+        
+        [_acronymAlertView show];
+        
         // switch to settings tab
         self.tabBarController.selectedIndex = 1;
         [self dismissModalViewControllerAnimated:YES];

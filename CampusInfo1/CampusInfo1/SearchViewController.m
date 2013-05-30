@@ -94,18 +94,30 @@
 // handling the search button
 - (IBAction)_startSearch:(id)sender
 {
-    //NSLog(@"search type: %@, search text: %@",_searchType, _searchTextField.text);
-   // [self setNewScheduleWithDate:_actualDate];
+    if (_searchTextField.text == nil || [_searchTextField.text length] == 0)
+    {
+        UIAlertView *_acronymAlertView = [[UIAlertView alloc]
+                                          initWithTitle:@"Suche"
+                                          message:@"Bitte ein Kürzel eingeben."
+                                          delegate:self
+                                          cancelButtonTitle:@"OK"
+                                          otherButtonTitles:nil];
+        
+        [_acronymAlertView show];
+    }
+    else
+    {
+
+        // trim space in front of and after the string
+        NSString *_stringWithoutSpaces = [_searchTextField.text stringByTrimmingCharactersInSet:
+                                          [NSCharacterSet whitespaceAndNewlineCharacterSet]];
     
-    // trim space in front of and after the string
-    NSString *_stringWithoutSpaces = [_searchTextField.text stringByTrimmingCharactersInSet:
-     [NSCharacterSet whitespaceAndNewlineCharacterSet]];
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"SearchType" object:_searchType];
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"SearchText" object:_stringWithoutSpaces];
     
-    [[NSNotificationCenter defaultCenter] postNotificationName:@"SearchType" object:_searchType];
-    [[NSNotificationCenter defaultCenter] postNotificationName:@"SearchText" object:_stringWithoutSpaces];
-    
-    self.tabBarController.selectedIndex = 0;
-    [self dismissModalViewControllerAnimated:YES];
+        self.tabBarController.selectedIndex = 0;
+        [self dismissModalViewControllerAnimated:YES];
+    }
 }
 
 

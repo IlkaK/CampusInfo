@@ -112,7 +112,14 @@
     }
     else
     {
-        _warningLabel.text = @"Nur Kürzel von Studenten und Dozenten sind möglich.";
+        if (_acronymTextField.text == nil || [_acronymTextField.text length] == 0)
+        {
+            _warningLabel.text = @"Bitte ein Kürzel eingeben.";
+        }
+        else
+        {
+            _warningLabel.text = @"Nur Kürzel von Studenten und Dozenten sind möglich.";
+        }
     }
 }
 

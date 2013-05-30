@@ -28,6 +28,15 @@
     // those two lines are needed for shaking 
     application.applicationSupportsShakeToEdit = YES;
      [self.window setRootViewController:self.tabBarController];
+
+    NSUserDefaults *_acronymUserDefaults = [NSUserDefaults standardUserDefaults];
+    NSString *_ownStoredAcronymString    = [_acronymUserDefaults stringForKey:@"TimeTableAcronym"];
+    
+    if (_ownStoredAcronymString == nil)
+        [self.tabBarController setSelectedIndex: 1]; // set search view
+    else
+        [self.tabBarController setSelectedIndex: 0]; // set timetable view
+    
     //[self.window addSubview:self.tabBarController.view];
     [self.window makeKeyAndVisible];
     
