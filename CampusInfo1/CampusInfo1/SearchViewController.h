@@ -9,8 +9,9 @@
 #import <UIKit/UIKit.h>
 #import <GradientButton.h>
 #import <Autocomplete.h>
+#import <TimeTableAsyncRequest.h>
 
-@interface SearchViewController : UIViewController<UIPickerViewDelegate,UIPickerViewDataSource,UITextFieldDelegate> {
+@interface SearchViewController : UIViewController<UIPickerViewDelegate,UIPickerViewDataSource,UITextFieldDelegate,TimeTableAsyncRequestDelegate> {
     
     IBOutlet UITextField  *_searchTextField;
 
@@ -30,6 +31,16 @@
     NSMutableArray *_studentArray;  
     NSMutableArray *_roomArray;
     NSMutableArray *_classArray;
+    
+    // gain timetable data from url
+    TimeTableAsyncRequest *_asyncTimeTableRequest;
+    
+    // holding data gained from url
+    NSData                *_dataFromUrl;
+    
+    NSString              *_errorMessage;
+    
+    int _connectionTrials;
 }
 
 @property (nonatomic, retain) IBOutlet UITextField *_searchTextField;
@@ -49,6 +60,12 @@
 @property (strong, nonatomic) NSMutableArray *_roomArray;
 @property (strong, nonatomic) NSMutableArray *_classArray;
 
+@property (nonatomic, retain) IBOutlet TimeTableAsyncRequest *_asyncTimeTableRequest;
+@property (nonatomic, retain) NSData                         *_dataFromUrl;
+
+@property (nonatomic, retain) NSString                       *_errorMessage;
+
+@property (nonatomic, assign) int                             _connectionTrials;
 
 // Button to start searching
 - (IBAction)_startSearch:(id)sender;
