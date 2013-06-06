@@ -16,7 +16,10 @@
 @synthesize _searchTypeArray;
 @synthesize _searchType;
 @synthesize _searchButton;
-
+@synthesize _acronymAutocompleteTableView;
+@synthesize _suggestions;
+@synthesize _autocomplete;
+@synthesize _classArray, _courseArray, _lecturerArray, _roomArray, _studentArray;
 
 // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
 - (void)viewDidLoad
@@ -28,12 +31,23 @@
     _searchType = @"Dozent";
     
     // set picker view
-    self._chooseSearchType.frame = CGRectMake(20.0, 134.0, 140.0, 162.0);
+    //self._chooseSearchType.frame = CGRectMake(20.0, 134.0, 140.0, 162.0);
     [_chooseSearchType selectRow:1 inComponent:0 animated:NO];
     
     self._searchTextField.delegate = self;
     [_searchButton useAlertStyle];
+    
+    _courseArray = [NSMutableArray arrayWithObjects:@"t.PHSAV2-G", @"e",nil];
+    _lecturerArray = [NSMutableArray arrayWithObjects:@"huhp", @"rege",nil];
+    _studentArray = [NSMutableArray arrayWithObjects:@"huhp", @"rege",nil];
+    _roomArray     = [NSMutableArray arrayWithObjects:@"TH 567", @"TH 561", @"TP 406", @"TB 610", @"TH 331", nil];
+    _classArray    = [NSMutableArray arrayWithObjects:@"T_AV12b.BA",nil];
+    
+    _autocomplete = [[Autocomplete alloc] initWithArray:_lecturerArray];
+	_searchTextField.autocorrectionType = UITextAutocorrectionTypeNo;
+    
 }
+
 
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
@@ -52,10 +66,7 @@
 
 - (void)didReceiveMemoryWarning
 {
-    // Releases the view if it doesn't have a superview.
     [super didReceiveMemoryWarning];
-    
-    // Release any cached data, images, etc. that aren't in use.
 }
 
 
@@ -64,10 +75,8 @@
     _searchTextField = nil;
     _chooseSearchType = nil;
     _searchButton = nil;
+    _acronymAutocompleteTableView = nil;
     [super viewDidUnload];
-
-    // Release any retained subviews of the main view.
-    // e.g. self.myOutlet = nil;
 }
 
 
@@ -93,8 +102,29 @@
 -(void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row
       inComponent:(NSInteger)component
 {
-    //NSLog(@"%@",[_searchTypeArray objectAtIndex:row]);
     _searchType = [_searchTypeArray objectAtIndex:row];
+    
+    // set autocomplete text depending on the chosen picker value
+    if ([_searchType isEqualToString:@"Kurs"])
+    {
+        _autocomplete._candidates = _courseArray;
+    }
+    if ([_searchType isEqualToString:@"Dozent"])
+    {
+        _autocomplete._candidates = _lecturerArray;
+    }
+    if ([_searchType isEqualToString:@"Student"])
+    {
+        _autocomplete._candidates = _studentArray;
+    }
+    if ([_searchType isEqualToString:@"Raum"])
+    {
+        _autocomplete._candidates = _roomArray;
+    }
+    if ([_searchType isEqualToString:@"Klasse"])
+    {
+        _autocomplete._candidates = _classArray;
+    }    
 }
 
 
@@ -126,6 +156,72 @@
         [self dismissModalViewControllerAnimated:YES];
     }
 }
+
+- (IBAction)searchTextFieldChanged:(id)sender
+{
+    _suggestions = [[NSMutableArray alloc] initWithArray:[_autocomplete GetSuggestions:((UITextField*)sender).text]];
+	
+	[self.view addSubview:_acronymAutocompleteTableView];
+	[_acronymAutocompleteTableView reloadData];
+    
+}
+
+
+//---------- Handling of table for suggestions -----
+
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
+{
+    return 1;
+}
+
+// Customize the number of rows in the table view.
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+	if (_suggestions)
+	{
+		return [_suggestions count];
+	}
+	
+	return 0;
+}
+
+
+// Customize the appearance of table view cells.
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    static NSString *CellIdentifier = @"Cell";
+    
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    if (cell == nil)
+	{
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
+    }
+	
+    UIFont *_cellFont = [ UIFont boldSystemFontOfSize: 12.0 ];
+    cell.textLabel.font  = _cellFont;
+    
+	// Configure the cell.
+	cell.textLabel.text = [_suggestions objectAtIndex:indexPath.row];
+    
+    return cell;
+}
+
+// set cell hight
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return 20;
+}
+
+// Override to support row selection in the table view.
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+	_searchTextField.text = [_suggestions objectAtIndex:indexPath.row];
+	[_acronymAutocompleteTableView removeFromSuperview];
+}
+
+
+
+
 
 
 @end
