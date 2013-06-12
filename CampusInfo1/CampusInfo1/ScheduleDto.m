@@ -544,15 +544,18 @@
 
 -(void) dataDownloadDidFinish:(NSData*) data {
     
-    _dataFromUrl = data;
+    //NSLog(@"ScheduleDto dataDownloadDidFinish");
     
-   // NSLog(@"dataDownloadDidFinish %@",[NSThread callStackSymbols]);
+    self._dataFromUrl = data;
     
-    //NSString *someString = [NSString stringWithFormat:@"%@", _dataFromUrl]; 
-    //someString = [someString substringToIndex:100];
-    //NSLog(@"dataDownloadDidFinish %@", someString);
-    //NSLog(@"1");
+    //if (self._dataFromUrl != nil)
+    //{
+    //    NSString *someString = [NSString stringWithFormat:@"%@", _dataFromUrl];
+    //    someString = [someString substringToIndex:100];
+    //    NSLog(@"dataDownloadDidFinish %@", someString);
+    //}
     
+   // NSLog(@"dataDownloadDidFinish %@",[NSThread callStackSymbols]);    
 }
 
 
@@ -674,9 +677,6 @@
         //NSString *responseString = [[NSString alloc] initWithData:newData encoding:NSUTF8StringEncoding];
         //responseString = [responseString substringToIndex:10];
         //NSLog(@"did something :  %@", responseString);
-
-        
-    
         return nil;
     }    
     else

@@ -42,16 +42,11 @@
     
     if (_connection) 
     {
-        self._receivedData        = [NSMutableData data]; 
-        //NSString *_receivedString = [[NSString alloc] initWithData:_receivedData encoding:NSASCIIStringEncoding];
-        //NSLog(@"2 DO downloadData %@", _receivedString);
-        
-        //NSString *someString = [NSString stringWithFormat:@"%@", _receivedData]; 
-        //NSLog(@"2 downloadData data from url %@", someString);
-    
-    } else 
+        self._receivedData        = [NSMutableData data];
+    }
+    else
     {
-        NSLog(@"Did not download data");
+        NSLog(@"NO CONNECTION IN ASYNC REQUEST");
     }  
     CFRunLoopRun(); // Avoid thread exiting
 } 
@@ -78,6 +73,17 @@
     //NSLog(@"3 didReceiveData %@", receivedString);
     
     [_receivedData appendData:data];
+    
+    //if (self._receivedData != nil)
+    //{
+    //    NSString *_receivedString = [[NSString alloc] initWithData:_receivedData encoding:NSASCIIStringEncoding];
+    //    NSLog(@"didReceiveData %@", _receivedString);
+    //}
+    //else
+    //{
+    //    NSLog(@"didReceiveData NO DATA");
+    //}
+    
     [_timeTableAsynchRequestDelegate dataDownloadDidFinish:_receivedData];
 }
 

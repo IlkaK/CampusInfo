@@ -20,6 +20,7 @@
 @synthesize _suggestions;
 @synthesize _autocomplete;
 @synthesize _classArray, _courseArray, _lecturerArray, _roomArray, _studentArray;
+@synthesize _lecturerDictionary;
 
 @synthesize _asyncTimeTableRequest;
 @synthesize _dataFromUrl;
@@ -50,10 +51,13 @@
     //_roomArray     = [NSMutableArray arrayWithObjects:@"TH 567", @"TH 561", @"TP 406", @"TB 610", @"TH 331", nil];
     //_classArray    = [NSMutableArray arrayWithObjects:@"T_AV12b.BA",nil];
     
+    _lecturerArray = [[NSMutableArray alloc] init];
+    
     _autocomplete = [[Autocomplete alloc] initWithArray:_lecturerArray];
 	_searchTextField.autocorrectionType = UITextAutocorrectionTypeNo;
     
     _connectionTrials = 1;
+    _lecturerDictionary = nil;
 }
 
 //-------------------------------
@@ -62,13 +66,81 @@
 
 -(void) dataDownloadDidFinish:(NSData*) data {
     
-    _dataFromUrl = data;
+    self._dataFromUrl = data;
     
     // NSLog(@"dataDownloadDidFinish 1 %@",[NSThread callStackSymbols]);
     
-    NSString *someString = [NSString stringWithFormat:@"%@", _dataFromUrl];
-    someString = [someString substringToIndex:100];
-    //NSLog(@"dataDownloadDidFinish 2 %@", someString);
+    if (self._dataFromUrl != nil)
+    {
+        //NSString *_receivedString = [[NSString alloc] initWithData:self._dataFromUrl encoding:NSASCIIStringEncoding];
+        //_receivedString = [_receivedString substringToIndex:100];
+        //NSLog(@"dataDownloadDidFinish FOR SEARCHVIEWCONTROLLER %@", _receivedString);
+        
+        NSError *_error;
+        
+        if (_lecturerDictionary == nil)
+        {
+            _lecturerDictionary = [NSJSONSerialization
+                               JSONObjectWithData:_dataFromUrl
+                               options:kNilOptions
+                               error:&_error];
+        
+            for (id lecturerKey in _lecturerDictionary)
+            {
+                //NSLog(@"lecturerKey:%@",lecturerKey);
+                
+                NSArray *_lecturerArray1 = [_lecturerDictionary objectForKey:lecturerKey];
+                NSDictionary *_lecturerDictionary1;
+                NSString *_lecturerName;
+                NSString *_lecturerShortName;
+                
+                //NSLog(@"how many lecturers: %i",[_lecturerArray1 count]);
+                
+                int i;
+                for (i = 0; i < [_lecturerArray1 count]; i++)
+                {
+                    _lecturerDictionary1 = [_lecturerArray1 objectAtIndex:i];
+                    
+                    for (id lecturerKey in _lecturerDictionary1)
+                    {
+                        if ([lecturerKey isEqualToString:@"name"])
+                        {
+                            _lecturerName = [_lecturerDictionary1 objectForKey:lecturerKey];
+                            //NSLog(@"lecturer name: %@", _lecturerName);
+                        }
+                        
+                        if ([lecturerKey isEqualToString:@"shortName"])
+                        {
+                            _lecturerShortName = [_lecturerDictionary1 objectForKey:lecturerKey];
+                            //NSLog(@"lecturer shortName: %@", _lecturerShortName);
+                            [_lecturerArray addObject:_lecturerShortName];
+                        }
+                    }
+                }
+                //NSLog(@"put names into _lecturerArray %i", [_lecturerArray count]);
+                if ([_searchType isEqualToString:@"Kurs"])
+                {
+                    _autocomplete._candidates = _courseArray;
+                }
+                if ([_searchType isEqualToString:@"Dozent"])
+                {
+                    _autocomplete._candidates = _lecturerArray;
+                }
+                if ([_searchType isEqualToString:@"Student"])
+                {
+                    _autocomplete._candidates = _studentArray;
+                }
+                if ([_searchType isEqualToString:@"Raum"])
+                {
+                    _autocomplete._candidates = _roomArray;
+                }
+                if ([_searchType isEqualToString:@"Klasse"])
+                {
+                    _autocomplete._candidates = _classArray;
+                }
+            }
+        }
+    }
 }
 
 
@@ -154,43 +226,14 @@
     
     NSError      *_error = nil;
     NSDictionary *_scheduleDictionary;
-    //NSLog(@"2");
-    
-    //NSLog(@"getDictionaryFromUrl 1 %@",[NSThread callStackSymbols]);
-    
-    NSString *someString = [NSString stringWithFormat:@"%@", _dataFromUrl];
-    NSLog(@"getDictionaryFromUrl data from url %@", someString);
-    
-    //NSString *someString = [[NSString alloc] initWithData:_dataFromUrl encoding:NSUTF8StringEncoding];
-    //NSLog(@"getDictionaryFromUrl %@", someString);
     
     if (_dataFromUrl == nil)
-    {
-        
-        
-        NSLog(@"getDictionaryFromUrl NO DATA HERE");
-        
-        
-        //NSMutableData *responseData = [[NSMutableData data] retain];
-        //NSURLRequest  *request = [NSURLRequest requestWithURL:[NSURL URLWithString:@"http://192.168.1.102:49619/v1/schedules/musteeri"]];
-        //NSURLResponse *response = nil;
-        //NSError *error = nil;
-        //getting the data
-        //NSData *newData = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&error];
-        //json parse
-        //NSString *responseString = [[NSString alloc] initWithData:newData encoding:NSUTF8StringEncoding];
-        //responseString = [responseString substringToIndex:10];
-        //NSLog(@"did something :  %@", responseString);
-        
-        
-        
+    {        
         return nil;
     }
     else
     {
         //NSLog(@"getDictionaryFromUrl got some data putting it now into dictionary");
-        NSString *someString = [[NSString alloc] initWithData:_dataFromUrl encoding:NSUTF8StringEncoding];
-        NSLog(@"getDictionaryFromUrl 2 %@", someString);
         _scheduleDictionary = [NSJSONSerialization
                                JSONObjectWithData:_dataFromUrl
                                options:kNilOptions
@@ -201,45 +244,36 @@
 }
 
 
+-(void) getData
+{
+    if (self._courseArray == nil)
+    {
+
+        self._lecturerDictionary = nil;
+        
+        self._lecturerDictionary = [self getDictionaryFromUrl];
+            
+        if (self._lecturerDictionary == nil)
+        {
+            NSLog(@"no connection");
+        }
+        else
+        {
+            NSLog(@"IF connection established");
+        }
+    }
+}
+
+
+
 
 
 // IMPORTANT, OTHERWISE DATA WILL NOT BE UPDATED, WHEN APP IS STARTED FIRST TIME
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    if (self._courseArray == nil)
-    {
-        _courseArray = [NSMutableArray arrayWithObjects:@"t.PHSAV2-G", @"e",nil];
-        _lecturerArray = [NSMutableArray arrayWithObjects:@"huhp", @"rege",nil];
-        _studentArray = [NSMutableArray arrayWithObjects:@"huhp", @"rege",nil];
-        _roomArray     = [NSMutableArray arrayWithObjects:@"TH 567", @"TH 561", @"TP 406", @"TB 610", @"TH 331", nil];
-        _classArray    = [NSMutableArray arrayWithObjects:@"T_AV12b.BA",nil];
-        //self._schedule = [[ScheduleDto alloc] initWithAcronym:_actualShownAcronymString:_actualShownAcronymType:_actualDate];
-        
-        NSDictionary *_scheduleDictionary = nil;
-        
-        if (_connectionTrials < 20)
-        {
-            //NSLog(@"viewWillAppear try connecting");
-            _connectionTrials++;
-        
-            _scheduleDictionary = [self getDictionaryFromUrl];
-        
-            if (_scheduleDictionary == nil)
-            {
-                NSLog(@"no connection");
-            }
-            else
-            {
-                NSLog(@"IF connection established");
-                
-                for (id scheduleKey in _scheduleDictionary)
-                {
-                    NSLog(@"scheduleKey:%@",scheduleKey);
-                }
-            }
-        }
-    }
+    [self getData];
+    //NSLog(@"viewWillAppear is DONE");
 }
 
 

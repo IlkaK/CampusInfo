@@ -32,6 +32,8 @@
     NSMutableArray *_roomArray;
     NSMutableArray *_classArray;
     
+    NSDictionary *_lecturerDictionary;
+    
     // gain timetable data from url
     TimeTableAsyncRequest *_asyncTimeTableRequest;
     
@@ -59,6 +61,8 @@
 @property (strong, nonatomic) NSMutableArray *_studentArray; 
 @property (strong, nonatomic) NSMutableArray *_roomArray;
 @property (strong, nonatomic) NSMutableArray *_classArray;
+
+@property (strong, nonatomic) NSDictionary *_lecturerDictionary;
 
 @property (nonatomic, retain) IBOutlet TimeTableAsyncRequest *_asyncTimeTableRequest;
 @property (nonatomic, retain) NSData                         *_dataFromUrl;
