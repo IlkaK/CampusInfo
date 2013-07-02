@@ -67,6 +67,7 @@
 		A3A8654D1520A0C90074FFE5 /* TimeTableOverviewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A3A8654B1520A0C90074FFE5 /* TimeTableOverviewController.xib */; };
 		E13D3B5B17412F0500F534DB /* ChooseDateViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E13D3B5917412F0500F534DB /* ChooseDateViewController.m */; };
 		E13D3B5C17412F0500F534DB /* ChooseDateViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E13D3B5A17412F0500F534DB /* ChooseDateViewController.xib */; };
+		E17842D2178309160059EA3C /* DBCachingForAutocomplete.m in Sources */ = {isa = PBXBuildFile; fileRef = E17842D1178309160059EA3C /* DBCachingForAutocomplete.m */; };
 		E195FF36178188A30065DF05 /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = E195FF35178188A30065DF05 /* libsqlite3.dylib */; };
 		E1BC14C2175F8D4900FE2854 /* Autocomplete.m in Sources */ = {isa = PBXBuildFile; fileRef = E1BC14C1175F8D4900FE2854 /* Autocomplete.m */; };
 		E1C9B22A1743894F00BD3DAE /* TwoSlotsFourRoomsTableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E1C9B2291743894F00BD3DAE /* TwoSlotsFourRoomsTableCell.xib */; };
@@ -158,6 +159,8 @@
 		E13D3B5817412F0500F534DB /* ChooseDateViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChooseDateViewController.h; sourceTree = "<group>"; };
 		E13D3B5917412F0500F534DB /* ChooseDateViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChooseDateViewController.m; sourceTree = "<group>"; };
 		E13D3B5A17412F0500F534DB /* ChooseDateViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ChooseDateViewController.xib; sourceTree = "<group>"; };
+		E17842D0178309160059EA3C /* DBCachingForAutocomplete.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DBCachingForAutocomplete.h; sourceTree = "<group>"; };
+		E17842D1178309160059EA3C /* DBCachingForAutocomplete.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DBCachingForAutocomplete.m; sourceTree = "<group>"; };
 		E195FF35178188A30065DF05 /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
 		E1BC14C0175F8D4900FE2854 /* Autocomplete.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Autocomplete.h; sourceTree = "<group>"; };
 		E1BC14C1175F8D4900FE2854 /* Autocomplete.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Autocomplete.m; sourceTree = "<group>"; };
@@ -261,25 +264,19 @@
 		A35A341E1520814800181E3F /* CampusInfo1 */ = {
 			isa = PBXGroup;
 			children = (
+				E17842CF178308720059EA3C /* Settings */,
+				E17842CE1783084D0059EA3C /* Search */,
 				A3A551371525DD5400BCAF3D /* TimeTableDto */,
 				A35A34551520843F00181E3F /* TimeTable */,
 				A35A34271520814800181E3F /* CampusInfo1AppDelegate.h */,
 				A35A34281520814800181E3F /* CampusInfo1AppDelegate.m */,
 				A35A342A1520814800181E3F /* MainWindow.xib */,
-				A35A34301520814800181E3F /* SearchViewController.h */,
-				A35A34311520814800181E3F /* SearchViewController.m */,
-				A35A34361520814800181E3F /* SearchView.xib */,
 				A35A341F1520814800181E3F /* Supporting Files */,
 				27FBF7251551A83600C09ED9 /* StartpageViewController.h */,
 				27FBF7261551A83600C09ED9 /* StartpageViewController.m */,
 				27FBF7271551A83600C09ED9 /* StartpageViewController.xib */,
-				E1DA96791740E41C00CA206F /* SettingsViewController.h */,
-				E1DA967A1740E41C00CA206F /* SettingsViewController.m */,
-				E1DA967B1740E41C00CA206F /* SettingsViewController.xib */,
 				E1D48A591757856400BB1652 /* GradientButton.h */,
 				E1D48A5A1757856400BB1652 /* GradientButton.m */,
-				E1BC14C0175F8D4900FE2854 /* Autocomplete.h */,
-				E1BC14C1175F8D4900FE2854 /* Autocomplete.m */,
 			);
 			path = CampusInfo1;
 			sourceTree = "<group>";
@@ -361,6 +358,30 @@
 				277EDF78155D60DC002BCE1F /* ScheduleCourseDto.m */,
 			);
 			name = TimeTableDto;
+			sourceTree = "<group>";
+		};
+		E17842CE1783084D0059EA3C /* Search */ = {
+			isa = PBXGroup;
+			children = (
+				E1BC14C0175F8D4900FE2854 /* Autocomplete.h */,
+				E1BC14C1175F8D4900FE2854 /* Autocomplete.m */,
+				A35A34301520814800181E3F /* SearchViewController.h */,
+				A35A34311520814800181E3F /* SearchViewController.m */,
+				A35A34361520814800181E3F /* SearchView.xib */,
+				E17842D0178309160059EA3C /* DBCachingForAutocomplete.h */,
+				E17842D1178309160059EA3C /* DBCachingForAutocomplete.m */,
+			);
+			name = Search;
+			sourceTree = "<group>";
+		};
+		E17842CF178308720059EA3C /* Settings */ = {
+			isa = PBXGroup;
+			children = (
+				E1DA96791740E41C00CA206F /* SettingsViewController.h */,
+				E1DA967A1740E41C00CA206F /* SettingsViewController.m */,
+				E1DA967B1740E41C00CA206F /* SettingsViewController.xib */,
+			);
+			name = Settings;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -487,6 +508,7 @@
 				E13D3B5B17412F0500F534DB /* ChooseDateViewController.m in Sources */,
 				E1D48A5B1757856400BB1652 /* GradientButton.m in Sources */,
 				E1BC14C2175F8D4900FE2854 /* Autocomplete.m in Sources */,
+				E17842D2178309160059EA3C /* DBCachingForAutocomplete.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
