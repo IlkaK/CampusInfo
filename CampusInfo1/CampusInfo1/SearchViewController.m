@@ -29,6 +29,8 @@
 
 @synthesize _connectionTrials;
 
+@synthesize _timeTableDBPath;
+
 // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
 - (void)viewDidLoad
 {
@@ -58,7 +60,68 @@
     
     _connectionTrials = 1;
     _lecturerDictionary = nil;
+    
+    // DB for caching autocomplete data
+    NSString *docsDir;
+    NSArray *dirPaths;
+
+    
+    // Get the documents directory
+    dirPaths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    
+    docsDir = [dirPaths objectAtIndex:0];
+    
+    // Build the path to the database file
+    _timeTableDBPath = [[NSString alloc]
+                    initWithString: [docsDir stringByAppendingPathComponent:
+                                     @"timetablenames.db"]];
+    
+    NSFileManager *filemgr = [NSFileManager defaultManager];
+    
+    if ([filemgr fileExistsAtPath: _timeTableDBPath ] == NO)
+    {
+        if (sqlite3_open([_timeTableDBPath UTF8String], &_timeTableNamesDB) == SQLITE_OK)
+        {
+            char *errMsg;
+            const char *sql_stmt = "CREATE TABLE IF NOT EXISTS LECTURER (ID INTEGER PRIMARY KEY AUTOINCREMENT, NAME TEXT, SHORTNAME TEXT)";
+            
+            if (sqlite3_exec(_timeTableNamesDB, sql_stmt, NULL, NULL, &errMsg) != SQLITE_OK)
+            {
+                NSLog(@"Failed to create table");
+            }
+            
+            sqlite3_close(_timeTableNamesDB);
+            
+        } else {
+            NSLog(@"Failed to open/create database");
+        }
+    }    
 }
+
+-(void) setAutocompleteCandidates
+{
+    if ([_searchType isEqualToString:@"Kurs"])
+    {
+        _autocomplete._candidates = _courseArray;
+    }
+    if ([_searchType isEqualToString:@"Dozent"])
+    {
+        _autocomplete._candidates = _lecturerArray;
+    }
+    if ([_searchType isEqualToString:@"Student"])
+    {
+        _autocomplete._candidates = _studentArray;
+    }
+    if ([_searchType isEqualToString:@"Raum"])
+    {
+        _autocomplete._candidates = _roomArray;
+    }
+    if ([_searchType isEqualToString:@"Klasse"])
+    {
+        _autocomplete._candidates = _classArray;
+    }
+}
+
 
 //-------------------------------
 // asynchronous request
@@ -94,6 +157,8 @@
                 NSString *_lecturerName;
                 NSString *_lecturerShortName;
                 
+                [_lecturerArray removeAllObjects];
+                
                 //NSLog(@"how many lecturers: %i",[_lecturerArray1 count]);
                 
                 int i;
@@ -117,27 +182,47 @@
                         }
                     }
                 }
-                //NSLog(@"put names into _lecturerArray %i", [_lecturerArray count]);
-                if ([_searchType isEqualToString:@"Kurs"])
+                
+                sqlite3_stmt    *_statement;
+                
+                if (sqlite3_open([_timeTableDBPath UTF8String], &_timeTableNamesDB) == SQLITE_OK)
                 {
-                    _autocomplete._candidates = _courseArray;
-                }
-                if ([_searchType isEqualToString:@"Dozent"])
-                {
-                    _autocomplete._candidates = _lecturerArray;
-                }
-                if ([_searchType isEqualToString:@"Student"])
-                {
-                    _autocomplete._candidates = _studentArray;
-                }
-                if ([_searchType isEqualToString:@"Raum"])
-                {
-                    _autocomplete._candidates = _roomArray;
-                }
-                if ([_searchType isEqualToString:@"Klasse"])
-                {
-                    _autocomplete._candidates = _classArray;
-                }
+                    int lecturerArrayI;
+                    NSString *_lecturerShortName;
+                    NSString *_insertSQL;
+                    NSString *_deleteSQL = [NSString stringWithFormat:@"DELETE FROM LECTURER"];
+                    
+                    //NSLog(@"first item: %@", [_lecturerArray objectAtIndex:0]);
+                    //NSLog(@"last item: %@", [_lecturerArray objectAtIndex:[_lecturerArray count]-1]);
+                    
+                    sqlite3_prepare_v2(_timeTableNamesDB, [_deleteSQL UTF8String], -1, &_statement, NULL);
+                    if (sqlite3_step(_statement) != SQLITE_DONE)
+                    {
+                        NSLog(@"Failed to delete contacts");
+                    }
+                    
+                    sqlite3_finalize(_statement);
+                    
+                    
+                    
+                    for (lecturerArrayI = 0; lecturerArrayI < [_lecturerArray count]; lecturerArrayI++) 
+                    {
+                        _lecturerShortName = [_lecturerArray objectAtIndex:lecturerArrayI];
+                        _insertSQL = [NSString stringWithFormat:
+                                               @"INSERT INTO LECTURER (name, shortname) VALUES (\"%@\", \"%@\")",
+                                               _lecturerShortName, _lecturerShortName];
+                                                   
+                        sqlite3_prepare_v2(_timeTableNamesDB, [_insertSQL UTF8String],-1, &_statement, NULL);
+                        if (sqlite3_step(_statement) != SQLITE_DONE)
+                        {
+                            NSLog(@"Failed to add contact: %@", _lecturerShortName);
+                        }
+                        sqlite3_finalize(_statement);
+                    }
+                    sqlite3_close(_timeTableNamesDB);
+                 }
+                
+                [self setAutocompleteCandidates];
             }
         }
     }
@@ -155,58 +240,6 @@
     
         _url = [NSURL URLWithString:
                 @"https://srv-lab-t-874.zhaw.ch/v1/schedules/lecturers/"];
-    
-    /*
-    {
-        
-        //NSLog(@"DOWNLOAD DATA ELSE ---type: %@-----acronym: %@ -----",_type, _acronym );
-        
-        NSString *_scheduleDateString = [[self dayFormatter] stringFromDate:_scheduleDate];
-        NSString *_translatedAcronym  = _acronym;
-        
-        if ([self._type isEqualToString:@"rooms"])
-        {
-            _translatedAcronym = [_translatedAcronym lowercaseString];
-            //NSLog(@"_translatedAcronym: %@", _translatedAcronym);
-        }
-        
-        _translatedAcronym = [_translatedAcronym stringByReplacingOccurrencesOfString:@"%" withString:@"%25"];
-        _translatedAcronym = [_translatedAcronym stringByReplacingOccurrencesOfString:@" " withString:@"%20"];
-        _translatedAcronym = [_translatedAcronym stringByReplacingOccurrencesOfString:@"(" withString:@"%28"];
-        _translatedAcronym = [_translatedAcronym stringByReplacingOccurrencesOfString:@")" withString:@"%29"];
-        
-        _translatedAcronym = [_translatedAcronym stringByReplacingOccurrencesOfString:@"*" withString:@"%2A"];
-        _translatedAcronym = [_translatedAcronym stringByReplacingOccurrencesOfString:@"+" withString:@"%2B"];
-        _translatedAcronym = [_translatedAcronym stringByReplacingOccurrencesOfString:@"," withString:@"%2C"];
-        _translatedAcronym = [_translatedAcronym stringByReplacingOccurrencesOfString:@"-" withString:@"%2D"];
-        _translatedAcronym = [_translatedAcronym stringByReplacingOccurrencesOfString:@"." withString:@"%2E"];
-        _translatedAcronym = [_translatedAcronym stringByReplacingOccurrencesOfString:@"/" withString:@"%2F"];
-        
-        _translatedAcronym = [_translatedAcronym stringByReplacingOccurrencesOfString:@":" withString:@"%3A"];
-        _translatedAcronym = [_translatedAcronym stringByReplacingOccurrencesOfString:@";" withString:@"%3B"];
-        _translatedAcronym = [_translatedAcronym stringByReplacingOccurrencesOfString:@"<" withString:@"%3C"];
-        _translatedAcronym = [_translatedAcronym stringByReplacingOccurrencesOfString:@"=" withString:@"%3D"];
-        _translatedAcronym = [_translatedAcronym stringByReplacingOccurrencesOfString:@">" withString:@"%3E"];
-        _translatedAcronym = [_translatedAcronym stringByReplacingOccurrencesOfString:@"?" withString:@"%3F"];
-        
-        _translatedAcronym = [_translatedAcronym stringByReplacingOccurrencesOfString:@"\\" withString:@"%5C"];
-        
-        NSString *_urlString = [NSString stringWithFormat:@"https://srv-lab-t-874.zhaw.ch/v1/schedules/%@/%@?startingAt=%@&days=7"
-                                , _type
-                                , _translatedAcronym
-                                , _scheduleDateString];
-        
-        NSLog(@"_urlString %@",_urlString );
-        
-        //_translatedAcronym = @"TE%20319";
-        // NSString *_urlString = [NSString stringWithFormat:@"https://srv-lab-t-874.zhaw.ch/v1/schedules/rooms/%@?startingAt=%@&days=7"
-        //                       ,_translatedAcronym
-        //                       , _scheduleDateString];
-        
-        _url       = [NSURL URLWithString:_urlString];
-        
-    }*/
-    
     [_asyncTimeTableRequest downloadData:_url];
     
 }
@@ -273,7 +306,37 @@
 {
     [super viewWillAppear:animated];
     [self getData];
-    //NSLog(@"viewWillAppear is DONE");
+    
+    if (self._lecturerDictionary == nil)
+    {
+        NSLog(@"no connection so get data from database");
+        if(sqlite3_open([_timeTableDBPath UTF8String], &_timeTableNamesDB) == SQLITE_OK)
+        {
+            const char      *_sqlStatement = "select * from lecturer";
+            sqlite3_stmt    *_compiledStatement;
+            NSString        *_lecturerShortName;
+
+            [_lecturerArray removeAllObjects]; 
+            
+            if(sqlite3_prepare_v2(_timeTableNamesDB, _sqlStatement, -1, &_compiledStatement, NULL) == SQLITE_OK)
+            {
+                // Loop through the results and add them to the feeds array
+                while(sqlite3_step(_compiledStatement) == SQLITE_ROW)
+                {
+                    _lecturerShortName = [NSString stringWithUTF8String:(char *)sqlite3_column_text(_compiledStatement, 1)];
+                    [_lecturerArray addObject:_lecturerShortName];
+                }
+            }
+            // Release the compiled statement from memory
+            sqlite3_finalize(_compiledStatement);
+        }
+        sqlite3_close(_timeTableNamesDB);
+        NSLog(@"_lecturerArray count: %i", [_lecturerArray count]);
+        [self setAutocompleteCandidates];
+        
+        [self.view addSubview:_acronymAutocompleteTableView];
+        [_acronymAutocompleteTableView reloadData];
+    }
 }
 
 
@@ -332,27 +395,7 @@
 {
     _searchType = [_searchTypeArray objectAtIndex:row];
     
-    // set autocomplete text depending on the chosen picker value
-    if ([_searchType isEqualToString:@"Kurs"])
-    {
-        _autocomplete._candidates = _courseArray;
-    }
-    if ([_searchType isEqualToString:@"Dozent"])
-    {
-        _autocomplete._candidates = _lecturerArray;
-    }
-    if ([_searchType isEqualToString:@"Student"])
-    {
-        _autocomplete._candidates = _studentArray;
-    }
-    if ([_searchType isEqualToString:@"Raum"])
-    {
-        _autocomplete._candidates = _roomArray;
-    }
-    if ([_searchType isEqualToString:@"Klasse"])
-    {
-        _autocomplete._candidates = _classArray;
-    }    
+    [self setAutocompleteCandidates];
 }
 
 
@@ -372,7 +415,6 @@
     }
     else
     {
-
         // trim space in front of and after the string
         NSString *_stringWithoutSpaces = [_searchTextField.text stringByTrimmingCharactersInSet:
                                           [NSCharacterSet whitespaceAndNewlineCharacterSet]];
@@ -409,7 +451,6 @@
 	{
 		return [_suggestions count];
 	}
-	
 	return 0;
 }
 
@@ -446,10 +487,6 @@
 	_searchTextField.text = [_suggestions objectAtIndex:indexPath.row];
 	[_acronymAutocompleteTableView removeFromSuperview];
 }
-
-
-
-
 
 
 @end

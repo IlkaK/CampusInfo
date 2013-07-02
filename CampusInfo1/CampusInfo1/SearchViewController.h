@@ -10,6 +10,7 @@
 #import <GradientButton.h>
 #import <Autocomplete.h>
 #import <TimeTableAsyncRequest.h>
+#import "/usr/include/sqlite3.h"
 
 @interface SearchViewController : UIViewController<UIPickerViewDelegate,UIPickerViewDataSource,UITextFieldDelegate,TimeTableAsyncRequestDelegate> {
     
@@ -43,6 +44,10 @@
     NSString              *_errorMessage;
     
     int _connectionTrials;
+
+    // DB handling
+    sqlite3         *_timeTableNamesDB;
+    NSString        *_timeTableDBPath;
 }
 
 @property (nonatomic, retain) IBOutlet UITextField *_searchTextField;
@@ -70,6 +75,10 @@
 @property (nonatomic, retain) NSString                       *_errorMessage;
 
 @property (nonatomic, assign) int                             _connectionTrials;
+
+//@property (nonatomic, retain) sqlite3 *_timeTableNamesDB;
+@property (nonatomic, retain) NSString *_timeTableDBPath;
+
 
 // Button to start searching
 - (IBAction)_startSearch:(id)sender;
