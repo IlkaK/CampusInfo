@@ -20,8 +20,16 @@
 @synthesize _acronymAutocompleteTableView;
 @synthesize _suggestions;
 @synthesize _autocomplete;
-@synthesize _classArray, _courseArray, _lecturerArray, _roomArray, _studentArray;
-@synthesize _lecturerDictionary;
+@synthesize _classArray;
+@synthesize _courseArray;
+@synthesize _lecturerArray;
+@synthesize _lecturerArrayFromDB;
+@synthesize _roomArray;
+@synthesize _roomArrayFromDB;
+@synthesize _studentArray;
+
+
+@synthesize _generalDictionary;
 
 @synthesize _asyncTimeTableRequest;
 @synthesize _dataFromUrl;
@@ -50,24 +58,25 @@
     [_searchButton useAlertStyle];
     
     //_courseArray = [NSMutableArray arrayWithObjects:@"t.PHSAV2-G", @"e",nil];
-    //_lecturerArray = [NSMutableArray arrayWithObjects:@"huhp", @"rege",nil];
     //_studentArray = [NSMutableArray arrayWithObjects:@"huhp", @"rege",nil];
-    //_roomArray     = [NSMutableArray arrayWithObjects:@"TH 567", @"TH 561", @"TP 406", @"TB 610", @"TH 331", nil];
     //_classArray    = [NSMutableArray arrayWithObjects:@"T_AV12b.BA",nil];
     
-    _lecturerArray = [[NSMutableArray alloc] init];
+    _lecturerArray       = [[NSMutableArray alloc] init];
+    _lecturerArrayFromDB = [[NSMutableArray alloc] init];
+    _roomArray           = [[NSMutableArray alloc] init];
+    _roomArrayFromDB     = [[NSMutableArray alloc] init];
     
     _autocomplete = [[Autocomplete alloc] initWithArray:_lecturerArray];
 	_searchTextField.autocorrectionType = UITextAutocorrectionTypeNo;
     
     _connectionTrials = 1;
-    _lecturerDictionary = nil;
+    _generalDictionary = nil;
     
     _dbCachingForAutocomplete = [[DBCachingForAutocomplete alloc]init];
 }
 
 
--(void) setAutocompleteCandidates
+-(void) setAutocompleteCandidatesWithDBUpdate:(BOOL)doDBUpdate
 {
     if ([_searchType isEqualToString:@"Kurs"])
     {
@@ -76,6 +85,11 @@
     if ([_searchType isEqualToString:@"Dozent"])
     {
         _autocomplete._candidates = _lecturerArray;
+        
+        if(doDBUpdate && [_lecturerArrayFromDB count] != [_lecturerArray count])
+        {
+            [_dbCachingForAutocomplete storeLecturers:_lecturerArray];
+        }
     }
     if ([_searchType isEqualToString:@"Student"])
     {
@@ -84,6 +98,11 @@
     if ([_searchType isEqualToString:@"Raum"])
     {
         _autocomplete._candidates = _roomArray;
+        
+        if(doDBUpdate && [_roomArrayFromDB count] != [_roomArray count])
+        {
+            [_dbCachingForAutocomplete storeRooms:_roomArray];
+        }
     }
     if ([_searchType isEqualToString:@"Klasse"])
     {
@@ -96,7 +115,8 @@
 // asynchronous request
 //-------------------------------
 
--(void) dataDownloadDidFinish:(NSData*) data {
+-(void) dataDownloadDidFinish:(NSData*) data
+{
     
     self._dataFromUrl = data;
     
@@ -110,52 +130,65 @@
         
         NSError *_error;
         
-        if (_lecturerDictionary == nil)
-        {
-            _lecturerDictionary = [NSJSONSerialization
+        //if (_generalDictionary == nil)
+        //{
+            _generalDictionary = [NSJSONSerialization
                                JSONObjectWithData:_dataFromUrl
                                options:kNilOptions
                                error:&_error];
         
-            for (id lecturerKey in _lecturerDictionary)
+            for (id generalKey in _generalDictionary)
             {
-                //NSLog(@"lecturerKey:%@",lecturerKey);
+                NSLog(@"generalKey:%@",generalKey);
                 
-                NSArray *_lecturerArray1 = [_lecturerDictionary objectForKey:lecturerKey];
-                NSDictionary *_lecturerDictionary1;
-                NSString *_lecturerName;
-                NSString *_lecturerShortName;
-                
-                [_lecturerArray removeAllObjects];
-                
-                //NSLog(@"how many lecturers: %i",[_lecturerArray1 count]);
-                
-                int i;
-                for (i = 0; i < [_lecturerArray1 count]; i++)
+                if ([generalKey isEqualToString:@"lecturers"])
                 {
-                    _lecturerDictionary1 = [_lecturerArray1 objectAtIndex:i];
-                    
-                    for (id lecturerKey in _lecturerDictionary1)
+                
+                    NSArray      *_lecturerArrayFromServer = [_generalDictionary objectForKey:generalKey];
+                    NSDictionary *_lecturerDictionary;
+                    NSString *_lecturerName;
+                    NSString *_lecturerShortName;
+                    [_lecturerArray removeAllObjects];
+                
+                    int lecturerArrayI;
+                    for (lecturerArrayI = 0; lecturerArrayI < [_lecturerArrayFromServer count]; lecturerArrayI++)
                     {
-                        if ([lecturerKey isEqualToString:@"name"])
+                        _lecturerDictionary = [_lecturerArrayFromServer objectAtIndex:lecturerArrayI];
+                    
+                        for (id lecturerKey in _lecturerDictionary)
                         {
-                            _lecturerName = [_lecturerDictionary1 objectForKey:lecturerKey];
-                            //NSLog(@"lecturer name: %@", _lecturerName);
-                        }
+                            if ([lecturerKey isEqualToString:@"name"])
+                            {
+                                _lecturerName = [_lecturerDictionary objectForKey:lecturerKey];
+                                //NSLog(@"lecturer name: %@", _lecturerName);
+                            }
                         
-                        if ([lecturerKey isEqualToString:@"shortName"])
-                        {
-                            _lecturerShortName = [_lecturerDictionary1 objectForKey:lecturerKey];
-                            //NSLog(@"lecturer shortName: %@", _lecturerShortName);
-                            [_lecturerArray addObject:_lecturerShortName];
+                            if ([lecturerKey isEqualToString:@"shortName"])
+                            {
+                                _lecturerShortName = [_lecturerDictionary objectForKey:lecturerKey];
+                                //NSLog(@"lecturer shortName: %@", _lecturerShortName);
+                                [_lecturerArray addObject:_lecturerShortName];
+                            }
                         }
                     }
+                    
                 }
-                
-                [_dbCachingForAutocomplete storeLecturers:_lecturerArray];
-                [self setAutocompleteCandidates];
+                if ([generalKey isEqualToString:@"rooms"])
+                {
+                    NSArray      *_roomArrayFromServer = [_generalDictionary objectForKey:generalKey];
+                    NSString     *_roomName;
+                    [_roomArray removeAllObjects];
+                    int roomArrayI;
+                    for (roomArrayI = 0; roomArrayI < [_roomArrayFromServer count]; roomArrayI++)
+                    {
+                        _roomName = [_roomArrayFromServer objectAtIndex:roomArrayI];
+                        [_roomArray addObject:_roomName];
+                    }
+                    
+                }
+                [self setAutocompleteCandidatesWithDBUpdate:(NO)];
             }
-        }
+        //}
     }
 }
 
@@ -165,14 +198,39 @@
     //NSLog(@"Thread exiting");
 }
 
+
 -(void) downloadData
 {
-    NSURL *_url;
+    NSString *_localTranslation;
     
-        _url = [NSURL URLWithString:
-                @"https://srv-lab-t-874.zhaw.ch/v1/schedules/lecturers/"];
+    if ([_searchType isEqualToString:@"Klasse"])
+    {
+        _localTranslation = @"classes";
+    }
+    if ([_searchType isEqualToString:@"Student"])
+    {
+        _localTranslation = @"students";
+    }
+    if ([_searchType isEqualToString:@"Raum"])
+    {
+        _localTranslation = @"rooms";
+    }
+    if ([_searchType isEqualToString:@"Dozent"])
+    {
+        _localTranslation = @"lecturers";
+    }
+    if ([_searchType isEqualToString:@"Kurs"])
+    {
+        _localTranslation = @"courses";
+    }
+    
+    NSString *_urlString = [NSString stringWithFormat:@"https://srv-lab-t-874.zhaw.ch/v1/schedules/%@/"
+                            , _localTranslation];
+    
+    NSLog(@"urlString: %@", _urlString);
+    
+    NSURL *_url = [NSURL URLWithString:_urlString];
     [_asyncTimeTableRequest downloadData:_url];
-    
 }
 
 
@@ -212,12 +270,11 @@
 {
     if (self._courseArray == nil)
     {
-
-        self._lecturerDictionary = nil;
+        self._generalDictionary = nil;
         
-        self._lecturerDictionary = [self getDictionaryFromUrl];
+        self._generalDictionary = [self getDictionaryFromUrl];
             
-        if (self._lecturerDictionary == nil)
+        if (self._generalDictionary == nil)
         {
             NSLog(@"no connection");
         }
@@ -238,14 +295,18 @@
     [super viewWillAppear:animated];
     [self getData];
     
-    if (self._lecturerDictionary == nil)
+    if (self._generalDictionary == nil)
     {
         [_lecturerArray removeAllObjects];
+        [_roomArray removeAllObjects];
 
         NSLog(@"no connection so get data from database");
         _lecturerArray = [_dbCachingForAutocomplete getLecturers];
+        _lecturerArrayFromDB = _lecturerArray;
+        _roomArray     = [_dbCachingForAutocomplete getRooms];
+        _roomArrayFromDB = _roomArray;
         
-        [self setAutocompleteCandidates];
+        [self setAutocompleteCandidatesWithDBUpdate:(NO)];
         [self.view addSubview:_acronymAutocompleteTableView];
         [_acronymAutocompleteTableView reloadData];
     }
@@ -306,8 +367,9 @@
       inComponent:(NSInteger)component
 {
     _searchType = [_searchTypeArray objectAtIndex:row];
+    [self getData];
     
-    [self setAutocompleteCandidates];
+    [self setAutocompleteCandidatesWithDBUpdate:(YES)];
 }
 
 
