@@ -26,4 +26,13 @@
 -(void) storeRooms:(NSMutableArray *)roomArray;
 -(NSMutableArray *) getRooms;
 
+-(void) storeClasses:(NSMutableArray *)classArray;
+-(NSMutableArray *) getClasses;
+
+-(void) storeCourses:(NSMutableArray *)coursesArray;
+-(NSMutableArray *) getCourses;
+
+-(void) storeStudents:(NSMutableArray *)studentsArray;
+-(NSMutableArray *) getStudents;
+
 @end

@@ -12,13 +12,49 @@
 
 @synthesize _timeTableDBPath;
 
--(id) init 
+
+-(void) createTableWithName:(NSString *)tableName
+                     withDB:(sqlite3  *)sqlite3DB
 {
+    char         *_errMsg;
+    sqlite3_stmt *_sqlite3stmt = nil;
+    
+    NSString    *_dropStmtString = [NSString stringWithFormat:@"drop table if exists %@;", tableName];
+    const char  *_dropStmtChar   = [_dropStmtString UTF8String];
+    
+    if (sqlite3_exec(sqlite3DB, _dropStmtChar , NULL, NULL, &_errMsg) != SQLITE_OK)
+    {
+        NSLog(@"Failed to drop table %@ with statement: %@", tableName, _dropStmtString);
+    }
+    else
+    {
+        NSLog(@"Dropped %@ table successfully", tableName);
+    }
+    int operationResult = sqlite3_step(_sqlite3stmt);
+    sqlite3_finalize(_sqlite3stmt);
+    
 
+    NSString *_stmtString = [NSString stringWithFormat:@"CREATE TABLE IF NOT EXISTS %@ (ID INTEGER PRIMARY KEY AUTOINCREMENT, NAME TEXT)",tableName];
+    const char *_stmtChar = [_stmtString UTF8String];
+    
+    if (sqlite3_exec(sqlite3DB, _stmtChar , NULL, NULL, &_errMsg) != SQLITE_OK)
+    {
+        NSLog(@"Failed to create table %@ with statement: %@", tableName, _stmtString);
+    }
+    else
+    {
+        NSLog(@"Created %@ table successfully", tableName);
+    }
+    operationResult = sqlite3_step(_sqlite3stmt);
+    sqlite3_finalize(_sqlite3stmt);
+}
+
+
+-(id) init
+{
     // DB for caching autocomplete data
-    NSArray *_dirPaths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-    NSString *_docsDir = [_dirPaths objectAtIndex:0];
-
+    NSArray  *_dirPaths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *_docsDir  = [_dirPaths objectAtIndex:0];
 
     // Build the path to the database file
     _timeTableDBPath = [[NSString alloc]
@@ -27,195 +63,149 @@
 
     sqlite3         *_timeTableNamesDB;
 
-    //NSFileManager *filemgr = [NSFileManager defaultManager];
-
-    //if ([filemgr fileExistsAtPath: _timeTableDBPath ] == NO)
-    //{
-        if (sqlite3_open([_timeTableDBPath UTF8String], &_timeTableNamesDB) == SQLITE_OK)
-        {
-            char *errMsg;
+    if (sqlite3_open([_timeTableDBPath UTF8String], &_timeTableNamesDB) == SQLITE_OK)
+    {
+        [self createTableWithName:@"LECTURER"   withDB:_timeTableNamesDB];
+        [self createTableWithName:@"ROOMS"      withDB:_timeTableNamesDB];
+        [self createTableWithName:@"CLASSES"    withDB:_timeTableNamesDB];
+        [self createTableWithName:@"COURSES"    withDB:_timeTableNamesDB];
+        [self createTableWithName:@"STUDENTS"   withDB:_timeTableNamesDB];
         
-            if (sqlite3_exec(_timeTableNamesDB, "CREATE TABLE IF NOT EXISTS LECTURER (ID INTEGER PRIMARY KEY AUTOINCREMENT, NAME TEXT, SHORTNAME TEXT)", NULL, NULL, &errMsg) != SQLITE_OK)
-            {
-                NSLog(@"Failed to create table LECTURER");
-            }
-            else
-            {
-                NSLog(@"Created Lecturer table successfully");
-            }
-            
-            if (sqlite3_exec(_timeTableNamesDB, "CREATE TABLE IF NOT EXISTS ROOMS (ID INTEGER PRIMARY KEY AUTOINCREMENT, NAME TEXT)", NULL, NULL, &errMsg) != SQLITE_OK)
-            {
-                NSLog(@"Failed to create table ROOMS");
-            }
-            else
-            {
-                NSLog(@"Created Rooms table successfully");
-            }
-            sqlite3_close(_timeTableNamesDB);
-        }
-        else
-        {
-            NSLog(@"Failed to open/create database");
-        }
+        sqlite3_close(_timeTableNamesDB);
+    }
+    else
+    {
+        NSLog(@"Failed to open/create database");
+    }
     return self;
+}
+
+
+-(void) storeOnTable:(NSString *)tableName
+           withArray:(NSMutableArray *)arrayToStore
+{
+    sqlite3_stmt    *_statement;
+    sqlite3         *_timeTableNamesDB;
+    
+    if (sqlite3_open([_timeTableDBPath UTF8String], &_timeTableNamesDB) == SQLITE_OK)
+    {
+        int      arrayToStoreI;
+        NSString *_nameToStore;
+        NSString *_insertSQL;
+        NSString *_deleteSQL = [NSString stringWithFormat:@"DELETE FROM %@", tableName];
+        
+        // delete first
+        sqlite3_prepare_v2(_timeTableNamesDB, [_deleteSQL UTF8String], -1, &_statement, NULL);
+        if (sqlite3_step(_statement) != SQLITE_DONE)
+        {
+            NSLog(@"Failed to delete %@ with statement: %d",tableName, sqlite3_step(_statement));
+        }
+        sqlite3_finalize(_statement);
+        
+        // then insert again
+        for (arrayToStoreI = 0; arrayToStoreI < [arrayToStore count]; arrayToStoreI++)
+        {
+            _nameToStore = [arrayToStore objectAtIndex:arrayToStoreI];
+            _insertSQL = [NSString stringWithFormat:@"INSERT INTO %@ (name, shortname) VALUES (\"%@\")",tableName, _nameToStore];
+            
+            sqlite3_prepare_v2(_timeTableNamesDB, [_insertSQL UTF8String],-1, &_statement, nil);
+            
+            if (sqlite3_step(_statement) != SQLITE_DONE)
+            {
+                NSLog(@"Failed to add to %@: %@ with statement: %d", tableName, _nameToStore, sqlite3_step(_statement));
+            }
+            sqlite3_finalize(_statement);            
+        }
+        sqlite3_close(_timeTableNamesDB);
+    }
+}
+
+
+-(NSMutableArray *)getNamesFromTable:(NSString *)tableName
+{
+    NSMutableArray  *_nameArray = [[NSMutableArray alloc] init];
+    sqlite3         *_timeTableNamesDB;
+    
+    if(sqlite3_open([_timeTableDBPath UTF8String], &_timeTableNamesDB) == SQLITE_OK)
+    {
+        NSString    *_sqlStmtString = [NSString stringWithFormat:@"select * from %@;", tableName];
+        const char  *_sqlStmtChar   = [_sqlStmtString UTF8String];
+        
+        sqlite3_stmt    *_compiledStatement;
+        NSString        *_namesFromTable;
+        
+        if(sqlite3_prepare_v2(_timeTableNamesDB, _sqlStmtChar, -1, &_compiledStatement, NULL) == SQLITE_OK)
+        {
+            // Loop through the results and add them to the feeds array
+            while(sqlite3_step(_compiledStatement) == SQLITE_ROW)
+            {
+                _namesFromTable = [NSString stringWithUTF8String:(char *)sqlite3_column_text(_compiledStatement, 1)];
+                [_nameArray addObject:_namesFromTable];
+            }
+        }
+        // Release the compiled statement from memory
+        sqlite3_finalize(_compiledStatement);
+        sqlite3_close(_timeTableNamesDB);
+    }
+    //NSLog(@"_nameArray count: %i", [_nameArray count]);
+    return _nameArray;
 }
 
 
 -(void) storeLecturers:(NSMutableArray *)lecturerArray
 {
-    sqlite3_stmt    *_statement;
-    sqlite3         *_timeTableNamesDB;
-
-    //sqlite3_open([_timeTableDBPath UTF8String], &_timeTableNamesDB);
-    
-    if (sqlite3_open([_timeTableDBPath UTF8String], &_timeTableNamesDB) == SQLITE_OK)
-    {
-        int lecturerArrayI;
-        NSString *_lecturerShortName;
-        NSString *_insertSQL;
-        NSString *_deleteSQL = [NSString stringWithFormat:@"DELETE FROM LECTURER"];
-    
-        //NSLog(@"first item: %@", [_lecturerArray objectAtIndex:0]);
-        //NSLog(@"last item: %@", [_lecturerArray objectAtIndex:[_lecturerArray count]-1]);
-    
-        sqlite3_prepare_v2(_timeTableNamesDB, [_deleteSQL UTF8String], -1, &_statement, NULL);
-        if (sqlite3_step(_statement) != SQLITE_DONE)
-        {
-            NSLog(@"Failed to delete lecturer with statement: %d", sqlite3_step(_statement));
-        }
-    
-        sqlite3_finalize(_statement);
-    
-        for (lecturerArrayI = 0; lecturerArrayI < [lecturerArray count]; lecturerArrayI++)
-        {
-            _lecturerShortName = [lecturerArray objectAtIndex:lecturerArrayI];
-            _insertSQL = [NSString stringWithFormat:
-                      @"INSERT INTO LECTURER (name, shortname) VALUES (\"%@\", \"%@\")",
-                      _lecturerShortName, _lecturerShortName];
-            
-            //NSLog(@"insert statement: %@ ", _insertSQL);
-            
-            sqlite3_prepare_v2(_timeTableNamesDB, [_insertSQL UTF8String],-1, &_statement, nil);
-                        
-            if (sqlite3_step(_statement) != SQLITE_DONE)
-            {
-                NSLog(@"Failed to add lecturer: %@ with statement: %d", _lecturerShortName, sqlite3_step(_statement));
-            }
-            sqlite3_finalize(_statement);
-            
-
-        }
-        sqlite3_close(_timeTableNamesDB);
-    }
+    [self storeOnTable:@"LECTURER" withArray:lecturerArray];
 }
 
 -(NSMutableArray *)getLecturers
 {
-    NSMutableArray *_lecturerArray = [[NSMutableArray alloc] init];
-    sqlite3         *_timeTableNamesDB;
-
-    if(sqlite3_open([_timeTableDBPath UTF8String], &_timeTableNamesDB) == SQLITE_OK)
-    {
-        const char      *_sqlStatement = "select * from lecturer";
-        sqlite3_stmt    *_compiledStatement;
-        NSString        *_lecturerShortName;
-        
-        if(sqlite3_prepare_v2(_timeTableNamesDB, _sqlStatement, -1, &_compiledStatement, NULL) == SQLITE_OK)
-        {
-            // Loop through the results and add them to the feeds array
-            while(sqlite3_step(_compiledStatement) == SQLITE_ROW)
-            {
-                _lecturerShortName = [NSString stringWithUTF8String:(char *)sqlite3_column_text(_compiledStatement, 1)];
-                [_lecturerArray addObject:_lecturerShortName];
-            }
-        }
-        // Release the compiled statement from memory
-        sqlite3_finalize(_compiledStatement);
-        sqlite3_close(_timeTableNamesDB);
-    }
-    //NSLog(@"_lecturerArray count: %i", [_lecturerArray count]);
-    return _lecturerArray;
+    return [self getNamesFromTable:@"LECTURER"];
 }
 
 
 -(void) storeRooms:(NSMutableArray *)roomArray
 {
-    NSLog(@"storeRooms START");
-    sqlite3_stmt    *_statement;
-    sqlite3         *_timeTableNamesDB;
-
-    if (sqlite3_open([_timeTableDBPath UTF8String], &_timeTableNamesDB) == SQLITE_OK)
-    {
-        int roomArrayI;
-        NSString *_roomName;
-        NSString *_insertSQL;
-        NSString *_deleteSQL = [NSString stringWithFormat:@"DELETE FROM ROOMS"];
-        
-        //NSLog(@"first item: %@", [_lecturerArray objectAtIndex:0]);
-        //NSLog(@"last item: %@", [_lecturerArray objectAtIndex:[_lecturerArray count]-1]);
-        
-        sqlite3_prepare_v2(_timeTableNamesDB, [_deleteSQL UTF8String], -1, &_statement, 0);
-        
-        if (sqlite3_step(_statement) != SQLITE_DONE)
-        {
-            NSLog(@"Failed to delete rooms");
-        }
-        sqlite3_finalize(_statement);
-        
-        
-        for (roomArrayI = 0; roomArrayI < [roomArray count]; roomArrayI++)
-        {
-            _roomName = [roomArray objectAtIndex:roomArrayI];
-            _insertSQL = [NSString stringWithFormat:
-                          @"INSERT INTO ROOMS (name) VALUES (\"%@\")",
-                          _roomName];
-            
-            //NSLog(@"insert statement: %@ ", _insertSQL);
-            
-            sqlite3_prepare_v2(_timeTableNamesDB, [_insertSQL UTF8String],-1, &_statement, 0);
-            
-            if (sqlite3_step(_statement) != SQLITE_DONE)
-            {
-                NSLog(@"Failed to add room: %@ with statement: %d", _roomName, sqlite3_step(_statement));
-            }
-            sqlite3_finalize(_statement);
-        }
-    sqlite3_close(_timeTableNamesDB);        
-    }
-    NSLog(@"storeRooms FINISHED");
+    //NSLog(@"storeRooms START");
+    [self storeOnTable:@"ROOMS" withArray:roomArray];
+    //NSLog(@"storeRooms FINISHED");
 }
 
 -(NSMutableArray *) getRooms
 {
-    NSLog(@"getRooms START");
-    NSMutableArray *_roomArray = [[NSMutableArray alloc] init];
-    sqlite3         *_timeTableNamesDB;
-
-    if(sqlite3_open([_timeTableDBPath UTF8String], &_timeTableNamesDB) == SQLITE_OK)
-    {
-        const char      *_sqlStatement = "select * from rooms";
-        sqlite3_stmt    *_compiledStatement;
-        NSString        *_roomName;
-        
-        if(sqlite3_prepare_v2(_timeTableNamesDB, _sqlStatement, -1, &_compiledStatement, 0) == SQLITE_OK)
-        {
-            // Loop through the results and add them to the feeds array
-            while(sqlite3_step(_compiledStatement) == SQLITE_ROW)
-            {
-                _roomName = [NSString stringWithUTF8String:(char *)sqlite3_column_text(_compiledStatement, 1)];
-                [_roomArray addObject:_roomName];
-            }
-        }
-        // Release the compiled statement from memory
-        sqlite3_finalize(_compiledStatement);
-        sqlite3_close(_timeTableNamesDB);
-    }
-//    NSLog(@"_roomArray count: %i", [_roomArray count]);
-    NSLog(@"getRooms FINISHED");
-
-    return _roomArray;
+    //NSLog(@"getRooms");
+    return [self getNamesFromTable:@"ROOMS"];
 }
 
+
+-(void) storeClasses:(NSMutableArray *)classArray
+{
+    [self storeOnTable:@"CLASSES" withArray:classArray];
+}
+
+-(NSMutableArray *)getClasses
+{
+    return [self getNamesFromTable:@"CLASSES"];
+}
+
+
+-(void) storeCourses:(NSMutableArray *)coursesArray
+{
+    [self storeOnTable:@"COURSES" withArray:coursesArray];
+}
+
+-(NSMutableArray *)getCourses
+{
+    return [self getNamesFromTable:@"COURSES"];
+}
+
+-(void) storeStudents:(NSMutableArray *)studentsArray
+{
+    [self storeOnTable:@"STUDENTS" withArray:studentsArray];
+}
+
+-(NSMutableArray *)getStudents
+{
+    return [self getNamesFromTable:@"STUDENTS"];
+}
 
 @end
