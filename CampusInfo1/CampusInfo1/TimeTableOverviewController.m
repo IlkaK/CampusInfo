@@ -84,6 +84,8 @@
 @synthesize _leftSwipe;
 @synthesize _rightSwipe;
 
+@synthesize _translator;
+
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {   
@@ -138,7 +140,7 @@
     _detailsVC._dayAndAcronymString = [NSString stringWithFormat:@" für den %@ von %@ (%@)"
                                        ,[[self dayFormatter] stringFromDate:_actualDate]
                                        ,newAcronym //self._actualShownAcronymString
-                                       ,[self getGermanTypeTranslation:newAcronymType] //self._actualShownAcronymType]
+                                       ,[_translator getGermanTypeTranslation:newAcronymType] //self._actualShownAcronymType]
                                        ];
     [_timeTable reloadData];
 }
@@ -250,7 +252,7 @@
                         withAcronymType:self._ownStoredAcronymType
                         withAcronymText:[NSString stringWithFormat:@"von %@ (%@)"
                                          ,_ownStoredAcronymString
-                                         ,[self getGermanTypeTranslation:_ownStoredAcronymType]
+                                         ,[_translator getGermanTypeTranslation:_ownStoredAcronymType]
                                          ]
          ];
     }
@@ -268,88 +270,6 @@
     // Releases the view if it doesn't have a superview.
     [super didReceiveMemoryWarning];
     // Release any cached data, images, etc that aren't in use.
-}
-
-- (NSString *)getGermanTypeTranslation:(NSString*)acronymType
-{
-    NSString *_localTranslation;
-    
-    if ([acronymType isEqualToString:@"classes"])
-    {
-        _localTranslation = @"Klasse";
-    }
-    if ([acronymType isEqualToString:@"students"])
-    {
-        _localTranslation = @"Student";
-    }
-    if ([acronymType isEqualToString:@"rooms"])
-    {
-        _localTranslation = @"Raum";
-    }
-    if ([acronymType isEqualToString:@"lecturers"])
-    {
-        _localTranslation = @"Dozent";
-    }
-    if ([acronymType isEqualToString:@"courses"])
-    {
-        _localTranslation = @"Kurs";
-    }    
-    return _localTranslation;
-}
-
-
-- (NSString *)getEnglishTypeTranslation:(NSString*)acronymType
-{
-    NSString *_localTranslation;
-    
-    if ([acronymType isEqualToString:@"Klasse"])
-    {
-        _localTranslation = @"classes";
-    }
-    if ([acronymType isEqualToString:@"Student"])
-    {
-        _localTranslation = @"students";
-    }
-    if ([acronymType isEqualToString:@"Raum"])
-    {
-        _localTranslation = @"rooms";
-    }
-    if ([acronymType isEqualToString:@"Dozent"])
-    {
-        _localTranslation = @"lecturers";
-    }
-    if ([acronymType isEqualToString:@"Kurs"])
-    {
-        _localTranslation = @"courses";
-    }
-    return _localTranslation;
-}
-
-
-- (NSString *)getGermanErrorMessageTranslation:(NSString *)errorMessage
-{
-    NSString *_localTranslation = @"";
-    if ([errorMessage isEqualToString:@"Schedule for given course name could not be found."])
-    {
-        _localTranslation = @"Der Stundenplan für den gesuchten Kurs konnte nicht gefunden werden. Bitte Schreibweise beachten (z.B. t.MARI-V) und kein Datum wählen, welches zu weit in der Zukunft oder in der Vergangenheit liegt.";
-    }
-    if ([errorMessage isEqualToString:@"Schedule for given lecturer id could not be found."])
-    {
-        _localTranslation = @"Der Stundenplan für den gesuchten Dozenten konnte nicht gefunden werden. Bitte Schreibweise beachten (z.B. huhp, rege) und kein Datum wählen, welches zu weit in der Zukunft oder in der Vergangenheit liegt.";
-    }
-    if ([errorMessage isEqualToString:@"Schedule for given room name could not be found."])
-    {
-        _localTranslation = @"Der Stundenplan für den gesuchten Raum konnte nicht gefunden werden. Bitte Schreibweise beachten (z.B. te 223, th 344) und kein Datum wählen, welches zu weit in der Zukunft oder in der Vergangenheit liegt.";
-    }
-    if ([errorMessage isEqualToString:@"Schedule for given school class could not be found."])
-    {
-        _localTranslation = @"Der Stundenplan für die gesuchte Klasse konnte nicht gefunden werden. Bitte Schreibweise beachten (z.B. T_WI11a.BA) und kein Datum wählen, welches zu weit in der Zukunft oder in der Vergangenheit liegt.";
-    }
-    if ([errorMessage isEqualToString:@"Schedule for given students id could not be found."])
-    {
-        _localTranslation = @"Der Stundenplan für den gesuchten Studenten konnte nicht gefunden werden. Bitte Schreibweise beachten und kein Datum wählen, welches zu weit in der Zukunft oder in der Vergangenheit liegt.";
-    }    
-    return _localTranslation;
 }
 
 
@@ -446,7 +366,7 @@
        
         _acronymLabel.text          = [NSString stringWithFormat:@"von %@ (%@)"
                                        ,_ownStoredAcronymString
-                                       ,[self getGermanTypeTranslation:_ownStoredAcronymType]
+                                       ,[_translator getGermanTypeTranslation:_ownStoredAcronymType]
                                       ];
         
         // SET NEW ACRONYM WITH ACTUAL DATE
@@ -454,7 +374,7 @@
          withAcronymType:_ownStoredAcronymType
          withAcronymText:[NSString stringWithFormat:@"von %@ (%@)"
                                          ,_ownStoredAcronymString
-                                         ,[self getGermanTypeTranslation:_ownStoredAcronymType]
+                                         ,[_translator getGermanTypeTranslation:_ownStoredAcronymType]
                                          ]
          ];
     
@@ -489,7 +409,7 @@
                     withAcronymType:newAcronymType
                     withAcronymText:[NSString stringWithFormat:@"von %@ (%@)"
                                      ,newAcronym
-                                     ,[self getGermanTypeTranslation:newAcronymType]
+                                     ,[_translator getGermanTypeTranslation:newAcronymType]
                                      ]
      ];
 }
@@ -500,6 +420,8 @@
 {
 
     [super viewDidLoad];
+    
+    _translator = [[LanguageTranslation alloc] init];
     
     //----- TimeTableViewController ----
     // set table controller
@@ -607,7 +529,7 @@
     self._searchText = txt;
     
     [self setNewScheduleWithAcronym:self._searchText
-                    withAcronymType:[self getEnglishTypeTranslation:self._searchType]
+                    withAcronymType:[_translator getEnglishTypeTranslation:self._searchType]
                     withAcronymText:[NSString stringWithFormat:@"von %@ (%@)",self._searchText, self._searchType]
      ];
 }
@@ -653,7 +575,7 @@
         {
             self._acronymLabel.text          = [NSString stringWithFormat:@"von %@ (%@)"
                                                 ,self._actualShownAcronymString
-                                                ,[self getGermanTypeTranslation:self._actualShownAcronymType]
+                                                ,[_translator getGermanTypeTranslation:self._actualShownAcronymType]
                                                 ];
                         
             //self._schedule                 = [[ScheduleDto alloc] initWithAcronym:_actualShownAcronymString:_actualShownAcronymType:_actualDate];
@@ -663,7 +585,7 @@
             _detailsVC._dayAndAcronymString = [NSString stringWithFormat:@" für den %@ von %@ (%@)"
                                                ,[[self dayFormatter] stringFromDate:_actualDate]
                                                ,self._actualShownAcronymString
-                                               ,[self getGermanTypeTranslation:self._actualShownAcronymType]
+                                               ,[_translator getGermanTypeTranslation:self._actualShownAcronymType]
                                                ];
             
             
@@ -867,7 +789,7 @@
         _detailsVC._dayAndAcronymString = [NSString stringWithFormat:@" für den %@ von %@ (%@)"
                                            ,[[self dayFormatter] stringFromDate:_actualDate]
                                            , self._actualShownAcronymString
-                                           ,[self getGermanTypeTranslation:self._actualShownAcronymType]
+                                           ,[_translator getGermanTypeTranslation:self._actualShownAcronymType]
                                            ];
     
         NSString *_fromString           = [[self timeFormatter] stringFromDate: _detailsVC._scheduleEvent._startTime];
@@ -1600,7 +1522,7 @@
     
     if (actualSelection == 0)
     {
-        _messageLabel.text = [self getGermanErrorMessageTranslation:errorMessage];
+        _messageLabel.text = [_translator getGermanErrorMessageTranslation:errorMessage];
     }
     else
     {

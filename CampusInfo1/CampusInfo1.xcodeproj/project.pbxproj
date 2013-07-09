@@ -65,6 +65,7 @@
 		A3A551461525EB8B00BCAF3D /* SlotDto.m in Sources */ = {isa = PBXBuildFile; fileRef = A3A551451525EB8B00BCAF3D /* SlotDto.m */; };
 		A3A8654C1520A0C90074FFE5 /* TimeTableOverviewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A3A8654A1520A0C90074FFE5 /* TimeTableOverviewController.m */; };
 		A3A8654D1520A0C90074FFE5 /* TimeTableOverviewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A3A8654B1520A0C90074FFE5 /* TimeTableOverviewController.xib */; };
+		E104C049178C397C0020EEB4 /* LanguageTranslation.m in Sources */ = {isa = PBXBuildFile; fileRef = E104C048178C397C0020EEB4 /* LanguageTranslation.m */; };
 		E13D3B5B17412F0500F534DB /* ChooseDateViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E13D3B5917412F0500F534DB /* ChooseDateViewController.m */; };
 		E13D3B5C17412F0500F534DB /* ChooseDateViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E13D3B5A17412F0500F534DB /* ChooseDateViewController.xib */; };
 		E17842D2178309160059EA3C /* DBCachingForAutocomplete.m in Sources */ = {isa = PBXBuildFile; fileRef = E17842D1178309160059EA3C /* DBCachingForAutocomplete.m */; };
@@ -156,6 +157,8 @@
 		A3A865491520A0C90074FFE5 /* TimeTableOverviewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TimeTableOverviewController.h; sourceTree = "<group>"; };
 		A3A8654A1520A0C90074FFE5 /* TimeTableOverviewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TimeTableOverviewController.m; sourceTree = "<group>"; };
 		A3A8654B1520A0C90074FFE5 /* TimeTableOverviewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TimeTableOverviewController.xib; sourceTree = "<group>"; };
+		E104C047178C397C0020EEB4 /* LanguageTranslation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LanguageTranslation.h; sourceTree = "<group>"; };
+		E104C048178C397C0020EEB4 /* LanguageTranslation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LanguageTranslation.m; sourceTree = "<group>"; };
 		E13D3B5817412F0500F534DB /* ChooseDateViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChooseDateViewController.h; sourceTree = "<group>"; };
 		E13D3B5917412F0500F534DB /* ChooseDateViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChooseDateViewController.m; sourceTree = "<group>"; };
 		E13D3B5A17412F0500F534DB /* ChooseDateViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ChooseDateViewController.xib; sourceTree = "<group>"; };
@@ -277,6 +280,8 @@
 				27FBF7271551A83600C09ED9 /* StartpageViewController.xib */,
 				E1D48A591757856400BB1652 /* GradientButton.h */,
 				E1D48A5A1757856400BB1652 /* GradientButton.m */,
+				E104C047178C397C0020EEB4 /* LanguageTranslation.h */,
+				E104C048178C397C0020EEB4 /* LanguageTranslation.m */,
 			);
 			path = CampusInfo1;
 			sourceTree = "<group>";
@@ -509,6 +514,7 @@
 				E1D48A5B1757856400BB1652 /* GradientButton.m in Sources */,
 				E1BC14C2175F8D4900FE2854 /* Autocomplete.m in Sources */,
 				E17842D2178309160059EA3C /* DBCachingForAutocomplete.m in Sources */,
+				E104C049178C397C0020EEB4 /* LanguageTranslation.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -39,11 +39,16 @@
 @synthesize _connectionTrials;
 @synthesize _dbCachingForAutocomplete;
 
+@synthesize _translator;
+
 
 // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
 - (void)viewDidLoad
 {
-    [super viewDidLoad];    
+    [super viewDidLoad];
+    
+    _translator = [[LanguageTranslation alloc] init];
+    
     self._searchTypeArray = [[NSArray alloc] initWithObjects:
                          @"Kurs", @"Dozent", @"Student",
                          @"Raum", @"Klasse", nil];
@@ -251,32 +256,9 @@
 
 
 -(void) downloadData
-{
-    NSString *_localTranslation;
-    
-    if ([_searchType isEqualToString:@"Klasse"])
-    {
-        _localTranslation = @"classes";
-    }
-    if ([_searchType isEqualToString:@"Student"])
-    {
-        _localTranslation = @"students";
-    }
-    if ([_searchType isEqualToString:@"Raum"])
-    {
-        _localTranslation = @"rooms";
-    }
-    if ([_searchType isEqualToString:@"Dozent"])
-    {
-        _localTranslation = @"lecturers";
-    }
-    if ([_searchType isEqualToString:@"Kurs"])
-    {
-        _localTranslation = @"courses";
-    }
-    
+{    
     NSString *_urlString = [NSString stringWithFormat:@"https://srv-lab-t-874.zhaw.ch/v1/schedules/%@/"
-                            , _localTranslation];
+                            , [_translator getEnglishTypeTranslation:_searchType]];
     
     NSLog(@"urlString: %@", _urlString);
     

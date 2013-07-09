@@ -11,6 +11,7 @@
 #import <Autocomplete.h>
 #import <TimeTableAsyncRequest.h>
 #import <DBCachingForAutocomplete.h>
+#import <LanguageTranslation.h>
 
 @interface SearchViewController : UIViewController<UIPickerViewDelegate,UIPickerViewDataSource,UITextFieldDelegate,TimeTableAsyncRequestDelegate>{
     
@@ -51,6 +52,8 @@
     int _connectionTrials;
 
     DBCachingForAutocomplete *_dbCachingForAutocomplete;
+    
+    LanguageTranslation *_translator;
 }
 
 @property (nonatomic, retain) IBOutlet UITextField *_searchTextField;
@@ -86,6 +89,8 @@
 @property (nonatomic, assign) int                             _connectionTrials;
 
 @property (nonatomic, retain) DBCachingForAutocomplete *_dbCachingForAutocomplete;
+
+@property (nonatomic, retain) LanguageTranslation            *_translator;
 
 
 // Button to start searching

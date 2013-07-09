@@ -11,6 +11,7 @@
 #import <TimeTableDetailController.h>
 #import <ChooseDateViewController.h>
 #import <GradientButton.h>
+#import <LanguageTranslation.h>
 
 @class ScheduleDto;
 @class DayDto;
@@ -98,6 +99,8 @@ UIViewController
     
     IBOutlet UISwipeGestureRecognizer *_rightSwipe;
     IBOutlet UISwipeGestureRecognizer *_leftSwipe;
+    
+    LanguageTranslation     *_translator;
 }
 
 
@@ -168,6 +171,9 @@ UIViewController
 
 @property (nonatomic, retain) IBOutlet UISwipeGestureRecognizer  *_rightSwipe;
 @property (nonatomic, retain) IBOutlet UISwipeGestureRecognizer  *_leftSwipe;
+
+@property (nonatomic, retain)          LanguageTranslation       *_translator;
+
 
 - (IBAction)tryConnectionAgain:(id)sender;
 
