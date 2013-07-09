@@ -20,24 +20,23 @@
 @synthesize _acronymAutocompleteTableView;
 @synthesize _suggestions;
 @synthesize _autocomplete;
-@synthesize _classArray;
-@synthesize _courseArray;
+
 @synthesize _lecturerArray;
 @synthesize _lecturerArrayFromDB;
 @synthesize _roomArray;
 @synthesize _roomArrayFromDB;
 @synthesize _studentArray;
-
+@synthesize _studentArrayFromDB;
+@synthesize _classArray;
+@synthesize _classArrayFromDB;
+@synthesize _courseArray;
+@synthesize _courseArrayFromDB;
 
 @synthesize _generalDictionary;
-
 @synthesize _asyncTimeTableRequest;
 @synthesize _dataFromUrl;
-
 @synthesize _errorMessage;
-
 @synthesize _connectionTrials;
-
 @synthesize _dbCachingForAutocomplete;
 
 
@@ -57,14 +56,16 @@
     self._searchTextField.delegate = self;
     [_searchButton useAlertStyle];
     
-    //_courseArray = [NSMutableArray arrayWithObjects:@"t.PHSAV2-G", @"e",nil];
-    //_studentArray = [NSMutableArray arrayWithObjects:@"huhp", @"rege",nil];
-    //_classArray    = [NSMutableArray arrayWithObjects:@"T_AV12b.BA",nil];
-    
     _lecturerArray       = [[NSMutableArray alloc] init];
     _lecturerArrayFromDB = [[NSMutableArray alloc] init];
     _roomArray           = [[NSMutableArray alloc] init];
     _roomArrayFromDB     = [[NSMutableArray alloc] init];
+    _classArray          = [[NSMutableArray alloc] init];
+    _classArrayFromDB    = [[NSMutableArray alloc] init];
+    _courseArray         = [[NSMutableArray alloc] init];
+    _courseArrayFromDB   = [[NSMutableArray alloc] init];
+    _studentArray        = [[NSMutableArray alloc] init];
+    _studentArrayFromDB  = [[NSMutableArray alloc] init];
     
     _autocomplete = [[Autocomplete alloc] initWithArray:_lecturerArray];
 	_searchTextField.autocorrectionType = UITextAutocorrectionTypeNo;
@@ -78,35 +79,50 @@
 
 -(void) setAutocompleteCandidatesWithDBUpdate:(BOOL)doDBUpdate
 {
+    
     if ([_searchType isEqualToString:@"Kurs"])
     {
         _autocomplete._candidates = _courseArray;
+        if(doDBUpdate && [_courseArrayFromDB count] != [_courseArray count])
+        {
+            [_dbCachingForAutocomplete storeCourses:_courseArray];
+        }
     }
+    
     if ([_searchType isEqualToString:@"Dozent"])
     {
         _autocomplete._candidates = _lecturerArray;
-        
         if(doDBUpdate && [_lecturerArrayFromDB count] != [_lecturerArray count])
         {
             [_dbCachingForAutocomplete storeLecturers:_lecturerArray];
         }
     }
+    
     if ([_searchType isEqualToString:@"Student"])
     {
         _autocomplete._candidates = _studentArray;
+        if(doDBUpdate && [_studentArrayFromDB count] != [_studentArray count])
+        {
+            [_dbCachingForAutocomplete storeStudents:_studentArray];
+        }
     }
+    
     if ([_searchType isEqualToString:@"Raum"])
     {
         _autocomplete._candidates = _roomArray;
-        
         if(doDBUpdate && [_roomArrayFromDB count] != [_roomArray count])
         {
             [_dbCachingForAutocomplete storeRooms:_roomArray];
         }
     }
+    
     if ([_searchType isEqualToString:@"Klasse"])
     {
         _autocomplete._candidates = _classArray;
+        if(doDBUpdate && [_classArrayFromDB count] != [_classArray count])
+        {
+            [_dbCachingForAutocomplete storeClasses:_classArray];
+        }
     }
 }
 
@@ -141,20 +157,19 @@
             {
                 NSLog(@"generalKey:%@",generalKey);
                 
+                NSArray      *_generalArrayFromServer = [_generalDictionary objectForKey:generalKey];
+                int          _generalArrayFromServerI;
+                
                 if ([generalKey isEqualToString:@"lecturers"])
                 {
-                
-                    NSArray      *_lecturerArrayFromServer = [_generalDictionary objectForKey:generalKey];
-                    NSDictionary *_lecturerDictionary;
-                    NSString *_lecturerName;
-                    NSString *_lecturerShortName;
+                    NSDictionary    *_lecturerDictionary;
+                    NSString        *_lecturerName;
+                    NSString        *_lecturerShortName;
                     [_lecturerArray removeAllObjects];
                 
-                    int lecturerArrayI;
-                    for (lecturerArrayI = 0; lecturerArrayI < [_lecturerArrayFromServer count]; lecturerArrayI++)
+                    for (_generalArrayFromServerI = 0; _generalArrayFromServerI < [_generalArrayFromServer count]; _generalArrayFromServerI++)
                     {
-                        _lecturerDictionary = [_lecturerArrayFromServer objectAtIndex:lecturerArrayI];
-                    
+                        _lecturerDictionary = [_generalArrayFromServer objectAtIndex:_generalArrayFromServerI];
                         for (id lecturerKey in _lecturerDictionary)
                         {
                             if ([lecturerKey isEqualToString:@"name"])
@@ -162,7 +177,6 @@
                                 _lecturerName = [_lecturerDictionary objectForKey:lecturerKey];
                                 //NSLog(@"lecturer name: %@", _lecturerName);
                             }
-                        
                             if ([lecturerKey isEqualToString:@"shortName"])
                             {
                                 _lecturerShortName = [_lecturerDictionary objectForKey:lecturerKey];
@@ -171,21 +185,58 @@
                             }
                         }
                     }
-                    
                 }
+                
                 if ([generalKey isEqualToString:@"rooms"])
                 {
-                    NSArray      *_roomArrayFromServer = [_generalDictionary objectForKey:generalKey];
-                    NSString     *_roomName;
                     [_roomArray removeAllObjects];
-                    int roomArrayI;
-                    for (roomArrayI = 0; roomArrayI < [_roomArrayFromServer count]; roomArrayI++)
+                    for (_generalArrayFromServerI = 0; _generalArrayFromServerI < [_generalArrayFromServer count]; _generalArrayFromServerI++)
                     {
-                        _roomName = [_roomArrayFromServer objectAtIndex:roomArrayI];
-                        [_roomArray addObject:_roomName];
+                        [_roomArray addObject:[_generalArrayFromServer objectAtIndex:_generalArrayFromServerI]];
                     }
-                    
                 }
+                
+                if ([generalKey isEqualToString:@"courses"])
+                {
+                    NSDictionary    *_courseDictionary;
+                    NSString        *_courseDescription;
+                    [_courseArray removeAllObjects];
+                    
+                    for (_generalArrayFromServerI = 0; _generalArrayFromServerI < [_generalArrayFromServer count]; _generalArrayFromServerI++)
+                    {
+                        _courseDictionary = [_generalArrayFromServer objectAtIndex:_generalArrayFromServerI];
+                        for (id courseKey in _courseDictionary)
+                        {
+                            if ([courseKey isEqualToString:@"name"])
+                            {
+                               [_courseArray addObject:[_courseDictionary objectForKey:courseKey]];
+                            }
+                            if ([courseKey isEqualToString:@"description"])
+                            {
+                                _courseDescription = [_courseDictionary objectForKey:courseKey];
+                            }
+                        }
+                    }
+                }
+                
+                if ([generalKey isEqualToString:@"classes"])
+                {
+                    [_classArray removeAllObjects];
+                    for (_generalArrayFromServerI = 0; _generalArrayFromServerI < [_generalArrayFromServer count]; _generalArrayFromServerI++)
+                    {
+                        [_classArray addObject:[_generalArrayFromServer objectAtIndex:_generalArrayFromServerI]];
+                    }
+                }
+                
+                if ([generalKey isEqualToString:@"students"])
+                {
+                    [_studentArray removeAllObjects];
+                    for (_generalArrayFromServerI = 0; _generalArrayFromServerI < [_generalArrayFromServer count]; _generalArrayFromServerI++)
+                    {
+                        [_studentArray addObject:[_generalArrayFromServer objectAtIndex:_generalArrayFromServerI]];
+                    }
+                }
+            
                 [self setAutocompleteCandidatesWithDBUpdate:(NO)];
             }
         //}
@@ -268,8 +319,8 @@
 
 -(void) getData
 {
-    if (self._courseArray == nil)
-    {
+    //if (self._courseArray == nil)
+    //{
         self._generalDictionary = nil;
         
         self._generalDictionary = [self getDictionaryFromUrl];
@@ -282,7 +333,7 @@
         {
             NSLog(@"IF connection established");
         }
-    }
+    //}
 }
 
 
@@ -299,12 +350,21 @@
     {
         [_lecturerArray removeAllObjects];
         [_roomArray removeAllObjects];
-
+        [_classArray removeAllObjects];
+        [_courseArray removeAllObjects];
+        [_studentArray removeAllObjects];
+        
         NSLog(@"no connection so get data from database");
-        _lecturerArray = [_dbCachingForAutocomplete getLecturers];
-        _lecturerArrayFromDB = _lecturerArray;
-        _roomArray     = [_dbCachingForAutocomplete getRooms];
-        _roomArrayFromDB = _roomArray;
+        _lecturerArray          = [_dbCachingForAutocomplete getLecturers];
+        _lecturerArrayFromDB    = _lecturerArray;
+        _roomArray              = [_dbCachingForAutocomplete getRooms];
+        _roomArrayFromDB        = _roomArray;
+        _classArray             = [_dbCachingForAutocomplete getClasses];
+        _classArrayFromDB       = _classArray;
+        _courseArray            = [_dbCachingForAutocomplete getCourses];
+        _courseArrayFromDB      = _courseArray;
+        _studentArray           = [_dbCachingForAutocomplete getStudents];
+        _studentArrayFromDB     = _studentArray;
         
         [self setAutocompleteCandidatesWithDBUpdate:(NO)];
         [self.view addSubview:_acronymAutocompleteTableView];
