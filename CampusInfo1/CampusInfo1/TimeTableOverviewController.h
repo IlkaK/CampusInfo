@@ -95,6 +95,9 @@ UIViewController
     
     IBOutlet GradientButton     *_homeButton;
     IBOutlet GradientButton     *_todayButton;
+    
+    IBOutlet UISwipeGestureRecognizer *_rightSwipe;
+    IBOutlet UISwipeGestureRecognizer *_leftSwipe;
 }
 
 
@@ -162,6 +165,9 @@ UIViewController
 
 @property (nonatomic, retain) IBOutlet UIButton                  *_homeButton;
 @property (nonatomic, retain) IBOutlet UIButton                  *_todayButton;
+
+@property (nonatomic, retain) IBOutlet UISwipeGestureRecognizer  *_rightSwipe;
+@property (nonatomic, retain) IBOutlet UISwipeGestureRecognizer  *_leftSwipe;
 
 - (IBAction)tryConnectionAgain:(id)sender;
 

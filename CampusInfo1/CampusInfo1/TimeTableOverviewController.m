@@ -81,6 +81,9 @@
 @synthesize _homeButton;
 @synthesize _todayButton;
 
+@synthesize _leftSwipe;
+@synthesize _rightSwipe;
+
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {   
@@ -571,6 +574,15 @@
     // set style of buttons next to title
      [_homeButton useAlertStyle];
      [_todayButton useAlertStyle];
+    
+    _rightSwipe = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(dayBefore:)];
+    [_rightSwipe setDirection:(UISwipeGestureRecognizerDirectionRight)];
+    [[self view] addGestureRecognizer:_rightSwipe];
+    
+    _leftSwipe = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(dayAfter:)];
+    [_leftSwipe setDirection:(UISwipeGestureRecognizerDirectionLeft)];
+    [[self view] addGestureRecognizer:_leftSwipe];
+    
 }
 
 
@@ -815,6 +827,8 @@
     _twoSlotsThreeRoomsTableCell = nil;
     _homeButton = nil;
     _todayButton = nil;
+    _rightSwipe = nil;
+    _leftSwipe = nil;
     [super viewDidUnload];
 }
 
