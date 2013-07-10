@@ -397,8 +397,8 @@
             }
             
         }
-        // get time slots 
-        if ([eventKey isEqualToString:@"slots"]) 
+        // get time slots
+        if ([eventKey isEqualToString:@"slots"])
         {
             NSArray  *_slotArray = [eventDictionary objectForKey:eventKey];
             
@@ -406,15 +406,36 @@
             
             // loop over slots
             int slotArrayI;
+            SlotDto *_localSlot;
+            SlotDto *_lastSlot;
+            
             for (slotArrayI = 0; slotArrayI < [_slotArray count]; slotArrayI++) 
             {
-                SlotDto *_localSlot = 
-                [self getSlot:[_slotArray objectAtIndex:slotArrayI]];
-                [_slotArrayToStore addObject:_localSlot];
+
+                if (slotArrayI == 0)
+                {
+                    _lastSlot = nil;
+                }
+                else
+                {
+                    _lastSlot = _localSlot;
+                }
+                _localSlot = [self getSlot:[_slotArray objectAtIndex:slotArrayI]];
+                
+                // always take first slot, but not the ones following, if start and end time are the same
+                if (!
+                        (    _lastSlot != nil
+                         && [_lastSlot._startTime   isEqualToDate:_localSlot._startTime ]
+                         && [_lastSlot._endTime     isEqualToDate:_localSlot._endTime   ]
+                         )
+                    )
+                {
+                    [_slotArrayToStore addObject:_localSlot];
+                }
             }
         }
     
-    } 
+    }
     
     _localScheduleEvent = [[ScheduleEventDto alloc]init:_eventDescription
                                                        :_eventStartTime 
@@ -423,7 +444,7 @@
                                                        :_slotArrayToStore
                                                        :_eventType
                                                        :_eventRealizationArray];
-    //NSLog(@"_localScheduleEvent._name: %@", _localScheduleEvent._name);
+    //NSLog(@"_localScheduleEvent._name: %@ with %i slots", _localScheduleEvent._name, [_slotArrayToStore count]);
     return _localScheduleEvent;
 }
 
@@ -550,9 +571,9 @@
     
     //if (self._dataFromUrl != nil)
     //{
-    //    NSString *someString = [NSString stringWithFormat:@"%@", _dataFromUrl];
-    //    someString = [someString substringToIndex:100];
-    //    NSLog(@"dataDownloadDidFinish %@", someString);
+    //    NSString *_receivedString = [[NSString alloc] initWithData:self._dataFromUrl encoding:NSASCIIStringEncoding];
+    //    _receivedString = [_receivedString substringToIndex:3000];
+    //    NSLog(@"dataDownloadDidFinish %@", _receivedString);
     //}
     
    // NSLog(@"dataDownloadDidFinish %@",[NSThread callStackSymbols]);    

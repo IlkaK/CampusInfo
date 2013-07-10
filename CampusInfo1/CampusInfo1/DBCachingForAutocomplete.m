@@ -18,20 +18,21 @@
 {
     char         *_errMsg;
     sqlite3_stmt *_sqlite3stmt = nil;
+    int operationResult;
     
-    NSString    *_dropStmtString = [NSString stringWithFormat:@"drop table if exists %@;", tableName];
-    const char  *_dropStmtChar   = [_dropStmtString UTF8String];
+    //NSString    *_dropStmtString = [NSString stringWithFormat:@"drop table if exists %@;", tableName];
+    //const char  *_dropStmtChar   = [_dropStmtString UTF8String];
     
-    if (sqlite3_exec(sqlite3DB, _dropStmtChar , NULL, NULL, &_errMsg) != SQLITE_OK)
-    {
-        NSLog(@"Failed to drop table %@ with statement: %@", tableName, _dropStmtString);
-    }
-    else
-    {
-        NSLog(@"Dropped %@ table successfully", tableName);
-    }
-    int operationResult = sqlite3_step(_sqlite3stmt);
-    sqlite3_finalize(_sqlite3stmt);
+    //if (sqlite3_exec(sqlite3DB, _dropStmtChar , NULL, NULL, &_errMsg) != SQLITE_OK)
+    //{
+    //    NSLog(@"Failed to drop table %@ with statement: %@", tableName, _dropStmtString);
+    //}
+    //else
+    //{
+     //   NSLog(@"Dropped %@ table successfully", tableName);
+    //}
+    //operationResult = sqlite3_step(_sqlite3stmt);
+    //sqlite3_finalize(_sqlite3stmt);
     
 
     NSString *_stmtString = [NSString stringWithFormat:@"CREATE TABLE IF NOT EXISTS %@ (ID INTEGER PRIMARY KEY AUTOINCREMENT, NAME TEXT)",tableName];
@@ -41,10 +42,10 @@
     {
         NSLog(@"Failed to create table %@ with statement: %@", tableName, _stmtString);
     }
-    else
-    {
-        NSLog(@"Created %@ table successfully", tableName);
-    }
+    //else
+    //{
+    //    NSLog(@"Created %@ table successfully", tableName);
+    //}
     operationResult = sqlite3_step(_sqlite3stmt);
     sqlite3_finalize(_sqlite3stmt);
 }
