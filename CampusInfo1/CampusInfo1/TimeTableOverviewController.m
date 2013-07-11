@@ -85,6 +85,7 @@
 @synthesize _rightSwipe;
 
 @synthesize _translator;
+@synthesize _dateFormatter;
 
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -95,30 +96,6 @@
 }
 
 
-
-- (NSDateFormatter *)dayFormatter {
-    NSDateFormatter *_dayFormatter = [[NSDateFormatter alloc]init];
-    [_dayFormatter setTimeZone:[NSTimeZone timeZoneWithName:@"CEST"]];
-    [_dayFormatter setDateFormat:@"dd.MM.yyyy"]; 
-    return _dayFormatter;
-} 
-
-- (NSDateFormatter *)weekDayFormatter {
-    NSDateFormatter *_weekDayFormatter = [[NSDateFormatter alloc] init] ;
-    [_weekDayFormatter setFormatterBehavior:NSDateFormatterBehavior10_4];
-    [_weekDayFormatter setTimeZone:[NSTimeZone timeZoneWithName:@"CEST"]];    
-    [_weekDayFormatter setDateFormat:@"EEEE"];
-    return _weekDayFormatter;
-}
-
-
-- (NSDateFormatter *)timeFormatter {
-    NSDateFormatter *timeFormatter = [[NSDateFormatter alloc]init];
-    [timeFormatter setTimeZone:[NSTimeZone timeZoneWithName:@"CEST"]];
-	[timeFormatter setDateFormat:@"HH:mm"]; 
-    [timeFormatter setDefaultDate:[NSDate date]];
-    return timeFormatter;
-}
 
 
 
@@ -138,7 +115,7 @@
     
     //NSLog(@"2 showScheduleDetails acronym: %@", self._actualShownAcronymString);
     _detailsVC._dayAndAcronymString = [NSString stringWithFormat:@" für den %@ von %@ (%@)"
-                                       ,[[self dayFormatter] stringFromDate:_actualDate]
+                                       ,[[_dateFormatter _dayFormatter] stringFromDate:_actualDate]
                                        ,newAcronym //self._actualShownAcronymString
                                        ,[_translator getGermanTypeTranslation:newAcronymType] //self._actualShownAcronymType]
                                        ];
@@ -152,7 +129,7 @@
     _actualShownAcronymTrials   = 1;
     DayDto   *_localDay;
     NSString *_localDateString;
-    NSString *_newDateString    = [[self dayFormatter] stringFromDate:newDate];
+    NSString *_newDateString    = [[_dateFormatter _dayFormatter] stringFromDate:newDate];
     int       _compareDate      = 0;
         
     if (self._schedule == nil) 
@@ -171,7 +148,7 @@
         for (scheduleI = 0; scheduleI < [self._schedule._days count]; scheduleI ++)
         {   
             _localDay        = [_schedule._days objectAtIndex:scheduleI];     
-            _localDateString = [[self dayFormatter] stringFromDate:_localDay._date];
+            _localDateString = [[_dateFormatter _dayFormatter] stringFromDate:_localDay._date];
             
             //NSLog(@" %@ compare with %@",_newDateString, _localDateString);
             
@@ -287,8 +264,8 @@
 - (void) setDateInNavigatorWithActualDate:(NSDate *)showDate
 {
     NSString *_dateString = [NSString stringWithFormat:@"%@, %@"
-                             ,[[self weekDayFormatter] stringFromDate:showDate]
-                             ,[[self dayFormatter]     stringFromDate:showDate]];
+                             ,[[_dateFormatter _weekDayFormatter] stringFromDate:showDate]
+                             ,[[_dateFormatter _dayFormatter]     stringFromDate:showDate]];
     
     [_dateLabel setTextColor:[UIColor whiteColor]];
     _dateLabel.text = _dateString;
@@ -421,7 +398,8 @@
 
     [super viewDidLoad];
     
-    _translator = [[LanguageTranslation alloc] init];
+    _translator     = [[LanguageTranslation alloc] init];
+    _dateFormatter  = [[DateFormation alloc] init];
     
     //----- TimeTableViewController ----
     // set table controller
@@ -583,7 +561,7 @@
             
             //NSLog(@"2 showScheduleDetails acronym: %@", self._actualShownAcronymString);
             _detailsVC._dayAndAcronymString = [NSString stringWithFormat:@" für den %@ von %@ (%@)"
-                                               ,[[self dayFormatter] stringFromDate:_actualDate]
+                                               ,[[_dateFormatter _dayFormatter] stringFromDate:_actualDate]
                                                ,self._actualShownAcronymString
                                                ,[_translator getGermanTypeTranslation:self._actualShownAcronymType]
                                                ];
@@ -787,13 +765,13 @@
         //NSLog(@"1 showScheduleDetails acronym: %@", self._actualShownAcronymString);
     
         _detailsVC._dayAndAcronymString = [NSString stringWithFormat:@" für den %@ von %@ (%@)"
-                                           ,[[self dayFormatter] stringFromDate:_actualDate]
+                                           ,[[_dateFormatter _dayFormatter] stringFromDate:_actualDate]
                                            , self._actualShownAcronymString
                                            ,[_translator getGermanTypeTranslation:self._actualShownAcronymType]
                                            ];
     
-        NSString *_fromString           = [[self timeFormatter] stringFromDate: _detailsVC._scheduleEvent._startTime];
-        NSString *_toString             = [[self timeFormatter] stringFromDate: _detailsVC._scheduleEvent._endTime  ];
+        NSString *_fromString           = [[_dateFormatter _timeFormatter] stringFromDate: _detailsVC._scheduleEvent._startTime];
+        NSString *_toString             = [[_dateFormatter _timeFormatter] stringFromDate: _detailsVC._scheduleEvent._endTime  ];
         
         //NSLog(@"schedule event end time %@", _toString);
         
@@ -948,21 +926,21 @@
     
     BOOL              _sameEventAgain       = NO;
     
-    NSString         *_fromString           = [[self timeFormatter] stringFromDate: fromTime];
-    NSString         *_toString             = [[self timeFormatter] stringFromDate: toTime  ];
+    NSString         *_fromString           = [[_dateFormatter _timeFormatter] stringFromDate: fromTime];
+    NSString         *_toString             = [[_dateFormatter _timeFormatter] stringFromDate: toTime  ];
     
     int dayI;
         
     for (dayI = 0; dayI < [currentDay._events count]; dayI ++)
     {   
         _localScheduleEvent     = [currentDay._events objectAtIndex:dayI];     
-        _toLocalScheduleEvent   = [[self timeFormatter] stringFromDate: _localScheduleEvent._endTime];
-        _fromLocalScheduleEvent = [[self timeFormatter] stringFromDate: _localScheduleEvent._startTime];
+        _toLocalScheduleEvent   = [[_dateFormatter _timeFormatter] stringFromDate: _localScheduleEvent._endTime];
+        _fromLocalScheduleEvent = [[_dateFormatter _timeFormatter] stringFromDate: _localScheduleEvent._startTime];
         
         if (formerScheduleEvent != nil) 
         {            
-            _formerToEvent   = [[self timeFormatter] stringFromDate: formerScheduleEvent._endTime];
-            _formerFromEvent = [[self timeFormatter] stringFromDate: formerScheduleEvent._startTime];
+            _formerToEvent   = [[_dateFormatter _timeFormatter] stringFromDate: formerScheduleEvent._endTime];
+            _formerFromEvent = [[_dateFormatter _timeFormatter] stringFromDate: formerScheduleEvent._startTime];
             
             // if the same lecture comes again, don't list it again
             
@@ -1070,14 +1048,14 @@
         {
             //NSMutableArray *_timeArray  = [self getTimeArray:cellSelection];
             
-            _fromTime           = [[self timeFormatter] dateFromString:@"00:00"];
-            _toTime             = [[self timeFormatter] dateFromString:@"23:59"];
-            NSString       *_fromString = [[self timeFormatter] stringFromDate: _fromTime];
-            NSString       *_toString   = [[self timeFormatter] stringFromDate: _toTime];
+            _fromTime           = [[_dateFormatter _timeFormatter] dateFromString:@"00:00"];
+            _toTime             = [[_dateFormatter _timeFormatter] dateFromString:@"23:59"];
+            NSString       *_fromString = [[_dateFormatter _timeFormatter] stringFromDate: _fromTime];
+            NSString       *_toString   = [[_dateFormatter _timeFormatter] stringFromDate: _toTime];
             
             _firstScheduleEvent = [currentDay._events objectAtIndex:0];
-            NSString       *_fromHoliday = [[self timeFormatter] stringFromDate: _firstScheduleEvent._startTime];
-            NSString       *_toHoliday   = [[self timeFormatter] stringFromDate: _firstScheduleEvent._endTime];
+            NSString       *_fromHoliday = [[_dateFormatter _timeFormatter] stringFromDate: _firstScheduleEvent._startTime];
+            NSString       *_toHoliday   = [[_dateFormatter _timeFormatter] stringFromDate: _firstScheduleEvent._endTime];
             
             //NSLog(@"(_fromHoliday) %@ = (_fromString) %@, (_toHoliday) %@ = (_toString) %@ _toString", _fromHoliday, _fromString, _toHoliday, _toString);
             
@@ -1092,16 +1070,16 @@
     
     if (!_foundHoliday)
     {
-        _fromTime           = [[self timeFormatter] dateFromString:@"08:00"];
-        _toTime             = [[self timeFormatter] dateFromString:@"08:45"];
+        _fromTime           = [[_dateFormatter _timeFormatter] dateFromString:@"08:00"];
+        _toTime             = [[_dateFormatter _timeFormatter] dateFromString:@"08:45"];
         _firstScheduleEvent = [self getCurrentScheduleEventWithDay  :currentDay
                                                 withFromTime        :_fromTime
                                                 withToTime          :_toTime
                                                 withScheduleEvent   :nil];
         [_sortedEvents addObject:_firstScheduleEvent];
     
-        _fromTime           = [[self timeFormatter] dateFromString:@"08:50"];
-        _toTime             = [[self timeFormatter] dateFromString:@"09:35"];
+        _fromTime           = [[_dateFormatter _timeFormatter] dateFromString:@"08:50"];
+        _toTime             = [[_dateFormatter _timeFormatter] dateFromString:@"09:35"];
         _nextScheduleEvent  = [self getCurrentScheduleEventWithDay  :currentDay
                                                 withFromTime        :_fromTime
                                                 withToTime          :_toTime
@@ -1112,8 +1090,8 @@
             _firstScheduleEvent = _nextScheduleEvent;
         }
     
-        _fromTime   = [[self timeFormatter] dateFromString:@"10:00"];
-        _toTime     = [[self timeFormatter] dateFromString:@"10:45"];
+        _fromTime   = [[_dateFormatter _timeFormatter] dateFromString:@"10:00"];
+        _toTime     = [[_dateFormatter _timeFormatter] dateFromString:@"10:45"];
         _nextScheduleEvent  = [self getCurrentScheduleEventWithDay  :currentDay
                                                 withFromTime        :_fromTime
                                                 withToTime          :_toTime
@@ -1124,8 +1102,8 @@
             _firstScheduleEvent = _nextScheduleEvent;
         }
     
-        _fromTime   = [[self timeFormatter] dateFromString:@"10:50"];
-        _toTime     = [[self timeFormatter] dateFromString:@"11:35"];
+        _fromTime   = [[_dateFormatter _timeFormatter] dateFromString:@"10:50"];
+        _toTime     = [[_dateFormatter _timeFormatter] dateFromString:@"11:35"];
         _nextScheduleEvent  = [self getCurrentScheduleEventWithDay  :currentDay
                                                 withFromTime        :_fromTime
                                                 withToTime          :_toTime
@@ -1136,8 +1114,8 @@
             _firstScheduleEvent = _nextScheduleEvent;
         }
     
-        _fromTime   = [[self timeFormatter] dateFromString:@"12:00"];
-        _toTime     = [[self timeFormatter] dateFromString:@"12:45"];
+        _fromTime   = [[_dateFormatter _timeFormatter] dateFromString:@"12:00"];
+        _toTime     = [[_dateFormatter _timeFormatter] dateFromString:@"12:45"];
         _nextScheduleEvent  = [self getCurrentScheduleEventWithDay  :currentDay
                                                 withFromTime        :_fromTime
                                                 withToTime          :_toTime
@@ -1148,8 +1126,8 @@
             _firstScheduleEvent = _nextScheduleEvent;
         }
     
-        _fromTime   = [[self timeFormatter] dateFromString:@"12:50"];
-        _toTime     = [[self timeFormatter] dateFromString:@"13:35"];
+        _fromTime   = [[_dateFormatter _timeFormatter] dateFromString:@"12:50"];
+        _toTime     = [[_dateFormatter _timeFormatter] dateFromString:@"13:35"];
         _nextScheduleEvent  = [self getCurrentScheduleEventWithDay  :currentDay
                                                 withFromTime        :_fromTime
                                                 withToTime          :_toTime
@@ -1160,8 +1138,8 @@
         }
         _firstScheduleEvent = _nextScheduleEvent;
     
-        _fromTime   = [[self timeFormatter] dateFromString:@"14:00"];
-        _toTime     = [[self timeFormatter] dateFromString:@"14:45"];
+        _fromTime   = [[_dateFormatter _timeFormatter] dateFromString:@"14:00"];
+        _toTime     = [[_dateFormatter _timeFormatter] dateFromString:@"14:45"];
         _nextScheduleEvent  = [self getCurrentScheduleEventWithDay  :currentDay
                                                 withFromTime        :_fromTime
                                                 withToTime          :_toTime
@@ -1172,8 +1150,8 @@
         }
         _firstScheduleEvent = _nextScheduleEvent;
     
-        _fromTime   = [[self timeFormatter] dateFromString:@"14:50"];
-        _toTime     = [[self timeFormatter] dateFromString:@"15:35"];
+        _fromTime   = [[_dateFormatter _timeFormatter] dateFromString:@"14:50"];
+        _toTime     = [[_dateFormatter _timeFormatter] dateFromString:@"15:35"];
         _nextScheduleEvent  = [self getCurrentScheduleEventWithDay  :currentDay
                                                 withFromTime        :_fromTime
                                                 withToTime          :_toTime
@@ -1184,8 +1162,8 @@
         }
         _firstScheduleEvent = _nextScheduleEvent;
     
-        _fromTime   = [[self timeFormatter] dateFromString:@"16:00"];
-        _toTime     = [[self timeFormatter] dateFromString:@"16:45"];
+        _fromTime   = [[_dateFormatter _timeFormatter] dateFromString:@"16:00"];
+        _toTime     = [[_dateFormatter _timeFormatter] dateFromString:@"16:45"];
         _nextScheduleEvent  = [self getCurrentScheduleEventWithDay  :currentDay
                                                 withFromTime        :_fromTime
                                                 withToTime          :_toTime
@@ -1196,8 +1174,8 @@
         }
         _firstScheduleEvent = _nextScheduleEvent;
     
-        _fromTime   = [[self timeFormatter] dateFromString:@"16:50"];
-        _toTime     = [[self timeFormatter] dateFromString:@"17:35"];
+        _fromTime   = [[_dateFormatter _timeFormatter] dateFromString:@"16:50"];
+        _toTime     = [[_dateFormatter _timeFormatter] dateFromString:@"17:35"];
         _nextScheduleEvent  = [self getCurrentScheduleEventWithDay  :currentDay
                                                 withFromTime        :_fromTime
                                                 withToTime          :_toTime
@@ -1208,8 +1186,8 @@
         }
         _firstScheduleEvent = _nextScheduleEvent;
     
-        _fromTime   = [[self timeFormatter] dateFromString:@"18:00"];
-        _toTime     = [[self timeFormatter] dateFromString:@"18:45"];
+        _fromTime   = [[_dateFormatter _timeFormatter] dateFromString:@"18:00"];
+        _toTime     = [[_dateFormatter _timeFormatter] dateFromString:@"18:45"];
         _nextScheduleEvent  = [self getCurrentScheduleEventWithDay  :currentDay
                                                 withFromTime        :_fromTime
                                                 withToTime          :_toTime
@@ -1220,8 +1198,8 @@
         }
         _firstScheduleEvent = _nextScheduleEvent;
     
-        _fromTime   = [[self timeFormatter] dateFromString:@"18:50"];
-        _toTime     = [[self timeFormatter] dateFromString:@"19:35"];
+        _fromTime   = [[_dateFormatter _timeFormatter] dateFromString:@"18:50"];
+        _toTime     = [[_dateFormatter _timeFormatter] dateFromString:@"19:35"];
         _nextScheduleEvent  = [self getCurrentScheduleEventWithDay  :currentDay
                                                 withFromTime        :_fromTime
                                                 withToTime          :_toTime
@@ -1234,8 +1212,8 @@
         }
         _firstScheduleEvent = _nextScheduleEvent;
     
-        _fromTime   = [[self timeFormatter] dateFromString:@"19:45"];
-        _toTime     = [[self timeFormatter] dateFromString:@"20:30"];
+        _fromTime   = [[_dateFormatter _timeFormatter] dateFromString:@"19:45"];
+        _toTime     = [[_dateFormatter _timeFormatter] dateFromString:@"20:30"];
         _nextScheduleEvent  = [self getCurrentScheduleEventWithDay  :currentDay
                                                 withFromTime        :_fromTime
                                                 withToTime          :_toTime
@@ -1246,8 +1224,8 @@
         }
         _firstScheduleEvent = _nextScheduleEvent;
     
-        _fromTime   = [[self timeFormatter] dateFromString:@"20:35"];
-        _toTime     = [[self timeFormatter] dateFromString:@"21:20"];
+        _fromTime   = [[_dateFormatter _timeFormatter] dateFromString:@"20:35"];
+        _toTime     = [[_dateFormatter _timeFormatter] dateFromString:@"21:20"];
         _nextScheduleEvent  = [self getCurrentScheduleEventWithDay  :currentDay
                                                 withFromTime        :_fromTime
                                                 withToTime          :_toTime
@@ -1277,8 +1255,8 @@
     {
       _oneDay = [_schedule._days objectAtIndex:dayCount];
     
-      NSString *_oneDayString    = [[self dayFormatter] stringFromDate:_oneDay._date];
-      NSString *_actualDayString = [[self dayFormatter] stringFromDate:_actualDate];
+      NSString *_oneDayString    = [[_dateFormatter _dayFormatter] stringFromDate:_oneDay._date];
+      NSString *_actualDayString = [[_dateFormatter _dayFormatter] stringFromDate:_actualDate];
       
       //NSLog(@"getDayDto %@ = %@?", _oneDayString, _actualDayString);
       
@@ -1307,20 +1285,20 @@
     NSDate *_to;
     
     switch ((int)cellSelection) {
-        case 0:  _from = [[self timeFormatter] dateFromString:@"08:00"];  _to = [[self timeFormatter] dateFromString:@"08:45"]; break;
-        case 1:  _from = [[self timeFormatter] dateFromString:@"08:50"];  _to = [[self timeFormatter] dateFromString:@"09:35"]; break;
-        case 2:  _from = [[self timeFormatter] dateFromString:@"10:00"];  _to = [[self timeFormatter] dateFromString:@"10:45"]; break;
-        case 3:  _from = [[self timeFormatter] dateFromString:@"10:50"];  _to = [[self timeFormatter] dateFromString:@"11:35"]; break;
-        case 4:  _from = [[self timeFormatter] dateFromString:@"12:00"];  _to = [[self timeFormatter] dateFromString:@"12:45"]; break;
-        case 5:  _from = [[self timeFormatter] dateFromString:@"12:50"];  _to = [[self timeFormatter] dateFromString:@"13:35"]; break;
-        case 6:  _from = [[self timeFormatter] dateFromString:@"14:00"];  _to = [[self timeFormatter] dateFromString:@"14:45"]; break;
-        case 7:  _from = [[self timeFormatter] dateFromString:@"14:50"];  _to = [[self timeFormatter] dateFromString:@"15:35"]; break;
-        case 8:  _from = [[self timeFormatter] dateFromString:@"16:00"];  _to = [[self timeFormatter] dateFromString:@"16:45"]; break;
-        case 9:  _from = [[self timeFormatter] dateFromString:@"16:50"];  _to = [[self timeFormatter] dateFromString:@"17:35"]; break;
-        case 10: _from = [[self timeFormatter] dateFromString:@"18:00"];  _to = [[self timeFormatter] dateFromString:@"18:45"]; break;
-        case 11: _from = [[self timeFormatter] dateFromString:@"18:50"];  _to = [[self timeFormatter] dateFromString:@"19:35"]; break;
-        case 12: _from = [[self timeFormatter] dateFromString:@"19:45"];  _to = [[self timeFormatter] dateFromString:@"20:30"]; break;
-        case 13: _from = [[self timeFormatter] dateFromString:@"20:35"];  _to = [[self timeFormatter] dateFromString:@"21:20"]; break;
+        case 0:  _from = [[_dateFormatter _timeFormatter] dateFromString:@"08:00"];  _to = [[_dateFormatter _timeFormatter] dateFromString:@"08:45"]; break;
+        case 1:  _from = [[_dateFormatter _timeFormatter] dateFromString:@"08:50"];  _to = [[_dateFormatter _timeFormatter] dateFromString:@"09:35"]; break;
+        case 2:  _from = [[_dateFormatter _timeFormatter] dateFromString:@"10:00"];  _to = [[_dateFormatter _timeFormatter] dateFromString:@"10:45"]; break;
+        case 3:  _from = [[_dateFormatter _timeFormatter] dateFromString:@"10:50"];  _to = [[_dateFormatter _timeFormatter] dateFromString:@"11:35"]; break;
+        case 4:  _from = [[_dateFormatter _timeFormatter] dateFromString:@"12:00"];  _to = [[_dateFormatter _timeFormatter] dateFromString:@"12:45"]; break;
+        case 5:  _from = [[_dateFormatter _timeFormatter] dateFromString:@"12:50"];  _to = [[_dateFormatter _timeFormatter] dateFromString:@"13:35"]; break;
+        case 6:  _from = [[_dateFormatter _timeFormatter] dateFromString:@"14:00"];  _to = [[_dateFormatter _timeFormatter] dateFromString:@"14:45"]; break;
+        case 7:  _from = [[_dateFormatter _timeFormatter] dateFromString:@"14:50"];  _to = [[_dateFormatter _timeFormatter] dateFromString:@"15:35"]; break;
+        case 8:  _from = [[_dateFormatter _timeFormatter] dateFromString:@"16:00"];  _to = [[_dateFormatter _timeFormatter] dateFromString:@"16:45"]; break;
+        case 9:  _from = [[_dateFormatter _timeFormatter] dateFromString:@"16:50"];  _to = [[_dateFormatter _timeFormatter] dateFromString:@"17:35"]; break;
+        case 10: _from = [[_dateFormatter _timeFormatter] dateFromString:@"18:00"];  _to = [[_dateFormatter _timeFormatter] dateFromString:@"18:45"]; break;
+        case 11: _from = [[_dateFormatter _timeFormatter] dateFromString:@"18:50"];  _to = [[_dateFormatter _timeFormatter] dateFromString:@"19:35"]; break;
+        case 12: _from = [[_dateFormatter _timeFormatter] dateFromString:@"19:45"];  _to = [[_dateFormatter _timeFormatter] dateFromString:@"20:30"]; break;
+        case 13: _from = [[_dateFormatter _timeFormatter] dateFromString:@"20:35"];  _to = [[_dateFormatter _timeFormatter] dateFromString:@"21:20"]; break;
     }
     
     [_timeArray addObject:_from];
@@ -1334,8 +1312,8 @@
     NSDate *_today = [NSDate date];
     //NSDate *_today    = [[self dayFormatter] dateFromString:@"19.03.2012"];
 
-    NSString *_actualDayString    = [[self dayFormatter] stringFromDate:_actualDate];
-    NSString *_todayString        = [[self dayFormatter] stringFromDate:_today];
+    NSString *_actualDayString    = [[_dateFormatter _dayFormatter] stringFromDate:_actualDate];
+    NSString *_todayString        = [[_dateFormatter _dayFormatter] stringFromDate:_today];
     
     NSLog(@"get actual Date: %@ and today: %@", _actualDayString, _todayString);
 
@@ -1345,14 +1323,14 @@
     if ([_actualDayString isEqualToString: _todayString]) 
     {
         // compare time slots
-        NSString *_todayTimeString     = [[self timeFormatter] stringFromDate:_today];
+        NSString *_todayTimeString     = [[_dateFormatter _timeFormatter] stringFromDate:_today];
         //NSString *_todayTimeString = @"17:05";
         
         NSMutableArray *_timeArray  = [self getTimeArray:cellSelection];
         NSDate         *_from       = [_timeArray objectAtIndex:0]; 
-        NSString       *_fromString = [[self timeFormatter] stringFromDate: _from];
+        NSString       *_fromString = [[_dateFormatter _timeFormatter] stringFromDate: _from];
         NSDate         *_to         = [_timeArray objectAtIndex:1]; 
-        NSString       *_toString   = [[self timeFormatter] stringFromDate: _to];
+        NSString       *_toString   = [[_dateFormatter _timeFormatter] stringFromDate: _to];
           
         if ([_fromString      compare: _todayTimeString] == NSOrderedAscending && 
             [_todayTimeString compare: _toString]        == NSOrderedAscending) 
@@ -1464,8 +1442,8 @@
 {
     UILabel          *_labelDate     = (UILabel  *)[cell viewWithTag:indexTag];
     _labelDate.text = [NSString stringWithFormat:@"%@ - %@",
-                       [[self timeFormatter] stringFromDate:startTime],
-                       [[self timeFormatter] stringFromDate:endTime  ]
+                       [[_dateFormatter _timeFormatter] stringFromDate:startTime],
+                       [[_dateFormatter _timeFormatter] stringFromDate:endTime  ]
                        ];
 }
 
@@ -1579,8 +1557,8 @@
         {
            [_lectureButton  setTitle:@"" forState:UIControlStateNormal];
             _labelDate.text = [NSString stringWithFormat:@"%@ - %@",
-                               [[self timeFormatter] stringFromDate:actualScheduleEvent._startTime],
-                               [[self timeFormatter] stringFromDate:actualScheduleEvent._endTime  ]
+                               [[_dateFormatter _timeFormatter] stringFromDate:actualScheduleEvent._startTime],
+                               [[_dateFormatter _timeFormatter] stringFromDate:actualScheduleEvent._endTime  ]
                                ];
         }
     }

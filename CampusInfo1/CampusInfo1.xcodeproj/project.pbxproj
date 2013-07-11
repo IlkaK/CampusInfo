@@ -75,6 +75,7 @@
 		E1D48A5B1757856400BB1652 /* GradientButton.m in Sources */ = {isa = PBXBuildFile; fileRef = E1D48A5A1757856400BB1652 /* GradientButton.m */; };
 		E1D48A5D17579AA500BB1652 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = E1D48A5C17579AA500BB1652 /* Default.png */; };
 		E1D48A5F17579C5D00BB1652 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E1D48A5E17579C5D00BB1652 /* Default-568h@2x.png */; };
+		E1D7EFF7178DA03D00100293 /* DateFormation.m in Sources */ = {isa = PBXBuildFile; fileRef = E1D7EFF6178DA03D00100293 /* DateFormation.m */; };
 		E1DA967C1740E41C00CA206F /* SettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E1DA967A1740E41C00CA206F /* SettingsViewController.m */; };
 		E1DA967D1740E41C00CA206F /* SettingsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E1DA967B1740E41C00CA206F /* SettingsViewController.xib */; };
 /* End PBXBuildFile section */
@@ -172,6 +173,8 @@
 		E1D48A5A1757856400BB1652 /* GradientButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GradientButton.m; sourceTree = "<group>"; };
 		E1D48A5C17579AA500BB1652 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
 		E1D48A5E17579C5D00BB1652 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
+		E1D7EFF5178DA03D00100293 /* DateFormation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DateFormation.h; sourceTree = "<group>"; };
+		E1D7EFF6178DA03D00100293 /* DateFormation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DateFormation.m; sourceTree = "<group>"; };
 		E1DA96791740E41C00CA206F /* SettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingsViewController.h; sourceTree = "<group>"; };
 		E1DA967A1740E41C00CA206F /* SettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingsViewController.m; sourceTree = "<group>"; };
 		E1DA967B1740E41C00CA206F /* SettingsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SettingsViewController.xib; sourceTree = "<group>"; };
@@ -267,6 +270,7 @@
 		A35A341E1520814800181E3F /* CampusInfo1 */ = {
 			isa = PBXGroup;
 			children = (
+				E1B13AB9178EA0DF00C037F8 /* Helper */,
 				E17842CF178308720059EA3C /* Settings */,
 				E17842CE1783084D0059EA3C /* Search */,
 				A3A551371525DD5400BCAF3D /* TimeTableDto */,
@@ -278,10 +282,6 @@
 				27FBF7251551A83600C09ED9 /* StartpageViewController.h */,
 				27FBF7261551A83600C09ED9 /* StartpageViewController.m */,
 				27FBF7271551A83600C09ED9 /* StartpageViewController.xib */,
-				E1D48A591757856400BB1652 /* GradientButton.h */,
-				E1D48A5A1757856400BB1652 /* GradientButton.m */,
-				E104C047178C397C0020EEB4 /* LanguageTranslation.h */,
-				E104C048178C397C0020EEB4 /* LanguageTranslation.m */,
 			);
 			path = CampusInfo1;
 			sourceTree = "<group>";
@@ -387,6 +387,19 @@
 				E1DA967B1740E41C00CA206F /* SettingsViewController.xib */,
 			);
 			name = Settings;
+			sourceTree = "<group>";
+		};
+		E1B13AB9178EA0DF00C037F8 /* Helper */ = {
+			isa = PBXGroup;
+			children = (
+				E1D48A591757856400BB1652 /* GradientButton.h */,
+				E1D48A5A1757856400BB1652 /* GradientButton.m */,
+				E104C047178C397C0020EEB4 /* LanguageTranslation.h */,
+				E104C048178C397C0020EEB4 /* LanguageTranslation.m */,
+				E1D7EFF5178DA03D00100293 /* DateFormation.h */,
+				E1D7EFF6178DA03D00100293 /* DateFormation.m */,
+			);
+			name = Helper;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -515,6 +528,7 @@
 				E1BC14C2175F8D4900FE2854 /* Autocomplete.m in Sources */,
 				E17842D2178309160059EA3C /* DBCachingForAutocomplete.m in Sources */,
 				E104C049178C397C0020EEB4 /* LanguageTranslation.m in Sources */,
+				E1D7EFF7178DA03D00100293 /* DateFormation.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

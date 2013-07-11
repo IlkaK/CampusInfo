@@ -37,28 +37,10 @@
 @synthesize _dataFromUrl;
 
 @synthesize _errorMessage;
+@synthesize _dateFormatter;
 
 
-- (NSDateFormatter *)dayFormatter {
-    NSDateFormatter *_dayFormatter = [[NSDateFormatter alloc]init];
-    [_dayFormatter setTimeZone:[NSTimeZone timeZoneWithName:@"CEST"]];
-    [_dayFormatter setDateFormat:@"yyyy-MM-dd"]; 
-    return _dayFormatter;
-} 
 
-- (NSDateFormatter *)timeFormatter {
-    NSDateFormatter *timeFormatter = [[NSDateFormatter alloc]init];
-    [timeFormatter setTimeZone:[NSTimeZone timeZoneWithName:@"CEST"]];
-	[timeFormatter setDateFormat:@"HH:mm"]; 
-    return timeFormatter;
-}
-
-- (NSDateFormatter *)timeAndDayFormatter {
-    NSDateFormatter *timeAndDayFormatter = [[NSDateFormatter alloc]init];
-    [timeAndDayFormatter setTimeZone:[NSTimeZone timeZoneWithName:@"CEST"]];
-	[timeAndDayFormatter setDateFormat:@"yyyy-MM-dd HH:mm"]; 
-    return timeAndDayFormatter;
-}
 
 - (NSDate *) parseDate:(NSString *)dateString
 {
@@ -67,8 +49,8 @@
     
     _localString = [dateString substringToIndex:10];
     //NSLog(@"_localString: %@",_localString);
-    _localDate   = [[self dayFormatter] dateFromString:_localString];
-    //NSLog(@"_localDate: %@", [[self dayFormatter] stringFromDate:_localDate]);
+    _localDate   = [[_dateFormatter _englishDayFormatter] dateFromString:_localString];
+    //NSLog(@"_localDate: %@", [[_dateFormatter _englishDayFormatter] stringFromDate:_localDate]);
     return _localDate;
 }
 
@@ -298,14 +280,14 @@
             
             NSString *_slotStartTimeString = [slotDictionary objectForKey:slotKey];
             _slotStartTimeString           = [_slotStartTimeString substringWithRange:NSMakeRange(11, 5)];
-            _slotStartTime                 = [[self timeFormatter]  dateFromString:_slotStartTimeString];
+            _slotStartTime                 = [[_dateFormatter _timeFormatter]  dateFromString:_slotStartTimeString];
             //NSLog(@"_slotStartTimeString: %@",_slotStartTime);
         }
         if ([slotKey isEqualToString:@"endTime"]) 
         {
             NSString *_slotEndTimeString = [slotDictionary objectForKey:slotKey];
             _slotEndTimeString           = [_slotEndTimeString substringWithRange:NSMakeRange(11, 5)];
-            _slotEndTime                 = [[self timeFormatter]  dateFromString:_slotEndTimeString];
+            _slotEndTime                 = [[_dateFormatter _timeFormatter]  dateFromString:_slotEndTimeString];
             //NSLog(@"_slotEndTimeString: %@",_slotEndTimeString);
         }
         
@@ -340,7 +322,7 @@
             //[str substringWithRange:NSMakeRange(3, [str length]-3)];
             NSString *_eventStartTimeString = [eventDictionary objectForKey:eventKey];
             _eventStartTimeString           = [_eventStartTimeString substringWithRange:NSMakeRange(11, 5)];
-            _eventStartTime                 = [[self timeFormatter]  dateFromString:_eventStartTimeString];
+            _eventStartTime                 = [[_dateFormatter _timeFormatter]  dateFromString:_eventStartTimeString];
             //NSLog(@"_eventStartTime: %@",_eventStartTimeString);
         }
         
@@ -349,7 +331,7 @@
         {
             NSString *_eventEndTimeString = [eventDictionary objectForKey:eventKey];
             _eventEndTimeString           = [_eventEndTimeString substringWithRange:NSMakeRange(11, 5)];
-            _eventEndTime                 = [[self timeFormatter]  dateFromString:_eventEndTimeString];
+            _eventEndTime                 = [[_dateFormatter _timeFormatter]  dateFromString:_eventEndTimeString];
             //NSLog(@"_eventEndTime: %@",_eventEndTimeString);
         }
         
@@ -463,7 +445,7 @@
         if ([daykey isEqualToString:@"date"]) 
         {
             _dayDate = [self parseDate:[dayDictionary objectForKey:daykey]];
-            //NSLog(@"dayDate: %@", [[self dayFormatter] stringFromDate:_dayDate]);
+            //NSLog(@"dayDate: %@", [[_dateFormatter _englishDayFormatter] stringFromDate:_dayDate]);
         }
 
         // get event information
@@ -534,7 +516,7 @@
         //          ,_toEvent
         //          );
         //}
-        //NSLog(@"getDays => for day %@", [[self dayFormatter] stringFromDate:_localDay._date]);
+        //NSLog(@"getDays => for day %@", [[_dateFormatter _englishDayFormatter] stringFromDate:_localDay._date]);
         
         [_dayArrayToStore addObject:_localDay];
     } 
@@ -596,7 +578,7 @@
         
         //NSLog(@"DOWNLOAD DATA ELSE ---type: %@-----acronym: %@ -----",_type, _acronym ); 
 
-        NSString *_scheduleDateString = [[self dayFormatter] stringFromDate:_scheduleDate];
+        NSString *_scheduleDateString = [[_dateFormatter _englishDayFormatter] stringFromDate:_scheduleDate];
         NSString *_translatedAcronym  = _acronym;
         
         if ([self._type isEqualToString:@"rooms"])
@@ -776,35 +758,35 @@
     ScheduleEventDto *_event2a   = nil;
     ScheduleEventDto *_event2b   = nil;
 
-    NSString *_dayDateString1 = [[self dayFormatter] stringFromDate:_dayDate1];
-    NSString *_dayDateString2 = [[self dayFormatter] stringFromDate:_dayDate2];
+    NSString *_dayDateString1 = [[_dateFormatter _englishDayFormatter] stringFromDate:_dayDate1];
+    NSString *_dayDateString2 = [[_dateFormatter _englishDayFormatter] stringFromDate:_dayDate2];
     
     
-    NSDate *_eventStartTime1a = [[self timeAndDayFormatter]  dateFromString:[NSString stringWithFormat:@"%@ 08:00", _dayDateString1]];
-    NSDate *_eventEndTime1a   = [[self timeAndDayFormatter]  dateFromString:[NSString stringWithFormat:@"%@ 09:35", _dayDateString1]];
+    NSDate *_eventStartTime1a = [[_dateFormatter _englishTimeAndDayFormatter]  dateFromString:[NSString stringWithFormat:@"%@ 08:00", _dayDateString1]];
+    NSDate *_eventEndTime1a   = [[_dateFormatter _englishTimeAndDayFormatter]  dateFromString:[NSString stringWithFormat:@"%@ 09:35", _dayDateString1]];
     
     SlotDto          *_slot1a1   = [[SlotDto alloc]init
-                                    :[[self timeAndDayFormatter]  dateFromString:[NSString stringWithFormat:@"%@ 08:00", _dayDateString1]]
-                                    :[[self timeAndDayFormatter]  dateFromString:[NSString stringWithFormat:@"%@ 08:45", _dayDateString1]]
+                                    :[[_dateFormatter _englishTimeAndDayFormatter]  dateFromString:[NSString stringWithFormat:@"%@ 08:00", _dayDateString1]]
+                                    :[[_dateFormatter _englishTimeAndDayFormatter]  dateFromString:[NSString stringWithFormat:@"%@ 08:45", _dayDateString1]]
                                     ];
     SlotDto          *_slot1a2   = [[SlotDto alloc]init
-                                    :[[self timeAndDayFormatter]  dateFromString:[NSString stringWithFormat:@"%@ 08:50", _dayDateString1]]
-                                    :[[self timeAndDayFormatter]  dateFromString:[NSString stringWithFormat:@"%@ 09:35", _dayDateString1]]
+                                    :[[_dateFormatter _englishTimeAndDayFormatter]  dateFromString:[NSString stringWithFormat:@"%@ 08:50", _dayDateString1]]
+                                    :[[_dateFormatter _englishTimeAndDayFormatter]  dateFromString:[NSString stringWithFormat:@"%@ 09:35", _dayDateString1]]
                                     ];
     [_slotArray1a    addObject:_slot1a1 ];
     [_slotArray1a    addObject:_slot1a2 ];
 
     
-    NSDate *_eventStartTime1b = [[self timeAndDayFormatter]  dateFromString:[NSString stringWithFormat:@"%@ 10:00", _dayDateString1]];
-    NSDate *_eventEndTime1b   = [[self timeAndDayFormatter]  dateFromString:[NSString stringWithFormat:@"%@ 11:35", _dayDateString1]];
+    NSDate *_eventStartTime1b = [[_dateFormatter _englishTimeAndDayFormatter]  dateFromString:[NSString stringWithFormat:@"%@ 10:00", _dayDateString1]];
+    NSDate *_eventEndTime1b   = [[_dateFormatter _englishTimeAndDayFormatter]  dateFromString:[NSString stringWithFormat:@"%@ 11:35", _dayDateString1]];
     
     SlotDto          *_slot1b1   = [[SlotDto alloc]init
-                                    :[[self timeAndDayFormatter]  dateFromString:[NSString stringWithFormat:@"%@ 10:00", _dayDateString1]]
-                                    :[[self timeAndDayFormatter]  dateFromString:[NSString stringWithFormat:@"%@ 10:45", _dayDateString1]]
+                                    :[[_dateFormatter _englishTimeAndDayFormatter]  dateFromString:[NSString stringWithFormat:@"%@ 10:00", _dayDateString1]]
+                                    :[[_dateFormatter _englishTimeAndDayFormatter]  dateFromString:[NSString stringWithFormat:@"%@ 10:45", _dayDateString1]]
                                     ];
     SlotDto          *_slot1b2   = [[SlotDto alloc]init
-                                    :[[self timeAndDayFormatter]  dateFromString:[NSString stringWithFormat:@"%@ 10:50", _dayDateString1]]
-                                    :[[self timeAndDayFormatter]  dateFromString:[NSString stringWithFormat:@"%@ 11:35", _dayDateString1]]
+                                    :[[_dateFormatter _englishTimeAndDayFormatter]  dateFromString:[NSString stringWithFormat:@"%@ 10:50", _dayDateString1]]
+                                    :[[_dateFormatter _englishTimeAndDayFormatter]  dateFromString:[NSString stringWithFormat:@"%@ 11:35", _dayDateString1]]
                                     ];
     [_slotArray1b    addObject:_slot1b1 ];
     [_slotArray1b    addObject:_slot1b2 ];
@@ -817,14 +799,14 @@
     
     
     SlotDto          *_slot2a    = [[SlotDto alloc]init
-                                    :[[self timeAndDayFormatter]  dateFromString:[NSString stringWithFormat:@"%@ 14:00", _dayDateString2]]
-                                    :[[self timeAndDayFormatter]  dateFromString:[NSString stringWithFormat:@"%@ 14:45", _dayDateString2]]
+                                    :[[_dateFormatter _englishTimeAndDayFormatter]  dateFromString:[NSString stringWithFormat:@"%@ 14:00", _dayDateString2]]
+                                    :[[_dateFormatter _englishTimeAndDayFormatter]  dateFromString:[NSString stringWithFormat:@"%@ 14:45", _dayDateString2]]
                                     ];
     [_slotArray2a    addObject:_slot2a ];
 
     SlotDto          *_slot2b   = [[SlotDto alloc]init
-                                    :[[self timeAndDayFormatter]  dateFromString:[NSString stringWithFormat:@"%@ 14:50", _dayDateString2]]
-                                    :[[self timeAndDayFormatter]  dateFromString:[NSString stringWithFormat:@"%@ 15:35", _dayDateString2]]
+                                    :[[_dateFormatter _englishTimeAndDayFormatter]  dateFromString:[NSString stringWithFormat:@"%@ 14:50", _dayDateString2]]
+                                    :[[_dateFormatter _englishTimeAndDayFormatter]  dateFromString:[NSString stringWithFormat:@"%@ 15:35", _dayDateString2]]
                                     ];
     [_slotArray2b    addObject:_slot2b ];
 
@@ -832,10 +814,10 @@
     [_slotArrayDay2  addObject:_slot2b ];
 
     
-    NSDate *_eventStartTime2a = [[self timeAndDayFormatter]  dateFromString:[NSString stringWithFormat:@"%@ 14:00", _dayDateString2]];
-    NSDate *_eventEndTime2a   = [[self timeAndDayFormatter]  dateFromString:[NSString stringWithFormat:@"%@ 14:45", _dayDateString2]];
-    NSDate *_eventStartTime2b = [[self timeAndDayFormatter]  dateFromString:[NSString stringWithFormat:@"%@ 14:50", _dayDateString2]];
-    NSDate *_eventEndTime2b   = [[self timeAndDayFormatter]  dateFromString:[NSString stringWithFormat:@"%@ 15:35", _dayDateString2]];
+    NSDate *_eventStartTime2a = [[_dateFormatter _englishTimeAndDayFormatter]  dateFromString:[NSString stringWithFormat:@"%@ 14:00", _dayDateString2]];
+    NSDate *_eventEndTime2a   = [[_dateFormatter _englishTimeAndDayFormatter]  dateFromString:[NSString stringWithFormat:@"%@ 14:45", _dayDateString2]];
+    NSDate *_eventStartTime2b = [[_dateFormatter _englishTimeAndDayFormatter]  dateFromString:[NSString stringWithFormat:@"%@ 14:50", _dayDateString2]];
+    NSDate *_eventEndTime2b   = [[_dateFormatter _englishTimeAndDayFormatter]  dateFromString:[NSString stringWithFormat:@"%@ 15:35", _dayDateString2]];
     
     NSString *_eventDescription1a = @"Java Vorlesung";
     NSString *_eventDescription1b = @"Java Praktikum";
@@ -995,6 +977,8 @@
 {
     self = [super init];
 
+    _dateFormatter  = [[DateFormation alloc] init];
+    
     NSLog(@"_acronymString %@ _acronymType %@", newAcronymString, newAcronymType);
     
     if (self) 
@@ -1070,7 +1054,7 @@
                     //for (dayArrayI = 0; dayArrayI < [_days count]; dayArrayI++)
                     //{
                     //    DayDto   *_oneDay        = [_days objectAtIndex:dayArrayI];
-                    //    NSString *_oneDateString = [[self dayFormatter] stringFromDate:_oneDay._date];
+                    //    NSString *_oneDateString = [[_dateFormatter _englishDayFormatter] stringFromDate:_oneDay._date];
                     //    NSLog(@"initWithAcronym _oneDateString => %@", _oneDateString);
                     //    int eventArrayI;
                     //    for (eventArrayI = 0; eventArrayI < [_oneDay._events count]; eventArrayI++)
@@ -1122,12 +1106,12 @@
                     {
                         _localDay       = [_newDayArray objectAtIndex:newDayArrayI];
                         _alreadyInArray = @"NO";
-                        _localDayString = [[self dayFormatter] stringFromDate:_localDay._date];
+                        _localDayString = [[_dateFormatter _englishDayFormatter] stringFromDate:_localDay._date];
                         
                         // only add new day, if it is not already in array
                         for (oldDayArrayI = 0; oldDayArrayI < [self._days count]; oldDayArrayI++) 
                         {
-                            _oldDayString = [[self dayFormatter] stringFromDate:_localDay._date];
+                            _oldDayString = [[_dateFormatter _englishDayFormatter] stringFromDate:_localDay._date];
                             if ([_localDayString isEqualToString:_oldDayString]) 
                             {
                                 _alreadyInArray = @"YES";
@@ -1140,13 +1124,13 @@
                         }
                     }
                 
-                    //_localDateString = [[self dayFormatter] stringFromDate:_localDay._date];
+                    //_localDateString = [[_dateFormatter _englishDayFormatter] stringFromDate:_localDay._date];
                     
                     int dayArrayI;
                     for (dayArrayI = 0; dayArrayI < [_days count]; dayArrayI++) 
                     {
                         DayDto   *_oneDay        = [_days objectAtIndex:dayArrayI];
-                        NSString *_oneDateString = [[self dayFormatter] stringFromDate:_oneDay._date];
+                        NSString *_oneDateString = [[_dateFormatter _englishDayFormatter]stringFromDate:_oneDay._date];
                         NSLog(@"loadScheduleWithAcronym _oneDateString => %@", _oneDateString);
                         int eventArrayI;
                         for (eventArrayI = 0; eventArrayI < [_oneDay._events count]; eventArrayI++) 

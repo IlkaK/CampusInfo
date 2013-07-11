@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import <TimeTableAsyncRequest.h>
+#import <DateFormation.h>
 
 @class PersonDto;
 @class RoomDto;
@@ -38,6 +39,7 @@
     NSData                *_dataFromUrl;
     
     NSString              *_errorMessage;
+    DateFormation         *_dateFormatter;
 }
 
 @property (nonatomic, retain) NSMutableArray                 *_days;
@@ -58,6 +60,7 @@
 @property (nonatomic, retain) NSData                         *_dataFromUrl;
 
 @property (nonatomic, retain) NSString                       *_errorMessage;
+@property (nonatomic, retain) DateFormation                  *_dateFormatter;
 
 
 -(id) initWithAcronym
