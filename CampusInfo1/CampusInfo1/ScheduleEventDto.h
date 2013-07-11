@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <DateFormation.h>
 
 @interface ScheduleEventDto : NSObject
 {    
@@ -17,6 +18,7 @@
     NSMutableArray *_slots;
     NSString       *_type;
     NSMutableArray *_scheduleEventRealizations;
+    DateFormation  *_dateFormatter;
 }
 
 @property (nonatomic, retain) NSString       *_description; 
@@ -26,7 +28,7 @@
 @property (nonatomic, retain) NSMutableArray *_slots;
 @property (nonatomic, retain) NSString       *_type; 
 @property (nonatomic, retain) NSMutableArray *_scheduleEventRealizations;
-
+@property (nonatomic, retain) DateFormation  *_dateFormatter;
 
 -(id) init : (NSString       *) newDescription
            : (NSDate         *) newStartTime
@@ -36,5 +38,6 @@
            : (NSString       *) newType
            : (NSMutableArray *) newScheduleEventRealizations;
 
+- (ScheduleEventDto *) getEvent:(NSDictionary *)eventDictionary;
 
 @end

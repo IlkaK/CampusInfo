@@ -15,6 +15,7 @@
 
 @property (nonatomic, retain) NSString  *_name;
 
--(id) init : (NSString  *) newName;
+- (id) init : (NSString  *) newName;
+- (SchoolClassDto *) getClassWithDictionary:(NSDictionary *)scheduleDictionary withKey:(id) scheduleKey;
 
 @end

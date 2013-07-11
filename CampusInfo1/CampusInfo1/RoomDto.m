@@ -21,4 +21,25 @@
     return self;
 }
 
+
+- (RoomDto *) getRoomWithDictionary:(NSDictionary *)dictionary withScheduleKey:(id) key
+{
+    RoomDto       *_localRoom      = nil;
+    NSString      *_localName      = nil;
+    NSDictionary  *_roomDictionary = [dictionary objectForKey:key];
+    
+    if (_roomDictionary != (id)[NSNull null])
+    {
+        for (id roomKey in _roomDictionary)
+        {
+            if ([roomKey isEqualToString:@"name"]) {
+                _localName = [_roomDictionary objectForKey:roomKey];
+            }
+        }
+        _localRoom    = [[RoomDto alloc]init:_localName];
+    }
+    return _localRoom;
+}
+
+
 @end

@@ -41,455 +41,6 @@
 
 
 
-
-- (NSDate *) parseDate:(NSString *)dateString
-{
-    NSDate   *_localDate;
-    NSString *_localString;
-    
-    _localString = [dateString substringToIndex:10];
-    //NSLog(@"_localString: %@",_localString);
-    _localDate   = [[_dateFormatter _englishDayFormatter] dateFromString:_localString];
-    //NSLog(@"_localDate: %@", [[_dateFormatter _englishDayFormatter] stringFromDate:_localDate]);
-    return _localDate;
-}
-
-
-- (DepartmentDto *)getDepartmentWithDictionary:(NSDictionary *)dictionary withPersonKey:(id)key{
-    DepartmentDto *_localDepartment      = nil;
-    NSString      *_name                 = nil;
-    NSDictionary  *_departmentDictionary = [dictionary objectForKey:key];
-    
-    for (id departmentKey in _departmentDictionary) 
-    {
-        if ([departmentKey isEqualToString:@"name"]) 
-        {
-            _name = [_departmentDictionary objectForKey:departmentKey];
-            //NSLog(@"department name: %@",_name);
-        }
-    } // end loop over keys     
-    _localDepartment    = [[DepartmentDto alloc]init:_name]; 
-    return _localDepartment;
-}
-
-
-- (RoomDto *) getRoomWithDictionary:(NSDictionary *)dictionary withScheduleKey:(id) key{
-    RoomDto       *_localRoom      = nil;
-    NSString      *_name           = nil;
-    NSDictionary  *_roomDictionary = [dictionary objectForKey:key];
-    
-    if (_roomDictionary != (id)[NSNull null])
-    {
-    for (id roomKey in _roomDictionary) 
-    {
-        if ([roomKey isEqualToString:@"name"]) {
-            _name = [_roomDictionary objectForKey:roomKey];
-        }
-    }    
-    _localRoom    = [[RoomDto alloc]init:_name]; 
-    }
-    return _localRoom;
-}
-
-
-- (SchoolClassDto *) getClassWithDictionary:(NSDictionary *)scheduleDictionary withKey:(id) scheduleKey
-{
-    SchoolClassDto *_localClass      = nil;
-    NSString       *_className       = nil;
-    NSDictionary   *_classDictionary = nil;
-    
-    if (scheduleKey == nil)
-    {
-        _classDictionary = scheduleDictionary;
-    }
-    else 
-    {
-       _classDictionary = [scheduleDictionary objectForKey:scheduleKey];    
-    }
-    
-    if (_classDictionary != (id)[NSNull null])
-    {
-    for (id classKey in _classDictionary) 
-    {
-        if ([classKey isEqualToString:@"name"]) {
-            _className = [_classDictionary objectForKey:classKey];
-        }
-    }    
-    _localClass = [[SchoolClassDto alloc]init:_className]; 
-    }
-    return _localClass;
-}
-
-
-- (ScheduleCourseDto *) getScheduleCourseWithDictionary:(NSDictionary *)dictionary withKey:(id) key
-{
-    ScheduleCourseDto *_localCourse       = nil;
-    NSString          *_courseName        = nil;
-    NSString          *_courseDescription = nil;
-    NSDictionary      *_courseDictionary  = [dictionary objectForKey:key];
-    
-     if (_courseDictionary != (id)[NSNull null])  
-     {
-    for (id courseKey in _courseDictionary) 
-    {
-        if ([courseKey isEqualToString:@"name"]) 
-        {
-            _courseName        = [_courseDictionary objectForKey:courseKey];
-        }
-        if ([courseKey isEqualToString:@"description"]) 
-        {
-            _courseDescription = [_courseDictionary objectForKey:courseKey];
-        }
-
-    }   
-    _localCourse    = [[ScheduleCourseDto alloc]init:_courseName:_courseDescription]; 
-     }
-    return _localCourse;
-}
-
-
-
-- (PersonDto *) getPersonWithDictionary:(NSDictionary *)dictionary withKey:(id) key
-{
-    PersonDto     *_localPerson      = nil;
-    NSString      *_firstName        = nil;
-    NSString      *_lastName         = nil;
-    NSString      *_shortName        = nil;
-    NSString      *_personType       = nil;
-    DepartmentDto *_department       = nil;
-    NSDictionary  *_personDictionary = nil;
-    
-    
-    if (key == nil)
-    {
-        _personDictionary = dictionary;
-    }
-    else
-    {
-        _personDictionary = [dictionary objectForKey:key];
-    }
-
-    if (_personDictionary != (id)[NSNull null])  
-    {
-    for (id personKey in _personDictionary) {
-
-        //NSLog(@"personKey: %@", personKey);
-        if ([personKey isEqualToString:@"firstName"]) {
-            _firstName = [_personDictionary objectForKey:personKey];
-            //NSLog(@"_firstName: %@",_firstName);
-        }
-    
-        if ([personKey isEqualToString:@"lastName"]) {
-            _lastName = [_personDictionary objectForKey:personKey];
-            //NSLog(@"_lastName: %@",_lastName);
-        }
-        if ([personKey isEqualToString:@"shortName"]) {
-            _shortName = [_personDictionary objectForKey:personKey];
-            //NSLog(@"_shortName: %@",_shortName);
-        }
-        
-        if ([personKey isEqualToString:@"type"]) {
-            _personType = [_personDictionary objectForKey:personKey];
-            //NSLog(@"_shortName: %@",_personType);
-        }
-
-        if ([personKey isEqualToString:@"department"]) {
-            if ([_personDictionary objectForKey:personKey] != (id)[NSNull null])  
-            {
-                _department = [self getDepartmentWithDictionary:_personDictionary withPersonKey:personKey];
-                //NSLog(@"_department._name: %@",_department._name);
-            }
-        }
-        
-    } // end loop over keys     
-    }
-    _localPerson    = [[PersonDto alloc]init:_shortName:_firstName:_lastName: _personType :_department]; 
-    return _localPerson;
-}
-
-
-- (ScheduleEventRealizationDto *) getEventRealization:(NSDictionary *)realizationDictionary
-{
-    ScheduleEventRealizationDto *_localRealization      = nil;
-    RoomDto                     *_realizationRoom       = nil;
-    NSMutableArray              *_lecturerArrayToStore  = [[NSMutableArray alloc]init];
-    NSMutableArray              *_classesArrayToStore   = [[NSMutableArray alloc]init];
-    
-    for (id realizationKey in realizationDictionary) 
-    {
-        // get room of event realization
-        if ([realizationKey isEqualToString:@"room"]) 
-        {
-            if ([realizationDictionary objectForKey:realizationKey] != (id)[NSNull null])  
-            {
-                _realizationRoom = [self getRoomWithDictionary:realizationDictionary withScheduleKey:realizationKey];
-                //NSLog(@"_realizationRoom._name: %@",_realizationRoom._name);
-            }
-        }
-        
-        if ([realizationKey isEqualToString:@"lecturers"]) 
-        {
-            NSArray  *_lecturersArray = [realizationDictionary objectForKey:realizationKey];
-            
-            //NSLog(@"_lecturersArray count: %i",[_lecturersArray count]);
-            
-            int lecturerArrayI;
-            for (lecturerArrayI = 0; lecturerArrayI < [_lecturersArray count]; lecturerArrayI++) 
-            {   
-                NSDictionary *_personDictionary = [_lecturersArray objectAtIndex:lecturerArrayI];
-                
-                PersonDto *_lectuerPerson = [self getPersonWithDictionary:_personDictionary withKey:nil];
-                //NSLog(@"_lectuerPerson._shortName: %@",_lectuerPerson._shortName);
-                
-                [_lecturerArrayToStore addObject:_lectuerPerson];
-            }
-        }
-        if ([realizationKey isEqualToString:@"classes"]) 
-        {
-            NSArray  *_classesArray = [realizationDictionary objectForKey:realizationKey];
-            int classesArrayI;
-            for (classesArrayI = 0; classesArrayI < [_classesArray count]; classesArrayI++) 
-            {   
-                NSDictionary *_classDictionary = [_classesArray objectAtIndex:classesArrayI];
-                
-                SchoolClassDto *_realizationClass = [self getClassWithDictionary:_classDictionary withKey:nil];
-                
-                //NSLog(@"_realizationClass._name: %@",_realizationClass._name);
-                [_classesArrayToStore addObject:_realizationClass];
-            }
-        }
-    }   
-    _localRealization    = [[ScheduleEventRealizationDto alloc]init:_realizationRoom:_lecturerArrayToStore:_classesArrayToStore]; 
-    return _localRealization;
-}
-
-
-- (SlotDto *) getSlot:(NSDictionary *)slotDictionary{
-    
-    SlotDto        *_localSlot;
-    NSDate         *_slotStartTime;
-    NSDate         *_slotEndTime;
-    
-    for (id slotKey in slotDictionary) 
-    {
-        if ([slotKey isEqualToString:@"startTime"]) 
-        {
-            
-            // 2012-04-04T08:00:00+02:00
-            //[str substringWithRange:NSMakeRange(3, [str length]-3)];
-            
-            NSString *_slotStartTimeString = [slotDictionary objectForKey:slotKey];
-            _slotStartTimeString           = [_slotStartTimeString substringWithRange:NSMakeRange(11, 5)];
-            _slotStartTime                 = [[_dateFormatter _timeFormatter]  dateFromString:_slotStartTimeString];
-            //NSLog(@"_slotStartTimeString: %@",_slotStartTime);
-        }
-        if ([slotKey isEqualToString:@"endTime"]) 
-        {
-            NSString *_slotEndTimeString = [slotDictionary objectForKey:slotKey];
-            _slotEndTimeString           = [_slotEndTimeString substringWithRange:NSMakeRange(11, 5)];
-            _slotEndTime                 = [[_dateFormatter _timeFormatter]  dateFromString:_slotEndTimeString];
-            //NSLog(@"_slotEndTimeString: %@",_slotEndTimeString);
-        }
-        
-    } // end loop over slotDictionary
-
-    _localSlot = [[SlotDto alloc]init: _slotStartTime :_slotEndTime];
-    return _localSlot;
-}
-
-
-
-- (ScheduleEventDto *) getEvent:(NSDictionary *)eventDictionary
-{
-
-    ScheduleEventDto  *_localScheduleEvent;
-    NSDate            *_eventStartTime;
-    NSDate            *_eventEndTime;
-    NSString          *_eventDescription;
-    NSString          *_eventType;
-    NSString          *_eventName;
-    NSMutableArray    *_slotArrayToStore      = [[NSMutableArray alloc]init];
-    NSMutableArray    *_eventRealizationArray = [[NSMutableArray alloc]init];
-    
-    for (id eventKey in eventDictionary) 
-    {
-         //NSLog(@"eventKey: %@",eventKey);
-        
-        // get start time of event
-        if ([eventKey isEqualToString:@"startTime"]) 
-        {
-            // 2012-04-04T08:00:00+02:00
-            //[str substringWithRange:NSMakeRange(3, [str length]-3)];
-            NSString *_eventStartTimeString = [eventDictionary objectForKey:eventKey];
-            _eventStartTimeString           = [_eventStartTimeString substringWithRange:NSMakeRange(11, 5)];
-            _eventStartTime                 = [[_dateFormatter _timeFormatter]  dateFromString:_eventStartTimeString];
-            //NSLog(@"_eventStartTime: %@",_eventStartTimeString);
-        }
-        
-        // get end time of event
-        if ([eventKey isEqualToString:@"endTime"]) 
-        {
-            NSString *_eventEndTimeString = [eventDictionary objectForKey:eventKey];
-            _eventEndTimeString           = [_eventEndTimeString substringWithRange:NSMakeRange(11, 5)];
-            _eventEndTime                 = [[_dateFormatter _timeFormatter]  dateFromString:_eventEndTimeString];
-            //NSLog(@"_eventEndTime: %@",_eventEndTimeString);
-        }
-        
-        // get description of event
-        if ([eventKey isEqualToString:@"description"]) 
-        {
-          _eventDescription = [eventDictionary objectForKey:eventKey];
-        //NSLog(@"_eventDescription: %@",_eventDescription);
-        }
-        
-        // get name of event
-        if ([eventKey isEqualToString:@"name"]) 
-        {
-            _eventName = [eventDictionary objectForKey:eventKey];
-             //NSLog(@"_eventName: %@",_eventName);
-        }
-
-        
-        // get type of event
-        if ([eventKey isEqualToString:@"type"]) 
-        {
-            _eventType = [eventDictionary objectForKey:eventKey];
-             //NSLog(@"_eventType: %@",_eventType);
-        }
-        
-        // get eventRealization 
-        if ([eventKey isEqualToString:@"eventRealizations"]) 
-        {
-            NSArray *_eventArray = [eventDictionary objectForKey:eventKey];
-            
-            if ((NSNull *)_eventArray != [NSNull null])
-            {
-                //NSLog(@"_eventArray count: %i",[_eventArray count]);
-            
-                // loop over slots
-                int  eventArrayI;
-                for (eventArrayI = 0; eventArrayI < [_eventArray count]; eventArrayI++)
-                {
-                    ScheduleEventRealizationDto *_realization =
-                    [self getEventRealization:[_eventArray objectAtIndex:eventArrayI]];
-                    //NSLog(@"_realization._room._name: %@",_realization._room._name);
-                
-                    [_eventRealizationArray addObject:_realization];
-                }
-            }
-            
-        }
-        // get time slots
-        if ([eventKey isEqualToString:@"slots"])
-        {
-            NSArray  *_slotArray = [eventDictionary objectForKey:eventKey];
-            
-            //NSLog(@"_slotArray count: %i",[_slotArray count]);
-            
-            // loop over slots
-            int slotArrayI;
-            SlotDto *_localSlot;
-            SlotDto *_lastSlot;
-            
-            for (slotArrayI = 0; slotArrayI < [_slotArray count]; slotArrayI++) 
-            {
-
-                if (slotArrayI == 0)
-                {
-                    _lastSlot = nil;
-                }
-                else
-                {
-                    _lastSlot = _localSlot;
-                }
-                _localSlot = [self getSlot:[_slotArray objectAtIndex:slotArrayI]];
-                
-                // always take first slot, but not the ones following, if start and end time are the same
-                if (!
-                        (    _lastSlot != nil
-                         && [_lastSlot._startTime   isEqualToDate:_localSlot._startTime ]
-                         && [_lastSlot._endTime     isEqualToDate:_localSlot._endTime   ]
-                         )
-                    )
-                {
-                    [_slotArrayToStore addObject:_localSlot];
-                }
-            }
-        }
-    
-    }
-    
-    _localScheduleEvent = [[ScheduleEventDto alloc]init:_eventDescription
-                                                       :_eventStartTime 
-                                                       :_eventEndTime
-                                                       :_eventName
-                                                       :_slotArrayToStore
-                                                       :_eventType
-                                                       :_eventRealizationArray];
-    //NSLog(@"_localScheduleEvent._name: %@ with %i slots", _localScheduleEvent._name, [_slotArrayToStore count]);
-    return _localScheduleEvent;
-}
-
-
-- (DayDto *) getDay:(NSDictionary *)dayDictionary
-{
-    NSDate         *_dayDate;
-    NSMutableArray *_slotArrayToStore  = [[NSMutableArray alloc]init];
-    NSMutableArray *_eventArrayToStore = [[NSMutableArray alloc]init];
-
-    //NSLog(@"start parsing day");
-    for (id daykey in dayDictionary) 
-    {
-        //NSLog(@"daykey: %@", daykey);
-        
-        if ([daykey isEqualToString:@"date"]) 
-        {
-            _dayDate = [self parseDate:[dayDictionary objectForKey:daykey]];
-            //NSLog(@"dayDate: %@", [[_dateFormatter _englishDayFormatter] stringFromDate:_dayDate]);
-        }
-
-        // get event information
-        if ([daykey isEqualToString:@"events"]) 
-        {
-            NSArray  *_eventArray = [dayDictionary objectForKey:daykey];
-            
-            //NSLog(@"events to parse count: %i",[_eventArray count]);
-            
-            // loop over slots
-            int eventArrayI;
-            for (eventArrayI = 0; eventArrayI < [_eventArray count]; eventArrayI++) 
-            {
-                ScheduleEventDto *_localEvent = [self getEvent:[_eventArray objectAtIndex:eventArrayI]];
-                //NSLog(@"%i localEvent: %@", eventArrayI,  _localEvent._name);
-                [_eventArrayToStore addObject:_localEvent];
-            }
-            
-            //NSLog(@"event array count: %i",[_eventArrayToStore count]);
-        }
-        
-        // get slot information
-        if ([daykey isEqualToString:@"slots"]) {
-            
-            NSArray  *_slotArray = [dayDictionary objectForKey:daykey];
-            
-            // loop over slots
-            int slotArrayI;
-            for (slotArrayI = 0; slotArrayI < [_slotArray count]; slotArrayI++) 
-            {
-                SlotDto *_localSlot = [self getSlot:[_slotArray objectAtIndex:slotArrayI]];
-                [_slotArrayToStore addObject:_localSlot];
-            }
-            
-            //NSLog(@"slot array count: %i",[_slotArrayToStore count]);
-        }
-    } 
-    //NSLog(@"end parsing day");
-
-    return [[DayDto alloc]init: _dayDate : _eventArrayToStore: _slotArrayToStore ];
-}
-
-
-
 - (NSMutableArray *) getDaysWithDictionary:(NSDictionary *)dictionary withKey:(id)key
 {
     NSMutableArray *_dayArrayToStore = [[NSMutableArray alloc]init];
@@ -498,9 +49,11 @@
     //NSLog(@"day array count: %i",[_dayArray count]);
     
     int i;
+    DayDto *_localDay = [[DayDto alloc] init:nil :nil :nil];
+    
     for (i = 0; i < [_dayArray count]; i++) 
     {
-        DayDto *_localDay = [self getDay:[_dayArray objectAtIndex:i]];
+        _localDay = [_localDay getDay:[_dayArray objectAtIndex:i]];
         
         //int eventArrayI;
         //for (eventArrayI = 0; eventArrayI < [_localDay._events count]; eventArrayI++) 
@@ -525,18 +78,6 @@
 
     return _dayArrayToStore;
 }
-
-
-
-/* TODO: do we need that?
-- (NSDate *) getDateWithDictionary:(NSDictionary *)dictionary withKey:(id)key
-{  
-    NSString *_subType = [dictionary objectForKey:key];
-    NSDate   *_startDateToStore = [self parseDate:_subType];
-    return _startDateToStore;
-}
- */
-
 
 
 
@@ -940,33 +481,37 @@
     // get student information
     if ([key isEqualToString:@"student"]) 
     {
-        self._student = [self getPersonWithDictionary:dictionary withKey:key];
+        self._student = [[PersonDto alloc] init:nil :nil :nil :nil :nil];
+        self._student = [self._student getPersonWithDictionary:dictionary withKey:key];
     } 
     
     // get lecturer information
-    if ([key isEqualToString:@"lecturer"]) 
+    if ([key isEqualToString:@"lecturer"])
     {
-        self._lecturer = [self getPersonWithDictionary:dictionary withKey:key];
+        self._lecturer = [[PersonDto alloc] init:nil :nil :nil :nil :nil];
+        self._lecturer = [self._lecturer getPersonWithDictionary:dictionary withKey:key];
     }  
     
     // get course information            
     if ([key isEqualToString:@"course"]) 
     {
-        self._scheduleCourse = [self getScheduleCourseWithDictionary:dictionary withKey:key];
+        self._scheduleCourse = [[ScheduleCourseDto alloc] init:nil :nil];
+        self._scheduleCourse = [_scheduleCourse getScheduleCourseWithDictionary:dictionary withKey:key];
     }  
     
     // get class information
     if ([key isEqualToString:@"class"]) 
     {
-        self._schoolClass  = [self getClassWithDictionary:dictionary withKey:key];
+        self._schoolClass  = [[SchoolClassDto alloc] init:nil];
+        self._schoolClass  = [self._schoolClass getClassWithDictionary:dictionary withKey:key];
     }  
     
     // get room information
     if ([key isEqualToString:@"room"]) 
     {
-        self._room = [self getRoomWithDictionary:dictionary withScheduleKey:key];
+        self._room = [[RoomDto alloc] init:nil];
+        self._room = [self._room getRoomWithDictionary:dictionary withScheduleKey:key];
     }           
-
 }
 
 

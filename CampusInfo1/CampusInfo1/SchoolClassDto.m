@@ -21,4 +21,32 @@
      return self;
 }
 
+- (SchoolClassDto *) getClassWithDictionary:(NSDictionary *)scheduleDictionary withKey:(id) scheduleKey
+{
+    SchoolClassDto *_localClass      = nil;
+    NSString       *_className       = nil;
+    NSDictionary   *_classDictionary = nil;
+    
+    if (scheduleKey == nil)
+    {
+        _classDictionary = scheduleDictionary;
+    }
+    else
+    {
+        _classDictionary = [scheduleDictionary objectForKey:scheduleKey];
+    }
+    
+    if (_classDictionary != (id)[NSNull null])
+    {
+        for (id classKey in _classDictionary)
+        {
+            if ([classKey isEqualToString:@"name"]) {
+                _className = [_classDictionary objectForKey:classKey];
+            }
+        }
+        _localClass = [[SchoolClassDto alloc]init:_className];
+    }
+    return _localClass;
+}
+
 @end

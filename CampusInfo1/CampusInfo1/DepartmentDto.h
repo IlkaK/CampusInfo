@@ -17,5 +17,6 @@
 @property (nonatomic, retain) NSString  *_name;
 
 -(id) init : (NSString  *) newName;
+- (DepartmentDto *)getDepartmentWithDictionary:(NSDictionary *)dictionary withPersonKey:(id)key;
 
 @end

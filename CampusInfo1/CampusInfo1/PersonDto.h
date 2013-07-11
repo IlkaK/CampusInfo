@@ -33,4 +33,6 @@
 : (NSString       *) newType
 : (DepartmentDto  *) newDepartment;
 
+- (PersonDto *) getPersonWithDictionary:(NSDictionary *)dictionary withKey:(id) key;
+
 @end

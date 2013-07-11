@@ -19,7 +19,8 @@
 -(id) init 
 {
     self = [super init];
-    if (self) {
+    if (self)
+    {
         _dayFormatter       = [[NSDateFormatter alloc]init];
         [_dayFormatter setTimeZone:[NSTimeZone timeZoneWithName:@"CEST"]];
         [_dayFormatter setDateFormat:@"dd.MM.yyyy"];
@@ -42,10 +43,8 @@
         _englishTimeAndDayFormatter = [[NSDateFormatter alloc]init];
         [_englishTimeAndDayFormatter setTimeZone:[NSTimeZone timeZoneWithName:@"CEST"]];
         [_englishTimeAndDayFormatter setDateFormat:@"yyyy-MM-dd HH:mm"]; 
-        
     }
     return self;
 }
-
 
 @end
