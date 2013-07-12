@@ -160,7 +160,7 @@
         
             for (id generalKey in _generalDictionary)
             {
-                NSLog(@"generalKey:%@",generalKey);
+                //NSLog(@"generalKey:%@",generalKey);
                 
                 NSArray      *_generalArrayFromServer = [_generalDictionary objectForKey:generalKey];
                 int          _generalArrayFromServerI;
@@ -309,12 +309,12 @@
             
         if (self._generalDictionary == nil)
         {
-            NSLog(@"no connection");
+            NSLog(@"SearchViewController: no connection");
         }
-        else
-        {
-            NSLog(@"IF connection established");
-        }
+        //else
+        //{
+        //    NSLog(@"IF connection established");
+        //}
     //}
 }
 

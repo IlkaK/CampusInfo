@@ -555,7 +555,7 @@
     //    || self._days == nil
     //   )
     //{
-        NSLog(@"loadScheduleWithAcronym old acronym: %@ - new acronym: %@", self._acronym , newAcronymString);
+        //NSLog(@"loadScheduleWithAcronym old acronym: %@ - new acronym: %@", self._acronym , newAcronymString);
         
         self._acronym       = newAcronymString;
         self._type          = newAcronymType;
