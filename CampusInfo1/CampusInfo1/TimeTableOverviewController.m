@@ -67,6 +67,8 @@
 @synthesize _sixSlotsOneRoomTableCell;
 @synthesize _sixSlotsTwoRoomsTableCell;
 
+@synthesize _sevenSlotsOneRoomTableCell;
+
 @synthesize _eightSlotsOneRoomTableCell;
 
 @synthesize _emptyTableCell;
@@ -729,6 +731,7 @@
     _todayButton = nil;
     _rightSwipe = nil;
     _leftSwipe = nil;
+    _sevenSlotsOneRoomTableCell = nil;
     [super viewDidUnload];
 }
 
@@ -2524,6 +2527,52 @@
 }
 
 
+- (UITableViewCell *)sevenSlotsOneRoomWithView      :(UITableView *)     actualTableView
+                                withSelection       :(NSUInteger)        actualSelection
+                                withScheduleEvent   :(ScheduleEventDto *)actualScheduleEvent
+{
+    static NSString *_cellIdentifier = @"SevenSlotsOneRoomTableCell";
+    UITableViewCell *_cell           = [actualTableView dequeueReusableCellWithIdentifier:_cellIdentifier];
+    
+    if (_cell == nil)
+    {
+        [[NSBundle mainBundle] loadNibNamed:@"SevenSlotsOneRoomTableCell" owner:self options:nil];
+        _cell = _sevenSlotsOneRoomTableCell;
+        self._sevenSlotsOneRoomTableCell = nil;
+    }
+    
+    ScheduleEventRealizationDto *_localRealization = [actualScheduleEvent._scheduleEventRealizations objectAtIndex:0];
+    SlotDto *_timeSlot1 = [actualScheduleEvent._slots objectAtIndex:0];
+    SlotDto *_timeSlot2 = [actualScheduleEvent._slots objectAtIndex:1];
+    SlotDto *_timeSlot3 = [actualScheduleEvent._slots objectAtIndex:2];
+    SlotDto *_timeSlot4 = [actualScheduleEvent._slots objectAtIndex:3];
+    SlotDto *_timeSlot5 = [actualScheduleEvent._slots objectAtIndex:4];
+    SlotDto *_timeSlot6 = [actualScheduleEvent._slots objectAtIndex:5];
+    SlotDto *_timeSlot7 = [actualScheduleEvent._slots objectAtIndex:6];
+    
+    [self setDateLabelWithCell:_cell withTag:1 withActualSelection:actualSelection withStartTime:_timeSlot1._startTime withEndTime:_timeSlot1._endTime];
+    [self setDateLabelWithCell:_cell withTag:2 withActualSelection:actualSelection withStartTime:_timeSlot2._startTime withEndTime:_timeSlot2._endTime];
+    [self setDateLabelWithCell:_cell withTag:3 withActualSelection:actualSelection withStartTime:_timeSlot3._startTime withEndTime:_timeSlot3._endTime];
+    [self setDateLabelWithCell:_cell withTag:4 withActualSelection:actualSelection withStartTime:_timeSlot4._startTime withEndTime:_timeSlot4._endTime];
+    [self setDateLabelWithCell:_cell withTag:5 withActualSelection:actualSelection withStartTime:_timeSlot5._startTime withEndTime:_timeSlot5._endTime];
+    [self setDateLabelWithCell:_cell withTag:6 withActualSelection:actualSelection withStartTime:_timeSlot6._startTime withEndTime:_timeSlot6._endTime];
+    [self setDateLabelWithCell:_cell withTag:7 withActualSelection:actualSelection withStartTime:_timeSlot7._startTime withEndTime:_timeSlot7._endTime];
+    
+    [self setLectureButtonWithCell:_cell withTag:8 withActualSelection:actualSelection withTitle:actualScheduleEvent._name doEnable:TRUE];
+    
+    [self setRoomButtonWithCell:_cell withTag:9 withActualSelection:actualSelection withTitle:_localRealization._room._name withSelector:1];
+    
+    [self setDetailButtonWithCell:_cell withTag:10 withActualSelection:actualSelection];
+    
+    [self setBackgroundColorOfCell:_cell
+               withActualSelection:actualSelection
+                     withIsLecture:YES];
+    return _cell;
+}
+
+
+
+
 - (UITableViewCell *)eightSlotsOneRoomWithView      :(UITableView *)     actualTableView
                                 withSelection       :(NSUInteger)        actualSelection
                                 withScheduleEvent   :(ScheduleEventDto *)actualScheduleEvent
@@ -2811,6 +2860,15 @@
                                             withScheduleEvent   :_scheduleEvent];
                 }
 
+                //----------------------------
+                // seven slots, one or more rooms
+                if (   [_scheduleEvent._slots                     count] == 7
+                    && [_scheduleEvent._scheduleEventRealizations count] == 1)
+                {
+                    return [self sevenSlotsOneRoomWithView  :tableView
+                                    withSelection           :_cellSelection
+                                    withScheduleEvent       :_scheduleEvent];
+                }
 
                 //----------------------------
                 // eight slots, one or more rooms

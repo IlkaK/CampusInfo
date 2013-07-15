@@ -84,6 +84,8 @@ UIViewController
     IBOutlet UITableViewCell  *_sixSlotsOneRoomTableCell;
     IBOutlet UITableViewCell  *_sixSlotsTwoRoomsTableCell;
     
+    IBOutlet UITableViewCell  *_sevenSlotsOneRoomTableCell;
+    
     IBOutlet UITableViewCell  *_eightSlotsOneRoomTableCell;
     
     IBOutlet UITableViewCell  *_emptyTableCell;
@@ -143,6 +145,8 @@ UIViewController
 
 @property (nonatomic, retain) IBOutlet UITableViewCell           *_sixSlotsOneRoomTableCell;
 @property (nonatomic, retain) IBOutlet UITableViewCell           *_sixSlotsTwoRoomsTableCell;
+
+@property (nonatomic, retain) IBOutlet UITableViewCell           *_sevenSlotsOneRoomTableCell;
 
 @property (nonatomic, retain) IBOutlet UITableViewCell           *_eightSlotsOneRoomTableCell;
 
