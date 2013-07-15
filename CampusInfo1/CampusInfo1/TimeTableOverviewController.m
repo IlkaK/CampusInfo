@@ -61,6 +61,7 @@
 @synthesize _fourSlotsOneRoomTableCell;
 @synthesize _fourSlotsTwoRoomsTableCell;
 @synthesize _fourSlotsThreeRoomsTableCell;
+@synthesize _fourSlotsFiveRoomsTableCell;
 
 @synthesize _fiveSlotsOneRoomTableCell;
 
@@ -685,53 +686,62 @@
 
 - (void)viewDidUnload
 {
-    _dayNavigator = nil;
-    _acronymLabel = nil;
-    _detailsVC = nil;
+
     
     _oneSlotOneRoomTableCell    = nil;
     _oneSlotTwoRoomsTableCell   = nil;
     _oneSlotThreeRoomsTableCell = nil;
+    _oneSlotFourRoomsTableCell = nil;
     _oneSlotFiveRoomsTableCell  = nil;
     _oneSlotSixRoomsTableCell   = nil;
+    _oneSlotSevenRoomsTableCell = nil;
     _oneSlotEightRoomsTableCell = nil;
-    
+
     _twoSlotsOneRoomTableCell   = nil;
     _twoSlotsTwoRoomsTableCell  = nil;
+    _twoSlotsThreeRoomsTableCell = nil;
+    _twoSlotsFourRoomsTableCell = nil;
+
+    _twoSlotsSixRoomsTableCell = nil;
 
     _threeSlotsOneRoomTableCell = nil;
     _threeSlotsTwoRoomsTableCell = nil;
+    _threeSlotsThreeRoomsTableCell = nil;
     
+    _fourSlotsOneRoomTableCell    = nil;
     _fourSlotsTwoRoomsTableCell   = nil;
     _fourSlotsThreeRoomsTableCell = nil;
-    _fourSlotsOneRoomTableCell    = nil;
-
+    _fourSlotsFiveRoomsTableCell = nil;
+    
     _fiveSlotsOneRoomTableCell    = nil;
+    
+    _sixSlotsOneRoomTableCell = nil;
+    _sixSlotsTwoRoomsTableCell = nil;
+
+    _sevenSlotsOneRoomTableCell = nil;
+    
+    _eightSlotsOneRoomTableCell = nil;
+
+    _emptyTableCell = nil;
+    _errorMessageCell = nil;
     
     _noConnectionButton = nil;
     _noConnectionLabel = nil;
 
-    _eightSlotsOneRoomTableCell = nil;
-    _oneSlotFourRoomsTableCell = nil;
-    _oneSlotSevenRoomsTableCell = nil;
-    _threeSlotsTwoRoomsTableCell = nil;
-    _threeSlotsThreeRoomsTableCell = nil;
-    _noConnectionLabel = nil;
-    _emptyTableCell = nil;
-    _sixSlotsTwoRoomsTableCell = nil;
-    _sixSlotsOneRoomTableCell = nil;
-    _twoSlotsSixRoomsTableCell = nil;
-    _dateLabel = nil;
+    _detailsVC = nil;
     _chooseDateVC = nil;
-    _twoSlotsFourRoomsTableCell = nil;
-    [self set_errorMessageCell:nil];
-    _errorMessageCell = nil;
-    _twoSlotsThreeRoomsTableCell = nil;
+ 
+    _dayNavigator = nil;
+    _acronymLabel = nil;
+    _dateLabel = nil;
+
     _homeButton = nil;
     _todayButton = nil;
+    
     _rightSwipe = nil;
     _leftSwipe = nil;
-    _sevenSlotsOneRoomTableCell = nil;
+
+    [self set_errorMessageCell:nil];
     [super viewDidUnload];
 }
 
@@ -2527,9 +2537,57 @@
 }
 
 
-- (UITableViewCell *)sevenSlotsOneRoomWithView      :(UITableView *)     actualTableView
+
+- (UITableViewCell *)fourSlotsFiveRoomsWithView     :(UITableView *)     actualTableView
                                 withSelection       :(NSUInteger)        actualSelection
                                 withScheduleEvent   :(ScheduleEventDto *)actualScheduleEvent
+{
+    static NSString *_cellIdentifier = @"FourSlotsFiveRoomsTableCell";
+    UITableViewCell *_cell           = [actualTableView dequeueReusableCellWithIdentifier:_cellIdentifier];
+    
+    if (_cell == nil)
+    {
+        [[NSBundle mainBundle] loadNibNamed:@"FourSlotsFiveRoomsTableCell" owner:self options:nil];
+        _cell = _fourSlotsFiveRoomsTableCell;
+        self._fourSlotsFiveRoomsTableCell = nil;
+    }
+    
+    ScheduleEventRealizationDto *_localRealization1 = [actualScheduleEvent._scheduleEventRealizations objectAtIndex:0];
+    ScheduleEventRealizationDto *_localRealization2 = [actualScheduleEvent._scheduleEventRealizations objectAtIndex:1];
+    ScheduleEventRealizationDto *_localRealization3 = [actualScheduleEvent._scheduleEventRealizations objectAtIndex:2];
+    ScheduleEventRealizationDto *_localRealization4 = [actualScheduleEvent._scheduleEventRealizations objectAtIndex:3];
+    ScheduleEventRealizationDto *_localRealization5 = [actualScheduleEvent._scheduleEventRealizations objectAtIndex:4];
+    
+    SlotDto *_timeSlot1 = [actualScheduleEvent._slots objectAtIndex:0];
+    SlotDto *_timeSlot2 = [actualScheduleEvent._slots objectAtIndex:1];
+    SlotDto *_timeSlot3 = [actualScheduleEvent._slots objectAtIndex:2];
+    SlotDto *_timeSlot4 = [actualScheduleEvent._slots objectAtIndex:3];
+    
+    [self setDateLabelWithCell:_cell withTag:1 withActualSelection:actualSelection withStartTime:_timeSlot1._startTime withEndTime:_timeSlot1._endTime];
+    [self setDateLabelWithCell:_cell withTag:2 withActualSelection:actualSelection withStartTime:_timeSlot2._startTime withEndTime:_timeSlot2._endTime];
+    [self setDateLabelWithCell:_cell withTag:3 withActualSelection:actualSelection withStartTime:_timeSlot3._startTime withEndTime:_timeSlot3._endTime];
+    [self setDateLabelWithCell:_cell withTag:4 withActualSelection:actualSelection withStartTime:_timeSlot4._startTime withEndTime:_timeSlot4._endTime];
+    
+    [self setLectureButtonWithCell:_cell withTag:5 withActualSelection:actualSelection withTitle:actualScheduleEvent._name doEnable:TRUE];
+    
+    [self setRoomButtonWithCell:_cell withTag:6 withActualSelection:actualSelection withTitle:_localRealization1._room._name withSelector:1];
+    [self setRoomButtonWithCell:_cell withTag:7 withActualSelection:actualSelection withTitle:_localRealization2._room._name withSelector:2];
+    [self setRoomButtonWithCell:_cell withTag:8 withActualSelection:actualSelection withTitle:_localRealization3._room._name withSelector:3];
+    [self setRoomButtonWithCell:_cell withTag:9 withActualSelection:actualSelection withTitle:_localRealization4._room._name withSelector:4];
+    [self setRoomButtonWithCell:_cell withTag:10 withActualSelection:actualSelection withTitle:_localRealization5._room._name withSelector:5];
+    
+    [self setDetailButtonWithCell:_cell withTag:11 withActualSelection:actualSelection];
+    
+    [self setBackgroundColorOfCell:_cell
+               withActualSelection:actualSelection
+                     withIsLecture:YES];
+    return _cell;
+}
+
+
+- (UITableViewCell *)sevenSlotsOneRoomWithView      :(UITableView *)     actualTableView
+                                 withSelection       :(NSUInteger)        actualSelection
+                                 withScheduleEvent   :(ScheduleEventDto *)actualScheduleEvent
 {
     static NSString *_cellIdentifier = @"SevenSlotsOneRoomTableCell";
     UITableViewCell *_cell           = [actualTableView dequeueReusableCellWithIdentifier:_cellIdentifier];
@@ -2542,6 +2600,7 @@
     }
     
     ScheduleEventRealizationDto *_localRealization = [actualScheduleEvent._scheduleEventRealizations objectAtIndex:0];
+    
     SlotDto *_timeSlot1 = [actualScheduleEvent._slots objectAtIndex:0];
     SlotDto *_timeSlot2 = [actualScheduleEvent._slots objectAtIndex:1];
     SlotDto *_timeSlot3 = [actualScheduleEvent._slots objectAtIndex:2];
@@ -2569,8 +2628,6 @@
                      withIsLecture:YES];
     return _cell;
 }
-
-
 
 
 - (UITableViewCell *)eightSlotsOneRoomWithView      :(UITableView *)     actualTableView
@@ -2828,7 +2885,14 @@
                                            withSelection       :_cellSelection
                                            withScheduleEvent   :_scheduleEvent];
                 }
-                
+                if (   [_scheduleEvent._slots                     count] == 4
+                    && [_scheduleEvent._scheduleEventRealizations count] == 5
+                    )
+                {
+                    return [self fourSlotsFiveRoomsWithView   :tableView
+                                           withSelection       :_cellSelection
+                                           withScheduleEvent   :_scheduleEvent];
+                }
                 
                 //----------------------------
                 // five slots, one or more rooms

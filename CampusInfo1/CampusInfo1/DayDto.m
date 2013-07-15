@@ -73,8 +73,9 @@
             for (eventArrayI = 0; eventArrayI < [_eventArray count]; eventArrayI++)
             {
                 _localEvent = [_localEvent getEvent:[_eventArray objectAtIndex:eventArrayI]];
-                //NSLog(@"%i localEvent: %@", eventArrayI,  _localEvent._name);
                 [_eventArrayToStore addObject:_localEvent];
+                //NSLog(@"%i localEvent: %@", eventArrayI,  _localEvent._name);
+                
             }
             
             //NSLog(@"event array count: %i",[_eventArrayToStore count]);

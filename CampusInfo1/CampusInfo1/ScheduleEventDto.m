@@ -55,6 +55,12 @@
     NSString *_eventStartTimeString;
     NSString *_eventEndTimeString;
     
+    NSString *_localSlotToString;
+    NSString *_localSlotFromString;
+    NSString *_lastSlotToString;
+    NSString *_lastSlotFromString;
+    
+    
     for (id eventKey in eventDictionary)
     {
         //NSLog(@"eventKey: %@",eventKey);
@@ -139,15 +145,23 @@
                 {
                     _lastSlot = _localSlot;
                 }
+                
                 _localSlot = [_localSlot getSlot:[_slotArray objectAtIndex:slotArrayI]];
                 
+                _localSlotFromString    = [[_dateFormatter _timeFormatter] stringFromDate: _localSlot._startTime];
+                _localSlotToString      = [[_dateFormatter _timeFormatter] stringFromDate: _localSlot._endTime];
+                _lastSlotFromString     = [[_dateFormatter _timeFormatter] stringFromDate: _lastSlot._startTime];
+                _lastSlotToString       = [[_dateFormatter _timeFormatter] stringFromDate: _lastSlot._endTime];
+                
+                //NSLog(@"_localSlot => from %@ to %@", _localSlotFromString, _localSlotToString);
+                //NSLog(@"_lastSlot => from %@ to %@", _lastSlotFromString, _lastSlotToString);
+                //NSLog(@"slotArrayI: %i", slotArrayI);
+                
                 // always take first slot, but not the ones following, if start and end time are the same
-                if (!
-                    (    slotArrayI > 0
-                     && [_lastSlot._startTime   isEqualToDate:_localSlot._startTime ]
-                     && [_lastSlot._endTime     isEqualToDate:_localSlot._endTime   ]
-                     )
-                    )
+                if (    slotArrayI == 0
+                     || [_localSlotFromString compare: _lastSlotFromString  ] != NSOrderedSame
+                     || [_localSlotToString   compare: _lastSlotToString    ] != NSOrderedSame
+                   )
                 {
                     [_slotArrayToStore addObject:_localSlot];
                 }
