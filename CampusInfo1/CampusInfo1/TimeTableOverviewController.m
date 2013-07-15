@@ -981,11 +981,11 @@
                 _sameEventAgain = NO;
                 for (localFormerScheduleEventArrayI = 0; localFormerScheduleEventArrayI < [_localFormerScheduleEventArray count]; localFormerScheduleEventArrayI ++)
                 {
-                    if (_sameEventAgain)
+                    if (!_sameEventAgain)
                     {
                         _localFormerScheduleEvent = [_localFormerScheduleEventArray objectAtIndex:localFormerScheduleEventArrayI];
-                        _formerToEvent   = [[_dateFormatter _timeFormatter] stringFromDate: _localFormerScheduleEvent._endTime];
                         _formerFromEvent = [[_dateFormatter _timeFormatter] stringFromDate: _localFormerScheduleEvent._startTime];
+                        _formerToEvent   = [[_dateFormatter _timeFormatter] stringFromDate: _localFormerScheduleEvent._endTime];
             
                         // if the same lecture comes again, don't list it again
                         // then the time of the former event must be between them or one of the them
@@ -993,13 +993,22 @@
                            ([_formerFromEvent          compare: _fromLocalScheduleEvent  ] == NSOrderedSame
                             ||[_formerToEvent          compare: _toLocalScheduleEvent    ] == NSOrderedSame
                             ||(
-                                    [_formerFromEvent       compare: _fromLocalScheduleEvent  ] == NSOrderedDescending
-                               &&[_formerToEvent            compare: _toLocalScheduleEvent    ] == NSOrderedAscending
+                                 [_formerFromEvent       compare: _fromLocalScheduleEvent  ] == NSOrderedDescending
+                               &&[_formerToEvent         compare: _toLocalScheduleEvent    ] == NSOrderedAscending
                                )
                             )
                            && [_localFormerScheduleEvent._name compare: _localScheduleEvent._name] == NSOrderedSame
                            )
-                        {
+                        {                            
+                            NSLog(@"_localScheduleEvent._name: %@ from %@ to %@ <-> former event %@ from %@ to %@"
+                                  , _localScheduleEvent._name
+                                  , _fromLocalScheduleEvent
+                                  , _toLocalScheduleEvent
+                                  ,_localFormerScheduleEvent._name
+                                  ,_formerFromEvent
+                                  ,_formerToEvent
+                                 );
+                            
                             // also compare the rooms, mabye the next lecture is somewhere else
                             if (   [_localScheduleEvent._scheduleEventRealizations count] == 1
                                 && [_localFormerScheduleEvent._scheduleEventRealizations count] == 1
@@ -1011,13 +1020,21 @@
                                 if  ([_formerRealization._room._name compare: _localRealization._room._name] == NSOrderedSame)
                                 {
                                     _goalScheduleEvent = [[ScheduleEventDto alloc]init:@"":_fromTime:_toTime:@"same":_emptyArray:@"same":_emptyArray];
+                                    [_allGoalScheduleEventArray     addObject: _goalScheduleEvent];
                                     _sameEventAgain    = YES;
+                                    NSLog(@"only one room and its the same one");
+                                }
+                                else
+                                {
+                                    NSLog(@"only one room but they are different");
                                 }
                             }
                             else // more than one room
                             {
                                 _goalScheduleEvent = [[ScheduleEventDto alloc]init:@"":_fromTime:_toTime:@"same":_emptyArray:@"same":_emptyArray];
+                                [_allGoalScheduleEventArray     addObject: _goalScheduleEvent];
                                 _sameEventAgain    = YES;
+                                NSLog(@"more than one room, but they are not compared");
                             }
                         } // events are not the same
                         else
@@ -1049,32 +1066,6 @@
     return _allGoalScheduleEventArray;
 }
 
-/*
-- (void) xxxxWithFromString:(NSString *)fromString
-WithToString: (NSString *)toString
-
-{
-    
-    
-_firstScheduleEventArray = [self getCurrentScheduleEventArrayWithDay  :currentDay
-                                                  withFromTime        :_fromTime
-                                                  withToTime          :_toTime
-                                       withFormerScheduleEventArray   :nil];
-
-int scheduleEventArrayI;
-for (scheduleEventArrayI = 0; scheduleEventArrayI < [_firstScheduleEventArray count]; scheduleEventArrayI ++)
-{
-    _firstScheduleEvent = [_firstScheduleEventArray objectAtIndex:scheduleEventArrayI];
-    
-    _toLocalScheduleEvent   = [[_dateFormatter _timeFormatter] stringFromDate: _firstScheduleEvent._endTime];
-    _fromLocalScheduleEvent = [[_dateFormatter _timeFormatter] stringFromDate: _firstScheduleEvent._startTime];
-    NSLog(@"08:00-08:45 => %@ from %@ to %@", _firstScheduleEvent._name, _fromLocalScheduleEvent, _toLocalScheduleEvent);
-    
-    [_sortedEvents addObject:_firstScheduleEvent];
-}
-}
-
-*/
 
 
 - (NSMutableArray *)getSortedScheduleEvent:(DayDto *)currentDay
@@ -1151,8 +1142,7 @@ for (scheduleEventArrayI = 0; scheduleEventArrayI < [_firstScheduleEventArray co
             _toLocalScheduleEvent   = [[_dateFormatter _timeFormatter] stringFromDate: _firstScheduleEvent._endTime];
             _fromLocalScheduleEvent = [[_dateFormatter _timeFormatter] stringFromDate: _firstScheduleEvent._startTime];
             NSLog(@"08:00-08:45 => %@ from %@ to %@", _firstScheduleEvent._name, _fromLocalScheduleEvent, _toLocalScheduleEvent);
-            
-            [_sortedEvents              addObject:_nextScheduleEvent];
+            [_sortedEvents              addObject:_firstScheduleEvent];
         }
     
         
@@ -1395,11 +1385,23 @@ for (scheduleEventArrayI = 0; scheduleEventArrayI < [_firstScheduleEventArray co
                 NSLog(@"20:35-21:20 => %@ from %@ to %@", _nextScheduleEvent._name, _fromLocalScheduleEvent, _toLocalScheduleEvent);
                 
                 [_sortedEvents              addObject:_nextScheduleEvent];
+                [_firstScheduleEventArray   addObject:_nextScheduleEvent];
             }
         }
          
         
     }
+    
+    NSLog(@"-################################-");
+    int sortedEventsI;
+    for (sortedEventsI = 0; sortedEventsI < [_sortedEvents count]; sortedEventsI ++)
+    {
+        _nextScheduleEvent     = [_sortedEvents objectAtIndex:sortedEventsI];
+        _toLocalScheduleEvent   = [[_dateFormatter _timeFormatter] stringFromDate: _nextScheduleEvent._endTime];
+        _fromLocalScheduleEvent = [[_dateFormatter _timeFormatter] stringFromDate: _nextScheduleEvent._startTime];
+        NSLog(@"_sortedEvents: %@ from %@ to %@", _nextScheduleEvent._name, _fromLocalScheduleEvent, _toLocalScheduleEvent);
+    }
+    NSLog(@"-################################-");
     
     //NSLog(@"getSortedScheduleEvent %i", [_sortedEvents count] );
     return _sortedEvents;
