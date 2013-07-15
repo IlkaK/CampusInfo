@@ -910,132 +910,201 @@
 }
  
 
-- (ScheduleEventDto *)getCurrentScheduleEventWithDay            :(DayDto *)          currentDay
-                                            withFromTime        :(NSDate *)          fromTime
-                                            withToTime          :(NSDate *)          toTime
-                                            withScheduleEvent   :(ScheduleEventDto *)formerScheduleEvent
+- (NSMutableArray *)getCurrentScheduleEventArrayWithDay       :(DayDto *)        currentDay
+                                    withFromTimeString        :(NSString *)      fromTimeString
+                                    withToTimeString          :(NSString *)      toTimeString
+                                withFormerScheduleEventArray  :(NSMutableArray *)formerScheduleEventArray
 {   
-    ScheduleEventDto *_localScheduleEvent   = nil;
-    ScheduleEventDto *_goalScheduleEvent    = nil;
     
+    NSDate           *_fromTime          = [[_dateFormatter _timeFormatter] dateFromString:fromTimeString];
+    NSDate           *_toTime            = [[_dateFormatter _timeFormatter] dateFromString:toTimeString];
+    NSString         *_fromString        = fromTimeString; 
+    NSString         *_toString          = toTimeString; 
     NSString         *_fromLocalScheduleEvent;
-    NSString         *_toLocalScheduleEvent;   
-    
+    NSString         *_toLocalScheduleEvent;
     NSString         *_formerToEvent;
     NSString         *_formerFromEvent;
     
+    NSMutableArray   *_allGoalScheduleEventArray        = [[NSMutableArray alloc]init];
+    NSMutableArray   *_localFormerScheduleEventArray    = [[NSMutableArray alloc]init];
+    NSMutableArray *_emptyArray                         = [[NSMutableArray alloc]init];
+    
+    ScheduleEventDto *_localScheduleEvent        = nil;
+    ScheduleEventDto *_goalScheduleEvent         = nil;
+    ScheduleEventDto *_localFormerScheduleEvent  = nil;
+    
+    ScheduleEventRealizationDto *_formerRealization = nil;
+    ScheduleEventRealizationDto *_localRealization  = nil;
+    
     BOOL              _sameEventAgain       = NO;
     
-    NSString         *_fromString           = [[_dateFormatter _timeFormatter] stringFromDate: fromTime];
-    NSString         *_toString             = [[_dateFormatter _timeFormatter] stringFromDate: toTime  ];
-    
     int dayI;
-        
+    int localFormerScheduleEventArrayI;
+    
+    //NSLog(@"----------------------------------");
+    for (localFormerScheduleEventArrayI = 0; localFormerScheduleEventArrayI < [formerScheduleEventArray count]; localFormerScheduleEventArrayI ++)
+    {
+        _localScheduleEvent     = [formerScheduleEventArray objectAtIndex:localFormerScheduleEventArrayI];
+        [_localFormerScheduleEventArray     addObject: _localScheduleEvent];
+        //_toLocalScheduleEvent   = [[_dateFormatter _timeFormatter] stringFromDate: _localScheduleEvent._endTime];
+        //_fromLocalScheduleEvent = [[_dateFormatter _timeFormatter] stringFromDate: _localScheduleEvent._startTime];
+        //NSLog(@"former event: %@ from %@ to %@", _localScheduleEvent._name, _fromLocalScheduleEvent, _toLocalScheduleEvent);
+    }
+    //NSLog(@"----------------------------------");
+    
+    
     for (dayI = 0; dayI < [currentDay._events count]; dayI ++)
     {   
         _localScheduleEvent     = [currentDay._events objectAtIndex:dayI];     
-        _toLocalScheduleEvent   = [[_dateFormatter _timeFormatter] stringFromDate: _localScheduleEvent._endTime];
         _fromLocalScheduleEvent = [[_dateFormatter _timeFormatter] stringFromDate: _localScheduleEvent._startTime];
+        _toLocalScheduleEvent   = [[_dateFormatter _timeFormatter] stringFromDate: _localScheduleEvent._endTime];
         
-        if (formerScheduleEvent != nil) 
-        {            
-            _formerToEvent   = [[_dateFormatter _timeFormatter] stringFromDate: formerScheduleEvent._endTime];
-            _formerFromEvent = [[_dateFormatter _timeFormatter] stringFromDate: formerScheduleEvent._startTime];
-            
-            // if the same lecture comes again, don't list it again
-            
-            //NSLog(@"_localScheduleEvent._name: %@ from %@ to %@ former event %@ from %@ to %@"
-            //      , _localScheduleEvent._name
-            //      , _fromLocalScheduleEvent
-            //      , _toLocalScheduleEvent
-            //      ,formerScheduleEvent._name
-            //      ,_formerFromEvent
-            //      ,_formerToEvent
-            //      );
-            
-            // actual time slot is defined by fromString and toString
-            // the local schedule event must be either between them or be one of them
-            if (
-                 (  [_fromString compare: _fromLocalScheduleEvent] == NSOrderedSame 
-                  ||[_toString   compare: _toLocalScheduleEvent  ] == NSOrderedSame
-                  ||(
-                     [_fromString          compare: _fromLocalScheduleEvent  ] == NSOrderedDescending 
-                     &&[_toString          compare: _toLocalScheduleEvent    ] == NSOrderedAscending
-                     )
-                 )
-                &&
-            // the time of the former event must be between them or one of the them
-                 (    [_formerFromEvent          compare: _fromLocalScheduleEvent  ] == NSOrderedSame 
-                    ||[_formerToEvent            compare: _toLocalScheduleEvent    ] == NSOrderedSame
-                    ||(
-                        [_formerFromEvent          compare: _fromLocalScheduleEvent  ] == NSOrderedDescending 
-                      &&[_formerToEvent            compare: _toLocalScheduleEvent    ] == NSOrderedAscending
-                      )
-                    //||[formerScheduleEvent._name compare: _localScheduleEvent._name] == NSOrderedSame
-                 )
-                )
-            {
-                // also compare the rooms, mabye the next lecture is somewhere else
-                if (  [_localScheduleEvent._scheduleEventRealizations count] == 1
-                   && [formerScheduleEvent._scheduleEventRealizations count] == 1
-                    ) 
-                {
-                    ScheduleEventRealizationDto *_formerRealization = 
-                      [formerScheduleEvent._scheduleEventRealizations objectAtIndex:0];
-                    ScheduleEventRealizationDto *_localRealization = 
-                    [_localScheduleEvent._scheduleEventRealizations objectAtIndex:0];    
-                    
-                    //NSLog(@"room name 1: %@ room name 2: %@", _formerRealization._room._name, _localRealization._room._name);
-                    if  ([_formerRealization._room._name compare: _localRealization._room._name] == NSOrderedSame)
-                    {
-                        NSMutableArray *_emptyArray = [[NSMutableArray alloc]init];
-                        _goalScheduleEvent = [[ScheduleEventDto alloc]init:@"":fromTime:toTime:@"same":_emptyArray:@"same":_emptyArray];
-                        _sameEventAgain    = YES;
-                    }
-                   
-                }
-                else 
-                {
-                    //NSLog(@"room count 1: %i room count 2: %i", [_localScheduleEvent._scheduleEventRealizations count], [formerScheduleEvent._scheduleEventRealizations count]);
-
-                    NSMutableArray *_emptyArray = [[NSMutableArray alloc]init];
-                    _goalScheduleEvent = [[ScheduleEventDto alloc]init:@"":fromTime:toTime:@"same":_emptyArray:@"same":_emptyArray];
-                    _sameEventAgain    = YES;
-            
-                }
-            }
-        }
-        
-        // found a schedule event for this time
-        if (([_fromString compare: _fromLocalScheduleEvent] == NSOrderedSame ||[_toString   compare: _toLocalScheduleEvent  ] == NSOrderedSame)
-             && (!_sameEventAgain) )
+        // actual time slot is defined by fromString and toString
+        // the local schedule event must be either between them or be one of them
+        if (  [_fromString compare: _fromLocalScheduleEvent] == NSOrderedSame
+            ||[_toString   compare: _toLocalScheduleEvent  ] == NSOrderedSame
+            ||(
+                    [_fromString          compare: _fromLocalScheduleEvent  ] == NSOrderedDescending
+                    &&[_toString          compare: _toLocalScheduleEvent    ] == NSOrderedAscending
+              )
+            )
         {
-            _goalScheduleEvent = _localScheduleEvent;
+        
+            // loop over all events which are already added, to avoid listing this one again
+            if ([_localFormerScheduleEventArray count] > 0 )
+            {
+                _sameEventAgain = NO;
+                for (localFormerScheduleEventArrayI = 0; localFormerScheduleEventArrayI < [_localFormerScheduleEventArray count]; localFormerScheduleEventArrayI ++)
+                {
+                    if (!_sameEventAgain)
+                    {
+                        _localFormerScheduleEvent = [_localFormerScheduleEventArray objectAtIndex:localFormerScheduleEventArrayI];
+                        _formerFromEvent = [[_dateFormatter _timeFormatter] stringFromDate: _localFormerScheduleEvent._startTime];
+                        _formerToEvent   = [[_dateFormatter _timeFormatter] stringFromDate: _localFormerScheduleEvent._endTime];
+            
+                        // if the same lecture comes again, don't list it again
+                        // then the time of the former event must be between them or one of the them
+                        if(
+                           ([_formerFromEvent          compare: _fromLocalScheduleEvent  ] == NSOrderedSame
+                            ||[_formerToEvent          compare: _toLocalScheduleEvent    ] == NSOrderedSame
+                            ||(
+                                 [_formerFromEvent       compare: _fromLocalScheduleEvent  ] == NSOrderedDescending
+                               &&[_formerToEvent         compare: _toLocalScheduleEvent    ] == NSOrderedAscending
+                               )
+                            )
+                           && [_localFormerScheduleEvent._name compare: _localScheduleEvent._name] == NSOrderedSame
+                           )
+                        {                            
+                            //NSLog(@"_localScheduleEvent._name: %@ from %@ to %@ <-> former event %@ from %@ to %@"
+                            //      , _localScheduleEvent._name
+                            //      , _fromLocalScheduleEvent
+                            //      , _toLocalScheduleEvent
+                            //      ,_localFormerScheduleEvent._name
+                            //      ,_formerFromEvent
+                            //      ,_formerToEvent
+                            //     );
+                            
+                            // also compare the rooms, mabye the next lecture is somewhere else
+                            if (   [_localScheduleEvent._scheduleEventRealizations count] == 1
+                                && [_localFormerScheduleEvent._scheduleEventRealizations count] == 1
+                                )
+                            {
+                                 _formerRealization = [_localFormerScheduleEvent._scheduleEventRealizations objectAtIndex:0];
+                                _localRealization = [_localScheduleEvent._scheduleEventRealizations objectAtIndex:0];
+                            
+                                if  ([_formerRealization._room._name compare: _localRealization._room._name] == NSOrderedSame)
+                                {
+                                    _goalScheduleEvent = [[ScheduleEventDto alloc]init:@"":_fromTime:_toTime:@"same":_emptyArray:@"same":_emptyArray];
+                                    [_allGoalScheduleEventArray     addObject: _goalScheduleEvent];
+                                    _sameEventAgain    = YES;
+                                    //NSLog(@"only one room and its the same one");
+                                }
+                                //else
+                                //{
+                                //    NSLog(@"only one room but they are different");
+                                //}
+                            }
+                            else // more than one room
+                            {
+                                _goalScheduleEvent = [[ScheduleEventDto alloc]init:@"":_fromTime:_toTime:@"same":_emptyArray:@"same":_emptyArray];
+                                [_allGoalScheduleEventArray     addObject: _goalScheduleEvent];
+                                _sameEventAgain    = YES;
+                                //NSLog(@"more than one room, but they are not compared");
+                            }
+                        } // events are not the same
+                        else
+                        {
+                            _sameEventAgain    = NO;
+                        }
+                    } // end if sameEventAgain
+                } // end loop over former events
+            } // end if localFormerArray count > 0
+        
+            // found a (new) schedule event for this time
+            if (!_sameEventAgain && [_localScheduleEvent._name length] != 0)
+            {
+                [_allGoalScheduleEventArray     addObject: _localScheduleEvent];
+                [_localFormerScheduleEventArray addObject: _localScheduleEvent];
+            }
+        } // end if dates of event fits into desired time intervall
+    } // end looping over all events of current day
+    
+    // no event for given time intervall found, create an empty one and return it
+    if ([_allGoalScheduleEventArray count] == 0)
+    {
+        _goalScheduleEvent = [[ScheduleEventDto alloc]init:@"":_fromTime:_toTime:@"empty":_emptyArray:@"empty":_emptyArray];
+        [_allGoalScheduleEventArray addObject: _goalScheduleEvent];
+        //_toLocalScheduleEvent   = [[_dateFormatter _timeFormatter] stringFromDate: _goalScheduleEvent._endTime];
+        //_fromLocalScheduleEvent = [[_dateFormatter _timeFormatter] stringFromDate: _goalScheduleEvent._startTime];
+        //NSLog(@"_goalScheduleEvent._name: %@ from %@ to %@", _goalScheduleEvent._name, _fromLocalScheduleEvent, _toLocalScheduleEvent);
+    }
+    return _allGoalScheduleEventArray;
+}
+
+
+
+- (NSMutableArray *)addToSortedScheduleEventArray:(NSMutableArray *)spottedScheduleEventArray
+                      withScheduleEventArrayToAdd:(NSMutableArray *)formerSheduleEventArray
+                               withDatesToDisplay:(NSString *)datesToDisplay
+{
+    int scheduleEventArrayI;
+    NSMutableArray   *_returnEventArray = [[NSMutableArray alloc]init];
+    ScheduleEventDto *_oneScheduleEvent = [[ScheduleEventDto alloc] init:nil :nil :nil :nil :nil :nil :nil];
+    //NSString         *_fromLocalScheduleEvent;
+    //NSString         *_toLocalScheduleEvent;
+    
+    // add former events
+    for (scheduleEventArrayI = 0; scheduleEventArrayI < [formerSheduleEventArray count]; scheduleEventArrayI ++)
+    {
+        _oneScheduleEvent = [formerSheduleEventArray objectAtIndex:scheduleEventArrayI];
+        [_returnEventArray  addObject:_oneScheduleEvent];
+    }
+    
+    // add new events
+    for (scheduleEventArrayI = 0; scheduleEventArrayI < [spottedScheduleEventArray count]; scheduleEventArrayI ++)
+    {
+        _oneScheduleEvent = [spottedScheduleEventArray objectAtIndex:scheduleEventArrayI];
+        if ([_oneScheduleEvent._name compare: @"same"] != NSOrderedSame)
+        {
+            //_toLocalScheduleEvent   = [[_dateFormatter _timeFormatter] stringFromDate: _oneScheduleEvent._endTime];
+            //_fromLocalScheduleEvent = [[_dateFormatter _timeFormatter] stringFromDate: _oneScheduleEvent._startTime];
+            //NSLog(@"%@ => %@ from %@ to %@", datesToDisplay, _oneScheduleEvent._name, _fromLocalScheduleEvent, _toLocalScheduleEvent);
+            [_returnEventArray  addObject:_oneScheduleEvent];
         }
     }
     
-    if([_goalScheduleEvent._name length] == 0)
-    {
-        NSMutableArray *_emptyArray = [[NSMutableArray alloc]init];
-        _goalScheduleEvent = [[ScheduleEventDto alloc]init:@"":fromTime:toTime:@"empty":_emptyArray:@"empty":_emptyArray];
-    }
-    
-    //_toLocalScheduleEvent   = [[self timeFormatter] stringFromDate: _goalScheduleEvent._endTime];
-    //_fromLocalScheduleEvent = [[self timeFormatter] stringFromDate: _goalScheduleEvent._startTime];
-    //NSLog(@"_goalScheduleEvent._name: %@ from %@ to %@", _goalScheduleEvent._name, _fromLocalScheduleEvent, _toLocalScheduleEvent);
-    return _goalScheduleEvent;
+    return _returnEventArray;
 }
+
+
 
 
 - (NSMutableArray *)getSortedScheduleEvent:(DayDto *)currentDay
 {
-    //NSLog(@"getSortedScheduleEvent");
-    NSMutableArray   *_sortedEvents       = [[NSMutableArray alloc]init];      
-    ScheduleEventDto *_firstScheduleEvent = nil;    
-    ScheduleEventDto *_nextScheduleEvent  = nil;    
-    NSDate           *_fromTime           = nil;
-    NSDate           *_toTime             = nil;
-    BOOL            _foundHoliday         = NO;
+    ScheduleEventDto    *_oneScheduleEvent          = [[ScheduleEventDto alloc] init:nil :nil :nil :nil :nil :nil :nil];
+    NSMutableArray      *_firstScheduleEventArray   = [[NSMutableArray alloc]init];
+    NSMutableArray      *_nextScheduleEventArray    = nil;
+    BOOL                _foundHoliday         = NO;
     
     // check for exceptional holiday first
     // also consider problem for days where there are no events, but neither holidays
@@ -1048,21 +1117,21 @@
         {
             //NSMutableArray *_timeArray  = [self getTimeArray:cellSelection];
             
-            _fromTime           = [[_dateFormatter _timeFormatter] dateFromString:@"00:00"];
-            _toTime             = [[_dateFormatter _timeFormatter] dateFromString:@"23:59"];
-            NSString       *_fromString = [[_dateFormatter _timeFormatter] stringFromDate: _fromTime];
-            NSString       *_toString   = [[_dateFormatter _timeFormatter] stringFromDate: _toTime];
+            //_fromTime           = [[_dateFormatter _timeFormatter] dateFromString:@"00:00"];
+            //_toTime             = [[_dateFormatter _timeFormatter] dateFromString:@"23:59"];
+            NSString       *_fromString = @"00:00"; //[[_dateFormatter _timeFormatter] stringFromDate: _fromTime];
+            NSString       *_toString   = @"23:59"; // [[_dateFormatter _timeFormatter] stringFromDate: _toTime];
             
-            _firstScheduleEvent = [currentDay._events objectAtIndex:0];
-            NSString       *_fromHoliday = [[_dateFormatter _timeFormatter] stringFromDate: _firstScheduleEvent._startTime];
-            NSString       *_toHoliday   = [[_dateFormatter _timeFormatter] stringFromDate: _firstScheduleEvent._endTime];
+            _oneScheduleEvent = [currentDay._events objectAtIndex:0];
+            NSString       *_fromHoliday = [[_dateFormatter _timeFormatter] stringFromDate: _oneScheduleEvent._startTime];
+            NSString       *_toHoliday   = [[_dateFormatter _timeFormatter] stringFromDate: _oneScheduleEvent._endTime];
             
             //NSLog(@"(_fromHoliday) %@ = (_fromString) %@, (_toHoliday) %@ = (_toString) %@ _toString", _fromHoliday, _fromString, _toHoliday, _toString);
             
             if ([_fromHoliday isEqualToString:_fromString] &&
                 [_toHoliday   isEqualToString:_toString])
             {
-                [_sortedEvents addObject:_holidayEvent];
+                [_firstScheduleEventArray addObject:_holidayEvent];
                 _foundHoliday = YES;
             }
         }
@@ -1070,173 +1139,150 @@
     
     if (!_foundHoliday)
     {
-        _fromTime           = [[_dateFormatter _timeFormatter] dateFromString:@"08:00"];
-        _toTime             = [[_dateFormatter _timeFormatter] dateFromString:@"08:45"];
-        _firstScheduleEvent = [self getCurrentScheduleEventWithDay  :currentDay
-                                                withFromTime        :_fromTime
-                                                withToTime          :_toTime
-                                                withScheduleEvent   :nil];
-        [_sortedEvents addObject:_firstScheduleEvent];
+        _nextScheduleEventArray = [self getCurrentScheduleEventArrayWithDay  :currentDay
+                                                withFromTimeString        :@"08:00"
+                                                withToTimeString          :@"08:45"
+                                                withFormerScheduleEventArray   :_firstScheduleEventArray];
+        
+        _firstScheduleEventArray = [self addToSortedScheduleEventArray:_nextScheduleEventArray
+                                           withScheduleEventArrayToAdd:_firstScheduleEventArray
+                                                    withDatesToDisplay:@"08:00-08:45"];
+        
+        
+        _nextScheduleEventArray  = [self getCurrentScheduleEventArrayWithDay  :currentDay
+                                                withFromTimeString        :@"08:50"
+                                                withToTimeString          :@"09:35"
+                                                withFormerScheduleEventArray   :_firstScheduleEventArray];
+        
+        _firstScheduleEventArray = [self addToSortedScheduleEventArray:_nextScheduleEventArray
+                                           withScheduleEventArrayToAdd:_firstScheduleEventArray
+                                                    withDatesToDisplay:@"08:50-09:35"];
+        
+        _nextScheduleEventArray  = [self getCurrentScheduleEventArrayWithDay  :currentDay
+                                                withFromTimeString        :@"10:00"
+                                                withToTimeString          :@"10:45"
+                                                withFormerScheduleEventArray   :_firstScheduleEventArray];
+        
+        _firstScheduleEventArray = [self addToSortedScheduleEventArray:_nextScheduleEventArray
+                                           withScheduleEventArrayToAdd:_firstScheduleEventArray
+                                                    withDatesToDisplay:@"10:00-10:45"];
     
-        _fromTime           = [[_dateFormatter _timeFormatter] dateFromString:@"08:50"];
-        _toTime             = [[_dateFormatter _timeFormatter] dateFromString:@"09:35"];
-        _nextScheduleEvent  = [self getCurrentScheduleEventWithDay  :currentDay
-                                                withFromTime        :_fromTime
-                                                withToTime          :_toTime
-                                                withScheduleEvent   :_firstScheduleEvent];
-        if ([_nextScheduleEvent._name compare: @"same"] != NSOrderedSame)
-        {
-            [_sortedEvents addObject:_nextScheduleEvent];
-            _firstScheduleEvent = _nextScheduleEvent;
-        }
+        _nextScheduleEventArray  = [self getCurrentScheduleEventArrayWithDay  :currentDay
+                                                          withFromTimeString        :@"10:50"
+                                                          withToTimeString          :@"11:35"
+                                                          withFormerScheduleEventArray   :_firstScheduleEventArray];
+        
+        _firstScheduleEventArray = [self addToSortedScheduleEventArray:_nextScheduleEventArray
+                                           withScheduleEventArrayToAdd:_firstScheduleEventArray
+                                                    withDatesToDisplay:@"10:50-11:35"];
+            
+        _nextScheduleEventArray  = [self getCurrentScheduleEventArrayWithDay  :currentDay
+                                                          withFromTimeString        :@"12:00"
+                                                          withToTimeString          :@"12:45"
+                                                          withFormerScheduleEventArray   :_firstScheduleEventArray];
+        
+        _firstScheduleEventArray = [self addToSortedScheduleEventArray:_nextScheduleEventArray
+                                           withScheduleEventArrayToAdd:_firstScheduleEventArray
+                                                    withDatesToDisplay:@"12:00-12:45"];
     
-        _fromTime   = [[_dateFormatter _timeFormatter] dateFromString:@"10:00"];
-        _toTime     = [[_dateFormatter _timeFormatter] dateFromString:@"10:45"];
-        _nextScheduleEvent  = [self getCurrentScheduleEventWithDay  :currentDay
-                                                withFromTime        :_fromTime
-                                                withToTime          :_toTime
-                                                withScheduleEvent   :_firstScheduleEvent];
-        if ([_nextScheduleEvent._name compare: @"same"] != NSOrderedSame)
-        {
-            [_sortedEvents addObject:_nextScheduleEvent];
-            _firstScheduleEvent = _nextScheduleEvent;
-        }
+        _nextScheduleEventArray  = [self getCurrentScheduleEventArrayWithDay  :currentDay
+                                                          withFromTimeString        :@"12:50"
+                                                          withToTimeString          :@"13:35"
+                                                          withFormerScheduleEventArray   :_firstScheduleEventArray];
+        
+        _firstScheduleEventArray = [self addToSortedScheduleEventArray:_nextScheduleEventArray
+                                           withScheduleEventArrayToAdd:_firstScheduleEventArray
+                                                    withDatesToDisplay:@"12:50-13:35"];
     
-        _fromTime   = [[_dateFormatter _timeFormatter] dateFromString:@"10:50"];
-        _toTime     = [[_dateFormatter _timeFormatter] dateFromString:@"11:35"];
-        _nextScheduleEvent  = [self getCurrentScheduleEventWithDay  :currentDay
-                                                withFromTime        :_fromTime
-                                                withToTime          :_toTime
-                                                withScheduleEvent   :_firstScheduleEvent];
-        if ([_nextScheduleEvent._name compare: @"same"] != NSOrderedSame)
-        {
-            [_sortedEvents addObject:_nextScheduleEvent];
-            _firstScheduleEvent = _nextScheduleEvent;
-        }
+        _nextScheduleEventArray  = [self getCurrentScheduleEventArrayWithDay  :currentDay
+                                                          withFromTimeString        :@"14:00"
+                                                          withToTimeString          :@"14:45"
+                                                          withFormerScheduleEventArray   :_firstScheduleEventArray];
+        
+        _firstScheduleEventArray = [self addToSortedScheduleEventArray:_nextScheduleEventArray
+                                           withScheduleEventArrayToAdd:_firstScheduleEventArray
+                                                    withDatesToDisplay:@"14:00-14:45"];
+        
+        _nextScheduleEventArray  = [self getCurrentScheduleEventArrayWithDay  :currentDay
+                                                          withFromTimeString        :@"14:50"
+                                                          withToTimeString          :@"15:35"
+                                                          withFormerScheduleEventArray   :_firstScheduleEventArray];
+        
+        _firstScheduleEventArray = [self addToSortedScheduleEventArray:_nextScheduleEventArray
+                                           withScheduleEventArrayToAdd:_firstScheduleEventArray
+                                                    withDatesToDisplay:@"14:50-15:35"];
+        
+        _nextScheduleEventArray  = [self getCurrentScheduleEventArrayWithDay  :currentDay
+                                                          withFromTimeString        :@"16:00"
+                                                          withToTimeString          :@"16:45"
+                                                          withFormerScheduleEventArray   :_firstScheduleEventArray];
+        
+        _firstScheduleEventArray = [self addToSortedScheduleEventArray:_nextScheduleEventArray
+                                           withScheduleEventArrayToAdd:_firstScheduleEventArray
+                                                    withDatesToDisplay:@"16:00-16:45"];
+        
+        _nextScheduleEventArray  = [self getCurrentScheduleEventArrayWithDay  :currentDay
+                                                          withFromTimeString        :@"16:50"
+                                                          withToTimeString          :@"17:35"
+                                                          withFormerScheduleEventArray   :_firstScheduleEventArray];
+        
+        _firstScheduleEventArray = [self addToSortedScheduleEventArray:_nextScheduleEventArray
+                                           withScheduleEventArrayToAdd:_firstScheduleEventArray
+                                                    withDatesToDisplay:@"16:50-17:35"];
     
-        _fromTime   = [[_dateFormatter _timeFormatter] dateFromString:@"12:00"];
-        _toTime     = [[_dateFormatter _timeFormatter] dateFromString:@"12:45"];
-        _nextScheduleEvent  = [self getCurrentScheduleEventWithDay  :currentDay
-                                                withFromTime        :_fromTime
-                                                withToTime          :_toTime
-                                                withScheduleEvent   :_firstScheduleEvent];
-        if ([_nextScheduleEvent._name compare: @"same"] != NSOrderedSame)
-        {
-            [_sortedEvents addObject:_nextScheduleEvent];
-            _firstScheduleEvent = _nextScheduleEvent;
-        }
+        _nextScheduleEventArray  = [self getCurrentScheduleEventArrayWithDay  :currentDay
+                                                          withFromTimeString        :@"18:00"
+                                                          withToTimeString          :@"18:45"
+                                                          withFormerScheduleEventArray   :_firstScheduleEventArray];
+        
+        _firstScheduleEventArray = [self addToSortedScheduleEventArray:_nextScheduleEventArray
+                                           withScheduleEventArrayToAdd:_firstScheduleEventArray
+                                                    withDatesToDisplay:@"18:00-18:45"];
     
-        _fromTime   = [[_dateFormatter _timeFormatter] dateFromString:@"12:50"];
-        _toTime     = [[_dateFormatter _timeFormatter] dateFromString:@"13:35"];
-        _nextScheduleEvent  = [self getCurrentScheduleEventWithDay  :currentDay
-                                                withFromTime        :_fromTime
-                                                withToTime          :_toTime
-                                                withScheduleEvent   :_firstScheduleEvent];
-        if ([_nextScheduleEvent._name compare: @"same"] != NSOrderedSame)
-        {
-            [_sortedEvents addObject:_nextScheduleEvent];
-        }
-        _firstScheduleEvent = _nextScheduleEvent;
-    
-        _fromTime   = [[_dateFormatter _timeFormatter] dateFromString:@"14:00"];
-        _toTime     = [[_dateFormatter _timeFormatter] dateFromString:@"14:45"];
-        _nextScheduleEvent  = [self getCurrentScheduleEventWithDay  :currentDay
-                                                withFromTime        :_fromTime
-                                                withToTime          :_toTime
-                                                withScheduleEvent   :_firstScheduleEvent];
-        if ([_nextScheduleEvent._name compare: @"same"] != NSOrderedSame)
-        {
-            [_sortedEvents addObject:_nextScheduleEvent];
-        }
-        _firstScheduleEvent = _nextScheduleEvent;
-    
-        _fromTime   = [[_dateFormatter _timeFormatter] dateFromString:@"14:50"];
-        _toTime     = [[_dateFormatter _timeFormatter] dateFromString:@"15:35"];
-        _nextScheduleEvent  = [self getCurrentScheduleEventWithDay  :currentDay
-                                                withFromTime        :_fromTime
-                                                withToTime          :_toTime
-                                                withScheduleEvent   :_firstScheduleEvent];
-        if ([_nextScheduleEvent._name compare: @"same"] != NSOrderedSame)
-        {
-            [_sortedEvents addObject:_nextScheduleEvent];
-        }
-        _firstScheduleEvent = _nextScheduleEvent;
-    
-        _fromTime   = [[_dateFormatter _timeFormatter] dateFromString:@"16:00"];
-        _toTime     = [[_dateFormatter _timeFormatter] dateFromString:@"16:45"];
-        _nextScheduleEvent  = [self getCurrentScheduleEventWithDay  :currentDay
-                                                withFromTime        :_fromTime
-                                                withToTime          :_toTime
-                                                withScheduleEvent   :_firstScheduleEvent];
-        if ([_nextScheduleEvent._name compare: @"same"] != NSOrderedSame)
-        {
-            [_sortedEvents addObject:_nextScheduleEvent];
-        }
-        _firstScheduleEvent = _nextScheduleEvent;
-    
-        _fromTime   = [[_dateFormatter _timeFormatter] dateFromString:@"16:50"];
-        _toTime     = [[_dateFormatter _timeFormatter] dateFromString:@"17:35"];
-        _nextScheduleEvent  = [self getCurrentScheduleEventWithDay  :currentDay
-                                                withFromTime        :_fromTime
-                                                withToTime          :_toTime
-                                                withScheduleEvent   :_firstScheduleEvent];
-        if ([_nextScheduleEvent._name compare: @"same"] != NSOrderedSame)
-        {
-            [_sortedEvents addObject:_nextScheduleEvent];
-        }
-        _firstScheduleEvent = _nextScheduleEvent;
-    
-        _fromTime   = [[_dateFormatter _timeFormatter] dateFromString:@"18:00"];
-        _toTime     = [[_dateFormatter _timeFormatter] dateFromString:@"18:45"];
-        _nextScheduleEvent  = [self getCurrentScheduleEventWithDay  :currentDay
-                                                withFromTime        :_fromTime
-                                                withToTime          :_toTime
-                                                withScheduleEvent   :_firstScheduleEvent];
-        if ([_nextScheduleEvent._name compare: @"same"] != NSOrderedSame)
-        {
-            [_sortedEvents addObject:_nextScheduleEvent];
-        }
-        _firstScheduleEvent = _nextScheduleEvent;
-    
-        _fromTime   = [[_dateFormatter _timeFormatter] dateFromString:@"18:50"];
-        _toTime     = [[_dateFormatter _timeFormatter] dateFromString:@"19:35"];
-        _nextScheduleEvent  = [self getCurrentScheduleEventWithDay  :currentDay
-                                                withFromTime        :_fromTime
-                                                withToTime          :_toTime
-                                                withScheduleEvent   :_firstScheduleEvent];
-        //NSLog(@"next schedule event %@ at 18:50", _nextScheduleEvent._name);
-        if ([_nextScheduleEvent._name compare: @"same"] != NSOrderedSame)
-        {
-            //NSLog(@"add new event to 18:50");
-            [_sortedEvents addObject:_nextScheduleEvent];
-        }
-        _firstScheduleEvent = _nextScheduleEvent;
-    
-        _fromTime   = [[_dateFormatter _timeFormatter] dateFromString:@"19:45"];
-        _toTime     = [[_dateFormatter _timeFormatter] dateFromString:@"20:30"];
-        _nextScheduleEvent  = [self getCurrentScheduleEventWithDay  :currentDay
-                                                withFromTime        :_fromTime
-                                                withToTime          :_toTime
-                                                withScheduleEvent   :_firstScheduleEvent];
-        if ([_nextScheduleEvent._name compare: @"same"] != NSOrderedSame)
-        {
-            [_sortedEvents addObject:_nextScheduleEvent];
-        }
-        _firstScheduleEvent = _nextScheduleEvent;
-    
-        _fromTime   = [[_dateFormatter _timeFormatter] dateFromString:@"20:35"];
-        _toTime     = [[_dateFormatter _timeFormatter] dateFromString:@"21:20"];
-        _nextScheduleEvent  = [self getCurrentScheduleEventWithDay  :currentDay
-                                                withFromTime        :_fromTime
-                                                withToTime          :_toTime
-                                                withScheduleEvent   :_firstScheduleEvent];
-        if ([_nextScheduleEvent._name compare: @"same"] != NSOrderedSame)
-        {
-            [_sortedEvents addObject:_nextScheduleEvent];
-        }
+        _nextScheduleEventArray  = [self getCurrentScheduleEventArrayWithDay  :currentDay
+                                                          withFromTimeString        :@"18:50"
+                                                          withToTimeString          :@"19:35"
+                                                          withFormerScheduleEventArray   :_firstScheduleEventArray];
+        
+        _firstScheduleEventArray = [self addToSortedScheduleEventArray:_nextScheduleEventArray
+                                           withScheduleEventArrayToAdd:_firstScheduleEventArray
+                                                    withDatesToDisplay:@"18:50-19:35"];
+        
+        _nextScheduleEventArray  = [self getCurrentScheduleEventArrayWithDay  :currentDay
+                                                          withFromTimeString        :@"19:45"
+                                                          withToTimeString          :@"20:30"
+                                                          withFormerScheduleEventArray   :_firstScheduleEventArray];
+        
+        _firstScheduleEventArray = [self addToSortedScheduleEventArray:_nextScheduleEventArray
+                                           withScheduleEventArrayToAdd:_firstScheduleEventArray
+                                                    withDatesToDisplay:@"19:45-20:30"];
+        
+        _nextScheduleEventArray  = [self getCurrentScheduleEventArrayWithDay  :currentDay
+                                                          withFromTimeString        :@"20:35"
+                                                          withToTimeString          :@"21:20"
+                                                          withFormerScheduleEventArray   :_firstScheduleEventArray];
+        
+        
+        _firstScheduleEventArray = [self addToSortedScheduleEventArray:_nextScheduleEventArray
+                                           withScheduleEventArrayToAdd:_firstScheduleEventArray
+                                                    withDatesToDisplay:@"20:35-21:20"];
     }
+    
+    //NSLog(@"-################################-");
+    //int sortedEventsI;
+    //NSString            *_fromLocalScheduleEvent;
+    //NSString            *_toLocalScheduleEvent;
+    //for (sortedEventsI = 0; sortedEventsI < [_firstScheduleEventArray count]; sortedEventsI ++)
+    //{
+    //    _oneScheduleEvent     = [_firstScheduleEventArray objectAtIndex:sortedEventsI];
+    //    _toLocalScheduleEvent   = [[_dateFormatter _timeFormatter] stringFromDate: _oneScheduleEvent._endTime];
+    //    _fromLocalScheduleEvent = [[_dateFormatter _timeFormatter] stringFromDate: _oneScheduleEvent._startTime];
+    //    NSLog(@"_sortedEvents: %@ from %@ to %@", _oneScheduleEvent._name, _fromLocalScheduleEvent, _toLocalScheduleEvent);
+    //}
+    //NSLog(@"-################################-");
+    
     //NSLog(@"getSortedScheduleEvent %i", [_sortedEvents count] );
-    return _sortedEvents;
+    return _firstScheduleEventArray;
 }
 
 
