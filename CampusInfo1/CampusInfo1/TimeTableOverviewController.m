@@ -1136,8 +1136,6 @@
         //NSLog(@"event._type: %@", _holidayEvent._type);
         if ([_holidayEvent._type isEqualToString:@"Holiday"])
         {
-            //NSMutableArray *_timeArray  = [self getTimeArray:cellSelection];
-            
             //_fromTime           = [[_dateFormatter _timeFormatter] dateFromString:@"00:00"];
             //_toTime             = [[_dateFormatter _timeFormatter] dateFromString:@"23:59"];
             NSString       *_fromString = @"00:00"; //[[_dateFormatter _timeFormatter] stringFromDate: _fromTime];
@@ -1343,66 +1341,34 @@
 
 
 
-
-- (NSMutableArray *)getTimeArray: (NSUInteger )cellSelection
+- (BOOL) isActualDayAndTime:(NSDate *)actualDate
+              withStartTimeString:(NSString *)startTimeString
+                withEndTimeString:(NSString *)endTimeString
 {
-    NSMutableArray *_timeArray = [[NSMutableArray alloc]init];
-    
-    NSDate *_from;
-    NSDate *_to;
-    
-    switch ((int)cellSelection) {
-        case 0:  _from = [[_dateFormatter _timeFormatter] dateFromString:@"08:00"];  _to = [[_dateFormatter _timeFormatter] dateFromString:@"08:45"]; break;
-        case 1:  _from = [[_dateFormatter _timeFormatter] dateFromString:@"08:50"];  _to = [[_dateFormatter _timeFormatter] dateFromString:@"09:35"]; break;
-        case 2:  _from = [[_dateFormatter _timeFormatter] dateFromString:@"10:00"];  _to = [[_dateFormatter _timeFormatter] dateFromString:@"10:45"]; break;
-        case 3:  _from = [[_dateFormatter _timeFormatter] dateFromString:@"10:50"];  _to = [[_dateFormatter _timeFormatter] dateFromString:@"11:35"]; break;
-        case 4:  _from = [[_dateFormatter _timeFormatter] dateFromString:@"12:00"];  _to = [[_dateFormatter _timeFormatter] dateFromString:@"12:45"]; break;
-        case 5:  _from = [[_dateFormatter _timeFormatter] dateFromString:@"12:50"];  _to = [[_dateFormatter _timeFormatter] dateFromString:@"13:35"]; break;
-        case 6:  _from = [[_dateFormatter _timeFormatter] dateFromString:@"14:00"];  _to = [[_dateFormatter _timeFormatter] dateFromString:@"14:45"]; break;
-        case 7:  _from = [[_dateFormatter _timeFormatter] dateFromString:@"14:50"];  _to = [[_dateFormatter _timeFormatter] dateFromString:@"15:35"]; break;
-        case 8:  _from = [[_dateFormatter _timeFormatter] dateFromString:@"16:00"];  _to = [[_dateFormatter _timeFormatter] dateFromString:@"16:45"]; break;
-        case 9:  _from = [[_dateFormatter _timeFormatter] dateFromString:@"16:50"];  _to = [[_dateFormatter _timeFormatter] dateFromString:@"17:35"]; break;
-        case 10: _from = [[_dateFormatter _timeFormatter] dateFromString:@"18:00"];  _to = [[_dateFormatter _timeFormatter] dateFromString:@"18:45"]; break;
-        case 11: _from = [[_dateFormatter _timeFormatter] dateFromString:@"18:50"];  _to = [[_dateFormatter _timeFormatter] dateFromString:@"19:35"]; break;
-        case 12: _from = [[_dateFormatter _timeFormatter] dateFromString:@"19:45"];  _to = [[_dateFormatter _timeFormatter] dateFromString:@"20:30"]; break;
-        case 13: _from = [[_dateFormatter _timeFormatter] dateFromString:@"20:35"];  _to = [[_dateFormatter _timeFormatter] dateFromString:@"21:20"]; break;
-    }
-    
-    [_timeArray addObject:_from];
-    [_timeArray addObject:_to  ];
-    return _timeArray;
-}
-
-
-- (BOOL) isActualDayAndTime: (NSDate *)actualDate withCellSelection:(NSUInteger )cellSelection{
 
     NSDate *_today = [NSDate date];
-    //NSDate *_today    = [[self dayFormatter] dateFromString:@"19.03.2012"];
+    //NSDate *_today    = [[_dateFormatter _dayFormatter] dateFromString:@"29.04.2013"];
 
     NSString *_actualDayString    = [[_dateFormatter _dayFormatter] stringFromDate:_actualDate];
     NSString *_todayString        = [[_dateFormatter _dayFormatter] stringFromDate:_today];
     
-    NSLog(@"get actual Date: %@ and today: %@", _actualDayString, _todayString);
-
-    
+    //NSLog(@"get actual Date: %@ and today: %@", _actualDayString, _todayString);
     
     // compare dates
     if ([_actualDayString isEqualToString: _todayString]) 
     {
         // compare time slots
         NSString *_todayTimeString     = [[_dateFormatter _timeFormatter] stringFromDate:_today];
-        //NSString *_todayTimeString = @"17:05";
+        //NSString *_todayTimeString = @"14:05";
         
-        NSMutableArray *_timeArray  = [self getTimeArray:cellSelection];
-        NSDate         *_from       = [_timeArray objectAtIndex:0]; 
-        NSString       *_fromString = [[_dateFormatter _timeFormatter] stringFromDate: _from];
-        NSDate         *_to         = [_timeArray objectAtIndex:1]; 
-        NSString       *_toString   = [[_dateFormatter _timeFormatter] stringFromDate: _to];
-          
-        if ([_fromString      compare: _todayTimeString] == NSOrderedAscending && 
-            [_todayTimeString compare: _toString]        == NSOrderedAscending) 
+        
+        // _todayTimeString is later in time than _fromString
+        // and _todayTimeString is earlier in time than _toString
+        if (    [_todayTimeString          compare: startTimeString  ] == NSOrderedDescending
+            &&  [_todayTimeString          compare: endTimeString    ] == NSOrderedAscending
+            )
         {
-          NSLog(@"YES _fromString: %@ _toString: %@ _todayTimeString: %@", _fromString, _toString, _todayTimeString);
+          //NSLog(@"YES _fromString: %@ _toString: %@ _todayTimeString: %@", startTimeString, endTimeString, _todayTimeString);
           return YES;
         }
     }
@@ -1516,8 +1482,9 @@
 
 
 - (void) setBackgroundColorOfCell:(UITableViewCell *)cell
-              withActualSelection:(NSUInteger)actualSelection
                     withIsLecture:(BOOL)isLecture
+                    withStartTime:(NSDate *)startTime
+                      withEndTime:(NSDate *)endTime
 {
 
     //lightsteelblue 1	#CAE1FF	202	225	255	16769482
@@ -1527,24 +1494,30 @@
     //UIColor *_lectureBackgroundColor= [UIColor colorWithRed:191.0/255.0 green:239.0/255.0 blue:255.0/255.0 alpha:1.0];
     
     //darkseagreen 1	#C1FFC1	193	255	193	12713921
-    //UIColor *_actualSelectionBackgroundColor = [UIColor colorWithRed:193.0/255.0 green:225.0/255.0 blue:193.0/255.0 alpha:1.0];
+    UIColor *_actualSelectionBackgroundColor = [UIColor colorWithRed:193.0/255.0 green:225.0/255.0 blue:193.0/255.0 alpha:1.0];
     
+    NSString *_startTimeString = [[_dateFormatter _timeFormatter] stringFromDate:startTime];
+    NSString *_endTimeString   = [[_dateFormatter _timeFormatter] stringFromDate:endTime];
     
-//    if ([self isActualDayAndTime:_actualDate withCellSelection:actualSelection])
-//    {
-//        cell.contentView.backgroundColor = _actualSelectionBackgroundColor;
-//        cell.backgroundColor = cell.contentView.backgroundColor;
-//    }
-//    else
-        if (isLecture)
+    if ([self isActualDayAndTime:_actualDate
+                   withStartTimeString:_startTimeString
+                     withEndTimeString:_endTimeString])
     {
-        cell.contentView.backgroundColor = _lectureBackgroundColor;
+        cell.contentView.backgroundColor = _actualSelectionBackgroundColor;
         cell.backgroundColor = cell.contentView.backgroundColor;
     }
     else
     {
-        cell.contentView.backgroundColor = [UIColor clearColor];  
-        cell.backgroundColor = cell.contentView.backgroundColor;
+        if (isLecture)
+        {
+            cell.contentView.backgroundColor = _lectureBackgroundColor;
+            cell.backgroundColor = cell.contentView.backgroundColor;
+        }
+        else
+        {
+            cell.contentView.backgroundColor = [UIColor clearColor];
+            cell.backgroundColor = cell.contentView.backgroundColor;
+        }
     }
 }
 
@@ -1574,8 +1547,10 @@
         _messageLabel.text = [NSString stringWithFormat:@""];
     }
     [self setBackgroundColorOfCell:_cell
-               withActualSelection:actualSelection
-                     withIsLecture:NO];
+                     withIsLecture:NO
+                     withStartTime:[[_dateFormatter _timeFormatter] dateFromString:@"08:00"]
+                       withEndTime:[[_dateFormatter _timeFormatter] dateFromString:@"08:45"]
+     ];
     return _cell;
 }
 
@@ -1596,6 +1571,8 @@
 
     UILabel          *_labelDate     = (UILabel  *)[_cell viewWithTag:1];
     UIButton         *_lectureButton = (UIButton *)[_cell viewWithTag:2];
+    NSDate           *_startTime;
+    NSDate           *_endTime;
     
     // initially always disable detail button
     _lectureButton.enabled = FALSE;
@@ -1619,20 +1596,25 @@
         {
             [_lectureButton    setTitle:actualScheduleEvent._name  forState:UIControlStateNormal];
             _labelDate.text = [NSString stringWithFormat:@""];
+            _startTime  = [[_dateFormatter _timeFormatter] dateFromString:@"08:00"];
+            _endTime    = [[_dateFormatter _timeFormatter] dateFromString:@"08:45"];
         }
         else
         {
            [_lectureButton  setTitle:@"" forState:UIControlStateNormal];
+            _startTime  = actualScheduleEvent._startTime;
+            _endTime    = actualScheduleEvent._endTime;
             _labelDate.text = [NSString stringWithFormat:@"%@ - %@",
-                               [[_dateFormatter _timeFormatter] stringFromDate:actualScheduleEvent._startTime],
-                               [[_dateFormatter _timeFormatter] stringFromDate:actualScheduleEvent._endTime  ]
+                               [[_dateFormatter _timeFormatter] stringFromDate:_startTime],
+                               [[_dateFormatter _timeFormatter] stringFromDate:_endTime]
                                ];
         }
     }
     
     [self setBackgroundColorOfCell:_cell
-               withActualSelection:actualSelection
-                     withIsLecture:NO];
+                     withIsLecture:NO
+                     withStartTime:_startTime
+                       withEndTime:_endTime];
     return _cell;
 }
 
@@ -1662,8 +1644,10 @@
     [self setDetailButtonWithCell:_cell withTag:4 withActualSelection:actualSelection];
 
     [self setBackgroundColorOfCell:_cell
-               withActualSelection:actualSelection
-                     withIsLecture:YES];
+                     withIsLecture:YES
+                     withStartTime:actualScheduleEvent._startTime
+                       withEndTime:actualScheduleEvent._endTime
+     ];
     return _cell;
 }
 
@@ -1697,9 +1681,11 @@
     [self setDetailButtonWithCell:_cell withTag:5 withActualSelection:actualSelection];
     
     [self setBackgroundColorOfCell:_cell
-               withActualSelection:actualSelection
-                     withIsLecture:YES];
-    return _cell;        
+                     withIsLecture:YES
+                     withStartTime:actualScheduleEvent._startTime
+                       withEndTime:actualScheduleEvent._endTime
+     ];
+    return _cell;
 }
 
 
@@ -1733,8 +1719,10 @@
     [self setDetailButtonWithCell:_cell withTag:6 withActualSelection:actualSelection];
     
     [self setBackgroundColorOfCell:_cell
-               withActualSelection:actualSelection
-                     withIsLecture:YES];
+                     withIsLecture:YES
+                     withStartTime:actualScheduleEvent._startTime
+                       withEndTime:actualScheduleEvent._endTime
+     ];
     return _cell;        
 }
 
@@ -1768,9 +1756,10 @@
     [self setDetailButtonWithCell:_cell withTag:5 withActualSelection:actualSelection];
     
     [self setBackgroundColorOfCell:_cell
-               withActualSelection:actualSelection
-                     withIsLecture:YES];
-
+                     withIsLecture:YES
+                     withStartTime:actualScheduleEvent._startTime
+                       withEndTime:actualScheduleEvent._endTime
+     ];
     return _cell;
 }
 
@@ -1806,10 +1795,11 @@
     [self setDetailButtonWithCell:_cell withTag:6 withActualSelection:actualSelection];
     
     [self setBackgroundColorOfCell:_cell
-               withActualSelection:actualSelection
-                     withIsLecture:YES];
-
-    return _cell;        
+                     withIsLecture:YES
+                     withStartTime:actualScheduleEvent._startTime
+                       withEndTime:actualScheduleEvent._endTime
+     ];
+    return _cell;
 }
 
 
@@ -1845,10 +1835,11 @@
     [self setDetailButtonWithCell:_cell withTag:6 withActualSelection:actualSelection];
 
     [self setBackgroundColorOfCell:_cell
-               withActualSelection:actualSelection
-                     withIsLecture:YES];
-
-    return _cell;        
+                     withIsLecture:YES
+                     withStartTime:actualScheduleEvent._startTime
+                       withEndTime:actualScheduleEvent._endTime
+     ];
+    return _cell;
 }
 
 
@@ -1885,9 +1876,10 @@
     [self setDetailButtonWithCell:_cell withTag:7 withActualSelection:actualSelection];
     
     [self setBackgroundColorOfCell:_cell
-               withActualSelection:actualSelection
-                     withIsLecture:YES];
-
+                     withIsLecture:YES
+                     withStartTime:actualScheduleEvent._startTime
+                       withEndTime:actualScheduleEvent._endTime
+     ];
     return _cell;
 }
 
@@ -1929,9 +1921,10 @@
     [self setDetailButtonWithCell:_cell withTag:8 withActualSelection:actualSelection];
     
     [self setBackgroundColorOfCell:_cell
-               withActualSelection:actualSelection
-                     withIsLecture:YES];
-
+                     withIsLecture:YES
+                     withStartTime:actualScheduleEvent._startTime
+                       withEndTime:actualScheduleEvent._endTime
+     ];
     return _cell;
 }
 
@@ -1973,10 +1966,11 @@
     [self setDetailButtonWithCell:_cell withTag:9 withActualSelection:actualSelection];
     
     [self setBackgroundColorOfCell:_cell
-               withActualSelection:actualSelection
-                     withIsLecture:YES];
-
-    return _cell;        
+                     withIsLecture:YES
+                     withStartTime:actualScheduleEvent._startTime
+                       withEndTime:actualScheduleEvent._endTime
+     ];
+    return _cell;
 }
 
 
@@ -2013,9 +2007,10 @@
     [self setDetailButtonWithCell:_cell withTag:7 withActualSelection:actualSelection];
     
     [self setBackgroundColorOfCell:_cell
-               withActualSelection:actualSelection
-                     withIsLecture:YES];
-    
+                     withIsLecture:YES
+                     withStartTime:actualScheduleEvent._startTime
+                       withEndTime:actualScheduleEvent._endTime
+     ];
     return _cell;
 }
 
@@ -2055,9 +2050,10 @@
     [self setDetailButtonWithCell:_cell withTag:8 withActualSelection:actualSelection];
     
     [self setBackgroundColorOfCell:_cell
-               withActualSelection:actualSelection
-                     withIsLecture:YES];
-    
+                     withIsLecture:YES
+                     withStartTime:actualScheduleEvent._startTime
+                       withEndTime:actualScheduleEvent._endTime
+     ];
     return _cell;
 }
 
@@ -2100,9 +2096,10 @@
     [self setDetailButtonWithCell:_cell withTag:10 withActualSelection:actualSelection];
     
     [self setBackgroundColorOfCell:_cell
-               withActualSelection:actualSelection
-                     withIsLecture:YES];
-
+                     withIsLecture:YES
+                     withStartTime:actualScheduleEvent._startTime
+                       withEndTime:actualScheduleEvent._endTime
+     ];
     return _cell;
 }
 
@@ -2146,9 +2143,10 @@
     [self setDetailButtonWithCell:_cell withTag:10 withActualSelection:actualSelection];
     
     [self setBackgroundColorOfCell:_cell
-               withActualSelection:actualSelection
-                     withIsLecture:YES];
-
+                     withIsLecture:YES
+                     withStartTime:actualScheduleEvent._startTime
+                       withEndTime:actualScheduleEvent._endTime
+     ];
     return _cell;
 }
 
@@ -2194,10 +2192,11 @@
     [self setDetailButtonWithCell:_cell withTag:11 withActualSelection:actualSelection];
         
     [self setBackgroundColorOfCell:_cell
-               withActualSelection:actualSelection
-                     withIsLecture:YES];
-
-    return _cell;        
+                     withIsLecture:YES
+                     withStartTime:actualScheduleEvent._startTime
+                       withEndTime:actualScheduleEvent._endTime
+     ];
+    return _cell;
 }
 
 - (UITableViewCell *)threeSlotsTwoRoomsWithView     :(UITableView *)     actualTableView
@@ -2232,9 +2231,10 @@
     [self setDetailButtonWithCell:_cell withTag:7 withActualSelection:actualSelection];
         
     [self setBackgroundColorOfCell:_cell
-               withActualSelection:actualSelection
-                     withIsLecture:YES];
-
+                     withIsLecture:YES
+                     withStartTime:actualScheduleEvent._startTime
+                       withEndTime:actualScheduleEvent._endTime
+     ];
     return _cell;
 }
 
@@ -2280,10 +2280,11 @@
     [self setDetailButtonWithCell:_cell withTag:7 withActualSelection:actualSelection];
     
     [self setBackgroundColorOfCell:_cell
-               withActualSelection:actualSelection
-                     withIsLecture:YES];
-
-    return _cell;        
+                     withIsLecture:YES
+                     withStartTime:actualScheduleEvent._startTime
+                       withEndTime:actualScheduleEvent._endTime
+     ];
+    return _cell;
 }
 
 
@@ -2322,10 +2323,11 @@
     [self setDetailButtonWithCell:_cell withTag:8 withActualSelection:actualSelection];
     
     [self setBackgroundColorOfCell:_cell
-               withActualSelection:actualSelection
-                     withIsLecture:YES];
-
-    return _cell;        
+                     withIsLecture:YES
+                     withStartTime:actualScheduleEvent._startTime
+                       withEndTime:actualScheduleEvent._endTime
+     ];
+    return _cell;
 }
 
 
@@ -2365,9 +2367,10 @@
     [self setDetailButtonWithCell:_cell withTag:9 withActualSelection:actualSelection];
     
     [self setBackgroundColorOfCell:_cell
-               withActualSelection:actualSelection
-                     withIsLecture:YES];
-
+                     withIsLecture:YES
+                     withStartTime:actualScheduleEvent._startTime
+                       withEndTime:actualScheduleEvent._endTime
+     ];
     return _cell;
 }
 
@@ -2412,9 +2415,10 @@
     [self setDetailButtonWithCell:_cell withTag:10 withActualSelection:actualSelection];
     
     [self setBackgroundColorOfCell:_cell
-               withActualSelection:actualSelection
-                     withIsLecture:YES];
-
+                     withIsLecture:YES
+                     withStartTime:actualScheduleEvent._startTime
+                       withEndTime:actualScheduleEvent._endTime
+     ];
     return _cell;
 }
 
@@ -2453,10 +2457,11 @@
     [self setDetailButtonWithCell:_cell withTag:8 withActualSelection:actualSelection];
     
     [self setBackgroundColorOfCell:_cell
-               withActualSelection:actualSelection
-                     withIsLecture:YES];
-
-    return _cell;        
+                     withIsLecture:YES
+                     withStartTime:actualScheduleEvent._startTime
+                       withEndTime:actualScheduleEvent._endTime
+     ];
+    return _cell;
 }
 
 
@@ -2494,9 +2499,10 @@
     [self setDetailButtonWithCell:_cell withTag:8 withActualSelection:actualSelection];
     
     [self setBackgroundColorOfCell:_cell
-               withActualSelection:actualSelection
-                     withIsLecture:YES];
-
+                     withIsLecture:YES
+                     withStartTime:actualScheduleEvent._startTime
+                       withEndTime:actualScheduleEvent._endTime
+     ];
     return _cell;
 }
 
@@ -2538,10 +2544,11 @@
     [self setDetailButtonWithCell:_cell withTag:9 withActualSelection:actualSelection];
     
     [self setBackgroundColorOfCell:_cell
-               withActualSelection:actualSelection
-                     withIsLecture:YES];
-
-    return _cell;        
+                     withIsLecture:YES
+                     withStartTime:actualScheduleEvent._startTime
+                       withEndTime:actualScheduleEvent._endTime
+     ];
+    return _cell;
 }
 
 
@@ -2587,8 +2594,10 @@
     [self setDetailButtonWithCell:_cell withTag:11 withActualSelection:actualSelection];
     
     [self setBackgroundColorOfCell:_cell
-               withActualSelection:actualSelection
-                     withIsLecture:YES];
+                     withIsLecture:YES
+                     withStartTime:actualScheduleEvent._startTime
+                       withEndTime:actualScheduleEvent._endTime
+     ];
     return _cell;
 }
 
@@ -2632,8 +2641,10 @@
     [self setDetailButtonWithCell:_cell withTag:10 withActualSelection:actualSelection];
     
     [self setBackgroundColorOfCell:_cell
-               withActualSelection:actualSelection
-                     withIsLecture:YES];
+                     withIsLecture:YES
+                     withStartTime:actualScheduleEvent._startTime
+                       withEndTime:actualScheduleEvent._endTime
+     ];
     return _cell;
 }
 
@@ -2678,8 +2689,10 @@
     [self setDetailButtonWithCell:_cell withTag:11 withActualSelection:actualSelection];
     
     [self setBackgroundColorOfCell:_cell
-               withActualSelection:actualSelection
-                     withIsLecture:YES];
+                     withIsLecture:YES
+                     withStartTime:actualScheduleEvent._startTime
+                       withEndTime:actualScheduleEvent._endTime
+     ];
     return _cell;
 }
 
