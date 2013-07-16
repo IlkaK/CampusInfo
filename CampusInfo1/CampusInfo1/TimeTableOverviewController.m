@@ -940,7 +940,7 @@
     
     NSMutableArray   *_allGoalScheduleEventArray        = [[NSMutableArray alloc]init];
     NSMutableArray   *_localFormerScheduleEventArray    = [[NSMutableArray alloc]init];
-    NSMutableArray *_emptyArray                         = [[NSMutableArray alloc]init];
+    NSMutableArray   *_emptyArray                       = [[NSMutableArray alloc]init];
     
     ScheduleEventDto *_localScheduleEvent        = nil;
     ScheduleEventDto *_goalScheduleEvent         = nil;
@@ -977,9 +977,17 @@
         if (  [_fromString compare: _fromLocalScheduleEvent] == NSOrderedSame
             ||[_toString   compare: _toLocalScheduleEvent  ] == NSOrderedSame
             ||(
+               // _fromString is later in time than _fromLocalScheduleEvent
+               // and _toString is earlier in time than _toLocalScheduleEvent
                     [_fromString          compare: _fromLocalScheduleEvent  ] == NSOrderedDescending
                     &&[_toString          compare: _toLocalScheduleEvent    ] == NSOrderedAscending
               )
+            ||(
+               // _fromString is later in time than _fromLocalScheduleEvent
+               // and _fromString is earlier in time than _toLocalScheduleEvent
+               [_fromString          compare: _fromLocalScheduleEvent  ] == NSOrderedDescending
+               &&[_fromString          compare: _toLocalScheduleEvent    ] == NSOrderedAscending
+               )
             )
         {
         
