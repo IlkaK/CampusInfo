@@ -8,11 +8,13 @@
 
 #import <Foundation/Foundation.h>
 
+@class LocationDto;
+
 @interface GastronomicFacilityDto : NSObject
 {
     NSMutableArray   *_holidays;
     int               _gastroId;
-    //LocationDto      *_location;
+    LocationDto      *_location;
     NSString         *_name;
     NSMutableArray   *_serviceTimePeriods;
     NSString         *_type;
@@ -21,7 +23,7 @@
 
 @property (nonatomic, retain) NSMutableArray    *_holidays;
 @property (nonatomic, assign) int               _gastroId;
-//@property (nonatomic, retain) LocationDto       *_location;
+@property (nonatomic, retain) LocationDto       *_location;
 @property (nonatomic, retain) NSString          *_name;
 @property (nonatomic, retain) NSMutableArray    *_serviceTimePeriods;
 @property (nonatomic, retain) NSString          *_type;
@@ -29,7 +31,7 @@
 
 -(id)                   init: (NSMutableArray  *) newHolidays
                 withGastroId: (int) newGastroId
-                //withLocation: (LocationDto *)newLocation
+                withLocation: (LocationDto *)newLocation
                     withName: (NSString *)newName
       withServiceTimePeriods: (NSMutableArray *)newServiceTimePeriods
                     withType: (NSString *)newType

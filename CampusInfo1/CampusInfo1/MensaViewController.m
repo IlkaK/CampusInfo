@@ -7,6 +7,8 @@
 //
 
 #import "MensaViewController.h"
+#import "LunchTimePlanDto.h"
+#import "OpeningTimePlanDto.h"
 
 @implementation MensaViewController
 
@@ -62,9 +64,9 @@
     
     if (self._dataFromUrl != nil)
     {
-        NSString *_receivedString = [[NSString alloc] initWithData:self._dataFromUrl encoding:NSASCIIStringEncoding];
-        _receivedString = [_receivedString substringToIndex:5000];
-        NSLog(@"dataDownloadDidFinish for MensaViewController %@", _receivedString);
+        //NSString *_receivedString = [[NSString alloc] initWithData:self._dataFromUrl encoding:NSASCIIStringEncoding];
+        //_receivedString = [_receivedString substringToIndex:5000];
+        //NSLog(@"dataDownloadDidFinish for MensaViewController %@", _receivedString);
         
         NSError *_error;
         
@@ -75,13 +77,24 @@
                               options:kNilOptions
                               error:&_error];
         
-        NSDictionary *_gastronomicFacilitiesDictionary;
         NSDictionary *_oneGastronomicDictionary;
+        NSDictionary *_oneHolidayDictionary;
+        NSDictionary *_locationDictionary;
+        NSDictionary *_oneServiceTimePeriodDictionary;
         NSArray  *_gastronomicArray;
+        NSArray *_holidayArray;
+        NSArray *_serviceTimePeriodArray;
         int _gastronomicArrayI;
+        int _holidayArrayI;
+        int _serviceTimePeriodArrayI;
+        
+        
+        LunchTimePlanDto *_localLunchTimePlan = [[LunchTimePlanDto alloc] init:nil withPlanType:nil];
+        OpeningTimePlanDto *_localOpeningTimePlan = [[OpeningTimePlanDto alloc] init:nil withPlanType:nil];
         
         for (id generalKey in _generalDictionary)
         {
+            NSLog(@"generalDictionary key: %@", generalKey);
             if ([generalKey isEqualToString:@"Message"])
             {
                 NSString *_message = [_generalDictionary objectForKey:generalKey];
@@ -96,27 +109,113 @@
                 {
                     _gastronomicArray = [_generalDictionary objectForKey:generalKey];
                     
+                    NSLog(@"count of _gastronomicArray: %i", [_gastronomicArray count]);
+                    
                     for (_gastronomicArrayI = 0; _gastronomicArrayI < [_gastronomicArray count]; _gastronomicArrayI++)
                     {
                         _oneGastronomicDictionary = [_gastronomicArray objectAtIndex:_gastronomicArrayI];
                     
-                        for (id gastronomicFacilitiesKey in _gastronomicFacilitiesDictionary)
+                        for (id oneGastronomicKey in _oneGastronomicDictionary)
                         {
-                            if ([gastronomicFacilitiesKey isEqualToString:@"holidays"])
+                            //NSLog(@"_gastronomicFacilitiesDictionary key: %@", gastronomicFacilitiesKey);
+                            
+                            if ([oneGastronomicKey isEqualToString:@"holidays"])
                             {
-                                //NSLog(@"lecturer name: %@", _lecturerName);
+                                _holidayArray = [_oneGastronomicDictionary objectForKey:oneGastronomicKey];
+                                for (_holidayArrayI = 0; _holidayArrayI < [_holidayArray count]; _holidayArrayI++)
+                                {
+                                    _oneHolidayDictionary = [_holidayArray objectAtIndex:_holidayArrayI];
+                                    for (id holidayKey in _oneHolidayDictionary)
+                                    {
+                                        if ([holidayKey isEqualToString:@"id"])
+                                        {
+                                            NSLog(@"holiday id: %@", [_oneHolidayDictionary objectForKey:holidayKey]);
+                                        }
+                                        if ([holidayKey isEqualToString:@"version"])
+                                        {
+                                            NSLog(@"holiday version: %@", [_oneHolidayDictionary objectForKey:holidayKey]);
+                                        }
+                                        if ([holidayKey isEqualToString:@"name"])
+                                        {
+                                            NSLog(@"holiday name: %@", [_oneHolidayDictionary objectForKey:holidayKey]);
+                                        }
+                                        if ([holidayKey isEqualToString:@"startsAt"])
+                                        {
+                                            NSLog(@"holiday startsAt: %@", [_oneHolidayDictionary objectForKey:holidayKey]);
+                                        }
+                                        if ([holidayKey isEqualToString:@"endsAt"])
+                                        {
+                                            NSLog(@"holiday endsAt: %@", [_oneHolidayDictionary objectForKey:holidayKey]);
+                                        }
+                                    }
+                                }
                             }
-                            if ([gastronomicFacilitiesKey isEqualToString:@"id"])
+                            if ([oneGastronomicKey isEqualToString:@"id"])
                             {
-                                //NSLog(@"lecturer name: %@", _lecturerName);
+                                NSLog(@"gastronomy id: %@", [_oneGastronomicDictionary objectForKey:oneGastronomicKey]);
                             }
-                            if ([gastronomicFacilitiesKey isEqualToString:@"location"])
+                            if ([oneGastronomicKey isEqualToString:@"name"])
                             {
-                                //NSLog(@"lecturer name: %@", _lecturerName);
+                                NSLog(@"gastronomy name: %@", [_oneGastronomicDictionary objectForKey:oneGastronomicKey]);
                             }
-                            if ([gastronomicFacilitiesKey isEqualToString:@"name"])
+                            if ([oneGastronomicKey isEqualToString:@"type"])
                             {
-                                //_lecturerName = [_lecturerDictionary objectForKey:lecturerKey];
+                                NSLog(@"gastronomy type: %@", [_oneGastronomicDictionary objectForKey:oneGastronomicKey]);
+                            }
+                            if ([oneGastronomicKey isEqualToString:@"version"])
+                            {
+                                NSLog(@"gastronomy version: %@", [_oneGastronomicDictionary objectForKey:oneGastronomicKey]);
+                            }
+                            if ([oneGastronomicKey isEqualToString:@"location"])
+                            {
+                                _locationDictionary = [_oneGastronomicDictionary objectForKey:oneGastronomicKey];
+                                for (id locationKey in _locationDictionary)
+                                {
+                                    if ([locationKey isEqualToString:@"id"])
+                                    {
+                                        NSLog(@"location id: %@", [_locationDictionary objectForKey:locationKey]);
+                                    }
+                                    if ([locationKey isEqualToString:@"version"])
+                                    {
+                                        NSLog(@"location version: %@", [_locationDictionary objectForKey:locationKey]);
+                                    }
+                                    if ([locationKey isEqualToString:@"name"])
+                                    {
+                                        NSLog(@"location name: %@", [_locationDictionary objectForKey:locationKey]);
+                                    }
+                                }
+                            }
+                            if ([oneGastronomicKey isEqualToString:@"serviceTimePeriods"])
+                            {
+                                _serviceTimePeriodArray = [_oneGastronomicDictionary objectForKey:oneGastronomicKey];
+                                for (_serviceTimePeriodArrayI = 0; _serviceTimePeriodArrayI < [_serviceTimePeriodArray count]; _serviceTimePeriodArrayI++)
+                                {
+                                    _oneServiceTimePeriodDictionary = [_serviceTimePeriodArray objectAtIndex:_serviceTimePeriodArrayI];
+                                    for (id oneServiceTimePeriodKey in _oneServiceTimePeriodDictionary)
+                                    {
+                                        if ([oneServiceTimePeriodKey isEqualToString:@"id"])
+                                        {
+                                            NSLog(@"service time period id: %@", [_oneServiceTimePeriodDictionary objectForKey:oneServiceTimePeriodKey]);
+                                        }
+                                        if ([oneServiceTimePeriodKey isEqualToString:@"startsAt"])
+                                        {
+                                            NSLog(@"service time period startsAt: %@", [_oneServiceTimePeriodDictionary objectForKey:oneServiceTimePeriodKey]);
+                                        }
+                                        if ([oneServiceTimePeriodKey isEqualToString:@"endsAt"])
+                                        {
+                                            NSLog(@"service time period endsAt: %@", [_oneServiceTimePeriodDictionary objectForKey:oneServiceTimePeriodKey]);
+                                        }
+                                        if ([oneServiceTimePeriodKey isEqualToString:@"lunchTimePlan"])
+                                        {
+                                            _localLunchTimePlan = [_localLunchTimePlan getLunchTimePlan:[_oneServiceTimePeriodDictionary objectForKey:oneServiceTimePeriodKey]];
+                                        }
+                                        if ([oneServiceTimePeriodKey isEqualToString:@"openingTimePlan"])
+                                        {
+                                            _localOpeningTimePlan = [_localOpeningTimePlan getOpeningTimePlan:[_oneServiceTimePeriodDictionary objectForKey:oneServiceTimePeriodKey]];
+                                        }
+
+                                    }
+                                }
                             }
                         }
                     }

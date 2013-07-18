@@ -11,23 +11,26 @@
 
 @interface WeekdayDto : NSObject
 {    
-    NSString   *_weekdayType;
-    NSDate     *_toTime;
-    NSDate     *_fromTime;
-    DateFormation  *_dateFormatter;    
+    NSString        *_weekdayType;
+    NSDate          *_fromTime;
+    NSDate          *_toTime;
+    NSString        *_timeplanType;
+    DateFormation   *_dateFormatter;
 }
 
-@property (nonatomic, retain) NSString  *_weekdayType;
-@property (nonatomic, retain) NSDate  *_toTime;
-@property (nonatomic, retain) NSDate  *_fromTime;
-@property (nonatomic, retain) DateFormation  *_dateFormatter;
+@property (nonatomic, retain) NSString          *_weekdayType;
+@property (nonatomic, retain) NSDate            *_fromTime;
+@property (nonatomic, retain) NSDate            *_toTime;
+@property (nonatomic, retain) NSString          *_timeplanType;
+@property (nonatomic, retain) DateFormation     *_dateFormatter;
+
 
 -(id)   init : (NSString  *) newWeekdayType
  withFromTime: (NSDate *)newFromTime
-   withToTime: (NSDate *)newToTime;
+   withToTime: (NSDate *)newToTime
+withTimeplanType: (NSString *)newTimeplanType;
 
-- (WeekdayDto *) getWeekdayWithDictionary:(NSDictionary *)dictionary
-                                  withKey:(id) key
-                          withWeekdayType:(NSString *)weekdayType;
+- (WeekdayDto *)getWeekday:(NSDictionary *)weekdayDictionary
+           withWeekdayType:(NSString *)weekdayType;
 
 @end

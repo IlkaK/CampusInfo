@@ -16,21 +16,26 @@
 @synthesize _serviceTimePeriods;
 @synthesize _type;
 @synthesize _version;
-//@synthesize _location;
 
 -(id)                   init: (NSMutableArray  *) newHolidays
                 withGastroId: (int) newGastroId
-                //withLocation: (LocationDto *)newLocation
+                withLocation: (LocationDto *)newLocation
                     withName: (NSString *)newName
       withServiceTimePeriods: (NSMutableArray *)newServiceTimePeriods
                     withType: (NSString *)newType
                  withVersion: (NSString *)newVersion
 {
     self = [super init];
-    //if (self)
-    //{
-    //    self._name = newName;
-    //}
+    if (self)
+    {
+        self._holidays = newHolidays;
+        self._gastroId = newGastroId;
+        self._location = newLocation;
+        self._name = newName;
+        self._serviceTimePeriods = newServiceTimePeriods;
+        self._type = newType;
+        self._version = newVersion;
+    }
     return self;
 }
 

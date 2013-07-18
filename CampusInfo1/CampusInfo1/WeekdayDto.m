@@ -11,55 +11,76 @@
 @implementation WeekdayDto
 
 @synthesize _weekdayType;
-@synthesize _toTime;
 @synthesize _fromTime;
+@synthesize _toTime;
+@synthesize _timeplanType;
 @synthesize _dateFormatter;
+
 
 -(id)   init : (NSString  *) newWeekdayType
  withFromTime: (NSDate *)newFromTime
    withToTime: (NSDate *)newToTime
+withTimeplanType:(NSString *)newTimeplanType
 {
     self = [super init];
     if (self)
     {
         self._weekdayType = newWeekdayType;
-        self._toTime      = newToTime;
         self._fromTime    = newFromTime;
+        self._toTime      = newToTime;
+        self._timeplanType = newTimeplanType;
     }
-    _dateFormatter  = [[DateFormation alloc] init]; 
+    _dateFormatter  = [[DateFormation alloc] init];
     return self;
 }
 
-- (WeekdayDto *) getWeekdayWithDictionary:(NSDictionary *)dictionary
-                                  withKey:(id) key
-                          withWeekdayType:(NSString *)weekdayType
+
+- (WeekdayDto *)getWeekday:(NSDictionary *)weekdayDictionary
+           withWeekdayType:(NSString *)weekdayType
 {
+    _dateFormatter  = [[DateFormation alloc] init];
     WeekdayDto    *_localWeekday   = nil;
-    NSDictionary  *_weekdayDictionary = [dictionary objectForKey:key];
     NSDate        *_localFromTime;
     NSDate        *_localToTime;
-    _dateFormatter  = [[DateFormation alloc] init];
+    NSString      *_localFromTimeString = nil;
+    NSString      *_localToTimeString   = nil;
+    NSString      *_localTimeplanType   = nil;
     
-    if (_weekdayDictionary != (id)[NSNull null])
+    for (id weekdayKey in weekdayDictionary)
     {
-        for (id weekdayKey in _weekdayDictionary)
+        //NSLog(@"weekdayKey: %@", weekdayKey);
+        if ([weekdayKey isEqualToString:@"from"])
         {
-            if ([weekdayKey isEqualToString:@"from"])
+            _localFromTimeString = [weekdayDictionary objectForKey:weekdayKey];
+            if (![_localFromTimeString isEqual:[NSNull null]])
             {
-                _fromTime = [[_dateFormatter _timeFormatter]  dateFromString:[_weekdayDictionary objectForKey:weekdayKey]];
-            }
-            if ([weekdayKey isEqualToString:@"until"])
-            {
-                _toTime = [[_dateFormatter _timeFormatter]  dateFromString:[_weekdayDictionary objectForKey:weekdayKey]];
+                NSLog(@"%@ from: %@",weekdayType, _localFromTimeString);
+                _localFromTime = [[_dateFormatter _timeFormatter]  dateFromString:_localFromTimeString];
             }
         }
+        if ([weekdayKey isEqualToString:@"until"])
+        {
+            _localToTimeString = [weekdayDictionary objectForKey:weekdayKey];
+            if (![_localToTimeString isEqual:[NSNull null]])
+            {
+                NSLog(@"%@ until: %@", weekdayType, _localToTimeString);
+                _localToTime = [[_dateFormatter _timeFormatter]  dateFromString:_localToTimeString];
+            }
+        }
+        if ([weekdayKey isEqualToString:@"type"])
+        {
+            _localTimeplanType = [weekdayDictionary objectForKey:weekdayKey];
+            NSLog(@"%@ type: %@", weekdayType, _localTimeplanType);
+        }
     }
-    
     _localWeekday    = [[WeekdayDto alloc]init:weekdayType
                                   withFromTime:_localFromTime
-                                    withToTime:_localToTime];
+                                    withToTime:_localToTime
+                              withTimeplanType:_localTimeplanType];
     return _localWeekday;
 }
+
+
 
 
 @end
