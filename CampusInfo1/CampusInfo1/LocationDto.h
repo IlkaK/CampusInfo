@@ -23,4 +23,6 @@
                     withName: (NSString *)newName
                  withVersion: (NSString *)newVersion;
 
+- (LocationDto *)getLocation:(NSDictionary *)locationDictionary;
+
 @end

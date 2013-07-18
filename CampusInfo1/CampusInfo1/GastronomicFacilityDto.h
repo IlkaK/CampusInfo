@@ -37,4 +37,6 @@
                     withType: (NSString *)newType
                  withVersion: (NSString *)newVersion;
 
+- (GastronomicFacilityDto *)getGastronomicFacility:(NSDictionary *)gastronomicDictionary;
+
 @end

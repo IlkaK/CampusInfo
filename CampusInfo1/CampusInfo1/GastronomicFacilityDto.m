@@ -7,6 +7,9 @@
 //
 
 #import "GastronomicFacilityDto.h"
+#import "LocationDto.h"
+#import "HolidayDto.h"
+#import "ServiceTimePeriodDto.h"
 
 @implementation GastronomicFacilityDto
 @synthesize _gastroId;
@@ -38,5 +41,84 @@
     }
     return self;
 }
+
+
+- (GastronomicFacilityDto *)getGastronomicFacility:(NSDictionary *)gastronomicDictionary
+{
+    int       _localGastroId;
+    NSString *_localVersion;
+    NSString *_localName;
+    NSString *_localType;
+    NSMutableArray *_holidayDictionaryArray;
+    NSMutableArray *_localHolidays;
+    NSMutableArray *_serviceTimePeriodDictionaryArray;
+    NSMutableArray *_localServiceTimePeriods;
+    
+    int _holidayArrayI;
+    int _serviceTimePeriodArrayI;
+    
+    LocationDto *_localLocation = [[LocationDto alloc] init:nil withName:nil withVersion:nil];
+    HolidayDto *_localHoliday = [[HolidayDto alloc] init:nil withName:nil withVersion:nil withStartsAt:nil withEndsAt:nil];
+    ServiceTimePeriodDto *_localServiceTimePeriod = [[ServiceTimePeriodDto alloc] init:nil withEndsOn:nil withServiceTimePeriodId:nil withLunchTimePlan:nil withOpeningTimePlan:nil];
+    
+    GastronomicFacilityDto *_localGastronomicFacilty = [[GastronomicFacilityDto alloc]init:nil withGastroId:nil withLocation:nil withName:nil withServiceTimePeriods:nil withType:nil withVersion:nil];
+    
+    for (id gastronomicKey in gastronomicDictionary)
+    {
+        //NSLog(@"_gastronomicFacilitiesDictionary key: %@", gastronomicFacilitiesKey);
+
+        if ([gastronomicKey isEqualToString:@"id"])
+        {
+            _localGastroId = [gastronomicDictionary objectForKey:gastronomicKey];
+            NSLog(@"gastronomy id: %i", _localGastroId);
+        }
+        if ([gastronomicKey isEqualToString:@"name"])
+        {
+            _localName = [gastronomicDictionary objectForKey:gastronomicKey];
+            NSLog(@"gastronomy name: %@", _localName);
+        }
+        if ([gastronomicKey isEqualToString:@"type"])
+        {
+            _localType = [gastronomicDictionary objectForKey:gastronomicKey];
+            NSLog(@"gastronomy type: %@", _localType);
+        }
+        if ([gastronomicKey isEqualToString:@"version"])
+        {
+            _localVersion = [gastronomicDictionary objectForKey:gastronomicKey];
+            NSLog(@"gastronomy version: %@", _localVersion);
+        }
+        if ([gastronomicKey isEqualToString:@"location"])
+        {
+            _localLocation = [_localLocation getLocation:[gastronomicDictionary objectForKey:gastronomicKey]];
+        }
+        
+        if ([gastronomicKey isEqualToString:@"holidays"])
+        {
+            _holidayDictionaryArray = [gastronomicDictionary objectForKey:gastronomicKey];
+            for (_holidayArrayI = 0; _holidayArrayI < [_holidayDictionaryArray count]; _holidayArrayI++)
+            {
+                _localHoliday = [_localHoliday getHoliday:[_holidayDictionaryArray objectAtIndex:_holidayArrayI]];
+                [_localHolidays addObject:_localHoliday];
+            }
+            
+        }
+        
+        if ([gastronomicKey isEqualToString:@"serviceTimePeriods"])
+        {
+            _serviceTimePeriodDictionaryArray = [gastronomicDictionary objectForKey:gastronomicKey];
+            NSLog(@"service time period array count %i", [_serviceTimePeriodDictionaryArray count]);
+        
+            for (_serviceTimePeriodArrayI = 0; _serviceTimePeriodArrayI < [_serviceTimePeriodDictionaryArray count]; _serviceTimePeriodArrayI++)
+            {
+                _localServiceTimePeriod = [_localServiceTimePeriod getServiceTimePeriod:[_serviceTimePeriodDictionaryArray objectAtIndex:_serviceTimePeriodArrayI]];
+                [_localServiceTimePeriods addObject:_localServiceTimePeriod];
+            }
+        }
+    }
+    _localGastronomicFacilty = [[GastronomicFacilityDto alloc]init:_localHolidays withGastroId:_localGastroId withLocation:_localLocation withName:_localName withServiceTimePeriods:_localServiceTimePeriods withType:_localType withVersion:_localVersion];
+    return _localGastronomicFacilty;
+}
+
+
 
 @end

@@ -47,4 +47,16 @@
     return self;
 }
 
+- (NSDate *) parseDate:(NSString *)dateString
+{
+    NSDate   *_localDate;
+    NSString *_localString;
+    
+    _localString = [dateString substringToIndex:10];
+    //NSLog(@"_localString: %@",_localString);
+    _localDate   = [[self _englishDayFormatter] dateFromString:_localString];
+    //NSLog(@"_localDate: %@", [[_dateFormatter _englishDayFormatter] stringFromDate:_localDate]);
+    return _localDate;
+}
+
 @end

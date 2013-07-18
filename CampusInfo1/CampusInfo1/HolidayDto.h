@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <DateFormation.h>
 
 @interface HolidayDto : NSObject
 {
@@ -15,6 +16,7 @@
     NSString         *_version;
     NSDate           *_startsAt;
     NSDate           *_endsAt;
+    DateFormation    *_dateFormatter;
 }
 
 @property (nonatomic, assign) int               _holidayId;
@@ -22,6 +24,7 @@
 @property (nonatomic, retain) NSString          *_version;
 @property (nonatomic, retain) NSDate            *_startsAt;
 @property (nonatomic, retain) NSDate            *_endsAt;
+@property (nonatomic, retain) DateFormation     *_dateFormatter;
 
 
 -(id)                   init: (int) newHolidayId
@@ -29,5 +32,7 @@
                  withVersion: (NSString *)newVersion
                 withStartsAt: (NSDate *)newStartsAt
                   withEndsAt: (NSDate *)newEndsAt;
+
+- (HolidayDto *)getHoliday:(NSDictionary *)holidayDictionary;
 
 @end
