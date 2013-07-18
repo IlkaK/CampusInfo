@@ -18,6 +18,7 @@
 @synthesize _dataFromUrl;
 @synthesize _errorMessage;
 @synthesize _connectionTrials;
+@synthesize _gastronomyArray;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -33,6 +34,9 @@
     [super viewDidLoad];
     _generalDictionary = nil;
     self._connectionTrials = 1;
+    
+    self._gastronomyArray = [[NSMutableArray alloc] init];
+    
 }
 
 - (void)didReceiveMemoryWarning
@@ -71,6 +75,9 @@
         
         //if (_generalDictionary == nil)
         //{
+        
+        [_gastronomyArray removeAllObjects];
+        
         _generalDictionary = [NSJSONSerialization
                               JSONObjectWithData:_dataFromUrl
                               options:kNilOptions
@@ -78,7 +85,6 @@
         
         NSArray  *_gastronomicArray;
         int _gastronomicArrayI;
-        NSMutableArray *_localGastronomies;
         
         GastronomicFacilityDto *_localGastronomicFacilty = [[GastronomicFacilityDto alloc]init:nil withGastroId:nil withLocation:nil withName:nil withServiceTimePeriods:nil withType:nil withVersion:nil];
         
@@ -104,11 +110,12 @@
                     for (_gastronomicArrayI = 0; _gastronomicArrayI < [_gastronomicArray count]; _gastronomicArrayI++)
                     {
                         _localGastronomicFacilty = [_localGastronomicFacilty getGastronomicFacility:[_gastronomicArray objectAtIndex:_gastronomicArrayI]];
-                        [_localGastronomies addObject:_localGastronomicFacilty];
+                        [_gastronomyArray addObject:_localGastronomicFacilty];
                     }
                 }
             }
         }
+        [_mensaOverviewTable reloadData];
     }
 }
 
@@ -189,7 +196,7 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return 10;
+    return [_gastronomyArray count];
 }
 
 
@@ -198,7 +205,9 @@
     return 1;
 }
 
-- (UITableViewCell *)oneSlotOneRoomWithView:(UITableView *)actualTableView
+- (UITableViewCell *)showGastronomy:(UITableView *)actualTableView
+                 withGastronomyName:(NSString *)gastronomyName
+                 withGastronomyType:(NSString *)gastronomyType
 {
     static NSString *_cellIdentifier = @"MensaOverviewTableCell";
     UITableViewCell *_cell           = [actualTableView dequeueReusableCellWithIdentifier:_cellIdentifier];
@@ -210,17 +219,29 @@
     }
     
     UILabel          *_mensaLabel     = (UILabel  *)[_cell viewWithTag:1];
-    _mensaLabel.text = [NSString stringWithFormat:@"Gruental"];
+    _mensaLabel.text = gastronomyName;
     
     UILabel          *_detailLabel     = (UILabel  *)[_cell viewWithTag:2];
-    _detailLabel.text = [NSString stringWithFormat:@"offen bis 19:00"];
+    _detailLabel.text = gastronomyType;
 
     return _cell;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return [self oneSlotOneRoomWithView :tableView];
+    NSUInteger        _cellSelection = indexPath.section;
+    NSString     *_gastronomyName;
+    NSString     *_gastronomyType;
+    
+    if ([_gastronomyArray count] >= _cellSelection)
+    {
+        GastronomicFacilityDto *_oneGastronomy = [_gastronomyArray objectAtIndex:_cellSelection];
+        _gastronomyName = _oneGastronomy._name;
+        _gastronomyType = _oneGastronomy._type;
+    }
+    return [self showGastronomy :tableView
+            withGastronomyName:_gastronomyName
+            withGastronomyType:_gastronomyType];
 }
 
 @end
