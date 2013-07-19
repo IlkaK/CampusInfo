@@ -30,17 +30,6 @@
     return self;
 }
 
-- (NSDate *) parseDate:(NSString *)dateString
-{
-    NSDate   *_localDate;
-    NSString *_localString;
-    
-    _localString = [dateString substringToIndex:10];
-    //NSLog(@"_localString: %@",_localString);
-    _localDate   = [[_dateFormatter _englishDayFormatter] dateFromString:_localString];
-    //NSLog(@"_localDate: %@", [[_dateFormatter _englishDayFormatter] stringFromDate:_localDate]);
-    return _localDate;
-}
 
 - (DayDto *) getDay:(NSDictionary *)dayDictionary
 {
@@ -56,7 +45,7 @@
         
         if ([daykey isEqualToString:@"date"])
         {
-            _dayDate = [self parseDate:[dayDictionary objectForKey:daykey]];
+            _dayDate = [_dateFormatter parseDate:[dayDictionary objectForKey:daykey]];
             //NSLog(@"dayDate: %@", [[_dateFormatter _englishDayFormatter] stringFromDate:_dayDate]);
         }
         

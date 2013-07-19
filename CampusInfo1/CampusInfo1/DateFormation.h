@@ -23,6 +23,8 @@
 @property (nonatomic, retain) NSDateFormatter *_englishDayFormatter;
 @property (nonatomic, retain) NSDateFormatter *_englishTimeAndDayFormatter;
 
--(id) init;
+- (id) init;
+- (NSDate *) parseDate:(NSString *)dateString;
+
 
 @end

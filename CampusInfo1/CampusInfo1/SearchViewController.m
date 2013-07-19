@@ -336,7 +336,7 @@
         [_courseArray removeAllObjects];
         [_studentArray removeAllObjects];
         
-        NSLog(@"no connection so get data from database");
+        //NSLog(@"no connection so get data from database");
         _lecturerArray          = [_dbCachingForAutocomplete getLecturers];
         _lecturerArrayFromDB    = _lecturerArray;
         _roomArray              = [_dbCachingForAutocomplete getRooms];
