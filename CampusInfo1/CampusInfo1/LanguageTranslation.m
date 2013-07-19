@@ -90,6 +90,21 @@
     return _localTranslation;
 }
 
+- (NSString *)getGermanGastronomyTypeTranslation:(NSString*)gastronomyType
+{
+    NSString *_localTranslation;
+    
+    if ([gastronomyType isEqualToString:@"Cafeteria"])
+    {
+        _localTranslation = @"Cafeteria";
+    }
+    if ([gastronomyType isEqualToString:@"Canteen"])
+    {
+        _localTranslation = @"Mensa";
+    }
+    return _localTranslation;
+}
+
 
 
 @end

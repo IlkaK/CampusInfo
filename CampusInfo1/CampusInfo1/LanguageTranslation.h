@@ -16,4 +16,6 @@
 
 - (NSString *)getGermanErrorMessageTranslation:(NSString *)errorMessage;
 
+- (NSString *)getGermanGastronomyTypeTranslation:(NSString*)gastronomyType;
+
 @end

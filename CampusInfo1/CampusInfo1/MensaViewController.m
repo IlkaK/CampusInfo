@@ -25,6 +25,8 @@
 @synthesize _gastronomyArray;
 @synthesize _actualDate;
 @synthesize _dateFormatter;
+@synthesize _translator;
+@synthesize _dateLabel;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -39,6 +41,7 @@
 {
     [super viewDidLoad];
     _dateFormatter  = [[DateFormation alloc] init];
+    _translator     = [[LanguageTranslation alloc] init];
     
     _generalDictionary = nil;
     self._connectionTrials = 1;
@@ -48,6 +51,11 @@
     self._actualDate = [NSDate date];
     //self._actualDate    = [[_dateFormatter _dayFormatter] dateFromString:@"01.05.2013"];
     
+    NSString *_dateString = [NSString stringWithFormat:@"%@, %@"
+                             ,[[_dateFormatter _weekDayFormatter] stringFromDate:self._actualDate]
+                             ,[[_dateFormatter _dayFormatter]     stringFromDate:self._actualDate]];
+    
+    _dateLabel.text = _dateString;
 }
 
 - (void)didReceiveMemoryWarning
@@ -60,6 +68,7 @@
     [self set_mensaOverviewTable:nil];
     _mensaOverviewTable = nil;
     _mensaOverviewTableCell = nil;
+    _dateLabel = nil;
     [super viewDidUnload];
 }
 
@@ -231,7 +240,9 @@
     }
     
     UILabel          *_mensaLabel     = (UILabel  *)[_cell viewWithTag:1];
-    _mensaLabel.text = [NSString stringWithFormat:@"%@ (%@)", gastronomyName, gastronomyType];
+    _mensaLabel.text = [NSString stringWithFormat:@"%@ (%@)", gastronomyName
+                        ,[_translator getGermanGastronomyTypeTranslation:gastronomyType]
+                        ];
     
     UILabel          *_detailLabel     = (UILabel  *)[_cell viewWithTag:2];
     _detailLabel.text = openingTime;

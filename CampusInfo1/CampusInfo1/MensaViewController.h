@@ -9,12 +9,14 @@
 #import <UIKit/UIKit.h>
 #import <TimeTableAsyncRequest.h>
 #import <DateFormation.h>
+#import <LanguageTranslation.h>
 
 @interface MensaViewController : UIViewController<TimeTableAsyncRequestDelegate>
 {
 
     IBOutlet UITableView        *_mensaOverviewTable;
     IBOutlet UITableViewCell    *_mensaOverviewTableCell;
+    IBOutlet UILabel            *_dateLabel;
 
     NSDictionary                *_generalDictionary;
     TimeTableAsyncRequest       *_asyncTimeTableRequest;
@@ -25,10 +27,12 @@
     
     NSDate                      *_actualDate;
     DateFormation               *_dateFormatter;
+    LanguageTranslation         *_translator;
 }
 
 @property (nonatomic, retain) IBOutlet UITableView               *_mensaOverviewTable;
 @property (nonatomic, retain) IBOutlet UITableViewCell           *_mensaOverviewTableCell;
+@property (nonatomic, retain) IBOutlet UILabel                   *_dateLabel;
 
 @property (strong, nonatomic) NSDictionary                      *_generalDictionary;
 @property (nonatomic, retain) IBOutlet TimeTableAsyncRequest    *_asyncTimeTableRequest;
@@ -39,6 +43,6 @@
 
 @property (nonatomic, retain) NSDate                            *_actualDate;
 @property (nonatomic, retain) DateFormation                     *_dateFormatter;
-
+@property (nonatomic, retain) LanguageTranslation               *_translator;
 
 @end
