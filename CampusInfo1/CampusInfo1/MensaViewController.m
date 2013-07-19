@@ -45,8 +45,8 @@
     
     self._gastronomyArray = [[NSMutableArray alloc] init];
     
-    //self._actualDate = [NSDate date];
-    self._actualDate    = [[_dateFormatter _dayFormatter] dateFromString:@"01.05.2013"];
+    self._actualDate = [NSDate date];
+    //self._actualDate    = [[_dateFormatter _dayFormatter] dateFromString:@"01.05.2013"];
     
 }
 

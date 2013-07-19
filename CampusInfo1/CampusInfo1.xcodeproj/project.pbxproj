@@ -80,6 +80,14 @@
 		E12B400B1796D25C000555AE /* GastronomicFacilityDto.m in Sources */ = {isa = PBXBuildFile; fileRef = E12B400A1796D25C000555AE /* GastronomicFacilityDto.m */; };
 		E13D3B5B17412F0500F534DB /* ChooseDateViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E13D3B5917412F0500F534DB /* ChooseDateViewController.m */; };
 		E13D3B5C17412F0500F534DB /* ChooseDateViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E13D3B5A17412F0500F534DB /* ChooseDateViewController.xib */; };
+		E153641F17997C0E00F18559 /* catering.png in Resources */ = {isa = PBXBuildFile; fileRef = E153641717997C0E00F18559 /* catering.png */; };
+		E153642017997C0E00F18559 /* catering@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E153641817997C0E00F18559 /* catering@2x.png */; };
+		E153642117997C0E00F18559 /* events.png in Resources */ = {isa = PBXBuildFile; fileRef = E153641917997C0E00F18559 /* events.png */; };
+		E153642217997C0E00F18559 /* events@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E153641A17997C0E00F18559 /* events@2x.png */; };
+		E153642317997C0E00F18559 /* schedule.png in Resources */ = {isa = PBXBuildFile; fileRef = E153641B17997C0E00F18559 /* schedule.png */; };
+		E153642417997C0E00F18559 /* schedule@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E153641C17997C0E00F18559 /* schedule@2x.png */; };
+		E153642517997C0E00F18559 /* search@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E153641D17997C0E00F18559 /* search@2x.png */; };
+		E153642617997C0E00F18559 /* settings@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E153641E17997C0E00F18559 /* settings@2x.png */; };
 		E17842D2178309160059EA3C /* DBCachingForAutocomplete.m in Sources */ = {isa = PBXBuildFile; fileRef = E17842D1178309160059EA3C /* DBCachingForAutocomplete.m */; };
 		E195FF36178188A30065DF05 /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = E195FF35178188A30065DF05 /* libsqlite3.dylib */; };
 		E1BC14C2175F8D4900FE2854 /* Autocomplete.m in Sources */ = {isa = PBXBuildFile; fileRef = E1BC14C1175F8D4900FE2854 /* Autocomplete.m */; };
@@ -195,6 +203,14 @@
 		E13D3B5817412F0500F534DB /* ChooseDateViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChooseDateViewController.h; sourceTree = "<group>"; };
 		E13D3B5917412F0500F534DB /* ChooseDateViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChooseDateViewController.m; sourceTree = "<group>"; };
 		E13D3B5A17412F0500F534DB /* ChooseDateViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ChooseDateViewController.xib; sourceTree = "<group>"; };
+		E153641717997C0E00F18559 /* catering.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = catering.png; path = CampusInfo1/resources/icons/catering.png; sourceTree = "<group>"; };
+		E153641817997C0E00F18559 /* catering@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "catering@2x.png"; path = "CampusInfo1/resources/icons/catering@2x.png"; sourceTree = "<group>"; };
+		E153641917997C0E00F18559 /* events.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = events.png; path = CampusInfo1/resources/icons/events.png; sourceTree = "<group>"; };
+		E153641A17997C0E00F18559 /* events@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "events@2x.png"; path = "CampusInfo1/resources/icons/events@2x.png"; sourceTree = "<group>"; };
+		E153641B17997C0E00F18559 /* schedule.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = schedule.png; path = CampusInfo1/resources/icons/schedule.png; sourceTree = "<group>"; };
+		E153641C17997C0E00F18559 /* schedule@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "schedule@2x.png"; path = "CampusInfo1/resources/icons/schedule@2x.png"; sourceTree = "<group>"; };
+		E153641D17997C0E00F18559 /* search@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "search@2x.png"; path = "CampusInfo1/resources/icons/search@2x.png"; sourceTree = "<group>"; };
+		E153641E17997C0E00F18559 /* settings@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "settings@2x.png"; path = "CampusInfo1/resources/icons/settings@2x.png"; sourceTree = "<group>"; };
 		E17842D0178309160059EA3C /* DBCachingForAutocomplete.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DBCachingForAutocomplete.h; sourceTree = "<group>"; };
 		E17842D1178309160059EA3C /* DBCachingForAutocomplete.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DBCachingForAutocomplete.m; sourceTree = "<group>"; };
 		E195FF35178188A30065DF05 /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
@@ -345,6 +361,14 @@
 		A35A34501520830700181E3F /* Icon */ = {
 			isa = PBXGroup;
 			children = (
+				E153641717997C0E00F18559 /* catering.png */,
+				E153641817997C0E00F18559 /* catering@2x.png */,
+				E153641917997C0E00F18559 /* events.png */,
+				E153641A17997C0E00F18559 /* events@2x.png */,
+				E153641B17997C0E00F18559 /* schedule.png */,
+				E153641C17997C0E00F18559 /* schedule@2x.png */,
+				E153641D17997C0E00F18559 /* search@2x.png */,
+				E153641E17997C0E00F18559 /* settings@2x.png */,
 				27943587174686E40077923D /* settings.png */,
 				277DDD811534A54B006136B5 /* arrowRight_small.png */,
 				277DDD7F1534A509006136B5 /* arrowLeft_small.png */,
@@ -567,6 +591,14 @@
 				E108614917944B110001C8E1 /* FourSlotsFiveRoomsTableCell.xib in Resources */,
 				E12B400217968AA1000555AE /* MensaViewController.xib in Resources */,
 				E12B400417968F7E000555AE /* MensaOverviewTableCell.xib in Resources */,
+				E153641F17997C0E00F18559 /* catering.png in Resources */,
+				E153642017997C0E00F18559 /* catering@2x.png in Resources */,
+				E153642117997C0E00F18559 /* events.png in Resources */,
+				E153642217997C0E00F18559 /* events@2x.png in Resources */,
+				E153642317997C0E00F18559 /* schedule.png in Resources */,
+				E153642417997C0E00F18559 /* schedule@2x.png in Resources */,
+				E153642517997C0E00F18559 /* search@2x.png in Resources */,
+				E153642617997C0E00F18559 /* settings@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
