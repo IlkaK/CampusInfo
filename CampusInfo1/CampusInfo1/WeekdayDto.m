@@ -54,7 +54,7 @@ withTimeplanType:(NSString *)newTimeplanType
             _localFromTimeString = [weekdayDictionary objectForKey:weekdayKey];
             if (![_localFromTimeString isEqual:[NSNull null]])
             {
-                NSLog(@"%@ from: %@",weekdayType, _localFromTimeString);
+                //NSLog(@"%@ from: %@",weekdayType, _localFromTimeString);
                 _localFromTime = [[_dateFormatter _timeFormatter]  dateFromString:_localFromTimeString];
             }
         }
@@ -63,14 +63,14 @@ withTimeplanType:(NSString *)newTimeplanType
             _localToTimeString = [weekdayDictionary objectForKey:weekdayKey];
             if (![_localToTimeString isEqual:[NSNull null]])
             {
-                NSLog(@"%@ until: %@", weekdayType, _localToTimeString);
+                //NSLog(@"%@ until: %@", weekdayType, _localToTimeString);
                 _localToTime = [[_dateFormatter _timeFormatter]  dateFromString:_localToTimeString];
             }
         }
         if ([weekdayKey isEqualToString:@"type"])
         {
             _localTimeplanType = [weekdayDictionary objectForKey:weekdayKey];
-            NSLog(@"%@ type: %@", weekdayType, _localTimeplanType);
+            //NSLog(@"%@ type: %@", weekdayType, _localTimeplanType);
         }
     }
     _localWeekday    = [[WeekdayDto alloc]init:weekdayType

@@ -28,8 +28,8 @@
     self = [super init];
     if (self)
     {
-        self._endsOn = newEndsOn;
         self._startsOn = newStartsOn;
+        self._endsOn = newEndsOn;
         self._serviceTimePeriodId = newServiceTimePeriodId;
         self._lunchTimePlan = newLunchTimePlan;
         self._openingTimePlan = newOpeningTimePlan;
@@ -53,36 +53,45 @@
     
     for (id serviceTimePeriodKey in serviceTimePeriodDictionary)
     {
-        NSLog(@"serviceTimePeriodKey: %@", serviceTimePeriodKey);
+        //NSLog(@"serviceTimePeriodKey: %@", serviceTimePeriodKey);
         if ([serviceTimePeriodKey isEqualToString:@"id"])
         {
             _localServiceTimePeriodId = [serviceTimePeriodDictionary objectForKey:serviceTimePeriodKey];
-            NSLog(@"service time period id: %i", _localServiceTimePeriodId);
+            //NSLog(@"service time period id: %i", _localServiceTimePeriodId);
         }
         if ([serviceTimePeriodKey isEqualToString:@"startsOn"])
         {
             _localStartsOn = [_dateFormatter parseDate:[serviceTimePeriodDictionary objectForKey:serviceTimePeriodKey]];
-            NSLog(@"service time period startsOn: %@", [[_dateFormatter _englishDayFormatter] stringFromDate:_localStartsOn]);
+            //NSLog(@"service time period startsOn: %@", [[_dateFormatter _englishDayFormatter] stringFromDate:_localStartsOn]);
         }
         if ([serviceTimePeriodKey isEqualToString:@"endsOn"])
         {
             _localEndsOn = [_dateFormatter parseDate:[serviceTimePeriodDictionary objectForKey:serviceTimePeriodKey]];
-            NSLog(@"service time period endsOn: %@", [[_dateFormatter _englishDayFormatter] stringFromDate:_localEndsOn]);
+            //NSLog(@"service time period endsOn: %@", [[_dateFormatter _englishDayFormatter] stringFromDate:_localEndsOn]);
         }
         if ([serviceTimePeriodKey isEqualToString:@"lunchTimePlan"])
         {
-            NSLog(@"---- start lunchTimePlan -----");
+            //NSLog(@"---- start lunchTimePlan -----");
             _localLunchTimePlan = [_localLunchTimePlan getLunchTimePlan:[serviceTimePeriodDictionary objectForKey:serviceTimePeriodKey]];
-            NSLog(@"---- end lunchTimePlan -----");
+            //NSLog(@"---- end lunchTimePlan -----");
         }
         if ([serviceTimePeriodKey isEqualToString:@"openingTimePlan"])
         {
-            NSLog(@"---- start openingTimePlan -----");            
+            //NSLog(@"---- start openingTimePlan -----");
             _localOpeningTimePlan = [_localOpeningTimePlan getOpeningTimePlan:[serviceTimePeriodDictionary objectForKey:serviceTimePeriodKey]];
-            NSLog(@"---- end openingTimePlan -----");       
+            //NSLog(@"---- end openingTimePlan -----");
         }
     }
-    _localServiceTimePeriod =  [[ServiceTimePeriodDto alloc] init:_localStartsOn withEndsOn:_localEndsOn withServiceTimePeriodId:_localServiceTimePeriodId withLunchTimePlan:_localLunchTimePlan withOpeningTimePlan:_localOpeningTimePlan];
+    _localServiceTimePeriod =  [[ServiceTimePeriodDto alloc] init:_localStartsOn
+                                                       withEndsOn:_localEndsOn
+                                          withServiceTimePeriodId:_localServiceTimePeriodId
+                                                withLunchTimePlan:_localLunchTimePlan
+                                              withOpeningTimePlan:_localOpeningTimePlan];
+    //NSLog(@"_localServiceTimePeriod from %@ to  %@"
+    //      ,[[_dateFormatter _englishDayFormatter] stringFromDate:
+    //        _localServiceTimePeriod._startsOn]
+    //      ,[[_dateFormatter _englishDayFormatter] stringFromDate:
+    //        _localServiceTimePeriod._endsOn]);
     return _localServiceTimePeriod;
 }
 

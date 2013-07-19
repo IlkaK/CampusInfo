@@ -41,17 +41,17 @@
         if ([locationKey isEqualToString:@"id"])
         {
             _localLocationId = [locationDictionary objectForKey:locationKey];
-            NSLog(@"location id: %i", _localLocationId);
+            //NSLog(@"location id: %i", _localLocationId);
         }
         if ([locationKey isEqualToString:@"version"])
         {
             _localVersion = [locationDictionary objectForKey:locationKey];
-            NSLog(@"location version: %@", _localVersion);
+            //NSLog(@"location version: %@", _localVersion);
         }
         if ([locationKey isEqualToString:@"name"])
         {
             _localName = [locationDictionary objectForKey:locationKey];
-            NSLog(@"location name: %@", _localName);
+            //NSLog(@"location name: %@", _localName);
         }
     }
     _localLocation = [[LocationDto alloc]init:_localLocationId withName:_localName withVersion:_localVersion];

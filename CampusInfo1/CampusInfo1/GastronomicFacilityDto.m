@@ -49,10 +49,10 @@
     NSString *_localVersion;
     NSString *_localName;
     NSString *_localType;
-    NSMutableArray *_holidayDictionaryArray;
-    NSMutableArray *_localHolidays;
-    NSMutableArray *_serviceTimePeriodDictionaryArray;
-    NSMutableArray *_localServiceTimePeriods;
+    NSMutableArray *_holidayDictionaryArray = [[NSMutableArray alloc] init];
+    NSMutableArray *_localHolidays = [[NSMutableArray alloc] init];
+    NSMutableArray *_serviceTimePeriodDictionaryArray = [[NSMutableArray alloc] init];
+    NSMutableArray *_localServiceTimePeriods = [[NSMutableArray alloc] init];
     
     int _holidayArrayI;
     int _serviceTimePeriodArrayI;
@@ -70,22 +70,22 @@
         if ([gastronomicKey isEqualToString:@"id"])
         {
             _localGastroId = [gastronomicDictionary objectForKey:gastronomicKey];
-            NSLog(@"gastronomy id: %i", _localGastroId);
+            //NSLog(@"gastronomy id: %i", _localGastroId);
         }
         if ([gastronomicKey isEqualToString:@"name"])
         {
             _localName = [gastronomicDictionary objectForKey:gastronomicKey];
-            NSLog(@"gastronomy name: %@", _localName);
+            //NSLog(@"gastronomy name: %@", _localName);
         }
         if ([gastronomicKey isEqualToString:@"type"])
         {
             _localType = [gastronomicDictionary objectForKey:gastronomicKey];
-            NSLog(@"gastronomy type: %@", _localType);
+            //NSLog(@"gastronomy type: %@", _localType);
         }
         if ([gastronomicKey isEqualToString:@"version"])
         {
             _localVersion = [gastronomicDictionary objectForKey:gastronomicKey];
-            NSLog(@"gastronomy version: %@", _localVersion);
+            //NSLog(@"gastronomy version: %@", _localVersion);
         }
         if ([gastronomicKey isEqualToString:@"location"])
         {
@@ -106,7 +106,7 @@
         if ([gastronomicKey isEqualToString:@"serviceTimePeriods"])
         {
             _serviceTimePeriodDictionaryArray = [gastronomicDictionary objectForKey:gastronomicKey];
-            NSLog(@"service time period array count %i", [_serviceTimePeriodDictionaryArray count]);
+            //NSLog(@"-- service time period array count %i", [_serviceTimePeriodDictionaryArray count]);
         
             for (_serviceTimePeriodArrayI = 0; _serviceTimePeriodArrayI < [_serviceTimePeriodDictionaryArray count]; _serviceTimePeriodArrayI++)
             {
@@ -115,6 +115,7 @@
             }
         }
     }
+    //NSLog(@"- found service time period array count: %i", [_localServiceTimePeriods count]);
     _localGastronomicFacilty = [[GastronomicFacilityDto alloc]init:_localHolidays withGastroId:_localGastroId withLocation:_localLocation withName:_localName withServiceTimePeriods:_localServiceTimePeriods withType:_localType withVersion:_localVersion];
     return _localGastronomicFacilty;
 }

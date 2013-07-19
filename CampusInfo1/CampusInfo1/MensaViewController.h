@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import <TimeTableAsyncRequest.h>
+#import <DateFormation.h>
 
 @interface MensaViewController : UIViewController<TimeTableAsyncRequestDelegate>
 {
@@ -21,6 +22,9 @@
     NSString                    *_errorMessage;
     int                         _connectionTrials;
     NSMutableArray              *_gastronomyArray;
+    
+    NSDate                      *_actualDate;
+    DateFormation               *_dateFormatter;
 }
 
 @property (nonatomic, retain) IBOutlet UITableView               *_mensaOverviewTable;
@@ -32,6 +36,9 @@
 @property (nonatomic, retain) NSString                          *_errorMessage;
 @property (nonatomic, retain) NSMutableArray                    *_gastronomyArray;
 @property (nonatomic, assign) int                                _connectionTrials;
+
+@property (nonatomic, retain) NSDate                            *_actualDate;
+@property (nonatomic, retain) DateFormation                     *_dateFormatter;
 
 
 @end

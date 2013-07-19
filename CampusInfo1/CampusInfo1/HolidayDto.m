@@ -51,27 +51,27 @@
         if ([holidayKey isEqualToString:@"id"])
         {
             _localHolidayId = [holidayDictionary objectForKey:holidayKey];
-            NSLog(@"holiday id: %i", _localHolidayId);
+            //NSLog(@"holiday id: %i", _localHolidayId);
         }
         if ([holidayKey isEqualToString:@"version"])
         {
             _localVersion = [holidayDictionary objectForKey:holidayKey];
-            NSLog(@"holiday version: %@", _localVersion);
+            //NSLog(@"holiday version: %@", _localVersion);
         }
         if ([holidayKey isEqualToString:@"name"])
         {
             _localName = [holidayDictionary objectForKey:holidayKey];
-            NSLog(@"holiday name: %@", _localName);
+            //NSLog(@"holiday name: %@", _localName);
         }
         if ([holidayKey isEqualToString:@"startsAt"])
         {
             _localStartsAt = [_dateFormatter parseDate:[holidayDictionary objectForKey:holidayKey]];
-            NSLog(@"holiday startsAt: %@", [[_dateFormatter _englishDayFormatter] stringFromDate:_localStartsAt]);
+            //NSLog(@"holiday startsAt: %@", [[_dateFormatter _englishDayFormatter] stringFromDate:_localStartsAt]);
         }
         if ([holidayKey isEqualToString:@"endsAt"])
         {
             _localEndsAt = [_dateFormatter parseDate:[holidayDictionary objectForKey:holidayKey]];
-            NSLog(@"holiday endsAt: %@", [[_dateFormatter _englishDayFormatter] stringFromDate:_localEndsAt]);
+            //NSLog(@"holiday endsAt: %@", [[_dateFormatter _englishDayFormatter] stringFromDate:_localEndsAt]);
         }
     }
     _localHoliday = [[HolidayDto alloc]init:_localHolidayId withName:_localName withVersion:_localVersion withStartsAt:_localStartsAt withEndsAt:_localEndsAt];

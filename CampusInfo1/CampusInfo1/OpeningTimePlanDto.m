@@ -37,7 +37,7 @@
         if ([openingTimePlanKey isEqualToString:@"type"])
         {
             _localPlanType = [openingTimePlanDictionary objectForKey:openingTimePlanKey];
-            NSLog(@"opening time plan type: %@", _localPlanType);
+            //NSLog(@"opening time plan type: %@", _localPlanType);
         }
         
         if (
