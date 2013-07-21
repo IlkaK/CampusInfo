@@ -258,16 +258,19 @@
     NSString     *_gastronomyType;
     NSString     *_openingTime;
     BOOL          _isHoliday = NO;
+    
     NSString     *_fromHolidayString;
     NSString     *_toHolidayString;
     NSString     *_actualDayString = [[_dateFormatter _englishDayFormatter] stringFromDate:_actualDate];
+    NSString     *_actualDayWeekday = [[_dateFormatter _weekDayFormatter] stringFromDate:_actualDate];
+    
     int           holidayArrayI;
     int           serviceTimePeriodArrayI;
     int           weekdaysArrayI;
-    ServiceTimePeriodDto *_oneServiceTimePeriod;
-    NSString     *_actualDayWeekday = [[_dateFormatter _weekDayFormatter] stringFromDate:_actualDate];
-    OpeningTimePlanDto *_openingTimePlan;
-    WeekdayDto *_oneWeekday;
+    
+    ServiceTimePeriodDto    *_oneServiceTimePeriod;
+    OpeningTimePlanDto      *_openingTimePlan;
+    WeekdayDto              *_oneWeekday;
     
     if ([_gastronomyArray count] >= _cellSelection)
     {
@@ -320,10 +323,17 @@
                     
                     if( [_oneWeekday._weekdayType caseInsensitiveCompare:_actualDayWeekday] == NSOrderedSame )
                     {
-                        _openingTime = [NSString stringWithFormat:@"offen von %@ bis %@",
-                                        [[_dateFormatter _timeFormatter] stringFromDate:_oneWeekday._fromTime]
-                                        ,[[_dateFormatter _timeFormatter] stringFromDate:_oneWeekday._toTime]
-                                        ];
+                        if (_oneWeekday._fromTime == nil && _oneWeekday._toTime == nil)
+                        {
+                            _openingTime = @"geschlossen";
+                        }
+                        else
+                        {
+                            _openingTime = [NSString stringWithFormat:@"offen von %@ bis %@",
+                                            [[_dateFormatter _timeFormatter] stringFromDate:_oneWeekday._fromTime]
+                                            ,[[_dateFormatter _timeFormatter] stringFromDate:_oneWeekday._toTime]
+                                            ];
+                        }
                     }
                 }
             }
