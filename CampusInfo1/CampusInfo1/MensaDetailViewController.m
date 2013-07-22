@@ -15,6 +15,12 @@
 @implementation MensaDetailViewController
 
 @synthesize _actualGastronomy;
+@synthesize _moveBackButton;
+@synthesize _dateLabel;
+@synthesize _dayNavigationItem;
+@synthesize _dateFormatter;
+@synthesize _actualDate;
+@synthesize _chooseDateVC;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -28,8 +34,113 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    _dateFormatter  = [[DateFormation alloc] init];
     //_actualGastronomy = [[GastronomicFacilityDto alloc]init:nil withGastroId:nil withLocation:nil withName:nil withServiceTimePeriods:nil withType:nil withVersion:nil];
+    [_moveBackButton useAlertStyle];
+    
+
+    //----- Navigation Bar ----
+    // set current day
+    [self setTitleToActualDate];
+    
+    // set day navigator
+    UIImage *_leftButtonImage  = [UIImage imageNamed:@"arrowLeft_small.png"];
+    UIImage *_rightButtonImage = [UIImage imageNamed:@"arrowRight_small.png"];
+    
+    UIBarButtonItem *_leftButton  = [[UIBarButtonItem alloc] initWithImage: _leftButtonImage
+                                                                     style:UIBarButtonItemStylePlain
+                                                                    target:self
+                                                                    action:@selector(dayBefore:)];
+    UIBarButtonItem *_rightButton = [[UIBarButtonItem alloc] initWithImage: _rightButtonImage
+                                                                     style:UIBarButtonItemStylePlain
+                                                                    target:self
+                                                                    action:@selector(dayAfter:)];
+    [_dayNavigationItem setLeftBarButtonItem :_leftButton animated :true];
+    [_dayNavigationItem setRightBarButtonItem:_rightButton animated:true];
+    
+    _dateLabel.userInteractionEnabled = YES;
+    UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(openChooseDateView)];
+    [_dateLabel addGestureRecognizer:tapGesture];
+    [self.view bringSubviewToFront:_dateLabel];
+    
+    
+    // ------ CHOOSE DATE FREELY ----
+    if (_chooseDateVC == nil)
+    {
+		_chooseDateVC = [[ChooseDateViewController alloc] init];
+	}
+    _chooseDateVC._chooseDateViewDelegate = self;
+    _chooseDateVC.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
+    
+    
 }
+
+- (void)setActualDate:(NSDate *)newDate
+{
+    self._actualDate      = newDate;
+    //[self setNewScheduleWithDate:newDate];
+    [self setDateInNavigatorWithActualDate:_actualDate];
+    //_actualDayDto        = [self getDayDto];
+    //[_timeTable reloadData];
+}
+
+
+- (void) dayBefore:(id)sender
+{
+    int daysToAdd = -1;
+    
+    // set up date components
+    NSDateComponents *_components = [[NSDateComponents alloc] init];
+    [_components setDay:daysToAdd];
+    
+    NSCalendar *_gregorian = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
+    NSDate     *_newDate   = [_gregorian dateByAddingComponents:_components toDate:self._actualDate options:0];
+    
+    [self setActualDate:_newDate];
+}
+
+- (void) dayAfter:(id)sender
+{
+    NSDate *_newDate = [self._actualDate dateByAddingTimeInterval:(1*24*60*60)];
+    [self setActualDate:_newDate];
+}
+
+- (void) setTitleToActualDate
+{
+    NSDateFormatter* df_local = [[NSDateFormatter alloc] init];
+    [df_local setTimeZone:[NSTimeZone timeZoneWithName:@"CEST"]];
+    [df_local setDateFormat:@"yyyy.MM.dd G 'at' HH:mm:ss zzz"];
+        
+    //----- Navigation Bar ----
+    // set current day
+    self._actualDate = [NSDate date];
+    //self._actualDate    = [[_dateFormatter _dayFormatter] dateFromString:@"17.12.2012"];
+    
+    [self setDateInNavigatorWithActualDate:self._actualDate];
+    
+    //NSLog(@"set actual Date: %@", [[self dayFormatter] stringFromDate:self._actualDate]);
+}
+
+
+- (void) setDateInNavigatorWithActualDate:(NSDate *)showDate
+{
+    NSString *_dateString = [NSString stringWithFormat:@"%@, %@"
+                             ,[[_dateFormatter _weekDayFormatter] stringFromDate:showDate]
+                             ,[[_dateFormatter _dayFormatter]     stringFromDate:showDate]];
+    
+    [_dateLabel setTextColor:[UIColor whiteColor]];
+    _dateLabel.text = _dateString;
+    _dayNavigationItem.title = @"";
+    
+    self.navigationItem.titleView = _dateLabel;
+}
+
+-(void) openChooseDateView
+{
+    [self presentModalViewController:_chooseDateVC animated:YES];
+}
+
 
 - (void)didReceiveMemoryWarning
 {
@@ -39,9 +150,15 @@
 
 - (IBAction)backToMensaOverview:(id)sender
 {
-    NSLog(@"you leave %@", _actualGastronomy._name);
-    
     [self dismissModalViewControllerAnimated:YES];
-    
+}
+
+- (void)viewDidUnload
+{
+    _moveBackButton = nil;
+    _dayNavigationItem = nil;
+    _dateLabel = nil;
+    _chooseDateVC = nil;
+    [super viewDidUnload];
 }
 @end

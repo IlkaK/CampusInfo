@@ -252,6 +252,18 @@
     // Release any cached data, images, etc that aren't in use.
 }
 
+- (void) setDateInNavigatorWithActualDate:(NSDate *)showDate
+{
+    NSString *_dateString = [NSString stringWithFormat:@"%@, %@"
+                                                        ,[[_dateFormatter _weekDayFormatter] stringFromDate:showDate]
+                                                        ,[[_dateFormatter _dayFormatter]     stringFromDate:showDate]];
+
+    [_dateLabel setTextColor:[UIColor whiteColor]];
+    _dateLabel.text = _dateString;
+    _dayNavigator.title = @"";
+}
+
+
 
 - (void)setActualDate:(NSDate *)newDate
 {
@@ -260,19 +272,6 @@
     [self setDateInNavigatorWithActualDate:_actualDate];
     _actualDayDto        = [self getDayDto];
     [_timeTable reloadData];
-}
-
-
-
-- (void) setDateInNavigatorWithActualDate:(NSDate *)showDate
-{
-    NSString *_dateString = [NSString stringWithFormat:@"%@, %@"
-                             ,[[_dateFormatter _weekDayFormatter] stringFromDate:showDate]
-                             ,[[_dateFormatter _dayFormatter]     stringFromDate:showDate]];
-    
-    [_dateLabel setTextColor:[UIColor whiteColor]];
-    _dateLabel.text = _dateString;
-    _dayNavigator.title = @"";
 }
 
 
@@ -415,28 +414,26 @@
     //----- Navigation Bar ----
     // set current day
     [self setTitleToActualDate];
-
+    
     // set day navigator
     UIImage *_leftButtonImage  = [UIImage imageNamed:@"arrowLeft_small.png"];
     UIImage *_rightButtonImage = [UIImage imageNamed:@"arrowRight_small.png"];
     
     UIBarButtonItem *_leftButton  = [[UIBarButtonItem alloc] initWithImage: _leftButtonImage
-                                     style:UIBarButtonItemStylePlain
-                                     target:self 
-                                      action:@selector(dayBefore:)];  
+                                                                              style:UIBarButtonItemStylePlain
+                                                                            target:self
+                                                                            action:@selector(dayBefore:)];
     UIBarButtonItem *_rightButton = [[UIBarButtonItem alloc] initWithImage: _rightButtonImage
-                                    style:UIBarButtonItemStylePlain 
-                                    target:self
-                                    action:@selector(dayAfter:)];  
-    
+                                                                     style:UIBarButtonItemStylePlain
+                                                                    target:self
+                                                                    action:@selector(dayAfter:)];
     [_dayNavigator setLeftBarButtonItem :_leftButton animated :true];
     [_dayNavigator setRightBarButtonItem:_rightButton animated:true];
     
     _dateLabel.userInteractionEnabled = YES;
     UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(openChooseDateView)];
     [_dateLabel addGestureRecognizer:tapGesture];
-    
-    
+
     // ----- DETAIL PAGE -----
     if (_detailsVC == nil) 
     {

@@ -8,13 +8,28 @@
 
 #import <UIKit/UIKit.h>
 #import <GastronomicFacilityDto.h>
+#import <GradientButton.h>
+#import <DateFormation.h>
+#import <ChooseDateViewController.h>
 
-@interface MensaDetailViewController : UIViewController
+@interface MensaDetailViewController : UIViewController <ChooseDateViewDelegate>
 {
-    GastronomicFacilityDto *_actualGastronomy;
+    GastronomicFacilityDto      *_actualGastronomy;
+    IBOutlet GradientButton     *_moveBackButton;
+    IBOutlet UINavigationItem   *_dayNavigationItem;
+    IBOutlet UILabel            *_dateLabel;
+    DateFormation               *_dateFormatter;
+    NSDate                      *_actualDate;
+    IBOutlet ChooseDateViewController *_chooseDateVC;
 }
 
-@property (nonatomic, retain) GastronomicFacilityDto                    *_actualGastronomy;
+@property (nonatomic, retain) GastronomicFacilityDto            *_actualGastronomy;
+@property (nonatomic, retain) GradientButton                    *_moveBackButton;
+@property (nonatomic, retain) IBOutlet UINavigationItem         *_dayNavigationItem;
+@property (nonatomic, retain) IBOutlet UILabel                  *_dateLabel;
+@property (nonatomic, retain) DateFormation                     *_dateFormatter;
+@property (nonatomic, retain) NSDate                            *_actualDate;
+@property (nonatomic, retain) IBOutlet ChooseDateViewController         *_chooseDateVC;
 
 - (IBAction)backToMensaOverview:(id)sender;
 

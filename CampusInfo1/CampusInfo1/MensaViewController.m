@@ -368,7 +368,7 @@
     NSLog(@"you've selected %@", _oneGastronomy._name);
     
     _mensaDetailVC._actualGastronomy = _oneGastronomy;
-    
+    //_mensaDetailVC._actualDate = _actualDate;
     [self presentModalViewController:_mensaDetailVC animated:YES];
     
 }
