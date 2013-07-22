@@ -91,6 +91,8 @@
 		E17842D2178309160059EA3C /* DBCachingForAutocomplete.m in Sources */ = {isa = PBXBuildFile; fileRef = E17842D1178309160059EA3C /* DBCachingForAutocomplete.m */; };
 		E195FF36178188A30065DF05 /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = E195FF35178188A30065DF05 /* libsqlite3.dylib */; };
 		E1BC14C2175F8D4900FE2854 /* Autocomplete.m in Sources */ = {isa = PBXBuildFile; fileRef = E1BC14C1175F8D4900FE2854 /* Autocomplete.m */; };
+		E1BC5622179D290A007E235D /* MensaDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E1BC5620179D290A007E235D /* MensaDetailViewController.m */; };
+		E1BC5623179D290A007E235D /* MensaDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E1BC5621179D290A007E235D /* MensaDetailViewController.xib */; };
 		E1C9B22A1743894F00BD3DAE /* TwoSlotsFourRoomsTableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E1C9B2291743894F00BD3DAE /* TwoSlotsFourRoomsTableCell.xib */; };
 		E1D48A5B1757856400BB1652 /* GradientButton.m in Sources */ = {isa = PBXBuildFile; fileRef = E1D48A5A1757856400BB1652 /* GradientButton.m */; };
 		E1D48A5D17579AA500BB1652 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = E1D48A5C17579AA500BB1652 /* Default.png */; };
@@ -216,6 +218,9 @@
 		E195FF35178188A30065DF05 /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
 		E1BC14C0175F8D4900FE2854 /* Autocomplete.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Autocomplete.h; sourceTree = "<group>"; };
 		E1BC14C1175F8D4900FE2854 /* Autocomplete.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Autocomplete.m; sourceTree = "<group>"; };
+		E1BC561F179D290A007E235D /* MensaDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MensaDetailViewController.h; sourceTree = "<group>"; };
+		E1BC5620179D290A007E235D /* MensaDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MensaDetailViewController.m; sourceTree = "<group>"; };
+		E1BC5621179D290A007E235D /* MensaDetailViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MensaDetailViewController.xib; sourceTree = "<group>"; };
 		E1C9B2291743894F00BD3DAE /* TwoSlotsFourRoomsTableCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TwoSlotsFourRoomsTableCell.xib; sourceTree = "<group>"; };
 		E1D48A591757856400BB1652 /* GradientButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GradientButton.h; sourceTree = "<group>"; };
 		E1D48A5A1757856400BB1652 /* GradientButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GradientButton.m; sourceTree = "<group>"; };
@@ -432,6 +437,9 @@
 				E12B3FFF17968AA1000555AE /* MensaViewController.m */,
 				E12B400017968AA1000555AE /* MensaViewController.xib */,
 				E12B400317968F7E000555AE /* MensaOverviewTableCell.xib */,
+				E1BC561F179D290A007E235D /* MensaDetailViewController.h */,
+				E1BC5620179D290A007E235D /* MensaDetailViewController.m */,
+				E1BC5621179D290A007E235D /* MensaDetailViewController.xib */,
 			);
 			name = Mensa;
 			sourceTree = "<group>";
@@ -599,6 +607,7 @@
 				E153642417997C0E00F18559 /* schedule@2x.png in Resources */,
 				E153642517997C0E00F18559 /* search@2x.png in Resources */,
 				E153642617997C0E00F18559 /* settings@2x.png in Resources */,
+				E1BC5623179D290A007E235D /* MensaDetailViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -641,6 +650,7 @@
 				E10B72FB1797DE42005D9D32 /* OpeningTimePlanDto.m in Sources */,
 				E10B72FE1797DE73005D9D32 /* LocationDto.m in Sources */,
 				E10B73011797DFAF005D9D32 /* HolidayDto.m in Sources */,
+				E1BC5622179D290A007E235D /* MensaDetailViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -27,6 +27,7 @@
 @synthesize _dateFormatter;
 @synthesize _translator;
 @synthesize _dateLabel;
+@synthesize _mensaDetailVC;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -56,6 +57,15 @@
                              ,[[_dateFormatter _dayFormatter]     stringFromDate:self._actualDate]];
     
     _dateLabel.text = _dateString;
+    
+    
+    // ----- DETAIL PAGE -----
+    if (_mensaDetailVC == nil)
+    {
+		_mensaDetailVC = [[MensaDetailViewController alloc] init];
+	}
+    _mensaDetailVC.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
+    
 }
 
 - (void)didReceiveMemoryWarning
@@ -69,6 +79,7 @@
     _mensaOverviewTable = nil;
     _mensaOverviewTableCell = nil;
     _dateLabel = nil;
+    _mensaDetailVC = nil;
     [super viewDidUnload];
 }
 
@@ -344,5 +355,23 @@
             withGastronomyType:_gastronomyType
             withOpeningTime:_openingTime];
 }
+
+
+
+// method necessary for UITableViewDelegate
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    NSUInteger    _cellSelection = indexPath.section;
+    GastronomicFacilityDto *_oneGastronomy = [_gastronomyArray objectAtIndex:_cellSelection];
+    
+    NSLog(@"you've selected %@", _oneGastronomy._name);
+    
+    _mensaDetailVC._actualGastronomy = _oneGastronomy;
+    
+    [self presentModalViewController:_mensaDetailVC animated:YES];
+    
+}
+
 
 @end
