@@ -11,8 +11,9 @@
 #import <GradientButton.h>
 #import <DateFormation.h>
 #import <ChooseDateViewController.h>
+#import <TimeTableAsyncRequest.h>
 
-@interface MensaDetailViewController : UIViewController <ChooseDateViewDelegate, UITableViewDataSource, UITableViewDelegate>
+@interface MensaDetailViewController : UIViewController <ChooseDateViewDelegate, UITableViewDataSource, UITableViewDelegate, TimeTableAsyncRequestDelegate>
 {
     GastronomicFacilityDto              *_actualGastronomy;
     IBOutlet GradientButton             *_moveBackButton;
@@ -24,6 +25,11 @@
     IBOutlet UITableView                *_detailTable;
     IBOutlet UITableViewCell            *_detailTableCell;
     IBOutlet UILabel                    *_gastronomyLabel;
+    
+    TimeTableAsyncRequest               *_asyncTimeTableRequest;
+    NSData                              *_dataFromUrl;
+    NSString                            *_errorMessage;
+    int                                 _connectionTrials;
 }
 
 @property (nonatomic, retain) GastronomicFacilityDto                    *_actualGastronomy;
@@ -36,6 +42,12 @@
 @property (nonatomic, retain) IBOutlet UITableView                      *_detailTable;
 @property (nonatomic, retain) IBOutlet UITableViewCell                  *_detailTableCell;
 @property (nonatomic, retain) IBOutlet UILabel                          *_gastronomyLabel;
+
+@property (strong, nonatomic) NSDictionary                      *_generalDictionary;
+@property (nonatomic, retain) IBOutlet TimeTableAsyncRequest    *_asyncTimeTableRequest;
+@property (nonatomic, retain) NSData                            *_dataFromUrl;
+@property (nonatomic, retain) NSString                          *_errorMessage;
+@property (nonatomic, assign) int                                _connectionTrials;
 
 - (IBAction)backToMensaOverview:(id)sender;
 

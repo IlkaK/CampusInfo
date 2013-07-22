@@ -8,10 +8,6 @@
 
 #import "MensaDetailViewController.h"
 
-@interface MensaDetailViewController ()
-
-@end
-
 @implementation MensaDetailViewController
 
 @synthesize _actualGastronomy;
@@ -24,6 +20,12 @@
 @synthesize _detailTable;
 @synthesize _detailTableCell;
 @synthesize _gastronomyLabel;
+
+@synthesize _asyncTimeTableRequest;
+@synthesize _connectionTrials;
+@synthesize _dataFromUrl;
+@synthesize _errorMessage;
+@synthesize _generalDictionary;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -177,6 +179,123 @@
     _gastronomyLabel = nil;
     [super viewDidUnload];
 }
+
+//-------------------------------
+// asynchronous request
+//-------------------------------
+
+-(void) dataDownloadDidFinish:(NSData*) data
+{
+    
+    self._dataFromUrl = data;
+    
+    // NSLog(@"dataDownloadDidFinish 1 %@",[NSThread callStackSymbols]);
+    
+    if (self._dataFromUrl != nil)
+    {
+        NSString *_receivedString = [[NSString alloc] initWithData:self._dataFromUrl encoding:NSASCIIStringEncoding];
+        _receivedString = [_receivedString substringToIndex:2000];
+        NSLog(@"dataDownloadDidFinish for MensaViewController %@", _receivedString);
+        
+        NSError *_error;
+        
+        _generalDictionary = [NSJSONSerialization
+                              JSONObjectWithData:_dataFromUrl
+                              options:kNilOptions
+                              error:&_error];
+        for (id generalKey in _generalDictionary)
+        {
+            //NSLog(@"generalDictionary key: %@", generalKey);
+            if ([generalKey isEqualToString:@"Message"])
+            {
+                NSString *_message = [_generalDictionary objectForKey:generalKey];
+                //self._errorMessage = _message;
+                NSLog(@"Message: %@",_message);
+            }
+            else
+            {
+                NSLog(@"interprete generalDictionary data");
+            }
+        }
+    }
+}
+
+
+-(void)threadDone:(NSNotification*)arg
+{
+    //NSLog(@"Thread exiting");
+}
+
+
+-(void) downloadData
+{
+    NSString *_urlString = [NSString stringWithFormat:@"https://srv-lab-t-874.zhaw.ch//v1/catering/menuplans/years/2013/weeks/8/"];
+    
+    NSLog(@"urlString: %@", _urlString);
+    
+    NSURL *_url = [NSURL URLWithString:_urlString];
+    [_asyncTimeTableRequest downloadData:_url];
+}
+
+
+- (NSDictionary *) getDictionaryFromUrl
+{
+    
+    _asyncTimeTableRequest = [[TimeTableAsyncRequest alloc] init];
+    _asyncTimeTableRequest._timeTableAsynchRequestDelegate = self;
+    [self performSelectorInBackground:@selector(downloadData) withObject:nil];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(threadDone:)
+                                                 name:NSThreadWillExitNotification
+                                               object:nil];
+    
+    NSError      *_error = nil;
+    NSDictionary *_scheduleDictionary;
+    
+    if (_dataFromUrl == nil)
+    {
+        return nil;
+    }
+    else
+    {
+        //NSLog(@"getDictionaryFromUrl got some data putting it now into dictionary");
+        _scheduleDictionary = [NSJSONSerialization
+                               JSONObjectWithData:_dataFromUrl
+                               options:kNilOptions
+                               error:&_error];
+        
+    }
+    return _scheduleDictionary;
+}
+
+
+
+-(void) getData
+{
+    self._generalDictionary = nil;
+    self._generalDictionary = [self getDictionaryFromUrl];
+    
+    if (self._generalDictionary == nil)
+    {
+        NSLog(@"MensaDetailViewController: no connection");
+    }
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    if (_connectionTrials < 20)
+    {
+        //NSLog(@"viewWillAppear try connecting");
+        _connectionTrials++;
+        [self getData];
+    }
+}
+
+
+
+
 
 
 // table and table cell handling

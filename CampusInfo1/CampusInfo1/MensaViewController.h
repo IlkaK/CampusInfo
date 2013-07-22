@@ -38,13 +38,14 @@
 
 @property (strong, nonatomic) NSDictionary                      *_generalDictionary;
 @property (nonatomic, retain) IBOutlet TimeTableAsyncRequest    *_asyncTimeTableRequest;
-@property (nonatomic, retain) IBOutlet MensaDetailViewController    *_mensaDetailVC;
 @property (nonatomic, retain) NSData                            *_dataFromUrl;
 @property (nonatomic, retain) NSString                          *_errorMessage;
 @property (nonatomic, retain) NSMutableArray                    *_gastronomyArray;
 @property (nonatomic, assign) int                                _connectionTrials;
 
-@property (nonatomic, retain) NSDate                            *_actualDate;
+
+
+@property (nonatomic, retain) IBOutlet MensaDetailViewController    *_mensaDetailVC;@property (nonatomic, retain) NSDate                            *_actualDate;
 @property (nonatomic, retain) DateFormation                     *_dateFormatter;
 @property (nonatomic, retain) LanguageTranslation               *_translator;
 
