@@ -93,6 +93,7 @@
 		E1BC14C2175F8D4900FE2854 /* Autocomplete.m in Sources */ = {isa = PBXBuildFile; fileRef = E1BC14C1175F8D4900FE2854 /* Autocomplete.m */; };
 		E1BC5622179D290A007E235D /* MensaDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E1BC5620179D290A007E235D /* MensaDetailViewController.m */; };
 		E1BC5623179D290A007E235D /* MensaDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E1BC5621179D290A007E235D /* MensaDetailViewController.xib */; };
+		E1BC5628179D7638007E235D /* MensaDetailTableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E1BC5627179D7638007E235D /* MensaDetailTableCell.xib */; };
 		E1C9B22A1743894F00BD3DAE /* TwoSlotsFourRoomsTableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E1C9B2291743894F00BD3DAE /* TwoSlotsFourRoomsTableCell.xib */; };
 		E1D48A5B1757856400BB1652 /* GradientButton.m in Sources */ = {isa = PBXBuildFile; fileRef = E1D48A5A1757856400BB1652 /* GradientButton.m */; };
 		E1D48A5D17579AA500BB1652 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = E1D48A5C17579AA500BB1652 /* Default.png */; };
@@ -221,6 +222,7 @@
 		E1BC561F179D290A007E235D /* MensaDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MensaDetailViewController.h; sourceTree = "<group>"; };
 		E1BC5620179D290A007E235D /* MensaDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MensaDetailViewController.m; sourceTree = "<group>"; };
 		E1BC5621179D290A007E235D /* MensaDetailViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MensaDetailViewController.xib; sourceTree = "<group>"; };
+		E1BC5627179D7638007E235D /* MensaDetailTableCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MensaDetailTableCell.xib; sourceTree = "<group>"; };
 		E1C9B2291743894F00BD3DAE /* TwoSlotsFourRoomsTableCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TwoSlotsFourRoomsTableCell.xib; sourceTree = "<group>"; };
 		E1D48A591757856400BB1652 /* GradientButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GradientButton.h; sourceTree = "<group>"; };
 		E1D48A5A1757856400BB1652 /* GradientButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GradientButton.m; sourceTree = "<group>"; };
@@ -396,9 +398,6 @@
 				27CCE302154414180057D9F8 /* TimeTableDetailController.h */,
 				27CCE303154414180057D9F8 /* TimeTableDetailController.m */,
 				27CCE304154414180057D9F8 /* TimeTableDetailController.xib */,
-				E13D3B5817412F0500F534DB /* ChooseDateViewController.h */,
-				E13D3B5917412F0500F534DB /* ChooseDateViewController.m */,
-				E13D3B5A17412F0500F534DB /* ChooseDateViewController.xib */,
 			);
 			name = TimeTable;
 			sourceTree = "<group>";
@@ -440,6 +439,7 @@
 				E1BC561F179D290A007E235D /* MensaDetailViewController.h */,
 				E1BC5620179D290A007E235D /* MensaDetailViewController.m */,
 				E1BC5621179D290A007E235D /* MensaDetailViewController.xib */,
+				E1BC5627179D7638007E235D /* MensaDetailTableCell.xib */,
 			);
 			name = Mensa;
 			sourceTree = "<group>";
@@ -492,6 +492,9 @@
 		E1B13AB9178EA0DF00C037F8 /* Helper */ = {
 			isa = PBXGroup;
 			children = (
+				E13D3B5817412F0500F534DB /* ChooseDateViewController.h */,
+				E13D3B5917412F0500F534DB /* ChooseDateViewController.m */,
+				E13D3B5A17412F0500F534DB /* ChooseDateViewController.xib */,
 				E1D48A591757856400BB1652 /* GradientButton.h */,
 				E1D48A5A1757856400BB1652 /* GradientButton.m */,
 				E104C047178C397C0020EEB4 /* LanguageTranslation.h */,
@@ -608,6 +611,7 @@
 				E153642517997C0E00F18559 /* search@2x.png in Resources */,
 				E153642617997C0E00F18559 /* settings@2x.png in Resources */,
 				E1BC5623179D290A007E235D /* MensaDetailViewController.xib in Resources */,
+				E1BC5628179D7638007E235D /* MensaDetailTableCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

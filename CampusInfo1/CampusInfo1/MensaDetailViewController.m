@@ -21,6 +21,8 @@
 @synthesize _dateFormatter;
 @synthesize _actualDate;
 @synthesize _chooseDateVC;
+@synthesize _detailTable;
+@synthesize _detailTableCell;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -74,6 +76,14 @@
     _chooseDateVC.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
     
     
+    // set table controller
+    if (_detailTable == nil) {
+		_detailTable = [[UITableView alloc] init];
+	}
+    _detailTable.separatorColor = [UIColor lightGrayColor];
+    _detailTable.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
+    
+    [_detailTable reloadData];    
 }
 
 - (void)setActualDate:(NSDate *)newDate
@@ -159,6 +169,55 @@
     _dayNavigationItem = nil;
     _dateLabel = nil;
     _chooseDateVC = nil;
+    _detailTable = nil;
+    _detailTableCell = nil;
     [super viewDidUnload];
 }
+
+
+// table and table cell handling
+
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
+{
+    return 10;
+}
+
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+    return 1;
+}
+
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return 137;
+}
+
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    
+    static NSString *_cellIdentifier  = @"MensaDetailTableCell";
+    UITableViewCell *_cell            = [tableView dequeueReusableCellWithIdentifier:_cellIdentifier];
+        
+    if (_cell == nil)
+    {
+        [[NSBundle mainBundle] loadNibNamed:@"MensaDetailTableCell" owner:self options:nil];
+        _cell = _detailTableCell;
+        self._detailTableCell = nil;
+    }
+    
+    UILabel         *_labelTitle            = (UILabel *) [_cell viewWithTag:1];
+    UILabel         *_labelMaincourse       = (UILabel *) [_cell viewWithTag:2];
+    UILabel         *_labelSidedishes       = (UILabel *) [_cell viewWithTag:3];
+    UILabel         *_labelPriceInternal    = (UILabel *) [_cell viewWithTag:4];
+    UILabel         *_labelPricePartner     = (UILabel *) [_cell viewWithTag:5];
+    UILabel         *_labelPriceExternal    = (UILabel *) [_cell viewWithTag:6];
+    
+    
+    return _cell;
+}
+
+
 @end
