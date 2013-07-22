@@ -23,6 +23,7 @@
     IBOutlet ChooseDateViewController   *_chooseDateVC;
     IBOutlet UITableView                *_detailTable;
     IBOutlet UITableViewCell            *_detailTableCell;
+    IBOutlet UILabel                    *_gastronomyLabel;
 }
 
 @property (nonatomic, retain) GastronomicFacilityDto                    *_actualGastronomy;
@@ -34,6 +35,7 @@
 @property (nonatomic, retain) IBOutlet ChooseDateViewController         *_chooseDateVC;
 @property (nonatomic, retain) IBOutlet UITableView                      *_detailTable;
 @property (nonatomic, retain) IBOutlet UITableViewCell                  *_detailTableCell;
+@property (nonatomic, retain) IBOutlet UILabel                          *_gastronomyLabel;
 
 - (IBAction)backToMensaOverview:(id)sender;
 

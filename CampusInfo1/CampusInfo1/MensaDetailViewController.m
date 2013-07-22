@@ -23,6 +23,7 @@
 @synthesize _chooseDateVC;
 @synthesize _detailTable;
 @synthesize _detailTableCell;
+@synthesize _gastronomyLabel;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -83,7 +84,9 @@
     _detailTable.separatorColor = [UIColor lightGrayColor];
     _detailTable.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
     
-    [_detailTable reloadData];    
+    [_detailTable reloadData];
+    
+    _gastronomyLabel.text = _actualGastronomy._name;
 }
 
 - (void)setActualDate:(NSDate *)newDate
@@ -171,6 +174,7 @@
     _chooseDateVC = nil;
     _detailTable = nil;
     _detailTableCell = nil;
+    _gastronomyLabel = nil;
     [super viewDidUnload];
 }
 
