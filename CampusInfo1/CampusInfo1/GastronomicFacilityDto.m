@@ -69,7 +69,7 @@
 
         if ([gastronomicKey isEqualToString:@"id"])
         {
-            _localGastroId = [gastronomicDictionary objectForKey:gastronomicKey];
+            _localGastroId = [[gastronomicDictionary objectForKey:gastronomicKey] intValue];
             //NSLog(@"gastronomy id: %i", _localGastroId);
         }
         if ([gastronomicKey isEqualToString:@"name"])

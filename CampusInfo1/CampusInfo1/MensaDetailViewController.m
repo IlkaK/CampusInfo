@@ -8,6 +8,12 @@
 
 #import "MensaDetailViewController.h"
 
+#import "SideDishDto.h"
+#import "DishDto.h"
+#import "MenuPlanDto.h"
+#import "CalendarWeekDto.h"
+#import "MenuDto.h"
+
 @implementation MensaDetailViewController
 
 @synthesize _actualGastronomy;
@@ -26,6 +32,9 @@
 @synthesize _dataFromUrl;
 @synthesize _errorMessage;
 @synthesize _generalDictionary;
+
+@synthesize _menuPlans;
+@synthesize _actualMenu;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -89,7 +98,11 @@
     [_detailTable reloadData];
     
     _gastronomyLabel.text = _actualGastronomy._name;
+    
+    self._menuPlans     = [[NSMutableArray alloc] init];
+    self._actualMenu    = [[MenuDto alloc] init:nil withDishes:nil withOfferedOn:nil withVersion:nil];
 }
+
 
 - (void)setActualDate:(NSDate *)newDate
 {
@@ -149,6 +162,7 @@
     _dayNavigationItem.title = @"";
     
     self.navigationItem.titleView = _dateLabel;
+    [self setActualMenu];
 }
 
 -(void) openChooseDateView
@@ -180,6 +194,48 @@
     [super viewDidUnload];
 }
 
+-(void)setActualMenu
+{
+    int _menuPlansI;
+    MenuPlanDto *_oneMenuPlan;
+    MenuDto *_oneMenu;
+    int _gastronomyFacilityIdsI;
+    int _localGastronomyFacilityId;
+    int _menuI;
+    NSString *_offeredOnString;
+    NSString *_actualDateString = [[_dateFormatter _dayFormatter] stringFromDate:_actualDate];
+    
+    
+    for (_menuPlansI = 0; _menuPlansI < [_menuPlans count]; _menuPlansI++)
+    {
+        _oneMenuPlan = [_menuPlans objectAtIndex:_menuPlansI];
+        
+        for (_gastronomyFacilityIdsI = 0; _gastronomyFacilityIdsI < [_oneMenuPlan._gastronomyFacilityIds count]; _gastronomyFacilityIdsI++)
+        {
+            _localGastronomyFacilityId = [[_oneMenuPlan._gastronomyFacilityIds objectAtIndex:_gastronomyFacilityIdsI] intValue];
+            
+            //NSLog(@"compare gastro ids %i - %i", _localGastronomyFacilityId, _actualGastronomy._gastroId);
+            
+            if (_localGastronomyFacilityId == _actualGastronomy._gastroId)
+            {
+                for (_menuI = 0; _menuI < [_oneMenuPlan._menus count]; _menuI++)
+                {
+                    _oneMenu         = [_oneMenuPlan._menus objectAtIndex:_menuI];
+                    _offeredOnString = [[_dateFormatter _dayFormatter] stringFromDate:_oneMenu._offeredOn];
+                    
+                    //NSLog(@"compare dates %@ = %@?", _offeredOnString, _actualDateString);
+                    if ([_offeredOnString isEqualToString: _actualDateString])
+                    {
+                        _actualMenu = _oneMenu;
+                    }
+                }
+            }
+        }
+    }
+    [_detailTable reloadData];
+}
+
+
 //-------------------------------
 // asynchronous request
 //-------------------------------
@@ -193,16 +249,24 @@
     
     if (self._dataFromUrl != nil)
     {
-        NSString *_receivedString = [[NSString alloc] initWithData:self._dataFromUrl encoding:NSASCIIStringEncoding];
-        _receivedString = [_receivedString substringToIndex:2000];
-        NSLog(@"dataDownloadDidFinish for MensaViewController %@", _receivedString);
+        //NSString *_receivedString = [[NSString alloc] initWithData:self._dataFromUrl encoding:NSASCIIStringEncoding];
+        //_receivedString = [_receivedString substringToIndex:2000];
+        //NSLog(@"dataDownloadDidFinish for MensaViewController %@", _receivedString);
         
         NSError *_error;
+        
+        [_menuPlans removeAllObjects];
+        _actualMenu = nil;
         
         _generalDictionary = [NSJSONSerialization
                               JSONObjectWithData:_dataFromUrl
                               options:kNilOptions
                               error:&_error];
+        
+        NSArray         *_menuPlanArray;
+        int             _menuPlanArrayI;
+        MenuPlanDto     *_localMenuPlan = [[MenuPlanDto alloc]init:nil withVersion:nil withCalendarWeek:nil withGastronomyFacilityIds:nil withMenus:nil];
+        
         for (id generalKey in _generalDictionary)
         {
             //NSLog(@"generalDictionary key: %@", generalKey);
@@ -214,9 +278,18 @@
             }
             else
             {
-                NSLog(@"interprete generalDictionary data");
+                if ([generalKey isEqualToString:@"menuPlans"])
+                {
+                    _menuPlanArray = [_generalDictionary objectForKey:generalKey];
+                    for (_menuPlanArrayI = 0; _menuPlanArrayI < [_menuPlanArray count]; _menuPlanArrayI++)
+                    {
+                        _localMenuPlan = [_localMenuPlan getMenuPlan:[_menuPlanArray objectAtIndex:_menuPlanArrayI]];
+                        [_menuPlans addObject:_localMenuPlan];
+                    }
+                }
             }
         }
+        [self setActualMenu];
     }
 }
 
@@ -302,7 +375,14 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return 10;
+    if (_actualMenu == nil)
+    {
+        return 1;
+    }
+    else
+    {
+        return [_actualMenu._dishes count];
+    }
 }
 
 
@@ -320,7 +400,7 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    
+    NSUInteger        _cellSelection = indexPath.section;
     static NSString *_cellIdentifier  = @"MensaDetailTableCell";
     UITableViewCell *_cell            = [tableView dequeueReusableCellWithIdentifier:_cellIdentifier];
         
@@ -331,14 +411,30 @@
         self._detailTableCell = nil;
     }
     
-    UILabel         *_labelTitle            = (UILabel *) [_cell viewWithTag:1];
-    UILabel         *_labelMaincourse       = (UILabel *) [_cell viewWithTag:2];
-    UILabel         *_labelSidedishes       = (UILabel *) [_cell viewWithTag:3];
-    UILabel         *_labelPriceInternal    = (UILabel *) [_cell viewWithTag:4];
-    UILabel         *_labelPricePartner     = (UILabel *) [_cell viewWithTag:5];
-    UILabel         *_labelPriceExternal    = (UILabel *) [_cell viewWithTag:6];
+    DishDto *_oneDish;
+
+     UILabel         *_labelTitle            = (UILabel *) [_cell viewWithTag:1];
+     UILabel         *_labelMaincourse       = (UILabel *) [_cell viewWithTag:2];
+     UILabel         *_labelSidedishes       = (UILabel *) [_cell viewWithTag:3];
+     UILabel         *_labelPriceInternal    = (UILabel *) [_cell viewWithTag:4];
+     UILabel         *_labelPricePartner     = (UILabel *) [_cell viewWithTag:5];
+     UILabel         *_labelPriceExternal    = (UILabel *) [_cell viewWithTag:6];
     
-    
+    if (_actualMenu == nil)
+    {
+        _labelTitle.text = @"kein Menü";
+    }
+    else
+    {
+       _oneDish = [_actualMenu._dishes objectAtIndex:_cellSelection];
+        _labelTitle.text = _oneDish._label;
+        _labelMaincourse.text = _oneDish._name;
+        _labelSidedishes.text = @"loop over sides missing";
+        _labelPriceExternal.text    = [NSString stringWithFormat:@"%.2f CHF",_oneDish._externalPrice];
+        _labelPriceInternal.text    = [NSString stringWithFormat:@"%.2f CHF",_oneDish._internalPrice];
+        _labelPricePartner.text     = [NSString stringWithFormat:@"%.2f CHF",_oneDish._priceForPartners];
+    }
+
     return _cell;
 }
 

@@ -40,7 +40,7 @@
     {
         if ([locationKey isEqualToString:@"id"])
         {
-            _localLocationId = [locationDictionary objectForKey:locationKey];
+            _localLocationId = [[locationDictionary objectForKey:locationKey] intValue];
             //NSLog(@"location id: %i", _localLocationId);
         }
         if ([locationKey isEqualToString:@"version"])

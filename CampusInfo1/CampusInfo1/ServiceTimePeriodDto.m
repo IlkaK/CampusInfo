@@ -56,7 +56,7 @@
         //NSLog(@"serviceTimePeriodKey: %@", serviceTimePeriodKey);
         if ([serviceTimePeriodKey isEqualToString:@"id"])
         {
-            _localServiceTimePeriodId = [serviceTimePeriodDictionary objectForKey:serviceTimePeriodKey];
+            _localServiceTimePeriodId = [[serviceTimePeriodDictionary objectForKey:serviceTimePeriodKey] intValue];
             //NSLog(@"service time period id: %i", _localServiceTimePeriodId);
         }
         if ([serviceTimePeriodKey isEqualToString:@"startsOn"])

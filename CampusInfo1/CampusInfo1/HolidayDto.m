@@ -50,7 +50,7 @@
     {
         if ([holidayKey isEqualToString:@"id"])
         {
-            _localHolidayId = [holidayDictionary objectForKey:holidayKey];
+            _localHolidayId = [[holidayDictionary objectForKey:holidayKey] intValue];
             //NSLog(@"holiday id: %i", _localHolidayId);
         }
         if ([holidayKey isEqualToString:@"version"])

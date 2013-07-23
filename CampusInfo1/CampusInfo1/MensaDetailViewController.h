@@ -12,6 +12,8 @@
 #import <DateFormation.h>
 #import <ChooseDateViewController.h>
 #import <TimeTableAsyncRequest.h>
+#import <MenuDto.h>
+
 
 @interface MensaDetailViewController : UIViewController <ChooseDateViewDelegate, UITableViewDataSource, UITableViewDelegate, TimeTableAsyncRequestDelegate>
 {
@@ -30,6 +32,9 @@
     NSData                              *_dataFromUrl;
     NSString                            *_errorMessage;
     int                                 _connectionTrials;
+    
+    NSMutableArray                      *_menuPlans;
+    MenuDto                             *_actualMenu;
 }
 
 @property (nonatomic, retain) GastronomicFacilityDto                    *_actualGastronomy;
@@ -48,6 +53,9 @@
 @property (nonatomic, retain) NSData                            *_dataFromUrl;
 @property (nonatomic, retain) NSString                          *_errorMessage;
 @property (nonatomic, assign) int                                _connectionTrials;
+
+@property (nonatomic, retain) NSMutableArray                    *_menuPlans;
+@property (nonatomic, retain) MenuDto                           *_actualMenu;
 
 - (IBAction)backToMensaOverview:(id)sender;
 

@@ -45,6 +45,7 @@
 								<int key="NSvFlags">292</int>
 								<string key="NSFrame">{{99, 0}, {123, 35}}</string>
 								<reference key="NSSuperview" ref="654600243"/>
+								<reference key="NSWindow"/>
 								<reference key="NSNextKeyView" ref="817674062"/>
 								<string key="NSReuseIdentifierKey">_NS:9</string>
 								<bool key="IBUIOpaque">NO</bool>
@@ -83,6 +84,7 @@
 								<int key="NSvFlags">292</int>
 								<string key="NSFrame">{{97, 26}, {140, 35}}</string>
 								<reference key="NSSuperview" ref="654600243"/>
+								<reference key="NSWindow"/>
 								<reference key="NSNextKeyView" ref="1021609045"/>
 								<string key="NSReuseIdentifierKey">_NS:9</string>
 								<bool key="IBUIOpaque">NO</bool>
@@ -114,6 +116,7 @@
 								<int key="NSvFlags">292</int>
 								<string key="NSFrame">{{6, 51}, {314, 35}}</string>
 								<reference key="NSSuperview" ref="654600243"/>
+								<reference key="NSWindow"/>
 								<reference key="NSNextKeyView" ref="572378393"/>
 								<string key="NSReuseIdentifierKey">_NS:9</string>
 								<bool key="IBUIOpaque">NO</bool>
@@ -145,6 +148,7 @@
 								<int key="NSvFlags">292</int>
 								<string key="NSFrame">{{5, 81}, {80, 35}}</string>
 								<reference key="NSSuperview" ref="654600243"/>
+								<reference key="NSWindow"/>
 								<reference key="NSNextKeyView" ref="442899620"/>
 								<string key="NSReuseIdentifierKey">_NS:9</string>
 								<bool key="IBUIOpaque">NO</bool>
@@ -167,12 +171,12 @@
 								<int key="NSvFlags">292</int>
 								<string key="NSFrame">{{6, 98}, {79, 38}}</string>
 								<reference key="NSSuperview" ref="654600243"/>
+								<reference key="NSWindow"/>
 								<reference key="NSNextKeyView" ref="848739367"/>
 								<string key="NSReuseIdentifierKey">_NS:9</string>
 								<bool key="IBUIOpaque">NO</bool>
 								<bool key="IBUIClipsSubviews">YES</bool>
 								<int key="IBUIContentMode">7</int>
-								<int key="IBUITag">5</int>
 								<bool key="IBUIUserInteractionEnabled">NO</bool>
 								<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 								<string key="IBUIText">interner Preis</string>
@@ -191,6 +195,7 @@
 								<int key="NSvFlags">292</int>
 								<string key="NSFrame">{{120, 81}, {80, 35}}</string>
 								<reference key="NSSuperview" ref="654600243"/>
+								<reference key="NSWindow"/>
 								<reference key="NSNextKeyView" ref="28787072"/>
 								<string key="NSReuseIdentifierKey">_NS:9</string>
 								<bool key="IBUIOpaque">NO</bool>
@@ -213,12 +218,12 @@
 								<int key="NSvFlags">292</int>
 								<string key="NSFrame">{{121, 98}, {79, 38}}</string>
 								<reference key="NSSuperview" ref="654600243"/>
+								<reference key="NSWindow"/>
 								<reference key="NSNextKeyView" ref="510917844"/>
 								<string key="NSReuseIdentifierKey">_NS:9</string>
 								<bool key="IBUIOpaque">NO</bool>
 								<bool key="IBUIClipsSubviews">YES</bool>
 								<int key="IBUIContentMode">7</int>
-								<int key="IBUITag">5</int>
 								<bool key="IBUIUserInteractionEnabled">NO</bool>
 								<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 								<string key="IBUIText">Partner</string>
@@ -237,6 +242,7 @@
 								<int key="NSvFlags">292</int>
 								<string key="NSFrame">{{225, 81}, {80, 35}}</string>
 								<reference key="NSSuperview" ref="654600243"/>
+								<reference key="NSWindow"/>
 								<reference key="NSNextKeyView" ref="469544374"/>
 								<string key="NSReuseIdentifierKey">_NS:9</string>
 								<bool key="IBUIOpaque">NO</bool>
@@ -259,11 +265,12 @@
 								<int key="NSvFlags">292</int>
 								<string key="NSFrame">{{226, 98}, {79, 38}}</string>
 								<reference key="NSSuperview" ref="654600243"/>
+								<reference key="NSWindow"/>
+								<reference key="NSNextKeyView"/>
 								<string key="NSReuseIdentifierKey">_NS:9</string>
 								<bool key="IBUIOpaque">NO</bool>
 								<bool key="IBUIClipsSubviews">YES</bool>
 								<int key="IBUIContentMode">7</int>
-								<int key="IBUITag">5</int>
 								<bool key="IBUIUserInteractionEnabled">NO</bool>
 								<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 								<string key="IBUIText">externer Preis</string>
@@ -280,6 +287,7 @@
 						</array>
 						<string key="NSFrameSize">{320, 136}</string>
 						<reference key="NSSuperview" ref="770131299"/>
+						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="297730401"/>
 						<string key="NSReuseIdentifierKey">_NS:11</string>
 						<object class="NSColor" key="IBUIBackgroundColor">
@@ -295,6 +303,7 @@
 				</array>
 				<string key="NSFrameSize">{320, 137}</string>
 				<reference key="NSSuperview"/>
+				<reference key="NSWindow"/>
 				<reference key="NSNextKeyView" ref="654600243"/>
 				<string key="NSReuseIdentifierKey">_NS:9</string>
 				<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
@@ -1296,7 +1305,140 @@
 			<nil key="sourceID"/>
 			<int key="maxID">172</int>
 		</object>
-		<object class="IBClassDescriber" key="IBDocument.Classes"/>
+		<object class="IBClassDescriber" key="IBDocument.Classes">
+			<array class="NSMutableArray" key="referencedPartialClassDescriptions">
+				<object class="IBPartialClassDescription">
+					<string key="className">ChooseDateViewController</string>
+					<string key="superclassName">UIViewController</string>
+					<object class="NSMutableDictionary" key="actions">
+						<string key="NS.key.0">setPickerToToday:</string>
+						<string key="NS.object.0">id</string>
+					</object>
+					<object class="NSMutableDictionary" key="actionInfosByName">
+						<string key="NS.key.0">setPickerToToday:</string>
+						<object class="IBActionInfo" key="NS.object.0">
+							<string key="name">setPickerToToday:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+					</object>
+					<dictionary class="NSMutableDictionary" key="outlets">
+						<string key="_chooseDateNavigationItem">UINavigationItem</string>
+						<string key="_datePicker">UIDatePicker</string>
+						<string key="_navigatorTitle">UILabel</string>
+						<string key="_todayButton">GradientButton</string>
+					</dictionary>
+					<dictionary class="NSMutableDictionary" key="toOneOutletInfosByName">
+						<object class="IBToOneOutletInfo" key="_chooseDateNavigationItem">
+							<string key="name">_chooseDateNavigationItem</string>
+							<string key="candidateClassName">UINavigationItem</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="_datePicker">
+							<string key="name">_datePicker</string>
+							<string key="candidateClassName">UIDatePicker</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="_navigatorTitle">
+							<string key="name">_navigatorTitle</string>
+							<string key="candidateClassName">UILabel</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="_todayButton">
+							<string key="name">_todayButton</string>
+							<string key="candidateClassName">GradientButton</string>
+						</object>
+					</dictionary>
+					<object class="IBClassDescriptionSource" key="sourceIdentifier">
+						<string key="majorKey">IBProjectSource</string>
+						<string key="minorKey">./Classes/ChooseDateViewController.h</string>
+					</object>
+				</object>
+				<object class="IBPartialClassDescription">
+					<string key="className">GradientButton</string>
+					<string key="superclassName">UIButton</string>
+					<object class="IBClassDescriptionSource" key="sourceIdentifier">
+						<string key="majorKey">IBProjectSource</string>
+						<string key="minorKey">./Classes/GradientButton.h</string>
+					</object>
+				</object>
+				<object class="IBPartialClassDescription">
+					<string key="className">MensaDetailViewController</string>
+					<string key="superclassName">UIViewController</string>
+					<object class="NSMutableDictionary" key="actions">
+						<string key="NS.key.0">backToMensaOverview:</string>
+						<string key="NS.object.0">id</string>
+					</object>
+					<object class="NSMutableDictionary" key="actionInfosByName">
+						<string key="NS.key.0">backToMensaOverview:</string>
+						<object class="IBActionInfo" key="NS.object.0">
+							<string key="name">backToMensaOverview:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+					</object>
+					<dictionary class="NSMutableDictionary" key="outlets">
+						<string key="_asyncTimeTableRequest">TimeTableAsyncRequest</string>
+						<string key="_chooseDateVC">ChooseDateViewController</string>
+						<string key="_dateLabel">UILabel</string>
+						<string key="_dayNavigationItem">UINavigationItem</string>
+						<string key="_detailTable">UITableView</string>
+						<string key="_detailTableCell">UITableViewCell</string>
+						<string key="_gastronomyLabel">UILabel</string>
+						<string key="_moveBackButton">GradientButton</string>
+					</dictionary>
+					<dictionary class="NSMutableDictionary" key="toOneOutletInfosByName">
+						<object class="IBToOneOutletInfo" key="_asyncTimeTableRequest">
+							<string key="name">_asyncTimeTableRequest</string>
+							<string key="candidateClassName">TimeTableAsyncRequest</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="_chooseDateVC">
+							<string key="name">_chooseDateVC</string>
+							<string key="candidateClassName">ChooseDateViewController</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="_dateLabel">
+							<string key="name">_dateLabel</string>
+							<string key="candidateClassName">UILabel</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="_dayNavigationItem">
+							<string key="name">_dayNavigationItem</string>
+							<string key="candidateClassName">UINavigationItem</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="_detailTable">
+							<string key="name">_detailTable</string>
+							<string key="candidateClassName">UITableView</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="_detailTableCell">
+							<string key="name">_detailTableCell</string>
+							<string key="candidateClassName">UITableViewCell</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="_gastronomyLabel">
+							<string key="name">_gastronomyLabel</string>
+							<string key="candidateClassName">UILabel</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="_moveBackButton">
+							<string key="name">_moveBackButton</string>
+							<string key="candidateClassName">GradientButton</string>
+						</object>
+					</dictionary>
+					<object class="IBClassDescriptionSource" key="sourceIdentifier">
+						<string key="majorKey">IBProjectSource</string>
+						<string key="minorKey">./Classes/MensaDetailViewController.h</string>
+					</object>
+				</object>
+				<object class="IBPartialClassDescription">
+					<string key="className">NSLayoutConstraint</string>
+					<string key="superclassName">NSObject</string>
+					<object class="IBClassDescriptionSource" key="sourceIdentifier">
+						<string key="majorKey">IBProjectSource</string>
+						<string key="minorKey">./Classes/NSLayoutConstraint.h</string>
+					</object>
+				</object>
+				<object class="IBPartialClassDescription">
+					<string key="className">TimeTableAsyncRequest</string>
+					<string key="superclassName">NSObject</string>
+					<object class="IBClassDescriptionSource" key="sourceIdentifier">
+						<string key="majorKey">IBProjectSource</string>
+						<string key="minorKey">./Classes/TimeTableAsyncRequest.h</string>
+					</object>
+				</object>
+			</array>
+		</object>
 		<int key="IBDocument.localizationMode">0</int>
 		<string key="IBDocument.TargetRuntimeIdentifier">IBCocoaTouchFramework</string>
 		<bool key="IBDocument.PluginDeclaredDependenciesTrackSystemTargetVersion">YES</bool>
