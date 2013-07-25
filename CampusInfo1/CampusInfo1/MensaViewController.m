@@ -204,7 +204,7 @@
 
 -(void) getData
 {
-    self._generalDictionary = nil;
+    //self._generalDictionary = nil;
     self._generalDictionary = [self getDictionaryFromUrl];
     
     if (self._generalDictionary == nil)
@@ -217,18 +217,19 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
+
     if (_connectionTrials < 20)
     {
         //NSLog(@"viewWillAppear try connecting");
         _connectionTrials++;
-        [self getData];
+       [self getData];
     }
 }
 
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return [_gastronomyArray count];
+    return [self._gastronomyArray count];
 }
 
 
@@ -275,6 +276,7 @@
     NSString     *_toHolidayString;
     NSString     *_actualDayString = [[_dateFormatter _englishDayFormatter] stringFromDate:_actualDate];
     NSString     *_actualDayWeekday = [[_dateFormatter _weekDayFormatter] stringFromDate:_actualDate];
+    NSString     *_oneDayWeekdayGermanTranslation;
     
     int           holidayArrayI;
     int           serviceTimePeriodArrayI;
@@ -284,34 +286,40 @@
     OpeningTimePlanDto      *_openingTimePlan;
     WeekdayDto              *_oneWeekday;
     
-    if ([_gastronomyArray count] >= _cellSelection)
+    //NSLog(@"_gastronomyArray count %i cellSelection %i", [_gastronomyArray count], _cellSelection);
+    
+    if (    [_gastronomyArray lastObject] != nil
+        &&  [_gastronomyArray count] > _cellSelection)
     {
         GastronomicFacilityDto *_oneGastronomy = [_gastronomyArray objectAtIndex:_cellSelection];
         _gastronomyName = _oneGastronomy._name;
         _gastronomyType = _oneGastronomy._type;
         HolidayDto *_oneHoliday;
         
-        for (holidayArrayI=0; holidayArrayI < [_oneGastronomy._holidays count]; holidayArrayI++)
+        if ([_oneGastronomy._holidays lastObject] != nil)
         {
-            _oneHoliday = [_oneGastronomy._holidays objectAtIndex:holidayArrayI];
-            
-            _fromHolidayString = [[_dateFormatter _englishDayFormatter] stringFromDate:_oneHoliday._startsAt];
-            _toHolidayString = [[_dateFormatter _englishDayFormatter] stringFromDate:_oneHoliday._endsAt];
-            //NSLog(@"_actualDayString %@ with from %@ and to %@", _actualDayString, _fromHolidayString, _toHolidayString);
-            
-            // _fromString is later in time than _fromLocalScheduleEvent
-            // and _fromString is earlier in time than _toLocalScheduleEvent
-            if(
-                (  [_actualDayString          compare: _fromHolidayString  ] == NSOrderedDescending
-                && [_actualDayString          compare: _toHolidayString    ] == NSOrderedAscending
-               )
-             ||[_actualDayString compare: _fromHolidayString] == NSOrderedSame
-             ||[_actualDayString compare: _toHolidayString  ] == NSOrderedSame
-            )
+            for (holidayArrayI=0; holidayArrayI < [_oneGastronomy._holidays count]; holidayArrayI++)
             {
-                _isHoliday = YES;
-            }
+                _oneHoliday = [_oneGastronomy._holidays objectAtIndex:holidayArrayI];
             
+                _fromHolidayString = [[_dateFormatter _englishDayFormatter] stringFromDate:_oneHoliday._startsAt];
+                _toHolidayString = [[_dateFormatter _englishDayFormatter] stringFromDate:_oneHoliday._endsAt];
+                //NSLog(@"_actualDayString %@ with from %@ and to %@", _actualDayString, _fromHolidayString, _toHolidayString);
+            
+                // _fromString is later in time than _fromLocalScheduleEvent
+                // and _fromString is earlier in time than _toLocalScheduleEvent
+                if (
+                     (  [_actualDayString          compare: _fromHolidayString  ] == NSOrderedDescending
+                     && [_actualDayString          compare: _toHolidayString    ] == NSOrderedAscending
+                     )
+                    ||[_actualDayString compare: _fromHolidayString] == NSOrderedSame
+                    ||[_actualDayString compare: _toHolidayString  ] == NSOrderedSame
+                   )
+                {
+                    _isHoliday = YES;
+                }
+            
+            }
         }
         if (_isHoliday)
         {
@@ -320,31 +328,41 @@
         else
         {
             //NSLog(@"serviceTimePeriod count: %i", [_oneGastronomy._serviceTimePeriods count]);
-            for (serviceTimePeriodArrayI=0; serviceTimePeriodArrayI < [_oneGastronomy._serviceTimePeriods count]; serviceTimePeriodArrayI++)
+            
+            if([ _oneGastronomy._serviceTimePeriods lastObject] != nil)
             {
-                _oneServiceTimePeriod = [_oneGastronomy._serviceTimePeriods objectAtIndex:serviceTimePeriodArrayI];
-                _openingTimePlan = _oneServiceTimePeriod._openingTimePlan;
-                
-                //NSLog(@"weekday count: %i", [_openingTimePlan._weekdays count]);
-                
-                for (weekdaysArrayI = 0; weekdaysArrayI < [_openingTimePlan._weekdays count]; weekdaysArrayI++)
+                for (serviceTimePeriodArrayI=0; serviceTimePeriodArrayI < [_oneGastronomy._serviceTimePeriods count]; serviceTimePeriodArrayI++)
                 {
-                    _oneWeekday = [_openingTimePlan._weekdays objectAtIndex:weekdaysArrayI];
-                    
-                    //NSLog(@"compare weekdays: %@ - %@", _oneWeekday._weekdayType, _actualDayWeekday);
-                    
-                    if( [_oneWeekday._weekdayType caseInsensitiveCompare:_actualDayWeekday] == NSOrderedSame )
+                    _oneServiceTimePeriod = [_oneGastronomy._serviceTimePeriods objectAtIndex:serviceTimePeriodArrayI];
+                    _openingTimePlan = _oneServiceTimePeriod._openingTimePlan;
+                
+                    //NSLog(@"weekday count: %i", [_openingTimePlan._weekdays count]);
+                
+                    if([_openingTimePlan._weekdays lastObject] != nil)
                     {
-                        if (_oneWeekday._fromTime == nil && _oneWeekday._toTime == nil)
+                        for (weekdaysArrayI = 0; weekdaysArrayI < [_openingTimePlan._weekdays count]; weekdaysArrayI++)
                         {
-                            _openingTime = @"geschlossen";
-                        }
-                        else
-                        {
-                            _openingTime = [NSString stringWithFormat:@"offen von %@ bis %@",
+                            _oneWeekday = [_openingTimePlan._weekdays objectAtIndex:weekdaysArrayI];
+                            _oneDayWeekdayGermanTranslation = [NSString stringWithFormat:@"%@",[_translator getGermanWeekdayTranslation:_oneWeekday._weekdayType]];
+                            
+                            //NSLog(@"compare weekdays: %@ (%@) - %@", _oneWeekday._weekdayType, _oneDayWeekdayGermanTranslation, _actualDayWeekday);
+                            
+                            if( [_oneWeekday._weekdayType caseInsensitiveCompare:_actualDayWeekday] == NSOrderedSame
+                               ||  [_oneDayWeekdayGermanTranslation  caseInsensitiveCompare:_actualDayWeekday] == NSOrderedSame
+                               )
+                            {
+                                if (_oneWeekday._fromTime == nil && _oneWeekday._toTime == nil)
+                                {
+                                    _openingTime = @"geschlossen";
+                                }
+                                else
+                                {
+                                    _openingTime = [NSString stringWithFormat:@"offen von %@ bis %@",
                                             [[_dateFormatter _timeFormatter] stringFromDate:_oneWeekday._fromTime]
                                             ,[[_dateFormatter _timeFormatter] stringFromDate:_oneWeekday._toTime]
                                             ];
+                                }
+                            }
                         }
                     }
                 }

@@ -105,6 +105,40 @@
     return _localTranslation;
 }
 
-
+-(NSString *)getGermanWeekdayTranslation:(NSString *)englishWeekday
+{
+    NSString *_localTranslation;
+    
+    if ([englishWeekday isEqualToString:@"monday"])
+    {
+        _localTranslation = @"Montag";
+    }
+    if ([englishWeekday isEqualToString:@"tuesday"])
+    {
+        _localTranslation = @"Dienstag";
+    }
+    if ([englishWeekday isEqualToString:@"wednesday"])
+    {
+        _localTranslation = @"Mittwoch";
+    }
+    if ([englishWeekday isEqualToString:@"thursday"])
+    {
+        _localTranslation = @"Donnerstag";
+    }
+    if ([englishWeekday isEqualToString:@"friday"])
+    {
+        _localTranslation = @"Freitag";
+    }
+    if ([englishWeekday isEqualToString:@"saturday"])
+    {
+        _localTranslation = @"Samstag";
+    }
+    if ([englishWeekday isEqualToString:@"sunday"])
+    {
+        _localTranslation = @"Sonntag";
+    }
+    return _localTranslation;
+    
+}
 
 @end

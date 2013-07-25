@@ -488,6 +488,7 @@
 
 -(void) openChooseDateView
 {
+     _chooseDateVC._actualDate = self._actualDate;
     [self presentModalViewController:_chooseDateVC animated:YES];
 }
 

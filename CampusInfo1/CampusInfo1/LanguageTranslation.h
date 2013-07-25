@@ -18,4 +18,6 @@
 
 - (NSString *)getGermanGastronomyTypeTranslation:(NSString*)gastronomyType;
 
+-(NSString *)getGermanWeekdayTranslation:(NSString *)englishWeekday;
+
 @end
