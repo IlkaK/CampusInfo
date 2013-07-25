@@ -38,6 +38,8 @@
     
     NSDate                              *_actualDate;
     int                                 _actualCalendarWeek;
+    IBOutlet UISwipeGestureRecognizer   *_rightSwipe;
+    IBOutlet UISwipeGestureRecognizer   *_leftSwipe;
 }
 
 @property (nonatomic, retain) GastronomicFacilityDto                    *_actualGastronomy;
@@ -62,6 +64,9 @@
 
 @property (nonatomic, retain) NSMutableArray                            *_menuPlans;
 @property (nonatomic, retain) MenuDto                                   *_actualMenu;
+
+@property (nonatomic, retain) IBOutlet UISwipeGestureRecognizer         *_rightSwipe;
+@property (nonatomic, retain) IBOutlet UISwipeGestureRecognizer         *_leftSwipe;
 
 - (IBAction)backToMensaOverview:(id)sender;
 

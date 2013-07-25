@@ -218,7 +218,7 @@
 {
     [super viewWillAppear:animated];
 
-    if (_connectionTrials < 20)
+    if (_connectionTrials < 20 && self._generalDictionary == nil)
     {
         //NSLog(@"viewWillAppear try connecting");
         _connectionTrials++;

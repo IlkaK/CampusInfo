@@ -38,6 +38,9 @@
 
 @synthesize _actualCalendarWeek;
 
+@synthesize _leftSwipe;
+@synthesize _rightSwipe;
+
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -104,6 +107,15 @@
     self._menuPlans     = [[NSMutableArray alloc] init];
     self._actualMenu    = [[MenuDto alloc] init:nil withDishes:nil withOfferedOn:nil withVersion:nil];
     self._actualCalendarWeek = 0;
+    
+    _rightSwipe = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(dayBefore:)];
+    [_rightSwipe setDirection:(UISwipeGestureRecognizerDirectionRight)];
+    [[self view] addGestureRecognizer:_rightSwipe];
+    
+    _leftSwipe = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(dayAfter:)];
+    [_leftSwipe setDirection:(UISwipeGestureRecognizerDirectionLeft)];
+    [[self view] addGestureRecognizer:_leftSwipe];
+    
 }
 
 
@@ -210,6 +222,8 @@
     _detailTable = nil;
     _detailTableCell = nil;
     _gastronomyLabel = nil;
+    _rightSwipe = nil;
+    _leftSwipe = nil;
     [super viewDidUnload];
 }
 

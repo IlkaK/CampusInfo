@@ -17,6 +17,7 @@
 			<string>IBUILabel</string>
 			<string>IBUINavigationBar</string>
 			<string>IBUINavigationItem</string>
+			<string>IBUISwipeGestureRecognizer</string>
 			<string>IBUITableView</string>
 			<string>IBUIView</string>
 			<string>IBUIViewController</string>
@@ -131,7 +132,6 @@
 						<string key="NSFrame">{{0, 113}, {320, 424}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
 						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
 						<reference key="IBUIBackgroundColor" ref="456672699"/>
 						<bool key="IBUIClipsSubviews">YES</bool>
@@ -213,6 +213,7 @@
 						<int key="NSID">2</int>
 					</object>
 				</object>
+				<array key="IBUIGestureRecognizers" id="0"/>
 				<object class="IBUISimulatedStatusBarMetrics" key="IBUISimulatedStatusBarMetrics"/>
 				<object class="IBUIScreenMetrics" key="IBUISimulatedDestinationMetrics" id="147310178">
 					<string key="IBUISimulatedSizeMetricsClass">IBUIScreenMetrics</string>
@@ -242,6 +243,10 @@
 				<reference key="IBUISimulatedDestinationMetrics" ref="147310178"/>
 				<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 				<bool key="IBUIHorizontal">NO</bool>
+			</object>
+			<object class="IBUISwipeGestureRecognizer" id="289071478"/>
+			<object class="IBUISwipeGestureRecognizer" id="380372340">
+				<int key="IBUIDirection">2</int>
 			</object>
 		</array>
 		<object class="IBObjectContainer" key="IBDocument.Objects">
@@ -303,6 +308,42 @@
 					<int key="connectionID">102</int>
 				</object>
 				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">_rightSwipe</string>
+						<reference key="source" ref="372490531"/>
+						<reference key="destination" ref="289071478"/>
+					</object>
+					<int key="connectionID">122</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">_leftSwipe</string>
+						<reference key="source" ref="372490531"/>
+						<reference key="destination" ref="380372340"/>
+					</object>
+					<int key="connectionID">123</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletCollectionConnection" key="connection">
+						<string key="label">gestureRecognizers</string>
+						<reference key="source" ref="191373211"/>
+						<reference key="destination" ref="289071478"/>
+						<string key="cachedDesigntimeCollectionClassName">NSArray</string>
+						<bool key="addsContentToExistingCollection">YES</bool>
+					</object>
+					<int key="connectionID">119</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletCollectionConnection" key="connection">
+						<string key="label">gestureRecognizers</string>
+						<reference key="source" ref="191373211"/>
+						<reference key="destination" ref="380372340"/>
+						<string key="cachedDesigntimeCollectionClassName">NSArray</string>
+						<bool key="addsContentToExistingCollection">YES</bool>
+					</object>
+					<int key="connectionID">121</int>
+				</object>
+				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchEventConnection" key="connection">
 						<string key="label">backToMensaOverview:</string>
 						<reference key="source" ref="648687617"/>
@@ -332,7 +373,7 @@
 				<array key="orderedObjects">
 					<object class="IBObjectRecord">
 						<int key="objectID">0</int>
-						<array key="object" id="0"/>
+						<reference key="object" ref="0"/>
 						<reference key="children" ref="1000"/>
 						<nil key="parent"/>
 					</object>
@@ -901,6 +942,18 @@
 						<reference key="object" ref="471827142"/>
 						<reference key="parent" ref="342158888"/>
 					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">118</int>
+						<reference key="object" ref="289071478"/>
+						<reference key="parent" ref="0"/>
+						<string key="objectName">Right Swipe Gesture Recognizer</string>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">120</int>
+						<reference key="object" ref="380372340"/>
+						<reference key="parent" ref="0"/>
+						<string key="objectName">Left Swipe Gesture Recognizer</string>
+					</object>
 				</array>
 			</object>
 			<dictionary class="NSMutableDictionary" key="flattenedProperties">
@@ -931,6 +984,8 @@
 				<string key="114.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 				<string key="115.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 				<string key="117.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
+				<string key="118.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
+				<string key="120.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 				<string key="16.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 				<boolean value="NO" key="16.IBViewMetadataTranslatesAutoresizingMaskIntoConstraints"/>
 				<string key="17.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
@@ -988,7 +1043,7 @@
 			<nil key="activeLocalization"/>
 			<dictionary class="NSMutableDictionary" key="localizations"/>
 			<nil key="sourceID"/>
-			<int key="maxID">117</int>
+			<int key="maxID">123</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<array class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -1066,6 +1121,7 @@
 						<string key="_detailTableCell">UITableViewCell</string>
 						<string key="_gastronomyLabel">UILabel</string>
 						<string key="_moveBackButton">GradientButton</string>
+						<string key="_rightSwipe">UISwipeGestureRecognizer</string>
 					</dictionary>
 					<dictionary class="NSMutableDictionary" key="toOneOutletInfosByName">
 						<object class="IBToOneOutletInfo" key="_asyncTimeTableRequest">
@@ -1099,6 +1155,10 @@
 						<object class="IBToOneOutletInfo" key="_moveBackButton">
 							<string key="name">_moveBackButton</string>
 							<string key="candidateClassName">GradientButton</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="_rightSwipe">
+							<string key="name">_rightSwipe</string>
+							<string key="candidateClassName">UISwipeGestureRecognizer</string>
 						</object>
 					</dictionary>
 					<object class="IBClassDescriptionSource" key="sourceIdentifier">
