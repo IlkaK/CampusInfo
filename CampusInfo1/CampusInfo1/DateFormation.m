@@ -21,27 +21,29 @@
     self = [super init];
     if (self)
     {
+        NSTimeZone *_timeZone = [NSTimeZone timeZoneWithName:@"CEST"];
+        
         _dayFormatter       = [[NSDateFormatter alloc]init];
-        [_dayFormatter setTimeZone:[NSTimeZone timeZoneWithName:@"CEST"]];
+        [_dayFormatter setTimeZone:_timeZone];
         [_dayFormatter setDateFormat:@"dd.MM.yyyy"];
         
         _weekDayFormatter   = [[NSDateFormatter alloc]init];
         [_weekDayFormatter setFormatterBehavior:NSDateFormatterBehavior10_4];
-        [_weekDayFormatter setTimeZone:[NSTimeZone timeZoneWithName:@"CEST"]];
+        [_weekDayFormatter setTimeZone:_timeZone];
         [_weekDayFormatter setDateFormat:@"EEEE"];
         
         _timeFormatter      = [[NSDateFormatter alloc]init];
-        [_timeFormatter setTimeZone:[NSTimeZone timeZoneWithName:@"CEST"]];
+        [_timeFormatter setTimeZone:_timeZone];
         [_timeFormatter setDateFormat:@"HH:mm"];
         [_timeFormatter setDefaultDate:[NSDate date]];
         
         
         _englishDayFormatter = [[NSDateFormatter alloc]init];
-        [_englishDayFormatter setTimeZone:[NSTimeZone timeZoneWithName:@"CEST"]];
+        [_englishDayFormatter setTimeZone:_timeZone];
         [_englishDayFormatter setDateFormat:@"yyyy-MM-dd"];
         
         _englishTimeAndDayFormatter = [[NSDateFormatter alloc]init];
-        [_englishTimeAndDayFormatter setTimeZone:[NSTimeZone timeZoneWithName:@"CEST"]];
+        [_englishTimeAndDayFormatter setTimeZone:_timeZone];
         [_englishTimeAndDayFormatter setDateFormat:@"yyyy-MM-dd HH:mm"]; 
     }
     return self;

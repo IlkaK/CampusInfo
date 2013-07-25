@@ -37,7 +37,6 @@
 
 - (HolidayDto *)getHoliday:(NSDictionary *)holidayDictionary
 {
-    _dateFormatter  = [[DateFormation alloc] init];
     int _localHolidayId;
     NSString *_localVersion;
     NSString *_localName;

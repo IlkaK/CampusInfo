@@ -85,10 +85,13 @@
             _menuArray = [menuPlanDictionary objectForKey:menuPlanKey];
             //NSLog(@"count of _menuArray: %i", [_menuArray count]);
         
-            for (_menuArrayI = 0; _menuArrayI < [_menuArray count]; _menuArrayI++)
+            if([_menuArray lastObject] != nil)
             {
-                _localMenu = [_localMenu getMenuWeek:[_menuArray objectAtIndex:_menuArrayI]];
-                [_localMenus addObject:_localMenu];
+                for (_menuArrayI = 0; _menuArrayI < [_menuArray count]; _menuArrayI++)
+                {
+                    _localMenu = [_localMenu getMenuWeek:[_menuArray objectAtIndex:_menuArrayI]];
+                    [_localMenus addObject:_localMenu];
+                }
             }
         }
     }

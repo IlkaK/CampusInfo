@@ -20,7 +20,8 @@
     IBOutlet UINavigationItem *_chooseDateNavigationItem;
     id                         _chooseDateViewDelegate;
     IBOutlet UILabel          *_navigatorTitle;
-    IBOutlet GradientButton *_todayButton;
+    IBOutlet GradientButton   *_todayButton;
+    NSDate                    *_actualDate;
 }
 
 - (IBAction)setPickerToToday:(id)sender;
@@ -30,5 +31,6 @@
 @property (nonatomic, retain) id<ChooseDateViewDelegate>   _chooseDateViewDelegate;
 @property (nonatomic, retain) IBOutlet UILabel            *_navigatorTitle;
 @property (nonatomic, retain) IBOutlet GradientButton     *_todayButton;
+@property (nonatomic, retain) NSDate                      *_actualDate;
 
 @end

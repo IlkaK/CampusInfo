@@ -103,10 +103,15 @@
         if ([dishKey isEqualToString:@"sideDishes"])
         {
             _sideDishArray = [dishDictionary objectForKey:dishKey];
-            for (_sideDishArrayI = 0; _sideDishArrayI < [_sideDishArray count]; _sideDishArrayI++)
+            
+            if([_sideDishArray lastObject] != nil)
             {
-                _localSideDish = [_localSideDish getSideDish:[_sideDishArray objectAtIndex:_sideDishArrayI]];
-                [_localSideDishes addObject:_localSideDish];
+            
+                for (_sideDishArrayI = 0; _sideDishArrayI < [_sideDishArray count]; _sideDishArrayI++)
+                {
+                    _localSideDish = [_localSideDish getSideDish:[_sideDishArray objectAtIndex:_sideDishArrayI]];
+                    [_localSideDishes addObject:_localSideDish];
+                }
             }
         }
     }

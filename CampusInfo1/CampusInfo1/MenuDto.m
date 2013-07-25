@@ -24,8 +24,8 @@
     self = [super init];
     if (self)
     {
-        self._menuId   = newMenuId;
-        self._dishes   = newDishes;
+        self._menuId    = newMenuId;
+        self._dishes    = newDishes;
         self._offeredOn = newOfferedOn;
         self._version   = newVersion;
     }
@@ -36,9 +36,7 @@
 
 - (MenuDto *)getMenuWeek:(NSDictionary *)menuDictionary
 {
-    _dateFormatter  = [[DateFormation alloc] init];
-    
-    MenuDto *_localMenu = [[MenuDto alloc]init:nil withDishes:nil withOfferedOn:nil withVersion:nil];
+    MenuDto         *_localMenu = [[MenuDto alloc]init:nil withDishes:nil withOfferedOn:nil withVersion:nil];
     int             _localMenuId;
     NSMutableArray  *_localDishes = [[NSMutableArray alloc] init];
     NSDate          *_localOfferedOn;
@@ -71,10 +69,13 @@
             _dishesArray = [menuDictionary objectForKey:menuKey];
             //NSLog(@"count of _dishesArray: %i", [_dishesArray count]);
         
-            for (_dishesArrayI = 0; _dishesArrayI < [_dishesArray count]; _dishesArrayI++)
+            if([_dishesArray lastObject] != nil)
             {
-                _localDish = [_localDish getDish:[_dishesArray objectAtIndex:_dishesArrayI]];
-                [_localDishes addObject:_localDish];
+                for (_dishesArrayI = 0; _dishesArrayI < [_dishesArray count]; _dishesArrayI++)
+                {
+                    _localDish = [_localDish getDish:[_dishesArray objectAtIndex:_dishesArrayI]];
+                    [_localDishes addObject:_localDish];
+                }
             }
         }
     }   

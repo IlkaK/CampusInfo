@@ -38,7 +38,6 @@ withTimeplanType:(NSString *)newTimeplanType
 - (WeekdayDto *)getWeekday:(NSDictionary *)weekdayDictionary
            withWeekdayType:(NSString *)weekdayType
 {
-    _dateFormatter  = [[DateFormation alloc] init];
     WeekdayDto    *_localWeekday        = nil;
     NSDate        *_localFromTime       = nil;
     NSDate        *_localToTime         = nil;

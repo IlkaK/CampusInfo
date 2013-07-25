@@ -20,9 +20,9 @@
     self = [super init];
     if (self)
     {
-        self._locationId = newLocationId;
-        self._name = newName;
-        self._version = newVersion;
+        self._locationId    = newLocationId;
+        self._name          = newName;
+        self._version       = newVersion;
     }
     return self;
 }

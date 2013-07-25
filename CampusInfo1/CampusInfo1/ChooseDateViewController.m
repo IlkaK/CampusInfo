@@ -19,6 +19,7 @@
 @synthesize _chooseDateViewDelegate;
 @synthesize _navigatorTitle;
 @synthesize _todayButton;
+@synthesize _actualDate;
 
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -60,6 +61,15 @@
     
     [_todayButton useAlertStyle];
     
+    if (_actualDate == nil)
+    {
+        [_datePicker setDate:[NSDate date]];
+
+    }
+    else
+    {
+        [_datePicker setDate:_actualDate];
+    }
 }
 
 - (void)didReceiveMemoryWarning
@@ -77,10 +87,14 @@
     [super viewDidUnload];
 }
 
+- (void)viewWillAppear:(BOOL)animated
+{
+    [_datePicker setDate:_actualDate];    
+}
+
 - (IBAction)setPickerToToday:(id)sender
 {
-    NSDate *_today = [NSDate date];
-    [_datePicker setDate:_today];
+    [_datePicker setDate:[NSDate date]];
 
 }
 

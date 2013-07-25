@@ -22,7 +22,7 @@
     IBOutlet UINavigationItem           *_dayNavigationItem;
     IBOutlet UILabel                    *_dateLabel;
     DateFormation                       *_dateFormatter;
-    NSDate                              *_actualDate;
+
     IBOutlet ChooseDateViewController   *_chooseDateVC;
     IBOutlet UITableView                *_detailTable;
     IBOutlet UITableViewCell            *_detailTableCell;
@@ -35,6 +35,9 @@
     
     NSMutableArray                      *_menuPlans;
     MenuDto                             *_actualMenu;
+    
+    NSDate                              *_actualDate;
+    int                                 _actualCalendarWeek;
 }
 
 @property (nonatomic, retain) GastronomicFacilityDto                    *_actualGastronomy;
@@ -42,20 +45,23 @@
 @property (nonatomic, retain) IBOutlet UINavigationItem                 *_dayNavigationItem;
 @property (nonatomic, retain) IBOutlet UILabel                          *_dateLabel;
 @property (nonatomic, retain) DateFormation                             *_dateFormatter;
+
 @property (nonatomic, retain) NSDate                                    *_actualDate;
+@property (nonatomic, assign) int                                       _actualCalendarWeek;
+
 @property (nonatomic, retain) IBOutlet ChooseDateViewController         *_chooseDateVC;
 @property (nonatomic, retain) IBOutlet UITableView                      *_detailTable;
 @property (nonatomic, retain) IBOutlet UITableViewCell                  *_detailTableCell;
 @property (nonatomic, retain) IBOutlet UILabel                          *_gastronomyLabel;
 
-@property (strong, nonatomic) NSDictionary                      *_generalDictionary;
-@property (nonatomic, retain) IBOutlet TimeTableAsyncRequest    *_asyncTimeTableRequest;
-@property (nonatomic, retain) NSData                            *_dataFromUrl;
-@property (nonatomic, retain) NSString                          *_errorMessage;
-@property (nonatomic, assign) int                                _connectionTrials;
+@property (strong, nonatomic) NSDictionary                              *_generalDictionary;
+@property (nonatomic, retain) IBOutlet TimeTableAsyncRequest            *_asyncTimeTableRequest;
+@property (nonatomic, retain) NSData                                    *_dataFromUrl;
+@property (nonatomic, retain) NSString                                  *_errorMessage;
+@property (nonatomic, assign) int                                       _connectionTrials;
 
-@property (nonatomic, retain) NSMutableArray                    *_menuPlans;
-@property (nonatomic, retain) MenuDto                           *_actualMenu;
+@property (nonatomic, retain) NSMutableArray                            *_menuPlans;
+@property (nonatomic, retain) MenuDto                                   *_actualMenu;
 
 - (IBAction)backToMensaOverview:(id)sender;
 

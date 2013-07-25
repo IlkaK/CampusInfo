@@ -38,6 +38,7 @@
     return self;
 }
 
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -49,8 +50,8 @@
     
     self._gastronomyArray = [[NSMutableArray alloc] init];
     
-    self._actualDate = [NSDate date];
-    //self._actualDate    = [[_dateFormatter _dayFormatter] dateFromString:@"01.05.2013"];
+    //self._actualDate = [NSDate date];
+    self._actualDate    = [[_dateFormatter _dayFormatter] dateFromString:@"20.02.2013"];
     
     NSString *_dateString = [NSString stringWithFormat:@"%@, %@"
                              ,[[_dateFormatter _weekDayFormatter] stringFromDate:self._actualDate]
@@ -65,8 +66,8 @@
 		_mensaDetailVC = [[MensaDetailViewController alloc] init];
 	}
     _mensaDetailVC.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
-    
 }
+
 
 - (void)didReceiveMemoryWarning
 {
@@ -365,11 +366,12 @@
     NSUInteger    _cellSelection = indexPath.section;
     GastronomicFacilityDto *_oneGastronomy = [_gastronomyArray objectAtIndex:_cellSelection];
     
-    NSLog(@"you've selected %@", _oneGastronomy._name);
+    //NSString *_actualDateString = [[_dateFormatter _dayFormatter] stringFromDate:_actualDate];
+    //NSLog(@"you've selected %@ for date %@", _oneGastronomy._name, _actualDateString);
     
     _mensaDetailVC._actualGastronomy = _oneGastronomy;
     _mensaDetailVC._gastronomyLabel.text  = _oneGastronomy._name;
-    //_mensaDetailVC._actualDate = _actualDate;
+    _mensaDetailVC._actualDate = _actualDate;
     [self presentModalViewController:_mensaDetailVC animated:YES];
     
 }

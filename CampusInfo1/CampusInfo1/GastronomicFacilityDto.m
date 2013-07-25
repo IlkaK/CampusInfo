@@ -95,10 +95,14 @@
         if ([gastronomicKey isEqualToString:@"holidays"])
         {
             _holidayDictionaryArray = [gastronomicDictionary objectForKey:gastronomicKey];
-            for (_holidayArrayI = 0; _holidayArrayI < [_holidayDictionaryArray count]; _holidayArrayI++)
+            
+            if([_holidayDictionaryArray lastObject] != nil)
             {
-                _localHoliday = [_localHoliday getHoliday:[_holidayDictionaryArray objectAtIndex:_holidayArrayI]];
-                [_localHolidays addObject:_localHoliday];
+                for (_holidayArrayI = 0; _holidayArrayI < [_holidayDictionaryArray count]; _holidayArrayI++)
+                {
+                    _localHoliday = [_localHoliday getHoliday:[_holidayDictionaryArray objectAtIndex:_holidayArrayI]];
+                    [_localHolidays addObject:_localHoliday];
+                }
             }
             
         }
@@ -108,10 +112,13 @@
             _serviceTimePeriodDictionaryArray = [gastronomicDictionary objectForKey:gastronomicKey];
             //NSLog(@"-- service time period array count %i", [_serviceTimePeriodDictionaryArray count]);
         
-            for (_serviceTimePeriodArrayI = 0; _serviceTimePeriodArrayI < [_serviceTimePeriodDictionaryArray count]; _serviceTimePeriodArrayI++)
+            if([_serviceTimePeriodDictionaryArray lastObject] != nil)
             {
-                _localServiceTimePeriod = [_localServiceTimePeriod getServiceTimePeriod:[_serviceTimePeriodDictionaryArray objectAtIndex:_serviceTimePeriodArrayI]];
-                [_localServiceTimePeriods addObject:_localServiceTimePeriod];
+                for (_serviceTimePeriodArrayI = 0; _serviceTimePeriodArrayI < [_serviceTimePeriodDictionaryArray count]; _serviceTimePeriodArrayI++)
+                {
+                    _localServiceTimePeriod = [_localServiceTimePeriod getServiceTimePeriod:[_serviceTimePeriodDictionaryArray objectAtIndex:_serviceTimePeriodArrayI]];
+                    [_localServiceTimePeriods addObject:_localServiceTimePeriod];
+                }
             }
         }
     }
