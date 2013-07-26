@@ -11,6 +11,7 @@
 #import "HolidayDto.h"
 #import "ServiceTimePeriodDto.h"
 #import "OpeningTimePlanDto.h"
+#import "LunchTimePlanDto.h"
 #import "WeekdayDto.h"
 
 @implementation MensaViewController
@@ -50,8 +51,8 @@
     
     self._gastronomyArray = [[NSMutableArray alloc] init];
     
-    //self._actualDate = [NSDate date];
-    self._actualDate    = [[_dateFormatter _dayFormatter] dateFromString:@"20.02.2013"];
+    self._actualDate = [NSDate date];
+    //self._actualDate    = [[_dateFormatter _dayFormatter] dateFromString:@"20.02.2013"];
     
     NSString *_dateString = [NSString stringWithFormat:@"%@, %@"
                              ,[[_dateFormatter _weekDayFormatter] stringFromDate:self._actualDate]
@@ -242,6 +243,7 @@
                  withGastronomyName:(NSString *)gastronomyName
                  withGastronomyType:(NSString *)gastronomyType
                     withOpeningTime:(NSString *)openingTime
+                      withLunchTime:(NSString *)lunchTime
 {
     static NSString *_cellIdentifier = @"MensaOverviewTableCell";
     UITableViewCell *_cell           = [actualTableView dequeueReusableCellWithIdentifier:_cellIdentifier];
@@ -252,13 +254,16 @@
         self._mensaOverviewTableCell = nil;
     }
     
-    UILabel          *_mensaLabel     = (UILabel  *)[_cell viewWithTag:1];
+    UILabel          *_mensaLabel           = (UILabel  *)[_cell viewWithTag:1];
+    UILabel          *_openingTimesLabel    = (UILabel  *)[_cell viewWithTag:2];
+    UILabel          *_lunchTimesLabel      = (UILabel  *)[_cell viewWithTag:3];
+    
     _mensaLabel.text = [NSString stringWithFormat:@"%@ (%@)", gastronomyName
                         ,[_translator getGermanGastronomyTypeTranslation:gastronomyType]
                         ];
     
-    UILabel          *_detailLabel     = (UILabel  *)[_cell viewWithTag:2];
-    _detailLabel.text = openingTime;
+    _openingTimesLabel.text = openingTime;
+    _lunchTimesLabel.text   = lunchTime;
 
     return _cell;
 }
@@ -270,6 +275,7 @@
     NSString     *_gastronomyName;
     NSString     *_gastronomyType;
     NSString     *_openingTime;
+    NSString     *_lunchTime = @"";
     BOOL          _isHoliday = NO;
     
     NSString     *_fromHolidayString;
@@ -280,11 +286,14 @@
     
     int           holidayArrayI;
     int           serviceTimePeriodArrayI;
-    int           weekdaysArrayI;
+    int           weekdaysArrayForOpeningTimePlanI;
+    int           weekdaysArrayForLunchTimePlanI;
     
     ServiceTimePeriodDto    *_oneServiceTimePeriod;
+    LunchTimePlanDto        *_lunchTimePlan;
     OpeningTimePlanDto      *_openingTimePlan;
-    WeekdayDto              *_oneWeekday;
+    WeekdayDto              *_oneWeekdayForOpeningTimePlan;
+    WeekdayDto              *_oneWeekdayForLunchTimePlan;
     
     //NSLog(@"_gastronomyArray count %i cellSelection %i", [_gastronomyArray count], _cellSelection);
     
@@ -335,32 +344,58 @@
                 {
                     _oneServiceTimePeriod = [_oneGastronomy._serviceTimePeriods objectAtIndex:serviceTimePeriodArrayI];
                     _openingTimePlan = _oneServiceTimePeriod._openingTimePlan;
+                    _lunchTimePlan   = _oneServiceTimePeriod._lunchTimePlan;
                 
                     //NSLog(@"weekday count: %i", [_openingTimePlan._weekdays count]);
                 
                     if([_openingTimePlan._weekdays lastObject] != nil)
                     {
-                        for (weekdaysArrayI = 0; weekdaysArrayI < [_openingTimePlan._weekdays count]; weekdaysArrayI++)
+                        for (weekdaysArrayForOpeningTimePlanI = 0; weekdaysArrayForOpeningTimePlanI < [_openingTimePlan._weekdays count]; weekdaysArrayForOpeningTimePlanI++)
                         {
-                            _oneWeekday = [_openingTimePlan._weekdays objectAtIndex:weekdaysArrayI];
-                            _oneDayWeekdayGermanTranslation = [NSString stringWithFormat:@"%@",[_translator getGermanWeekdayTranslation:_oneWeekday._weekdayType]];
+                            _oneWeekdayForOpeningTimePlan = [_openingTimePlan._weekdays objectAtIndex:weekdaysArrayForOpeningTimePlanI];
+                            _oneDayWeekdayGermanTranslation = [NSString stringWithFormat:@"%@",[_translator getGermanWeekdayTranslation:_oneWeekdayForOpeningTimePlan._weekdayType]];
                             
                             //NSLog(@"compare weekdays: %@ (%@) - %@", _oneWeekday._weekdayType, _oneDayWeekdayGermanTranslation, _actualDayWeekday);
                             
-                            if( [_oneWeekday._weekdayType caseInsensitiveCompare:_actualDayWeekday] == NSOrderedSame
+                            if( [_oneWeekdayForOpeningTimePlan._weekdayType caseInsensitiveCompare:_actualDayWeekday] == NSOrderedSame
                                ||  [_oneDayWeekdayGermanTranslation  caseInsensitiveCompare:_actualDayWeekday] == NSOrderedSame
                                )
                             {
-                                if (_oneWeekday._fromTime == nil && _oneWeekday._toTime == nil)
+                                if (_oneWeekdayForOpeningTimePlan._fromTime == nil && _oneWeekdayForOpeningTimePlan._toTime == nil)
                                 {
                                     _openingTime = @"geschlossen";
                                 }
                                 else
                                 {
                                     _openingTime = [NSString stringWithFormat:@"offen von %@ bis %@",
-                                            [[_dateFormatter _timeFormatter] stringFromDate:_oneWeekday._fromTime]
-                                            ,[[_dateFormatter _timeFormatter] stringFromDate:_oneWeekday._toTime]
+                                            [[_dateFormatter _timeFormatter] stringFromDate:_oneWeekdayForOpeningTimePlan._fromTime]
+                                            ,[[_dateFormatter _timeFormatter] stringFromDate:_oneWeekdayForOpeningTimePlan._toTime]
                                             ];
+                                    
+                                    if([_lunchTimePlan._weekdays lastObject] != nil)
+                                    {
+                                        for (weekdaysArrayForLunchTimePlanI = 0; weekdaysArrayForLunchTimePlanI < [_lunchTimePlan._weekdays count]; weekdaysArrayForLunchTimePlanI++)
+                                        {
+                                            _oneWeekdayForLunchTimePlan = [_lunchTimePlan._weekdays objectAtIndex:weekdaysArrayForLunchTimePlanI];
+                                            _oneDayWeekdayGermanTranslation = [NSString stringWithFormat:@"%@",[_translator getGermanWeekdayTranslation:_oneWeekdayForLunchTimePlan._weekdayType]];
+                                            
+                                            //NSLog(@"compare weekdays: %@ (%@) - %@", _oneWeekdayForLunchTimePlan._weekdayType, _oneDayWeekdayGermanTranslation, _actualDayWeekday);
+                                            
+                                            if( [_oneWeekdayForLunchTimePlan._weekdayType caseInsensitiveCompare:_actualDayWeekday] == NSOrderedSame
+                                               ||  [_oneDayWeekdayGermanTranslation  caseInsensitiveCompare:_actualDayWeekday] == NSOrderedSame
+                                               )
+                                            {
+                                                _lunchTime = [NSString stringWithFormat:@"Mittagessen von %@ bis %@",
+                                                                 [[_dateFormatter _timeFormatter] stringFromDate:_oneWeekdayForLunchTimePlan._fromTime]
+                                                                 ,[[_dateFormatter _timeFormatter] stringFromDate:_oneWeekdayForLunchTimePlan._toTime]
+                                                                 ];
+                                            }
+                                        }
+                                    }
+                                    else
+                                    {
+                                        _lunchTime   = @"kein Mittagsmenü";
+                                    }
                                 }
                             }
                         }
@@ -370,10 +405,18 @@
         }
     }
     return [self showGastronomy :tableView
-            withGastronomyName:_gastronomyName
-            withGastronomyType:_gastronomyType
-            withOpeningTime:_openingTime];
+            withGastronomyName  :_gastronomyName
+            withGastronomyType  :_gastronomyType
+            withOpeningTime     :_openingTime
+            withLunchTime       :_lunchTime];
 }
+
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return 66;
+}
+
 
 
 
