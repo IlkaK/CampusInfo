@@ -46,10 +46,8 @@
     
     // holding data gained from url
     NSData                *_dataFromUrl;
-    
     NSString              *_errorMessage;
-    
-    int _connectionTrials;
+    int                   _connectionTrials;
 
     DBCachingForAutocomplete *_dbCachingForAutocomplete;
     
