@@ -23,8 +23,11 @@
     DBCachingForAutocomplete    *_dbCachingForAutocomplete;    
     NSMutableArray              *_suggestions;
     Autocomplete                *_autocomplete;
-    NSMutableArray              *_studentsAndLecturerArray;
-    NSMutableArray              *_studentsAndLecturerArrayFromDB;
+    
+    NSMutableArray              *_lecturerArray;
+    NSMutableArray              *_lecturerArrayFromDB;
+    NSMutableArray              *_studentArray;
+    NSMutableArray              *_studentArrayFromDB;
     
     NSDictionary                *_generalDictionary;
     TimeTableAsyncRequest       *_asyncTimeTableRequest;
@@ -45,8 +48,11 @@
 @property (nonatomic, retain) DBCachingForAutocomplete      *_dbCachingForAutocomplete;
 @property (strong, nonatomic) NSMutableArray                *_suggestions;
 @property (strong, nonatomic) Autocomplete                  *_autocomplete;
-@property (strong, nonatomic) NSMutableArray                *_studentsAndLecturerArray;
-@property (strong, nonatomic) NSMutableArray                *_studentsAndLecturerArrayFromDB;
+
+@property (strong, nonatomic) NSMutableArray                *_lecturerArray;
+@property (strong, nonatomic) NSMutableArray                *_lecturerArrayFromDB;
+@property (strong, nonatomic) NSMutableArray                *_studentArray;
+@property (strong, nonatomic) NSMutableArray                *_studentArrayFromDB;
 
 @property (strong, nonatomic) NSDictionary                   *_generalDictionary;
 @property (nonatomic, retain) IBOutlet TimeTableAsyncRequest *_asyncTimeTableRequest;

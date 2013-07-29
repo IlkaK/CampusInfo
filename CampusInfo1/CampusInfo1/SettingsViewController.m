@@ -20,8 +20,11 @@
 @synthesize _dbCachingForAutocomplete;
 @synthesize _autocomplete;
 @synthesize _suggestions;
-@synthesize _studentsAndLecturerArray;
-@synthesize _studentsAndLecturerArrayFromDB;
+
+@synthesize _studentArray;
+@synthesize _studentArrayFromDB;
+@synthesize _lecturerArray;
+@synthesize _lecturerArrayFromDB;
 
 @synthesize _errorMessage;
 @synthesize _asyncTimeTableRequest;
@@ -48,11 +51,13 @@
 
     _translator = [[LanguageTranslation alloc] init];
     
-    _studentsAndLecturerArray       = [[NSMutableArray alloc] init];
-    _studentsAndLecturerArrayFromDB = [[NSMutableArray alloc] init];
+    _studentArray        = [[NSMutableArray alloc] init];
+    _studentArrayFromDB  = [[NSMutableArray alloc] init];
+    _lecturerArray       = [[NSMutableArray alloc] init];
+    _lecturerArrayFromDB = [[NSMutableArray alloc] init];
     
     self._acronymTextField.delegate = self;    
-    _autocomplete = [[Autocomplete alloc] initWithArray:_studentsAndLecturerArray];
+    _autocomplete = [[Autocomplete alloc] initWithArray:_studentArray];
 	_acronymTextField.autocorrectionType = UITextAutocorrectionTypeNo;
     
     self._connectionTrials = 1;
@@ -66,10 +71,22 @@
 
 -(void) setAutocompleteCandidatesWithDBUpdate:(BOOL)doDBUpdate
 {
-    _autocomplete._candidates = _studentsAndLecturerArray;
-    if(doDBUpdate && [_studentsAndLecturerArray count] != [_studentsAndLecturerArray count])
+    _autocomplete._candidates = _lecturerArray;
+    
+    int studentArrayI;
+    for (studentArrayI=0; studentArrayI<[_studentArray count]; studentArrayI++)
     {
-        [_dbCachingForAutocomplete storeLecturers:_studentsAndLecturerArray];
+        [_autocomplete._candidates addObject:[_studentArray objectAtIndex:studentArrayI]];
+    }
+    
+    if(doDBUpdate && [_lecturerArrayFromDB count] != [_lecturerArray count])
+    {
+       [_dbCachingForAutocomplete storeLecturers:_lecturerArray];
+    }
+    
+    if(doDBUpdate && [_studentArrayFromDB count] != [_studentArray count])
+    {
+       [_dbCachingForAutocomplete storeStudents:_studentArray];
     }
 }
 
@@ -128,7 +145,7 @@
                         {
                             _lecturerShortName = [_lecturerDictionary objectForKey:lecturerKey];
                             //NSLog(@"lecturer shortName: %@", _lecturerShortName);
-                            [_studentsAndLecturerArray addObject:_lecturerShortName];
+                            [_lecturerArray addObject:_lecturerShortName];
                         }
                     }
                 }
@@ -141,7 +158,7 @@
                 {
                     NSString *_student = [_generalArrayFromServer objectAtIndex:_generalArrayFromServerI];
                     //NSLog(@"students: %@",_student);
-                    [_studentsAndLecturerArray addObject:_student];
+                    [_studentArray addObject:_student];
                 }
             }
             
@@ -206,13 +223,14 @@
     //if (self._courseArray == nil)
     //{
     self._generalDictionary = nil;
-    [_studentsAndLecturerArray removeAllObjects];
+    //[_studentArray removeAllObjects];
+    
     
     self._searchType = @"students";
     self._generalDictionary = [self getDictionaryFromUrl];
     
-    //self._searchType = @"lecturers";
-    //self._generalDictionary = [self getDictionaryFromUrl];
+    self._searchType = @"lecturers";
+    self._generalDictionary = [self getDictionaryFromUrl];
     
     if (self._generalDictionary == nil)
     {
@@ -239,9 +257,7 @@
         NSLog(@"no connection so get data from database: %i", _connectionTrials);
         _connectionTrials++;
         [self getData];
-        
         [self setAutocompleteCandidatesWithDBUpdate:(YES)];
-        
     }
         
     //_studentsAndLecturerArray       = [_dbCachingForAutocomplete getLecturers];
@@ -344,7 +360,7 @@
 {
     _suggestions = [[NSMutableArray alloc] initWithArray:[_autocomplete GetSuggestions:((UITextField*)sender).text]];
 	
-    NSLog(@"acronymTextFieldChanged -> _studentsAndLecturerArray count: %i -> _suggestions count: %i",[_studentsAndLecturerArray count], [_suggestions count]);
+    NSLog(@"acronymTextFieldChanged -> _studentArray count: %i -> _lecturerArray count: %i -> _suggestions count: %i",[_studentArray count], [_lecturerArray count], [_suggestions count]);
     
 	[self.view addSubview:_acronymAutocompleteTableView];
 	[_acronymAutocompleteTableView reloadData];
