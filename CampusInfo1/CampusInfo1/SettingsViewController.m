@@ -239,12 +239,15 @@
         NSLog(@"no connection so get data from database: %i", _connectionTrials);
         _connectionTrials++;
         [self getData];
+        
+        [self setAutocompleteCandidatesWithDBUpdate:(YES)];
+        
     }
         
     //_studentsAndLecturerArray       = [_dbCachingForAutocomplete getLecturers];
     //_studentsAndLecturerArrayFromDB = _studentsAndLecturerArray;
         
-    [self setAutocompleteCandidatesWithDBUpdate:(NO)];
+    //[self setAutocompleteCandidatesWithDBUpdate:(NO)];
     [self.view addSubview:_acronymAutocompleteTableView];
     [_acronymAutocompleteTableView reloadData];
 }
@@ -341,7 +344,7 @@
 {
     _suggestions = [[NSMutableArray alloc] initWithArray:[_autocomplete GetSuggestions:((UITextField*)sender).text]];
 	
-    NSLog(@"acronymTextFieldChanged -> _studentsAndLecturerArray count: %i",[_studentsAndLecturerArray count]);
+    NSLog(@"acronymTextFieldChanged -> _studentsAndLecturerArray count: %i -> _suggestions count: %i",[_studentsAndLecturerArray count], [_suggestions count]);
     
 	[self.view addSubview:_acronymAutocompleteTableView];
 	[_acronymAutocompleteTableView reloadData];
