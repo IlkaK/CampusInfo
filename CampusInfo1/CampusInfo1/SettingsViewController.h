@@ -29,7 +29,9 @@
     NSMutableArray              *_studentArray;
     NSMutableArray              *_studentArrayFromDB;
     
-    NSDictionary                *_generalDictionary;
+    NSDictionary                *_generalStudentDictionary;
+    NSDictionary                *_generalLecturerDictionary;
+    
     TimeTableAsyncRequest       *_asyncTimeTableRequest;
     NSData                      *_dataFromUrl;
     NSString                    *_errorMessage;
@@ -54,7 +56,9 @@
 @property (strong, nonatomic) NSMutableArray                *_studentArray;
 @property (strong, nonatomic) NSMutableArray                *_studentArrayFromDB;
 
-@property (strong, nonatomic) NSDictionary                   *_generalDictionary;
+@property (strong, nonatomic) NSDictionary                   *_generalStudentDictionary;
+@property (strong, nonatomic) NSDictionary                   *_generalLecturerDictionary;
+
 @property (nonatomic, retain) IBOutlet TimeTableAsyncRequest *_asyncTimeTableRequest;
 @property (nonatomic, retain) NSData                         *_dataFromUrl;
 @property (nonatomic, retain) NSString                       *_errorMessage;
