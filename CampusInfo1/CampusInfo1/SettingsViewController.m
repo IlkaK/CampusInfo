@@ -31,8 +31,7 @@
 @synthesize _connectionTrials;
 @synthesize _dataFromUrl;
 
-@synthesize _generalStudentDictionary;
-@synthesize _generalLecturerDictionary;
+@synthesize _generalDictionary;
 
 @synthesize _translator;
 
@@ -63,12 +62,13 @@
 	_acronymTextField.autocorrectionType = UITextAutocorrectionTypeNo;
     
     self._connectionTrials = 1;
-    _generalStudentDictionary = nil;
-    _generalLecturerDictionary = nil;
+    _generalDictionary = nil;
     
     NSUserDefaults *_acronymUserDefaults = [NSUserDefaults standardUserDefaults];
     _acronymTextField.text                = [_acronymUserDefaults stringForKey:@"TimeTableAcronym"];
     [_backToScheduleButton useAlertStyle];
+    
+    _dbCachingForAutocomplete = [[DBCachingForAutocomplete alloc]init];
 }
 
 
@@ -121,82 +121,62 @@
         //{
         NSArray      *_generalArrayFromServer;
         int          _generalArrayFromServerI;
-        
-        if ([self._searchType isEqualToString:@"lecturers"])
-        {
-            _generalLecturerDictionary = [NSJSONSerialization
+
+        _generalDictionary = [NSJSONSerialization
                               JSONObjectWithData:_dataFromUrl
                               options:kNilOptions
                               error:&_error];
             
-            [_lecturerArray removeAllObjects];
             
-            for (id generalKey in _generalLecturerDictionary)
+        for (id generalKey in _generalDictionary)
+        {
+            //NSLog(@"dataDownloadDidFinish generalKey:%@",generalKey);
+            
+            _generalArrayFromServer = [_generalDictionary objectForKey:generalKey];
+            
+            if ([generalKey isEqualToString:@"lecturers"])
             {
-                //NSLog(@"dataDownloadDidFinish generalKey:%@",generalKey);
-            
-                _generalArrayFromServer = [_generalLecturerDictionary objectForKey:generalKey];
-            
-                if ([generalKey isEqualToString:@"lecturers"])
-                {
-                    NSDictionary    *_lecturerDictionary;
-                    NSString        *_lecturerName;
-                    NSString        *_lecturerShortName;
+                [_lecturerArray removeAllObjects];
+                NSDictionary    *_lecturerDictionary;
+                NSString        *_lecturerName;
+                NSString        *_lecturerShortName;
 
-                    for (_generalArrayFromServerI = 0; _generalArrayFromServerI < [_generalArrayFromServer count]; _generalArrayFromServerI++)
+                for (_generalArrayFromServerI = 0; _generalArrayFromServerI < [_generalArrayFromServer count]; _generalArrayFromServerI++)
+                {
+                    _lecturerDictionary = [_generalArrayFromServer objectAtIndex:_generalArrayFromServerI];
+                    for (id lecturerKey in _lecturerDictionary)
                     {
-                        _lecturerDictionary = [_generalArrayFromServer objectAtIndex:_generalArrayFromServerI];
-                        for (id lecturerKey in _lecturerDictionary)
+                        if ([lecturerKey isEqualToString:@"name"])
                         {
-                            if ([lecturerKey isEqualToString:@"name"])
-                            {
-                                _lecturerName = [_lecturerDictionary objectForKey:lecturerKey];
-                                //NSLog(@"lecturer name: %@", _lecturerName);
-                            }
-                            if ([lecturerKey isEqualToString:@"shortName"])
-                            {
-                                _lecturerShortName = [_lecturerDictionary objectForKey:lecturerKey];
-                                //NSLog(@"lecturer shortName: %@", _lecturerShortName);
-                                [_lecturerArray addObject:_lecturerShortName];
-                            }
+                            _lecturerName = [_lecturerDictionary objectForKey:lecturerKey];
+                            //NSLog(@"lecturer name: %@", _lecturerName);
+                        }
+                        if ([lecturerKey isEqualToString:@"shortName"])
+                        {
+                            _lecturerShortName = [_lecturerDictionary objectForKey:lecturerKey];
+                            //NSLog(@"lecturer shortName: %@", _lecturerShortName);
+                            [_lecturerArray addObject:_lecturerShortName];
                         }
                     }
                 }
+                //NSLog(@"dataDownloadDidFinish lecturerArray count: %i", [_lecturerArray count]);
+                [self setAutocompleteCandidatesWithDBUpdate:(NO)];
             }
-            NSLog(@"dataDownloadDidFinish lecturerArray count: %i", [_lecturerArray count]);
-            [self setAutocompleteCandidatesWithDBUpdate:(NO)];
-        }
-            
-        if ([self._searchType isEqualToString:@"students"])
-        {
-            _generalStudentDictionary = [NSJSONSerialization
-                                              JSONObjectWithData:_dataFromUrl
-                                              options:kNilOptions
-                                              error:&_error];
-            
-            [_studentArray removeAllObjects];
-
-            for (id generalKey in _generalStudentDictionary)
+            if ([generalKey isEqualToString:@"students"])
             {
-                NSLog(@"dataDownloadDidFinish generalKey:%@",generalKey);
-                
-                if ([generalKey isEqualToString:@"students"])
+                [_studentArray removeAllObjects];
+                _generalArrayFromServer = [_generalDictionary objectForKey:generalKey];
+                //[_studentsAndLecturerArray removeAllObjects];
+                for (_generalArrayFromServerI = 0; _generalArrayFromServerI < [_generalArrayFromServer count]; _generalArrayFromServerI++)
                 {
-                    _generalArrayFromServer = [_generalLecturerDictionary objectForKey:generalKey];
-                    //[_studentsAndLecturerArray removeAllObjects];
-                    for (_generalArrayFromServerI = 0; _generalArrayFromServerI < [_generalArrayFromServer count]; _generalArrayFromServerI++)
-                    {
-                        NSString *_student = [_generalArrayFromServer objectAtIndex:_generalArrayFromServerI];
-                        //NSLog(@"students: %@",_student);
-                        [_studentArray addObject:_student];
-                    }
+                    NSString *_student = [_generalArrayFromServer objectAtIndex:_generalArrayFromServerI];
+                    //NSLog(@"students: %@",_student);
+                    [_studentArray addObject:_student];
                 }
+                //NSLog(@"dataDownloadDidFinish studentArray count: %i", [_studentArray count]);
+                [self setAutocompleteCandidatesWithDBUpdate:(NO)];
             }
-            NSLog(@"dataDownloadDidFinish studentArray count: %i", [_studentArray count]);
-            
-            [self setAutocompleteCandidatesWithDBUpdate:(NO)];
         }
-        //}
     }
 }
 
@@ -260,17 +240,17 @@
     
     
     self._searchType = @"students";
-    self._generalStudentDictionary = [self getDictionaryFromUrl];
+    self._generalDictionary = [self getDictionaryFromUrl];
     
-    if (self._generalStudentDictionary == nil)
+    if (self._generalDictionary == nil)
     {
         NSLog(@"SearchViewController: no connection for student");
     }
     
     self._searchType = @"lecturers";
-    self._generalLecturerDictionary = [self getDictionaryFromUrl];
+    self._generalDictionary = [self getDictionaryFromUrl];
     
-    if (self._generalLecturerDictionary == nil)
+    if (self._generalDictionary == nil)
     {
         NSLog(@"SearchViewController: no connection for lecturer");
     }
@@ -290,26 +270,23 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
+    [self getData];
     
-    if (    _connectionTrials < 20
-        && (
-               self._generalStudentDictionary == nil
-            || self._generalLecturerDictionary == nil
-            )
-        )
+    if (self._generalDictionary == nil)
     {
-        NSLog(@"no connection so get data from database: %i", _connectionTrials);
-        _connectionTrials++;
-        [self getData];
-        [self setAutocompleteCandidatesWithDBUpdate:(YES)];
+        [_lecturerArray removeAllObjects];
+        [_studentArray removeAllObjects];
+        
+        //NSLog(@"no connection so get data from database");
+        _lecturerArray          = [_dbCachingForAutocomplete getLecturers];
+        _lecturerArrayFromDB    = _lecturerArray;
+        _studentArray           = [_dbCachingForAutocomplete getStudents];
+        _studentArrayFromDB     = _studentArray;
+        
+        [self setAutocompleteCandidatesWithDBUpdate:(NO)];
+        [self.view addSubview:_acronymAutocompleteTableView];
+        [_acronymAutocompleteTableView reloadData];
     }
-        
-    //_studentsAndLecturerArray       = [_dbCachingForAutocomplete getLecturers];
-    //_studentsAndLecturerArrayFromDB = _studentsAndLecturerArray;
-        
-    //[self setAutocompleteCandidatesWithDBUpdate:(NO)];
-    [self.view addSubview:_acronymAutocompleteTableView];
-    [_acronymAutocompleteTableView reloadData];
 }
 
 
@@ -402,9 +379,10 @@
 
 - (IBAction)acronymTextFieldChanged:(id)sender
 {
+
     _suggestions = [[NSMutableArray alloc] initWithArray:[_autocomplete GetSuggestions:((UITextField*)sender).text]];
 	
-    NSLog(@"acronymTextFieldChanged -> _studentArray count: %i -> _lecturerArray count: %i -> _suggestions count: %i",[_studentArray count], [_lecturerArray count], [_suggestions count]);
+    //NSLog(@"acronymTextFieldChanged -> _studentArray count: %i -> _lecturerArray count: %i -> _suggestions count: %i",[_studentArray count], [_lecturerArray count], [_suggestions count]);
     
 	[self.view addSubview:_acronymAutocompleteTableView];
 	[_acronymAutocompleteTableView reloadData];
