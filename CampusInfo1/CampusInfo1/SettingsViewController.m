@@ -69,6 +69,7 @@
     [_backToScheduleButton useAlertStyle];
     
     _dbCachingForAutocomplete = [[DBCachingForAutocomplete alloc]init];
+    [self._acronymAutocompleteTableView setSeparatorStyle:UITableViewCellSeparatorStyleNone];
 }
 
 
