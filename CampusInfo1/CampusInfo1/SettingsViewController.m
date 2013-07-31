@@ -14,7 +14,6 @@
 
 @implementation SettingsViewController
 @synthesize _acronymTextField;
-@synthesize _warningLabel;
 @synthesize _backToScheduleButton;
 @synthesize _acronymAutocompleteTableView;
 @synthesize _dbCachingForAutocomplete;
@@ -36,6 +35,8 @@
 @synthesize _translator;
 
 @synthesize _searchType;
+
+@synthesize _contactsButton;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -67,6 +68,7 @@
     NSUserDefaults *_acronymUserDefaults = [NSUserDefaults standardUserDefaults];
     _acronymTextField.text                = [_acronymUserDefaults stringForKey:@"TimeTableAcronym"];
     [_backToScheduleButton useAlertStyle];
+    [_contactsButton useAlertStyle];
     
     _dbCachingForAutocomplete = [[DBCachingForAutocomplete alloc]init];
     [self._acronymAutocompleteTableView setSeparatorStyle:UITableViewCellSeparatorStyleNone];
@@ -301,9 +303,9 @@
 - (void)viewDidUnload {
     [self set_acronymTextField:nil];
     _acronymTextField = nil;
-    _warningLabel = nil;
     _backToScheduleButton = nil;
     _acronymAutocompleteTableView = nil;
+    _contactsButton = nil;
     [super viewDidUnload];
 }
 
@@ -354,7 +356,6 @@
     
     if ([_localType compare: @"empty" ] != NSOrderedSame)
     {
-        _warningLabel.text = @"";
         [[NSNotificationCenter defaultCenter] postNotificationName:@"SearchType" object:_localType];
         [[NSNotificationCenter defaultCenter] postNotificationName:@"SearchText" object:_localAcronym];
         
@@ -369,11 +370,25 @@
     {
         if (_acronymTextField.text == nil || [_acronymTextField.text length] == 0)
         {
-            _warningLabel.text = @"Bitte ein Kürzel eingeben.";
+            UIAlertView *_acronymAlertView = [[UIAlertView alloc]
+                                              initWithTitle:@"Weitere Dienste"
+                                              message:@"Bitte ein Kürzel eingeben."
+                                              delegate:self
+                                              cancelButtonTitle:@"OK"
+                                              otherButtonTitles:nil];
+            
+            [_acronymAlertView show];
         }
         else
         {
-            _warningLabel.text = @"Nur Kürzel von Studenten und Dozenten sind möglich.";
+            UIAlertView *_acronymAlertView = [[UIAlertView alloc]
+                                              initWithTitle:@"Weitere Dienste"
+                                              message:@"Nur Kürzel von Studenten und Dozenten sind möglich."
+                                              delegate:self
+                                              cancelButtonTitle:@"OK"
+                                              otherButtonTitles:nil];
+            
+            [_acronymAlertView show];
         }
     }
 }
@@ -387,6 +402,11 @@
     
 	[self.view addSubview:_acronymAutocompleteTableView];
 	[_acronymAutocompleteTableView reloadData];
+}
+
+- (IBAction)moveToContacts:(id)sender
+{
+    NSLog(@"move to contacts");
 }
 
 

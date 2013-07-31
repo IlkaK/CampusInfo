@@ -16,7 +16,6 @@
 @interface SettingsViewController : UIViewController<UITextFieldDelegate, TimeTableAsyncRequestDelegate>
 {
     IBOutlet UITextField        *_acronymTextField;
-    IBOutlet UILabel            *_warningLabel;
     IBOutlet GradientButton     *_backToScheduleButton;
     
     IBOutlet UITableView        *_acronymAutocompleteTableView;
@@ -38,11 +37,11 @@
     
     LanguageTranslation         *_translator;
     NSString                    *_searchType;
+    IBOutlet GradientButton     *_contactsButton;
 }
 
 
 @property (nonatomic, retain) IBOutlet UITextField          *_acronymTextField;
-@property (nonatomic, retain) IBOutlet UILabel              *_warningLabel;
 @property (nonatomic, retain) IBOutlet GradientButton       *_backToScheduleButton;
 
 @property (nonatomic, retain) IBOutlet UITableView          *_acronymAutocompleteTableView;
@@ -66,7 +65,11 @@
 
 @property (nonatomic, retain) NSString                       *_searchType;
 
+@property (nonatomic, retain) IBOutlet GradientButton       *_contactsButton;
+
+
 - (IBAction)moveToTimeTable:(id)sender;
 - (IBAction)acronymTextFieldChanged:(id)sender;
+- (IBAction)moveToContacts:(id)sender;
 
 @end
