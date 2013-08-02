@@ -38,6 +38,7 @@
     LanguageTranslation         *_translator;
     NSString                    *_searchType;
     IBOutlet GradientButton     *_contactsButton;
+    IBOutlet GradientButton     *_emergencyButton;
 }
 
 
@@ -65,11 +66,13 @@
 
 @property (nonatomic, retain) NSString                       *_searchType;
 
-@property (nonatomic, retain) IBOutlet GradientButton       *_contactsButton;
+@property (nonatomic, retain) IBOutlet GradientButton        *_contactsButton;
+@property (nonatomic, retain) IBOutlet GradientButton        *_emergencyButton;
 
 
 - (IBAction)moveToTimeTable:(id)sender;
 - (IBAction)acronymTextFieldChanged:(id)sender;
 - (IBAction)moveToContacts:(id)sender;
+- (IBAction)moveToEmergency:(id)sender;
 
 @end

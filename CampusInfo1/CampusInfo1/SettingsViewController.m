@@ -37,6 +37,7 @@
 @synthesize _searchType;
 
 @synthesize _contactsButton;
+@synthesize _emergencyButton;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -68,10 +69,20 @@
     NSUserDefaults *_acronymUserDefaults = [NSUserDefaults standardUserDefaults];
     _acronymTextField.text                = [_acronymUserDefaults stringForKey:@"TimeTableAcronym"];
     [_backToScheduleButton useAlertStyle];
+    
     [_contactsButton useAlertStyle];
+    [_emergencyButton useAlertStyle];
     
     _dbCachingForAutocomplete = [[DBCachingForAutocomplete alloc]init];
-    [self._acronymAutocompleteTableView setSeparatorStyle:UITableViewCellSeparatorStyleNone];
+    [self._acronymAutocompleteTableView setSeparatorStyle:UITableViewCellSeparatorStyleNone];    
+    
+    UIView *lineView1 = [[UIView alloc] initWithFrame:CGRectMake(0, 32, self.view.bounds.size.width, 1)];
+    lineView1.backgroundColor = [UIColor blackColor];
+    [self.view addSubview:lineView1];
+    
+    UIView *lineView2 = [[UIView alloc] initWithFrame:CGRectMake(0, 105, self.view.bounds.size.width, 1)];
+    lineView2.backgroundColor = [UIColor blackColor];
+    [self.view addSubview:lineView2];
 }
 
 
@@ -306,6 +317,7 @@
     _backToScheduleButton = nil;
     _acronymAutocompleteTableView = nil;
     _contactsButton = nil;
+    _emergencyButton = nil;
     [super viewDidUnload];
 }
 
@@ -407,6 +419,9 @@
 - (IBAction)moveToContacts:(id)sender
 {
     NSLog(@"move to contacts");
+}
+
+- (IBAction)moveToEmergency:(id)sender {
 }
 
 

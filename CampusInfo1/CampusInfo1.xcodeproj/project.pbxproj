@@ -93,6 +93,10 @@
 		E155A99E179E82A700726C39 /* MenuPlanDto.m in Sources */ = {isa = PBXBuildFile; fileRef = E155A99D179E82A700726C39 /* MenuPlanDto.m */; };
 		E155A9A1179E82C900726C39 /* CalendarWeekDto.m in Sources */ = {isa = PBXBuildFile; fileRef = E155A9A0179E82C900726C39 /* CalendarWeekDto.m */; };
 		E155A9A4179E85FD00726C39 /* MenuDto.m in Sources */ = {isa = PBXBuildFile; fileRef = E155A9A3179E85FD00726C39 /* MenuDto.m */; };
+		E16C642517ABDC0100BEDBB3 /* ContactsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E16C642317ABDC0100BEDBB3 /* ContactsViewController.m */; };
+		E16C642617ABDC0100BEDBB3 /* ContactsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E16C642417ABDC0100BEDBB3 /* ContactsViewController.xib */; };
+		E16C642A17ABDC4600BEDBB3 /* EmergencyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E16C642817ABDC4600BEDBB3 /* EmergencyViewController.m */; };
+		E16C642B17ABDC4600BEDBB3 /* EmergencyViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E16C642917ABDC4600BEDBB3 /* EmergencyViewController.xib */; };
 		E17842D2178309160059EA3C /* DBCachingForAutocomplete.m in Sources */ = {isa = PBXBuildFile; fileRef = E17842D1178309160059EA3C /* DBCachingForAutocomplete.m */; };
 		E195FF36178188A30065DF05 /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = E195FF35178188A30065DF05 /* libsqlite3.dylib */; };
 		E1BC14C2175F8D4900FE2854 /* Autocomplete.m in Sources */ = {isa = PBXBuildFile; fileRef = E1BC14C1175F8D4900FE2854 /* Autocomplete.m */; };
@@ -229,6 +233,12 @@
 		E155A9A0179E82C900726C39 /* CalendarWeekDto.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CalendarWeekDto.m; sourceTree = "<group>"; };
 		E155A9A2179E85FD00726C39 /* MenuDto.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MenuDto.h; sourceTree = "<group>"; };
 		E155A9A3179E85FD00726C39 /* MenuDto.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MenuDto.m; sourceTree = "<group>"; };
+		E16C642217ABDC0100BEDBB3 /* ContactsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContactsViewController.h; sourceTree = "<group>"; };
+		E16C642317ABDC0100BEDBB3 /* ContactsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContactsViewController.m; sourceTree = "<group>"; };
+		E16C642417ABDC0100BEDBB3 /* ContactsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ContactsViewController.xib; sourceTree = "<group>"; };
+		E16C642717ABDC4600BEDBB3 /* EmergencyViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EmergencyViewController.h; sourceTree = "<group>"; };
+		E16C642817ABDC4600BEDBB3 /* EmergencyViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EmergencyViewController.m; sourceTree = "<group>"; };
+		E16C642917ABDC4600BEDBB3 /* EmergencyViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EmergencyViewController.xib; sourceTree = "<group>"; };
 		E17842D0178309160059EA3C /* DBCachingForAutocomplete.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DBCachingForAutocomplete.h; sourceTree = "<group>"; };
 		E17842D1178309160059EA3C /* DBCachingForAutocomplete.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DBCachingForAutocomplete.m; sourceTree = "<group>"; };
 		E195FF35178188A30065DF05 /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
@@ -518,6 +528,12 @@
 				E1DA96791740E41C00CA206F /* SettingsViewController.h */,
 				E1DA967A1740E41C00CA206F /* SettingsViewController.m */,
 				E1DA967B1740E41C00CA206F /* SettingsViewController.xib */,
+				E16C642217ABDC0100BEDBB3 /* ContactsViewController.h */,
+				E16C642317ABDC0100BEDBB3 /* ContactsViewController.m */,
+				E16C642417ABDC0100BEDBB3 /* ContactsViewController.xib */,
+				E16C642717ABDC4600BEDBB3 /* EmergencyViewController.h */,
+				E16C642817ABDC4600BEDBB3 /* EmergencyViewController.m */,
+				E16C642917ABDC4600BEDBB3 /* EmergencyViewController.xib */,
 			);
 			name = Settings;
 			sourceTree = "<group>";
@@ -645,6 +661,8 @@
 				E153642617997C0E00F18559 /* settings@2x.png in Resources */,
 				E1BC5623179D290A007E235D /* MensaDetailViewController.xib in Resources */,
 				E1BC5628179D7638007E235D /* MensaDetailTableCell.xib in Resources */,
+				E16C642617ABDC0100BEDBB3 /* ContactsViewController.xib in Resources */,
+				E16C642B17ABDC4600BEDBB3 /* EmergencyViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -693,6 +711,8 @@
 				E155A99E179E82A700726C39 /* MenuPlanDto.m in Sources */,
 				E155A9A1179E82C900726C39 /* CalendarWeekDto.m in Sources */,
 				E155A9A4179E85FD00726C39 /* MenuDto.m in Sources */,
+				E16C642517ABDC0100BEDBB3 /* ContactsViewController.m in Sources */,
+				E16C642A17ABDC4600BEDBB3 /* EmergencyViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
