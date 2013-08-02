@@ -38,6 +38,8 @@
 
 @synthesize _contactsButton;
 @synthesize _emergencyButton;
+@synthesize _contactsVC;
+@synthesize _emergencyVC;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -83,6 +85,22 @@
     UIView *lineView2 = [[UIView alloc] initWithFrame:CGRectMake(0, 105, self.view.bounds.size.width, 1)];
     lineView2.backgroundColor = [UIColor blackColor];
     [self.view addSubview:lineView2];
+    
+    if (_contactsVC == nil)
+    {
+		_contactsVC = [[ContactsViewController alloc] init];
+	}
+    //_contactsVC._chooseDateViewDelegate = self;
+    _contactsVC.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
+    
+    if (_emergencyVC == nil)
+    {
+		_emergencyVC = [[EmergencyViewController alloc] init];
+	}
+    //_emergencyVC._chooseDateViewDelegate = self;
+    _emergencyVC.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
+    
+    
 }
 
 
@@ -318,6 +336,8 @@
     _acronymAutocompleteTableView = nil;
     _contactsButton = nil;
     _emergencyButton = nil;
+    _contactsVC = nil;
+    _emergencyVC = nil;
     [super viewDidUnload];
 }
 
@@ -418,10 +438,12 @@
 
 - (IBAction)moveToContacts:(id)sender
 {
-    NSLog(@"move to contacts");
+   [self presentModalViewController:_contactsVC animated:YES];
 }
 
-- (IBAction)moveToEmergency:(id)sender {
+- (IBAction)moveToEmergency:(id)sender
+{
+    [self presentModalViewController:_emergencyVC animated:YES];
 }
 
 

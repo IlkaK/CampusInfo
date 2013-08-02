@@ -9,5 +9,11 @@
 #import <UIKit/UIKit.h>
 
 @interface ContactsViewController : UIViewController
+{
+
+    IBOutlet UINavigationItem *_backToSettingsNavigationItem;
+}
+
+@property (nonatomic, retain) IBOutlet UINavigationItem   *_backToSettingsNavigationItem;
 
 @end

@@ -13,6 +13,7 @@
 @end
 
 @implementation ContactsViewController
+@synthesize _backToSettingsNavigationItem;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -23,10 +24,23 @@
     return self;
 }
 
+- (void) backToSettings:(id)sender
+{
+     [self dismissModalViewControllerAnimated:YES];
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    // Do any additional setup after loading the view from its nib.
+    
+    UIImage         *_leftButtonImage = [UIImage imageNamed:@"arrowLeft_small.png"];
+    UIBarButtonItem *_leftButton      = [[UIBarButtonItem alloc] initWithImage: _leftButtonImage
+                                                                         style:UIBarButtonItemStylePlain
+                                                                        target:self
+                                                                        action:@selector(backToSettings:)];
+    
+    [_backToSettingsNavigationItem setLeftBarButtonItem :_leftButton animated :true];
+    _backToSettingsNavigationItem.title = @"";
 }
 
 - (void)didReceiveMemoryWarning
@@ -35,4 +49,8 @@
     // Dispose of any resources that can be recreated.
 }
 
+- (void)viewDidUnload {
+    _backToSettingsNavigationItem = nil;
+    [super viewDidUnload];
+}
 @end

@@ -12,6 +12,8 @@
 #import <Autocomplete.h>
 #import <TimeTableAsyncRequest.h>
 #import <LanguageTranslation.h>
+#import <ContactsViewController.h>
+#import <EmergencyViewController.h>
 
 @interface SettingsViewController : UIViewController<UITextFieldDelegate, TimeTableAsyncRequestDelegate>
 {
@@ -39,6 +41,8 @@
     NSString                    *_searchType;
     IBOutlet GradientButton     *_contactsButton;
     IBOutlet GradientButton     *_emergencyButton;
+    IBOutlet ContactsViewController     *_contactsVC;
+    IBOutlet EmergencyViewController    *_emergencyVC;
 }
 
 
@@ -68,7 +72,8 @@
 
 @property (nonatomic, retain) IBOutlet GradientButton        *_contactsButton;
 @property (nonatomic, retain) IBOutlet GradientButton        *_emergencyButton;
-
+@property (nonatomic, retain) IBOutlet ContactsViewController  *_contactsVC;
+@property (nonatomic, retain) IBOutlet EmergencyViewController *_emergencyVC;
 
 - (IBAction)moveToTimeTable:(id)sender;
 - (IBAction)acronymTextFieldChanged:(id)sender;
