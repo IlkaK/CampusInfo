@@ -13,6 +13,9 @@
 		2700DD2D1699F2C4002906D0 /* ThreeSlotsTwoRoomsTableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2700DD2C1699F2C4002906D0 /* ThreeSlotsTwoRoomsTableCell.xib */; };
 		2700DD2F1699F854002906D0 /* ThreeSlotsThreeRoomsTableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2700DD2E1699F854002906D0 /* ThreeSlotsThreeRoomsTableCell.xib */; };
 		270ACE1D174EA09D00F72E2A /* TwoSlotsThreeRoomsTableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 270ACE1C174EA09D00F72E2A /* TwoSlotsThreeRoomsTableCell.xib */; };
+		271CB2BE17AD196A005CC185 /* EmergencyDetailTableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 271CB2BD17AD196A005CC185 /* EmergencyDetailTableCell.xib */; };
+		271CB2C017AD198E005CC185 /* EmergencyOverviewTableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 271CB2BF17AD198E005CC185 /* EmergencyOverviewTableCell.xib */; };
+		271CB2C217AD26F3005CC185 /* EmergencyInformTableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 271CB2C117AD26F2005CC185 /* EmergencyInformTableCell.xib */; };
 		275ACACD173D36C90091B266 /* SixSlotsTwoRoomsTableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 275ACACC173D36C90091B266 /* SixSlotsTwoRoomsTableCell.xib */; };
 		275ACACF173D3BB60091B266 /* SixSlotsOneRoomTableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 275ACACE173D3BB50091B266 /* SixSlotsOneRoomTableCell.xib */; };
 		275ACAD1173D4AD20091B266 /* TwoSlotSixRoomsTableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 275ACAD0173D4AD20091B266 /* TwoSlotSixRoomsTableCell.xib */; };
@@ -119,6 +122,9 @@
 		2700DD2C1699F2C4002906D0 /* ThreeSlotsTwoRoomsTableCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ThreeSlotsTwoRoomsTableCell.xib; sourceTree = "<group>"; };
 		2700DD2E1699F854002906D0 /* ThreeSlotsThreeRoomsTableCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ThreeSlotsThreeRoomsTableCell.xib; sourceTree = "<group>"; };
 		270ACE1C174EA09D00F72E2A /* TwoSlotsThreeRoomsTableCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TwoSlotsThreeRoomsTableCell.xib; sourceTree = "<group>"; };
+		271CB2BD17AD196A005CC185 /* EmergencyDetailTableCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EmergencyDetailTableCell.xib; sourceTree = "<group>"; };
+		271CB2BF17AD198E005CC185 /* EmergencyOverviewTableCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EmergencyOverviewTableCell.xib; sourceTree = "<group>"; };
+		271CB2C117AD26F2005CC185 /* EmergencyInformTableCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EmergencyInformTableCell.xib; sourceTree = "<group>"; };
 		275ACACC173D36C90091B266 /* SixSlotsTwoRoomsTableCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SixSlotsTwoRoomsTableCell.xib; sourceTree = "<group>"; };
 		275ACACE173D3BB50091B266 /* SixSlotsOneRoomTableCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SixSlotsOneRoomTableCell.xib; sourceTree = "<group>"; };
 		275ACAD0173D4AD20091B266 /* TwoSlotSixRoomsTableCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TwoSlotSixRoomsTableCell.xib; sourceTree = "<group>"; };
@@ -534,6 +540,9 @@
 				E16C642717ABDC4600BEDBB3 /* EmergencyViewController.h */,
 				E16C642817ABDC4600BEDBB3 /* EmergencyViewController.m */,
 				E16C642917ABDC4600BEDBB3 /* EmergencyViewController.xib */,
+				271CB2BD17AD196A005CC185 /* EmergencyDetailTableCell.xib */,
+				271CB2BF17AD198E005CC185 /* EmergencyOverviewTableCell.xib */,
+				271CB2C117AD26F2005CC185 /* EmergencyInformTableCell.xib */,
 			);
 			name = Settings;
 			sourceTree = "<group>";
@@ -663,6 +672,9 @@
 				E1BC5628179D7638007E235D /* MensaDetailTableCell.xib in Resources */,
 				E16C642617ABDC0100BEDBB3 /* ContactsViewController.xib in Resources */,
 				E16C642B17ABDC4600BEDBB3 /* EmergencyViewController.xib in Resources */,
+				271CB2BE17AD196A005CC185 /* EmergencyDetailTableCell.xib in Resources */,
+				271CB2C017AD198E005CC185 /* EmergencyOverviewTableCell.xib in Resources */,
+				271CB2C217AD26F3005CC185 /* EmergencyInformTableCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

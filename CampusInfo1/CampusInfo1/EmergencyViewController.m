@@ -13,7 +13,14 @@
 @end
 
 @implementation EmergencyViewController
+
 @synthesize _backToSettingsNavigationItem;
+@synthesize _emergencyDetailTableCell;
+@synthesize _emergencyOverviewTableCell;
+@synthesize _emergencyTable;
+@synthesize _emergencyInformTableCell;
+@synthesize _emergencyCallNumber;
+
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -33,8 +40,11 @@
 {
     if (buttonIndex != [alertView firstOtherButtonIndex])
     {
-        NSLog(@"Launching the store");
-        // [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"tel://1456987452"]];
+        
+        NSString *_urlString = [NSString stringWithFormat:@"tel://%@", self._emergencyCallNumber];
+        NSLog(@"calling %@", _urlString);
+        
+        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:_urlString]];
     }
 }
 
@@ -43,20 +53,56 @@
 {
     NSSet            *_touches              = [event    allTouches];
     UITouch          *_touch                = [_touches anyObject ];
-    CGPoint           _currentTouchPosition = [_touch locationInView:self.view];
+    CGPoint           _currentTouchPosition = [_touch locationInView:self._emergencyTable];
     
-    NSLog(@"_currentTouchPosition x: %f y: %f", _currentTouchPosition.x , _currentTouchPosition.y);
+    NSIndexPath      *_indexPath            = [self._emergencyTable indexPathForRowAtPoint: _currentTouchPosition];
+    
+    //NSLog(@"_indexPath %i", _indexPath.section);
+    NSString *_callWhom;
+    NSString *_callNumber;
+    
+    if(_indexPath.section == 1)
+    {
+        _callWhom = @"Die Polizei";
+        _callNumber = @"117";
+    }
+    if(_indexPath.section == 2)
+    {
+        _callWhom = @"Die Feuerwehr";
+        _callNumber = @"118";
+    }
+    if(_indexPath.section == 3)
+    {
+        _callWhom = @"Die Sanität";
+        _callNumber = @"144";
+    }
+    if(_indexPath.section == 4)
+    {
+        _callWhom = @"Das Tox-Zentrum";
+        _callNumber = @"145";
+    }
+    if(_indexPath.section == 5)
+    {
+        _callWhom = @"Die REGA";
+        _callNumber = @"1414";
+    }
+    if(_indexPath.section == 7)
+    {
+        _callWhom = @"Die ZHAW-Notfallnummer";
+        _callNumber = @"0589347070";
+    }
+    
+    NSString *_messageForCalling = [NSString stringWithFormat:@"%@ anrufen (%@)?"
+                                   , _callWhom, _callNumber];
     
     UIAlertView *_acronymAlertView = [[UIAlertView alloc]
                                       initWithTitle:@"Weitere Dienste"
-                                      message:@"Anrufen?"
+                                      message:_messageForCalling
                                       delegate:self
                                       cancelButtonTitle:@"OK"
                                       otherButtonTitles:@"Cancel", nil];
-    
+    _emergencyCallNumber = _callNumber;
     [_acronymAlertView show];
-    
-    NSLog(@"changeToCourseSchedule");
 // [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"tel://1456987452"]];
 }
 
@@ -72,153 +118,17 @@
     
     [_backToSettingsNavigationItem setLeftBarButtonItem :_leftButton animated :true];
     _backToSettingsNavigationItem.title = @"";
-    NSDictionary *underlineAttribute = @{NSUnderlineStyleAttributeName: @1};
-    
-    int startLeft  = 20;
-    int startRight = 130;
 
-    int lengthLeft = 140;
-    int lengthRight = 120;
-    int lengthTitle = 250;
+    // set table controller
+    if (_emergencyTable == nil) {
+		_emergencyTable = [[UITableView alloc] init];
+	}
+    _emergencyTable.separatorColor = [UIColor lightGrayColor];
+    _emergencyTable.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
     
-    double sizeTitle = 17.0;
-    double sizeText = 14.0;
-    double sizeComments = 12.0;
+    [_emergencyTable reloadData];
+    _emergencyCallNumber = @"";
     
-    int heightTitle = 20;
-    int heightText = 18;
-    int heightComments = 15;
-
-    NSMutableParagraphStyle *mutParaStyle=[[NSMutableParagraphStyle alloc] init];
-    [mutParaStyle setAlignment:NSTextAlignmentLeft];
-    
-    UILabel *_emergencyTitle = [[UILabel alloc] initWithFrame:CGRectMake(startLeft, 110, lengthTitle, heightTitle)];
-    _emergencyTitle.font = [UIFont systemFontOfSize:sizeTitle];
-    _emergencyTitle.numberOfLines = 0;
-    _emergencyTitle.attributedText = [[NSAttributedString alloc] initWithString:@"1. Alarmieren > wenn nötig" attributes:underlineAttribute];
-    [self.view addSubview:_emergencyTitle];
-    
-    UILabel *_police = [[UILabel alloc] initWithFrame:CGRectMake(startLeft, 140, lengthLeft, heightText)];
-    _police.font = [UIFont systemFontOfSize:sizeText];
-    _police.numberOfLines = 0;
-    _police.text = [NSString stringWithFormat:@"Polizei"];
-    [self.view addSubview:_police];
-    
-    UILabel *_fireservice = [[UILabel alloc] initWithFrame:CGRectMake(startLeft, 160, lengthLeft, heightText)];
-    _fireservice.font = [UIFont systemFontOfSize:sizeText];
-    _fireservice.numberOfLines = 0;
-    _fireservice.text = [NSString stringWithFormat:@"Feuerwehr"];
-    [self.view addSubview:_fireservice];
-    
-    UILabel *_sanitary = [[UILabel alloc] initWithFrame:CGRectMake(startLeft, 180, lengthLeft, heightText)];
-    _sanitary.font = [UIFont systemFontOfSize:sizeText];
-    _sanitary.numberOfLines = 0;
-    _sanitary.text = [NSString stringWithFormat:@"Sanität"];
-    [self.view addSubview:_sanitary];
-    
-    UILabel *_toxcentre = [[UILabel alloc] initWithFrame:CGRectMake(startLeft, 200, lengthLeft, heightText)];
-    _toxcentre.font = [UIFont systemFontOfSize:sizeText];
-    _toxcentre.numberOfLines = 0;
-    _toxcentre.text = [NSString stringWithFormat:@"Tox-Zentrum"];
-    [self.view addSubview:_toxcentre];
-
-    UILabel *_rega = [[UILabel alloc] initWithFrame:CGRectMake(startLeft, 220, lengthLeft, heightText)];
-    _rega.font = [UIFont systemFontOfSize:sizeText];
-    _rega.numberOfLines = 0;
-    _rega.text = [NSString stringWithFormat:@"REGA"];
-    [self.view addSubview:_rega];
-    
-    UILabel *_policeNumber = [[UILabel alloc] initWithFrame:CGRectMake(startRight, 140, lengthRight, heightText)];
-    _policeNumber.font = [UIFont systemFontOfSize:sizeText];
-    _policeNumber.numberOfLines = 0;
-    _policeNumber.text = [NSString stringWithFormat:@"(0)117"];
-    [self.view addSubview:_policeNumber];
-    
-    UILabel *_fireserviceNumber = [[UILabel alloc] initWithFrame:CGRectMake(startRight, 160, lengthRight, heightText)];
-    _fireserviceNumber.font = [UIFont systemFontOfSize:sizeText];
-    _fireserviceNumber.numberOfLines = 0;
-    _fireserviceNumber.text = [NSString stringWithFormat:@"(0)118"];
-    [self.view addSubview:_fireserviceNumber];
-    
-    UILabel *_sanitaryNumber = [[UILabel alloc] initWithFrame:CGRectMake(startRight, 180, lengthRight, heightText)];
-    _sanitaryNumber.font = [UIFont systemFontOfSize:sizeText];
-    _sanitaryNumber.numberOfLines = 0;
-    _sanitaryNumber.text = [NSString stringWithFormat:@"(0)144"];
-    [self.view addSubview:_sanitaryNumber];
-
-    UIButton  *_toxcentreNumber = [[UIButton alloc] initWithFrame:CGRectMake(startRight, 200, lengthRight, heightText)];
-    NSMutableAttributedString *_toxcentreNumberString = [[NSMutableAttributedString alloc] initWithString:@"(0)145"];
-    [_toxcentreNumberString addAttributes:[NSDictionary dictionaryWithObject:mutParaStyle
-                                                                 forKey:NSParagraphStyleAttributeName]
-                               range:NSMakeRange(0,[[_toxcentreNumberString string] length])];
-    
-    [_toxcentreNumberString addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:sizeText]range:NSMakeRange(0, _toxcentreNumberString.length)];
-    [_toxcentreNumber setAttributedTitle:_toxcentreNumberString forState:UIControlStateNormal];
-    _toxcentreNumber.enabled = true;
-    [_toxcentreNumber addTarget:self action:@selector(changeToCourseSchedule  :event:) forControlEvents:UIControlEventTouchUpInside];
-    [self.view addSubview:_toxcentreNumber];
-    
-    UIButton  *_regaNumber = [[UIButton alloc] initWithFrame:CGRectMake(startRight, 220, lengthRight, heightText)];
-    NSMutableAttributedString *_regaNumberString = [[NSMutableAttributedString alloc] initWithString:@"(0)1414"];
-
-    [_regaNumberString addAttributes:[NSDictionary dictionaryWithObject:mutParaStyle
-                                                   forKey:NSParagraphStyleAttributeName]
-                 range:NSMakeRange(0,[[_regaNumberString string] length])];
-    
-    [_regaNumberString addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:sizeText]range:NSMakeRange(0, _regaNumberString.length)];
-    [_regaNumber setAttributedTitle:_regaNumberString forState:UIControlStateNormal];
-    _regaNumber.enabled = true;
-    [_regaNumber addTarget:self action:@selector(changeToCourseSchedule  :event:) forControlEvents:UIControlEventTouchUpInside];
-    [self.view addSubview:_regaNumber];
-    
-     
-    UILabel *_informTitle = [[UILabel alloc] initWithFrame:CGRectMake(startLeft, 250, lengthTitle, heightTitle)];
-    _informTitle.font = [UIFont systemFontOfSize:sizeTitle];
-    _informTitle.numberOfLines = 0;
-    _informTitle.attributedText = [[NSAttributedString alloc] initWithString:@"2. Informieren > immer" attributes:underlineAttribute];
-    [self.view addSubview:_informTitle];
-    
-    UILabel *_zhawEmergency = [[UILabel alloc] initWithFrame:CGRectMake(startLeft, 280, lengthLeft, heightText)];
-    _zhawEmergency.font = [UIFont systemFontOfSize:sizeText];
-    _zhawEmergency.numberOfLines = 0;
-    _zhawEmergency.text = [NSString stringWithFormat:@"ZHAW-Notfallnummer"];
-    [self.view addSubview:_zhawEmergency];
-
-    UILabel *_zhawEmergencyNumbers = [[UILabel alloc] initWithFrame:CGRectMake(startRight, 280, lengthRight, heightText)];
-    _zhawEmergencyNumbers.font = [UIFont systemFontOfSize:sizeText];
-    _zhawEmergencyNumbers.numberOfLines = 0;
-    _zhawEmergencyNumbers.text = [NSString stringWithFormat:@"(0) 058 934 70 70"];
-    [self.view addSubview:_zhawEmergencyNumbers];
-
-    UILabel *_zhawEmergencyDaily = [[UILabel alloc] initWithFrame:CGRectMake(startLeft, 298, lengthLeft, heightComments)];
-    _zhawEmergencyDaily.font = [UIFont systemFontOfSize:sizeComments];
-    _zhawEmergencyDaily.numberOfLines = 0;
-    _zhawEmergencyDaily.text = [NSString stringWithFormat:@"(365 Tage/24 Stunden)"];
-    [self.view addSubview:_zhawEmergencyDaily];
-    
-    UILabel *_or = [[UILabel alloc] initWithFrame:CGRectMake(startLeft, 315, lengthLeft, heightText)];
-    _or.font = [UIFont systemFontOfSize:sizeText];
-    _or.numberOfLines = 0;
-    _or.text = [NSString stringWithFormat:@"oder"];
-    [self.view addSubview:_or];
-
-    UILabel *_inHouse = [[UILabel alloc] initWithFrame:CGRectMake(startLeft, 335, lengthLeft, heightText)];
-    _inHouse.font = [UIFont systemFontOfSize:sizeText];
-    _inHouse.numberOfLines = 0;
-    _inHouse.text = [NSString stringWithFormat:@"Hausdienst"];
-    [self.view addSubview:_inHouse];
-    
-    UILabel *_inHouseNumber = [[UILabel alloc] initWithFrame:CGRectMake(startRight, 335, lengthRight, heightText)];
-    _inHouseNumber.font = [UIFont systemFontOfSize:sizeText];
-    _inHouseNumber.numberOfLines = 0;
-    _inHouseNumber.text = [NSString stringWithFormat:@"Tel. je Standort"];
-    [self.view addSubview:_inHouseNumber];
-
-    UILabel *_inHouseDaily = [[UILabel alloc] initWithFrame:CGRectMake(startLeft, 353, lengthLeft, heightComments)];
-    _inHouseDaily.font = [UIFont systemFontOfSize:sizeComments];
-    _inHouseDaily.numberOfLines = 0;
-    _inHouseDaily.text = [NSString stringWithFormat:@"(während Betriebszeit)"];
-    [self.view addSubview:_inHouseDaily];
 }
 
 - (void)didReceiveMemoryWarning
@@ -229,6 +139,143 @@
 
 - (void)viewDidUnload {
     _backToSettingsNavigationItem = nil;
+    _emergencyTable = nil;
+    _emergencyDetailTableCell = nil;
+    _emergencyOverviewTableCell = nil;
+    _emergencyInformTableCell = nil;
     [super viewDidUnload];
 }
+
+
+// table and table cell handling
+
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
+{
+    return 8;
+}
+
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+    return 1;
+}
+
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    NSUInteger        _cellSelection = indexPath.section;
+    
+    if (_cellSelection == 0 || _cellSelection == 6)
+    {
+        return 40;
+    }
+    if(_cellSelection == 7)
+    {
+        return 114;
+    }
+    return 30;
+}
+
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    NSUInteger        _cellSelection = indexPath.section;
+    static NSString *_cellIdentifier;
+    UITableViewCell *_cell;
+    
+    if (_cellSelection == 0 || _cellSelection == 6)
+    {
+        _cellIdentifier  = @"EmergencyOverviewTableCell";
+        _cell            = [tableView dequeueReusableCellWithIdentifier:_cellIdentifier];
+        if (_cell == nil)
+        {
+            [[NSBundle mainBundle] loadNibNamed:@"EmergencyOverviewTableCell" owner:self options:nil];
+            _cell = _emergencyOverviewTableCell;
+            self._emergencyOverviewTableCell = nil;
+        }
+        UILabel         *_labelTitle      = (UILabel *) [_cell viewWithTag:1];
+        if (_cellSelection == 0)
+        {
+            _labelTitle.text = @"1. Alarmieren > wenn nötig";
+        }
+        if (_cellSelection == 6)
+        {
+            _labelTitle.text = @"2. Informieren > immer";
+        }
+    }
+    else
+    {
+        UIButton        *_buttonNumber;
+        NSString        *_buttonNumberTitle;
+        
+        if (_cellSelection == 7)
+        {
+            _cellIdentifier  = @"EmergencyInformTableCell";
+            _cell            = [tableView dequeueReusableCellWithIdentifier:_cellIdentifier];
+            if (_cell == nil)
+            {
+                [[NSBundle mainBundle] loadNibNamed:@"EmergencyInformTableCell" owner:self options:nil];
+                _cell = _emergencyInformTableCell;
+                self._emergencyInformTableCell = nil;
+            }
+            _buttonNumber          = (UIButton *) [_cell viewWithTag:6];
+            _buttonNumberTitle     = @"(0)058 9347070";
+        }
+        else
+        {
+        
+            _cellIdentifier  = @"EmergencyDetailTableCell";
+            _cell            = [tableView dequeueReusableCellWithIdentifier:_cellIdentifier];
+            if (_cell == nil)
+            {
+                [[NSBundle mainBundle] loadNibNamed:@"EmergencyDetailTableCell" owner:self options:nil];
+                _cell = _emergencyDetailTableCell;
+                self._emergencyDetailTableCell = nil;
+            }
+            UILabel         *_labelDescription      = (UILabel *) [_cell viewWithTag:1];
+            _buttonNumber          = (UIButton *) [_cell viewWithTag:2];
+        
+            if (_cellSelection == 1)
+            {
+                _labelDescription.text = @"Polizei";
+                _buttonNumberTitle = @"(0)117";
+            }
+            if (_cellSelection == 2)
+            {
+                _labelDescription.text = @"Feuerwehr";
+                _buttonNumberTitle = @"(0)118";
+            }
+            if (_cellSelection == 3)
+            {
+                _labelDescription.text = @"Sanität";
+                _buttonNumberTitle = @"(0)144";
+            }
+            if (_cellSelection == 4)
+            {
+                _labelDescription.text = @"Tox-Zentrum";
+                _buttonNumberTitle = @"(0)145";
+            }
+            if (_cellSelection == 5)
+            {
+                _labelDescription.text = @"REGA";
+                _buttonNumberTitle = @"(0)1414";
+            }
+        }
+        _buttonNumber.enabled = true;
+        [_buttonNumber addTarget:self action:@selector(changeToCourseSchedule  :event:) forControlEvents:UIControlEventTouchUpInside];
+            
+        NSMutableAttributedString *_titleString = [[NSMutableAttributedString alloc] initWithString:_buttonNumberTitle];
+        
+        [_titleString addAttribute:NSUnderlineStyleAttributeName value:[NSNumber numberWithInteger:NSUnderlineStyleSingle] range:NSMakeRange(0, [_titleString length])];
+        
+        [_buttonNumber setAttributedTitle:_titleString forState:UIControlStateNormal];
+        
+
+    }
+    return _cell;
+}
+
+
+
+
 @end
