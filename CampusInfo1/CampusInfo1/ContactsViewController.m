@@ -19,6 +19,9 @@
 @synthesize _contactsPhoneTableCell;
 @synthesize _contactsTable;
 @synthesize _contactsPlaceTableCell;
+@synthesize _currentEmail;
+@synthesize _currentPhoneNumber;
+@synthesize _titleLabel;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -46,6 +49,12 @@
     
     [_backToSettingsNavigationItem setLeftBarButtonItem :_leftButton animated :true];
     _backToSettingsNavigationItem.title = @"";
+
+    [self.view bringSubviewToFront:_titleLabel];
+    [_titleLabel setTextColor:[UIColor whiteColor]];
+    _titleLabel.text = @"Studium und Weiterbildung";
+    _backToSettingsNavigationItem.title = @"";
+    self.navigationItem.titleView = _titleLabel;
 }
 
 - (void)didReceiveMemoryWarning
@@ -60,8 +69,133 @@
     _contactsOverviewTableCell = nil;
     _contactsPhoneTableCell = nil;
     _contactsPlaceTableCell = nil;
+    _titleLabel = nil;
     [super viewDidUnload];
 }
+
+
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    if (buttonIndex != [alertView firstOtherButtonIndex])
+    {
+        NSString *_urlString = nil;
+        if (_currentPhoneNumber != nil)
+        {
+            _urlString = [NSString stringWithFormat:@"tel://%@", self._currentPhoneNumber];
+        }
+        else
+        {
+            if(_currentEmail != nil)
+            {
+                _urlString = [NSString stringWithFormat:@"mailto:%@", self._currentEmail];
+            }
+        }
+
+        NSLog(@"calling/mailing %@", _urlString);
+        
+        if (_urlString != nil)
+        {
+            [[UIApplication sharedApplication] openURL:[NSURL URLWithString:_urlString]];
+        }
+    }
+}
+
+
+-(void) sendEmailToGivenAdress:(id)sender event:(id)event
+{
+    NSSet            *_touches              = [event    allTouches];
+    UITouch          *_touch                = [_touches anyObject ];
+    CGPoint           _currentTouchPosition = [_touch locationInView:self._contactsTable];
+    
+    NSIndexPath      *_indexPath            = [self._contactsTable indexPathForRowAtPoint: _currentTouchPosition];
+
+    NSString *_email;
+    
+    if(_indexPath.section == 1)
+    {
+        _email = @"info-sg.engineering@zhaw.ch";
+    }
+    if(_indexPath.section == 2)
+    {
+        _email = @"info-sg.zh.engineering@zhaw.ch";
+    }
+    if(_indexPath.section == 17)
+    {
+        _email = @"weiterbildung.engineering@zhaw.ch";
+    }
+    
+    NSString *_messageForCalling = [NSString stringWithFormat:@"Sende Email an %@?"
+                                    , _email];
+    
+    UIAlertView *_acronymAlertView = [[UIAlertView alloc]
+                                      initWithTitle:@"Weitere Dienste"
+                                      message:_messageForCalling
+                                      delegate:self
+                                      cancelButtonTitle:@"OK"
+                                      otherButtonTitles:@"Cancel", nil];
+    _currentEmail       = _email;
+    _currentPhoneNumber = nil;
+    [_acronymAlertView show];
+}
+
+
+-(void) callGivenNumber:(id)sender event:(id)event
+{
+    NSSet            *_touches              = [event    allTouches];
+    UITouch          *_touch                = [_touches anyObject ];
+    CGPoint           _currentTouchPosition = [_touch locationInView:self._contactsTable];
+    
+    NSIndexPath      *_indexPath            = [self._contactsTable indexPathForRowAtPoint: _currentTouchPosition];
+    
+    //NSLog(@"_indexPath %i", _indexPath.section);
+    NSString *_callWhom;
+    NSString *_callNumber;
+    
+    if(_indexPath.section == 3 || _indexPath.section == 12)
+    {
+        _callWhom = @"Gianna Scherrer";
+        _callNumber = @"0041589347560";
+    }
+    if(_indexPath.section == 4 || _indexPath.section == 10  || _indexPath.section == 11)
+    {
+        _callWhom = @"Eliane Roth";
+        _callNumber = @"0041589347366";
+    }
+    if(_indexPath.section == 5 || _indexPath.section == 6 || _indexPath.section == 15)
+    {
+        _callWhom = @"Jennifer Hohl";
+        _callNumber = @"0041589347563";
+    }
+    if(_indexPath.section == 7)
+    {
+        _callWhom = @"Zita Fejér";
+        _callNumber = @"0041589348242";
+    }
+    if(_indexPath.section == 8 || _indexPath.section == 9)
+    {
+        _callWhom = @"Béatrice Schaffner";
+        _callNumber = @"0041589347414";
+    }
+    if(_indexPath.section == 18)
+    {
+        _callWhom = @"Christine Rhiel";
+        _callNumber = @"0041589347428";
+    }
+    
+    NSString *_messageForCalling = [NSString stringWithFormat:@"%@ anrufen (%@)?"
+                                    , _callWhom, _callNumber];
+    
+    UIAlertView *_acronymAlertView = [[UIAlertView alloc]
+                                      initWithTitle:@"Weitere Dienste"
+                                      message:_messageForCalling
+                                      delegate:self
+                                      cancelButtonTitle:@"OK"
+                                      otherButtonTitles:@"Cancel", nil];
+    _currentEmail       = nil;
+    _currentPhoneNumber = _callNumber;
+    [_acronymAlertView show];
+}
+
 
 
 // table and table cell handling
@@ -85,29 +219,19 @@
     // overview table cell
     if (_cellSelection == 0 || _cellSelection == 13 || _cellSelection == 16)
     {
-        return 40;
+        return 24;
     }
     // email table cell
     if(_cellSelection == 1 || _cellSelection == 2 || _cellSelection == 14 || _cellSelection == 17)
     {
-        return 57;
+        return 42;
     }
     
     // _cellSelection: 3-12, 15, 18
     // phone table cell
-    return 54;
+    return 43;
 }
 
--(void) changeToCourseSchedule:(id)sender event:(id)event
-{
-    NSSet            *_touches              = [event    allTouches];
-    UITouch          *_touch                = [_touches anyObject ];
-    CGPoint           _currentTouchPosition = [_touch locationInView:self._contactsTable];
-    
-    NSIndexPath      *_indexPath            = [self._contactsTable indexPathForRowAtPoint: _currentTouchPosition];
-    
-    NSLog(@"_indexPath %i", _indexPath.section);
-}
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -182,7 +306,7 @@
             }
             
             _emailButton.enabled = true;
-            [_emailButton addTarget:self action:@selector(changeToCourseSchedule  :event:) forControlEvents:UIControlEventTouchUpInside];
+            [_emailButton addTarget:self action:@selector(sendEmailToGivenAdress  :event:) forControlEvents:UIControlEventTouchUpInside];
             
             NSMutableAttributedString *_titleString = [[NSMutableAttributedString alloc] initWithString:_emailButtonTitle];
             
@@ -282,7 +406,7 @@
             }
             
             _numberButton.enabled = true;
-            [_numberButton addTarget:self action:@selector(changeToCourseSchedule  :event:) forControlEvents:UIControlEventTouchUpInside];
+            [_numberButton addTarget:self action:@selector(callGivenNumber  :event:) forControlEvents:UIControlEventTouchUpInside];
             
             NSMutableAttributedString *_titleString = [[NSMutableAttributedString alloc] initWithString:_numberButtonTitle];
             

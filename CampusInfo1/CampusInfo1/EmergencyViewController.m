@@ -20,6 +20,7 @@
 @synthesize _emergencyTable;
 @synthesize _emergencyInformTableCell;
 @synthesize _emergencyCallNumber;
+@synthesize _titleLabel;
 
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -49,7 +50,7 @@
 }
 
 
--(void) changeToCourseSchedule:(id)sender event:(id)event
+-(void) callGivenNumber:(id)sender event:(id)event
 {
     NSSet            *_touches              = [event    allTouches];
     UITouch          *_touch                = [_touches anyObject ];
@@ -129,6 +130,11 @@
     [_emergencyTable reloadData];
     _emergencyCallNumber = @"";
     
+    [self.view bringSubviewToFront:_titleLabel];
+    [_titleLabel setTextColor:[UIColor whiteColor]];
+    _titleLabel.text = @"Notfall";
+    _backToSettingsNavigationItem.title = @"";
+    self.navigationItem.titleView = _titleLabel;
 }
 
 - (void)didReceiveMemoryWarning
@@ -143,6 +149,7 @@
     _emergencyDetailTableCell = nil;
     _emergencyOverviewTableCell = nil;
     _emergencyInformTableCell = nil;
+    _titleLabel = nil;
     [super viewDidUnload];
 }
 
@@ -262,7 +269,7 @@
             }
         }
         _buttonNumber.enabled = true;
-        [_buttonNumber addTarget:self action:@selector(changeToCourseSchedule  :event:) forControlEvents:UIControlEventTouchUpInside];
+        [_buttonNumber addTarget:self action:@selector(callGivenNumber  :event:) forControlEvents:UIControlEventTouchUpInside];
             
         NSMutableAttributedString *_titleString = [[NSMutableAttributedString alloc] initWithString:_buttonNumberTitle];
         

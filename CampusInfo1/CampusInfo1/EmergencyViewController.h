@@ -17,6 +17,7 @@
     IBOutlet UITableViewCell    *_emergencyOverviewTableCell;
     IBOutlet UITableViewCell    *_emergencyInformTableCell;
     NSString                    *_emergencyCallNumber;
+    IBOutlet UILabel            *_titleLabel;
 }
 
 @property (nonatomic, retain) IBOutlet UINavigationItem     *_backToSettingsNavigationItem;
@@ -24,6 +25,7 @@
 @property (nonatomic, retain) IBOutlet UITableViewCell      *_emergencyDetailTableCell;
 @property (nonatomic, retain) IBOutlet UITableViewCell      *_emergencyOverviewTableCell;
 @property (nonatomic, retain) IBOutlet UITableViewCell      *_emergencyInformTableCell;
+@property (nonatomic, retain) IBOutlet UILabel              *_titleLabel;
 @property (nonatomic, retain) NSString                      *_emergencyCallNumber;
 
 @end
