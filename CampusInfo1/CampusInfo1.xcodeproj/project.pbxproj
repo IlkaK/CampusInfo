@@ -85,6 +85,7 @@
 		E10D601A17AFAF4100036690 /* twitter.png in Resources */ = {isa = PBXBuildFile; fileRef = E10D601517AFAF4100036690 /* twitter.png */; };
 		E10D601B17AFAF4100036690 /* xing.png in Resources */ = {isa = PBXBuildFile; fileRef = E10D601617AFAF4100036690 /* xing.png */; };
 		E10D601C17AFAF4100036690 /* youtube.png in Resources */ = {isa = PBXBuildFile; fileRef = E10D601717AFAF4100036690 /* youtube.png */; };
+		E10D601F17AFDA4500036690 /* Icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E10D601E17AFDA4500036690 /* Icon@2x.png */; };
 		E12B400117968AA1000555AE /* MensaViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E12B3FFF17968AA1000555AE /* MensaViewController.m */; };
 		E12B400217968AA1000555AE /* MensaViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E12B400017968AA1000555AE /* MensaViewController.xib */; };
 		E12B400417968F7E000555AE /* MensaOverviewTableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E12B400317968F7E000555AE /* MensaOverviewTableCell.xib */; };
@@ -228,6 +229,7 @@
 		E10D601517AFAF4100036690 /* twitter.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = twitter.png; path = CampusInfo1/resources/icons/twitter.png; sourceTree = "<group>"; };
 		E10D601617AFAF4100036690 /* xing.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = xing.png; path = CampusInfo1/resources/icons/xing.png; sourceTree = "<group>"; };
 		E10D601717AFAF4100036690 /* youtube.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = youtube.png; path = CampusInfo1/resources/icons/youtube.png; sourceTree = "<group>"; };
+		E10D601E17AFDA4500036690 /* Icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Icon@2x.png"; path = "CampusInfo1/resources/Icon@2x.png"; sourceTree = "<group>"; };
 		E12B3FFE17968AA1000555AE /* MensaViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MensaViewController.h; sourceTree = "<group>"; };
 		E12B3FFF17968AA1000555AE /* MensaViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MensaViewController.m; sourceTree = "<group>"; };
 		E12B400017968AA1000555AE /* MensaViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MensaViewController.xib; sourceTree = "<group>"; };
@@ -366,6 +368,8 @@
 		A35A34091520814700181E3F = {
 			isa = PBXGroup;
 			children = (
+				27E0AA9B1550420C00D83EC1 /* Icon.png */,
+				E10D601E17AFDA4500036690 /* Icon@2x.png */,
 				E195FF35178188A30065DF05 /* libsqlite3.dylib */,
 				E1D48A5E17579C5D00BB1652 /* Default-568h@2x.png */,
 				E1D48A5C17579AA500BB1652 /* Default.png */,
@@ -408,10 +412,10 @@
 				A35A34271520814800181E3F /* CampusInfo1AppDelegate.h */,
 				A35A34281520814800181E3F /* CampusInfo1AppDelegate.m */,
 				A35A342A1520814800181E3F /* MainWindow.xib */,
-				A35A341F1520814800181E3F /* Supporting Files */,
 				27FBF7251551A83600C09ED9 /* StartpageViewController.h */,
 				27FBF7261551A83600C09ED9 /* StartpageViewController.m */,
 				27FBF7271551A83600C09ED9 /* StartpageViewController.xib */,
+				A35A341F1520814800181E3F /* Supporting Files */,
 			);
 			path = CampusInfo1;
 			sourceTree = "<group>";
@@ -430,7 +434,6 @@
 		A35A344E152082F600181E3F /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				27E0AA9B1550420C00D83EC1 /* Icon.png */,
 				A35A34501520830700181E3F /* Icon */,
 			);
 			name = Resources;
@@ -735,6 +738,7 @@
 				E10D601A17AFAF4100036690 /* twitter.png in Resources */,
 				E10D601B17AFAF4100036690 /* xing.png in Resources */,
 				E10D601C17AFAF4100036690 /* youtube.png in Resources */,
+				E10D601F17AFDA4500036690 /* Icon@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

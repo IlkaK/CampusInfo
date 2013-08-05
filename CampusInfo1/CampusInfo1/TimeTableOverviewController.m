@@ -223,7 +223,7 @@
 {
     if (self._ownStoredAcronymString == nil)
     {
-        self.tabBarController.selectedIndex = 2;
+        self.tabBarController.selectedIndex = 3;
         [self dismissModalViewControllerAnimated:YES];
     }
     else
