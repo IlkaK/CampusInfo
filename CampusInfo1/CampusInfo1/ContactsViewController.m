@@ -15,13 +15,17 @@
 @implementation ContactsViewController
 
 @synthesize _backToSettingsNavigationItem;
+@synthesize _titleLabel;
+@synthesize _contactsTable;
+
 @synthesize _contactsOverviewTableCell;
 @synthesize _contactsPhoneTableCell;
-@synthesize _contactsTable;
 @synthesize _contactsPlaceTableCell;
+@synthesize _contactsSocialMediaTableCell;
+
 @synthesize _currentEmail;
 @synthesize _currentPhoneNumber;
-@synthesize _titleLabel;
+
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -70,6 +74,7 @@
     _contactsPhoneTableCell = nil;
     _contactsPlaceTableCell = nil;
     _titleLabel = nil;
+    _contactsSocialMediaTableCell = nil;
     [super viewDidUnload];
 }
 
@@ -196,13 +201,36 @@
     [_acronymAlertView show];
 }
 
+-(void) openURLFacebook:(id)sender event:(id)event
+{
+     [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"https://www.facebook.com/engineering.zhaw"]];
+}
 
+-(void) openURLYoutube:(id)sender event:(id)event
+{
+    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"http://www.youtube.com/engineeringzhaw"]];
+}
+
+-(void) openURLTwitter:(id)sender event:(id)event
+{
+    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"https://twitter.com/engineeringzhaw"]];
+}
+
+-(void) openURLIssuu:(id)sender event:(id)event
+{
+    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"http://issuu.com/engineeringzhaw"]];
+}
+
+-(void) openURLXing:(id)sender event:(id)event
+{
+    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"https://www.xing.com/companies/zhawschoolofengineering"]];
+}
 
 // table and table cell handling
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return 19;
+    return 20;
 }
 
 
@@ -219,12 +247,17 @@
     // overview table cell
     if (_cellSelection == 0 || _cellSelection == 13 || _cellSelection == 16)
     {
-        return 24;
+        return 30;
     }
     // email table cell
     if(_cellSelection == 1 || _cellSelection == 2 || _cellSelection == 14 || _cellSelection == 17)
     {
         return 42;
+    }
+    
+    if(_cellSelection == 19)
+    {
+        return 69;
     }
     
     // _cellSelection: 3-12, 15, 18
@@ -236,11 +269,41 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     NSUInteger        _cellSelection = indexPath.section;
-    NSString *_cellIdentifier;
-    UITableViewCell *_cell = nil;
+    NSString         *_cellIdentifier;
+    UITableViewCell  *_cell = nil;
 
-    
+    if (_cellSelection == 19)
+    {
+        _cellIdentifier  = @"ContactsSocialMediaTableCell";
+        _cell            = [tableView dequeueReusableCellWithIdentifier:_cellIdentifier];
+        if (_cell == nil)
+        {
+            [[NSBundle mainBundle] loadNibNamed:@"ContactsSocialMediaTableCell" owner:self options:nil];
+            _cell = _contactsSocialMediaTableCell;
+            self._contactsSocialMediaTableCell = nil;
+        }
+        UIButton *_facebookButton  = (UIButton *) [_cell viewWithTag:2];
+        UIButton *_youtubeButton   = (UIButton *) [_cell viewWithTag:3];
+        UIButton *_twitterButton   = (UIButton *) [_cell viewWithTag:4];
+        UIButton *_issuuButton     = (UIButton *) [_cell viewWithTag:5];
+        UIButton *_xingButton      = (UIButton *) [_cell viewWithTag:6];
         
+        _facebookButton.enabled = true;
+        [_facebookButton addTarget:self action:@selector(openURLFacebook:event:) forControlEvents:UIControlEventTouchUpInside];
+        
+        _youtubeButton.enabled = true;
+        [_youtubeButton addTarget:self action:@selector(openURLYoutube:event:) forControlEvents:UIControlEventTouchUpInside];
+        
+        _twitterButton.enabled = true;
+        [_twitterButton addTarget:self action:@selector(openURLTwitter:event:) forControlEvents:UIControlEventTouchUpInside];
+        
+        _issuuButton.enabled = true;
+        [_issuuButton addTarget:self action:@selector(openURLIssuu:event:) forControlEvents:UIControlEventTouchUpInside];
+
+        _xingButton.enabled = true;
+        [_xingButton addTarget:self action:@selector(openURLXing:event:) forControlEvents:UIControlEventTouchUpInside];
+    }
+    
     if (_cellSelection == 0 || _cellSelection == 13 || _cellSelection == 16)
     {
         _cellIdentifier  = @"ContactsOverviewTableCell";
@@ -267,153 +330,153 @@
         }
         
     }
-    else
+    
+    if(_cellSelection == 1 || _cellSelection == 2 || _cellSelection == 14 || _cellSelection == 17)
     {
-        
-        if(_cellSelection == 1 || _cellSelection == 2 || _cellSelection == 14 || _cellSelection == 17)
+        _cellIdentifier  = @"ContactsPlaceTableCell";
+        _cell            = [tableView dequeueReusableCellWithIdentifier:_cellIdentifier];
+        if (_cell == nil)
         {
-            _cellIdentifier  = @"ContactsPlaceTableCell";
-            _cell            = [tableView dequeueReusableCellWithIdentifier:_cellIdentifier];
-            if (_cell == nil)
-            {
-                [[NSBundle mainBundle] loadNibNamed:@"ContactsPlaceTableCell" owner:self options:nil];
+            [[NSBundle mainBundle] loadNibNamed:@"ContactsPlaceTableCell" owner:self options:nil];
                 _cell = _contactsPlaceTableCell;
                 self._contactsPlaceTableCell = nil;
-            }
-            UILabel         *_labelTitle     = (UILabel *) [_cell viewWithTag:1];
-            UIButton        *_emailButton    = (UIButton *)[_cell viewWithTag:2];
-            NSString        *_emailButtonTitle;
+        }
+        UILabel         *_labelTitle     = (UILabel *) [_cell viewWithTag:1];
+        UIButton        *_emailButton    = (UIButton *)[_cell viewWithTag:2];
+        NSString        *_emailButtonTitle;
 
-            if(_cellSelection == 1)
-            {
-                _labelTitle.text    = @"Standort Winterthur";
-                _emailButtonTitle   = @"info-sg.engineering(at)zhaw.ch";
-            }
-            if(_cellSelection == 2)
-            {
-                _labelTitle.text    = @"Standort Zürich";
-                _emailButtonTitle   = @"info-sg.zh.engineering(at)zhaw.ch";
-            }
-            if(_cellSelection == 14)
-            {
-                _labelTitle.text    = @"Masterstudiengang";
-                _emailButtonTitle   = @"";
-            }
-            if(_cellSelection == 17)
-            {
-                _labelTitle.text    = @"Weiterbildung";
-                _emailButtonTitle   = @"weiterbildung.engineering(at)zhaw.ch";
-            }
-            
-            _emailButton.enabled = true;
-            [_emailButton addTarget:self action:@selector(sendEmailToGivenAdress  :event:) forControlEvents:UIControlEventTouchUpInside];
-            
-            NSMutableAttributedString *_titleString = [[NSMutableAttributedString alloc] initWithString:_emailButtonTitle];
-            
-            [_titleString addAttribute:NSUnderlineStyleAttributeName value:[NSNumber numberWithInteger:NSUnderlineStyleSingle] range:NSMakeRange(0, [_titleString length])];
-            
-            [_emailButton setAttributedTitle:_titleString forState:UIControlStateNormal];
-        }
-        else
+        if(_cellSelection == 1)
         {
-            
-            _cellIdentifier  = @"ContactsPhoneTableCell";
-            _cell            = [tableView dequeueReusableCellWithIdentifier:_cellIdentifier];
-            if (_cell == nil)
-            {
-                [[NSBundle mainBundle] loadNibNamed:@"ContactsPhoneTableCell" owner:self options:nil];
-                _cell = _contactsPhoneTableCell;
-                self._contactsPhoneTableCell = nil;
-            }
-            
-            UILabel         *_labelTitle     = (UILabel *) [_cell viewWithTag:1];
-            UILabel         *_labelPerson    = (UILabel *) [_cell viewWithTag:2];
-            UIButton        *_numberButton    = (UIButton *)[_cell viewWithTag:3];
-            NSString        *_numberButtonTitle;
-            
-            // _cellSelection: 3-12, 15, 18
-            if(_cellSelection == 3)
-            {
-                _labelTitle.text = @"Aviatik";
-                _labelPerson.text = @"Gianna Scherrer";
-                _numberButtonTitle = @"Tel. +41 58 934 75 60";
-            }
-            if(_cellSelection == 4)
-            {
-                _labelTitle.text = @"Elektrotechnik";
-                _labelPerson.text = @"Eliane Roth";
-                _numberButtonTitle = @"Tel. +41 58 934 73 66";
-            }
-            if(_cellSelection == 5)
-            {
-                _labelTitle.text = @"Energie- und Umwelttechnik";
-                _labelPerson.text = @"Jennifer Hohl";
-                _numberButtonTitle = @"Tel. +41 58 934 75 63";
-            }
-            if(_cellSelection == 6)
-            {
-                _labelTitle.text = @"Informatik Standort Winterthur";
-                _labelPerson.text = @"Jennifer Hohl";
-                _numberButtonTitle = @"Tel. +41 58 934 75 63";
-            }
-            if(_cellSelection == 7)
-            {
-                _labelTitle.text = @"Informatik Standort Zürich";
-                _labelPerson.text = @"Zita Fejér";
-                _numberButtonTitle = @"Tel. +41 58 934 82 42";
-            }
-            if(_cellSelection == 8)
-            {
-                _labelTitle.text = @"Allgemeine Maschinentechnik";
-                _labelPerson.text = @"Béatrice Schaffner";
-                _numberButtonTitle = @"Tel. +41 58 934 74 14";
-            }
-            if(_cellSelection == 9)
-            {
-                _labelTitle.text = @"Material- und Verfahrenstechnik";
-                _labelPerson.text = @"Béatrice Schaffner";
-                _numberButtonTitle = @"Tel. +41 58 934 74 14";
-            }
-            if(_cellSelection == 10)
-            {
-                _labelTitle.text = @"Systemtechnik";
-                _labelPerson.text = @"Eliane Roth";
-                _numberButtonTitle = @"Tel. +41 58 934 73 66";
-            }
-            if(_cellSelection == 11)
-            {
-                _labelTitle.text = @"Verkehrssysteme";
-                _labelPerson.text = @"Eliane Roth";
-                _numberButtonTitle = @"Tel. +41 58 934 73 66";
-            }
-            if(_cellSelection == 12)
-            {
-                _labelTitle.text = @"Wirtschaftsingenieurwesen";
-                _labelPerson.text = @"Gianna Scherrer";
-                _numberButtonTitle = @"Tel. +41 58 934 75 60";
-            }
-            if(_cellSelection == 15)
-            {
-                _labelTitle.text = @"Master of Science in Engineering";
-                _labelPerson.text = @"Jennifer Hohl";
-                _numberButtonTitle = @"Tel. +41 58 934 75 63";
-            }
-            if(_cellSelection == 18)
-            {
-                _labelTitle.text = @"Weiterbildung (MAS, CAS, DAS und WBK)";
-                _labelPerson.text = @"Christine Rhiel";
-                _numberButtonTitle = @"Tel. +41 58 934 74 28";
-            }
-            
-            _numberButton.enabled = true;
-            [_numberButton addTarget:self action:@selector(callGivenNumber  :event:) forControlEvents:UIControlEventTouchUpInside];
-            
-            NSMutableAttributedString *_titleString = [[NSMutableAttributedString alloc] initWithString:_numberButtonTitle];
-            
-            [_titleString addAttribute:NSUnderlineStyleAttributeName value:[NSNumber numberWithInteger:NSUnderlineStyleSingle] range:NSMakeRange(0, [_titleString length])];
-            
-            [_numberButton setAttributedTitle:_titleString forState:UIControlStateNormal];
+            _labelTitle.text    = @"Standort Winterthur";
+            _emailButtonTitle   = @"info-sg.engineering(at)zhaw.ch";
         }
+        if(_cellSelection == 2)
+        {
+            _labelTitle.text    = @"Standort Zürich";
+            _emailButtonTitle   = @"info-sg.zh.engineering(at)zhaw.ch";
+        }
+        if(_cellSelection == 14)
+        {
+            _labelTitle.text    = @"Masterstudiengang";
+            _emailButtonTitle   = @"";
+        }
+        if(_cellSelection == 17)
+        {
+            _labelTitle.text    = @"Weiterbildung";
+            _emailButtonTitle   = @"weiterbildung.engineering(at)zhaw.ch";
+        }
+            
+        _emailButton.enabled = true;
+        [_emailButton addTarget:self action:@selector(sendEmailToGivenAdress  :event:) forControlEvents:UIControlEventTouchUpInside];
+            
+        NSMutableAttributedString *_titleString = [[NSMutableAttributedString alloc] initWithString:_emailButtonTitle];
+            
+        [_titleString addAttribute:NSUnderlineStyleAttributeName value:[NSNumber numberWithInteger:NSUnderlineStyleSingle] range:NSMakeRange(0, [_titleString length])];
+            
+        [_emailButton setAttributedTitle:_titleString forState:UIControlStateNormal];
+    }
+    
+    // _cellSelection: 3-12, 15, 18
+    if((_cellSelection >= 3 && _cellSelection <= 12)
+       || _cellSelection == 15 || _cellSelection == 18
+       )
+    {
+            
+        _cellIdentifier  = @"ContactsPhoneTableCell";
+        _cell            = [tableView dequeueReusableCellWithIdentifier:_cellIdentifier];
+        if (_cell == nil)
+        {
+            [[NSBundle mainBundle] loadNibNamed:@"ContactsPhoneTableCell" owner:self options:nil];
+                _cell = _contactsPhoneTableCell;
+            self._contactsPhoneTableCell = nil;
+        }
+            
+        UILabel         *_labelTitle     = (UILabel *) [_cell viewWithTag:1];
+        UILabel         *_labelPerson    = (UILabel *) [_cell viewWithTag:2];
+        UIButton        *_numberButton    = (UIButton *)[_cell viewWithTag:3];
+        NSString        *_numberButtonTitle;
+            
+        if(_cellSelection == 3)
+        {
+            _labelTitle.text = @"Aviatik";
+            _labelPerson.text = @"Gianna Scherrer";
+            _numberButtonTitle = @"Tel. +41 58 934 75 60";
+        }
+        if(_cellSelection == 4)
+        {
+            _labelTitle.text = @"Elektrotechnik";
+            _labelPerson.text = @"Eliane Roth";
+            _numberButtonTitle = @"Tel. +41 58 934 73 66";
+        }
+        if(_cellSelection == 5)
+        {
+            _labelTitle.text = @"Energie- und Umwelttechnik";
+            _labelPerson.text = @"Jennifer Hohl";
+            _numberButtonTitle = @"Tel. +41 58 934 75 63";
+        }
+        if(_cellSelection == 6)
+        {
+            _labelTitle.text = @"Informatik Standort Winterthur";
+            _labelPerson.text = @"Jennifer Hohl";
+            _numberButtonTitle = @"Tel. +41 58 934 75 63";
+        }
+        if(_cellSelection == 7)
+        {
+            _labelTitle.text = @"Informatik Standort Zürich";
+            _labelPerson.text = @"Zita Fejér";
+            _numberButtonTitle = @"Tel. +41 58 934 82 42";
+        }
+        if(_cellSelection == 8)
+        {
+            _labelTitle.text = @"Allgemeine Maschinentechnik";
+            _labelPerson.text = @"Béatrice Schaffner";
+            _numberButtonTitle = @"Tel. +41 58 934 74 14";
+        }
+        if(_cellSelection == 9)
+        {
+            _labelTitle.text = @"Material- und Verfahrenstechnik";
+            _labelPerson.text = @"Béatrice Schaffner";
+            _numberButtonTitle = @"Tel. +41 58 934 74 14";
+        }
+        if(_cellSelection == 10)
+        {
+            _labelTitle.text = @"Systemtechnik";
+            _labelPerson.text = @"Eliane Roth";
+            _numberButtonTitle = @"Tel. +41 58 934 73 66";
+        }
+        if(_cellSelection == 11)
+        {
+            _labelTitle.text = @"Verkehrssysteme";
+            _labelPerson.text = @"Eliane Roth";
+            _numberButtonTitle = @"Tel. +41 58 934 73 66";
+        }
+        if(_cellSelection == 12)
+        {
+            _labelTitle.text = @"Wirtschaftsingenieurwesen";
+            _labelPerson.text = @"Gianna Scherrer";
+            _numberButtonTitle = @"Tel. +41 58 934 75 60";
+        }
+        if(_cellSelection == 15)
+        {
+            _labelTitle.text = @"Master of Science in Engineering";
+            _labelPerson.text = @"Jennifer Hohl";
+            _numberButtonTitle = @"Tel. +41 58 934 75 63";
+        }
+        if(_cellSelection == 18)
+        {
+            _labelTitle.text = @"Weiterbildung (MAS, CAS, DAS und WBK)";
+            _labelPerson.text = @"Christine Rhiel";
+            _numberButtonTitle = @"Tel. +41 58 934 74 28";
+        }
+            
+        _numberButton.enabled = true;
+        [_numberButton addTarget:self action:@selector(callGivenNumber  :event:) forControlEvents:UIControlEventTouchUpInside];
+            
+        NSMutableAttributedString *_titleString = [[NSMutableAttributedString alloc] initWithString:_numberButtonTitle];
+            
+        [_titleString addAttribute:NSUnderlineStyleAttributeName value:[NSNumber numberWithInteger:NSUnderlineStyleSingle] range:NSMakeRange(0, [_titleString length])];
+            
+        [_numberButton setAttributedTitle:_titleString forState:UIControlStateNormal];
         
     }
     
