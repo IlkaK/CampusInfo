@@ -67,6 +67,10 @@
 		_mensaDetailVC = [[MensaDetailViewController alloc] init];
 	}
     _mensaDetailVC.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
+    
+    [self.view bringSubviewToFront:_dateLabel];
+    [_dateLabel setTextColor:[UIColor whiteColor]];
+    self.navigationItem.titleView = _dateLabel;
 }
 
 

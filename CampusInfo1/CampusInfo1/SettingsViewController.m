@@ -41,6 +41,9 @@
 @synthesize _contactsVC;
 @synthesize _emergencyVC;
 
+@synthesize _contactsEmergencyTitle;
+@synthesize _timetableSettingsTitle;
+
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -78,14 +81,6 @@
     _dbCachingForAutocomplete = [[DBCachingForAutocomplete alloc]init];
     [self._acronymAutocompleteTableView setSeparatorStyle:UITableViewCellSeparatorStyleNone];    
     
-    UIView *lineView1 = [[UIView alloc] initWithFrame:CGRectMake(0, 32, self.view.bounds.size.width, 1)];
-    lineView1.backgroundColor = [UIColor blackColor];
-    [self.view addSubview:lineView1];
-    
-    UIView *lineView2 = [[UIView alloc] initWithFrame:CGRectMake(0, 105, self.view.bounds.size.width, 1)];
-    lineView2.backgroundColor = [UIColor blackColor];
-    [self.view addSubview:lineView2];
-    
     if (_contactsVC == nil)
     {
 		_contactsVC = [[ContactsViewController alloc] init];
@@ -100,7 +95,13 @@
     //_emergencyVC._chooseDateViewDelegate = self;
     _emergencyVC.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
     
+    [self.view bringSubviewToFront:_contactsEmergencyTitle];
+    [_contactsEmergencyTitle setTextColor:[UIColor whiteColor]];
+    self.navigationItem.titleView = _contactsEmergencyTitle;
     
+    [self.view bringSubviewToFront:_timetableSettingsTitle];
+    [_timetableSettingsTitle setTextColor:[UIColor whiteColor]];
+    self.navigationItem.titleView = _timetableSettingsTitle;
 }
 
 
@@ -338,6 +339,8 @@
     _emergencyButton = nil;
     _contactsVC = nil;
     _emergencyVC = nil;
+    _contactsEmergencyTitle = nil;
+    _timetableSettingsTitle = nil;
     [super viewDidUnload];
 }
 

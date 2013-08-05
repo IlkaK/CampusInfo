@@ -46,7 +46,6 @@
 								<int key="NSvFlags">292</int>
 								<string key="NSFrame">{{12, -3}, {280, 21}}</string>
 								<reference key="NSSuperview" ref="178690710"/>
-								<reference key="NSWindow"/>
 								<reference key="NSNextKeyView" ref="679196993"/>
 								<string key="NSReuseIdentifierKey">_NS:9</string>
 								<bool key="IBUIOpaque">NO</bool>
@@ -82,7 +81,6 @@
 								<int key="NSvFlags">292</int>
 								<string key="NSFrame">{{11, 26}, {32, 32}}</string>
 								<reference key="NSSuperview" ref="178690710"/>
-								<reference key="NSWindow"/>
 								<reference key="NSNextKeyView" ref="351965598"/>
 								<string key="NSReuseIdentifierKey">_NS:9</string>
 								<bool key="IBUIOpaque">NO</bool>
@@ -118,7 +116,6 @@
 								<int key="NSvFlags">292</int>
 								<string key="NSFrame">{{46, 26}, {32, 32}}</string>
 								<reference key="NSSuperview" ref="178690710"/>
-								<reference key="NSWindow"/>
 								<reference key="NSNextKeyView" ref="679056652"/>
 								<string key="NSReuseIdentifierKey">_NS:9</string>
 								<bool key="IBUIOpaque">NO</bool>
@@ -144,7 +141,6 @@
 								<int key="NSvFlags">292</int>
 								<string key="NSFrame">{{80, 26}, {32, 33}}</string>
 								<reference key="NSSuperview" ref="178690710"/>
-								<reference key="NSWindow"/>
 								<reference key="NSNextKeyView" ref="913782962"/>
 								<string key="NSReuseIdentifierKey">_NS:9</string>
 								<bool key="IBUIOpaque">NO</bool>
@@ -169,9 +165,8 @@
 							<object class="IBUIButton" id="913782962">
 								<reference key="NSNextResponder" ref="178690710"/>
 								<int key="NSvFlags">292</int>
-								<string key="NSFrame">{{115, 27}, {32, 32}}</string>
+								<string key="NSFrame">{{115, 26}, {32, 33}}</string>
 								<reference key="NSSuperview" ref="178690710"/>
-								<reference key="NSWindow"/>
 								<reference key="NSNextKeyView" ref="415898432"/>
 								<string key="NSReuseIdentifierKey">_NS:9</string>
 								<bool key="IBUIOpaque">NO</bool>
@@ -198,8 +193,6 @@
 								<int key="NSvFlags">292</int>
 								<string key="NSFrame">{{149, 26}, {32, 32}}</string>
 								<reference key="NSSuperview" ref="178690710"/>
-								<reference key="NSWindow"/>
-								<reference key="NSNextKeyView"/>
 								<string key="NSReuseIdentifierKey">_NS:9</string>
 								<bool key="IBUIOpaque">NO</bool>
 								<int key="IBUITag">6</int>
@@ -222,7 +215,6 @@
 						</array>
 						<string key="NSFrameSize">{320, 68}</string>
 						<reference key="NSSuperview" ref="149152322"/>
-						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="398316411"/>
 						<string key="NSReuseIdentifierKey">_NS:11</string>
 						<object class="NSColor" key="IBUIBackgroundColor">
@@ -238,7 +230,6 @@
 				</array>
 				<string key="NSFrameSize">{320, 69}</string>
 				<reference key="NSSuperview"/>
-				<reference key="NSWindow"/>
 				<reference key="NSNextKeyView" ref="178690710"/>
 				<string key="NSReuseIdentifierKey">_NS:9</string>
 				<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
@@ -328,22 +319,6 @@
 								<int key="scoringType">3</int>
 								<float key="scoringTypeFloat">9</float>
 								<int key="contentType">3</int>
-							</object>
-							<object class="IBNSLayoutConstraint" id="687541122">
-								<reference key="firstItem" ref="913782962"/>
-								<int key="firstAttribute">11</int>
-								<int key="relation">0</int>
-								<reference key="secondItem" ref="679056652"/>
-								<int key="secondAttribute">11</int>
-								<float key="multiplier">1</float>
-								<object class="IBLayoutConstant" key="constant">
-									<double key="value">0.0</double>
-								</object>
-								<float key="priority">1000</float>
-								<reference key="containingView" ref="149152322"/>
-								<int key="scoringType">6</int>
-								<float key="scoringTypeFloat">24</float>
-								<int key="contentType">2</int>
 							</object>
 							<object class="IBNSLayoutConstraint" id="158702872">
 								<reference key="firstItem" ref="679056652"/>
@@ -676,11 +651,6 @@
 						<reference key="parent" ref="913782962"/>
 					</object>
 					<object class="IBObjectRecord">
-						<int key="objectID">163</int>
-						<reference key="object" ref="687541122"/>
-						<reference key="parent" ref="149152322"/>
-					</object>
-					<object class="IBObjectRecord">
 						<int key="objectID">164</int>
 						<reference key="object" ref="415898432"/>
 						<array class="NSMutableArray" key="children"/>
@@ -798,7 +768,6 @@
 				</array>
 				<boolean value="NO" key="157.IBViewMetadataTranslatesAutoresizingMaskIntoConstraints"/>
 				<string key="160.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
-				<string key="163.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 				<string key="164.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 				<real value="0.0" key="164.IBUIButtonInspectorSelectedStateConfigurationMetadataKey"/>
 				<boolean value="NO" key="164.IBViewMetadataTranslatesAutoresizingMaskIntoConstraints"/>
@@ -819,7 +788,6 @@
 					<reference ref="928879494"/>
 					<reference ref="309049886"/>
 					<reference ref="158702872"/>
-					<reference ref="687541122"/>
 					<reference ref="538437550"/>
 					<reference ref="194864384"/>
 					<reference ref="1050929462"/>
@@ -852,65 +820,7 @@
 			<nil key="sourceID"/>
 			<int key="maxID">231</int>
 		</object>
-		<object class="IBClassDescriber" key="IBDocument.Classes">
-			<array class="NSMutableArray" key="referencedPartialClassDescriptions">
-				<object class="IBPartialClassDescription">
-					<string key="className">ContactsViewController</string>
-					<string key="superclassName">UIViewController</string>
-					<dictionary class="NSMutableDictionary" key="outlets">
-						<string key="_backToSettingsNavigationItem">UINavigationItem</string>
-						<string key="_contactsOverviewTableCell">UITableViewCell</string>
-						<string key="_contactsPhoneTableCell">UITableViewCell</string>
-						<string key="_contactsPlaceTableCell">UITableViewCell</string>
-						<string key="_contactsSocialMediaTableCell">UITableViewCell</string>
-						<string key="_contactsTable">UITableView</string>
-						<string key="_titleLabel">UILabel</string>
-					</dictionary>
-					<dictionary class="NSMutableDictionary" key="toOneOutletInfosByName">
-						<object class="IBToOneOutletInfo" key="_backToSettingsNavigationItem">
-							<string key="name">_backToSettingsNavigationItem</string>
-							<string key="candidateClassName">UINavigationItem</string>
-						</object>
-						<object class="IBToOneOutletInfo" key="_contactsOverviewTableCell">
-							<string key="name">_contactsOverviewTableCell</string>
-							<string key="candidateClassName">UITableViewCell</string>
-						</object>
-						<object class="IBToOneOutletInfo" key="_contactsPhoneTableCell">
-							<string key="name">_contactsPhoneTableCell</string>
-							<string key="candidateClassName">UITableViewCell</string>
-						</object>
-						<object class="IBToOneOutletInfo" key="_contactsPlaceTableCell">
-							<string key="name">_contactsPlaceTableCell</string>
-							<string key="candidateClassName">UITableViewCell</string>
-						</object>
-						<object class="IBToOneOutletInfo" key="_contactsSocialMediaTableCell">
-							<string key="name">_contactsSocialMediaTableCell</string>
-							<string key="candidateClassName">UITableViewCell</string>
-						</object>
-						<object class="IBToOneOutletInfo" key="_contactsTable">
-							<string key="name">_contactsTable</string>
-							<string key="candidateClassName">UITableView</string>
-						</object>
-						<object class="IBToOneOutletInfo" key="_titleLabel">
-							<string key="name">_titleLabel</string>
-							<string key="candidateClassName">UILabel</string>
-						</object>
-					</dictionary>
-					<object class="IBClassDescriptionSource" key="sourceIdentifier">
-						<string key="majorKey">IBProjectSource</string>
-						<string key="minorKey">./Classes/ContactsViewController.h</string>
-					</object>
-				</object>
-				<object class="IBPartialClassDescription">
-					<string key="className">NSLayoutConstraint</string>
-					<string key="superclassName">NSObject</string>
-					<object class="IBClassDescriptionSource" key="sourceIdentifier">
-						<string key="majorKey">IBProjectSource</string>
-						<string key="minorKey">./Classes/NSLayoutConstraint.h</string>
-					</object>
-				</object>
-			</array>
-		</object>
+		<object class="IBClassDescriber" key="IBDocument.Classes"/>
 		<int key="IBDocument.localizationMode">0</int>
 		<string key="IBDocument.TargetRuntimeIdentifier">IBCocoaTouchFramework</string>
 		<bool key="IBDocument.PluginDeclaredDependenciesTrackSystemTargetVersion">YES</bool>

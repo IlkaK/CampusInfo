@@ -25,6 +25,8 @@
     
     IBOutlet UITableView    *_acronymAutocompleteTableView;
     
+    IBOutlet UILabel        *_titleLabel;
+    
     NSMutableArray  *_suggestions;
     Autocomplete	*_autocomplete;
     
@@ -50,14 +52,16 @@
     int                   _connectionTrials;
 
     DBCachingForAutocomplete *_dbCachingForAutocomplete;
-    
     LanguageTranslation *_translator;
+    
+
 }
 
-@property (nonatomic, retain) IBOutlet UITextField *_searchTextField;
-@property (nonatomic, retain) IBOutlet UIPickerView *_chooseSearchType;
-@property (nonatomic, retain) IBOutlet GradientButton *_searchButton;
-@property (nonatomic, retain) IBOutlet UITableView *_acronymAutocompleteTableView;
+@property (nonatomic, retain) IBOutlet UITextField      *_searchTextField;
+@property (nonatomic, retain) IBOutlet UIPickerView     *_chooseSearchType;
+@property (nonatomic, retain) IBOutlet GradientButton   *_searchButton;
+@property (nonatomic, retain) IBOutlet UITableView      *_acronymAutocompleteTableView;
+@property (nonatomic, retain) IBOutlet UILabel          *_titleLabel;
 
 @property (nonatomic, retain) NSString *_searchType;
 @property (strong, nonatomic) NSArray *_searchTypeArray;

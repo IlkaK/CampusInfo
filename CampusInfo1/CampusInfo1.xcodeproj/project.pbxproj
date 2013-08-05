@@ -505,17 +505,25 @@
 			name = TimeTableDto;
 			sourceTree = "<group>";
 		};
+		E10D601D17AFD2B500036690 /* MensaTableCells */ = {
+			isa = PBXGroup;
+			children = (
+				E1BC5627179D7638007E235D /* MensaDetailTableCell.xib */,
+				E12B400317968F7E000555AE /* MensaOverviewTableCell.xib */,
+			);
+			name = MensaTableCells;
+			sourceTree = "<group>";
+		};
 		E12B3FF9179689C0000555AE /* Mensa */ = {
 			isa = PBXGroup;
 			children = (
+				E10D601D17AFD2B500036690 /* MensaTableCells */,
 				E12B3FFE17968AA1000555AE /* MensaViewController.h */,
 				E12B3FFF17968AA1000555AE /* MensaViewController.m */,
 				E12B400017968AA1000555AE /* MensaViewController.xib */,
-				E12B400317968F7E000555AE /* MensaOverviewTableCell.xib */,
 				E1BC561F179D290A007E235D /* MensaDetailViewController.h */,
 				E1BC5620179D290A007E235D /* MensaDetailViewController.m */,
 				E1BC5621179D290A007E235D /* MensaDetailViewController.xib */,
-				E1BC5627179D7638007E235D /* MensaDetailTableCell.xib */,
 			);
 			name = Mensa;
 			sourceTree = "<group>";
@@ -561,13 +569,9 @@
 		E17842CE1783084D0059EA3C /* Search */ = {
 			isa = PBXGroup;
 			children = (
-				E1BC14C0175F8D4900FE2854 /* Autocomplete.h */,
-				E1BC14C1175F8D4900FE2854 /* Autocomplete.m */,
 				A35A34301520814800181E3F /* SearchViewController.h */,
 				A35A34311520814800181E3F /* SearchViewController.m */,
 				A35A34361520814800181E3F /* SearchView.xib */,
-				E17842D0178309160059EA3C /* DBCachingForAutocomplete.h */,
-				E17842D1178309160059EA3C /* DBCachingForAutocomplete.m */,
 			);
 			name = Search;
 			sourceTree = "<group>";
@@ -593,6 +597,10 @@
 		E1B13AB9178EA0DF00C037F8 /* Helper */ = {
 			isa = PBXGroup;
 			children = (
+				E1BC14C0175F8D4900FE2854 /* Autocomplete.h */,
+				E1BC14C1175F8D4900FE2854 /* Autocomplete.m */,
+				E17842D0178309160059EA3C /* DBCachingForAutocomplete.h */,
+				E17842D1178309160059EA3C /* DBCachingForAutocomplete.m */,
 				E13D3B5817412F0500F534DB /* ChooseDateViewController.h */,
 				E13D3B5917412F0500F534DB /* ChooseDateViewController.m */,
 				E13D3B5A17412F0500F534DB /* ChooseDateViewController.xib */,

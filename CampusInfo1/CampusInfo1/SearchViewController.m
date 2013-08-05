@@ -20,6 +20,7 @@
 @synthesize _acronymAutocompleteTableView;
 @synthesize _suggestions;
 @synthesize _autocomplete;
+@synthesize _titleLabel;
 
 @synthesize _lecturerArray;
 @synthesize _lecturerArrayFromDB;
@@ -79,6 +80,11 @@
     _generalDictionary = nil;
     
     _dbCachingForAutocomplete = [[DBCachingForAutocomplete alloc]init];
+    
+    [self.view bringSubviewToFront:_titleLabel];
+    [_titleLabel setTextColor:[UIColor whiteColor]];
+    _titleLabel.text = @"Bitte Kürzel eingeben";
+    self.navigationItem.titleView = _titleLabel;
 }
 
 
@@ -382,6 +388,7 @@
     _chooseSearchType = nil;
     _searchButton = nil;
     _acronymAutocompleteTableView = nil;
+    _titleLabel = nil;
     [super viewDidUnload];
 }
 

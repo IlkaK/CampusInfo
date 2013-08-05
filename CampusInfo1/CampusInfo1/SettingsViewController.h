@@ -43,6 +43,8 @@
     IBOutlet GradientButton     *_emergencyButton;
     IBOutlet ContactsViewController     *_contactsVC;
     IBOutlet EmergencyViewController    *_emergencyVC;
+    IBOutlet UILabel                    *_contactsEmergencyTitle;
+    IBOutlet UILabel                    *_timetableSettingsTitle;
 }
 
 
@@ -74,6 +76,10 @@
 @property (nonatomic, retain) IBOutlet GradientButton        *_emergencyButton;
 @property (nonatomic, retain) IBOutlet ContactsViewController  *_contactsVC;
 @property (nonatomic, retain) IBOutlet EmergencyViewController *_emergencyVC;
+
+@property (nonatomic, retain) IBOutlet UILabel          *_contactsEmergencyTitle;
+@property (nonatomic, retain) IBOutlet UILabel          *_timetableSettingsTitle;
+
 
 - (IBAction)moveToTimeTable:(id)sender;
 - (IBAction)acronymTextFieldChanged:(id)sender;
