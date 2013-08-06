@@ -243,23 +243,22 @@
                                                  name:NSThreadWillExitNotification
                                                object:nil];
     
-    NSError      *_error = nil; 
-    NSDictionary *_scheduleDictionary;
-    
     if (_dataFromUrl == nil)
     {
         return nil;
     }
     else
     {
+        NSError      *_error = nil;
         //NSLog(@"getDictionaryFromUrl got some data putting it now into dictionary");
-        _scheduleDictionary = [NSJSONSerialization
+        NSDictionary *_scheduleDictionary = [NSJSONSerialization
                                JSONObjectWithData:_dataFromUrl
                                options:kNilOptions
                                error:&_error];
+        return _scheduleDictionary;
         
     }
-    return _scheduleDictionary;
+
 }
 
 

@@ -195,7 +195,7 @@
 		27FBF7251551A83600C09ED9 /* StartpageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StartpageViewController.h; sourceTree = "<group>"; };
 		27FBF7261551A83600C09ED9 /* StartpageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StartpageViewController.m; sourceTree = "<group>"; };
 		27FBF7271551A83600C09ED9 /* StartpageViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = StartpageViewController.xib; sourceTree = "<group>"; };
-		A35A34141520814800181E3F /* CampusInfo1.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CampusInfo1.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		A35A34141520814800181E3F /* Engineering.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Engineering.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A35A34181520814800181E3F /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		A35A341A1520814800181E3F /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		A35A341C1520814800181E3F /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -421,7 +421,7 @@
 		A35A34151520814800181E3F /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				A35A34141520814800181E3F /* CampusInfo1.app */,
+				A35A34141520814800181E3F /* Engineering.app */,
 				E12AD04717B0E9E4009A9B1B /* CampusInfoLogicTests.octest */,
 			);
 			name = Products;
@@ -696,7 +696,7 @@
 			);
 			name = CampusInfo1;
 			productName = CampusInfo1;
-			productReference = A35A34141520814800181E3F /* CampusInfo1.app */;
+			productReference = A35A34141520814800181E3F /* Engineering.app */;
 			productType = "com.apple.product-type.application";
 		};
 		E12AD04617B0E9E4009A9B1B /* CampusInfoLogicTests */ = {
@@ -1021,7 +1021,7 @@
 					"-ObjC",
 					"-all_load",
 				);
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = Engineering;
 				PROVISIONING_PROFILE = "";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = 1;
@@ -1053,7 +1053,7 @@
 					"-ObjC",
 					"-all_load",
 				);
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = Engineering;
 				PROVISIONING_PROFILE = "";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = 1;
@@ -1149,6 +1149,7 @@
 				E12AD05717B0E9E4009A9B1B /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
 		};
 /* End XCConfigurationList section */
 	};
