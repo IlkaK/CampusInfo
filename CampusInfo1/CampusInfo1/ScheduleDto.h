@@ -7,8 +7,8 @@
 //
 
 #import <Foundation/Foundation.h>
-#import <TimeTableAsyncRequest.h>
-#import <DateFormation.h>
+#import "TimeTableAsyncRequest.h"
+#import "DateFormation.h"
 
 @class PersonDto;
 @class RoomDto;
@@ -73,5 +73,8 @@
     :(NSString *)newAcronymType
     :(NSDate   *)newScheduleDate;
 
+-(id) initWithExampleDays
+    :(NSMutableArray *)newExampleDays
+    :(NSString *)newExampleType;
 
 @end

@@ -86,6 +86,24 @@
 		E10D601B17AFAF4100036690 /* xing.png in Resources */ = {isa = PBXBuildFile; fileRef = E10D601617AFAF4100036690 /* xing.png */; };
 		E10D601C17AFAF4100036690 /* youtube.png in Resources */ = {isa = PBXBuildFile; fileRef = E10D601717AFAF4100036690 /* youtube.png */; };
 		E10D601F17AFDA4500036690 /* Icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E10D601E17AFDA4500036690 /* Icon@2x.png */; };
+		E12AD04917B0E9E4009A9B1B /* SenTestingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E12AD04817B0E9E4009A9B1B /* SenTestingKit.framework */; };
+		E12AD04A17B0E9E4009A9B1B /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A35A34181520814800181E3F /* UIKit.framework */; };
+		E12AD04B17B0E9E4009A9B1B /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A35A341A1520814800181E3F /* Foundation.framework */; };
+		E12AD05117B0E9E4009A9B1B /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = E12AD04F17B0E9E4009A9B1B /* InfoPlist.strings */; };
+		E12AD05417B0E9E4009A9B1B /* CampusInfoLogicTests.m in Sources */ = {isa = PBXBuildFile; fileRef = E12AD05317B0E9E4009A9B1B /* CampusInfoLogicTests.m */; };
+		E12AD05B17B0EBEA009A9B1B /* ScheduleDtoTest.m in Sources */ = {isa = PBXBuildFile; fileRef = E12AD05A17B0EBEA009A9B1B /* ScheduleDtoTest.m */; };
+		E12AD05F17B0FCB3009A9B1B /* DateFormation.m in Sources */ = {isa = PBXBuildFile; fileRef = E1D7EFF6178DA03D00100293 /* DateFormation.m */; };
+		E12AD06017B0FCDD009A9B1B /* SchoolClassDto.m in Sources */ = {isa = PBXBuildFile; fileRef = A3A551391525DDB700BCAF3D /* SchoolClassDto.m */; };
+		E12AD06117B0FCDD009A9B1B /* RoomDto.m in Sources */ = {isa = PBXBuildFile; fileRef = A3A5513C1525E29F00BCAF3D /* RoomDto.m */; };
+		E12AD06217B0FCDD009A9B1B /* PersonDto.m in Sources */ = {isa = PBXBuildFile; fileRef = A3A5513F1525E33900BCAF3D /* PersonDto.m */; };
+		E12AD06317B0FCDD009A9B1B /* SlotDto.m in Sources */ = {isa = PBXBuildFile; fileRef = A3A551451525EB8B00BCAF3D /* SlotDto.m */; };
+		E12AD06417B0FCDD009A9B1B /* DayDto.m in Sources */ = {isa = PBXBuildFile; fileRef = A3811C5015274C7A00A43735 /* DayDto.m */; };
+		E12AD06517B0FCDD009A9B1B /* ScheduleDto.m in Sources */ = {isa = PBXBuildFile; fileRef = A3811C5415274F4400A43735 /* ScheduleDto.m */; };
+		E12AD06617B0FCDD009A9B1B /* DepartmentDto.m in Sources */ = {isa = PBXBuildFile; fileRef = 2779DA5415544A6600923A54 /* DepartmentDto.m */; };
+		E12AD06717B0FCDD009A9B1B /* ScheduleEventDto.m in Sources */ = {isa = PBXBuildFile; fileRef = 27795DFF1558498300D0F350 /* ScheduleEventDto.m */; };
+		E12AD06817B0FCDD009A9B1B /* ScheduleEventRealizationDto.m in Sources */ = {isa = PBXBuildFile; fileRef = 27E8229D155D214A006EA12D /* ScheduleEventRealizationDto.m */; };
+		E12AD06917B0FCDD009A9B1B /* ScheduleCourseDto.m in Sources */ = {isa = PBXBuildFile; fileRef = 277EDF78155D60DC002BCE1F /* ScheduleCourseDto.m */; };
+		E12AD06A17B0FCFD009A9B1B /* TimeTableAsyncRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 27B66926153AE0D8004D3ABC /* TimeTableAsyncRequest.m */; };
 		E12B400117968AA1000555AE /* MensaViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E12B3FFF17968AA1000555AE /* MensaViewController.m */; };
 		E12B400217968AA1000555AE /* MensaViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E12B400017968AA1000555AE /* MensaViewController.xib */; };
 		E12B400417968F7E000555AE /* MensaOverviewTableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E12B400317968F7E000555AE /* MensaOverviewTableCell.xib */; };
@@ -230,6 +248,15 @@
 		E10D601617AFAF4100036690 /* xing.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = xing.png; path = CampusInfo1/resources/icons/xing.png; sourceTree = "<group>"; };
 		E10D601717AFAF4100036690 /* youtube.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = youtube.png; path = CampusInfo1/resources/icons/youtube.png; sourceTree = "<group>"; };
 		E10D601E17AFDA4500036690 /* Icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Icon@2x.png"; path = "CampusInfo1/resources/Icon@2x.png"; sourceTree = "<group>"; };
+		E12AD04717B0E9E4009A9B1B /* CampusInfoLogicTests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CampusInfoLogicTests.octest; sourceTree = BUILT_PRODUCTS_DIR; };
+		E12AD04817B0E9E4009A9B1B /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
+		E12AD04E17B0E9E4009A9B1B /* CampusInfoLogicTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "CampusInfoLogicTests-Info.plist"; sourceTree = "<group>"; };
+		E12AD05017B0E9E4009A9B1B /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		E12AD05217B0E9E4009A9B1B /* CampusInfoLogicTests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CampusInfoLogicTests.h; sourceTree = "<group>"; };
+		E12AD05317B0E9E4009A9B1B /* CampusInfoLogicTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CampusInfoLogicTests.m; sourceTree = "<group>"; };
+		E12AD05517B0E9E4009A9B1B /* CampusInfoLogicTests-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "CampusInfoLogicTests-Prefix.pch"; sourceTree = "<group>"; };
+		E12AD05917B0EBEA009A9B1B /* ScheduleDtoTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ScheduleDtoTest.h; sourceTree = "<group>"; };
+		E12AD05A17B0EBEA009A9B1B /* ScheduleDtoTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ScheduleDtoTest.m; sourceTree = "<group>"; };
 		E12B3FFE17968AA1000555AE /* MensaViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MensaViewController.h; sourceTree = "<group>"; };
 		E12B3FFF17968AA1000555AE /* MensaViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MensaViewController.m; sourceTree = "<group>"; };
 		E12B400017968AA1000555AE /* MensaViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MensaViewController.xib; sourceTree = "<group>"; };
@@ -295,6 +322,16 @@
 				A35A34191520814800181E3F /* UIKit.framework in Frameworks */,
 				A35A341B1520814800181E3F /* Foundation.framework in Frameworks */,
 				A35A341D1520814800181E3F /* CoreGraphics.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		E12AD04317B0E9E4009A9B1B /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E12AD04917B0E9E4009A9B1B /* SenTestingKit.framework in Frameworks */,
+				E12AD04A17B0E9E4009A9B1B /* UIKit.framework in Frameworks */,
+				E12AD04B17B0E9E4009A9B1B /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -375,6 +412,7 @@
 				E1D48A5C17579AA500BB1652 /* Default.png */,
 				A35A344E152082F600181E3F /* Resources */,
 				A35A341E1520814800181E3F /* CampusInfo1 */,
+				E12AD04C17B0E9E4009A9B1B /* CampusInfoLogicTests */,
 				A35A34171520814800181E3F /* Frameworks */,
 				A35A34151520814800181E3F /* Products */,
 			);
@@ -384,6 +422,7 @@
 			isa = PBXGroup;
 			children = (
 				A35A34141520814800181E3F /* CampusInfo1.app */,
+				E12AD04717B0E9E4009A9B1B /* CampusInfoLogicTests.octest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -394,6 +433,7 @@
 				A35A34181520814800181E3F /* UIKit.framework */,
 				A35A341A1520814800181E3F /* Foundation.framework */,
 				A35A341C1520814800181E3F /* CoreGraphics.framework */,
+				E12AD04817B0E9E4009A9B1B /* SenTestingKit.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -517,6 +557,28 @@
 			name = MensaTableCells;
 			sourceTree = "<group>";
 		};
+		E12AD04C17B0E9E4009A9B1B /* CampusInfoLogicTests */ = {
+			isa = PBXGroup;
+			children = (
+				E12AD05217B0E9E4009A9B1B /* CampusInfoLogicTests.h */,
+				E12AD05317B0E9E4009A9B1B /* CampusInfoLogicTests.m */,
+				E12AD04D17B0E9E4009A9B1B /* Supporting Files */,
+				E12AD05917B0EBEA009A9B1B /* ScheduleDtoTest.h */,
+				E12AD05A17B0EBEA009A9B1B /* ScheduleDtoTest.m */,
+			);
+			path = CampusInfoLogicTests;
+			sourceTree = "<group>";
+		};
+		E12AD04D17B0E9E4009A9B1B /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				E12AD04E17B0E9E4009A9B1B /* CampusInfoLogicTests-Info.plist */,
+				E12AD04F17B0E9E4009A9B1B /* InfoPlist.strings */,
+				E12AD05517B0E9E4009A9B1B /* CampusInfoLogicTests-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
 		E12B3FF9179689C0000555AE /* Mensa */ = {
 			isa = PBXGroup;
 			children = (
@@ -637,6 +699,24 @@
 			productReference = A35A34141520814800181E3F /* CampusInfo1.app */;
 			productType = "com.apple.product-type.application";
 		};
+		E12AD04617B0E9E4009A9B1B /* CampusInfoLogicTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = E12AD05817B0E9E4009A9B1B /* Build configuration list for PBXNativeTarget "CampusInfoLogicTests" */;
+			buildPhases = (
+				E12AD04217B0E9E4009A9B1B /* Sources */,
+				E12AD04317B0E9E4009A9B1B /* Frameworks */,
+				E12AD04417B0E9E4009A9B1B /* Resources */,
+				E12AD04517B0E9E4009A9B1B /* ShellScript */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = CampusInfoLogicTests;
+			productName = CampusInfoLogicTests;
+			productReference = E12AD04717B0E9E4009A9B1B /* CampusInfoLogicTests.octest */;
+			productType = "com.apple.product-type.bundle";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -658,6 +738,7 @@
 			projectRoot = "";
 			targets = (
 				A35A34131520814700181E3F /* CampusInfo1 */,
+				E12AD04617B0E9E4009A9B1B /* CampusInfoLogicTests */,
 			);
 		};
 /* End PBXProject section */
@@ -742,7 +823,31 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		E12AD04417B0E9E4009A9B1B /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E12AD05117B0E9E4009A9B1B /* InfoPlist.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		E12AD04517B0E9E4009A9B1B /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Run the unit tests in this test bundle.\n\"${SYSTEM_DEVELOPER_DIR}/Tools/RunUnitTests\"\n";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		A35A34101520814700181E3F /* Sources */ = {
@@ -792,6 +897,27 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		E12AD04217B0E9E4009A9B1B /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E12AD06A17B0FCFD009A9B1B /* TimeTableAsyncRequest.m in Sources */,
+				E12AD06017B0FCDD009A9B1B /* SchoolClassDto.m in Sources */,
+				E12AD06117B0FCDD009A9B1B /* RoomDto.m in Sources */,
+				E12AD06217B0FCDD009A9B1B /* PersonDto.m in Sources */,
+				E12AD06317B0FCDD009A9B1B /* SlotDto.m in Sources */,
+				E12AD06417B0FCDD009A9B1B /* DayDto.m in Sources */,
+				E12AD06517B0FCDD009A9B1B /* ScheduleDto.m in Sources */,
+				E12AD06617B0FCDD009A9B1B /* DepartmentDto.m in Sources */,
+				E12AD06717B0FCDD009A9B1B /* ScheduleEventDto.m in Sources */,
+				E12AD06817B0FCDD009A9B1B /* ScheduleEventRealizationDto.m in Sources */,
+				E12AD06917B0FCDD009A9B1B /* ScheduleCourseDto.m in Sources */,
+				E12AD05F17B0FCB3009A9B1B /* DateFormation.m in Sources */,
+				E12AD05417B0E9E4009A9B1B /* CampusInfoLogicTests.m in Sources */,
+				E12AD05B17B0EBEA009A9B1B /* ScheduleDtoTest.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
@@ -817,6 +943,14 @@
 				A35A34371520814800181E3F /* en */,
 			);
 			name = SearchView.xib;
+			sourceTree = "<group>";
+		};
+		E12AD04F17B0E9E4009A9B1B /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				E12AD05017B0E9E4009A9B1B /* en */,
+			);
+			name = InfoPlist.strings;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -928,6 +1062,65 @@
 			};
 			name = Release;
 		};
+		E12AD05617B0E9E4009A9B1B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				FRAMEWORK_SEARCH_PATHS = (
+					"\"$(SDKROOT)/Developer/Library/Frameworks\"",
+					"\"$(DEVELOPER_LIBRARY_DIR)/Frameworks\"",
+				);
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "CampusInfoLogicTests/CampusInfoLogicTests-Prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_UNINITIALIZED_AUTOS = NO;
+				INFOPLIST_FILE = "CampusInfoLogicTests/CampusInfoLogicTests-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = octest;
+			};
+			name = Debug;
+		};
+		E12AD05717B0E9E4009A9B1B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"\"$(SDKROOT)/Developer/Library/Frameworks\"",
+					"\"$(DEVELOPER_LIBRARY_DIR)/Frameworks\"",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "CampusInfoLogicTests/CampusInfoLogicTests-Prefix.pch";
+				GCC_WARN_UNINITIALIZED_AUTOS = NO;
+				INFOPLIST_FILE = "CampusInfoLogicTests/CampusInfoLogicTests-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				VALIDATE_PRODUCT = YES;
+				WRAPPER_EXTENSION = octest;
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -948,6 +1141,14 @@
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Debug;
+		};
+		E12AD05817B0E9E4009A9B1B /* Build configuration list for PBXNativeTarget "CampusInfoLogicTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				E12AD05617B0E9E4009A9B1B /* Debug */,
+				E12AD05717B0E9E4009A9B1B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
 		};
 /* End XCConfigurationList section */
 	};
