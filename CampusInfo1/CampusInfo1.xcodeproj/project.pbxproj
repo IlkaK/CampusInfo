@@ -111,6 +111,9 @@
 		E12B400B1796D25C000555AE /* GastronomicFacilityDto.m in Sources */ = {isa = PBXBuildFile; fileRef = E12B400A1796D25C000555AE /* GastronomicFacilityDto.m */; };
 		E13AA95117B2416B0061E0ED /* StudentsDto.m in Sources */ = {isa = PBXBuildFile; fileRef = E13AA95017B2416B0061E0ED /* StudentsDto.m */; };
 		E13AA95417B248620061E0ED /* LecturersDto.m in Sources */ = {isa = PBXBuildFile; fileRef = E13AA95317B248620061E0ED /* LecturersDto.m */; };
+		E13AA95717B269330061E0ED /* CoursesDto.m in Sources */ = {isa = PBXBuildFile; fileRef = E13AA95617B269330061E0ED /* CoursesDto.m */; };
+		E13AA95A17B269480061E0ED /* RoomsDto.m in Sources */ = {isa = PBXBuildFile; fileRef = E13AA95917B269480061E0ED /* RoomsDto.m */; };
+		E13AA95D17B269580061E0ED /* ClassesDto.m in Sources */ = {isa = PBXBuildFile; fileRef = E13AA95C17B269580061E0ED /* ClassesDto.m */; };
 		E13D3B5B17412F0500F534DB /* ChooseDateViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E13D3B5917412F0500F534DB /* ChooseDateViewController.m */; };
 		E13D3B5C17412F0500F534DB /* ChooseDateViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E13D3B5A17412F0500F534DB /* ChooseDateViewController.xib */; };
 		E153641F17997C0E00F18559 /* catering.png in Resources */ = {isa = PBXBuildFile; fileRef = E153641717997C0E00F18559 /* catering.png */; };
@@ -271,6 +274,12 @@
 		E13AA95017B2416B0061E0ED /* StudentsDto.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StudentsDto.m; sourceTree = "<group>"; };
 		E13AA95217B248620061E0ED /* LecturersDto.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LecturersDto.h; sourceTree = "<group>"; };
 		E13AA95317B248620061E0ED /* LecturersDto.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LecturersDto.m; sourceTree = "<group>"; };
+		E13AA95517B269330061E0ED /* CoursesDto.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CoursesDto.h; sourceTree = "<group>"; };
+		E13AA95617B269330061E0ED /* CoursesDto.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CoursesDto.m; sourceTree = "<group>"; };
+		E13AA95817B269480061E0ED /* RoomsDto.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RoomsDto.h; sourceTree = "<group>"; };
+		E13AA95917B269480061E0ED /* RoomsDto.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RoomsDto.m; sourceTree = "<group>"; };
+		E13AA95B17B269580061E0ED /* ClassesDto.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ClassesDto.h; sourceTree = "<group>"; };
+		E13AA95C17B269580061E0ED /* ClassesDto.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ClassesDto.m; sourceTree = "<group>"; };
 		E13D3B5817412F0500F534DB /* ChooseDateViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChooseDateViewController.h; sourceTree = "<group>"; };
 		E13D3B5917412F0500F534DB /* ChooseDateViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChooseDateViewController.m; sourceTree = "<group>"; };
 		E13D3B5A17412F0500F534DB /* ChooseDateViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ChooseDateViewController.xib; sourceTree = "<group>"; };
@@ -628,6 +637,12 @@
 				E13AA95017B2416B0061E0ED /* StudentsDto.m */,
 				E13AA95217B248620061E0ED /* LecturersDto.h */,
 				E13AA95317B248620061E0ED /* LecturersDto.m */,
+				E13AA95517B269330061E0ED /* CoursesDto.h */,
+				E13AA95617B269330061E0ED /* CoursesDto.m */,
+				E13AA95817B269480061E0ED /* RoomsDto.h */,
+				E13AA95917B269480061E0ED /* RoomsDto.m */,
+				E13AA95B17B269580061E0ED /* ClassesDto.h */,
+				E13AA95C17B269580061E0ED /* ClassesDto.m */,
 			);
 			name = TimeTableOwnerDto;
 			sourceTree = "<group>";
@@ -914,6 +929,9 @@
 				E16C642A17ABDC4600BEDBB3 /* EmergencyViewController.m in Sources */,
 				E13AA95117B2416B0061E0ED /* StudentsDto.m in Sources */,
 				E13AA95417B248620061E0ED /* LecturersDto.m in Sources */,
+				E13AA95717B269330061E0ED /* CoursesDto.m in Sources */,
+				E13AA95A17B269480061E0ED /* RoomsDto.m in Sources */,
+				E13AA95D17B269580061E0ED /* ClassesDto.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
