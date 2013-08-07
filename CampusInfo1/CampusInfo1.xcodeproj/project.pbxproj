@@ -109,6 +109,8 @@
 		E12B400417968F7E000555AE /* MensaOverviewTableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E12B400317968F7E000555AE /* MensaOverviewTableCell.xib */; };
 		E12B40081796B786000555AE /* WeekdayDto.m in Sources */ = {isa = PBXBuildFile; fileRef = E12B40071796B786000555AE /* WeekdayDto.m */; };
 		E12B400B1796D25C000555AE /* GastronomicFacilityDto.m in Sources */ = {isa = PBXBuildFile; fileRef = E12B400A1796D25C000555AE /* GastronomicFacilityDto.m */; };
+		E13AA95117B2416B0061E0ED /* StudentsDto.m in Sources */ = {isa = PBXBuildFile; fileRef = E13AA95017B2416B0061E0ED /* StudentsDto.m */; };
+		E13AA95417B248620061E0ED /* LecturersDto.m in Sources */ = {isa = PBXBuildFile; fileRef = E13AA95317B248620061E0ED /* LecturersDto.m */; };
 		E13D3B5B17412F0500F534DB /* ChooseDateViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E13D3B5917412F0500F534DB /* ChooseDateViewController.m */; };
 		E13D3B5C17412F0500F534DB /* ChooseDateViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E13D3B5A17412F0500F534DB /* ChooseDateViewController.xib */; };
 		E153641F17997C0E00F18559 /* catering.png in Resources */ = {isa = PBXBuildFile; fileRef = E153641717997C0E00F18559 /* catering.png */; };
@@ -265,6 +267,10 @@
 		E12B40071796B786000555AE /* WeekdayDto.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WeekdayDto.m; sourceTree = "<group>"; };
 		E12B40091796D25C000555AE /* GastronomicFacilityDto.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GastronomicFacilityDto.h; sourceTree = "<group>"; };
 		E12B400A1796D25C000555AE /* GastronomicFacilityDto.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GastronomicFacilityDto.m; sourceTree = "<group>"; };
+		E13AA94F17B2416B0061E0ED /* StudentsDto.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StudentsDto.h; sourceTree = "<group>"; };
+		E13AA95017B2416B0061E0ED /* StudentsDto.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StudentsDto.m; sourceTree = "<group>"; };
+		E13AA95217B248620061E0ED /* LecturersDto.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LecturersDto.h; sourceTree = "<group>"; };
+		E13AA95317B248620061E0ED /* LecturersDto.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LecturersDto.m; sourceTree = "<group>"; };
 		E13D3B5817412F0500F534DB /* ChooseDateViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChooseDateViewController.h; sourceTree = "<group>"; };
 		E13D3B5917412F0500F534DB /* ChooseDateViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChooseDateViewController.m; sourceTree = "<group>"; };
 		E13D3B5A17412F0500F534DB /* ChooseDateViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ChooseDateViewController.xib; sourceTree = "<group>"; };
@@ -441,6 +447,7 @@
 		A35A341E1520814800181E3F /* CampusInfo1 */ = {
 			isa = PBXGroup;
 			children = (
+				E13AA94E17B241150061E0ED /* TimeTableOwnerDto */,
 				E155A995179E773300726C39 /* MensaMenuDto */,
 				E12B40051796B51F000555AE /* MensaOverviewDto */,
 				E12B3FF9179689C0000555AE /* Mensa */,
@@ -612,6 +619,17 @@
 				E10B73001797DFAF005D9D32 /* HolidayDto.m */,
 			);
 			name = MensaOverviewDto;
+			sourceTree = "<group>";
+		};
+		E13AA94E17B241150061E0ED /* TimeTableOwnerDto */ = {
+			isa = PBXGroup;
+			children = (
+				E13AA94F17B2416B0061E0ED /* StudentsDto.h */,
+				E13AA95017B2416B0061E0ED /* StudentsDto.m */,
+				E13AA95217B248620061E0ED /* LecturersDto.h */,
+				E13AA95317B248620061E0ED /* LecturersDto.m */,
+			);
+			name = TimeTableOwnerDto;
 			sourceTree = "<group>";
 		};
 		E155A995179E773300726C39 /* MensaMenuDto */ = {
@@ -894,6 +912,8 @@
 				E155A9A4179E85FD00726C39 /* MenuDto.m in Sources */,
 				E16C642517ABDC0100BEDBB3 /* ContactsViewController.m in Sources */,
 				E16C642A17ABDC4600BEDBB3 /* EmergencyViewController.m in Sources */,
+				E13AA95117B2416B0061E0ED /* StudentsDto.m in Sources */,
+				E13AA95417B248620061E0ED /* LecturersDto.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

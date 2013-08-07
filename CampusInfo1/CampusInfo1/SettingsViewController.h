@@ -8,39 +8,29 @@
 
 #import <UIKit/UIKit.h>
 #import <GradientButton.h>
-#import <DBCachingForAutocomplete.h>
 #import <Autocomplete.h>
-#import <TimeTableAsyncRequest.h>
 #import <LanguageTranslation.h>
 #import <ContactsViewController.h>
 #import <EmergencyViewController.h>
+#import <StudentsDto.h>
+#import <LecturersDto.h>
 
-@interface SettingsViewController : UIViewController<UITextFieldDelegate, TimeTableAsyncRequestDelegate>
+@interface SettingsViewController : UIViewController<UITextFieldDelegate>
 {
-    IBOutlet UITextField        *_acronymTextField;
-    IBOutlet GradientButton     *_backToScheduleButton;
+    IBOutlet UITextField                *_acronymTextField;
+    IBOutlet GradientButton             *_backToScheduleButton;
     
-    IBOutlet UITableView        *_acronymAutocompleteTableView;
-    DBCachingForAutocomplete    *_dbCachingForAutocomplete;    
-    NSMutableArray              *_suggestions;
-    Autocomplete                *_autocomplete;
+    IBOutlet UITableView                *_acronymAutocompleteTableView;
+
+    NSMutableArray                      *_suggestions;
+    Autocomplete                        *_autocomplete;
+    StudentsDto                         *_students;
+    LecturersDto                        *_lecturers;
     
-    NSMutableArray              *_lecturerArray;
-    NSMutableArray              *_lecturerArrayFromDB;
-    NSMutableArray              *_studentArray;
-    NSMutableArray              *_studentArrayFromDB;
+    LanguageTranslation                 *_translator;
     
-    NSDictionary                *_generalDictionary;
-    
-    TimeTableAsyncRequest       *_asyncTimeTableRequest;
-    NSData                      *_dataFromUrl;
-    NSString                    *_errorMessage;
-    int                         _connectionTrials;
-    
-    LanguageTranslation         *_translator;
-    NSString                    *_searchType;
-    IBOutlet GradientButton     *_contactsButton;
-    IBOutlet GradientButton     *_emergencyButton;
+    IBOutlet GradientButton             *_contactsButton;
+    IBOutlet GradientButton             *_emergencyButton;
     IBOutlet ContactsViewController     *_contactsVC;
     IBOutlet EmergencyViewController    *_emergencyVC;
     IBOutlet UILabel                    *_contactsEmergencyTitle;
@@ -48,37 +38,26 @@
 }
 
 
-@property (nonatomic, retain) IBOutlet UITextField          *_acronymTextField;
-@property (nonatomic, retain) IBOutlet GradientButton       *_backToScheduleButton;
+@property (nonatomic, retain) IBOutlet UITextField              *_acronymTextField;
+@property (nonatomic, retain) IBOutlet GradientButton           *_backToScheduleButton;
 
-@property (nonatomic, retain) IBOutlet UITableView          *_acronymAutocompleteTableView;
-@property (nonatomic, retain) DBCachingForAutocomplete      *_dbCachingForAutocomplete;
-@property (strong, nonatomic) NSMutableArray                *_suggestions;
-@property (strong, nonatomic) Autocomplete                  *_autocomplete;
+@property (nonatomic, retain) IBOutlet UITableView              *_acronymAutocompleteTableView;
 
-@property (strong, nonatomic) NSMutableArray                *_lecturerArray;
-@property (strong, nonatomic) NSMutableArray                *_lecturerArrayFromDB;
-@property (strong, nonatomic) NSMutableArray                *_studentArray;
-@property (strong, nonatomic) NSMutableArray                *_studentArrayFromDB;
+@property (strong, nonatomic) NSMutableArray                    *_suggestions;
+@property (strong, nonatomic) Autocomplete                      *_autocomplete;
+@property (nonatomic, retain) StudentsDto                       *_students;
+@property (nonatomic, retain) LecturersDto                      *_lecturers;
 
-@property (strong, nonatomic) NSDictionary                   *_generalDictionary;
+@property (nonatomic, retain) LanguageTranslation               *_translator;
 
-@property (nonatomic, retain) IBOutlet TimeTableAsyncRequest *_asyncTimeTableRequest;
-@property (nonatomic, retain) NSData                         *_dataFromUrl;
-@property (nonatomic, retain) NSString                       *_errorMessage;
-@property (nonatomic, assign) int                             _connectionTrials;
+@property (nonatomic, retain) IBOutlet GradientButton           *_contactsButton;
+@property (nonatomic, retain) IBOutlet GradientButton           *_emergencyButton;
+@property (nonatomic, retain) IBOutlet ContactsViewController   *_contactsVC;
+@property (nonatomic, retain) IBOutlet EmergencyViewController  *_emergencyVC;
 
-@property (nonatomic, retain) LanguageTranslation            *_translator;
+@property (nonatomic, retain) IBOutlet UILabel                  *_contactsEmergencyTitle;
+@property (nonatomic, retain) IBOutlet UILabel                  *_timetableSettingsTitle;
 
-@property (nonatomic, retain) NSString                       *_searchType;
-
-@property (nonatomic, retain) IBOutlet GradientButton        *_contactsButton;
-@property (nonatomic, retain) IBOutlet GradientButton        *_emergencyButton;
-@property (nonatomic, retain) IBOutlet ContactsViewController  *_contactsVC;
-@property (nonatomic, retain) IBOutlet EmergencyViewController *_emergencyVC;
-
-@property (nonatomic, retain) IBOutlet UILabel          *_contactsEmergencyTitle;
-@property (nonatomic, retain) IBOutlet UILabel          *_timetableSettingsTitle;
 
 
 - (IBAction)moveToTimeTable:(id)sender;

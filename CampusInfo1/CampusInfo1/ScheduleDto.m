@@ -194,9 +194,8 @@
     
     NSError      *_error = nil;
     NSDictionary *_scheduleDictionary;
-    //NSLog(@"2");
     
-     //   NSLog(@"getDictionaryFromUrl %@",[NSThread callStackSymbols]);
+    //NSLog(@"getDictionaryFromUrl %@",[NSThread callStackSymbols]);
     
     //NSString *someString = [NSString stringWithFormat:@"%@", _dataFromUrl]; 
     //NSLog(@"getDictionaryFromUrl data from url %@", someString);
@@ -206,21 +205,6 @@
     
     if (_dataFromUrl == nil) 
     {
-        
-        
-        //NSLog(@"getDictionaryFromUrl NO DATA HERE");
-        
-        
-        //NSMutableData *responseData = [[NSMutableData data] retain];
-        //NSURLRequest  *request = [NSURLRequest requestWithURL:[NSURL URLWithString:@"http://192.168.1.102:49619/v1/schedules/musteeri"]];
-        //NSURLResponse *response = nil;
-        //NSError *error = nil;
-        //getting the data
-        //NSData *newData = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&error];
-        //json parse
-        //NSString *responseString = [[NSString alloc] initWithData:newData encoding:NSUTF8StringEncoding];
-        //responseString = [responseString substringToIndex:10];
-        //NSLog(@"did something :  %@", responseString);
         return nil;
     }    
     else
@@ -350,59 +334,47 @@
     :(NSString *)newAcronymString
     :(NSString *)newAcronymType
     :(NSDate   *)newScheduleDate
-{
-    //self = [self setExampleData];
-    //self._acronym       = newAcronymString;
-    //self._type          = newAcronymType;
-    //self._scheduleDate  = newScheduleDate;    
-    
+{    
     
     NSDictionary *_scheduleDictionary = nil;
     
-    //if (   self._acronym == nil 
-    //    || !([self._acronym isEqualToString:newAcronymString])  
-    //    || self._days == nil
-    //   )
-    //{
-        //NSLog(@"loadScheduleWithAcronym old acronym: %@ - new acronym: %@", self._acronym , newAcronymString);
-        
-        self._acronym       = newAcronymString;
-        self._type          = newAcronymType;
-        self._scheduleDate  = newScheduleDate;
+    self._acronym       = newAcronymString;
+    self._type          = newAcronymType;
+    self._scheduleDate  = newScheduleDate;
     
-        _scheduleDictionary = [self getDictionaryFromUrl];
+    _scheduleDictionary = [self getDictionaryFromUrl];
     
-        if (_scheduleDictionary == nil)
-        {
-            NSLog(@"no connection");
-            self._connectionEstablished      = @"NO";
-        }
-        else 
-        {
-            //NSLog(@"IF connection established");
-            self._connectionEstablished      = @"YES";
+    if (_scheduleDictionary == nil)
+    {
+        NSLog(@"no connection");
+        self._connectionEstablished      = @"NO";
+    }
+    else 
+    {
+        //NSLog(@"IF connection established");
+        self._connectionEstablished      = @"YES";
             
-            for (id scheduleKey in _scheduleDictionary) 
-            {
-                //NSLog(@"scheduleKey:%@",scheduleKey);
+        for (id scheduleKey in _scheduleDictionary) 
+        {
+            //NSLog(@"scheduleKey:%@",scheduleKey);
                 
-                if ([scheduleKey isEqualToString:@"Message"])
+            if ([scheduleKey isEqualToString:@"Message"])
+            {
+                NSString *_message = [_scheduleDictionary objectForKey:scheduleKey];
+                self._errorMessage = _message;
+                NSLog(@"Message: %@",_message);
+            }
+            else
+            {
+                self._errorMessage = nil;
+                // define type of schedule
+                if ([scheduleKey isEqualToString:@"type"])
                 {
-                    NSString *_message = [_scheduleDictionary objectForKey:scheduleKey];
-                    self._errorMessage = _message;
-                    NSLog(@"Message: %@",_message);
+                    self._type = [self getScheduleType:[_scheduleDictionary objectForKey:scheduleKey]];
                 }
-                else
+                if ([scheduleKey isEqualToString:@"days"])
                 {
-                  self._errorMessage = nil;
-                  // define type of schedule
-                  if ([scheduleKey isEqualToString:@"type"])
-                  {
-                      self._type = [self getScheduleType:[_scheduleDictionary objectForKey:scheduleKey]];
-                  }
-                  if ([scheduleKey isEqualToString:@"days"])
-                  {
-                      self._days = [self getDaysWithDictionary:_scheduleDictionary withKey:scheduleKey];
+                    self._days = [self getDaysWithDictionary:_scheduleDictionary withKey:scheduleKey];
                     
                     //int dayArrayI;
                     //for (dayArrayI = 0; dayArrayI < [_days count]; dayArrayI++)
@@ -417,88 +389,11 @@
                     //        NSLog(@"initWithAcronym => %i event in table cell: %@ (%@)", eventArrayI,  _localEvent._name, _localEvent._type);
                      //   }
                     //}
-                  }
-                  [self setTypeDetailsWithDictionary:_scheduleDictionary withKey:scheduleKey];
                 }
+                [self setTypeDetailsWithDictionary:_scheduleDictionary withKey:scheduleKey];
             }
         }
-    //}
-    /*
-    else 
-    {
-        self._type          = newAcronymType;
-        self._scheduleDate  = newScheduleDate;
-        _scheduleDictionary = [self getDictionaryFromUrl];
-    
-        if (_scheduleDictionary == nil) 
-        {
-            NSLog(@"no connection");
-            self._connectionEstablished      = @"NO";
-        }
-        else 
-        {
-            NSLog(@"ELSE connection established");
-            self._connectionEstablished      = @"YES";
-            NSString *_alreadyInArray        = @"NO";
-            NSString *_oldDayString;
-            NSString *_localDayString;
-            DayDto   *_localDay;
-            
-            for (id scheduleKey in _scheduleDictionary) 
-            {            
-                // get days
-                if ([scheduleKey isEqualToString:@"days"]) 
-                {
-                    NSMutableArray *_newDayArray = [[NSMutableArray alloc]init];
-                    _newDayArray                 = [self getDays:_scheduleDictionary:scheduleKey];
-                    
-                    NSLog(@"new days count %i", [_newDayArray count]);
-                    
-                    int newDayArrayI;
-                    int oldDayArrayI;
-                    for (newDayArrayI = 0; newDayArrayI < [_newDayArray count]; newDayArrayI++) 
-                    {
-                        _localDay       = [_newDayArray objectAtIndex:newDayArrayI];
-                        _alreadyInArray = @"NO";
-                        _localDayString = [[_dateFormatter _englishDayFormatter] stringFromDate:_localDay._date];
-                        
-                        // only add new day, if it is not already in array
-                        for (oldDayArrayI = 0; oldDayArrayI < [self._days count]; oldDayArrayI++) 
-                        {
-                            _oldDayString = [[_dateFormatter _englishDayFormatter] stringFromDate:_localDay._date];
-                            if ([_localDayString isEqualToString:_oldDayString]) 
-                            {
-                                _alreadyInArray = @"YES";
-                            }
-                        }
-                        
-                        if ([_alreadyInArray isEqualToString:@"NO"]) 
-                        {
-                            [self._days addObject:_localDay];
-                        }
-                    }
-                
-                    //_localDateString = [[_dateFormatter _englishDayFormatter] stringFromDate:_localDay._date];
-                    
-                    int dayArrayI;
-                    for (dayArrayI = 0; dayArrayI < [_days count]; dayArrayI++) 
-                    {
-                        DayDto   *_oneDay        = [_days objectAtIndex:dayArrayI];
-                        NSString *_oneDateString = [[_dateFormatter _englishDayFormatter]stringFromDate:_oneDay._date];
-                        NSLog(@"loadScheduleWithAcronym _oneDateString => %@", _oneDateString);
-                        int eventArrayI;
-                        for (eventArrayI = 0; eventArrayI < [_oneDay._events count]; eventArrayI++) 
-                        {
-                            ScheduleEventDto *_localEvent = [_oneDay._events objectAtIndex:eventArrayI];
-                            NSLog(@"loadScheduleWithAcronym => %i event in table cell: %@", eventArrayI,  _localEvent._name);
-                        }
-                    }
-                } 
-            }
-        } 
-    }
-    */
-     
+    }     
 }
 
 

@@ -13,28 +13,17 @@
 @end
 
 @implementation SettingsViewController
+
 @synthesize _acronymTextField;
 @synthesize _backToScheduleButton;
+
 @synthesize _acronymAutocompleteTableView;
-@synthesize _dbCachingForAutocomplete;
 @synthesize _autocomplete;
 @synthesize _suggestions;
-
-@synthesize _studentArray;
-@synthesize _studentArrayFromDB;
-@synthesize _lecturerArray;
-@synthesize _lecturerArrayFromDB;
-
-@synthesize _errorMessage;
-@synthesize _asyncTimeTableRequest;
-@synthesize _connectionTrials;
-@synthesize _dataFromUrl;
-
-@synthesize _generalDictionary;
+@synthesize _lecturers;
+@synthesize _students;
 
 @synthesize _translator;
-
-@synthesize _searchType;
 
 @synthesize _contactsButton;
 @synthesize _emergencyButton;
@@ -43,6 +32,7 @@
 
 @synthesize _contactsEmergencyTitle;
 @synthesize _timetableSettingsTitle;
+
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -59,17 +49,12 @@
 
     _translator = [[LanguageTranslation alloc] init];
     
-    _studentArray        = [[NSMutableArray alloc] init];
-    _studentArrayFromDB  = [[NSMutableArray alloc] init];
-    _lecturerArray       = [[NSMutableArray alloc] init];
-    _lecturerArrayFromDB = [[NSMutableArray alloc] init];
-    
+    _students = [[StudentsDto alloc]init];
+    _lecturers = [[LecturersDto alloc]init];
+
     self._acronymTextField.delegate = self;    
-    _autocomplete = [[Autocomplete alloc] initWithArray:_studentArray];
+    _autocomplete = [[Autocomplete alloc] initWithArray:_students._studentArray];
 	_acronymTextField.autocorrectionType = UITextAutocorrectionTypeNo;
-    
-    self._connectionTrials = 1;
-    _generalDictionary = nil;
     
     NSUserDefaults *_acronymUserDefaults = [NSUserDefaults standardUserDefaults];
     _acronymTextField.text                = [_acronymUserDefaults stringForKey:@"TimeTableAcronym"];
@@ -78,7 +63,7 @@
     [_contactsButton useAlertStyle];
     [_emergencyButton useAlertStyle];
     
-    _dbCachingForAutocomplete = [[DBCachingForAutocomplete alloc]init];
+
     [self._acronymAutocompleteTableView setSeparatorStyle:UITableViewCellSeparatorStyleNone];    
     
     if (_contactsVC == nil)
@@ -105,196 +90,33 @@
 }
 
 
--(void) setAutocompleteCandidatesWithDBUpdate:(BOOL)doDBUpdate
+-(void)addValuesToAutocompleteCandidates
 {
-    _autocomplete._candidates = _lecturerArray;
+    // all values must be summarized in suggestions array
+    int countAllValues = [_lecturers._lecturerArray count] + [_students._studentArray count];
     
-    //NSLog(@"1 _autocomplete._candidates count: %i", [_autocomplete._candidates count]);
+    //NSLog(@"acronymTextFieldChanged countAllValues: %i lecturers count: %i students count: %i", countAllValues, [_lecturers._lecturerArray count], [_students._studentArray count]);
     
-    int studentArrayI;
-    for (studentArrayI=0; studentArrayI<[_studentArray count]; studentArrayI++)
+    if (countAllValues > [_autocomplete._candidates count])
     {
-        [_autocomplete._candidates addObject:[_studentArray objectAtIndex:studentArrayI]];
-    }
-    
-    //NSLog(@"2 _autocomplete._candidates count: %i", [_autocomplete._candidates count]);
-    
-    if(doDBUpdate && [_lecturerArrayFromDB count] != [_lecturerArray count])
-    {
-       [_dbCachingForAutocomplete storeLecturers:_lecturerArray];
-    }
-    
-    if(doDBUpdate && [_studentArrayFromDB count] != [_studentArray count])
-    {
-       [_dbCachingForAutocomplete storeStudents:_studentArray];
-    }
-}
-
-
-//-------------------------------
-// asynchronous request
-//-------------------------------
-
--(void) dataDownloadDidFinish:(NSData*) data
-{
-    
-    self._dataFromUrl = data;
-    
-    // NSLog(@"dataDownloadDidFinish 1 %@",[NSThread callStackSymbols]);
-    
-    if (self._dataFromUrl != nil)
-    {
-        //NSString *_receivedString = [[NSString alloc] initWithData:self._dataFromUrl encoding:NSASCIIStringEncoding];
-        //_receivedString = [_receivedString substringToIndex:100];
-        //NSLog(@"dataDownloadDidFinish FOR SEARCHVIEWCONTROLLER %@", _receivedString);
-        
-        NSError *_error;
-        
-        //if (_generalDictionary == nil)
-        //{
-        NSArray      *_generalArrayFromServer;
-        int          _generalArrayFromServerI;
-
-        _generalDictionary = [NSJSONSerialization
-                              JSONObjectWithData:_dataFromUrl
-                              options:kNilOptions
-                              error:&_error];
-            
-            
-        for (id generalKey in _generalDictionary)
+        int lecturerArrayI;
+        for (lecturerArrayI=0; lecturerArrayI<[_lecturers._lecturerArray count]; lecturerArrayI++)
         {
-            //NSLog(@"dataDownloadDidFinish generalKey:%@",generalKey);
-            
-            _generalArrayFromServer = [_generalDictionary objectForKey:generalKey];
-            
-            if ([generalKey isEqualToString:@"lecturers"])
-            {
-                [_lecturerArray removeAllObjects];
-                NSDictionary    *_lecturerDictionary;
-                NSString        *_lecturerName;
-                NSString        *_lecturerShortName;
-
-                for (_generalArrayFromServerI = 0; _generalArrayFromServerI < [_generalArrayFromServer count]; _generalArrayFromServerI++)
-                {
-                    _lecturerDictionary = [_generalArrayFromServer objectAtIndex:_generalArrayFromServerI];
-                    for (id lecturerKey in _lecturerDictionary)
-                    {
-                        if ([lecturerKey isEqualToString:@"name"])
-                        {
-                            _lecturerName = [_lecturerDictionary objectForKey:lecturerKey];
-                            //NSLog(@"lecturer name: %@", _lecturerName);
-                        }
-                        if ([lecturerKey isEqualToString:@"shortName"])
-                        {
-                            _lecturerShortName = [_lecturerDictionary objectForKey:lecturerKey];
-                            //NSLog(@"lecturer shortName: %@", _lecturerShortName);
-                            [_lecturerArray addObject:_lecturerShortName];
-                        }
-                    }
-                }
-                //NSLog(@"dataDownloadDidFinish lecturerArray count: %i", [_lecturerArray count]);
-                [self setAutocompleteCandidatesWithDBUpdate:(NO)];
-            }
-            if ([generalKey isEqualToString:@"students"])
-            {
-                [_studentArray removeAllObjects];
-                _generalArrayFromServer = [_generalDictionary objectForKey:generalKey];
-                //[_studentsAndLecturerArray removeAllObjects];
-                for (_generalArrayFromServerI = 0; _generalArrayFromServerI < [_generalArrayFromServer count]; _generalArrayFromServerI++)
-                {
-                    NSString *_student = [_generalArrayFromServer objectAtIndex:_generalArrayFromServerI];
-                    //NSLog(@"students: %@",_student);
-                    [_studentArray addObject:_student];
-                }
-                //NSLog(@"dataDownloadDidFinish studentArray count: %i", [_studentArray count]);
-                [self setAutocompleteCandidatesWithDBUpdate:(NO)];
-            }
+            //NSLog(@"loop %i lecturer count: %i", lecturerArrayI, [_lecturers._lecturerArray count]);
+            [_autocomplete._candidates addObject:[_lecturers._lecturerArray objectAtIndex:lecturerArrayI]];
+        }
+        
+        int studentArrayI;
+        for (studentArrayI=0; studentArrayI<[_students._studentArray count]; studentArrayI++)
+        {
+            [_autocomplete._candidates addObject:[_students._studentArray objectAtIndex:studentArrayI]];
         }
     }
+    
+    //NSLog(@"acronymTextFieldChanged autocomplete candidates: %i ", [_autocomplete._candidates count]);
+    //NSLog(@"6 lecturers array after: %i", [_lecturers._lecturerArray count]);
+    
 }
-
-
--(void)threadDone:(NSNotification*)arg
-{
-    //NSLog(@"Thread exiting");
-}
-
-
--(void) downloadData
-{
-    NSString *_urlString = [NSString stringWithFormat:@"https://srv-lab-t-874.zhaw.ch/v1/schedules/%@/"
-                            , self._searchType];
-    
-    NSLog(@"urlString SettingsViewController: %@", _urlString);
-    
-    NSURL *_url = [NSURL URLWithString:_urlString];
-    [_asyncTimeTableRequest downloadData:_url];
-}
-
-
-- (NSDictionary *) getDictionaryFromUrl
-{
-    _asyncTimeTableRequest = [[TimeTableAsyncRequest alloc] init];
-    _asyncTimeTableRequest._timeTableAsynchRequestDelegate = self;
-    [self performSelectorInBackground:@selector(downloadData) withObject:nil];
-    
-    [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(threadDone:)
-                                                 name:NSThreadWillExitNotification
-                                               object:nil];
-    
-    if (_dataFromUrl == nil)
-    {
-        return nil;
-    }
-    else
-    {
-        NSError      *_error = nil;
-        //NSLog(@"getDictionaryFromUrl got some data putting it now into dictionary");
-        NSDictionary *_scheduleDictionary = [NSJSONSerialization
-                               JSONObjectWithData:_dataFromUrl
-                               options:kNilOptions
-                               error:&_error];
-        return _scheduleDictionary;
-        
-    }
-
-}
-
-
--(void) getData
-{
-    //if (self._courseArray == nil)
-    //{
-    //self._generalStudentDictionary = nil;
-    //self._generalLecturerDictionary = nil;
-    //[_studentArray removeAllObjects];
-    
-    
-    self._searchType = @"students";
-    self._generalDictionary = [self getDictionaryFromUrl];
-    
-    if (self._generalDictionary == nil)
-    {
-        NSLog(@"SearchViewController: no connection for student");
-    }
-    
-    self._searchType = @"lecturers";
-    self._generalDictionary = [self getDictionaryFromUrl];
-    
-    if (self._generalDictionary == nil)
-    {
-        NSLog(@"SearchViewController: no connection for lecturer");
-    }
-    
-    //else
-    //{
-    //    NSLog(@"IF connection established");
-    //}
-    //}
-}
-
-
 
 
 
@@ -302,23 +124,16 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    [self getData];
     
-    if (self._generalDictionary == nil)
-    {
-        [_lecturerArray removeAllObjects];
-        [_studentArray removeAllObjects];
-        
-        //NSLog(@"no connection so get data from database");
-        _lecturerArray          = [_dbCachingForAutocomplete getLecturers];
-        _lecturerArrayFromDB    = _lecturerArray;
-        _studentArray           = [_dbCachingForAutocomplete getStudents];
-        _studentArrayFromDB     = _studentArray;
-        
-        [self setAutocompleteCandidatesWithDBUpdate:(NO)];
-        [self.view addSubview:_acronymAutocompleteTableView];
-        [_acronymAutocompleteTableView reloadData];
-    }
+    [_students getData];
+    [_lecturers getData];
+    
+    [self addValuesToAutocompleteCandidates];
+    
+    //NSLog(@"viewWillAppear: 2 _autocomplete._candidates count: %i", [_autocomplete._candidates count]);
+    
+    [self.view addSubview:_acronymAutocompleteTableView];
+    [_acronymAutocompleteTableView reloadData];
 }
 
 
@@ -429,12 +244,14 @@
 
 - (IBAction)acronymTextFieldChanged:(id)sender
 {
-
-    _suggestions = [[NSMutableArray alloc] initWithArray:[_autocomplete GetSuggestions:((UITextField*)sender).text]];
-	
-    //NSLog(@"acronymTextFieldChanged -> _studentArray count: %i -> _lecturerArray count: %i -> _suggestions count: %i",[_studentArray count], [_lecturerArray count], [_suggestions count]);
+    [self addValuesToAutocompleteCandidates];
     
-	[self.view addSubview:_acronymAutocompleteTableView];
+    _suggestions = [[NSMutableArray alloc] initWithArray:[_autocomplete GetSuggestions:((UITextField*)sender).text]];
+    
+    //NSLog(@"_suggestions count: %i", [_suggestions count]);
+	
+    [self.view addSubview:_acronymAutocompleteTableView];
+    _acronymAutocompleteTableView.hidden = NO;
 	[_acronymAutocompleteTableView reloadData];
 }
 
@@ -451,7 +268,6 @@
 
 
 //---------- Handling of table for suggestions -----
-
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
     return 1;
@@ -499,7 +315,7 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
 	_acronymTextField.text = [_suggestions objectAtIndex:indexPath.row];
-	[_acronymAutocompleteTableView removeFromSuperview];
+    _acronymAutocompleteTableView.hidden = YES;
 }
 
 
