@@ -47,6 +47,7 @@
 		27C217D1154D47A700BA423D /* DetailTableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 27C217D0154D47A700BA423D /* DetailTableCell.xib */; };
 		27CCE305154414190057D9F8 /* TimeTableDetailController.m in Sources */ = {isa = PBXBuildFile; fileRef = 27CCE303154414180057D9F8 /* TimeTableDetailController.m */; };
 		27CCE306154414190057D9F8 /* TimeTableDetailController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 27CCE304154414180057D9F8 /* TimeTableDetailController.xib */; };
+		27CFFAC117B2D02A009C66A8 /* MenuNewsTableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 27CFFAC017B2D02A009C66A8 /* MenuNewsTableCell.xib */; };
 		27E0AA9C1550420C00D83EC1 /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 27E0AA9B1550420C00D83EC1 /* Icon.png */; };
 		27E8229E155D214A006EA12D /* ScheduleEventRealizationDto.m in Sources */ = {isa = PBXBuildFile; fileRef = 27E8229D155D214A006EA12D /* ScheduleEventRealizationDto.m */; };
 		27FBF7281551A83600C09ED9 /* StartpageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 27FBF7261551A83600C09ED9 /* StartpageViewController.m */; };
@@ -198,6 +199,7 @@
 		27CCE302154414180057D9F8 /* TimeTableDetailController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TimeTableDetailController.h; sourceTree = "<group>"; };
 		27CCE303154414180057D9F8 /* TimeTableDetailController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TimeTableDetailController.m; sourceTree = "<group>"; };
 		27CCE304154414180057D9F8 /* TimeTableDetailController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TimeTableDetailController.xib; sourceTree = "<group>"; };
+		27CFFAC017B2D02A009C66A8 /* MenuNewsTableCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MenuNewsTableCell.xib; sourceTree = "<group>"; };
 		27E0AA9B1550420C00D83EC1 /* Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Icon.png; path = CampusInfo1/resources/Icon.png; sourceTree = "<group>"; };
 		27E8229C155D214A006EA12D /* ScheduleEventRealizationDto.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ScheduleEventRealizationDto.h; sourceTree = "<group>"; };
 		27E8229D155D214A006EA12D /* ScheduleEventRealizationDto.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ScheduleEventRealizationDto.m; sourceTree = "<group>"; };
@@ -665,6 +667,7 @@
 				E13AA96417B285600061E0ED /* MenuOverviewController.xib */,
 				E13AA96717B286D40061E0ED /* MenuTimeTableCell.xib */,
 				E13AA96917B28E400061E0ED /* MenuMensaTableCell.xib */,
+				27CFFAC017B2D02A009C66A8 /* MenuNewsTableCell.xib */,
 			);
 			name = MenuOverview;
 			sourceTree = "<group>";
@@ -878,6 +881,7 @@
 				E13AA96617B285600061E0ED /* MenuOverviewController.xib in Resources */,
 				E13AA96817B286D40061E0ED /* MenuTimeTableCell.xib in Resources */,
 				E13AA96A17B28E400061E0ED /* MenuMensaTableCell.xib in Resources */,
+				27CFFAC117B2D02A009C66A8 /* MenuNewsTableCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
