@@ -32,15 +32,18 @@
     application.applicationSupportsShakeToEdit = YES;
      [self.window setRootViewController:self.tabBarController];
 
-    NSUserDefaults *_acronymUserDefaults = [NSUserDefaults standardUserDefaults];
-    NSString *_ownStoredAcronymString    = [_acronymUserDefaults stringForKey:@"TimeTableAcronym"];
     
-    if (_ownStoredAcronymString == nil)
-        [self.tabBarController setSelectedIndex: 1]; // set search view
-    else
-        [self.tabBarController setSelectedIndex: 0]; // set timetable view
+    //NSUserDefaults *_acronymUserDefaults = [NSUserDefaults standardUserDefaults];
+    //NSString *_ownStoredAcronymString    = [_acronymUserDefaults stringForKey:@"TimeTableAcronym"];
     
-    //[self.window addSubview:self.tabBarController.view];
+    //if (_ownStoredAcronymString == nil)
+    //    [self.tabBarController setSelectedIndex: 1]; // set search view
+    //else
+    //    [self.tabBarController setSelectedIndex: 0]; // set timetable view
+    
+    // always start with menu overview
+    [self.tabBarController setSelectedIndex: 0];
+    
     [self.window makeKeyAndVisible];
     
     return YES;

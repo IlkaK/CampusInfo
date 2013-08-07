@@ -223,7 +223,7 @@
 {
     if (self._ownStoredAcronymString == nil)
     {
-        self.tabBarController.selectedIndex = 3;
+        self.tabBarController.selectedIndex = 4;
         [self dismissModalViewControllerAnimated:YES];
     }
     else
@@ -623,7 +623,7 @@
         [_acronymAlertView show];
         
         // switch to settings tab
-        self.tabBarController.selectedIndex = 1;
+        self.tabBarController.selectedIndex = 2;
         [self dismissModalViewControllerAnimated:YES];
         
         //NSLog(@"cannot load acronym view");
