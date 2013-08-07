@@ -127,8 +127,11 @@
     }
     else
     {
+        //NSString *_receivedString = [[NSString alloc] initWithData:self._dataFromUrl encoding:NSASCIIStringEncoding];
+        //_receivedString = [_receivedString substringToIndex:100];
+        //NSLog(@"getDictionaryFromUrl studentsDto %@", _receivedString);
+        
         NSError      *_error = nil;
-        //NSLog(@"getDictionaryFromUrl got some data putting it now into dictionary");
         NSDictionary *_scheduleDictionary = [NSJSONSerialization
                                              JSONObjectWithData:_dataFromUrl
                                              options:kNilOptions

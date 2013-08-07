@@ -61,6 +61,31 @@
     self.navigationItem.titleView = _titleLabel;
 }
 
+-(void)loadDataWithSearchType
+{
+    if ([_searchType isEqualToString:@"Kurs"])
+    {
+        [_courses getData];
+    }
+    if ([_searchType isEqualToString:@"Dozent"])
+    {
+        [_lecturers getData];
+    }
+    if ([_searchType isEqualToString:@"Student"])
+    {
+        [_students getData];
+    }
+    if ([_searchType isEqualToString:@"Raum"])
+    {
+        [_rooms getData];
+    }
+    if ([_searchType isEqualToString:@"Klasse"])
+    {
+        [_classes getData];
+    }
+}
+
+
 -(void) setTableWithSearchType
 {
     if ([_searchType isEqualToString:@"Kurs"])
@@ -89,12 +114,7 @@
 {
     [super viewWillAppear:animated];
     
-    [_students getData];
-    [_lecturers getData];
-    [_courses getData];
-    [_classes getData];
-    [_rooms getData];
-    
+    [self loadDataWithSearchType];
     [self setTableWithSearchType];
     
     [self.view addSubview:_acronymAutocompleteTableView];
@@ -158,7 +178,7 @@
 {
     _acronymAutocompleteTableView.hidden = YES;
     _searchType = [_searchTypeArray objectAtIndex:row];
-
+    [self loadDataWithSearchType];
     [self setTableWithSearchType];    
 }
 

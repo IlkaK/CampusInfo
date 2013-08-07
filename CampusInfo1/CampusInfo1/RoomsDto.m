@@ -117,16 +117,19 @@
                                                  name:NSThreadWillExitNotification
                                                object:nil];
     
-    if (_dataFromUrl == nil)
+    if (self._dataFromUrl == nil)
     {
         return nil;
     }
     else
     {
+        //NSString *_receivedString = [[NSString alloc] initWithData:self._dataFromUrl encoding:NSASCIIStringEncoding];
+        //_receivedString = [_receivedString substringToIndex:100];
+        //NSLog(@"getDictionaryFromUrl roomsDto %@", _receivedString);
+
         NSError      *_error = nil;
-        //NSLog(@"getDictionaryFromUrl got some data putting it now into dictionary");
         NSDictionary *_scheduleDictionary = [NSJSONSerialization
-                                             JSONObjectWithData:_dataFromUrl
+                                             JSONObjectWithData:self._dataFromUrl
                                              options:kNilOptions
                                              error:&_error];
         return _scheduleDictionary;
