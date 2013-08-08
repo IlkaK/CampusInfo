@@ -140,6 +140,7 @@
 		E16C642B17ABDC4600BEDBB3 /* EmergencyViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E16C642917ABDC4600BEDBB3 /* EmergencyViewController.xib */; };
 		E17842D2178309160059EA3C /* DBCachingForAutocomplete.m in Sources */ = {isa = PBXBuildFile; fileRef = E17842D1178309160059EA3C /* DBCachingForAutocomplete.m */; };
 		E195FF36178188A30065DF05 /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = E195FF35178188A30065DF05 /* libsqlite3.dylib */; };
+		E1ACAF4C17B3836C00F2630B /* ZHAW-App-Banner.png in Resources */ = {isa = PBXBuildFile; fileRef = E1ACAF4B17B3836C00F2630B /* ZHAW-App-Banner.png */; };
 		E1BC14C2175F8D4900FE2854 /* Autocomplete.m in Sources */ = {isa = PBXBuildFile; fileRef = E1BC14C1175F8D4900FE2854 /* Autocomplete.m */; };
 		E1BC5622179D290A007E235D /* MensaDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E1BC5620179D290A007E235D /* MensaDetailViewController.m */; };
 		E1BC5623179D290A007E235D /* MensaDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E1BC5621179D290A007E235D /* MensaDetailViewController.xib */; };
@@ -321,6 +322,7 @@
 		E17842D0178309160059EA3C /* DBCachingForAutocomplete.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DBCachingForAutocomplete.h; sourceTree = "<group>"; };
 		E17842D1178309160059EA3C /* DBCachingForAutocomplete.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DBCachingForAutocomplete.m; sourceTree = "<group>"; };
 		E195FF35178188A30065DF05 /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
+		E1ACAF4B17B3836C00F2630B /* ZHAW-App-Banner.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "ZHAW-App-Banner.png"; path = "CampusInfo1/resources/icons/ZHAW-App-Banner.png"; sourceTree = "<group>"; };
 		E1BC14C0175F8D4900FE2854 /* Autocomplete.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Autocomplete.h; sourceTree = "<group>"; };
 		E1BC14C1175F8D4900FE2854 /* Autocomplete.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Autocomplete.m; sourceTree = "<group>"; };
 		E1BC561F179D290A007E235D /* MensaDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MensaDetailViewController.h; sourceTree = "<group>"; };
@@ -510,6 +512,7 @@
 		A35A34501520830700181E3F /* Icon */ = {
 			isa = PBXGroup;
 			children = (
+				E1ACAF4B17B3836C00F2630B /* ZHAW-App-Banner.png */,
 				E10D601317AFAF4100036690 /* facebook.png */,
 				E10D601417AFAF4100036690 /* issuu.png */,
 				E10D601517AFAF4100036690 /* twitter.png */,
@@ -882,6 +885,7 @@
 				E13AA96817B286D40061E0ED /* MenuTimeTableCell.xib in Resources */,
 				E13AA96A17B28E400061E0ED /* MenuMensaTableCell.xib in Resources */,
 				27CFFAC117B2D02A009C66A8 /* MenuNewsTableCell.xib in Resources */,
+				E1ACAF4C17B3836C00F2630B /* ZHAW-App-Banner.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

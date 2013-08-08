@@ -17,6 +17,7 @@
 @synthesize _menuTimeTableCell;
 @synthesize _menuMensaTableCell;
 @synthesize _menuNewsTableCell;
+@synthesize _contactsVC;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -30,7 +31,26 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    // Do any additional setup after loading the view from its nib.
+    // set table controller
+    if (_menuTableView == nil) {
+		_menuTableView = [[UITableView alloc] init];
+	}
+    
+    UIColor *_lectureBackgroundColor = [UIColor colorWithRed:1.0/255.0 green:100.0/255.0 blue:167.0/255.0 alpha:1.0];
+    
+    _menuTableView.separatorColor = _lectureBackgroundColor;
+    _menuTableView.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
+    _menuTableView.scrollEnabled = NO;
+    
+    [self.view setBackgroundColor:_lectureBackgroundColor];
+    
+    if (_contactsVC == nil)
+    {
+		_contactsVC = [[ContactsViewController alloc] init];
+	}
+    //_contactsVC._chooseDateViewDelegate = self;
+    _contactsVC.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
+    
 }
 
 - (void)didReceiveMemoryWarning
@@ -44,6 +64,7 @@
     _menuTimeTableCell = nil;
     _menuMensaTableCell = nil;
     _menuNewsTableCell = nil;
+    _contactsVC = nil;
     [super viewDidUnload];
 }
 
@@ -71,7 +92,7 @@
 
 -(void) moveToContacts:(id)sender event:(id)event
 {
-    NSLog(@"move to contact");
+    [self presentModalViewController:_contactsVC animated:YES];
 }
 
 -(void) moveToQuestion:(id)sender event:(id)event
@@ -111,7 +132,7 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return 72;
+    return 85;
 }
 
 
@@ -122,8 +143,8 @@
     NSString         *_cellIdentifier;
     UITableViewCell  *_cell = nil;
     
-    UIColor *_lectureBackgroundColor = [UIColor colorWithRed:202.0/255.0 green:225.0/255.0 blue:255.0/255.0 alpha:1.0];
-    
+    UIColor *_lectureBackgroundColor = [UIColor colorWithRed:1.0/255.0 green:100.0/255.0 blue:167.0/255.0 alpha:1.0];
+    // #0164A7 -> 1,100,167
     
     if (_cellSelection == 0)
     {
@@ -143,6 +164,9 @@
         UIButton *_timeTableTitleButton  = (UIButton *) [_cell viewWithTag:2];
         _timeTableTitleButton.enabled = true;
         [_timeTableTitleButton addTarget:self action:@selector(moveToTimeTable:event:) forControlEvents:UIControlEventTouchUpInside];
+        NSMutableAttributedString *_timeTableTitleString = [[NSMutableAttributedString alloc] initWithString:@"Stundenplan"];
+        [_timeTableTitleString addAttribute:NSForegroundColorAttributeName value:[UIColor whiteColor] range:NSMakeRange(0, [_timeTableTitleString length])];
+        [_timeTableTitleButton setAttributedTitle:_timeTableTitleString forState:UIControlStateNormal];
         
         // mensa
         UIButton *_mensaIconButton  = (UIButton *) [_cell viewWithTag:3];
@@ -151,6 +175,9 @@
         UIButton *_mensaTitleButton  = (UIButton *) [_cell viewWithTag:4];
         _mensaTitleButton.enabled = true;
         [_mensaTitleButton addTarget:self action:@selector(moveToMensa:event:) forControlEvents:UIControlEventTouchUpInside];
+        NSMutableAttributedString *_mensaTitleString = [[NSMutableAttributedString alloc] initWithString:@"Mensa"];
+        [_mensaTitleString addAttribute:NSForegroundColorAttributeName value:[UIColor whiteColor] range:NSMakeRange(0, [_mensaTitleString length])];
+        [_mensaTitleButton setAttributedTitle:_mensaTitleString forState:UIControlStateNormal];
         
         //OeV
         UIButton *_oevIconButton  = (UIButton *) [_cell viewWithTag:5];
@@ -159,9 +186,13 @@
         UIButton *_oevTitleButton  = (UIButton *) [_cell viewWithTag:6];
         _oevTitleButton.enabled = true;
         [_oevTitleButton addTarget:self action:@selector(moveToOev:event:) forControlEvents:UIControlEventTouchUpInside];
+        NSMutableAttributedString *_oevTitleString = [[NSMutableAttributedString alloc] initWithString:@"ÖV"];
+        [_oevTitleString addAttribute:NSForegroundColorAttributeName value:[UIColor whiteColor] range:NSMakeRange(0, [_oevTitleString length])];
+        [_oevTitleButton setAttributedTitle:_oevTitleString forState:UIControlStateNormal];
         
         _cell.contentView.backgroundColor = _lectureBackgroundColor;
         _cell.backgroundColor = _cell.contentView.backgroundColor;
+        _cell.selectionStyle = UITableViewCellSelectionStyleNone;
     }
     
     if (_cellSelection == 1)
@@ -182,6 +213,9 @@
         UIButton *_personTitleButton  = (UIButton *) [_cell viewWithTag:2];
         _personTitleButton.enabled = true;
         [_personTitleButton addTarget:self action:@selector(moveToPerson:event:) forControlEvents:UIControlEventTouchUpInside];
+        NSMutableAttributedString *_personTitleString = [[NSMutableAttributedString alloc] initWithString:@"Person"];
+        [_personTitleString addAttribute:NSForegroundColorAttributeName value:[UIColor whiteColor] range:NSMakeRange(0, [_personTitleString length])];
+        [_personTitleButton setAttributedTitle:_personTitleString forState:UIControlStateNormal];
         
         // contact
         UIButton *_contactsIconButton  = (UIButton *) [_cell viewWithTag:3];
@@ -190,7 +224,10 @@
         UIButton *_contactsTitleButton  = (UIButton *) [_cell viewWithTag:4];
         _contactsTitleButton.enabled = true;
         [_contactsTitleButton addTarget:self action:@selector(moveToContacts:event:) forControlEvents:UIControlEventTouchUpInside];
-        
+        NSMutableAttributedString *_contactsTitleString = [[NSMutableAttributedString alloc] initWithString:@"Kontakte"];
+        [_contactsTitleString addAttribute:NSForegroundColorAttributeName value:[UIColor whiteColor] range:NSMakeRange(0, [_contactsTitleString length])];
+        [_contactsTitleButton setAttributedTitle:_contactsTitleString forState:UIControlStateNormal];
+
         //???
         UIButton *_questionIconButton  = (UIButton *) [_cell viewWithTag:5];
         _questionIconButton.enabled = true;
@@ -198,9 +235,13 @@
         UIButton *_questionTitleButton  = (UIButton *) [_cell viewWithTag:6];
         _questionTitleButton.enabled = true;
         [_questionTitleButton addTarget:self action:@selector(moveToQuestion:event:) forControlEvents:UIControlEventTouchUpInside];
-
+        NSMutableAttributedString *_questionTitleString = [[NSMutableAttributedString alloc] initWithString:@"???"];
+        [_questionTitleString addAttribute:NSForegroundColorAttributeName value:[UIColor whiteColor] range:NSMakeRange(0, [_questionTitleString length])];
+        [_questionTitleButton setAttributedTitle:_questionTitleString forState:UIControlStateNormal];
+        
         _cell.contentView.backgroundColor = _lectureBackgroundColor;
         _cell.backgroundColor = _cell.contentView.backgroundColor;
+        _cell.selectionStyle = UITableViewCellSelectionStyleNone;
     }
     
     if (_cellSelection == 2)
@@ -221,6 +262,9 @@
         UIButton *_newsTitleButton  = (UIButton *) [_cell viewWithTag:2];
         _newsTitleButton.enabled = true;
         [_newsTitleButton addTarget:self action:@selector(moveToNews:event:) forControlEvents:UIControlEventTouchUpInside];
+        NSMutableAttributedString *_newsTitleString = [[NSMutableAttributedString alloc] initWithString:@"News"];
+        [_newsTitleString addAttribute:NSForegroundColorAttributeName value:[UIColor whiteColor] range:NSMakeRange(0, [_newsTitleString length])];
+        [_newsTitleButton setAttributedTitle:_newsTitleString forState:UIControlStateNormal];
         
         // events
         UIButton *_eventsIconButton  = (UIButton *) [_cell viewWithTag:3];
@@ -229,6 +273,9 @@
         UIButton *_eventsTitleButton  = (UIButton *) [_cell viewWithTag:4];
         _eventsTitleButton.enabled = true;
         [_eventsTitleButton addTarget:self action:@selector(moveToEvents:event:) forControlEvents:UIControlEventTouchUpInside];
+        NSMutableAttributedString *_eventsTitleString = [[NSMutableAttributedString alloc] initWithString:@"Events"];
+        [_eventsTitleString addAttribute:NSForegroundColorAttributeName value:[UIColor whiteColor] range:NSMakeRange(0, [_eventsTitleString length])];
+        [_eventsTitleButton setAttributedTitle:_eventsTitleString forState:UIControlStateNormal];
         
         // settings
         UIButton *_settingsIconButton  = (UIButton *) [_cell viewWithTag:5];
@@ -237,9 +284,13 @@
         UIButton *_settingsTitleButton  = (UIButton *) [_cell viewWithTag:6];
         _settingsTitleButton.enabled = true;
         [_settingsTitleButton addTarget:self action:@selector(moveToSettings:event:) forControlEvents:UIControlEventTouchUpInside];
+        NSMutableAttributedString *_settingsTitleString = [[NSMutableAttributedString alloc] initWithString:@"Einstellungen"];
+        [_settingsTitleString addAttribute:NSForegroundColorAttributeName value:[UIColor whiteColor] range:NSMakeRange(0, [_settingsTitleString length])];
+        [_settingsTitleButton setAttributedTitle:_settingsTitleString forState:UIControlStateNormal];
         
         _cell.contentView.backgroundColor = _lectureBackgroundColor;
         _cell.backgroundColor = _cell.contentView.backgroundColor;
+        _cell.selectionStyle = UITableViewCellSelectionStyleNone;
     }
     
     //NSLog(@"_cellSelection: %i", _cellSelection);
