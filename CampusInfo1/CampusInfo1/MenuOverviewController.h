@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import <ContactsViewController.h>
+#import <SettingsViewController.h>
 
 
 @interface MenuOverviewController : UIViewController<UITableViewDelegate>
@@ -18,6 +19,7 @@
     IBOutlet UITableViewCell        *_menuMensaTableCell;
     IBOutlet UITableViewCell        *_menuNewsTableCell;
     IBOutlet ContactsViewController *_contactsVC;
+    IBOutlet SettingsViewController *_settingsVC;
 }
 
 @property (nonatomic, retain) IBOutlet UITableView               *_menuTableView;
@@ -25,5 +27,6 @@
 @property (nonatomic, retain) IBOutlet UITableViewCell           *_menuMensaTableCell;
 @property (nonatomic, retain) IBOutlet UITableViewCell           *_menuNewsTableCell;
 @property (nonatomic, retain) IBOutlet ContactsViewController    *_contactsVC;
+@property (nonatomic, retain) IBOutlet SettingsViewController    *_settingsVC;
 
 @end
