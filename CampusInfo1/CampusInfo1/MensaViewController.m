@@ -29,6 +29,7 @@
 @synthesize _translator;
 @synthesize _dateLabel;
 @synthesize _mensaDetailVC;
+@synthesize _titleLabel;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -71,6 +72,11 @@
     [self.view bringSubviewToFront:_dateLabel];
     [_dateLabel setTextColor:[UIColor whiteColor]];
     self.navigationItem.titleView = _dateLabel;
+    
+    UIColor *_backgroundColor = [UIColor colorWithRed:1.0/255.0 green:100.0/255.0 blue:167.0/255.0 alpha:1.0];
+
+    [_titleLabel setBackgroundColor:_backgroundColor];
+    [_titleLabel setTextColor:[UIColor whiteColor]];
 }
 
 
@@ -86,6 +92,7 @@
     _mensaOverviewTableCell = nil;
     _dateLabel = nil;
     _mensaDetailVC = nil;
+    _titleLabel = nil;
     [super viewDidUnload];
 }
 

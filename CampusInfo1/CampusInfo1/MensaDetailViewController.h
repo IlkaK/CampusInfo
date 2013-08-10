@@ -40,6 +40,7 @@
     int                                 _actualCalendarWeek;
     IBOutlet UISwipeGestureRecognizer   *_rightSwipe;
     IBOutlet UISwipeGestureRecognizer   *_leftSwipe;
+    IBOutlet UILabel                    *_titleLabel;
 }
 
 @property (nonatomic, retain) GastronomicFacilityDto                    *_actualGastronomy;
@@ -67,6 +68,9 @@
 
 @property (nonatomic, retain) IBOutlet UISwipeGestureRecognizer         *_rightSwipe;
 @property (nonatomic, retain) IBOutlet UISwipeGestureRecognizer         *_leftSwipe;
+
+@property (nonatomic, retain) IBOutlet UILabel                          *_titleLabel;
+
 
 - (IBAction)backToMensaOverview:(id)sender;
 

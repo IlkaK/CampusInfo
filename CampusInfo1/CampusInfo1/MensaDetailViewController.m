@@ -41,6 +41,8 @@
 @synthesize _leftSwipe;
 @synthesize _rightSwipe;
 
+@synthesize _titleLabel;
+
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -53,6 +55,8 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    UIColor *_backgroundColor = [UIColor colorWithRed:1.0/255.0 green:100.0/255.0 blue:167.0/255.0 alpha:1.0];
     
     _dateFormatter  = [[DateFormation alloc] init];
     //_actualGastronomy = [[GastronomicFacilityDto alloc]init:nil withGastroId:nil withLocation:nil withName:nil withServiceTimePeriods:nil withType:nil withVersion:nil];
@@ -102,7 +106,10 @@
     
     [_detailTable reloadData];
     
-    _gastronomyLabel.text = _actualGastronomy._name;
+    _gastronomyLabel.text = [NSString stringWithFormat:@"   %@",_actualGastronomy._name];
+    
+    [_gastronomyLabel setBackgroundColor:_backgroundColor];
+    [_gastronomyLabel setTextColor:[UIColor whiteColor]];
     
     self._menuPlans     = [[NSMutableArray alloc] init];
     self._actualMenu    = [[MenuDto alloc] init:nil withDishes:nil withOfferedOn:nil withVersion:nil];
@@ -116,6 +123,8 @@
     [_leftSwipe setDirection:(UISwipeGestureRecognizerDirectionLeft)];
     [[self view] addGestureRecognizer:_leftSwipe];
     
+    [_titleLabel setBackgroundColor:_backgroundColor];
+    [_titleLabel setTextColor:[UIColor whiteColor]];
 }
 
 
@@ -224,8 +233,11 @@
     _gastronomyLabel = nil;
     _rightSwipe = nil;
     _leftSwipe = nil;
+    _titleLabel = nil;
     [super viewDidUnload];
 }
+
+
 
 -(void)setActualMenu
 {
@@ -443,6 +455,7 @@
      //   [self getData];
     //}
     [_detailTable reloadData];
+    _gastronomyLabel.text = [NSString stringWithFormat:@"   %@",_actualGastronomy._name];
 }
  
 

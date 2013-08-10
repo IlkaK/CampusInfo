@@ -17,6 +17,7 @@
 		271CB2BE17AD196A005CC185 /* EmergencyDetailTableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 271CB2BD17AD196A005CC185 /* EmergencyDetailTableCell.xib */; };
 		271CB2C017AD198E005CC185 /* EmergencyOverviewTableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 271CB2BF17AD198E005CC185 /* EmergencyOverviewTableCell.xib */; };
 		271CB2C217AD26F3005CC185 /* EmergencyInformTableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 271CB2C117AD26F2005CC185 /* EmergencyInformTableCell.xib */; };
+		274AE0CD17B528340031E912 /* zhaw_logo.png in Resources */ = {isa = PBXBuildFile; fileRef = 274AE0CC17B528340031E912 /* zhaw_logo.png */; };
 		275ACACD173D36C90091B266 /* SixSlotsTwoRoomsTableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 275ACACC173D36C90091B266 /* SixSlotsTwoRoomsTableCell.xib */; };
 		275ACACF173D3BB60091B266 /* SixSlotsOneRoomTableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 275ACACE173D3BB50091B266 /* SixSlotsOneRoomTableCell.xib */; };
 		275ACAD1173D4AD20091B266 /* TwoSlotSixRoomsTableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 275ACAD0173D4AD20091B266 /* TwoSlotSixRoomsTableCell.xib */; };
@@ -165,6 +166,7 @@
 		271CB2BD17AD196A005CC185 /* EmergencyDetailTableCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EmergencyDetailTableCell.xib; sourceTree = "<group>"; };
 		271CB2BF17AD198E005CC185 /* EmergencyOverviewTableCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EmergencyOverviewTableCell.xib; sourceTree = "<group>"; };
 		271CB2C117AD26F2005CC185 /* EmergencyInformTableCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EmergencyInformTableCell.xib; sourceTree = "<group>"; };
+		274AE0CC17B528340031E912 /* zhaw_logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = zhaw_logo.png; path = CampusInfo1/resources/icons/zhaw_logo.png; sourceTree = "<group>"; };
 		275ACACC173D36C90091B266 /* SixSlotsTwoRoomsTableCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SixSlotsTwoRoomsTableCell.xib; sourceTree = "<group>"; };
 		275ACACE173D3BB50091B266 /* SixSlotsOneRoomTableCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SixSlotsOneRoomTableCell.xib; sourceTree = "<group>"; };
 		275ACAD0173D4AD20091B266 /* TwoSlotSixRoomsTableCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TwoSlotSixRoomsTableCell.xib; sourceTree = "<group>"; };
@@ -512,6 +514,7 @@
 		A35A34501520830700181E3F /* Icon */ = {
 			isa = PBXGroup;
 			children = (
+				274AE0CC17B528340031E912 /* zhaw_logo.png */,
 				E1ACAF4B17B3836C00F2630B /* ZHAW-App-Banner.png */,
 				E10D601317AFAF4100036690 /* facebook.png */,
 				E10D601417AFAF4100036690 /* issuu.png */,
@@ -784,7 +787,7 @@
 		A35A340B1520814700181E3F /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0430;
+				LastUpgradeCheck = 0460;
 			};
 			buildConfigurationList = A35A340E1520814700181E3F /* Build configuration list for PBXProject "CampusInfo1" */;
 			compatibilityVersion = "Xcode 3.2";
@@ -886,6 +889,7 @@
 				E13AA96A17B28E400061E0ED /* MenuMensaTableCell.xib in Resources */,
 				27CFFAC117B2D02A009C66A8 /* MenuNewsTableCell.xib in Resources */,
 				E1ACAF4C17B3836C00F2630B /* ZHAW-App-Banner.png in Resources */,
+				274AE0CD17B528340031E912 /* zhaw_logo.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1157,6 +1161,7 @@
 					"DEBUG=1",
 					"$(inherited)",
 				);
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				GCC_WARN_UNINITIALIZED_AUTOS = NO;
 				INFOPLIST_FILE = "CampusInfoLogicTests/CampusInfoLogicTests-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
@@ -1184,6 +1189,7 @@
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "CampusInfoLogicTests/CampusInfoLogicTests-Prefix.pch";
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				GCC_WARN_UNINITIALIZED_AUTOS = NO;
 				INFOPLIST_FILE = "CampusInfoLogicTests/CampusInfoLogicTests-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
