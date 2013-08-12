@@ -45,6 +45,7 @@
 								<int key="NSvFlags">292</int>
 								<string key="NSFrame">{{0, 8}, {110, 42}}</string>
 								<reference key="NSSuperview" ref="73987664"/>
+								<reference key="NSWindow"/>
 								<reference key="NSNextKeyView" ref="320941051"/>
 								<string key="NSReuseIdentifierKey">_NS:9</string>
 								<bool key="IBUIOpaque">NO</bool>
@@ -83,6 +84,7 @@
 								<int key="NSvFlags">292</int>
 								<string key="NSFrame">{{108, 8}, {103, 42}}</string>
 								<reference key="NSSuperview" ref="73987664"/>
+								<reference key="NSWindow"/>
 								<reference key="NSNextKeyView" ref="286758392"/>
 								<string key="NSReuseIdentifierKey">_NS:9</string>
 								<bool key="IBUIOpaque">NO</bool>
@@ -108,6 +110,7 @@
 								<int key="NSvFlags">292</int>
 								<string key="NSFrame">{{210, 8}, {110, 42}}</string>
 								<reference key="NSSuperview" ref="73987664"/>
+								<reference key="NSWindow"/>
 								<reference key="NSNextKeyView" ref="478351877"/>
 								<string key="NSReuseIdentifierKey">_NS:9</string>
 								<bool key="IBUIOpaque">NO</bool>
@@ -129,6 +132,7 @@
 								<int key="NSvFlags">292</int>
 								<string key="NSFrame">{{0, 53}, {110, 30}}</string>
 								<reference key="NSSuperview" ref="73987664"/>
+								<reference key="NSWindow"/>
 								<reference key="NSNextKeyView" ref="764503571"/>
 								<string key="NSReuseIdentifierKey">_NS:9</string>
 								<bool key="IBUIOpaque">NO</bool>
@@ -158,6 +162,7 @@
 								<int key="NSvFlags">292</int>
 								<string key="NSFrame">{{108, 53}, {103, 30}}</string>
 								<reference key="NSSuperview" ref="73987664"/>
+								<reference key="NSWindow"/>
 								<reference key="NSNextKeyView" ref="444487137"/>
 								<string key="NSReuseIdentifierKey">_NS:9</string>
 								<bool key="IBUIOpaque">NO</bool>
@@ -180,6 +185,7 @@
 								<int key="NSvFlags">292</int>
 								<string key="NSFrame">{{210, 54}, {110, 30}}</string>
 								<reference key="NSSuperview" ref="73987664"/>
+								<reference key="NSWindow"/>
 								<string key="NSReuseIdentifierKey">_NS:9</string>
 								<bool key="IBUIOpaque">NO</bool>
 								<int key="IBUITag">6</int>
@@ -199,6 +205,7 @@
 						</array>
 						<string key="NSFrameSize">{320, 84}</string>
 						<reference key="NSSuperview" ref="249524775"/>
+						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="947455649"/>
 						<string key="NSReuseIdentifierKey">_NS:11</string>
 						<object class="NSColor" key="IBUIBackgroundColor">
@@ -214,6 +221,7 @@
 				</array>
 				<string key="NSFrameSize">{320, 85}</string>
 				<reference key="NSSuperview"/>
+				<reference key="NSWindow"/>
 				<reference key="NSNextKeyView" ref="73987664"/>
 				<string key="NSReuseIdentifierKey">_NS:9</string>
 				<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
@@ -903,7 +911,118 @@
 			<nil key="sourceID"/>
 			<int key="maxID">253</int>
 		</object>
-		<object class="IBClassDescriber" key="IBDocument.Classes"/>
+		<object class="IBClassDescriber" key="IBDocument.Classes">
+			<array class="NSMutableArray" key="referencedPartialClassDescriptions">
+				<object class="IBPartialClassDescription">
+					<string key="className">ContactsViewController</string>
+					<string key="superclassName">UIViewController</string>
+					<object class="NSMutableDictionary" key="actions">
+						<string key="NS.key.0">moveBackToContactsOverview:</string>
+						<string key="NS.object.0">id</string>
+					</object>
+					<object class="NSMutableDictionary" key="actionInfosByName">
+						<string key="NS.key.0">moveBackToContactsOverview:</string>
+						<object class="IBActionInfo" key="NS.object.0">
+							<string key="name">moveBackToContactsOverview:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+					</object>
+					<dictionary class="NSMutableDictionary" key="outlets">
+						<string key="_backButton">UIButton</string>
+						<string key="_backLabel">UILabel</string>
+						<string key="_contactsOverviewTableCell">UITableViewCell</string>
+						<string key="_contactsPhoneTableCell">UITableViewCell</string>
+						<string key="_contactsPlaceTableCell">UITableViewCell</string>
+						<string key="_contactsSocialMediaTableCell">UITableViewCell</string>
+						<string key="_contactsTable">UITableView</string>
+						<string key="_titleLabel">UILabel</string>
+					</dictionary>
+					<dictionary class="NSMutableDictionary" key="toOneOutletInfosByName">
+						<object class="IBToOneOutletInfo" key="_backButton">
+							<string key="name">_backButton</string>
+							<string key="candidateClassName">UIButton</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="_backLabel">
+							<string key="name">_backLabel</string>
+							<string key="candidateClassName">UILabel</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="_contactsOverviewTableCell">
+							<string key="name">_contactsOverviewTableCell</string>
+							<string key="candidateClassName">UITableViewCell</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="_contactsPhoneTableCell">
+							<string key="name">_contactsPhoneTableCell</string>
+							<string key="candidateClassName">UITableViewCell</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="_contactsPlaceTableCell">
+							<string key="name">_contactsPlaceTableCell</string>
+							<string key="candidateClassName">UITableViewCell</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="_contactsSocialMediaTableCell">
+							<string key="name">_contactsSocialMediaTableCell</string>
+							<string key="candidateClassName">UITableViewCell</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="_contactsTable">
+							<string key="name">_contactsTable</string>
+							<string key="candidateClassName">UITableView</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="_titleLabel">
+							<string key="name">_titleLabel</string>
+							<string key="candidateClassName">UILabel</string>
+						</object>
+					</dictionary>
+					<object class="IBClassDescriptionSource" key="sourceIdentifier">
+						<string key="majorKey">IBProjectSource</string>
+						<string key="minorKey">./Classes/ContactsViewController.h</string>
+					</object>
+				</object>
+				<object class="IBPartialClassDescription">
+					<string key="className">MenuOverviewController</string>
+					<string key="superclassName">UIViewController</string>
+					<dictionary class="NSMutableDictionary" key="outlets">
+						<string key="_contactsVC">ContactsViewController</string>
+						<string key="_menuMensaTableCell">UITableViewCell</string>
+						<string key="_menuNewsTableCell">UITableViewCell</string>
+						<string key="_menuTableView">UITableView</string>
+						<string key="_menuTimeTableCell">UITableViewCell</string>
+					</dictionary>
+					<dictionary class="NSMutableDictionary" key="toOneOutletInfosByName">
+						<object class="IBToOneOutletInfo" key="_contactsVC">
+							<string key="name">_contactsVC</string>
+							<string key="candidateClassName">ContactsViewController</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="_menuMensaTableCell">
+							<string key="name">_menuMensaTableCell</string>
+							<string key="candidateClassName">UITableViewCell</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="_menuNewsTableCell">
+							<string key="name">_menuNewsTableCell</string>
+							<string key="candidateClassName">UITableViewCell</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="_menuTableView">
+							<string key="name">_menuTableView</string>
+							<string key="candidateClassName">UITableView</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="_menuTimeTableCell">
+							<string key="name">_menuTimeTableCell</string>
+							<string key="candidateClassName">UITableViewCell</string>
+						</object>
+					</dictionary>
+					<object class="IBClassDescriptionSource" key="sourceIdentifier">
+						<string key="majorKey">IBProjectSource</string>
+						<string key="minorKey">./Classes/MenuOverviewController.h</string>
+					</object>
+				</object>
+				<object class="IBPartialClassDescription">
+					<string key="className">NSLayoutConstraint</string>
+					<string key="superclassName">NSObject</string>
+					<object class="IBClassDescriptionSource" key="sourceIdentifier">
+						<string key="majorKey">IBProjectSource</string>
+						<string key="minorKey">./Classes/NSLayoutConstraint.h</string>
+					</object>
+				</object>
+			</array>
+		</object>
 		<int key="IBDocument.localizationMode">0</int>
 		<string key="IBDocument.TargetRuntimeIdentifier">IBCocoaTouchFramework</string>
 		<bool key="IBDocument.PluginDeclaredDependenciesTrackSystemTargetVersion">YES</bool>

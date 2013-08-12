@@ -14,6 +14,10 @@
 #import <StudentsDto.h>
 #import <LecturersDto.h>
 
+@protocol SettingsViewDelegate <NSObject>
+
+@end
+
 @interface SettingsViewController : UIViewController<UITextFieldDelegate>
 {
     IBOutlet UITextField                *_acronymTextField;
