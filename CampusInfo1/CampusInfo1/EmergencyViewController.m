@@ -14,28 +14,29 @@
 
 @implementation EmergencyViewController
 
-@synthesize _backToSettingsNavigationItem;
 @synthesize _emergencyDetailTableCell;
 @synthesize _emergencyOverviewTableCell;
 @synthesize _emergencyTable;
 @synthesize _emergencyInformTableCell;
 @synthesize _emergencyCallNumber;
+
 @synthesize _titleLabel;
+@synthesize _backLabel;
+@synthesize _backButton;
 
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self) {
-        // Custom initialization
-    }
     return self;
 }
 
-- (void) backToSettings:(id)sender
+
+- (IBAction)moveBackToContactsOverview:(id)sender
 {
     [self dismissModalViewControllerAnimated:YES];
 }
+
 
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
 {
@@ -107,18 +108,10 @@
 // [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"tel://1456987452"]];
 }
 
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
-    UIImage         *_leftButtonImage = [UIImage imageNamed:@"arrowLeft_small.png"];
-    UIBarButtonItem *_leftButton      = [[UIBarButtonItem alloc] initWithImage: _leftButtonImage
-                                                                         style:UIBarButtonItemStylePlain
-                                                                        target:self
-                                                                        action:@selector(backToSettings:)];
-    
-    [_backToSettingsNavigationItem setLeftBarButtonItem :_leftButton animated :true];
-    _backToSettingsNavigationItem.title = @"";
 
     // set table controller
     if (_emergencyTable == nil) {
@@ -130,11 +123,22 @@
     [_emergencyTable reloadData];
     _emergencyCallNumber = @"";
     
-    [self.view bringSubviewToFront:_titleLabel];
+    UIColor *_backgroundColor = [UIColor colorWithRed:1.0/255.0 green:100.0/255.0 blue:167.0/255.0 alpha:1.0];
+    
+    [_titleLabel setBackgroundColor:_backgroundColor];
     [_titleLabel setTextColor:[UIColor whiteColor]];
-    _titleLabel.text = @"Notfall";
-    _backToSettingsNavigationItem.title = @"";
-    self.navigationItem.titleView = _titleLabel;
+    _titleLabel.text = @"   Notfall";
+    
+    [_backLabel setBackgroundColor:_backgroundColor];
+    [_backLabel setTextColor:[UIColor whiteColor]];
+    
+    [_backButton setBackgroundColor:_backgroundColor];
+    
+    NSMutableAttributedString *_backButtonTitleString = [[NSMutableAttributedString alloc] initWithString:@"zurück"];
+    
+    [_backButtonTitleString addAttribute:NSForegroundColorAttributeName value:[UIColor whiteColor] range:NSMakeRange(0, [_backButtonTitleString length])];
+    
+    [_backButton setAttributedTitle:_backButtonTitleString forState:UIControlStateNormal];
 }
 
 - (void)didReceiveMemoryWarning
@@ -144,12 +148,13 @@
 }
 
 - (void)viewDidUnload {
-    _backToSettingsNavigationItem = nil;
     _emergencyTable = nil;
     _emergencyDetailTableCell = nil;
     _emergencyOverviewTableCell = nil;
     _emergencyInformTableCell = nil;
     _titleLabel = nil;
+    _backButton = nil;
+    _backLabel = nil;
     [super viewDidUnload];
 }
 

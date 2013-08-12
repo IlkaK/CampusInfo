@@ -41,6 +41,8 @@
     IBOutlet UISwipeGestureRecognizer   *_rightSwipe;
     IBOutlet UISwipeGestureRecognizer   *_leftSwipe;
     IBOutlet UILabel                    *_titleLabel;
+    IBOutlet UIButton                   *_backButton;
+    IBOutlet UILabel                    *_backLabel;
 }
 
 @property (nonatomic, retain) GastronomicFacilityDto                    *_actualGastronomy;
@@ -70,6 +72,8 @@
 @property (nonatomic, retain) IBOutlet UISwipeGestureRecognizer         *_leftSwipe;
 
 @property (nonatomic, retain) IBOutlet UILabel                          *_titleLabel;
+@property (nonatomic, retain) IBOutlet UIButton                         *_backButton;
+@property (nonatomic, retain) IBOutlet UILabel                          *_backLabel;
 
 
 - (IBAction)backToMensaOverview:(id)sender;

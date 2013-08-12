@@ -25,21 +25,13 @@
 
 @synthesize _translator;
 
-@synthesize _contactsButton;
-@synthesize _emergencyButton;
-@synthesize _contactsVC;
-@synthesize _emergencyVC;
-
-@synthesize _contactsEmergencyTitle;
 @synthesize _timetableSettingsTitle;
+//@synthesize _menuOverviewVC;
 
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self) {
-        // Custom initialization
-    }
     return self;
 }
 
@@ -59,34 +51,19 @@
     NSUserDefaults *_acronymUserDefaults = [NSUserDefaults standardUserDefaults];
     _acronymTextField.text                = [_acronymUserDefaults stringForKey:@"TimeTableAcronym"];
     [_backToScheduleButton useAlertStyle];
-    
-    [_contactsButton useAlertStyle];
-    [_emergencyButton useAlertStyle];
-    
 
     [self._acronymAutocompleteTableView setSeparatorStyle:UITableViewCellSeparatorStyleNone];    
-    
-    if (_contactsVC == nil)
-    {
-		_contactsVC = [[ContactsViewController alloc] init];
-	}
-    //_contactsVC._chooseDateViewDelegate = self;
-    _contactsVC.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
-    
-    if (_emergencyVC == nil)
-    {
-		_emergencyVC = [[EmergencyViewController alloc] init];
-	}
-    //_emergencyVC._chooseDateViewDelegate = self;
-    _emergencyVC.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
-    
-    [self.view bringSubviewToFront:_contactsEmergencyTitle];
-    [_contactsEmergencyTitle setTextColor:[UIColor whiteColor]];
-    self.navigationItem.titleView = _contactsEmergencyTitle;
     
     [self.view bringSubviewToFront:_timetableSettingsTitle];
     [_timetableSettingsTitle setTextColor:[UIColor whiteColor]];
     self.navigationItem.titleView = _timetableSettingsTitle;
+    
+    //if (_menuOverviewVC == nil)
+    //{
+	//	_menuOverviewVC = [[MenuOverviewController alloc] init];
+	//}
+    //_menuOverviewVC.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
+    
 }
 
 
@@ -149,12 +126,8 @@
     _acronymTextField = nil;
     _backToScheduleButton = nil;
     _acronymAutocompleteTableView = nil;
-    _contactsButton = nil;
-    _emergencyButton = nil;
-    _contactsVC = nil;
-    _emergencyVC = nil;
-    _contactsEmergencyTitle = nil;
     _timetableSettingsTitle = nil;
+    //_menuOverviewVC = nil;
     [super viewDidUnload];
 }
 
@@ -255,14 +228,9 @@
 	[_acronymAutocompleteTableView reloadData];
 }
 
-- (IBAction)moveToContacts:(id)sender
+- (IBAction)moveToMenuOverview:(id)sender
 {
-   [self presentModalViewController:_contactsVC animated:YES];
-}
-
-- (IBAction)moveToEmergency:(id)sender
-{
-    [self presentModalViewController:_emergencyVC animated:YES];
+    //[self presentModalViewController:_menuOverviewVC animated:YES];
 }
 
 

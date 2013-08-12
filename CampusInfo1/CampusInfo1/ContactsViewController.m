@@ -14,7 +14,6 @@
 
 @implementation ContactsViewController
 
-@synthesize _backToSettingsNavigationItem;
 @synthesize _titleLabel;
 @synthesize _contactsTable;
 
@@ -26,39 +25,42 @@
 @synthesize _currentEmail;
 @synthesize _currentPhoneNumber;
 
+@synthesize _backButton;
+@synthesize _backLabel;
+
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self) {
-        // Custom initialization
-    }
     return self;
 }
 
-- (void) backToSettings:(id)sender
+
+- (IBAction)moveBackToContactsOverview:(id)sender
 {
-     [self dismissModalViewControllerAnimated:YES];
+    [self dismissModalViewControllerAnimated:YES];
 }
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     
-    UIImage         *_leftButtonImage = [UIImage imageNamed:@"arrowLeft_small.png"];
-    UIBarButtonItem *_leftButton      = [[UIBarButtonItem alloc] initWithImage: _leftButtonImage
-                                                                         style:UIBarButtonItemStylePlain
-                                                                        target:self
-                                                                        action:@selector(backToSettings:)];
-    
-    [_backToSettingsNavigationItem setLeftBarButtonItem :_leftButton animated :true];
-    _backToSettingsNavigationItem.title = @"";
+    UIColor *_backgroundColor = [UIColor colorWithRed:1.0/255.0 green:100.0/255.0 blue:167.0/255.0 alpha:1.0];
 
-    [self.view bringSubviewToFront:_titleLabel];
+    [_titleLabel setBackgroundColor:_backgroundColor];
     [_titleLabel setTextColor:[UIColor whiteColor]];
-    _titleLabel.text = @"Studium und Weiterbildung";
-    _backToSettingsNavigationItem.title = @"";
-    self.navigationItem.titleView = _titleLabel;
+    _titleLabel.text = @"   Sektretariat";
+
+    [_backLabel setBackgroundColor:_backgroundColor];
+    [_backLabel setTextColor:[UIColor whiteColor]];
+    
+    [_backButton setBackgroundColor:_backgroundColor];
+    
+    NSMutableAttributedString *_backButtonTitleString = [[NSMutableAttributedString alloc] initWithString:@"zurück"];
+    
+    [_backButtonTitleString addAttribute:NSForegroundColorAttributeName value:[UIColor whiteColor] range:NSMakeRange(0, [_backButtonTitleString length])];
+    
+    [_backButton setAttributedTitle:_backButtonTitleString forState:UIControlStateNormal];
 }
 
 - (void)didReceiveMemoryWarning
@@ -68,13 +70,14 @@
 }
 
 - (void)viewDidUnload {
-    _backToSettingsNavigationItem = nil;
     _contactsTable = nil;
     _contactsOverviewTableCell = nil;
     _contactsPhoneTableCell = nil;
     _contactsPlaceTableCell = nil;
     _titleLabel = nil;
     _contactsSocialMediaTableCell = nil;
+    _backButton = nil;
+    _backLabel = nil;
     [super viewDidUnload];
 }
 
@@ -482,6 +485,7 @@
     
     return _cell;
 }
+
 
 
 @end

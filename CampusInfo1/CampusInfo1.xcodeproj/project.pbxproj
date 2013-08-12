@@ -17,6 +17,8 @@
 		271CB2BE17AD196A005CC185 /* EmergencyDetailTableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 271CB2BD17AD196A005CC185 /* EmergencyDetailTableCell.xib */; };
 		271CB2C017AD198E005CC185 /* EmergencyOverviewTableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 271CB2BF17AD198E005CC185 /* EmergencyOverviewTableCell.xib */; };
 		271CB2C217AD26F3005CC185 /* EmergencyInformTableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 271CB2C117AD26F2005CC185 /* EmergencyInformTableCell.xib */; };
+		2724546817B7EBE4005F979C /* ContactsOverViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2724546617B7EBE4005F979C /* ContactsOverViewController.m */; };
+		2724546917B7EBE4005F979C /* ContactsOverViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2724546717B7EBE4005F979C /* ContactsOverViewController.xib */; };
 		274AE0CD17B528340031E912 /* zhaw_logo.png in Resources */ = {isa = PBXBuildFile; fileRef = 274AE0CC17B528340031E912 /* zhaw_logo.png */; };
 		275ACACD173D36C90091B266 /* SixSlotsTwoRoomsTableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 275ACACC173D36C90091B266 /* SixSlotsTwoRoomsTableCell.xib */; };
 		275ACACF173D3BB60091B266 /* SixSlotsOneRoomTableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 275ACACE173D3BB50091B266 /* SixSlotsOneRoomTableCell.xib */; };
@@ -166,6 +168,9 @@
 		271CB2BD17AD196A005CC185 /* EmergencyDetailTableCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EmergencyDetailTableCell.xib; sourceTree = "<group>"; };
 		271CB2BF17AD198E005CC185 /* EmergencyOverviewTableCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EmergencyOverviewTableCell.xib; sourceTree = "<group>"; };
 		271CB2C117AD26F2005CC185 /* EmergencyInformTableCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EmergencyInformTableCell.xib; sourceTree = "<group>"; };
+		2724546517B7EBE4005F979C /* ContactsOverViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContactsOverViewController.h; sourceTree = "<group>"; };
+		2724546617B7EBE4005F979C /* ContactsOverViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContactsOverViewController.m; sourceTree = "<group>"; };
+		2724546717B7EBE4005F979C /* ContactsOverViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ContactsOverViewController.xib; sourceTree = "<group>"; };
 		274AE0CC17B528340031E912 /* zhaw_logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = zhaw_logo.png; path = CampusInfo1/resources/icons/zhaw_logo.png; sourceTree = "<group>"; };
 		275ACACC173D36C90091B266 /* SixSlotsTwoRoomsTableCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SixSlotsTwoRoomsTableCell.xib; sourceTree = "<group>"; };
 		275ACACE173D3BB50091B266 /* SixSlotsOneRoomTableCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SixSlotsOneRoomTableCell.xib; sourceTree = "<group>"; };
@@ -368,6 +373,23 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		2724546417B7EBB7005F979C /* Contacts */ = {
+			isa = PBXGroup;
+			children = (
+				2724546517B7EBE4005F979C /* ContactsOverViewController.h */,
+				2724546617B7EBE4005F979C /* ContactsOverViewController.m */,
+				2724546717B7EBE4005F979C /* ContactsOverViewController.xib */,
+				E16C642217ABDC0100BEDBB3 /* ContactsViewController.h */,
+				E16C642317ABDC0100BEDBB3 /* ContactsViewController.m */,
+				E16C642417ABDC0100BEDBB3 /* ContactsViewController.xib */,
+				E16C642717ABDC4600BEDBB3 /* EmergencyViewController.h */,
+				E16C642817ABDC4600BEDBB3 /* EmergencyViewController.m */,
+				E16C642917ABDC4600BEDBB3 /* EmergencyViewController.xib */,
+				27AC5C7417AEADD8006A1774 /* ContactsTableCells */,
+			);
+			name = Contacts;
+			sourceTree = "<group>";
+		};
 		27AC5C7317AEADA7006A1774 /* EmergencyTableCells */ = {
 			isa = PBXGroup;
 			children = (
@@ -471,6 +493,7 @@
 		A35A341E1520814800181E3F /* CampusInfo1 */ = {
 			isa = PBXGroup;
 			children = (
+				2724546417B7EBB7005F979C /* Contacts */,
 				E13AA95E17B284DF0061E0ED /* MenuOverview */,
 				E13AA94E17B241150061E0ED /* TimeTableOwnerDto */,
 				E155A995179E773300726C39 /* MensaMenuDto */,
@@ -708,17 +731,10 @@
 		E17842CF178308720059EA3C /* Settings */ = {
 			isa = PBXGroup;
 			children = (
-				27AC5C7417AEADD8006A1774 /* ContactsTableCells */,
 				27AC5C7317AEADA7006A1774 /* EmergencyTableCells */,
 				E1DA96791740E41C00CA206F /* SettingsViewController.h */,
 				E1DA967A1740E41C00CA206F /* SettingsViewController.m */,
 				E1DA967B1740E41C00CA206F /* SettingsViewController.xib */,
-				E16C642217ABDC0100BEDBB3 /* ContactsViewController.h */,
-				E16C642317ABDC0100BEDBB3 /* ContactsViewController.m */,
-				E16C642417ABDC0100BEDBB3 /* ContactsViewController.xib */,
-				E16C642717ABDC4600BEDBB3 /* EmergencyViewController.h */,
-				E16C642817ABDC4600BEDBB3 /* EmergencyViewController.m */,
-				E16C642917ABDC4600BEDBB3 /* EmergencyViewController.xib */,
 			);
 			name = Settings;
 			sourceTree = "<group>";
@@ -890,6 +906,7 @@
 				27CFFAC117B2D02A009C66A8 /* MenuNewsTableCell.xib in Resources */,
 				E1ACAF4C17B3836C00F2630B /* ZHAW-App-Banner.png in Resources */,
 				274AE0CD17B528340031E912 /* zhaw_logo.png in Resources */,
+				2724546917B7EBE4005F979C /* ContactsOverViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -970,6 +987,7 @@
 				E13AA95A17B269480061E0ED /* RoomsDto.m in Sources */,
 				E13AA95D17B269580061E0ED /* ClassesDto.m in Sources */,
 				E13AA96517B285600061E0ED /* MenuOverviewController.m in Sources */,
+				2724546817B7EBE4005F979C /* ContactsOverViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

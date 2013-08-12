@@ -42,6 +42,9 @@
 @synthesize _rightSwipe;
 
 @synthesize _titleLabel;
+@synthesize _backButton;
+@synthesize _backLabel;
+
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -60,8 +63,11 @@
     
     _dateFormatter  = [[DateFormation alloc] init];
     //_actualGastronomy = [[GastronomicFacilityDto alloc]init:nil withGastroId:nil withLocation:nil withName:nil withServiceTimePeriods:nil withType:nil withVersion:nil];
-    [_moveBackButton useAlertStyle];
     
+    //TODO
+    //[_moveBackButton useAlertStyle];
+    [_moveBackButton setBackgroundColor:_backgroundColor];
+    //[_moveBackButton setTextColor:[UIColor whiteColor]];
 
     //----- Navigation Bar ----
     // set current day
@@ -125,6 +131,18 @@
     
     [_titleLabel setBackgroundColor:_backgroundColor];
     [_titleLabel setTextColor:[UIColor whiteColor]];
+    
+    [_backLabel setBackgroundColor:_backgroundColor];
+    [_backLabel setTextColor:[UIColor whiteColor]];
+    
+    [_backButton setBackgroundColor:_backgroundColor];
+    
+    NSMutableAttributedString *_backButtonTitleString = [[NSMutableAttributedString alloc] initWithString:@"zurück"];
+    
+    [_backButtonTitleString addAttribute:NSForegroundColorAttributeName value:[UIColor whiteColor] range:NSMakeRange(0, [_backButtonTitleString length])];
+    
+    [_backButton setAttributedTitle:_backButtonTitleString forState:UIControlStateNormal];
+    
 }
 
 
@@ -234,6 +252,8 @@
     _rightSwipe = nil;
     _leftSwipe = nil;
     _titleLabel = nil;
+    _backButton = nil;
+    _backLabel = nil;
     [super viewDidUnload];
 }
 

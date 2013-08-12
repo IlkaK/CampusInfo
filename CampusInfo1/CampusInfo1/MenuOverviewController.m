@@ -18,7 +18,7 @@
 @synthesize _menuMensaTableCell;
 @synthesize _menuNewsTableCell;
 @synthesize _contactsVC;
-@synthesize _settingsVC;
+//@synthesize _settingsVC;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -52,11 +52,11 @@
     //_contactsVC._chooseDateViewDelegate = self;
     _contactsVC.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
     
-    if (_settingsVC == nil)
-    {
-		_settingsVC = [[SettingsViewController alloc] init];
-	}
-    _settingsVC.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
+    //if (_settingsVC == nil)
+    //{
+	//	_settingsVC = [[SettingsViewController alloc] init];
+	//}
+    //_settingsVC.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
     
 }
 
@@ -72,7 +72,7 @@
     _menuMensaTableCell = nil;
     _menuNewsTableCell = nil;
     _contactsVC = nil;
-    _settingsVC = nil;
+    //_settingsVC = nil;
     [super viewDidUnload];
 }
 
@@ -120,7 +120,7 @@
 
 -(void) moveToSettings:(id)sender event:(id)event
 {
-    [self presentModalViewController:_settingsVC animated:YES];
+    //[self presentModalViewController:_settingsVC animated:YES];
     //self.tabBarController.selectedIndex = 4;
     //[self dismissModalViewControllerAnimated:YES];
 }

@@ -584,6 +584,7 @@
 							</object>
 						</array>
 						<reference key="parent" ref="191373211"/>
+						<string key="objectName">MensaTableView</string>
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">17</int>
@@ -595,6 +596,7 @@
 						<reference key="object" ref="651069988"/>
 						<array class="NSMutableArray" key="children"/>
 						<reference key="parent" ref="191373211"/>
+						<string key="objectName">DateLabel</string>
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">42</int>

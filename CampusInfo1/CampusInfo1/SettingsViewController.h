@@ -10,8 +10,7 @@
 #import <GradientButton.h>
 #import <Autocomplete.h>
 #import <LanguageTranslation.h>
-#import <ContactsViewController.h>
-#import <EmergencyViewController.h>
+#import <MenuOverviewController.h>
 #import <StudentsDto.h>
 #import <LecturersDto.h>
 
@@ -28,13 +27,11 @@
     LecturersDto                        *_lecturers;
     
     LanguageTranslation                 *_translator;
-    
-    IBOutlet GradientButton             *_contactsButton;
-    IBOutlet GradientButton             *_emergencyButton;
-    IBOutlet ContactsViewController     *_contactsVC;
-    IBOutlet EmergencyViewController    *_emergencyVC;
-    IBOutlet UILabel                    *_contactsEmergencyTitle;
+
     IBOutlet UILabel                    *_timetableSettingsTitle;
+    
+    //IBOutlet MenuOverviewController     *_menuOverviewVC;
+    
 }
 
 
@@ -50,19 +47,12 @@
 
 @property (nonatomic, retain) LanguageTranslation               *_translator;
 
-@property (nonatomic, retain) IBOutlet GradientButton           *_contactsButton;
-@property (nonatomic, retain) IBOutlet GradientButton           *_emergencyButton;
-@property (nonatomic, retain) IBOutlet ContactsViewController   *_contactsVC;
-@property (nonatomic, retain) IBOutlet EmergencyViewController  *_emergencyVC;
-
-@property (nonatomic, retain) IBOutlet UILabel                  *_contactsEmergencyTitle;
 @property (nonatomic, retain) IBOutlet UILabel                  *_timetableSettingsTitle;
 
-
+//@property (nonatomic, retain) IBOutlet MenuOverviewController   *_menuOverviewVC;
 
 - (IBAction)moveToTimeTable:(id)sender;
 - (IBAction)acronymTextFieldChanged:(id)sender;
-- (IBAction)moveToContacts:(id)sender;
-- (IBAction)moveToEmergency:(id)sender;
+- (IBAction)moveToMenuOverview:(id)sender;
 
 @end

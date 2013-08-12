@@ -67,13 +67,9 @@
 				<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 				<bool key="IBUIHorizontal">NO</bool>
 				<object class="IBUIViewController" key="IBUISelectedViewController" id="114341493">
-					<string key="IBUITitle">Einstellungen</string>
+					<string key="IBUITitle">Kontakte</string>
 					<object class="IBUITabBarItem" key="IBUITabBarItem" id="494047200">
-						<string key="IBUITitle">weitere Dienste</string>
-						<object class="NSCustomResource" key="IBUIImage">
-							<string key="NSClassName">NSImage</string>
-							<string key="NSResourceName">settings.png</string>
-						</object>
+						<string key="IBUITitle">Kontakte</string>
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 					</object>
 					<reference key="IBUIParentViewController" ref="1034742383"/>
@@ -418,7 +414,7 @@
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>StartpageViewController</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
-					<string>SettingsViewController</string>
+					<string>ContactsOverViewController</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>MensaViewController</string>
@@ -467,11 +463,9 @@
 				<string>catering.png</string>
 				<string>schedule.png</string>
 				<string>search.png</string>
-				<string>settings.png</string>
 			</object>
 			<object class="NSArray" key="dict.values">
 				<bool key="EncodedWithXMLCoder">YES</bool>
-				<string>{30, 30}</string>
 				<string>{30, 30}</string>
 				<string>{30, 30}</string>
 				<string>{30, 30}</string>
