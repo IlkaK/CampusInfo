@@ -19,13 +19,12 @@
 @synthesize _menuNewsTableCell;
 @synthesize _contactsVC;
 @synthesize _settingsVC;
+@synthesize _cellBackgroundColor;
+@synthesize _fontColor;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self) {
-        // Custom initialization
-    }
     return self;
 }
 
@@ -37,13 +36,16 @@
 		_menuTableView = [[UITableView alloc] init];
 	}
     
-    UIColor *_lectureBackgroundColor = [UIColor colorWithRed:1.0/255.0 green:100.0/255.0 blue:167.0/255.0 alpha:1.0];
+    _cellBackgroundColor = [UIColor whiteColor];
+    _fontColor = [UIColor darkGrayColor];
     
-    _menuTableView.separatorColor = _lectureBackgroundColor;
+    //_cellBackgroundColor = [UIColor colorWithRed:1.0/255.0 green:100.0/255.0 blue:167.0/255.0 alpha:1.0];
+    
+    _menuTableView.separatorColor = _cellBackgroundColor;
     _menuTableView.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
     _menuTableView.scrollEnabled = NO;
     
-    [self.view setBackgroundColor:_lectureBackgroundColor];
+    [self.view setBackgroundColor:_cellBackgroundColor];
     
     if (_contactsVC == nil)
     {
@@ -93,19 +95,9 @@
     NSLog(@"move to ÖV");
 }
 
--(void) moveToPerson:(id)sender event:(id)event
-{
-    NSLog(@"move to person");
-}
-
 -(void) moveToContacts:(id)sender event:(id)event
 {
     [self presentModalViewController:_contactsVC animated:YES];
-}
-
--(void) moveToQuestion:(id)sender event:(id)event
-{
-    NSLog(@"move to question");
 }
 
 -(void) moveToNews:(id)sender event:(id)event
@@ -118,11 +110,14 @@
     NSLog(@"move to events");
 }
 
+-(void) moveToFacebook:(id)sender event:(id)event
+{
+    NSLog(@"move to Facebook");
+}
+
 -(void) moveToSettings:(id)sender event:(id)event
 {
     [self presentModalViewController:_settingsVC animated:YES];
-    //self.tabBarController.selectedIndex = 4;
-    //[self dismissModalViewControllerAnimated:YES];
 }
 
 // table and table cell handling
@@ -152,9 +147,6 @@
     NSString         *_cellIdentifier;
     UITableViewCell  *_cell = nil;
     
-    UIColor *_lectureBackgroundColor = [UIColor colorWithRed:1.0/255.0 green:100.0/255.0 blue:167.0/255.0 alpha:1.0];
-    // #0164A7 -> 1,100,167
-    
     if (_cellSelection == 0)
     {
         _cellIdentifier  = @"MenuTimeTableCell";
@@ -174,7 +166,7 @@
         _timeTableTitleButton.enabled = true;
         [_timeTableTitleButton addTarget:self action:@selector(moveToTimeTable:event:) forControlEvents:UIControlEventTouchUpInside];
         NSMutableAttributedString *_timeTableTitleString = [[NSMutableAttributedString alloc] initWithString:@"Stundenplan"];
-        [_timeTableTitleString addAttribute:NSForegroundColorAttributeName value:[UIColor whiteColor] range:NSMakeRange(0, [_timeTableTitleString length])];
+        [_timeTableTitleString addAttribute:NSForegroundColorAttributeName value:_fontColor range:NSMakeRange(0, [_timeTableTitleString length])];
         [_timeTableTitleButton setAttributedTitle:_timeTableTitleString forState:UIControlStateNormal];
         
         // mensa
@@ -185,7 +177,7 @@
         _mensaTitleButton.enabled = true;
         [_mensaTitleButton addTarget:self action:@selector(moveToMensa:event:) forControlEvents:UIControlEventTouchUpInside];
         NSMutableAttributedString *_mensaTitleString = [[NSMutableAttributedString alloc] initWithString:@"Mensa"];
-        [_mensaTitleString addAttribute:NSForegroundColorAttributeName value:[UIColor whiteColor] range:NSMakeRange(0, [_mensaTitleString length])];
+        [_mensaTitleString addAttribute:NSForegroundColorAttributeName value:_fontColor range:NSMakeRange(0, [_mensaTitleString length])];
         [_mensaTitleButton setAttributedTitle:_mensaTitleString forState:UIControlStateNormal];
         
         //OeV
@@ -196,10 +188,10 @@
         _oevTitleButton.enabled = true;
         [_oevTitleButton addTarget:self action:@selector(moveToOev:event:) forControlEvents:UIControlEventTouchUpInside];
         NSMutableAttributedString *_oevTitleString = [[NSMutableAttributedString alloc] initWithString:@"ÖV"];
-        [_oevTitleString addAttribute:NSForegroundColorAttributeName value:[UIColor whiteColor] range:NSMakeRange(0, [_oevTitleString length])];
+        [_oevTitleString addAttribute:NSForegroundColorAttributeName value:_fontColor range:NSMakeRange(0, [_oevTitleString length])];
         [_oevTitleButton setAttributedTitle:_oevTitleString forState:UIControlStateNormal];
         
-        _cell.contentView.backgroundColor = _lectureBackgroundColor;
+        _cell.contentView.backgroundColor = _cellBackgroundColor;
         _cell.backgroundColor = _cell.contentView.backgroundColor;
         _cell.selectionStyle = UITableViewCellSelectionStyleNone;
     }
@@ -215,40 +207,40 @@
             self._menuMensaTableCell = nil;
         }
         
-        // person
-        UIButton *_personIconButton  = (UIButton *) [_cell viewWithTag:1];
-        _personIconButton.enabled = true;
-        [_personIconButton addTarget:self action:@selector(moveToPerson:event:) forControlEvents:UIControlEventTouchUpInside];
-        UIButton *_personTitleButton  = (UIButton *) [_cell viewWithTag:2];
-        _personTitleButton.enabled = true;
-        [_personTitleButton addTarget:self action:@selector(moveToPerson:event:) forControlEvents:UIControlEventTouchUpInside];
-        NSMutableAttributedString *_personTitleString = [[NSMutableAttributedString alloc] initWithString:@"Person"];
-        [_personTitleString addAttribute:NSForegroundColorAttributeName value:[UIColor whiteColor] range:NSMakeRange(0, [_personTitleString length])];
-        [_personTitleButton setAttributedTitle:_personTitleString forState:UIControlStateNormal];
-        
         // contact
-        UIButton *_contactsIconButton  = (UIButton *) [_cell viewWithTag:3];
+        UIButton *_contactsIconButton  = (UIButton *) [_cell viewWithTag:1];
         _contactsIconButton.enabled = true;
         [_contactsIconButton addTarget:self action:@selector(moveToContacts:event:) forControlEvents:UIControlEventTouchUpInside];
-        UIButton *_contactsTitleButton  = (UIButton *) [_cell viewWithTag:4];
+        UIButton *_contactsTitleButton  = (UIButton *) [_cell viewWithTag:2];
         _contactsTitleButton.enabled = true;
         [_contactsTitleButton addTarget:self action:@selector(moveToContacts:event:) forControlEvents:UIControlEventTouchUpInside];
         NSMutableAttributedString *_contactsTitleString = [[NSMutableAttributedString alloc] initWithString:@"Kontakte"];
-        [_contactsTitleString addAttribute:NSForegroundColorAttributeName value:[UIColor whiteColor] range:NSMakeRange(0, [_contactsTitleString length])];
+        [_contactsTitleString addAttribute:NSForegroundColorAttributeName value:_fontColor range:NSMakeRange(0, [_contactsTitleString length])];
         [_contactsTitleButton setAttributedTitle:_contactsTitleString forState:UIControlStateNormal];
 
-        //???
-        UIButton *_questionIconButton  = (UIButton *) [_cell viewWithTag:5];
-        _questionIconButton.enabled = true;
-        [_questionIconButton addTarget:self action:@selector(moveToQuestion:event:) forControlEvents:UIControlEventTouchUpInside];
-        UIButton *_questionTitleButton  = (UIButton *) [_cell viewWithTag:6];
-        _questionTitleButton.enabled = true;
-        [_questionTitleButton addTarget:self action:@selector(moveToQuestion:event:) forControlEvents:UIControlEventTouchUpInside];
-        NSMutableAttributedString *_questionTitleString = [[NSMutableAttributedString alloc] initWithString:@"???"];
-        [_questionTitleString addAttribute:NSForegroundColorAttributeName value:[UIColor whiteColor] range:NSMakeRange(0, [_questionTitleString length])];
-        [_questionTitleButton setAttributedTitle:_questionTitleString forState:UIControlStateNormal];
+        // news
+        UIButton *_newsIconButton  = (UIButton *) [_cell viewWithTag:3];
+        _newsIconButton.enabled = true;
+        [_newsIconButton addTarget:self action:@selector(moveToNews:event:) forControlEvents:UIControlEventTouchUpInside];
+        UIButton *_newsTitleButton  = (UIButton *) [_cell viewWithTag:4];
+        _newsTitleButton.enabled = true;
+        [_newsTitleButton addTarget:self action:@selector(moveToNews:event:) forControlEvents:UIControlEventTouchUpInside];
+        NSMutableAttributedString *_newsTitleString = [[NSMutableAttributedString alloc] initWithString:@"News"];
+        [_newsTitleString addAttribute:NSForegroundColorAttributeName value:_fontColor range:NSMakeRange(0, [_newsTitleString length])];
+        [_newsTitleButton setAttributedTitle:_newsTitleString forState:UIControlStateNormal];
         
-        _cell.contentView.backgroundColor = _lectureBackgroundColor;
+        // events
+        UIButton *_eventsIconButton  = (UIButton *) [_cell viewWithTag:5];
+        _eventsIconButton.enabled = true;
+        [_eventsIconButton addTarget:self action:@selector(moveToEvents:event:) forControlEvents:UIControlEventTouchUpInside];
+        UIButton *_eventsTitleButton  = (UIButton *) [_cell viewWithTag:6];
+        _eventsTitleButton.enabled = true;
+        [_eventsTitleButton addTarget:self action:@selector(moveToEvents:event:) forControlEvents:UIControlEventTouchUpInside];
+        NSMutableAttributedString *_eventsTitleString = [[NSMutableAttributedString alloc] initWithString:@"Events"];
+        [_eventsTitleString addAttribute:NSForegroundColorAttributeName value:_fontColor range:NSMakeRange(0, [_eventsTitleString length])];
+        [_eventsTitleButton setAttributedTitle:_eventsTitleString forState:UIControlStateNormal];
+        
+        _cell.contentView.backgroundColor = _cellBackgroundColor;
         _cell.backgroundColor = _cell.contentView.backgroundColor;
         _cell.selectionStyle = UITableViewCellSelectionStyleNone;
     }
@@ -264,40 +256,29 @@
             self._menuNewsTableCell = nil;
         }
         
-        // news
-        UIButton *_newsIconButton  = (UIButton *) [_cell viewWithTag:1];
-        _newsIconButton.enabled = true;
-        [_newsIconButton addTarget:self action:@selector(moveToNews:event:) forControlEvents:UIControlEventTouchUpInside];
-        UIButton *_newsTitleButton  = (UIButton *) [_cell viewWithTag:2];
-        _newsTitleButton.enabled = true;
-        [_newsTitleButton addTarget:self action:@selector(moveToNews:event:) forControlEvents:UIControlEventTouchUpInside];
-        NSMutableAttributedString *_newsTitleString = [[NSMutableAttributedString alloc] initWithString:@"News"];
-        [_newsTitleString addAttribute:NSForegroundColorAttributeName value:[UIColor whiteColor] range:NSMakeRange(0, [_newsTitleString length])];
-        [_newsTitleButton setAttributedTitle:_newsTitleString forState:UIControlStateNormal];
-        
-        // events
-        UIButton *_eventsIconButton  = (UIButton *) [_cell viewWithTag:3];
-        _eventsIconButton.enabled = true;
-        [_eventsIconButton addTarget:self action:@selector(moveToEvents:event:) forControlEvents:UIControlEventTouchUpInside];
-        UIButton *_eventsTitleButton  = (UIButton *) [_cell viewWithTag:4];
-        _eventsTitleButton.enabled = true;
-        [_eventsTitleButton addTarget:self action:@selector(moveToEvents:event:) forControlEvents:UIControlEventTouchUpInside];
-        NSMutableAttributedString *_eventsTitleString = [[NSMutableAttributedString alloc] initWithString:@"Events"];
-        [_eventsTitleString addAttribute:NSForegroundColorAttributeName value:[UIColor whiteColor] range:NSMakeRange(0, [_eventsTitleString length])];
-        [_eventsTitleButton setAttributedTitle:_eventsTitleString forState:UIControlStateNormal];
+        // facebook
+        UIButton *_facebookIconButton  = (UIButton *) [_cell viewWithTag:1];
+        _facebookIconButton.enabled = true;
+        [_facebookIconButton addTarget:self action:@selector(moveToFacebook:event:) forControlEvents:UIControlEventTouchUpInside];
+        UIButton *_facebookTitleButton  = (UIButton *) [_cell viewWithTag:2];
+        _facebookTitleButton.enabled = true;
+        [_facebookTitleButton addTarget:self action:@selector(moveToFacebook:event:) forControlEvents:UIControlEventTouchUpInside];
+        NSMutableAttributedString *_newsTitleString = [[NSMutableAttributedString alloc] initWithString:@"Facebook"];
+        [_newsTitleString addAttribute:NSForegroundColorAttributeName value:_fontColor range:NSMakeRange(0, [_newsTitleString length])];
+        [_facebookTitleButton setAttributedTitle:_newsTitleString forState:UIControlStateNormal];
         
         // settings
-        UIButton *_settingsIconButton  = (UIButton *) [_cell viewWithTag:5];
+        UIButton *_settingsIconButton  = (UIButton *) [_cell viewWithTag:3];
         _settingsIconButton.enabled = true;
         [_settingsIconButton addTarget:self action:@selector(moveToSettings:event:) forControlEvents:UIControlEventTouchUpInside];
-        UIButton *_settingsTitleButton  = (UIButton *) [_cell viewWithTag:6];
+        UIButton *_settingsTitleButton  = (UIButton *) [_cell viewWithTag:4];
         _settingsTitleButton.enabled = true;
         [_settingsTitleButton addTarget:self action:@selector(moveToSettings:event:) forControlEvents:UIControlEventTouchUpInside];
         NSMutableAttributedString *_settingsTitleString = [[NSMutableAttributedString alloc] initWithString:@"Einstellungen"];
-        [_settingsTitleString addAttribute:NSForegroundColorAttributeName value:[UIColor whiteColor] range:NSMakeRange(0, [_settingsTitleString length])];
+        [_settingsTitleString addAttribute:NSForegroundColorAttributeName value:_fontColor range:NSMakeRange(0, [_settingsTitleString length])];
         [_settingsTitleButton setAttributedTitle:_settingsTitleString forState:UIControlStateNormal];
         
-        _cell.contentView.backgroundColor = _lectureBackgroundColor;
+        _cell.contentView.backgroundColor = _cellBackgroundColor;
         _cell.backgroundColor = _cell.contentView.backgroundColor;
         _cell.selectionStyle = UITableViewCellSelectionStyleNone;
     }

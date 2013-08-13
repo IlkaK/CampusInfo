@@ -17,15 +17,15 @@
 @synthesize _acronymTextField;
 @synthesize _backToScheduleButton;
 
+@synthesize _timetableSettingsTitle;
 @synthesize _acronymAutocompleteTableView;
 @synthesize _autocomplete;
 @synthesize _suggestions;
 @synthesize _lecturers;
 @synthesize _students;
 
-@synthesize _translator;
+@synthesize _titleLabel;
 
-@synthesize _timetableSettingsTitle;
 
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -38,7 +38,10 @@
 {
     [super viewDidLoad];
 
-    _translator = [[LanguageTranslation alloc] init];
+    UIColor *_backgroundColor = [UIColor colorWithRed:1.0/255.0 green:100.0/255.0 blue:167.0/255.0 alpha:1.0];
+    
+    [_titleLabel setBackgroundColor:_backgroundColor];
+    [_titleLabel setTextColor:[UIColor whiteColor]];
     
     _students = [[StudentsDto alloc]init];
     _lecturers = [[LecturersDto alloc]init];
@@ -120,6 +123,7 @@
     _backToScheduleButton = nil;
     _acronymAutocompleteTableView = nil;
     _timetableSettingsTitle = nil;
+    _titleLabel = nil;
     [super viewDidUnload];
 }
 

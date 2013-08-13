@@ -21,34 +21,30 @@
 {
     IBOutlet UITextField                *_acronymTextField;
     IBOutlet GradientButton             *_backToScheduleButton;
-    
     IBOutlet UITableView                *_acronymAutocompleteTableView;
+    IBOutlet UILabel                    *_timetableSettingsTitle;
 
     NSMutableArray                      *_suggestions;
     Autocomplete                        *_autocomplete;
     StudentsDto                         *_students;
     LecturersDto                        *_lecturers;
-    
-    LanguageTranslation                 *_translator;
 
-    IBOutlet UILabel                    *_timetableSettingsTitle;
+    IBOutlet UILabel                    *_titleLabel;
     
 }
 
 
 @property (nonatomic, retain) IBOutlet UITextField              *_acronymTextField;
 @property (nonatomic, retain) IBOutlet GradientButton           *_backToScheduleButton;
-
 @property (nonatomic, retain) IBOutlet UITableView              *_acronymAutocompleteTableView;
+@property (nonatomic, retain) IBOutlet UILabel                  *_timetableSettingsTitle;
 
 @property (strong, nonatomic) NSMutableArray                    *_suggestions;
 @property (strong, nonatomic) Autocomplete                      *_autocomplete;
 @property (nonatomic, retain) StudentsDto                       *_students;
 @property (nonatomic, retain) LecturersDto                      *_lecturers;
 
-@property (nonatomic, retain) LanguageTranslation               *_translator;
-
-@property (nonatomic, retain) IBOutlet UILabel                  *_timetableSettingsTitle;
+@property (nonatomic, retain) IBOutlet UILabel                  *_titleLabel;
 
 - (IBAction)moveToTimeTable:(id)sender;
 - (IBAction)acronymTextFieldChanged:(id)sender;
