@@ -206,7 +206,7 @@
         [[NSNotificationCenter defaultCenter] postNotificationName:@"SearchType" object:_searchType];
         [[NSNotificationCenter defaultCenter] postNotificationName:@"SearchText" object:_stringWithoutSpaces];
     
-        self.tabBarController.selectedIndex = 0;
+        //self.tabBarController.selectedIndex = 0;
         [self dismissModalViewControllerAnimated:YES];
     }
 }

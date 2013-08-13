@@ -13,11 +13,13 @@
 #import <GradientButton.h>
 #import <LanguageTranslation.h>
 #import <DateFormation.h>
+#import <SearchViewController.h>
 
 @class ScheduleDto;
 @class DayDto;
 @class TimeTableAsyncRequest;
 @class TimeTableDetailController;
+@class SearchViewController;
 
 @interface TimeTableOverviewController : 
 UIViewController 
@@ -26,9 +28,6 @@ UIViewController
     
     // taking care of the whole view
     IBOutlet UIView           *timeTableView;
-    
-    // choose dates for navigator
-    IBOutlet ChooseDateViewController *_chooseDateVC;
     
     // setting the table with timetable data
     IBOutlet UITableView      *_timeTable;
@@ -51,11 +50,19 @@ UIViewController
     IBOutlet UILabel          *_dateLabel;
     
     // acronym for timetable
-    IBOutlet UILabel          *_acronymLabel;
+    IBOutlet UILabel                    *_acronymLabel;
+    IBOutlet UILabel                    *_titleLabel;
+    
+    // choose dates for navigator
+    IBOutlet ChooseDateViewController   *_chooseDateVC;
     
     // taking care of the button to time table details    
-    IBOutlet TimeTableDetailController *_detailsVC;
+    IBOutlet TimeTableDetailController  *_detailsVC;
     
+    // switches to search view
+    IBOutlet SearchViewController       *_searchVC;
+    
+    // cells for table
     IBOutlet UITableViewCell  *_oneSlotOneRoomTableCell;    
     IBOutlet UITableViewCell  *_oneSlotTwoRoomsTableCell;
     IBOutlet UITableViewCell  *_oneSlotThreeRoomsTableCell;
@@ -98,19 +105,21 @@ UIViewController
     NSString                  *_searchText;
     NSString                  *_searchType;
     
-    IBOutlet GradientButton     *_homeButton;
-    IBOutlet GradientButton     *_todayButton;
+    IBOutlet GradientButton             *_homeButton;
+    IBOutlet GradientButton             *_todayButton;
+    IBOutlet GradientButton             *_searchButton;
     
-    IBOutlet UISwipeGestureRecognizer *_rightSwipe;
-    IBOutlet UISwipeGestureRecognizer *_leftSwipe;
+    IBOutlet UISwipeGestureRecognizer   *_rightSwipe;
+    IBOutlet UISwipeGestureRecognizer   *_leftSwipe;
     
-    LanguageTranslation     *_translator;
-    DateFormation           *_dateFormatter;
+    LanguageTranslation                 *_translator;
+    DateFormation                       *_dateFormatter;
 }
 
 
 @property (nonatomic, retain) IBOutlet TimeTableDetailController *_detailsVC;
 @property (nonatomic, retain) IBOutlet ChooseDateViewController  *_chooseDateVC;
+@property (nonatomic, retain) IBOutlet SearchViewController      *_searchVC;
 
 @property (nonatomic, retain) IBOutlet UITableView               *_timeTable;
 
@@ -118,6 +127,7 @@ UIViewController
 @property (nonatomic, retain) IBOutlet UILabel                   *_dateLabel;
 
 @property (nonatomic, retain) IBOutlet UILabel                   *_acronymLabel;
+@property (nonatomic, retain) IBOutlet UILabel                   *_titleLabel;
 
 @property (nonatomic, retain) IBOutlet UITableViewCell           *_oneSlotOneRoomTableCell;
 @property (nonatomic, retain) IBOutlet UITableViewCell           *_oneSlotTwoRoomsTableCell;
@@ -174,8 +184,9 @@ UIViewController
 @property (nonatomic, retain)          NSString                  *_searchText;
 @property (nonatomic, retain)          NSString                  *_searchType;
 
-@property (nonatomic, retain) IBOutlet UIButton                  *_homeButton;
-@property (nonatomic, retain) IBOutlet UIButton                  *_todayButton;
+@property (nonatomic, retain) IBOutlet GradientButton            *_homeButton;
+@property (nonatomic, retain) IBOutlet GradientButton            *_todayButton;
+@property (nonatomic, retain) IBOutlet GradientButton            *_searchButton;
 
 @property (nonatomic, retain) IBOutlet UISwipeGestureRecognizer  *_rightSwipe;
 @property (nonatomic, retain) IBOutlet UISwipeGestureRecognizer  *_leftSwipe;
@@ -188,5 +199,6 @@ UIViewController
 
 - (IBAction)backToOwnAcronym:(id)sender;
 - (IBAction)backToToday:(id)sender;
+- (IBAction)moveToSearch:(id)sender;
 
 @end

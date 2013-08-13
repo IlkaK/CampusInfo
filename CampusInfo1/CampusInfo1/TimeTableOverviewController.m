@@ -27,10 +27,13 @@
 @synthesize _actualDayDto;
 @synthesize _dayNavigator;
 @synthesize _dateLabel;
+
 @synthesize _detailsVC;
 @synthesize _chooseDateVC;
+@synthesize _searchVC;
 
 @synthesize _acronymLabel;
+@synthesize _titleLabel;
 
 @synthesize _ownStoredAcronymString;
 @synthesize _ownStoredAcronymType;
@@ -83,13 +86,13 @@
 
 @synthesize _homeButton;
 @synthesize _todayButton;
+@synthesize _searchButton;
 
 @synthesize _leftSwipe;
 @synthesize _rightSwipe;
 
 @synthesize _translator;
 @synthesize _dateFormatter;
-
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {   
@@ -106,7 +109,9 @@
                 withAcronymType  :(NSString *)newAcronymType
                 withAcronymText  :(NSString *)newAcronymText
 {
-    self._acronymLabel.text          = newAcronymText;
+    self._acronymLabel.text        = [NSString stringWithFormat:@"   %@",newAcronymText];
+    [self._homeButton setTitle:_ownStoredAcronymString forState:UIControlStateNormal];
+    
     
     self._actualShownAcronymTrials = 1;
     self._actualShownAcronymString = newAcronym;
@@ -244,6 +249,11 @@
    [self setActualDate:_today];
 }
 
+- (IBAction)moveToSearch:(id)sender
+{
+  [self presentModalViewController:_searchVC animated:YES];
+}
+
 
 - (void)didReceiveMemoryWarning
 {
@@ -343,10 +353,11 @@
         [_acronymUserDefaults setObject:_ownStoredAcronymString forKey:@"TimeTableAcronym"];
         [_acronymUserDefaults synchronize];
        
-        _acronymLabel.text          = [NSString stringWithFormat:@"von %@ (%@)"
+        _acronymLabel.text          = [NSString stringWithFormat:@"   von %@ (%@)"
                                        ,_ownStoredAcronymString
                                        ,[_translator getGermanTypeTranslation:_ownStoredAcronymType]
                                       ];
+        [self._homeButton setTitle:_ownStoredAcronymString forState:UIControlStateNormal];
         
         // SET NEW ACRONYM WITH ACTUAL DATE
         [self setNewScheduleWithAcronym:_ownStoredAcronymString
@@ -411,6 +422,16 @@
     // clear border colour between table cells
     _timeTable.separatorColor = [UIColor lightGrayColor];
     
+    // title
+    UIColor *_backgroundColor = [UIColor colorWithRed:1.0/255.0 green:100.0/255.0 blue:167.0/255.0 alpha:1.0];
+    
+    [_titleLabel setBackgroundColor:_backgroundColor];
+    [_titleLabel setTextColor:[UIColor whiteColor]];
+    
+    [_acronymLabel setBackgroundColor:_backgroundColor];
+    [_acronymLabel setTextColor:[UIColor whiteColor]];
+    
+    
     //----- Navigation Bar ----
     // set current day
     [self setTitleToActualDate];
@@ -451,6 +472,13 @@
     _chooseDateVC._chooseDateViewDelegate = self;
     _chooseDateVC.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
     
+    // ------ SWITCH TO SEARCH VIEW ----
+    if (_searchVC == nil)
+    {
+		_searchVC = [[SearchViewController alloc] init];
+	}
+    _searchVC.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
+    
     
     //----- SET ACRONYM WHEN COMING FROM SEARCH TAB -----
     [[NSNotificationCenter defaultCenter] addObserver:self
@@ -472,8 +500,9 @@
     _noConnectionLabel.hidden = YES;
     
     // set style of buttons next to title
-     [_homeButton useAlertStyle];
-     [_todayButton useAlertStyle];
+    [_homeButton useAlertStyle];
+    [_todayButton useAlertStyle];
+    [_searchButton useAlertStyle];
     
     _rightSwipe = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(dayBefore:)];
     [_rightSwipe setDirection:(UISwipeGestureRecognizerDirectionRight)];
@@ -552,11 +581,12 @@
         
         if (self._actualShownAcronymString != nil && [_actualShownAcronymString length] > 0)
         {
-            self._acronymLabel.text          = [NSString stringWithFormat:@"von %@ (%@)"
+            self._acronymLabel.text          = [NSString stringWithFormat:@"   von %@ (%@)"
                                                 ,self._actualShownAcronymString
                                                 ,[_translator getGermanTypeTranslation:self._actualShownAcronymType]
                                                 ];
-                        
+            [self._homeButton setTitle:_ownStoredAcronymString forState:UIControlStateNormal];
+            
             //self._schedule                 = [[ScheduleDto alloc] initWithAcronym:_actualShownAcronymString:_actualShownAcronymType:_actualDate];
             
             
@@ -649,7 +679,9 @@
         {
             self._actualShownAcronymString       = _textField.text;
             _actualShownAcronymTrials            = 1;
-            _acronymLabel.text                   = [NSString stringWithFormat:@"von %@",_actualShownAcronymString];
+            _acronymLabel.text                   = [NSString stringWithFormat:@"   von %@",_actualShownAcronymString];
+            [self._homeButton setTitle:_ownStoredAcronymString forState:UIControlStateNormal];
+            
             NSUserDefaults *_acronymUserDefaults = [NSUserDefaults standardUserDefaults];
             [_acronymUserDefaults setObject:_actualShownAcronymString forKey:@"TimeTableAcronym"];
             [_acronymUserDefaults synchronize];
@@ -738,6 +770,10 @@
     _leftSwipe = nil;
 
     [self set_errorMessageCell:nil];
+    _titleLabel = nil;
+    _searchVC = nil;
+    _searchButton = nil;
+    _searchButton = nil;
     [super viewDidUnload];
 }
 
