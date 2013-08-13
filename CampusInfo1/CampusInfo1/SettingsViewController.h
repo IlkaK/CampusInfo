@@ -10,7 +10,6 @@
 #import <GradientButton.h>
 #import <Autocomplete.h>
 #import <LanguageTranslation.h>
-#import <MenuOverviewController.h>
 #import <StudentsDto.h>
 #import <LecturersDto.h>
 
@@ -34,8 +33,6 @@
 
     IBOutlet UILabel                    *_timetableSettingsTitle;
     
-    //IBOutlet MenuOverviewController     *_menuOverviewVC;
-    
 }
 
 
@@ -53,10 +50,8 @@
 
 @property (nonatomic, retain) IBOutlet UILabel                  *_timetableSettingsTitle;
 
-//@property (nonatomic, retain) IBOutlet MenuOverviewController   *_menuOverviewVC;
-
 - (IBAction)moveToTimeTable:(id)sender;
 - (IBAction)acronymTextFieldChanged:(id)sender;
-- (IBAction)moveToMenuOverview:(id)sender;
+- (IBAction)moveBackToMenuOverview:(id)sender;
 
 @end

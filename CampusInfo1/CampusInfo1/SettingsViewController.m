@@ -26,7 +26,6 @@
 @synthesize _translator;
 
 @synthesize _timetableSettingsTitle;
-//@synthesize _menuOverviewVC;
 
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -57,12 +56,6 @@
     [self.view bringSubviewToFront:_timetableSettingsTitle];
     [_timetableSettingsTitle setTextColor:[UIColor whiteColor]];
     self.navigationItem.titleView = _timetableSettingsTitle;
-    
-    //if (_menuOverviewVC == nil)
-    //{
-	//	_menuOverviewVC = [[MenuOverviewController alloc] init];
-	//}
-    //_menuOverviewVC.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
     
 }
 
@@ -127,10 +120,13 @@
     _backToScheduleButton = nil;
     _acronymAutocompleteTableView = nil;
     _timetableSettingsTitle = nil;
-    //_menuOverviewVC = nil;
     [super viewDidUnload];
 }
 
+- (IBAction)moveBackToMenuOverview:(id)sender
+{
+    [self dismissModalViewControllerAnimated:YES];
+}
 
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
@@ -185,7 +181,7 @@
         [_acronymUserDefaults setObject:_localAcronym forKey:@"TimeTableAcronym"];
         [_acronymUserDefaults synchronize];
         
-        self.tabBarController.selectedIndex = 0;
+        self.tabBarController.selectedIndex = 1;
         [self dismissModalViewControllerAnimated:YES];
     }
     else
@@ -228,10 +224,6 @@
 	[_acronymAutocompleteTableView reloadData];
 }
 
-- (IBAction)moveToMenuOverview:(id)sender
-{
-    //[self presentModalViewController:_menuOverviewVC animated:YES];
-}
 
 
 

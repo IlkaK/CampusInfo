@@ -67,4 +67,10 @@
     [self presentModalViewController:_emergencyVC animated:YES];
 }
 
+- (IBAction)moveBackToMenuOverview:(id)sender
+{
+    [self dismissModalViewControllerAnimated:YES];
+    self.tabBarController.selectedIndex = 0;
+}
+
 @end
