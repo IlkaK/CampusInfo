@@ -254,6 +254,12 @@
   [self presentModalViewController:_searchVC animated:YES];
 }
 
+- (IBAction)moveBackToMenuOverview:(id)sender
+{
+    [self dismissModalViewControllerAnimated:YES];
+    self.tabBarController.selectedIndex = 0;
+}
+
 
 - (void)didReceiveMemoryWarning
 {

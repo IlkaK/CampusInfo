@@ -200,5 +200,6 @@ UIViewController
 - (IBAction)backToOwnAcronym:(id)sender;
 - (IBAction)backToToday:(id)sender;
 - (IBAction)moveToSearch:(id)sender;
+- (IBAction)moveBackToMenuOverview:(id)sender;
 
 @end

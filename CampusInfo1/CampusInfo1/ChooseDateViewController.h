@@ -16,21 +16,34 @@
 
 @interface ChooseDateViewController : UIViewController
 {
-    IBOutlet UIDatePicker     *_datePicker;
-    IBOutlet UINavigationItem *_chooseDateNavigationItem;
-    id                         _chooseDateViewDelegate;
-    IBOutlet UILabel          *_navigatorTitle;
-    IBOutlet GradientButton   *_todayButton;
-    NSDate                    *_actualDate;
+
+    IBOutlet UILabel            *_titleLabel;
+
+    IBOutlet GradientButton     *_cancelButton;
+    IBOutlet GradientButton     *_todayButton;
+    IBOutlet GradientButton     *_doneButton;
+
+    NSDate                      *_actualDate;
+    IBOutlet UIDatePicker       *_datePicker;    
+    
+    id                          _chooseDateViewDelegate;
+    
 }
 
-- (IBAction)setPickerToToday:(id)sender;
 
-@property (nonatomic, retain) IBOutlet UIDatePicker       *_datePicker;
-@property (nonatomic, retain) IBOutlet UINavigationItem   *_chooseDateNavigationItem;
-@property (nonatomic, retain) id<ChooseDateViewDelegate>   _chooseDateViewDelegate;
-@property (nonatomic, retain) IBOutlet UILabel            *_navigatorTitle;
+@property (nonatomic, retain) IBOutlet UILabel            *_titleLabel;
+
+@property (nonatomic, retain) IBOutlet GradientButton     *_cancelButton;
 @property (nonatomic, retain) IBOutlet GradientButton     *_todayButton;
+@property (nonatomic, retain) IBOutlet GradientButton     *_doneButton;
+
 @property (nonatomic, retain) NSDate                      *_actualDate;
+@property (nonatomic, retain) IBOutlet UIDatePicker       *_datePicker;
+
+@property (nonatomic, retain) id<ChooseDateViewDelegate>   _chooseDateViewDelegate;
+
+- (IBAction)setPickerToToday:(id)sender;
+- (IBAction)cancelDateChoice:(id)sender;
+- (IBAction)acceptDateChoice:(id)sender;
 
 @end

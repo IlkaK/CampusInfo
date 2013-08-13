@@ -236,6 +236,13 @@
 }
 
 
+- (IBAction)moveBackToMenuOverview:(id)sender
+{
+    [self dismissModalViewControllerAnimated:YES];
+    self.tabBarController.selectedIndex = 0;
+}
+
+
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
     return [self._gastronomyArray count];

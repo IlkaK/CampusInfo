@@ -14,25 +14,31 @@
 
 @implementation ChooseDateViewController
 
-@synthesize _datePicker;
-@synthesize _chooseDateNavigationItem;
-@synthesize _chooseDateViewDelegate;
-@synthesize _navigatorTitle;
+@synthesize _titleLabel;
+
+@synthesize _cancelButton;
 @synthesize _todayButton;
+@synthesize _doneButton;
+
 @synthesize _actualDate;
+@synthesize _datePicker;
+
+@synthesize _chooseDateViewDelegate;
 
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self) {
-        // Custom initialization
-    }
     return self;
 }
 
 
-- (void) backToTimeTableOverview:(id)sender
+- (IBAction)cancelDateChoice:(id)sender
+{
+        [self dismissModalViewControllerAnimated:YES];
+}
+
+- (IBAction)acceptDateChoice:(id)sender
 {
     if([self._chooseDateViewDelegate respondsToSelector:@selector(setActualDate:)])
     {
@@ -41,30 +47,29 @@
     }
 }
 
+- (IBAction)setPickerToToday:(id)sender
+{
+    [_datePicker setDate:[NSDate date]];
+    
+}
+
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     
-    UIImage         *_leftButtonImage = [UIImage imageNamed:@"arrowLeft_small.png"];
-    UIBarButtonItem *_leftButton      = [[UIBarButtonItem alloc] initWithImage: _leftButtonImage
-                                                                         style:UIBarButtonItemStylePlain
-                                                                        target:self
-                                                                        action:@selector(backToTimeTableOverview:)];
+    UIColor *_backgroundColor = [UIColor colorWithRed:1.0/255.0 green:100.0/255.0 blue:167.0/255.0 alpha:1.0];
     
-    [_chooseDateNavigationItem setLeftBarButtonItem :_leftButton animated :true];
-    
-    [self.view bringSubviewToFront:_navigatorTitle];
-    [_navigatorTitle setTextColor:[UIColor whiteColor]];
-    _navigatorTitle.text = @"Wähle ein Datum";
-    _chooseDateNavigationItem.title = @"";
+    [_titleLabel setBackgroundColor:_backgroundColor];
+    [_titleLabel setTextColor:[UIColor whiteColor]];
     
     [_todayButton useAlertStyle];
+    [_cancelButton useAlertStyle];
+    [_doneButton useAlertStyle];
     
     if (_actualDate == nil)
     {
         [_datePicker setDate:[NSDate date]];
-
     }
     else
     {
@@ -75,15 +80,15 @@
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
 - (void)viewDidUnload
 {
     _datePicker = nil;
-    _chooseDateNavigationItem = nil;
-    _navigatorTitle = nil;
     _todayButton = nil;
+    _titleLabel = nil;
+    _cancelButton = nil;
+    _doneButton = nil;
     [super viewDidUnload];
 }
 
@@ -91,12 +96,5 @@
 {
     [_datePicker setDate:_actualDate];    
 }
-
-- (IBAction)setPickerToToday:(id)sender
-{
-    [_datePicker setDate:[NSDate date]];
-
-}
-
 
 @end

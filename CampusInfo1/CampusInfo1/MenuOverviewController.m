@@ -86,18 +86,21 @@
 
 -(void) moveToMensa:(id)sender event:(id)event
 {
-    self.tabBarController.selectedIndex = 3;
+    self.tabBarController.selectedIndex = 2;
     [self dismissModalViewControllerAnimated:YES];
 }
 
 -(void) moveToOev:(id)sender event:(id)event
 {
+    self.tabBarController.selectedIndex = 3;
+    [self dismissModalViewControllerAnimated:YES];
     NSLog(@"move to ÖV");
 }
 
 -(void) moveToContacts:(id)sender event:(id)event
 {
-    [self presentModalViewController:_contactsVC animated:YES];
+    self.tabBarController.selectedIndex = 4;
+    [self dismissModalViewControllerAnimated:YES];
 }
 
 -(void) moveToNews:(id)sender event:(id)event

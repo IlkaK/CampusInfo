@@ -385,6 +385,7 @@
 				E16C642717ABDC4600BEDBB3 /* EmergencyViewController.h */,
 				E16C642817ABDC4600BEDBB3 /* EmergencyViewController.m */,
 				E16C642917ABDC4600BEDBB3 /* EmergencyViewController.xib */,
+				27AC5C7317AEADA7006A1774 /* EmergencyTableCells */,
 				27AC5C7417AEADD8006A1774 /* ContactsTableCells */,
 			);
 			name = Contacts;
@@ -721,7 +722,6 @@
 		E17842CF178308720059EA3C /* Settings */ = {
 			isa = PBXGroup;
 			children = (
-				27AC5C7317AEADA7006A1774 /* EmergencyTableCells */,
 				E1DA96791740E41C00CA206F /* SettingsViewController.h */,
 				E1DA967A1740E41C00CA206F /* SettingsViewController.m */,
 				E1DA967B1740E41C00CA206F /* SettingsViewController.xib */,

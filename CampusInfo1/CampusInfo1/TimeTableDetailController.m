@@ -15,47 +15,42 @@
 #import "ScheduleDto.h"
 
 
-
-
 @implementation TimeTableDetailController
 
 @synthesize _timeTableDetailViewDelegate;
+
 @synthesize _scheduleEvent;
 @synthesize _detailTable;
 @synthesize _detailTableCell;
+
+@synthesize _titleLabel;
 @synthesize _timeLabel;
+@synthesize _timeTableDescriptionLabel;
+@synthesize _backButton;
+@synthesize _backLabel;
+
 @synthesize _timeString;
 @synthesize _dayAndAcronymString;
-@synthesize _titleNavigationItem;
 @synthesize _detailTableCellWithButton;
-@synthesize _titelLabel;
 
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self) {
-        // Custom initialization
-    }
     return self;
 }
 
 
 
-- (void) backToTimeTableOverview:(id)sender 
-{    
-    [self dismissModalViewControllerAnimated:YES];
+- (IBAction)moveBackToTimeTable:(id)sender
+{
+        [self dismissModalViewControllerAnimated:YES];
 }
 
 
 -(void)setNavigationTitle:(NSString *)titleString
 {
-
-    [self.view bringSubviewToFront:_titelLabel];
-    [_titelLabel setTextColor:[UIColor whiteColor]];
-    _titelLabel.text = titleString;
-    _titleNavigationItem.title = @"";
-
+    _timeTableDescriptionLabel.text = [NSString stringWithFormat:@"   %@", titleString];
 }
 
 
@@ -74,14 +69,24 @@
     
     [self setNavigationTitle:_dayAndAcronymString];
     
+    UIColor *_backgroundColor = [UIColor colorWithRed:1.0/255.0 green:100.0/255.0 blue:167.0/255.0 alpha:1.0];
     
-    UIImage         *_leftButtonImage = [UIImage imageNamed:@"arrowLeft_small.png"];
-    UIBarButtonItem *_leftButton      = [[UIBarButtonItem alloc] initWithImage: _leftButtonImage
-                                                                    style:UIBarButtonItemStylePlain 
-                                                                    target:self 
-                                                                    action:@selector(backToTimeTableOverview:)];  
+    [_timeTableDescriptionLabel setBackgroundColor:_backgroundColor];
+    [_timeTableDescriptionLabel setTextColor:[UIColor whiteColor]];
     
-    [_titleNavigationItem setLeftBarButtonItem :_leftButton animated :true];    
+    [_titleLabel setBackgroundColor:_backgroundColor];
+    [_titleLabel setTextColor:[UIColor whiteColor]];
+    
+    [_backLabel setBackgroundColor:_backgroundColor];
+    [_backLabel setTextColor:[UIColor whiteColor]];
+    
+    [_backButton setBackgroundColor:_backgroundColor];
+    
+    NSMutableAttributedString *_backButtonTitleString = [[NSMutableAttributedString alloc] initWithString:@"zurück"];
+    
+    [_backButtonTitleString addAttribute:NSForegroundColorAttributeName value:[UIColor whiteColor] range:NSMakeRange(0, [_backButtonTitleString length])];
+    
+    [_backButton setAttributedTitle:_backButtonTitleString forState:UIControlStateNormal];
     
     [_detailTable reloadData];    
     [super viewDidLoad];
@@ -95,13 +100,12 @@
     _timeLabel                  = nil;
     _timeString                 = nil;
     _dayAndAcronymString        = nil;
-    _titleNavigationItem        = nil;
     _detailTableCellWithButton  = nil;
-    
-    _titelLabel = nil;
+    _timeTableDescriptionLabel = nil;
+    _backButton = nil;
+    _titleLabel = nil;
+    _backLabel = nil;
     [super viewDidUnload];
-    // Release any retained subviews of the main view.
-    // e.g. self.myOutlet = nil;
 }
 
 

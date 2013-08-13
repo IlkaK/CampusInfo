@@ -51,4 +51,6 @@
 @property (nonatomic, retain) DateFormation                         *_dateFormatter;
 @property (nonatomic, retain) LanguageTranslation                   *_translator;
 
+- (IBAction)moveBackToMenuOverview:(id)sender;
+
 @end
