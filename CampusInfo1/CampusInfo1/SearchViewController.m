@@ -16,10 +16,14 @@
 @synthesize _searchTextField;
 @synthesize _searchTypeArray;
 @synthesize _searchType;
+
 @synthesize _searchButton;
+@synthesize _cancelButton;
+
 @synthesize _acronymAutocompleteTableView;
 @synthesize _suggestions;
 @synthesize _autocomplete;
+
 @synthesize _titleLabel;
 
 @synthesize _students;
@@ -44,6 +48,7 @@
     
     self._searchTextField.delegate = self;
     [_searchButton useAlertStyle];
+    [_cancelButton useAlertStyle];
     
     _students   = [[StudentsDto alloc]init];
     _lecturers  = [[LecturersDto alloc]init];
@@ -55,10 +60,10 @@
     _autocomplete = [[Autocomplete alloc] initWithArray:_lecturers._lecturerArray];
 	_searchTextField.autocorrectionType = UITextAutocorrectionTypeNo;
     
-    [self.view bringSubviewToFront:_titleLabel];
+    UIColor *_backgroundColor = [UIColor colorWithRed:1.0/255.0 green:100.0/255.0 blue:167.0/255.0 alpha:1.0];
+    
+    [_titleLabel setBackgroundColor:_backgroundColor];
     [_titleLabel setTextColor:[UIColor whiteColor]];
-    _titleLabel.text = @"Bitte Kürzel eingeben";
-    self.navigationItem.titleView = _titleLabel;
 }
 
 -(void)loadDataWithSearchType
@@ -150,6 +155,7 @@
     _searchButton = nil;
     _acronymAutocompleteTableView = nil;
     _titleLabel = nil;
+    _cancelButton = nil;
     [super viewDidUnload];
 }
 
@@ -179,12 +185,29 @@
     _acronymAutocompleteTableView.hidden = YES;
     _searchType = [_searchTypeArray objectAtIndex:row];
     [self loadDataWithSearchType];
-    [self setTableWithSearchType];    
+    [self setTableWithSearchType];
+    
+    _suggestions = [[NSMutableArray alloc] initWithArray:[_autocomplete GetSuggestions:_searchTextField.text]];
+    [self.view addSubview:_acronymAutocompleteTableView];
+    _acronymAutocompleteTableView.hidden = NO;
+	[_acronymAutocompleteTableView reloadData];
 }
 
 
+- (IBAction)searchTextFieldChanged:(id)sender
+{
+    _suggestions = [[NSMutableArray alloc] initWithArray:[_autocomplete GetSuggestions:((UITextField*)sender).text]];
+    
+    //NSLog(@"_suggestions count: %i", [_suggestions count]);
+	
+    [self.view addSubview:_acronymAutocompleteTableView];
+    _acronymAutocompleteTableView.hidden = NO;
+	[_acronymAutocompleteTableView reloadData];
+    
+}
+
 // handling the search button
-- (IBAction)_startSearch:(id)sender
+- (IBAction)startSearch:(id)sender
 {
     if (_searchTextField.text == nil || [_searchTextField.text length] == 0)
     {
@@ -202,25 +225,20 @@
         // trim space in front of and after the string
         NSString *_stringWithoutSpaces = [_searchTextField.text stringByTrimmingCharactersInSet:
                                           [NSCharacterSet whitespaceAndNewlineCharacterSet]];
-    
+        
         [[NSNotificationCenter defaultCenter] postNotificationName:@"SearchType" object:_searchType];
         [[NSNotificationCenter defaultCenter] postNotificationName:@"SearchText" object:_stringWithoutSpaces];
-    
+        
         //self.tabBarController.selectedIndex = 0;
         [self dismissModalViewControllerAnimated:YES];
     }
+    
 }
 
-- (IBAction)searchTextFieldChanged:(id)sender
+// handling the cancel button
+- (IBAction)cancelSearch:(id)sender
 {
-    _suggestions = [[NSMutableArray alloc] initWithArray:[_autocomplete GetSuggestions:((UITextField*)sender).text]];
-    
-    //NSLog(@"_suggestions count: %i", [_suggestions count]);
-	
-    [self.view addSubview:_acronymAutocompleteTableView];
-    _acronymAutocompleteTableView.hidden = NO;
-	[_acronymAutocompleteTableView reloadData];
-    
+    [self dismissModalViewControllerAnimated:YES];
 }
 
 
@@ -236,7 +254,14 @@
 {
 	if (_suggestions)
 	{
-		return [_suggestions count];
+        if ([_suggestions count] > 5)
+        {
+            return 5;
+        }
+        else
+        {
+            return [_suggestions count];
+        }
 	}
 	return 0;
 }
@@ -253,7 +278,7 @@
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
     }
 	
-    UIFont *_cellFont = [ UIFont boldSystemFontOfSize: 12.0 ];
+    UIFont *_cellFont = [ UIFont boldSystemFontOfSize: 18.0 ];
     cell.textLabel.font  = _cellFont;
     
 	// Configure the cell.
@@ -265,7 +290,7 @@
 // set cell hight
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return 20;
+    return 25;
 }
 
 // Override to support row selection in the table view.

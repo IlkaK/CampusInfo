@@ -29,6 +29,7 @@
     NSString                *_searchType;
     
     IBOutlet GradientButton *_searchButton;
+    IBOutlet GradientButton *_cancelButton;
     
     IBOutlet UITableView    *_acronymAutocompleteTableView;
     
@@ -46,9 +47,12 @@
 
 @property (nonatomic, retain) IBOutlet UITextField      *_searchTextField;
 @property (nonatomic, retain) IBOutlet UIPickerView     *_chooseSearchType;
-@property (nonatomic, retain) IBOutlet GradientButton   *_searchButton;
 @property (nonatomic, retain) IBOutlet UITableView      *_acronymAutocompleteTableView;
+
 @property (nonatomic, retain) IBOutlet UILabel          *_titleLabel;
+
+@property (nonatomic, retain) IBOutlet GradientButton   *_searchButton;
+@property (nonatomic, retain) IBOutlet GradientButton   *_cancelButton;
 
 @property (nonatomic, retain) NSString                  *_searchType;
 @property (strong, nonatomic) NSArray                   *_searchTypeArray;
@@ -64,7 +68,8 @@
 
 
 // Button to start searching
-- (IBAction)_startSearch:(id)sender;
+- (IBAction)startSearch:(id)sender;
+- (IBAction)cancelSearch:(id)sender;
 - (IBAction)searchTextFieldChanged:(id)sender;
 
 @end

@@ -501,7 +501,6 @@
 				E12B3FF9179689C0000555AE /* Mensa */,
 				E1B13AB9178EA0DF00C037F8 /* Helper */,
 				E17842CF178308720059EA3C /* Settings */,
-				E17842CE1783084D0059EA3C /* Search */,
 				A3A551371525DD5400BCAF3D /* TimeTableDto */,
 				A35A34551520843F00181E3F /* TimeTable */,
 				A35A34271520814800181E3F /* CampusInfo1AppDelegate.h */,
@@ -564,13 +563,14 @@
 		A35A34551520843F00181E3F /* TimeTable */ = {
 			isa = PBXGroup;
 			children = (
-				27C1ED1B157A5C02000DF028 /* DetailTableCells */,
 				27C1ED19157A51AC000DF028 /* TimeTableCells */,
+				27C1ED1B157A5C02000DF028 /* DetailTableCells */,
+				A35A34301520814800181E3F /* SearchViewController.h */,
+				A35A34311520814800181E3F /* SearchViewController.m */,
+				A35A34361520814800181E3F /* SearchView.xib */,
 				A3A865491520A0C90074FFE5 /* TimeTableOverviewController.h */,
 				A3A8654A1520A0C90074FFE5 /* TimeTableOverviewController.m */,
 				A3A8654B1520A0C90074FFE5 /* TimeTableOverviewController.xib */,
-				27B66925153AE0D8004D3ABC /* TimeTableAsyncRequest.h */,
-				27B66926153AE0D8004D3ABC /* TimeTableAsyncRequest.m */,
 				27CCE302154414180057D9F8 /* TimeTableDetailController.h */,
 				27CCE303154414180057D9F8 /* TimeTableDetailController.m */,
 				27CCE304154414180057D9F8 /* TimeTableDetailController.xib */,
@@ -718,16 +718,6 @@
 			name = MensaMenuDto;
 			sourceTree = "<group>";
 		};
-		E17842CE1783084D0059EA3C /* Search */ = {
-			isa = PBXGroup;
-			children = (
-				A35A34301520814800181E3F /* SearchViewController.h */,
-				A35A34311520814800181E3F /* SearchViewController.m */,
-				A35A34361520814800181E3F /* SearchView.xib */,
-			);
-			name = Search;
-			sourceTree = "<group>";
-		};
 		E17842CF178308720059EA3C /* Settings */ = {
 			isa = PBXGroup;
 			children = (
@@ -742,6 +732,8 @@
 		E1B13AB9178EA0DF00C037F8 /* Helper */ = {
 			isa = PBXGroup;
 			children = (
+				27B66925153AE0D8004D3ABC /* TimeTableAsyncRequest.h */,
+				27B66926153AE0D8004D3ABC /* TimeTableAsyncRequest.m */,
 				E1BC14C0175F8D4900FE2854 /* Autocomplete.h */,
 				E1BC14C1175F8D4900FE2854 /* Autocomplete.m */,
 				E17842D0178309160059EA3C /* DBCachingForAutocomplete.h */,
