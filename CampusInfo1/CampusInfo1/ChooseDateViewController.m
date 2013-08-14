@@ -25,11 +25,20 @@
 
 @synthesize _chooseDateViewDelegate;
 
+@synthesize _waitForChangeActivityIndicator;
+
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     return self;
+}
+
+
+- (void) threadWaitForChangeActivityIndicator:(id)data
+{
+    _waitForChangeActivityIndicator.hidden = NO;
+    [_waitForChangeActivityIndicator startAnimating];
 }
 
 
@@ -42,7 +51,13 @@
 {
     if([self._chooseDateViewDelegate respondsToSelector:@selector(setActualDate:)])
     {
+        [NSThread detachNewThreadSelector:@selector(threadWaitForChangeActivityIndicator:) toTarget:self withObject:nil];
+        
         [self._chooseDateViewDelegate setActualDate:_datePicker.date];
+        
+        [_waitForChangeActivityIndicator stopAnimating];
+        _waitForChangeActivityIndicator.hidden = YES;
+        
         [self dismissModalViewControllerAnimated:YES];
     }
 }
@@ -75,7 +90,12 @@
     {
         [_datePicker setDate:_actualDate];
     }
+    
+    // set default values for spinner/activity indicator
+    _waitForChangeActivityIndicator.hidesWhenStopped = YES;
+    _waitForChangeActivityIndicator.hidden = YES;
 }
+
 
 - (void)didReceiveMemoryWarning
 {
@@ -89,6 +109,7 @@
     _titleLabel = nil;
     _cancelButton = nil;
     _doneButton = nil;
+    _waitForChangeActivityIndicator = nil;
     [super viewDidUnload];
 }
 

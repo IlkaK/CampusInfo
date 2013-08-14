@@ -94,14 +94,15 @@
 @synthesize _translator;
 @synthesize _dateFormatter;
 
+@synthesize _waitForLoadingActivityIndicator;
+
+
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {   
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) { }
     return self;
 }
-
-
 
 
 
@@ -510,6 +511,7 @@
     [_todayButton useAlertStyle];
     [_searchButton useAlertStyle];
     
+    // initialize swipe gestures
     _rightSwipe = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(dayBefore:)];
     [_rightSwipe setDirection:(UISwipeGestureRecognizerDirectionRight)];
     [[self view] addGestureRecognizer:_rightSwipe];
@@ -518,6 +520,9 @@
     [_leftSwipe setDirection:(UISwipeGestureRecognizerDirectionLeft)];
     [[self view] addGestureRecognizer:_leftSwipe];
     
+    // set default values for spinner/activity indicator
+    _waitForLoadingActivityIndicator.hidesWhenStopped = YES;
+    _waitForLoadingActivityIndicator.hidden = YES;
 }
 
 
@@ -546,6 +551,12 @@
                     withAcronymType:[_translator getEnglishTypeTranslation:self._searchType]
                     withAcronymText:[NSString stringWithFormat:@"von %@ (%@)",self._searchText, self._searchType]
      ];
+}
+
+- (void) threadWaitForLoadingActivityIndicator:(id)data
+{
+    _waitForLoadingActivityIndicator.hidden = NO;
+    [_waitForLoadingActivityIndicator startAnimating];
 }
 
 
@@ -606,6 +617,8 @@
             
             if (_actualShownAcronymTrials < 20)
             {
+                [NSThread detachNewThreadSelector:@selector(threadWaitForLoadingActivityIndicator:) toTarget:self withObject:nil];
+                
                 //NSLog(@"viewWillAppear try connecting");
                 _actualShownAcronymTrials++;
                 if (self._schedule == nil)
@@ -616,10 +629,15 @@
                 {
                     self._schedule             = [_schedule initWithAcronym:_actualShownAcronymString:_actualShownAcronymType:_actualDate];
                 }
+                
                 self._actualDayDto              = [self getDayDto];
                 self._noConnectionButton.hidden = YES;
                 self._noConnectionLabel.hidden = YES;
+                
                 [_timeTable reloadData];
+                
+                [_waitForLoadingActivityIndicator stopAnimating];
+                _waitForLoadingActivityIndicator.hidden = YES;
             }
             else
             {
@@ -780,6 +798,7 @@
     _searchVC = nil;
     _searchButton = nil;
     _searchButton = nil;
+    _waitForLoadingActivityIndicator = nil;
     [super viewDidUnload];
 }
 

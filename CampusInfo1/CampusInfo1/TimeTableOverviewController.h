@@ -114,6 +114,8 @@ UIViewController
     
     LanguageTranslation                 *_translator;
     DateFormation                       *_dateFormatter;
+    
+    IBOutlet UIActivityIndicatorView    *_waitForLoadingActivityIndicator;
 }
 
 
@@ -193,6 +195,8 @@ UIViewController
 
 @property (nonatomic, retain)          LanguageTranslation       *_translator;
 @property (nonatomic, retain)          DateFormation             *_dateFormatter;
+
+@property (nonatomic, retain) IBOutlet UIActivityIndicatorView   *_waitForLoadingActivityIndicator;
 
 
 - (IBAction)tryConnectionAgain:(id)sender;

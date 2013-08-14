@@ -33,6 +33,8 @@
 @synthesize _dayAndAcronymString;
 @synthesize _detailTableCellWithButton;
 
+@synthesize _waitForChangeActivityIndicator;
+
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -56,6 +58,7 @@
 
 - (void)viewDidLoad
 {
+    [super viewDidLoad];
     //NSLog(@"TimeTableDetail viewDidLoad");
 
     // set table controller
@@ -89,7 +92,10 @@
     [_backButton setAttributedTitle:_backButtonTitleString forState:UIControlStateNormal];
     
     [_detailTable reloadData];    
-    [super viewDidLoad];
+
+    // set default values for spinner/activity indicator
+    _waitForChangeActivityIndicator.hidesWhenStopped = YES;
+    _waitForChangeActivityIndicator.hidden = YES;
 }
 
 
@@ -105,6 +111,7 @@
     _backButton = nil;
     _titleLabel = nil;
     _backLabel = nil;
+    _waitForChangeActivityIndicator = nil;
     [super viewDidUnload];
 }
 
@@ -112,6 +119,13 @@
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
+}
+
+
+- (void) threadWaitForChangeActivityIndicator:(id)data
+{
+    _waitForChangeActivityIndicator.hidden = NO;
+    [_waitForChangeActivityIndicator startAnimating];
 }
 
 
@@ -257,6 +271,8 @@
 -(void) changeToSchedule:(id)sender event:(id)event
 {
     
+    [NSThread detachNewThreadSelector:@selector(threadWaitForChangeActivityIndicator:) toTarget:self withObject:nil];
+    
     NSMutableArray *_bothArrays       = [self splitScheduleToArray:_scheduleEvent];
     //NSMutableArray *_descriptionArray = [_bothArrays objectAtIndex:0];
     //NSMutableArray *_detailArray      = [_bothArrays objectAtIndex:1];
@@ -277,6 +293,9 @@
     //{
     [self._timeTableDetailViewDelegate setNewAcronym:_newAcronymString withAcronymType:_newAcronymType];
     //}
+    [_waitForChangeActivityIndicator stopAnimating];
+    _waitForChangeActivityIndicator.hidden = YES;
+    
     [self dismissModalViewControllerAnimated:YES];
     
 
