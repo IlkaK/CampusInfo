@@ -12,6 +12,9 @@
 #import <LanguageTranslation.h>
 #import <StudentsDto.h>
 #import <LecturersDto.h>
+#import <TimeTableOverviewController.h>
+
+@class TimeTableOverviewController;
 
 @protocol SettingsViewDelegate <NSObject>
 
@@ -31,20 +34,23 @@
 
     IBOutlet UILabel                    *_titleLabel;
     
+    IBOutlet TimeTableOverviewController *_timeTableVC;
 }
 
 
-@property (nonatomic, retain) IBOutlet UITextField              *_acronymTextField;
-@property (nonatomic, retain) IBOutlet GradientButton           *_backToScheduleButton;
-@property (nonatomic, retain) IBOutlet UITableView              *_acronymAutocompleteTableView;
-@property (nonatomic, retain) IBOutlet UILabel                  *_timetableSettingsTitle;
+@property (nonatomic, retain) IBOutlet UITextField                  *_acronymTextField;
+@property (nonatomic, retain) IBOutlet GradientButton               *_backToScheduleButton;
+@property (nonatomic, retain) IBOutlet UITableView                  *_acronymAutocompleteTableView;
+@property (nonatomic, retain) IBOutlet UILabel                      *_timetableSettingsTitle;
 
-@property (strong, nonatomic) NSMutableArray                    *_suggestions;
-@property (strong, nonatomic) Autocomplete                      *_autocomplete;
-@property (nonatomic, retain) StudentsDto                       *_students;
-@property (nonatomic, retain) LecturersDto                      *_lecturers;
+@property (strong, nonatomic) NSMutableArray                        *_suggestions;
+@property (strong, nonatomic) Autocomplete                          *_autocomplete;
+@property (nonatomic, retain) StudentsDto                           *_students;
+@property (nonatomic, retain) LecturersDto                          *_lecturers;
 
-@property (nonatomic, retain) IBOutlet UILabel                  *_titleLabel;
+@property (nonatomic, retain) IBOutlet UILabel                      *_titleLabel;
+
+@property (nonatomic, retain) IBOutlet TimeTableOverviewController  *_timeTableVC;
 
 - (IBAction)moveToTimeTable:(id)sender;
 - (IBAction)acronymTextFieldChanged:(id)sender;

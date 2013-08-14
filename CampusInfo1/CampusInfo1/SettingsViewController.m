@@ -26,6 +26,8 @@
 
 @synthesize _titleLabel;
 
+@synthesize _timeTableVC;
+
 
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -59,6 +61,13 @@
     [self.view bringSubviewToFront:_timetableSettingsTitle];
     [_timetableSettingsTitle setTextColor:[UIColor whiteColor]];
     self.navigationItem.titleView = _timetableSettingsTitle;
+    
+    // ----- DETAIL PAGE -----
+    if (_timeTableVC == nil)
+    {
+		_timeTableVC = [[TimeTableOverviewController alloc] init];
+	}
+    _timeTableVC.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
     
 }
 
@@ -124,6 +133,7 @@
     _acronymAutocompleteTableView = nil;
     _timetableSettingsTitle = nil;
     _titleLabel = nil;
+    _timeTableVC = nil;
     [super viewDidUnload];
 }
 
@@ -185,8 +195,11 @@
         [_acronymUserDefaults setObject:_localAcronym forKey:@"TimeTableAcronym"];
         [_acronymUserDefaults synchronize];
         
-        self.tabBarController.selectedIndex = 1;
-        [self dismissModalViewControllerAnimated:YES];
+        
+        [self presentModalViewController:_timeTableVC animated:YES];
+
+        //self.tabBarController.selectedIndex = 1;
+        //[self dismissModalViewControllerAnimated:YES];
     }
     else
     {
