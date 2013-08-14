@@ -13,7 +13,11 @@
 @end
 
 @implementation ContactsOverViewController
+
 @synthesize _titleLabel;
+@synthesize _secretaryButton;
+@synthesize _emergencyButton;
+
 @synthesize _contactsVC;
 @synthesize _emergencyVC;
 
@@ -30,6 +34,9 @@
 
     [_titleLabel setBackgroundColor:_backgroundColor];
     [_titleLabel setTextColor:[UIColor whiteColor]];
+    
+    [_secretaryButton useAlertStyle];
+    [_emergencyButton useAlertStyle];
     
     if (_contactsVC == nil)
     {
@@ -55,6 +62,8 @@
     _titleLabel = nil;
     _contactsVC = nil;
     _emergencyVC = nil;
+    _secretaryButton = nil;
+    _emergencyButton = nil;
     [super viewDidUnload];
 }
 - (IBAction)moveToSecretaryContacts:(id)sender

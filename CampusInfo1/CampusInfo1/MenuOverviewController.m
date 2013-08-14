@@ -17,10 +17,15 @@
 @synthesize _menuTimeTableCell;
 @synthesize _menuMensaTableCell;
 @synthesize _menuNewsTableCell;
-@synthesize _contactsVC;
-@synthesize _settingsVC;
+
 @synthesize _cellBackgroundColor;
 @synthesize _fontColor;
+
+@synthesize _contactsVC;
+@synthesize _settingsVC;
+@synthesize _newsVC;
+@synthesize _eventsVC;
+@synthesize _publicTransportVC;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -51,7 +56,6 @@
     {
 		_contactsVC = [[ContactsViewController alloc] init];
 	}
-    //_contactsVC._chooseDateViewDelegate = self;
     _contactsVC.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
     
     if (_settingsVC == nil)
@@ -59,7 +63,24 @@
 		_settingsVC = [[SettingsViewController alloc] init];
 	}
     _settingsVC.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
+  
+    if (_newsVC == nil)
+    {
+		_newsVC = [[NewsViewController alloc] init];
+	}
+    _newsVC.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
     
+    if (_eventsVC == nil)
+    {
+		_eventsVC = [[EventsViewController alloc] init];
+	}
+    _eventsVC.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
+    
+    if (_publicTransportVC == nil)
+    {
+		_publicTransportVC = [[PublicTransportViewController alloc] init];
+	}
+    _publicTransportVC.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
 }
 
 - (void)didReceiveMemoryWarning
@@ -75,6 +96,9 @@
     _menuNewsTableCell = nil;
     _contactsVC = nil;
     _settingsVC = nil;
+    _newsVC = nil;
+    _eventsVC = nil;
+    _publicTransportVC = nil;
     [super viewDidUnload];
 }
 
@@ -92,9 +116,9 @@
 
 -(void) moveToOev:(id)sender event:(id)event
 {
+    //[self presentModalViewController:_settingsVC animated:YES];
     self.tabBarController.selectedIndex = 3;
     [self dismissModalViewControllerAnimated:YES];
-    NSLog(@"move to ÖV");
 }
 
 -(void) moveToContacts:(id)sender event:(id)event
@@ -105,17 +129,17 @@
 
 -(void) moveToNews:(id)sender event:(id)event
 {
-    NSLog(@"move to news");
+   [self presentModalViewController:_newsVC animated:YES];
 }
 
 -(void) moveToEvents:(id)sender event:(id)event
 {
-    NSLog(@"move to events");
+    [self presentModalViewController:_eventsVC animated:YES];
 }
 
 -(void) moveToFacebook:(id)sender event:(id)event
 {
-    NSLog(@"move to Facebook");
+    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"https://www.facebook.com/engineering.zhaw"]];
 }
 
 -(void) moveToSettings:(id)sender event:(id)event
