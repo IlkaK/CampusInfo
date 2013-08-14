@@ -31,6 +31,7 @@
 @synthesize _detailsVC;
 @synthesize _chooseDateVC;
 @synthesize _searchVC;
+@synthesize _settingsVC;
 
 @synthesize _acronymLabel;
 @synthesize _titleLabel;
@@ -229,8 +230,7 @@
 {
     if (self._ownStoredAcronymString == nil)
     {
-        self.tabBarController.selectedIndex = 4;
-        [self dismissModalViewControllerAnimated:YES];
+        [self presentModalViewController:_settingsVC animated:YES];
     }
     else
     {
@@ -486,6 +486,13 @@
 	}
     _searchVC.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
     
+    // ------ SWITCH TO SETTINGS VIEW ----
+    if (_settingsVC == nil)
+    {
+		_settingsVC = [[SettingsViewController alloc] init];
+	}
+    _settingsVC.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
+    
     
     //----- SET ACRONYM WHEN COMING FROM SEARCH TAB -----
     [[NSNotificationCenter defaultCenter] addObserver:self
@@ -677,9 +684,7 @@
         [_acronymAlertView show];
         
         // switch to settings tab
-        self.tabBarController.selectedIndex = 2;
-        [self dismissModalViewControllerAnimated:YES];
-        
+        [self presentModalViewController:_settingsVC animated:YES];
         //NSLog(@"cannot load acronym view");
     }
 }
@@ -799,6 +804,7 @@
     _searchButton = nil;
     _searchButton = nil;
     _waitForLoadingActivityIndicator = nil;
+    _settingsVC = nil;
     [super viewDidUnload];
 }
 

@@ -346,7 +346,6 @@
 						<int key="NSvFlags">274</int>
 						<string key="NSFrame">{{0, 139}, {320, 311}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
-						<reference key="NSNextKeyView"/>
 						<reference key="IBUIBackgroundColor" ref="770361227"/>
 						<bool key="IBUIClipsSubviews">YES</bool>
 						<object class="NSArray" key="IBUIGestureRecognizers" id="0">
@@ -414,6 +413,16 @@
 				<bool key="IBUIHorizontal">NO</bool>
 			</object>
 			<object class="IBUIViewController" id="951218162">
+				<object class="IBUISimulatedStatusBarMetrics" key="IBUISimulatedStatusBarMetrics"/>
+				<object class="IBUISimulatedOrientationMetrics" key="IBUISimulatedOrientationMetrics">
+					<int key="IBUIInterfaceOrientation">1</int>
+					<int key="interfaceOrientation">1</int>
+				</object>
+				<reference key="IBUISimulatedDestinationMetrics" ref="674540461"/>
+				<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
+				<bool key="IBUIHorizontal">NO</bool>
+			</object>
+			<object class="IBUIViewController" id="497662659">
 				<object class="IBUISimulatedStatusBarMetrics" key="IBUISimulatedStatusBarMetrics"/>
 				<object class="IBUISimulatedOrientationMetrics" key="IBUISimulatedOrientationMetrics">
 					<int key="IBUIInterfaceOrientation">1</int>
@@ -566,6 +575,14 @@
 						<reference key="destination" ref="734904921"/>
 					</object>
 					<int key="connectionID">105</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">_settingsVC</string>
+						<reference key="source" ref="372490531"/>
+						<reference key="destination" ref="497662659"/>
+					</object>
+					<int key="connectionID">107</int>
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchOutletCollectionConnection" key="connection">
@@ -803,6 +820,11 @@
 						<reference key="parent" ref="191373211"/>
 						<string key="objectName">WaitForLoadingActivityIndicator</string>
 					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">106</int>
+						<reference key="object" ref="497662659"/>
+						<reference key="parent" ref="0"/>
+					</object>
 				</object>
 			</object>
 			<object class="NSMutableDictionary" key="flattenedProperties">
@@ -815,6 +837,8 @@
 					<string>-2.IBPluginDependency</string>
 					<string>1.IBPluginDependency</string>
 					<string>104.IBPluginDependency</string>
+					<string>106.CustomClassName</string>
+					<string>106.IBPluginDependency</string>
 					<string>14.CustomClassName</string>
 					<string>14.IBPluginDependency</string>
 					<string>14.IBUIButtonInspectorSelectedStateConfigurationMetadataKey</string>
@@ -850,6 +874,8 @@
 					<string>UIResponder</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
+					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
+					<string>SettingsViewController</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>GradientButton</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
@@ -892,7 +918,7 @@
 				<reference key="dict.values" ref="0"/>
 			</object>
 			<nil key="sourceID"/>
-			<int key="maxID">105</int>
+			<int key="maxID">107</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes"/>
 		<int key="IBDocument.localizationMode">0</int>

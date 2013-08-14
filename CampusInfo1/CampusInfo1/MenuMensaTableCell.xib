@@ -171,6 +171,10 @@
 									<bytes key="NSRGB">MC4xOTYwNzg0MzQ2IDAuMzA5ODAzOTMyOSAwLjUyMTU2ODY1NgA</bytes>
 								</object>
 								<reference key="IBUINormalTitleShadowColor" ref="372459993"/>
+								<object class="NSCustomResource" key="IBUINormalImage">
+									<string key="NSClassName">NSImage</string>
+									<string key="NSResourceName">events1.png</string>
+								</object>
 								<reference key="IBUIFontDescription" ref="430662840"/>
 								<reference key="IBUIFont" ref="435600419"/>
 							</object>
@@ -910,7 +914,8 @@
 		<int key="IBDocument.defaultPropertyAccessControl">3</int>
 		<dictionary class="NSMutableDictionary" key="IBDocument.LastKnownImageSizes">
 			<string key="contacts1.png">{46, 46}</string>
-			<string key="news1.png">{46, 46}</string>
+			<string key="events1.png">{46, 46}</string>
+			<string key="news1.png">{48, 48}</string>
 		</dictionary>
 		<bool key="IBDocument.UseAutolayout">YES</bool>
 		<string key="IBCocoaTouchPluginVersion">2083</string>

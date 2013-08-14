@@ -14,12 +14,14 @@
 #import <LanguageTranslation.h>
 #import <DateFormation.h>
 #import <SearchViewController.h>
+#import <SettingsViewController.h>
 
 @class ScheduleDto;
 @class DayDto;
 @class TimeTableAsyncRequest;
 @class TimeTableDetailController;
 @class SearchViewController;
+@class SettingsViewController;
 
 @interface TimeTableOverviewController : 
 UIViewController 
@@ -61,6 +63,8 @@ UIViewController
     
     // switches to search view
     IBOutlet SearchViewController       *_searchVC;
+    
+    IBOutlet SettingsViewController     *_settingsVC;
     
     // cells for table
     IBOutlet UITableViewCell  *_oneSlotOneRoomTableCell;    
@@ -122,6 +126,7 @@ UIViewController
 @property (nonatomic, retain) IBOutlet TimeTableDetailController *_detailsVC;
 @property (nonatomic, retain) IBOutlet ChooseDateViewController  *_chooseDateVC;
 @property (nonatomic, retain) IBOutlet SearchViewController      *_searchVC;
+@property (nonatomic, retain) IBOutlet SettingsViewController    *_settingsVC;
 
 @property (nonatomic, retain) IBOutlet UITableView               *_timeTable;
 
