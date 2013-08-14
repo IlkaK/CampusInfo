@@ -388,7 +388,7 @@
     //----- Navigation Bar ----
     // set current day
     self._actualDate = [NSDate date];
-    //self._actualDate    = [[self dayFormatter] dateFromString:@"17.12.2012"];
+    //self._actualDate    = [[_dateFormatter _dayFormatter] dateFromString:@"07.10.2013"];
     
     [self setDateInNavigatorWithActualDate:_actualDate];
     
@@ -1385,8 +1385,9 @@
 {
 
     NSDate *_today = [NSDate date];
-    //NSDate *_today    = [[_dateFormatter _dayFormatter] dateFromString:@"29.04.2013"];
-
+    
+    //NSDate *_today   = [[_dateFormatter _dayFormatter] dateFromString:@"07.10.2013"];
+ 
     NSString *_actualDayString    = [[_dateFormatter _dayFormatter] stringFromDate:_actualDate];
     NSString *_todayString        = [[_dateFormatter _dayFormatter] stringFromDate:_today];
     
@@ -1507,11 +1508,28 @@
              withEndTime        :(NSDate *)  endTime
 {
     UILabel          *_labelDate     = (UILabel  *)[cell viewWithTag:indexTag];
+    NSString *_startTimeString = [[_dateFormatter _timeFormatter] stringFromDate:startTime];
+    NSString *_endTimeString   = [[_dateFormatter _timeFormatter] stringFromDate:endTime];
+    
     _labelDate.text = [NSString stringWithFormat:@"%@ - %@",
-                       [[_dateFormatter _timeFormatter] stringFromDate:startTime],
-                       [[_dateFormatter _timeFormatter] stringFromDate:endTime  ]
+                       _startTimeString,
+                       _endTimeString
                        ];
+    if([self isActualDayAndTime:_actualDate
+            withStartTimeString:_startTimeString
+              withEndTimeString:_endTimeString])
+    {
+        //NSLog(@"1 set red for %@", _labelDate.text);
+        // orangered 2 #EE4000	238	64	0 16622
+        UIColor *_actualSelectionBackgroundColor = [UIColor colorWithRed:238.0/255.0 green:64.0/255.0 blue:0.0/255.0 alpha:1.0];
+        _labelDate.backgroundColor = _actualSelectionBackgroundColor;
+    }
+    else
+    {
+        _labelDate.backgroundColor = [UIColor clearColor];
+    }
 }
+
 
 
 - (void) setBackgroundColorOfCell:(UITableViewCell *)cell
@@ -1527,20 +1545,23 @@
     //UIColor *_lectureBackgroundColor= [UIColor colorWithRed:191.0/255.0 green:239.0/255.0 blue:255.0/255.0 alpha:1.0];
     
     //darkseagreen 1	#C1FFC1	193	255	193	12713921
-    UIColor *_actualSelectionBackgroundColor = [UIColor colorWithRed:193.0/255.0 green:225.0/255.0 blue:193.0/255.0 alpha:1.0];
+    //UIColor *_actualSelectionBackgroundColor = [UIColor colorWithRed:193.0/255.0 green:225.0/255.0 blue:193.0/255.0 alpha:1.0];
     
-    NSString *_startTimeString = [[_dateFormatter _timeFormatter] stringFromDate:startTime];
-    NSString *_endTimeString   = [[_dateFormatter _timeFormatter] stringFromDate:endTime];
+    // orangered 2 #EE4000	238	64	0 16622
+    //UIColor *_actualSelectionBackgroundColor = [UIColor colorWithRed:238.0/255.0 green:64.0/255.0 blue:0.0/255.0 alpha:1.0];
     
-    if ([self isActualDayAndTime:_actualDate
-                   withStartTimeString:_startTimeString
-                     withEndTimeString:_endTimeString])
-    {
-        cell.contentView.backgroundColor = _actualSelectionBackgroundColor;
-        cell.backgroundColor = cell.contentView.backgroundColor;
-    }
-    else
-    {
+    //NSString *_startTimeString = [[_dateFormatter _timeFormatter] stringFromDate:startTime];
+    //NSString *_endTimeString   = [[_dateFormatter _timeFormatter] stringFromDate:endTime];
+    
+    //if ([self isActualDayAndTime:_actualDate
+    //               withStartTimeString:_startTimeString
+    //                 withEndTimeString:_endTimeString])
+    //{
+        //cell.contentView.backgroundColor = _actualSelectionBackgroundColor;
+        //cell.backgroundColor = cell.contentView.backgroundColor;
+    //}
+    //else
+    //{
         if (isLecture)
         {
             cell.contentView.backgroundColor = _lectureBackgroundColor;
@@ -1551,7 +1572,7 @@
             cell.contentView.backgroundColor = [UIColor clearColor];
             cell.backgroundColor = cell.contentView.backgroundColor;
         }
-    }
+    //}
 }
 
 
@@ -1583,7 +1604,7 @@
                      withIsLecture:NO
                      withStartTime:[[_dateFormatter _timeFormatter] dateFromString:@"08:00"]
                        withEndTime:[[_dateFormatter _timeFormatter] dateFromString:@"08:45"]
-     ];
+    ];
     return _cell;
 }
 
@@ -1636,17 +1657,35 @@
            [_lectureButton  setTitle:@"" forState:UIControlStateNormal];
             _startTime  = actualScheduleEvent._startTime;
             _endTime    = actualScheduleEvent._endTime;
+            NSString *_startTimeString = [[_dateFormatter _timeFormatter] stringFromDate:_startTime];
+            NSString *_endTimeString   = [[_dateFormatter _timeFormatter] stringFromDate:_endTime];
+            
             _labelDate.text = [NSString stringWithFormat:@"%@ - %@",
-                               [[_dateFormatter _timeFormatter] stringFromDate:_startTime],
-                               [[_dateFormatter _timeFormatter] stringFromDate:_endTime]
+                               _startTimeString,
+                               _endTimeString
                                ];
+            
+            if([self isActualDayAndTime:_actualDate
+                    withStartTimeString:_startTimeString
+                      withEndTimeString:_endTimeString])
+            {
+                //NSLog(@"2 set red for %@", _labelDate.text);
+                // orangered 2 #EE4000	238	64	0 16622
+                UIColor *_actualSelectionBackgroundColor = [UIColor colorWithRed:238.0/255.0 green:64.0/255.0 blue:0.0/255.0 alpha:1.0];
+                _labelDate.backgroundColor = _actualSelectionBackgroundColor;
+            }
+            else
+            {
+                _labelDate.backgroundColor = [UIColor clearColor];
+            }
         }
     }
     
     [self setBackgroundColorOfCell:_cell
                      withIsLecture:NO
                      withStartTime:_startTime
-                       withEndTime:_endTime];
+                       withEndTime:_endTime
+     ];
     return _cell;
 }
 
