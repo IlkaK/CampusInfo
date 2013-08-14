@@ -65,7 +65,7 @@
 								</object>
 								<object class="NSCustomResource" key="IBUINormalImage">
 									<string key="NSClassName">NSImage</string>
-									<string key="NSResourceName">settings.png</string>
+									<string key="NSResourceName">settings1.png</string>
 								</object>
 								<object class="IBUIFontDescription" key="IBUIFontDescription" id="381866450">
 									<int key="type">2</int>
@@ -656,7 +656,7 @@
 		<int key="IBDocument.defaultPropertyAccessControl">3</int>
 		<dictionary class="NSMutableDictionary" key="IBDocument.LastKnownImageSizes">
 			<string key="facebook.png">{32, 32}</string>
-			<string key="settings.png">{30, 30}</string>
+			<string key="settings1.png">{46, 46}</string>
 		</dictionary>
 		<bool key="IBDocument.UseAutolayout">YES</bool>
 		<string key="IBCocoaTouchPluginVersion">2083</string>

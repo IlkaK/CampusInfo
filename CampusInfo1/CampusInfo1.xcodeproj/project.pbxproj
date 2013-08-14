@@ -75,6 +75,11 @@
 		A3A551461525EB8B00BCAF3D /* SlotDto.m in Sources */ = {isa = PBXBuildFile; fileRef = A3A551451525EB8B00BCAF3D /* SlotDto.m */; };
 		A3A8654C1520A0C90074FFE5 /* TimeTableOverviewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A3A8654A1520A0C90074FFE5 /* TimeTableOverviewController.m */; };
 		A3A8654D1520A0C90074FFE5 /* TimeTableOverviewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A3A8654B1520A0C90074FFE5 /* TimeTableOverviewController.xib */; };
+		E101908A17BB6FA700242A87 /* contacts1.png in Resources */ = {isa = PBXBuildFile; fileRef = E101908717BB6FA700242A87 /* contacts1.png */; };
+		E101908B17BB6FA700242A87 /* news1.png in Resources */ = {isa = PBXBuildFile; fileRef = E101908817BB6FA700242A87 /* news1.png */; };
+		E101908C17BB6FA700242A87 /* settings1.png in Resources */ = {isa = PBXBuildFile; fileRef = E101908917BB6FA700242A87 /* settings1.png */; };
+		E101908F17BB703B00242A87 /* mensa1.png in Resources */ = {isa = PBXBuildFile; fileRef = E101908D17BB703B00242A87 /* mensa1.png */; };
+		E101909017BB703B00242A87 /* public_transportation1.png in Resources */ = {isa = PBXBuildFile; fileRef = E101908E17BB703B00242A87 /* public_transportation1.png */; };
 		E104C049178C397C0020EEB4 /* LanguageTranslation.m in Sources */ = {isa = PBXBuildFile; fileRef = E104C048178C397C0020EEB4 /* LanguageTranslation.m */; };
 		E1086147179432460001C8E1 /* SevenSlotsOneRoomTableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E1086146179432460001C8E1 /* SevenSlotsOneRoomTableCell.xib */; };
 		E108614917944B110001C8E1 /* FourSlotsFiveRoomsTableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E108614817944B110001C8E1 /* FourSlotsFiveRoomsTableCell.xib */; };
@@ -246,6 +251,11 @@
 		A3A865491520A0C90074FFE5 /* TimeTableOverviewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TimeTableOverviewController.h; sourceTree = "<group>"; };
 		A3A8654A1520A0C90074FFE5 /* TimeTableOverviewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TimeTableOverviewController.m; sourceTree = "<group>"; };
 		A3A8654B1520A0C90074FFE5 /* TimeTableOverviewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TimeTableOverviewController.xib; sourceTree = "<group>"; };
+		E101908717BB6FA700242A87 /* contacts1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = contacts1.png; path = CampusInfo1/resources/icons/contacts1.png; sourceTree = "<group>"; };
+		E101908817BB6FA700242A87 /* news1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = news1.png; path = CampusInfo1/resources/icons/news1.png; sourceTree = "<group>"; };
+		E101908917BB6FA700242A87 /* settings1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = settings1.png; path = CampusInfo1/resources/icons/settings1.png; sourceTree = "<group>"; };
+		E101908D17BB703B00242A87 /* mensa1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = mensa1.png; path = CampusInfo1/resources/icons/mensa1.png; sourceTree = "<group>"; };
+		E101908E17BB703B00242A87 /* public_transportation1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = public_transportation1.png; path = CampusInfo1/resources/icons/public_transportation1.png; sourceTree = "<group>"; };
 		E104C047178C397C0020EEB4 /* LanguageTranslation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LanguageTranslation.h; sourceTree = "<group>"; };
 		E104C048178C397C0020EEB4 /* LanguageTranslation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LanguageTranslation.m; sourceTree = "<group>"; };
 		E1086146179432460001C8E1 /* SevenSlotsOneRoomTableCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SevenSlotsOneRoomTableCell.xib; sourceTree = "<group>"; };
@@ -537,6 +547,11 @@
 		A35A34501520830700181E3F /* Icon */ = {
 			isa = PBXGroup;
 			children = (
+				E101908D17BB703B00242A87 /* mensa1.png */,
+				E101908E17BB703B00242A87 /* public_transportation1.png */,
+				E101908717BB6FA700242A87 /* contacts1.png */,
+				E101908817BB6FA700242A87 /* news1.png */,
+				E101908917BB6FA700242A87 /* settings1.png */,
 				274AE0CC17B528340031E912 /* zhaw_logo.png */,
 				E1ACAF4B17B3836C00F2630B /* ZHAW-App-Banner.png */,
 				E10D601317AFAF4100036690 /* facebook.png */,
@@ -899,6 +914,11 @@
 				E1ACAF4C17B3836C00F2630B /* ZHAW-App-Banner.png in Resources */,
 				274AE0CD17B528340031E912 /* zhaw_logo.png in Resources */,
 				2724546917B7EBE4005F979C /* ContactsOverViewController.xib in Resources */,
+				E101908A17BB6FA700242A87 /* contacts1.png in Resources */,
+				E101908B17BB6FA700242A87 /* news1.png in Resources */,
+				E101908C17BB6FA700242A87 /* settings1.png in Resources */,
+				E101908F17BB703B00242A87 /* mensa1.png in Resources */,
+				E101909017BB703B00242A87 /* public_transportation1.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
