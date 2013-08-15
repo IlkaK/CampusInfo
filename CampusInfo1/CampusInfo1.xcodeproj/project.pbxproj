@@ -174,6 +174,7 @@
 		E1F32A5117BCE4C4000D69F3 /* NewsChannelDto.m in Sources */ = {isa = PBXBuildFile; fileRef = E1F32A5017BCE4C4000D69F3 /* NewsChannelDto.m */; };
 		E1F32A5417BCE4DB000D69F3 /* NewsImageDto.m in Sources */ = {isa = PBXBuildFile; fileRef = E1F32A5317BCE4DB000D69F3 /* NewsImageDto.m */; };
 		E1F32A5717BCE4F9000D69F3 /* NewsItemDto.m in Sources */ = {isa = PBXBuildFile; fileRef = E1F32A5617BCE4F9000D69F3 /* NewsItemDto.m */; };
+		E1F32A5917BCFD9A000D69F3 /* NewsTableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E1F32A5817BCFD9A000D69F3 /* NewsTableCell.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -390,6 +391,7 @@
 		E1F32A5317BCE4DB000D69F3 /* NewsImageDto.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewsImageDto.m; sourceTree = "<group>"; };
 		E1F32A5517BCE4F9000D69F3 /* NewsItemDto.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewsItemDto.h; sourceTree = "<group>"; };
 		E1F32A5617BCE4F9000D69F3 /* NewsItemDto.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewsItemDto.m; sourceTree = "<group>"; };
+		E1F32A5817BCFD9A000D69F3 /* NewsTableCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NewsTableCell.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -670,6 +672,7 @@
 				E101909117BBAE9D00242A87 /* NewsViewController.h */,
 				E101909217BBAE9D00242A87 /* NewsViewController.m */,
 				E101909317BBAE9D00242A87 /* NewsViewController.xib */,
+				E1F32A5817BCFD9A000D69F3 /* NewsTableCell.xib */,
 			);
 			name = News;
 			sourceTree = "<group>";
@@ -1013,6 +1016,7 @@
 				276754F317BC02850052B55C /* contacts1_for_tab.png in Resources */,
 				276754F517BC048D0052B55C /* public_transportation1_for_tab.png in Resources */,
 				276754F717BC05610052B55C /* home1_for_tab.png in Resources */,
+				E1F32A5917BCFD9A000D69F3 /* NewsTableCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
