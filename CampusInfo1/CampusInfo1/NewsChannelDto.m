@@ -69,6 +69,7 @@
     if ([_actualStartElement isEqualToString:@"channel"])
     {
         _startChannel = YES;
+        [_newsItemArray removeAllObjects];
         //NSLog(@"- start parsing channel");
     }
     

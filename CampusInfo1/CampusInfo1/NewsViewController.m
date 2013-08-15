@@ -14,10 +14,16 @@
 
 @implementation NewsViewController
 @synthesize _newsChannel;
+
 @synthesize _titleLabel;
+@synthesize _descriptionTitleLabel;
+
 @synthesize _newsTable;
 @synthesize _newsTableCell;
+
 @synthesize _dateFormatter;
+
+@synthesize _blueColor;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -30,12 +36,19 @@
     [super viewDidLoad];
 
     _newsChannel   = [[NewsChannelDto alloc]init];
-    UIColor *_backgroundColor = [UIColor colorWithRed:1.0/255.0 green:100.0/255.0 blue:167.0/255.0 alpha:1.0];
+    _blueColor = [UIColor colorWithRed:1.0/255.0 green:100.0/255.0 blue:167.0/255.0 alpha:1.0];
     
-    [_titleLabel setBackgroundColor:_backgroundColor];
+    [_titleLabel setBackgroundColor:_blueColor];
     [_titleLabel setTextColor:[UIColor whiteColor]];
     
-    _dateFormatter = [[DateFormation alloc] init]; 
+    [_descriptionTitleLabel setBackgroundColor:_blueColor];
+    [_descriptionTitleLabel setTextColor:[UIColor whiteColor]];
+    
+    _dateFormatter = [[DateFormation alloc] init];
+    
+    _descriptionTitleLabel.text = [NSString stringWithFormat:@"   School of Engineering"];
+    _titleLabel.text            = [NSString stringWithFormat:@"   News"];
+
 }
 
 - (void)didReceiveMemoryWarning
@@ -44,10 +57,6 @@
     // Dispose of any resources that can be recreated.
 }
 
-- (IBAction)_startNews:(id)sender
-{
-    [_newsChannel getData];
-}
 
 - (IBAction)moveBackToMenuOverview:(id)sender
 {
@@ -59,6 +68,7 @@
     _titleLabel = nil;
     _newsTable = nil;
     _newsTableCell = nil;
+    _descriptionTitleLabel = nil;
     [super viewDidUnload];
 }
 
@@ -67,6 +77,7 @@
     [super viewWillAppear:animated];
     
      [_newsChannel getData];
+
     
     //NSLog(@"viewWillAppear: 2 _autocomplete._candidates count: %i", [_autocomplete._candidates count]);
     
@@ -83,25 +94,24 @@
 // Customize the number of rows in the table view.
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    NSLog(@"numberOfRowsInSection");
-    return 4;
-    
-    /*
-	if ([_newsChannel._newsItemArray count] > 0)
+    //NSLog(@"numberOfRowsInSection");
+    if ([_newsChannel._newsItemArray count] > 0)
 	{
         //NSLog(@"_suggestions: %i", [_suggestions count]);
 		return [_newsChannel._newsItemArray count];
 	}
 	return 0;
-     */
+     
 }
 
 
 // Customize the appearance of table view cells.
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    
-    NSLog(@"cellForRowAtIndexPath");
+    if ([_newsChannel._newsItemArray count] == 0)
+	{
+     [_newsChannel getData];
+    }
     
     //NSUInteger        _cellSelection = indexPath.section;
     NSString         *_cellIdentifier;
@@ -122,24 +132,27 @@
     UILabel *_dateLabel         = (UILabel *) [_cell viewWithTag:2];
     UILabel *_descriptionLabel  = (UILabel *) [_cell viewWithTag:3];
     
-    NewsItemDto *_newsItem = [_newsChannel._newsItemArray objectAtIndex:indexPath.row];
+    //NSLog(@"item array count: %i - index row: %i", [_newsChannel._newsItemArray count], indexPath.row);
     
-//    _oneTitleLabel.text     = _newsItem._title;
-//    _dateLabel.text         = [[_dateFormatter _englishTimeAndDayFormatter] stringFromDate:_newsItem._pubDate];
-//    _descriptionLabel.text  = _newsItem._description;
-
-    _oneTitleLabel.text     = @"irgendein Titel";
-    _dateLabel.text         = @"22.12.2014";
-    _descriptionLabel.text  = @"dann noch eine Beschreibung";
-
+    if ([_newsChannel._newsItemArray count] >= indexPath.row)
+	{
+        NewsItemDto *_newsItem = [_newsChannel._newsItemArray objectAtIndex:indexPath.row];
     
+        _oneTitleLabel.text     = _newsItem._title;
+        _dateLabel.text         = [NSString stringWithFormat:@"%@"
+                                   ,[[_dateFormatter _dayFormatter] stringFromDate:_newsItem._pubDate]];
+        _descriptionLabel.text  = _newsItem._description;
+    
+        [_oneTitleLabel setTextColor:_blueColor];
+        [_dateLabel     setTextColor:[UIColor lightGrayColor]];
+    }
     return _cell;
 }
 
 // set cell hight
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return 114;
+    return 126;
 }
 
 // Override to support row selection in the table view.
