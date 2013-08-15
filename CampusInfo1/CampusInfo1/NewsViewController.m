@@ -13,7 +13,7 @@
 @end
 
 @implementation NewsViewController
-@synthesize _someThing;
+@synthesize _newsChannel;
 @synthesize _titleLabel;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -26,7 +26,7 @@
 {
     [super viewDidLoad];
 
-    _someThing   = [[SomethingDto alloc]init];
+    _newsChannel   = [[NewsChannelDto alloc]init];
     UIColor *_backgroundColor = [UIColor colorWithRed:1.0/255.0 green:100.0/255.0 blue:167.0/255.0 alpha:1.0];
     
     [_titleLabel setBackgroundColor:_backgroundColor];
@@ -41,7 +41,7 @@
 
 - (IBAction)_startNews:(id)sender
 {
-    [_someThing getData];
+    [_newsChannel getData];
 }
 
 - (IBAction)moveBackToMenuOverview:(id)sender

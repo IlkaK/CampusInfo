@@ -7,17 +7,17 @@
 //
 
 #import <UIKit/UIKit.h>
-#import <SomethingDto.h>
+#import <NewsChannelDto.h>
 
 
 @interface NewsViewController : UIViewController
 {
-    SomethingDto *_someThing;
+    NewsChannelDto      *_newsChannel;
 
-    IBOutlet UILabel *_titleLabel;
+    IBOutlet UILabel    *_titleLabel;
 }
 
-@property (strong, nonatomic) SomethingDto                          *_someThing;
+@property (strong, nonatomic) NewsChannelDto                        *_newsChannel;
 @property (nonatomic, retain) IBOutlet UILabel                      *_titleLabel;
 
 - (IBAction)_startNews:(id)sender;

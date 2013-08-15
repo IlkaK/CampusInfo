@@ -24,7 +24,8 @@
 @property (nonatomic, retain) NSDateFormatter *_englishTimeAndDayFormatter;
 
 - (id) init;
-- (NSDate *) parseDate:(NSString *)dateString;
 
+- (NSDate *) parseDate:(NSString *)dateString;
+- (NSDate *) parseDateFromXMLString:(NSString *)dateString;
 
 @end

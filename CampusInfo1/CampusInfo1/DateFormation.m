@@ -55,9 +55,63 @@
     NSString *_localString;
     
     _localString = [dateString substringToIndex:10];
-    //NSLog(@"_localString: %@",_localString);
+    NSLog(@"_localString: %@",_localString);
     _localDate   = [[self _englishDayFormatter] dateFromString:_localString];
-    //NSLog(@"_localDate: %@", [[_dateFormatter _englishDayFormatter] stringFromDate:_localDate]);
+    NSLog(@"_localDate: %@", [[self _englishDayFormatter] stringFromDate:_localDate]);
+    return _localDate;
+}
+
+-(NSDate *) parseDateFromXMLString:(NSString *)dateString
+{
+    NSDate   *_localDate;
+
+    //NSString *_weekDayString = [dateString substringToIndex:3];
+    //NSLog(@"_weekDayString: %@",_weekDayString);
+    
+    NSString *_dayString = [dateString substringFromIndex:5];
+    _dayString = [_dayString substringToIndex:11];
+    //NSLog(@"_dayString: %@",_dayString);
+    
+    NSString *_day = [_dayString substringFromIndex:0];
+    _day = [_day substringToIndex:2];
+    //NSLog(@"_day: %@",_day);
+    
+    NSString *_month = [_dayString substringFromIndex:3];
+    _month = [_month substringToIndex:3];
+    //NSLog(@"_month: %@",_month);
+    
+    NSString *_monthNumber;
+    
+    if ([_month isEqualToString:@"Jan"]) { _monthNumber = @"01"; }
+    if ([_month isEqualToString:@"Feb"]) { _monthNumber = @"02"; }
+    if ([_month isEqualToString:@"Mar"]) { _monthNumber = @"03"; }
+    if ([_month isEqualToString:@"Apr"]) { _monthNumber = @"04"; }
+    if ([_month isEqualToString:@"May"]) { _monthNumber = @"05"; }
+    if ([_month isEqualToString:@"Jun"]) { _monthNumber = @"06"; }
+    if ([_month isEqualToString:@"Jul"]) { _monthNumber = @"07"; }
+    if ([_month isEqualToString:@"Aug"]) { _monthNumber = @"08"; }
+    if ([_month isEqualToString:@"Sep"]) { _monthNumber = @"09"; }
+    if ([_month isEqualToString:@"Oct"]) { _monthNumber = @"10"; }
+    if ([_month isEqualToString:@"Nov"]) { _monthNumber = @"11"; }
+    if ([_month isEqualToString:@"Dec"]) { _monthNumber = @"12"; }
+    
+    
+    NSString *_year = [_dayString substringFromIndex:7];
+    _year = [_year substringToIndex:4];
+    //NSLog(@"_year: %@",_year);
+    
+    NSString *_timeString = [dateString substringFromIndex:17];
+    _timeString = [_timeString substringToIndex:5];
+    //NSLog(@"_timeString: %@",_timeString);
+    
+    NSString *_allStrings = [NSString stringWithFormat:@"%@-%@-%@ %@",_year, _monthNumber, _day, _timeString];
+    //NSString *_allStrings = [NSString stringWithFormat:@"%@-%@-%@ 07:00",_year, _monthNumber, _day];
+
+    //NSLog(@"_allStrings: %@",_allStrings);
+    
+    _localDate   = [[self _englishTimeAndDayFormatter] dateFromString:_allStrings];
+    //NSLog(@"_localDate: %@", [[self _englishTimeAndDayFormatter] stringFromDate:_localDate]);
+    
     return _localDate;
 }
 
