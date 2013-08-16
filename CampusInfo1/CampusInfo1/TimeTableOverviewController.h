@@ -29,27 +29,27 @@ UIViewController
 {
     
     // taking care of the whole view
-    IBOutlet UIView           *timeTableView;
+    IBOutlet UIView                     *timeTableView;
     
     // setting the table with timetable data
-    IBOutlet UITableView      *_timeTable;
+    IBOutlet UITableView                *_timeTable;
 
-    NSDate                    *_actualDate;
-    ScheduleDto               *_schedule;
-    DayDto                    *_actualDayDto;
+    NSDate                              *_actualDate;
+    ScheduleDto                         *_schedule;
+    DayDto                              *_actualDayDto;
     
     // acronyms used in the schedule
-    NSString                  *_ownStoredAcronymString;
-    NSString                  *_ownStoredAcronymType;
-    int                        _ownStoredAcronymTrials;
+    NSString                            *_ownStoredAcronymString;
+    NSString                            *_ownStoredAcronymType;
+    int                                 _ownStoredAcronymTrials;
 
-    NSString                  *_actualShownAcronymString;
-    NSString                  *_actualShownAcronymType;
-    int                        _actualShownAcronymTrials;
+    NSString                            *_actualShownAcronymString;
+    NSString                            *_actualShownAcronymType;
+    int                                 _actualShownAcronymTrials;
     
     // setting the navigation bar
-    IBOutlet UINavigationItem *_dayNavigator;
-    IBOutlet UILabel          *_dateLabel;
+    IBOutlet UINavigationItem           *_dayNavigator;
+    IBOutlet UILabel                    *_dateLabel;
     
     // acronym for timetable
     IBOutlet UILabel                    *_acronymLabel;
@@ -67,15 +67,15 @@ UIViewController
     IBOutlet SettingsViewController     *_settingsVC;
     
     // cells for table
-    IBOutlet UITableViewCell  *_oneSlotOneRoomTableCell;    
-    IBOutlet UITableViewCell  *_oneSlotTwoRoomsTableCell;
-    IBOutlet UITableViewCell  *_oneSlotThreeRoomsTableCell;
-    IBOutlet UITableViewCell  *_oneSlotFourRoomsTableCell;
-    IBOutlet UITableViewCell  *_oneSlotFiveRoomsTableCell;
-    IBOutlet UITableViewCell  *_oneSlotSixRoomsTableCell;
-    IBOutlet UITableViewCell  *_oneSlotSevenRoomsTableCell;
-    IBOutlet UITableViewCell  *_oneSlotEightRoomsTableCell;
-
+    IBOutlet UITableViewCell            *_oneSlotOneRoomTableCell;    
+    IBOutlet UITableViewCell            *_oneSlotTwoRoomsTableCell;
+    IBOutlet UITableViewCell            *_oneSlotThreeRoomsTableCell;
+    IBOutlet UITableViewCell            *_oneSlotFourRoomsTableCell;
+    IBOutlet UITableViewCell            *_oneSlotFiveRoomsTableCell;
+    IBOutlet UITableViewCell            *_oneSlotSixRoomsTableCell;
+    IBOutlet UITableViewCell            *_oneSlotSevenRoomsTableCell;
+    IBOutlet UITableViewCell            *_oneSlotEightRoomsTableCell;
+            
     IBOutlet UITableViewCell  *_twoSlotsOneRoomTableCell;
     IBOutlet UITableViewCell  *_twoSlotsTwoRoomsTableCell;
     IBOutlet UITableViewCell  *_twoSlotsThreeRoomsTableCell;

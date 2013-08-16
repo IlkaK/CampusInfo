@@ -112,8 +112,15 @@
                 withAcronymText  :(NSString *)newAcronymText
 {
     self._acronymLabel.text        = [NSString stringWithFormat:@"   %@",newAcronymText];
-    [self._homeButton setTitle:_ownStoredAcronymString forState:UIControlStateNormal];
     
+    if (_ownStoredAcronymString != nil)
+    {
+        [self._homeButton setTitle:_ownStoredAcronymString forState:UIControlStateNormal];
+    }
+    else
+    {
+        [self._homeButton setTitle:@"Kürzel" forState:UIControlStateNormal];
+    }
     
     self._actualShownAcronymTrials = 1;
     self._actualShownAcronymString = newAcronym;
@@ -364,7 +371,14 @@
                                        ,_ownStoredAcronymString
                                        ,[_translator getGermanTypeTranslation:_ownStoredAcronymType]
                                       ];
-        [self._homeButton setTitle:_ownStoredAcronymString forState:UIControlStateNormal];
+        if (_ownStoredAcronymString != nil)
+        {
+            [self._homeButton setTitle:_ownStoredAcronymString forState:UIControlStateNormal];
+        }
+        else
+        {
+            [self._homeButton setTitle:@"Kürzel" forState:UIControlStateNormal];
+        }
         
         // SET NEW ACRONYM WITH ACTUAL DATE
         [self setNewScheduleWithAcronym:_ownStoredAcronymString
@@ -609,7 +623,14 @@
                                                 ,self._actualShownAcronymString
                                                 ,[_translator getGermanTypeTranslation:self._actualShownAcronymType]
                                                 ];
-            [self._homeButton setTitle:_ownStoredAcronymString forState:UIControlStateNormal];
+            if (_ownStoredAcronymString != nil)
+            {
+                [self._homeButton setTitle:_ownStoredAcronymString forState:UIControlStateNormal];
+            }
+            else
+            {
+                [self._homeButton setTitle:@"Kürzel" forState:UIControlStateNormal];
+            }
             
             //self._schedule                 = [[ScheduleDto alloc] initWithAcronym:_actualShownAcronymString:_actualShownAcronymType:_actualDate];
             
@@ -684,7 +705,7 @@
         [_acronymAlertView show];
         
         // switch to settings tab
-        [self presentModalViewController:_settingsVC animated:YES];
+        //[self presentModalViewController:_settingsVC animated:YES];
         //NSLog(@"cannot load acronym view");
     }
 }
@@ -709,7 +730,14 @@
             self._actualShownAcronymString       = _textField.text;
             _actualShownAcronymTrials            = 1;
             _acronymLabel.text                   = [NSString stringWithFormat:@"   von %@",_actualShownAcronymString];
-            [self._homeButton setTitle:_ownStoredAcronymString forState:UIControlStateNormal];
+            if (_ownStoredAcronymString != nil)
+            {
+                [self._homeButton setTitle:_ownStoredAcronymString forState:UIControlStateNormal];
+            }
+            else
+            {
+                [self._homeButton setTitle:@"Kürzel" forState:UIControlStateNormal];
+            }
             
             NSUserDefaults *_acronymUserDefaults = [NSUserDefaults standardUserDefaults];
             [_acronymUserDefaults setObject:_actualShownAcronymString forKey:@"TimeTableAcronym"];

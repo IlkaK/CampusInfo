@@ -13,8 +13,10 @@
 #import <StudentsDto.h>
 #import <LecturersDto.h>
 #import <TimeTableOverviewController.h>
+#import <MenuOverviewController.h>
 
 @class TimeTableOverviewController;
+@class MenuOverviewController;
 
 @protocol SettingsViewDelegate <NSObject>
 
@@ -22,19 +24,20 @@
 
 @interface SettingsViewController : UIViewController<UITextFieldDelegate>
 {
-    IBOutlet UITextField                *_acronymTextField;
-    IBOutlet GradientButton             *_backToScheduleButton;
-    IBOutlet UITableView                *_acronymAutocompleteTableView;
-    IBOutlet UILabel                    *_timetableSettingsTitle;
+    IBOutlet UITextField                    *_acronymTextField;
+    IBOutlet GradientButton                 *_backToScheduleButton;
+    IBOutlet UITableView                    *_acronymAutocompleteTableView;
+    IBOutlet UILabel                        *_timetableSettingsTitle;
 
-    NSMutableArray                      *_suggestions;
-    Autocomplete                        *_autocomplete;
-    StudentsDto                         *_students;
-    LecturersDto                        *_lecturers;
+    NSMutableArray                          *_suggestions;
+    Autocomplete                            *_autocomplete;
+    StudentsDto                             *_students;
+    LecturersDto                            *_lecturers;
 
-    IBOutlet UILabel                    *_titleLabel;
+    IBOutlet UILabel                        *_titleLabel;
     
-    IBOutlet TimeTableOverviewController *_timeTableVC;
+    IBOutlet TimeTableOverviewController    *_timeTableVC;
+    IBOutlet MenuOverviewController         *_menuOverviewVC;
 }
 
 
@@ -51,6 +54,7 @@
 @property (nonatomic, retain) IBOutlet UILabel                      *_titleLabel;
 
 @property (nonatomic, retain) IBOutlet TimeTableOverviewController  *_timeTableVC;
+@property (nonatomic, retain) IBOutlet MenuOverviewController       *_menuOverviewVC;
 
 - (IBAction)moveToTimeTable:(id)sender;
 - (IBAction)acronymTextFieldChanged:(id)sender;

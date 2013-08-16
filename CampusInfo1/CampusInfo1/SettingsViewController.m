@@ -27,6 +27,7 @@
 @synthesize _titleLabel;
 
 @synthesize _timeTableVC;
+@synthesize _menuOverviewVC;
 
 
 
@@ -62,12 +63,18 @@
     [_timetableSettingsTitle setTextColor:[UIColor whiteColor]];
     self.navigationItem.titleView = _timetableSettingsTitle;
     
-    // ----- DETAIL PAGE -----
+    // ----- TIME TABLE PAGE -----
     if (_timeTableVC == nil)
     {
 		_timeTableVC = [[TimeTableOverviewController alloc] init];
 	}
     _timeTableVC.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
+    
+    if (_menuOverviewVC == nil)
+    {
+		_menuOverviewVC = [[MenuOverviewController alloc] init];
+	}
+    _menuOverviewVC.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
     
 }
 
@@ -134,11 +141,14 @@
     _timetableSettingsTitle = nil;
     _titleLabel = nil;
     _timeTableVC = nil;
+    _menuOverviewVC = nil;
     [super viewDidUnload];
 }
 
 - (IBAction)moveBackToMenuOverview:(id)sender
 {
+    //[self dismissModalViewControllerAnimated:YES]; // Third
+    //[self presentModalViewController:_menuOverviewVC animated:YES];
     [self dismissModalViewControllerAnimated:YES];
 }
 
