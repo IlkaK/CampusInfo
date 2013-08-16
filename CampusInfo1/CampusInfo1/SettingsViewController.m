@@ -15,7 +15,6 @@
 @implementation SettingsViewController
 
 @synthesize _acronymTextField;
-@synthesize _backToScheduleButton;
 
 @synthesize _timetableSettingsTitle;
 @synthesize _acronymAutocompleteTableView;
@@ -55,7 +54,6 @@
     
     NSUserDefaults *_acronymUserDefaults = [NSUserDefaults standardUserDefaults];
     _acronymTextField.text                = [_acronymUserDefaults stringForKey:@"TimeTableAcronym"];
-    [_backToScheduleButton useAlertStyle];
 
     [self._acronymAutocompleteTableView setSeparatorStyle:UITableViewCellSeparatorStyleNone];    
     
@@ -136,7 +134,6 @@
 - (void)viewDidUnload {
     [self set_acronymTextField:nil];
     _acronymTextField = nil;
-    _backToScheduleButton = nil;
     _acronymAutocompleteTableView = nil;
     _timetableSettingsTitle = nil;
     _titleLabel = nil;
@@ -147,8 +144,19 @@
 
 - (IBAction)moveBackToMenuOverview:(id)sender
 {
-    //[self dismissModalViewControllerAnimated:YES]; // Third
-    //[self presentModalViewController:_menuOverviewVC animated:YES];
+    NSString *_localAcronym = _acronymTextField.text;
+    NSString *_localType    = [self getAcronymType:_localAcronym];
+    
+    if ([_localType compare: @"empty" ] != NSOrderedSame)
+    {
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"SearchType" object:_localType];
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"SearchText" object:_localAcronym];
+        
+        NSUserDefaults *_acronymUserDefaults = [NSUserDefaults standardUserDefaults];
+        [_acronymUserDefaults setObject:_localAcronym forKey:@"TimeTableAcronym"];
+        [_acronymUserDefaults synchronize];
+    }
+    
     [self dismissModalViewControllerAnimated:YES];
 }
 
@@ -190,54 +198,6 @@
 }
 
 
-// handling the search button
-- (IBAction)moveToTimeTable:(id)sender
-{
-    NSString *_localAcronym = _acronymTextField.text;
-    NSString *_localType    = [self getAcronymType:_localAcronym];
-    
-    if ([_localType compare: @"empty" ] != NSOrderedSame)
-    {
-        [[NSNotificationCenter defaultCenter] postNotificationName:@"SearchType" object:_localType];
-        [[NSNotificationCenter defaultCenter] postNotificationName:@"SearchText" object:_localAcronym];
-        
-        NSUserDefaults *_acronymUserDefaults = [NSUserDefaults standardUserDefaults];
-        [_acronymUserDefaults setObject:_localAcronym forKey:@"TimeTableAcronym"];
-        [_acronymUserDefaults synchronize];
-        
-        
-        [self presentModalViewController:_timeTableVC animated:YES];
-
-        //self.tabBarController.selectedIndex = 1;
-        //[self dismissModalViewControllerAnimated:YES];
-    }
-    else
-    {
-        if (_acronymTextField.text == nil || [_acronymTextField.text length] == 0)
-        {
-            UIAlertView *_acronymAlertView = [[UIAlertView alloc]
-                                              initWithTitle:@"Weitere Dienste"
-                                              message:@"Bitte ein Kürzel eingeben."
-                                              delegate:self
-                                              cancelButtonTitle:@"OK"
-                                              otherButtonTitles:nil];
-            
-            [_acronymAlertView show];
-        }
-        else
-        {
-            UIAlertView *_acronymAlertView = [[UIAlertView alloc]
-                                              initWithTitle:@"Weitere Dienste"
-                                              message:@"Nur Kürzel von Studenten und Dozenten sind möglich."
-                                              delegate:self
-                                              cancelButtonTitle:@"OK"
-                                              otherButtonTitles:nil];
-            
-            [_acronymAlertView show];
-        }
-    }
-}
-
 - (IBAction)acronymTextFieldChanged:(id)sender
 {
     [self addValuesToAutocompleteCandidates];
@@ -250,7 +210,6 @@
     _acronymAutocompleteTableView.hidden = NO;
 	[_acronymAutocompleteTableView reloadData];
 }
-
 
 
 

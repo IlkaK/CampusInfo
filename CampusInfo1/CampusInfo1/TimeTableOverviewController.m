@@ -111,7 +111,14 @@
                 withAcronymType  :(NSString *)newAcronymType
                 withAcronymText  :(NSString *)newAcronymText
 {
-    self._acronymLabel.text        = [NSString stringWithFormat:@"   %@",newAcronymText];
+    if (newAcronym != nil)
+    {
+        self._acronymLabel.text        = [NSString stringWithFormat:@"   %@",newAcronymText];
+    }
+    else
+    {
+        self._acronymLabel.text        = [NSString stringWithFormat:@""];
+    }
     
     if (_ownStoredAcronymString != nil)
     {
@@ -241,6 +248,7 @@
     }
     else
     {
+        
         [self setNewScheduleWithAcronym:self._ownStoredAcronymString
                         withAcronymType:self._ownStoredAcronymType
                         withAcronymText:[NSString stringWithFormat:@"von %@ (%@)"
@@ -367,16 +375,18 @@
         [_acronymUserDefaults setObject:_ownStoredAcronymString forKey:@"TimeTableAcronym"];
         [_acronymUserDefaults synchronize];
        
-        _acronymLabel.text          = [NSString stringWithFormat:@"   von %@ (%@)"
-                                       ,_ownStoredAcronymString
-                                       ,[_translator getGermanTypeTranslation:_ownStoredAcronymType]
-                                      ];
+
         if (_ownStoredAcronymString != nil)
         {
+            _acronymLabel.text          = [NSString stringWithFormat:@"   von %@ (%@)"
+                                           ,_ownStoredAcronymString
+                                           ,[_translator getGermanTypeTranslation:_ownStoredAcronymType]
+                                           ];
             [self._homeButton setTitle:_ownStoredAcronymString forState:UIControlStateNormal];
         }
         else
         {
+            _acronymLabel.text          = [NSString stringWithFormat:@""];
             [self._homeButton setTitle:@"Kürzel" forState:UIControlStateNormal];
         }
         
@@ -416,6 +426,7 @@
 {
     //NSLog(@"setNewAcronym");
     // SET NEW ACRONYM WITH ACTUAL DATE
+    
     [self setNewScheduleWithAcronym:newAcronym
                     withAcronymType:newAcronymType
                     withAcronymText:[NSString stringWithFormat:@"von %@ (%@)"
@@ -619,16 +630,18 @@
         
         if (self._actualShownAcronymString != nil && [_actualShownAcronymString length] > 0)
         {
-            self._acronymLabel.text          = [NSString stringWithFormat:@"   von %@ (%@)"
-                                                ,self._actualShownAcronymString
-                                                ,[_translator getGermanTypeTranslation:self._actualShownAcronymType]
-                                                ];
+
             if (_ownStoredAcronymString != nil)
             {
+                self._acronymLabel.text          = [NSString stringWithFormat:@"   von %@ (%@)"
+                                                    ,self._actualShownAcronymString
+                                                    ,[_translator getGermanTypeTranslation:self._actualShownAcronymType]
+                                                    ];
                 [self._homeButton setTitle:_ownStoredAcronymString forState:UIControlStateNormal];
             }
             else
             {
+                self._acronymLabel.text          = [NSString stringWithFormat:@""];
                 [self._homeButton setTitle:@"Kürzel" forState:UIControlStateNormal];
             }
             
@@ -729,13 +742,15 @@
         {
             self._actualShownAcronymString       = _textField.text;
             _actualShownAcronymTrials            = 1;
-            _acronymLabel.text                   = [NSString stringWithFormat:@"   von %@",_actualShownAcronymString];
+            
             if (_ownStoredAcronymString != nil)
             {
+                _acronymLabel.text                   = [NSString stringWithFormat:@"   von %@",_actualShownAcronymString];
                 [self._homeButton setTitle:_ownStoredAcronymString forState:UIControlStateNormal];
             }
             else
             {
+                _acronymLabel.text                   = [NSString stringWithFormat:@""];
                 [self._homeButton setTitle:@"Kürzel" forState:UIControlStateNormal];
             }
             

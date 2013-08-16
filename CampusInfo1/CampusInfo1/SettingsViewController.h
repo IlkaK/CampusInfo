@@ -7,7 +7,6 @@
 //
 
 #import <UIKit/UIKit.h>
-#import <GradientButton.h>
 #import <Autocomplete.h>
 #import <LanguageTranslation.h>
 #import <StudentsDto.h>
@@ -25,7 +24,6 @@
 @interface SettingsViewController : UIViewController<UITextFieldDelegate>
 {
     IBOutlet UITextField                    *_acronymTextField;
-    IBOutlet GradientButton                 *_backToScheduleButton;
     IBOutlet UITableView                    *_acronymAutocompleteTableView;
     IBOutlet UILabel                        *_timetableSettingsTitle;
 
@@ -42,7 +40,6 @@
 
 
 @property (nonatomic, retain) IBOutlet UITextField                  *_acronymTextField;
-@property (nonatomic, retain) IBOutlet GradientButton               *_backToScheduleButton;
 @property (nonatomic, retain) IBOutlet UITableView                  *_acronymAutocompleteTableView;
 @property (nonatomic, retain) IBOutlet UILabel                      *_timetableSettingsTitle;
 
@@ -56,7 +53,6 @@
 @property (nonatomic, retain) IBOutlet TimeTableOverviewController  *_timeTableVC;
 @property (nonatomic, retain) IBOutlet MenuOverviewController       *_menuOverviewVC;
 
-- (IBAction)moveToTimeTable:(id)sender;
 - (IBAction)acronymTextFieldChanged:(id)sender;
 - (IBAction)moveBackToMenuOverview:(id)sender;
 
