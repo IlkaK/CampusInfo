@@ -159,6 +159,8 @@
 		E16C642B17ABDC4600BEDBB3 /* EmergencyViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E16C642917ABDC4600BEDBB3 /* EmergencyViewController.xib */; };
 		E17842D2178309160059EA3C /* DBCachingForAutocomplete.m in Sources */ = {isa = PBXBuildFile; fileRef = E17842D1178309160059EA3C /* DBCachingForAutocomplete.m */; };
 		E195FF36178188A30065DF05 /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = E195FF35178188A30065DF05 /* libsqlite3.dylib */; };
+		E198FD5317BE240400D5BE9B /* NewsDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E198FD5117BE240400D5BE9B /* NewsDetailViewController.m */; };
+		E198FD5417BE240400D5BE9B /* NewsDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E198FD5217BE240400D5BE9B /* NewsDetailViewController.xib */; };
 		E1ACAF4C17B3836C00F2630B /* ZHAW-App-Banner.png in Resources */ = {isa = PBXBuildFile; fileRef = E1ACAF4B17B3836C00F2630B /* ZHAW-App-Banner.png */; };
 		E1BC14C2175F8D4900FE2854 /* Autocomplete.m in Sources */ = {isa = PBXBuildFile; fileRef = E1BC14C1175F8D4900FE2854 /* Autocomplete.m */; };
 		E1BC5622179D290A007E235D /* MensaDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E1BC5620179D290A007E235D /* MensaDetailViewController.m */; };
@@ -368,6 +370,9 @@
 		E17842D0178309160059EA3C /* DBCachingForAutocomplete.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DBCachingForAutocomplete.h; sourceTree = "<group>"; };
 		E17842D1178309160059EA3C /* DBCachingForAutocomplete.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DBCachingForAutocomplete.m; sourceTree = "<group>"; };
 		E195FF35178188A30065DF05 /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
+		E198FD5017BE240400D5BE9B /* NewsDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewsDetailViewController.h; sourceTree = "<group>"; };
+		E198FD5117BE240400D5BE9B /* NewsDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewsDetailViewController.m; sourceTree = "<group>"; };
+		E198FD5217BE240400D5BE9B /* NewsDetailViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NewsDetailViewController.xib; sourceTree = "<group>"; };
 		E1ACAF4B17B3836C00F2630B /* ZHAW-App-Banner.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "ZHAW-App-Banner.png"; path = "CampusInfo1/resources/icons/ZHAW-App-Banner.png"; sourceTree = "<group>"; };
 		E1BC14C0175F8D4900FE2854 /* Autocomplete.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Autocomplete.h; sourceTree = "<group>"; };
 		E1BC14C1175F8D4900FE2854 /* Autocomplete.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Autocomplete.m; sourceTree = "<group>"; };
@@ -673,6 +678,9 @@
 				E101909217BBAE9D00242A87 /* NewsViewController.m */,
 				E101909317BBAE9D00242A87 /* NewsViewController.xib */,
 				E1F32A5817BCFD9A000D69F3 /* NewsTableCell.xib */,
+				E198FD5017BE240400D5BE9B /* NewsDetailViewController.h */,
+				E198FD5117BE240400D5BE9B /* NewsDetailViewController.m */,
+				E198FD5217BE240400D5BE9B /* NewsDetailViewController.xib */,
 			);
 			name = News;
 			sourceTree = "<group>";
@@ -1017,6 +1025,7 @@
 				276754F517BC048D0052B55C /* public_transportation1_for_tab.png in Resources */,
 				276754F717BC05610052B55C /* home1_for_tab.png in Resources */,
 				E1F32A5917BCFD9A000D69F3 /* NewsTableCell.xib in Resources */,
+				E198FD5417BE240400D5BE9B /* NewsDetailViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1104,6 +1113,7 @@
 				E1F32A5117BCE4C4000D69F3 /* NewsChannelDto.m in Sources */,
 				E1F32A5417BCE4DB000D69F3 /* NewsImageDto.m in Sources */,
 				E1F32A5717BCE4F9000D69F3 /* NewsItemDto.m in Sources */,
+				E198FD5317BE240400D5BE9B /* NewsDetailViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

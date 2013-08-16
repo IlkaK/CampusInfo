@@ -25,6 +25,8 @@
 
 @synthesize _blueColor;
 
+@synthesize _newsDetailVC;
+
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -49,6 +51,12 @@
     _descriptionTitleLabel.text = [NSString stringWithFormat:@"   School of Engineering"];
     _titleLabel.text            = [NSString stringWithFormat:@"   News"];
 
+    // ----- DETAIL PAGE -----
+    if (_newsDetailVC == nil)
+    {
+		_newsDetailVC = [[NewsDetailViewController alloc] init];
+	}
+    _newsDetailVC.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
 }
 
 - (void)didReceiveMemoryWarning
@@ -69,6 +77,7 @@
     _newsTable = nil;
     _newsTableCell = nil;
     _descriptionTitleLabel = nil;
+    _newsDetailVC = nil;
     [super viewDidUnload];
 }
 
@@ -82,6 +91,23 @@
     //NSLog(@"viewWillAppear: 2 _autocomplete._candidates count: %i", [_autocomplete._candidates count]);
     
     [_newsTable reloadData];
+}
+
+-(void) showNewsDetails:(id)sender event:(id)event
+{
+    NSSet       *_touches              = [event    allTouches];
+    UITouch     *_touch                = [_touches anyObject ];
+    CGPoint      _currentTouchPosition = [_touch locationInView:self._newsTable];
+    NSIndexPath *_indexPath            = [self._newsTable indexPathForRowAtPoint: _currentTouchPosition];
+    
+    if ([_newsChannel._newsItemArray count] >= _indexPath.row)
+	{
+        NewsItemDto *_newsItem = [_newsChannel._newsItemArray objectAtIndex:_indexPath.row];
+        
+        _newsDetailVC._newsItem = _newsItem;
+
+        [self presentModalViewController:_newsDetailVC animated:YES];
+    }
 }
 
 
@@ -131,6 +157,7 @@
     UILabel *_oneTitleLabel     = (UILabel *) [_cell viewWithTag:1];
     UILabel *_dateLabel         = (UILabel *) [_cell viewWithTag:2];
     UILabel *_descriptionLabel  = (UILabel *) [_cell viewWithTag:3];
+    UIButton *_detailButton      = (UIButton *) [_cell viewWithTag:4];
     
     //NSLog(@"item array count: %i - index row: %i", [_newsChannel._newsItemArray count], indexPath.row);
     
@@ -145,6 +172,9 @@
     
         [_oneTitleLabel setTextColor:_blueColor];
         [_dateLabel     setTextColor:[UIColor lightGrayColor]];
+        
+         [_detailButton addTarget:self action:@selector(showNewsDetails  :event:) forControlEvents:UIControlEventTouchUpInside];
+        
     }
     return _cell;
 }
