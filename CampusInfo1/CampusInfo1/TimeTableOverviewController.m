@@ -845,7 +845,6 @@
     _titleLabel = nil;
     _searchVC = nil;
     _searchButton = nil;
-    _searchButton = nil;
     _waitForLoadingActivityIndicator = nil;
     _settingsVC = nil;
     [super viewDidUnload];

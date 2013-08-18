@@ -27,6 +27,11 @@
 
 @synthesize _newsDetailVC;
 
+@synthesize _actualTrials;
+@synthesize _noConnectionButton;
+@synthesize _noConnectionLabel;
+
+
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -35,6 +40,7 @@
 
 - (void)viewDidLoad
 {
+    //NSLog(@"news view controller: viewDidLoad");
     [super viewDidLoad];
 
     _newsChannel   = [[NewsChannelDto alloc]init];
@@ -57,6 +63,14 @@
 		_newsDetailVC = [[NewsDetailViewController alloc] init];
 	}
     _newsDetailVC.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
+    
+    //[_newsChannel getData];
+    [_newsTable reloadData];
+    
+    self._actualTrials = 1;
+    
+    _noConnectionButton.hidden = YES;
+    _noConnectionLabel.hidden = YES;
 }
 
 - (void)didReceiveMemoryWarning
@@ -65,6 +79,52 @@
     // Dispose of any resources that can be recreated.
 }
 
+
+-(void) sortNewsItems
+{
+
+    //int someArrayI;
+    //for (someArrayI = 0; someArrayI < [_newsChannel._newsItemArray count]; someArrayI++)
+    //{
+    //    NewsItemDto *_oneItem = [_newsChannel._newsItemArray objectAtIndex:someArrayI];
+        //NSLog(@"before sorting _oneItem date %@ and title %@", [NSString stringWithFormat:@"%@"
+        //                                                       ,[[_dateFormatter _dayFormatter] stringFromDate:_oneItem._pubDate]], _oneItem._title);
+    //}
+    
+       
+       [_newsChannel._newsItemArray sortUsingComparator:^NSComparisonResult(NewsItemDto *a, NewsItemDto *b)
+        {
+            
+            //int timestamp1 = [a._pubDate timeIntervalSince1970];
+            //int timestamp2 = [b._pubDate timeIntervalSince1970];
+            
+            NSString *_compareInEnglishDateFormat1 = [NSString stringWithFormat:@"%.0f", [a._pubDate timeIntervalSince1970]];
+            NSString *_compareInEnglishDateFormat2 = [NSString stringWithFormat:@"%.0f", [b._pubDate timeIntervalSince1970]];
+            
+            //NSString *_compareInEnglishDateFormat1 = [[_dateFormatter _dayFormatter] stringFromDate:a._pubDate];
+            //NSString *_compareInEnglishDateFormat2 = [[_dateFormatter _dayFormatter] stringFromDate:b._pubDate];
+            
+            return [_compareInEnglishDateFormat1 compare:_compareInEnglishDateFormat2];
+        }
+        ];
+       
+       
+       
+    //for (someArrayI = 0; someArrayI < [_newsChannel._newsItemArray count]; someArrayI++)
+    //{
+    //    NewsItemDto *_oneItem = [_newsChannel._newsItemArray objectAtIndex:someArrayI];
+        
+        //NSLog(@"after sorting _oneItem date %@ and title %@", [NSString stringWithFormat:@"%@"
+        //                                         ,[[_dateFormatter _dayFormatter] stringFromDate:_oneItem._pubDate]], _oneItem._title);
+    //}
+}
+
+
+- (IBAction)tryConnectionAgain:(id)sender
+{
+    [_newsChannel getData];
+    [_newsTable reloadData];
+}
 
 - (IBAction)moveBackToMenuOverview:(id)sender
 {
@@ -78,19 +138,31 @@
     _newsTableCell = nil;
     _descriptionTitleLabel = nil;
     _newsDetailVC = nil;
+    _noConnectionButton = nil;
+    _noConnectionLabel = nil;
     [super viewDidUnload];
 }
 
+
 - (void)viewWillAppear:(BOOL)animated
 {
+
     [super viewWillAppear:animated];
     
-     [_newsChannel getData];
+    //NSLog(@"news view controller: viewWillAppear: %i", [_newsChannel._newsItemArray count]);
+    
 
-    
-    //NSLog(@"viewWillAppear: 2 _autocomplete._candidates count: %i", [_autocomplete._candidates count]);
-    
-    [_newsTable reloadData];
+        if (_actualTrials < 20)
+        {
+            _actualTrials++;
+            [_newsChannel getData];
+            [_newsTable reloadData];
+            if ( [_newsChannel._newsItemArray count] == 0)
+            {
+                self._noConnectionButton.hidden = NO;
+                self._noConnectionLabel.hidden = NO;
+            }
+        }
 }
 
 -(void) showNewsDetails:(id)sender event:(id)event
@@ -99,10 +171,11 @@
     UITouch     *_touch                = [_touches anyObject ];
     CGPoint      _currentTouchPosition = [_touch locationInView:self._newsTable];
     NSIndexPath *_indexPath            = [self._newsTable indexPathForRowAtPoint: _currentTouchPosition];
+    NSUInteger        _cellSelection = _indexPath.section;
     
-    if ([_newsChannel._newsItemArray count] >= _indexPath.row)
+    if ([_newsChannel._newsItemArray count] >= _cellSelection)
 	{
-        NewsItemDto *_newsItem = [_newsChannel._newsItemArray objectAtIndex:_indexPath.row];
+        NewsItemDto *_newsItem = [_newsChannel._newsItemArray objectAtIndex:_cellSelection];
         
         _newsDetailVC._newsItem = _newsItem;
 
@@ -114,19 +187,26 @@
 //---------- Handling of table for suggestions -----
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return 1;
+    if ([_newsChannel._newsItemArray count] > 0)
+	{
+        self._noConnectionButton.hidden = YES;
+        self._noConnectionLabel.hidden = YES;
+        //NSLog(@"news item array count: %i", [_newsChannel._newsItemArray count]);
+        
+
+        
+        
+		return [_newsChannel._newsItemArray count];
+	}
+	return 1;
 }
+
+
 
 // Customize the number of rows in the table view.
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    //NSLog(@"numberOfRowsInSection");
-    if ([_newsChannel._newsItemArray count] > 0)
-	{
-        //NSLog(@"_suggestions: %i", [_suggestions count]);
-		return [_newsChannel._newsItemArray count];
-	}
-	return 0;
+    return 1;
      
 }
 
@@ -134,12 +214,14 @@
 // Customize the appearance of table view cells.
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if ([_newsChannel._newsItemArray count] == 0)
-	{
-     [_newsChannel getData];
-    }
+    //NSLog(@"news view controller: cellForRowAtIndexPath");
+    //if ([_newsChannel._newsItemArray count] == 0)
+	//{
+            // VERY IMPORTANT, OTHERWISE, NO NEW DATA
+           // [self viewWillAppear:YES];
+    //}
     
-    //NSUInteger        _cellSelection = indexPath.section;
+    NSUInteger        _cellSelection = indexPath.section;
     NSString         *_cellIdentifier;
     UITableViewCell  *_cell = nil;
     
@@ -157,14 +239,17 @@
     UILabel *_oneTitleLabel     = (UILabel *) [_cell viewWithTag:1];
     UILabel *_dateLabel         = (UILabel *) [_cell viewWithTag:2];
     UILabel *_descriptionLabel  = (UILabel *) [_cell viewWithTag:3];
-    UIButton *_detailButton      = (UIButton *) [_cell viewWithTag:4];
+    UIButton *_detailButton     = (UIButton *)[_cell viewWithTag:4];
+    _detailButton.hidden        = YES;
     
-    //NSLog(@"item array count: %i - index row: %i", [_newsChannel._newsItemArray count], indexPath.row);
-    
-    if ([_newsChannel._newsItemArray count] >= indexPath.row)
+    if ([_newsChannel._newsItemArray count] >= _cellSelection && [_newsChannel._newsItemArray count] > 0)
 	{
-        NewsItemDto *_newsItem = [_newsChannel._newsItemArray objectAtIndex:indexPath.row];
+        NSLog(@"item array count: %i >= _cellSelection: %i", [_newsChannel._newsItemArray count], _cellSelection);
+        
+        NewsItemDto *_newsItem = [_newsChannel._newsItemArray objectAtIndex:_cellSelection];
     
+        //NSLog(@"_newsItem._title: %@ - _cellSelection: %i", _newsItem._title, _cellSelection);
+        
         _oneTitleLabel.text     = _newsItem._title;
         _dateLabel.text         = [NSString stringWithFormat:@"%@"
                                    ,[[_dateFormatter _dayFormatter] stringFromDate:_newsItem._pubDate]];
@@ -173,8 +258,8 @@
         [_oneTitleLabel setTextColor:_blueColor];
         [_dateLabel     setTextColor:[UIColor lightGrayColor]];
         
-         [_detailButton addTarget:self action:@selector(showNewsDetails  :event:) forControlEvents:UIControlEventTouchUpInside];
-        
+        [_detailButton addTarget:self action:@selector(showNewsDetails  :event:) forControlEvents:UIControlEventTouchUpInside];
+        _detailButton.hidden    = NO;
     }
     return _cell;
 }

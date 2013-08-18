@@ -55,9 +55,9 @@
     NSString *_localString;
     
     _localString = [dateString substringToIndex:10];
-    NSLog(@"_localString: %@",_localString);
+    //NSLog(@"_localString: %@",_localString);
     _localDate   = [[self _englishDayFormatter] dateFromString:_localString];
-    NSLog(@"_localDate: %@", [[self _englishDayFormatter] stringFromDate:_localDate]);
+    //NSLog(@"_localDate: %@", [[self _englishDayFormatter] stringFromDate:_localDate]);
     return _localDate;
 }
 

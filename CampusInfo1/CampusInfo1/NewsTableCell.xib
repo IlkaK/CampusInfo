@@ -55,7 +55,7 @@
 								<int key="IBUITag">2</int>
 								<bool key="IBUIUserInteractionEnabled">NO</bool>
 								<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
-								<string key="IBUIText">Date</string>
+								<string key="IBUIText"/>
 								<object class="NSColor" key="IBUITextColor" id="270546034">
 									<int key="NSColorSpace">1</int>
 									<bytes key="NSRGB">MCAwIDAAA</bytes>
@@ -93,7 +93,7 @@
 								<int key="IBUITag">1</int>
 								<bool key="IBUIUserInteractionEnabled">NO</bool>
 								<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
-								<string key="IBUIText">Title</string>
+								<string key="IBUIText"/>
 								<reference key="IBUITextColor" ref="270546034"/>
 								<reference key="IBUIHighlightedColor" ref="335394717"/>
 								<int key="IBUIBaselineAdjustment">0</int>
@@ -125,7 +125,7 @@
 								<int key="IBUITag">3</int>
 								<bool key="IBUIUserInteractionEnabled">NO</bool>
 								<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
-								<string key="IBUIText">Hausdienst</string>
+								<string key="IBUIText"/>
 								<reference key="IBUITextColor" ref="270546034"/>
 								<reference key="IBUIHighlightedColor" ref="335394717"/>
 								<int key="IBUIBaselineAdjustment">0</int>
@@ -150,7 +150,6 @@
 								<string key="NSFrame">{{273, 61}, {47, 45}}</string>
 								<reference key="NSSuperview" ref="273211043"/>
 								<reference key="NSWindow"/>
-								<reference key="NSNextKeyView"/>
 								<string key="NSReuseIdentifierKey">_NS:9</string>
 								<bool key="IBUIOpaque">NO</bool>
 								<int key="IBUITag">4</int>
@@ -745,22 +744,27 @@
 				<object class="IBPartialClassDescription">
 					<string key="className">NewsViewController</string>
 					<string key="superclassName">UIViewController</string>
-					<object class="NSMutableDictionary" key="actions">
-						<string key="NS.key.0">moveBackToMenuOverview:</string>
-						<string key="NS.object.0">id</string>
-					</object>
-					<object class="NSMutableDictionary" key="actionInfosByName">
-						<string key="NS.key.0">moveBackToMenuOverview:</string>
-						<object class="IBActionInfo" key="NS.object.0">
+					<dictionary class="NSMutableDictionary" key="actions">
+						<string key="moveBackToMenuOverview:">id</string>
+						<string key="tryConnectionAgain:">id</string>
+					</dictionary>
+					<dictionary class="NSMutableDictionary" key="actionInfosByName">
+						<object class="IBActionInfo" key="moveBackToMenuOverview:">
 							<string key="name">moveBackToMenuOverview:</string>
 							<string key="candidateClassName">id</string>
 						</object>
-					</object>
+						<object class="IBActionInfo" key="tryConnectionAgain:">
+							<string key="name">tryConnectionAgain:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+					</dictionary>
 					<dictionary class="NSMutableDictionary" key="outlets">
 						<string key="_descriptionTitleLabel">UILabel</string>
 						<string key="_newsDetailVC">NewsDetailViewController</string>
 						<string key="_newsTable">UITableView</string>
 						<string key="_newsTableCell">UITableViewCell</string>
+						<string key="_noConnectionButton">UIButton</string>
+						<string key="_noConnectionLabel">UILabel</string>
 						<string key="_titleLabel">UILabel</string>
 					</dictionary>
 					<dictionary class="NSMutableDictionary" key="toOneOutletInfosByName">
@@ -779,6 +783,14 @@
 						<object class="IBToOneOutletInfo" key="_newsTableCell">
 							<string key="name">_newsTableCell</string>
 							<string key="candidateClassName">UITableViewCell</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="_noConnectionButton">
+							<string key="name">_noConnectionButton</string>
+							<string key="candidateClassName">UIButton</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="_noConnectionLabel">
+							<string key="name">_noConnectionLabel</string>
+							<string key="candidateClassName">UILabel</string>
 						</object>
 						<object class="IBToOneOutletInfo" key="_titleLabel">
 							<string key="name">_titleLabel</string>

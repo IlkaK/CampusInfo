@@ -341,6 +341,13 @@
         NSLog(@"SomethingDto: no connection");
         
     }
+    else
+    {
+    
+    
+
+    }
+    
 }
 
 

@@ -28,6 +28,11 @@
     
     UIColor                             *_blueColor;
     IBOutlet NewsDetailViewController   *_newsDetailVC;
+    
+    int                                 _actualTrials;
+    IBOutlet UIButton                   *_noConnectionButton;
+    IBOutlet UILabel                    *_noConnectionLabel;
+    
 }
 
 @property (strong, nonatomic) NewsChannelDto                        *_newsChannel;
@@ -43,6 +48,11 @@
 
 @property (nonatomic, retain) IBOutlet NewsDetailViewController     *_newsDetailVC;
 
+@property (nonatomic, assign) int                                   _actualTrials;
+@property (nonatomic, retain) IBOutlet UIButton                     *_noConnectionButton;
+@property (nonatomic, retain) IBOutlet UILabel                      *_noConnectionLabel;
+
+- (IBAction)tryConnectionAgain:(id)sender;
 - (IBAction)moveBackToMenuOverview:(id)sender;
 
 @end
