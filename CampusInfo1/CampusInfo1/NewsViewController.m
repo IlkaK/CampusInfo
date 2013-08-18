@@ -242,24 +242,28 @@
     UIButton *_detailButton     = (UIButton *)[_cell viewWithTag:4];
     _detailButton.hidden        = YES;
     
-    if ([_newsChannel._newsItemArray count] >= _cellSelection && [_newsChannel._newsItemArray count] > 0)
-	{
+    
+    if([_newsChannel._newsItemArray count] > 0)
+    {
         NSLog(@"item array count: %i >= _cellSelection: %i", [_newsChannel._newsItemArray count], _cellSelection);
-        
-        NewsItemDto *_newsItem = [_newsChannel._newsItemArray objectAtIndex:_cellSelection];
+
+        if ([_newsChannel._newsItemArray count] >= _cellSelection)
+        {
+            NewsItemDto *_newsItem = [_newsChannel._newsItemArray objectAtIndex:_cellSelection];
+            
+            //NSLog(@"_newsItem._title: %@ - _cellSelection: %i", _newsItem._title, _cellSelection);
+            
+            _oneTitleLabel.text     = _newsItem._title;
+            _dateLabel.text         = [NSString stringWithFormat:@"%@"
+                                       ,[[_dateFormatter _dayFormatter] stringFromDate:_newsItem._pubDate]];
+            _descriptionLabel.text  = _newsItem._description;
     
-        //NSLog(@"_newsItem._title: %@ - _cellSelection: %i", _newsItem._title, _cellSelection);
+            [_oneTitleLabel setTextColor:_blueColor];
+            [_dateLabel     setTextColor:[UIColor lightGrayColor]];
         
-        _oneTitleLabel.text     = _newsItem._title;
-        _dateLabel.text         = [NSString stringWithFormat:@"%@"
-                                   ,[[_dateFormatter _dayFormatter] stringFromDate:_newsItem._pubDate]];
-        _descriptionLabel.text  = _newsItem._description;
-    
-        [_oneTitleLabel setTextColor:_blueColor];
-        [_dateLabel     setTextColor:[UIColor lightGrayColor]];
-        
-        [_detailButton addTarget:self action:@selector(showNewsDetails  :event:) forControlEvents:UIControlEventTouchUpInside];
-        _detailButton.hidden    = NO;
+            [_detailButton addTarget:self action:@selector(showNewsDetails  :event:) forControlEvents:UIControlEventTouchUpInside];
+            _detailButton.hidden    = NO;
+        }
     }
     return _cell;
 }

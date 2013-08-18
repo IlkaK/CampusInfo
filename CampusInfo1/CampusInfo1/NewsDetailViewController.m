@@ -13,12 +13,11 @@
 @end
 
 @implementation NewsDetailViewController
-@synthesize _contentTextView;
 @synthesize _dateLabel;
-@synthesize _descriptionTextView;
 @synthesize _descriptionTitleLabel;
 @synthesize _linkButton;
 @synthesize _titleLabel;
+@synthesize _contentWebView;
 
 @synthesize _newsItem;
 
@@ -58,12 +57,16 @@
     _titleLabel = nil;
     _descriptionTitleLabel = nil;
     _dateLabel = nil;
-    _descriptionTextView = nil;
-    _contentTextView = nil;
     _linkButton = nil;
-    _contentTextView = nil;
+    _contentWebView = nil;
     [super viewDidUnload];
 }
+
+-(void) openingURL:(id)sender event:(id)event
+{
+    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:_newsItem._link]];
+}
+
 
 - (void)viewWillAppear:(BOOL)animated
 {
@@ -75,15 +78,17 @@
                                        ,_newsItem._title];
         _dateLabel.text             =  [NSString stringWithFormat:@"%@"
                                          ,[[_dateFormatter _dayFormatter] stringFromDate:_newsItem._pubDate]];
-        _descriptionTextView.text   = _newsItem._description;
-        _contentTextView.text       = _newsItem._content;
+        
+        [_contentWebView loadHTMLString:_newsItem._content baseURL:nil];
         
         NSMutableAttributedString *_linkButtonString = [[NSMutableAttributedString alloc] initWithString:_newsItem._link];
         [_linkButtonString addAttribute:NSUnderlineStyleAttributeName value:[NSNumber numberWithInteger:NSUnderlineStyleSingle] range:NSMakeRange(0, [_linkButtonString length])];
         [_linkButton setAttributedTitle:_linkButtonString forState:UIControlStateNormal];
         
+        _linkButton.enabled = true;
+        [_linkButton addTarget:self action:@selector(openingURL :event:) forControlEvents:UIControlEventTouchUpInside];
+        
     }
-    
 }
 
 
