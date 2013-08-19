@@ -153,6 +153,15 @@
 		E155A99E179E82A700726C39 /* MenuPlanDto.m in Sources */ = {isa = PBXBuildFile; fileRef = E155A99D179E82A700726C39 /* MenuPlanDto.m */; };
 		E155A9A1179E82C900726C39 /* CalendarWeekDto.m in Sources */ = {isa = PBXBuildFile; fileRef = E155A9A0179E82C900726C39 /* CalendarWeekDto.m */; };
 		E155A9A4179E85FD00726C39 /* MenuDto.m in Sources */ = {isa = PBXBuildFile; fileRef = E155A9A3179E85FD00726C39 /* MenuDto.m */; };
+		E15AA5A417C223CF007E9F00 /* technikumstr_neu.pdf in Resources */ = {isa = PBXBuildFile; fileRef = E15AA5A317C223CF007E9F00 /* technikumstr_neu.pdf */; };
+		E15AA5A917C23155007E9F00 /* MapsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E15AA5A717C23155007E9F00 /* MapsViewController.m */; };
+		E15AA5AA17C23155007E9F00 /* MapsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E15AA5A817C23155007E9F00 /* MapsViewController.xib */; };
+		E15AA5AE17C23167007E9F00 /* TechnikumViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E15AA5AC17C23167007E9F00 /* TechnikumViewController.m */; };
+		E15AA5AF17C23167007E9F00 /* TechnikumViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E15AA5AD17C23167007E9F00 /* TechnikumViewController.xib */; };
+		E15AA5B117C23182007E9F00 /* Anfahrtsplan-Zuerich.pdf in Resources */ = {isa = PBXBuildFile; fileRef = E15AA5B017C23182007E9F00 /* Anfahrtsplan-Zuerich.pdf */; };
+		E15AA5B517C23197007E9F00 /* ZurichViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E15AA5B317C23197007E9F00 /* ZurichViewController.m */; };
+		E15AA5B617C23197007E9F00 /* ZurichViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E15AA5B417C23197007E9F00 /* ZurichViewController.xib */; };
+		E15AA5B817C23BF8007E9F00 /* maps1.png in Resources */ = {isa = PBXBuildFile; fileRef = E15AA5B717C23BF8007E9F00 /* maps1.png */; };
 		E16C642517ABDC0100BEDBB3 /* ContactsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E16C642317ABDC0100BEDBB3 /* ContactsViewController.m */; };
 		E16C642617ABDC0100BEDBB3 /* ContactsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E16C642417ABDC0100BEDBB3 /* ContactsViewController.xib */; };
 		E16C642A17ABDC4600BEDBB3 /* EmergencyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E16C642817ABDC4600BEDBB3 /* EmergencyViewController.m */; };
@@ -361,6 +370,18 @@
 		E155A9A0179E82C900726C39 /* CalendarWeekDto.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CalendarWeekDto.m; sourceTree = "<group>"; };
 		E155A9A2179E85FD00726C39 /* MenuDto.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MenuDto.h; sourceTree = "<group>"; };
 		E155A9A3179E85FD00726C39 /* MenuDto.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MenuDto.m; sourceTree = "<group>"; };
+		E15AA5A317C223CF007E9F00 /* technikumstr_neu.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = technikumstr_neu.pdf; sourceTree = "<group>"; };
+		E15AA5A617C23155007E9F00 /* MapsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MapsViewController.h; sourceTree = "<group>"; };
+		E15AA5A717C23155007E9F00 /* MapsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MapsViewController.m; sourceTree = "<group>"; };
+		E15AA5A817C23155007E9F00 /* MapsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MapsViewController.xib; sourceTree = "<group>"; };
+		E15AA5AB17C23167007E9F00 /* TechnikumViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TechnikumViewController.h; sourceTree = "<group>"; };
+		E15AA5AC17C23167007E9F00 /* TechnikumViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TechnikumViewController.m; sourceTree = "<group>"; };
+		E15AA5AD17C23167007E9F00 /* TechnikumViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TechnikumViewController.xib; sourceTree = "<group>"; };
+		E15AA5B017C23182007E9F00 /* Anfahrtsplan-Zuerich.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = "Anfahrtsplan-Zuerich.pdf"; sourceTree = "<group>"; };
+		E15AA5B217C23197007E9F00 /* ZurichViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZurichViewController.h; sourceTree = "<group>"; };
+		E15AA5B317C23197007E9F00 /* ZurichViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZurichViewController.m; sourceTree = "<group>"; };
+		E15AA5B417C23197007E9F00 /* ZurichViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ZurichViewController.xib; sourceTree = "<group>"; };
+		E15AA5B717C23BF8007E9F00 /* maps1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = maps1.png; path = CampusInfo1/resources/icons/maps1.png; sourceTree = "<group>"; };
 		E16C642217ABDC0100BEDBB3 /* ContactsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContactsViewController.h; sourceTree = "<group>"; };
 		E16C642317ABDC0100BEDBB3 /* ContactsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContactsViewController.m; sourceTree = "<group>"; };
 		E16C642417ABDC0100BEDBB3 /* ContactsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ContactsViewController.xib; sourceTree = "<group>"; };
@@ -545,6 +566,7 @@
 		A35A341E1520814800181E3F /* CampusInfo1 */ = {
 			isa = PBXGroup;
 			children = (
+				E15AA5A517C23111007E9F00 /* Maps */,
 				E10190A417BBE58B00242A87 /* PublicTransport */,
 				E101909E17BBE3CD00242A87 /* Events */,
 				E101909717BBAEBD00242A87 /* NewsDto */,
@@ -592,6 +614,7 @@
 		A35A34501520830700181E3F /* Icon */ = {
 			isa = PBXGroup;
 			children = (
+				E15AA5B717C23BF8007E9F00 /* maps1.png */,
 				276754F617BC05600052B55C /* home1_for_tab.png */,
 				276754F417BC048D0052B55C /* public_transportation1_for_tab.png */,
 				276754F217BC02850052B55C /* contacts1_for_tab.png */,
@@ -831,6 +854,24 @@
 			name = MensaMenuDto;
 			sourceTree = "<group>";
 		};
+		E15AA5A517C23111007E9F00 /* Maps */ = {
+			isa = PBXGroup;
+			children = (
+				E15AA5B017C23182007E9F00 /* Anfahrtsplan-Zuerich.pdf */,
+				E15AA5A317C223CF007E9F00 /* technikumstr_neu.pdf */,
+				E15AA5A617C23155007E9F00 /* MapsViewController.h */,
+				E15AA5A717C23155007E9F00 /* MapsViewController.m */,
+				E15AA5A817C23155007E9F00 /* MapsViewController.xib */,
+				E15AA5AB17C23167007E9F00 /* TechnikumViewController.h */,
+				E15AA5AC17C23167007E9F00 /* TechnikumViewController.m */,
+				E15AA5AD17C23167007E9F00 /* TechnikumViewController.xib */,
+				E15AA5B217C23197007E9F00 /* ZurichViewController.h */,
+				E15AA5B317C23197007E9F00 /* ZurichViewController.m */,
+				E15AA5B417C23197007E9F00 /* ZurichViewController.xib */,
+			);
+			name = Maps;
+			sourceTree = "<group>";
+		};
 		E17842CF178308720059EA3C /* Settings */ = {
 			isa = PBXGroup;
 			children = (
@@ -1026,6 +1067,12 @@
 				276754F717BC05610052B55C /* home1_for_tab.png in Resources */,
 				E1F32A5917BCFD9A000D69F3 /* NewsTableCell.xib in Resources */,
 				E198FD5417BE240400D5BE9B /* NewsDetailViewController.xib in Resources */,
+				E15AA5A417C223CF007E9F00 /* technikumstr_neu.pdf in Resources */,
+				E15AA5AA17C23155007E9F00 /* MapsViewController.xib in Resources */,
+				E15AA5AF17C23167007E9F00 /* TechnikumViewController.xib in Resources */,
+				E15AA5B117C23182007E9F00 /* Anfahrtsplan-Zuerich.pdf in Resources */,
+				E15AA5B617C23197007E9F00 /* ZurichViewController.xib in Resources */,
+				E15AA5B817C23BF8007E9F00 /* maps1.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1114,6 +1161,9 @@
 				E1F32A5417BCE4DB000D69F3 /* NewsImageDto.m in Sources */,
 				E1F32A5717BCE4F9000D69F3 /* NewsItemDto.m in Sources */,
 				E198FD5317BE240400D5BE9B /* NewsDetailViewController.m in Sources */,
+				E15AA5A917C23155007E9F00 /* MapsViewController.m in Sources */,
+				E15AA5AE17C23167007E9F00 /* TechnikumViewController.m in Sources */,
+				E15AA5B517C23197007E9F00 /* ZurichViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

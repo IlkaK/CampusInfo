@@ -26,6 +26,7 @@
 @synthesize _newsVC;
 @synthesize _eventsVC;
 @synthesize _publicTransportVC;
+@synthesize _mapsVC;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -81,6 +82,12 @@
 		_publicTransportVC = [[PublicTransportViewController alloc] init];
 	}
     _publicTransportVC.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
+
+    if (_mapsVC == nil)
+    {
+		_mapsVC = [[MapsViewController alloc] init];
+	}
+    _mapsVC.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
 }
 
 - (void)didReceiveMemoryWarning
@@ -94,11 +101,13 @@
     _menuTimeTableCell = nil;
     _menuMensaTableCell = nil;
     _menuNewsTableCell = nil;
+    
     _contactsVC = nil;
     _settingsVC = nil;
     _newsVC = nil;
     _eventsVC = nil;
-    _publicTransportVC = nil;
+    _publicTransportVC = nil;    
+    _mapsVC = nil;
     [super viewDidUnload];
 }
 
@@ -146,6 +155,14 @@
 {
     [self presentModalViewController:_settingsVC animated:YES];
 }
+
+-(void) moveToMaps:(id)sender event:(id)event
+{
+    [self presentModalViewController:_mapsVC animated:YES];
+}
+
+
+
 
 // table and table cell handling
 
@@ -304,6 +321,17 @@
         NSMutableAttributedString *_settingsTitleString = [[NSMutableAttributedString alloc] initWithString:@"Einstellungen"];
         [_settingsTitleString addAttribute:NSForegroundColorAttributeName value:_fontColor range:NSMakeRange(0, [_settingsTitleString length])];
         [_settingsTitleButton setAttributedTitle:_settingsTitleString forState:UIControlStateNormal];
+        
+        // card
+        UIButton *_cardIconButton  = (UIButton *) [_cell viewWithTag:5];
+        _cardIconButton.enabled = true;
+        [_cardIconButton addTarget:self action:@selector(moveToMaps:event:) forControlEvents:UIControlEventTouchUpInside];
+        UIButton *_cardTitleButton  = (UIButton *) [_cell viewWithTag:6];
+        _cardTitleButton.enabled = true;
+        [_cardTitleButton addTarget:self action:@selector(moveToMaps:event:) forControlEvents:UIControlEventTouchUpInside];
+        NSMutableAttributedString *_cardTitleString = [[NSMutableAttributedString alloc] initWithString:@"Karten"];
+        [_cardTitleString addAttribute:NSForegroundColorAttributeName value:_fontColor range:NSMakeRange(0, [_cardTitleString length])];
+        [_cardTitleButton setAttributedTitle:_cardTitleString forState:UIControlStateNormal];
         
         _cell.contentView.backgroundColor = _cellBackgroundColor;
         _cell.backgroundColor = _cell.contentView.backgroundColor;

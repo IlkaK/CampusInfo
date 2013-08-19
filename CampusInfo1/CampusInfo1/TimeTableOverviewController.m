@@ -111,7 +111,8 @@
                 withAcronymType  :(NSString *)newAcronymType
                 withAcronymText  :(NSString *)newAcronymText
 {
-    if (newAcronym != nil)
+    //NSLog(@"newAcronymText: %@", newAcronymText);
+    if (newAcronymText != nil)
     {
         self._acronymLabel.text        = [NSString stringWithFormat:@"   %@",newAcronymText];
     }
@@ -357,8 +358,8 @@
     }
     if ([_localType  compare: @"empty" ] == NSOrderedSame)
     {
-      NSLog(@"Nur Kürzel von Studenten und Dozenten sind möglich.");
-      //[self popUpAcronymView:@"Nur Kürzel von Studenten und Dozenten sind möglich."];   
+      NSLog(@"Nur Kürzel von Studenten und Dozenten sind möglich. %@ kann nicht identifiziert werden.", _newAcronym);
+      //[self popUpAcronymView:@"Nur Kürzel von Studenten und Dozenten sind möglich."];
     }
     return _localType;
 }
