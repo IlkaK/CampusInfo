@@ -64,7 +64,7 @@
 	}
     _newsDetailVC.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
     
-    //[_newsChannel getData];
+    //[_newsChannel getNewsData];
     [_newsTable reloadData];
     
     self._actualTrials = 1;
@@ -122,7 +122,7 @@
 
 - (IBAction)tryConnectionAgain:(id)sender
 {
-    [_newsChannel getData];
+    [_newsChannel getNewsData];
     [_newsTable reloadData];
 }
 
@@ -155,7 +155,7 @@
         if (_actualTrials < 20)
         {
             _actualTrials++;
-            [_newsChannel getData];
+            [_newsChannel getNewsData];
             [_newsTable reloadData];
             if ( [_newsChannel._newsItemArray count] == 0)
             {
@@ -245,7 +245,7 @@
     
     if([_newsChannel._newsItemArray count] > 0)
     {
-        NSLog(@"item array count: %i >= _cellSelection: %i", [_newsChannel._newsItemArray count], _cellSelection);
+        //NSLog(@"item array count: %i >= _cellSelection: %i", [_newsChannel._newsItemArray count], _cellSelection);
 
         if ([_newsChannel._newsItemArray count] >= _cellSelection)
         {

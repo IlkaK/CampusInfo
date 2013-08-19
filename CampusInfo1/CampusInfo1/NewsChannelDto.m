@@ -40,6 +40,8 @@
 @synthesize _newsItem;
 @synthesize _newsItemArray;
 
+@synthesize _dataType;
+
 - (id)init
 {
     self._connectionTrials = 1;
@@ -50,6 +52,8 @@
     
     _dateFormatter = [[DateFormation alloc] init]; 
     _newsItemArray = [[NSMutableArray alloc] init];
+    
+    self._dataType = @"NEWS";
     return self;
 }
 
@@ -195,7 +199,8 @@
                 //NSLog(@"-- item category: %@", _actualValue);
                 _newsItem._category = [NSString stringWithFormat:@"%@%@",_newsItem._category, _actualValue];
             }
-            if ([_actualStartElement isEqualToString:@"pubDate"])
+            // pubDate returns weird string for events, so only works for news
+            if ([_actualStartElement isEqualToString:@"pubDate"] && [_dataType isEqualToString:@"NEWS"])
             {
                 //NSLog(@"-- item pubDate: %@", _actualValue);
                 _newsItem._pubDate = [_dateFormatter parseDateFromXMLString:_actualValue];
@@ -291,9 +296,18 @@
 
 -(void) downloadData
 {
-    NSString *_urlString = [NSString stringWithFormat:@"https://srv-lab-t-874.zhaw.ch/v1/feeds/soe-news/feed"];
+    NSString *_urlString;
     
-    NSLog(@"urlString SomethingDto: %@", _urlString);
+    if ([_dataType isEqualToString:@"EVENTS"])
+    {
+        _urlString = [NSString stringWithFormat:@"https://srv-lab-t-874.zhaw.ch/v1/feeds/soe-events/feed"];
+    }
+    else
+    {
+        _urlString = [NSString stringWithFormat:@"https://srv-lab-t-874.zhaw.ch/v1/feeds/soe-news/feed"];
+    }
+        
+    NSLog(@"urlString NewsChannelDto: %@", _urlString);
     
     NSURL *_url = [NSURL URLWithString:_urlString];
     [_asyncTimeTableRequest downloadData:_url];
@@ -332,22 +346,28 @@
     
 }
 
--(void) getData
+-(void) getNewsData
 {
     self._generalDictionary = [self getDictionaryFromUrl];
+    self._dataType = @"NEWS";
     
     if (self._generalDictionary == nil)
     {
-        NSLog(@"SomethingDto: no connection");
+        NSLog(@"NewsChannelDto: no connection");
         
     }
-    else
-    {
-    
-    
+}
 
-    }
+-(void) getEventData
+{
+    self._generalDictionary = [self getDictionaryFromUrl];
+    self._dataType = @"EVENTS";
     
+    if (self._generalDictionary == nil)
+    {
+        NSLog(@"NewsChannelDto: no connection");
+        
+    }
 }
 
 

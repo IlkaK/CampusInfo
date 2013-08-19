@@ -26,6 +26,8 @@
     NSString                    *_actualStartElement;
     NSString                    *_actualEndElement;
     
+    NSString                    *_dataType;
+    
     // data structure of channel
     NSString                    *_title;
     NSString                    *_link;
@@ -63,13 +65,15 @@
 @property (nonatomic, assign) BOOL                           _startImage;
 @property (nonatomic, assign) BOOL                           _startItem;
 
-@property (nonatomic, retain) NSString                    *_title;
-@property (nonatomic, retain) NSString                    *_link;
-@property (nonatomic, retain) NSString                    *_description;
-@property (nonatomic, retain) NSString                    *_language;
-@property (nonatomic, retain) NSString                    *_generator;
-@property (nonatomic, retain) NSString                    *_docs;
-@property (nonatomic, retain) NSDate                      *_lastBuildDate;
+@property (nonatomic, retain) NSString                      *_title;
+@property (nonatomic, retain) NSString                      *_link;
+@property (nonatomic, retain) NSString                      *_description;
+@property (nonatomic, retain) NSString                      *_language;
+@property (nonatomic, retain) NSString                      *_generator;
+@property (nonatomic, retain) NSString                      *_docs;
+@property (nonatomic, retain) NSDate                        *_lastBuildDate;
+
+@property (nonatomic, retain) NSString                       *_dataType;
 
 @property (nonatomic, retain) DateFormation                  *_dateFormatter;
 @property (nonatomic, retain) NewsImageDto                   *_newsImage;
@@ -78,6 +82,7 @@
 
 @property(nonatomic, assign) id<NSXMLParserDelegate> delegate;
 
--(void) getData;
+-(void) getNewsData;
+-(void) getEventData;
 
 @end
