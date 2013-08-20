@@ -11,11 +11,11 @@
 #import <GradientButton.h>
 #import <DateFormation.h>
 #import <ChooseDateViewController.h>
-#import <TimeTableAsyncRequest.h>
 #import <MenuDto.h>
+#import <MenuPlanArrayDto.h>
 
 
-@interface MensaDetailViewController : UIViewController <ChooseDateViewDelegate, UITableViewDataSource, UITableViewDelegate, TimeTableAsyncRequestDelegate>
+@interface MensaDetailViewController : UIViewController <ChooseDateViewDelegate, UITableViewDataSource, UITableViewDelegate>
 {
     GastronomicFacilityDto              *_actualGastronomy;
     IBOutlet GradientButton             *_moveBackButton;
@@ -28,12 +28,7 @@
     IBOutlet UITableViewCell            *_detailTableCell;
     IBOutlet UILabel                    *_gastronomyLabel;
     
-    TimeTableAsyncRequest               *_asyncTimeTableRequest;
-    NSData                              *_dataFromUrl;
-    NSString                            *_errorMessage;
-    int                                 _connectionTrials;
-    
-    NSMutableArray                      *_menuPlans;
+    MenuPlanArrayDto                    *_menuPlans;
     MenuDto                             *_actualMenu;
     
     NSDate                              *_actualDate;
@@ -43,6 +38,8 @@
     IBOutlet UILabel                    *_titleLabel;
     IBOutlet UIButton                   *_backButton;
     IBOutlet UILabel                    *_backLabel;
+    
+    IBOutlet UIActivityIndicatorView    *_waitForChangeActivityIndicator;
 }
 
 @property (nonatomic, retain) GastronomicFacilityDto                    *_actualGastronomy;
@@ -59,13 +56,7 @@
 @property (nonatomic, retain) IBOutlet UITableViewCell                  *_detailTableCell;
 @property (nonatomic, retain) IBOutlet UILabel                          *_gastronomyLabel;
 
-@property (strong, nonatomic) NSDictionary                              *_generalDictionary;
-@property (nonatomic, retain) IBOutlet TimeTableAsyncRequest            *_asyncTimeTableRequest;
-@property (nonatomic, retain) NSData                                    *_dataFromUrl;
-@property (nonatomic, retain) NSString                                  *_errorMessage;
-@property (nonatomic, assign) int                                       _connectionTrials;
-
-@property (nonatomic, retain) NSMutableArray                            *_menuPlans;
+@property (nonatomic, retain) MenuPlanArrayDto                          *_menuPlans;
 @property (nonatomic, retain) MenuDto                                   *_actualMenu;
 
 @property (nonatomic, retain) IBOutlet UISwipeGestureRecognizer         *_rightSwipe;
@@ -74,6 +65,8 @@
 @property (nonatomic, retain) IBOutlet UILabel                          *_titleLabel;
 @property (nonatomic, retain) IBOutlet UIButton                         *_backButton;
 @property (nonatomic, retain) IBOutlet UILabel                          *_backLabel;
+
+@property (nonatomic, retain) IBOutlet UIActivityIndicatorView          *_waitForChangeActivityIndicator;
 
 
 - (IBAction)backToMensaOverview:(id)sender;

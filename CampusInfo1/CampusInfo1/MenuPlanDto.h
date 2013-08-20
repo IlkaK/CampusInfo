@@ -9,20 +9,23 @@
 #import <Foundation/Foundation.h>
 #import <CalendarWeekDto.h>
 
+
 @interface MenuPlanDto : NSObject
-{
-    int             _menuPlanId;
-    NSString        *_version;
-    CalendarWeekDto *_calendarWeek;
-    NSMutableArray  *_gastronomyFacilityIds;
-    NSMutableArray  *_menus;
+{    
+    int                         _menuPlanId;
+    NSString                    *_version;
+    CalendarWeekDto             *_calendarWeek;
+    NSMutableArray              *_gastronomyFacilityIds;
+    NSMutableArray              *_menus;
 }
 
-@property (nonatomic, assign) int                       _menuPlanId;
-@property (nonatomic, retain) CalendarWeekDto           *_calendarWeek;
-@property (nonatomic, retain) NSMutableArray            *_gastronomyFacilityIds;
-@property (nonatomic, retain) NSMutableArray            *_menus;
-@property (nonatomic, retain) NSString                  *_version;
+
+@property (nonatomic, assign) int                               _menuPlanId;
+@property (nonatomic, retain) CalendarWeekDto                   *_calendarWeek;
+@property (nonatomic, retain) NSMutableArray                    *_gastronomyFacilityIds;
+@property (nonatomic, retain) NSMutableArray                    *_menus;
+@property (nonatomic, retain) NSString                          *_version;
+
 
 
 -(id)   init               : (int) newMenuPlanId

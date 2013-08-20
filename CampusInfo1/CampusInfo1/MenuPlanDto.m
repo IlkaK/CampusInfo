@@ -17,6 +17,8 @@
 @synthesize _menuPlanId;
 @synthesize _menus;
 
+
+
 -(id)   init               : (int) newMenuPlanId
                 withVersion: (NSString *) newVersion
            withCalendarWeek: (CalendarWeekDto *) newCalendarWeek
@@ -104,5 +106,7 @@
 
     return _localMenuPlan;
 }
+
+
 
 @end

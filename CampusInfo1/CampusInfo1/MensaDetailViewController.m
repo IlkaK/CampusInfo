@@ -13,30 +13,27 @@
 #import "MenuPlanDto.h"
 #import "CalendarWeekDto.h"
 #import "MenuDto.h"
+#import "MenuPlanArrayDto.h"
 
 @implementation MensaDetailViewController
 
 @synthesize _actualGastronomy;
+@synthesize _actualCalendarWeek;
+@synthesize _actualDate;
+@synthesize _actualMenu;
+@synthesize _menuPlans;
+
 @synthesize _moveBackButton;
+
 @synthesize _dateLabel;
 @synthesize _dayNavigationItem;
 @synthesize _dateFormatter;
-@synthesize _actualDate;
+
 @synthesize _chooseDateVC;
 @synthesize _detailTable;
 @synthesize _detailTableCell;
+
 @synthesize _gastronomyLabel;
-
-@synthesize _asyncTimeTableRequest;
-@synthesize _connectionTrials;
-@synthesize _dataFromUrl;
-@synthesize _errorMessage;
-@synthesize _generalDictionary;
-
-@synthesize _menuPlans;
-@synthesize _actualMenu;
-
-@synthesize _actualCalendarWeek;
 
 @synthesize _leftSwipe;
 @synthesize _rightSwipe;
@@ -45,13 +42,12 @@
 @synthesize _backButton;
 @synthesize _backLabel;
 
+@synthesize _waitForChangeActivityIndicator;
+
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self) {
-        // Custom initialization
-    }
     return self;
 }
 
@@ -117,7 +113,7 @@
     [_gastronomyLabel setBackgroundColor:_backgroundColor];
     [_gastronomyLabel setTextColor:[UIColor whiteColor]];
     
-    self._menuPlans     = [[NSMutableArray alloc] init];
+    self._menuPlans     = [[MenuPlanArrayDto alloc] init:nil];
     self._actualMenu    = [[MenuDto alloc] init:nil withDishes:nil withOfferedOn:nil withVersion:nil];
     self._actualCalendarWeek = 0;
     
@@ -143,26 +139,55 @@
     
     [_backButton setAttributedTitle:_backButtonTitleString forState:UIControlStateNormal];
     
+    // set default values for spinner/activity indicator
+    _waitForChangeActivityIndicator.hidesWhenStopped = YES;
+    _waitForChangeActivityIndicator.hidden = YES;
+    
 }
 
+- (void) threadWaitForChangeActivityIndicator:(id)data
+{
+    _waitForChangeActivityIndicator.hidden = NO;
+    [_waitForChangeActivityIndicator startAnimating];
+    //NSLog(@"start animating again");
+}
 
 - (void)setActualDate:(NSDate *)newDate
 {
+    int _actualTrials = 0;
     self._actualDate      = newDate;
     [self setDateInNavigatorWithActualDate:_actualDate];
     
     NSCalendar *_calendar = [NSCalendar currentCalendar];
     int         _newWeekNumber = [[_calendar components: NSWeekOfYearCalendarUnit fromDate:newDate] weekOfYear];
 
-    
-    if (_newWeekNumber != _actualCalendarWeek || [_actualMenu._dishes lastObject] == nil)
-    {
-        //NSLog(@"setActualDate => _actualCalendarWeek: %i - newWeekNumber %i - count actual dishes: %i",_actualCalendarWeek, _newWeekNumber, [_actualMenu._dishes count]);
+        _actualCalendarWeek = _newWeekNumber;
         
-        [self getData];
+        NSDateComponents *components = [_calendar components:NSDayCalendarUnit | NSMonthCalendarUnit | NSYearCalendarUnit fromDate:_actualDate];
+        int _newYear = [components year];
+    
+    [NSThread detachNewThreadSelector:@selector(threadWaitForChangeActivityIndicator:) toTarget:self withObject:nil];
+    
+    while (_actualTrials < 20 && [_actualMenu._dishes count] == 0)
+    {
+        [_menuPlans getData:_newWeekNumber
+                   withYear:_newYear
+             withActualDate:_actualDate
+               withGastroId:_actualGastronomy._gastroId
+         ];
+    
+        self._actualMenu = [_menuPlans getActualMenu:_actualDate withGastroId:_actualGastronomy._gastroId];
+        _actualTrials++;
+        
+        //NSLog(@"setActualDate => _actualDate: %@ - _actualGastronomy._gastroId: %i - actual Menu dishes count: %i",[[_dateFormatter _dayFormatter]     stringFromDate:_actualDate], _actualGastronomy._gastroId, [_actualMenu._dishes count]);
     }
-    [self setActualMenu];
+    
     [_detailTable reloadData];
+    
+
+    //NSLog(@"stop animating!!!");
+    [_waitForChangeActivityIndicator stopAnimating];
+    _waitForChangeActivityIndicator.hidden = YES;
 }
 
 
@@ -219,7 +244,9 @@
     _dayNavigationItem.title = @"";
     
     self.navigationItem.titleView = _dateLabel;
-    [self setActualMenu];
+    
+    self._actualMenu = [_menuPlans getActualMenu:showDate withGastroId:_actualGastronomy._gastroId];
+    [_detailTable reloadData];
 }
 
 -(void) openChooseDateView
@@ -254,235 +281,20 @@
     _titleLabel = nil;
     _backButton = nil;
     _backLabel = nil;
+    _waitForChangeActivityIndicator = nil;
     [super viewDidUnload];
 }
 
 
-
--(void)setActualMenu
-{
-    int             _menuPlansI;
-    MenuPlanDto     *_oneMenuPlan;
-    MenuDto         *_oneMenu = [[MenuDto alloc]init:nil withDishes:nil withOfferedOn:nil withVersion:nil];
-    int             _gastronomyFacilityIdsI;
-    int             _localGastronomyFacilityId;
-    int             _menuI;
-    NSString        *_offeredOnString;
-    NSString        *_actualDateString = [[_dateFormatter _dayFormatter] stringFromDate:_actualDate];
-    
-    _actualMenu = _oneMenu;
-    
-    if (_menuPlans != nil && [_menuPlans lastObject] != nil)
-    {
-        for (_menuPlansI = 0; _menuPlansI < [_menuPlans count]; _menuPlansI++)
-        {
-            _oneMenuPlan = [_menuPlans objectAtIndex:_menuPlansI];
-            
-            if ([_oneMenuPlan._gastronomyFacilityIds lastObject] != nil)
-            {
-                for (_gastronomyFacilityIdsI = 0; _gastronomyFacilityIdsI < [_oneMenuPlan._gastronomyFacilityIds count]; _gastronomyFacilityIdsI++)
-                {
-                    //NSLog(@"gastronomy facility id: %@", [_oneMenuPlan._gastronomyFacilityIds objectAtIndex:_gastronomyFacilityIdsI]);
-            
-                    _localGastronomyFacilityId = [[_oneMenuPlan._gastronomyFacilityIds objectAtIndex:_gastronomyFacilityIdsI] intValue];
-            
-                    //NSLog(@"compare gastro ids %i - %i", _localGastronomyFacilityId, _actualGastronomy._gastroId);
-            
-                    if (_localGastronomyFacilityId == _actualGastronomy._gastroId)
-                    {
-                        if([_oneMenuPlan._menus lastObject] != nil)
-                        {
-                            
-                            for (_menuI = 0; _menuI < [_oneMenuPlan._menus count]; _menuI++)
-                            {
-                                _oneMenu         = [_oneMenuPlan._menus objectAtIndex:_menuI];
-                                _offeredOnString = [[_dateFormatter _dayFormatter] stringFromDate:_oneMenu._offeredOn];
-                    
-                                //NSLog(@"compare dates %@ = %@?", _offeredOnString, _actualDateString);
-                                if ([_offeredOnString isEqualToString: _actualDateString])
-                                {
-                                    _actualMenu = _oneMenu;
-                        
-                                    //int dishI;
-                                    //for (dishI = 0; dishI < [_actualMenu._dishes count]; dishI++)
-                                    //{
-                                    //DishDto *_oneDish = [_actualMenu._dishes objectAtIndex:dishI];
-                                    //NSLog(@"On %@ dishes %@", _offeredOnString, _oneDish._label);
-                                    //}
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        }
-    }
-    [_detailTable reloadData];
-}
-
-
-//-------------------------------
-// asynchronous request
-//-------------------------------
-
--(void) dataDownloadDidFinish:(NSData*) data
-{
-    
-    self._dataFromUrl = data;
-    
-    // NSLog(@"dataDownloadDidFinish 1 %@",[NSThread callStackSymbols]);
-    
-    if (self._dataFromUrl != nil)
-    {
-        //NSString *_receivedString = [[NSString alloc] initWithData:self._dataFromUrl encoding:NSASCIIStringEncoding];
-        //_receivedString = [_receivedString substringToIndex:2000];
-        //NSLog(@"dataDownloadDidFinish for MensaViewController %@", _receivedString);
-        
-        NSError *_error;
-        
-        [_menuPlans removeAllObjects];
-        _actualMenu =  [_actualMenu init:nil withDishes:nil withOfferedOn:nil withVersion:nil];
-        
-        _generalDictionary = [NSJSONSerialization
-                              JSONObjectWithData:_dataFromUrl
-                              options:kNilOptions
-                              error:&_error];
-        
-        NSArray         *_menuPlanArray;
-        int             _menuPlanArrayI;
-        MenuPlanDto     *_localMenuPlan = [[MenuPlanDto alloc]init:nil withVersion:nil withCalendarWeek:nil withGastronomyFacilityIds:nil withMenus:nil];
-        
-        for (id generalKey in _generalDictionary)
-        {
-            //NSLog(@"generalDictionary key: %@", generalKey);
-            if ([generalKey isEqualToString:@"Message"])
-            {
-                NSString *_message = [_generalDictionary objectForKey:generalKey];
-                //self._errorMessage = _message;
-                NSLog(@"Message: %@",_message);
-            }
-            else
-            {
-                if ([generalKey isEqualToString:@"menuPlans"])
-                {
-                    _menuPlanArray = [_generalDictionary objectForKey:generalKey];
-                    
-                    if([_menuPlanArray lastObject] != nil)
-                    {
-                    
-                        for (_menuPlanArrayI = 0; _menuPlanArrayI < [_menuPlanArray count]; _menuPlanArrayI++)
-                        {
-                            _localMenuPlan = [_localMenuPlan getMenuPlan:[_menuPlanArray objectAtIndex:_menuPlanArrayI]];
-                            [_menuPlans addObject:_localMenuPlan];
-                        }
-                    }
-                }
-                [self setActualMenu];
-            }
-        }
-
-    }
-}
-
-
--(void)threadDone:(NSNotification*)arg
-{
-    //NSLog(@"Thread exiting");
-}
-
-
--(void) downloadData
-{
-    NSCalendar *_calendar = [NSCalendar currentCalendar];
-    int         _newCalendarWeek = [[_calendar components: NSWeekOfYearCalendarUnit fromDate:_actualDate] weekOfYear];
-
-    //NSLog(@"actual calendar week: %i - new calendar week %i",_actualCalendarWeek, _newCalendarWeek);
-
-    if (_actualCalendarWeek == 0
-    ||  _actualCalendarWeek != _newCalendarWeek)
-    {
-        _actualCalendarWeek = _newCalendarWeek;
-    }
-    
-    NSDateComponents *components = [_calendar components:NSDayCalendarUnit | NSMonthCalendarUnit | NSYearCalendarUnit fromDate:_actualDate];
-    NSInteger _year = [components year];
-    
-    NSString *_urlString = [NSString stringWithFormat:@"https://srv-lab-t-874.zhaw.ch//v1/catering/menuplans/years/%i/weeks/%i/",_year, _actualCalendarWeek];
-    
-    NSLog(@"urlString: %@", _urlString);
-    
-    NSURL *_url = [NSURL URLWithString:_urlString];
-    [_asyncTimeTableRequest downloadData:_url];
-
-}
-    
-
-
-- (NSDictionary *) getDictionaryFromUrl
-{
-    
-    _asyncTimeTableRequest = [[TimeTableAsyncRequest alloc] init];
-    _asyncTimeTableRequest._timeTableAsynchRequestDelegate = self;
-    [self performSelectorInBackground:@selector(downloadData) withObject:nil];
-    
-    [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(threadDone:)
-                                                 name:NSThreadWillExitNotification
-                                               object:nil];
-    
-    NSError      *_error = nil;
-    NSDictionary *_scheduleDictionary;
-    
-    if (_dataFromUrl == nil)
-    {
-        return nil;
-    }
-    else
-    {
-        //NSLog(@"getDictionaryFromUrl got some data putting it now into dictionary");
-        _scheduleDictionary = [NSJSONSerialization
-                               JSONObjectWithData:_dataFromUrl
-                               options:kNilOptions
-                               error:&_error];
-        
-    }
-    return _scheduleDictionary;
-}
-
-
-
--(void) getData
-{
-    //self._generalDictionary = nil;
-    self._generalDictionary = [self getDictionaryFromUrl];
-    
-    if (self._generalDictionary == nil)
-    {
-        NSLog(@"MensaDetailViewController: no connection");
-    }
-}
-
-
-
 - (void)viewWillAppear:(BOOL)animated
 {
+    //NSLog(@"viewWillAppear");
     [super viewWillAppear:animated];
     [self setActualDate:_actualDate];
-    //if (_connectionTrials < 20)
-    //{
-        //NSLog(@"viewWillAppear try connecting");
-     //   _connectionTrials++;
-     //   [self getData];
-    //}
     [_detailTable reloadData];
     _gastronomyLabel.text = [NSString stringWithFormat:@"   %@",_actualGastronomy._name];
 }
  
-
-
-
-
-
 
 // table and table cell handling
 
@@ -609,6 +421,11 @@
         _labelWriteExternalPrice.text = @"externer Preis";
 
     }
+    
+    //NSLog(@"stop animating!!!");
+    [_waitForChangeActivityIndicator stopAnimating];
+    _waitForChangeActivityIndicator.hidden = YES;
+    
     return _cell;
 }
 
