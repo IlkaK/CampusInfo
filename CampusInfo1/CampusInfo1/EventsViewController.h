@@ -8,10 +8,8 @@
 
 #import <UIKit/UIKit.h>
 #import <NewsChannelDto.h>
-#import <NewsDetailViewController.h>
 #import <DateFormation.h>
 
-@class NewsDetailViewController;
 
 @interface EventsViewController : UIViewController
 {
@@ -28,8 +26,6 @@
     int                                 _actualTrials;
     IBOutlet UILabel                    *_noConnectionLabel;
     IBOutlet UIButton                   *_noConnectionButton;
-    
-    IBOutlet NewsDetailViewController   *_eventsDetailVC;
 
 }
 
@@ -46,8 +42,6 @@
 @property (nonatomic, assign) int                                   _actualTrials;
 @property (nonatomic, retain) IBOutlet UIButton                     *_noConnectionButton;
 @property (nonatomic, retain) IBOutlet UILabel                      *_noConnectionLabel;
-
-@property (nonatomic, retain) IBOutlet NewsDetailViewController     *_eventsDetailVC;
 
 - (IBAction)moveBackToMenuOverview:(id)sender;
 - (IBAction)tryConnectionAgain:(id)sender;

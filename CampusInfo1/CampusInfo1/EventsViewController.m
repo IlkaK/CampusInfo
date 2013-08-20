@@ -26,8 +26,6 @@
 
 @synthesize _blueColor;
 
-@synthesize _eventsDetailVC;
-
 @synthesize _actualTrials;
 @synthesize _noConnectionButton;
 @synthesize _noConnectionLabel;
@@ -57,13 +55,6 @@
     
     _descriptionTitleLabel.text = [NSString stringWithFormat:@"   School of Engineering"];
     _titleLabel.text            = [NSString stringWithFormat:@"   Events"];
-    
-    // ----- DETAIL PAGE -----
-    if (_eventsDetailVC == nil)
-    {
-		_eventsDetailVC = [[NewsDetailViewController alloc] init];
-	}
-    _eventsDetailVC.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
     
     //[_newsChannel getEventsData];
     [_eventsTable reloadData];
@@ -100,7 +91,6 @@
     _noConnectionButton = nil;
     _noConnectionLabel = nil;
     _noConnectionButton = nil;
-    _eventsDetailVC = nil;
     _eventsTableCell = nil;
     [super viewDidUnload];
 }
@@ -123,25 +113,6 @@
             self._noConnectionButton.hidden = NO;
             self._noConnectionLabel.hidden = NO;
         }
-    }
-}
-
--(void) showEventsDetails:(id)sender event:(id)event
-{
-    NSSet       *_touches              = [event    allTouches];
-    UITouch     *_touch                = [_touches anyObject ];
-    CGPoint      _currentTouchPosition = [_touch locationInView:self._eventsTable];
-    NSIndexPath *_indexPath            = [self._eventsTable indexPathForRowAtPoint: _currentTouchPosition];
-    NSUInteger   _cellSelection        = _indexPath.section;
-    
-    if ([_newsChannel._newsItemArray count] >= _cellSelection)
-	{
-        NewsItemDto *_newsItem = [_newsChannel._newsItemArray objectAtIndex:_cellSelection];
-        
-        _eventsDetailVC._newsItem = _newsItem;
-        _eventsDetailVC._dateLabel.hidden = YES;
-        
-        [self presentModalViewController:_eventsDetailVC animated:YES];
     }
 }
 
@@ -197,9 +168,9 @@
     
     UILabel     *_oneTitleLabel         = (UILabel *) [_cell viewWithTag:1];
     UIWebView   *_descriptionWebView    = (UIWebView *) [_cell viewWithTag:2];
-    UIButton    *_detailButton          = (UIButton *)[_cell viewWithTag:3];
-    _detailButton.hidden        = YES;
-    
+    _descriptionWebView.scrollView.scrollEnabled = NO;
+    _descriptionWebView.scrollView.bounces = NO;
+    _descriptionWebView.dataDetectorTypes = UIDataDetectorTypeNone;
     
     if([_newsChannel._newsItemArray count] > 0)
     {
@@ -215,9 +186,9 @@
             [_oneTitleLabel setTextColor:_blueColor];
             
             [_descriptionWebView loadHTMLString:_newsItem._description baseURL:nil];
+            //[_descriptionWebView loadHTMLString:_newsItem._content baseURL:nil];
             
-            [_detailButton addTarget:self action:@selector(showEventsDetails  :event:) forControlEvents:UIControlEventTouchUpInside];
-            _detailButton.hidden    = NO;
+            
         }
     }
     return _cell;
@@ -226,7 +197,7 @@
 // set cell hight
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return 126;
+    return 200;
 }
 
 // Override to support row selection in the table view.
