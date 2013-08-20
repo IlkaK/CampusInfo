@@ -15,11 +15,13 @@
 @implementation ContactsOverViewController
 
 @synthesize _titleLabel;
-@synthesize _secretaryButton;
-@synthesize _emergencyButton;
 
 @synthesize _contactsVC;
 @synthesize _emergencyVC;
+
+@synthesize _menuTableView;
+@synthesize _menuTableCell;
+
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -34,9 +36,6 @@
 
     [_titleLabel setBackgroundColor:_backgroundColor];
     [_titleLabel setTextColor:[UIColor whiteColor]];
-    
-    [_secretaryButton useAlertStyle];
-    [_emergencyButton useAlertStyle];
     
     if (_contactsVC == nil)
     {
@@ -62,24 +61,97 @@
     _titleLabel = nil;
     _contactsVC = nil;
     _emergencyVC = nil;
-    _secretaryButton = nil;
-    _emergencyButton = nil;
+    _menuTableView = nil;
+    _menuTableCell = nil;
     [super viewDidUnload];
 }
-- (IBAction)moveToSecretaryContacts:(id)sender
-{
-    [self presentModalViewController:_contactsVC animated:YES];
-}
 
-- (IBAction)moveToEmergencyContacts:(id)sender
-{
-    [self presentModalViewController:_emergencyVC animated:YES];
-}
 
 - (IBAction)moveBackToMenuOverview:(id)sender
 {
     [self dismissModalViewControllerAnimated:YES];
     self.tabBarController.selectedIndex = 0;
 }
+
+
+//---------- Handling of menu table -----
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
+{
+    return 2;
+}
+
+// Customize the number of rows in the table view.
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+	if(section == 0)
+    {
+        return 1;
+	}
+	else
+    {
+		return 1;
+	}
+}
+
+
+// Override to support row selection in the table view.
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    NSUInteger        _cellSelection = indexPath.section;
+    if (_cellSelection == 0)
+    {
+        [self presentModalViewController:_contactsVC animated:YES];
+    }
+    else
+    {
+        [self presentModalViewController:_emergencyVC animated:YES];
+    }
+    
+}
+
+
+// Customize the appearance of table view cells.
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    NSUInteger        _cellSelection = indexPath.section; //indexPath.section;
+    static NSString *CellIdentifier = @"Cell";
+    
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    if (cell == nil)
+	{
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
+    }
+    
+    
+   // [_menuButton addTarget:self action:@selector(moveToSecretaryContacts1  :event:) forControlEvents:UIControlEventTouchUpInside];
+    
+    
+    if (_cellSelection == 0)
+    {
+        cell.textLabel.text = @"Sekretariat";
+        
+        //NSMutableAttributedString *_titleString = [[NSMutableAttributedString alloc] initWithString:@"Sekretariat"];
+        //[_menuButton setAttributedTitle:_titleString forState:UIControlStateNormal];
+        
+        //[_menuButton addTarget:self action:@selector(moveToSecretaryContacts  :event:) forControlEvents:UIControlEventTouchUpInside];
+    }
+    else
+    {
+        cell.textLabel.text = @"Notfall";
+        //NSMutableAttributedString *_titleString = [[NSMutableAttributedString alloc] initWithString:@"Notfall"];
+        //[_menuButton setAttributedTitle:_titleString forState:UIControlStateNormal];
+        
+        //[_menuButton addTarget:self action:@selector(moveToEmergencyContacts  :event:) forControlEvents:UIControlEventTouchUpInside];
+    }
+     
+        
+    return cell;
+}
+
+
+
+
+
+
 
 @end
