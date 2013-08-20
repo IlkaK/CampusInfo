@@ -178,6 +178,8 @@
 		E1BC5628179D7638007E235D /* MensaDetailTableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E1BC5627179D7638007E235D /* MensaDetailTableCell.xib */; };
 		E1C9B22A1743894F00BD3DAE /* TwoSlotsFourRoomsTableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E1C9B2291743894F00BD3DAE /* TwoSlotsFourRoomsTableCell.xib */; };
 		E1D35BD717C3593300CCDB1D /* MenuPlanArrayDto.m in Sources */ = {isa = PBXBuildFile; fileRef = E1D35BD617C3593300CCDB1D /* MenuPlanArrayDto.m */; };
+		E1D35BDA17C385BC00CCDB1D /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = E1D35BD817C3858700CCDB1D /* Icon.png */; };
+		E1D35BDC17C385C900CCDB1D /* Icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E1D35BDB17C385C900CCDB1D /* Icon@2x.png */; };
 		E1D48A5B1757856400BB1652 /* GradientButton.m in Sources */ = {isa = PBXBuildFile; fileRef = E1D48A5A1757856400BB1652 /* GradientButton.m */; };
 		E1D48A5D17579AA500BB1652 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = E1D48A5C17579AA500BB1652 /* Default.png */; };
 		E1D48A5F17579C5D00BB1652 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E1D48A5E17579C5D00BB1652 /* Default-568h@2x.png */; };
@@ -407,6 +409,8 @@
 		E1C9B2291743894F00BD3DAE /* TwoSlotsFourRoomsTableCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TwoSlotsFourRoomsTableCell.xib; sourceTree = "<group>"; };
 		E1D35BD517C3593300CCDB1D /* MenuPlanArrayDto.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MenuPlanArrayDto.h; sourceTree = "<group>"; };
 		E1D35BD617C3593300CCDB1D /* MenuPlanArrayDto.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MenuPlanArrayDto.m; sourceTree = "<group>"; };
+		E1D35BD817C3858700CCDB1D /* Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon.png; sourceTree = "<group>"; };
+		E1D35BDB17C385C900CCDB1D /* Icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon@2x.png"; sourceTree = "<group>"; };
 		E1D48A591757856400BB1652 /* GradientButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GradientButton.h; sourceTree = "<group>"; };
 		E1D48A5A1757856400BB1652 /* GradientButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GradientButton.m; sourceTree = "<group>"; };
 		E1D48A5C17579AA500BB1652 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
@@ -535,6 +539,8 @@
 		A35A34091520814700181E3F = {
 			isa = PBXGroup;
 			children = (
+				E1D35BDB17C385C900CCDB1D /* Icon@2x.png */,
+				E1D35BD817C3858700CCDB1D /* Icon.png */,
 				27E0AA9B1550420C00D83EC1 /* Icon.png */,
 				E10D601E17AFDA4500036690 /* Icon@2x.png */,
 				E195FF35178188A30065DF05 /* libsqlite3.dylib */,
@@ -1074,6 +1080,8 @@
 				E15AA5B617C23197007E9F00 /* ZurichViewController.xib in Resources */,
 				E15AA5B817C23BF8007E9F00 /* maps1.png in Resources */,
 				E15AA5BE17C24D38007E9F00 /* EventsTableCell.xib in Resources */,
+				E1D35BDA17C385BC00CCDB1D /* Icon.png in Resources */,
+				E1D35BDC17C385C900CCDB1D /* Icon@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
