@@ -15,9 +15,6 @@
 
 @interface ChooseDateViewController : UIViewController
 {
-
-    IBOutlet UILabel                    *_titleLabel;
-
     NSDate                              *_actualDate;
     IBOutlet UIDatePicker               *_datePicker;
     
@@ -25,10 +22,16 @@
     
     IBOutlet UISegmentedControl         *_chooseDateSegmentedControl;
     IBOutlet UIActivityIndicatorView    *_waitForChangeActivityIndicator;
+    
+    IBOutlet UINavigationBar            *_titleNavigationBar;
+    IBOutlet UINavigationItem           *_titleNavigationItem;
+    IBOutlet UILabel                    *_titleNavigationLabel;
 }
 
 
-@property (nonatomic, retain) IBOutlet UILabel                  *_titleLabel;
+@property (nonatomic, retain) IBOutlet UINavigationBar          *_titleNavigationBar;
+@property (nonatomic, retain) IBOutlet UINavigationItem         *_titleNavigationItem;
+@property (nonatomic, retain) IBOutlet UILabel                  *_titleNavigationLabel;
 
 @property (nonatomic, retain) NSDate                            *_actualDate;
 @property (nonatomic, retain) IBOutlet UIDatePicker             *_datePicker;

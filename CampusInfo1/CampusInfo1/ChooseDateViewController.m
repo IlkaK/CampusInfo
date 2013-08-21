@@ -14,8 +14,6 @@
 
 @implementation ChooseDateViewController
 
-@synthesize _titleLabel;
-
 @synthesize _actualDate;
 @synthesize _datePicker;
 
@@ -24,6 +22,9 @@
 @synthesize _waitForChangeActivityIndicator;
 @synthesize _chooseDateSegmentedControl;
 
+@synthesize _titleNavigationLabel;
+@synthesize _titleNavigationItem;
+@synthesize _titleNavigationBar;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -43,6 +44,13 @@
 {
         [self dismissModalViewControllerAnimated:YES];
 }
+
+
+- (void)moveBackToTimeTable:(id)sender
+{
+    [self dismissModalViewControllerAnimated:YES];
+}
+
 
 - (IBAction)acceptDateChoice:(id)sender
 {
@@ -106,8 +114,30 @@
     
     UIColor *_backgroundColor = [UIColor colorWithRed:1.0/255.0 green:100.0/255.0 blue:167.0/255.0 alpha:1.0];
     
-    [_titleLabel setBackgroundColor:_backgroundColor];
-    [_titleLabel setTextColor:[UIColor whiteColor]];
+    UIButton *backButton = [UIButton buttonWithType:101];
+    UIView *backButtonView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, backButton.frame.size.width, backButton.frame.size.height)];
+    
+    [backButton addTarget:self action:@selector(moveBackToTimeTable:) forControlEvents:UIControlEventTouchUpInside];
+    [backButton setTitle:@"zurück" forState:UIControlStateNormal];
+    [backButtonView addSubview:backButton];
+    
+    // set buttonview as custom view for bar button item
+    UIBarButtonItem *backButtonItem = [[UIBarButtonItem alloc] initWithCustomView:backButtonView];
+    [_titleNavigationItem setLeftBarButtonItem :backButtonItem animated :true];
+    
+    [_titleNavigationLabel setTextColor:[UIColor whiteColor]];
+    _titleNavigationLabel.text = @"Datum wählen";
+    _titleNavigationItem.title = @"";
+    
+    CGRect imageRect = CGRectMake(0, 0, _titleNavigationBar.frame.size.width, _titleNavigationBar.frame.size.height);
+    UIGraphicsBeginImageContext(imageRect.size);
+    [_backgroundColor set];
+    UIRectFill(imageRect);
+    UIImage *aImage = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    [_titleNavigationBar setBackgroundImage:aImage forBarMetrics:UIBarMetricsDefault];
+    
+    [_titleNavigationLabel setBackgroundColor:_backgroundColor];
     
     if (_actualDate == nil)
     {
@@ -132,9 +162,11 @@
 - (void)viewDidUnload
 {
     _datePicker = nil;
-    _titleLabel = nil;
     _waitForChangeActivityIndicator = nil;
     _chooseDateSegmentedControl = nil;
+    _titleNavigationBar = nil;
+    _titleNavigationItem = nil;
+    _titleNavigationLabel = nil;
     [super viewDidUnload];
 }
 

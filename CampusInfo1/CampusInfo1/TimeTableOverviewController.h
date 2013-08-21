@@ -50,10 +50,6 @@ UIViewController
     IBOutlet UINavigationItem           *_dayNavigator;
     IBOutlet UILabel                    *_dateLabel;
     
-    // acronym for timetable
-    IBOutlet UILabel                    *_acronymLabel;
-    IBOutlet UILabel                    *_titleLabel;
-    
     IBOutlet UISegmentedControl         *_timeTableSegmentedControl;
     
     
@@ -118,6 +114,11 @@ UIViewController
     DateFormation                       *_dateFormatter;
     
     IBOutlet UIActivityIndicatorView    *_waitForLoadingActivityIndicator;
+    
+    IBOutlet UINavigationItem           *_titleNavigationItem;
+    IBOutlet UINavigationBar            *_titleNavigationBar;
+    IBOutlet UILabel                    *_titleNavigationLabel;
+    IBOutlet UILabel                    *_acronymLabel;
 }
 
 
@@ -132,7 +133,9 @@ UIViewController
 @property (nonatomic, retain) IBOutlet UILabel                   *_dateLabel;
 
 @property (nonatomic, retain) IBOutlet UILabel                   *_acronymLabel;
-@property (nonatomic, retain) IBOutlet UILabel                   *_titleLabel;
+@property (nonatomic, retain) IBOutlet UILabel                   *_titleNavigationLabel;
+@property (nonatomic, retain) IBOutlet UINavigationItem          *_titleNavigationItem;
+@property (nonatomic, retain) IBOutlet UINavigationBar           *_titleNavigationBar;
 
 @property (nonatomic, retain) IBOutlet UISegmentedControl        *_timeTableSegmentedControl;
 
@@ -202,7 +205,6 @@ UIViewController
 
 - (IBAction)tryConnectionAgain:(id)sender;
 
-- (IBAction)moveBackToMenuOverview:(id)sender;
 - (IBAction)moveToTimeTableSegmentedControlFeature:(id)sender;
 
 @end

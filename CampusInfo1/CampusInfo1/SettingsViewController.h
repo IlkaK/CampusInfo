@@ -31,11 +31,13 @@
     Autocomplete                            *_autocomplete;
     StudentsDto                             *_students;
     LecturersDto                            *_lecturers;
-
-    IBOutlet UILabel                        *_titleLabel;
     
     IBOutlet TimeTableOverviewController    *_timeTableVC;
     IBOutlet MenuOverviewController         *_menuOverviewVC;
+    
+    IBOutlet UINavigationBar                *_titleNavigationBar;
+    IBOutlet UINavigationItem               *_titleNavigationItem;
+    IBOutlet UILabel                        *_titleNavigationLabel;
 }
 
 
@@ -48,7 +50,9 @@
 @property (nonatomic, retain) StudentsDto                           *_students;
 @property (nonatomic, retain) LecturersDto                          *_lecturers;
 
-@property (nonatomic, retain) IBOutlet UILabel                      *_titleLabel;
+@property (nonatomic, retain) IBOutlet UINavigationBar              *_titleNavigationBar;
+@property (nonatomic, retain) IBOutlet UINavigationItem             *_titleNavigationItem;
+@property (nonatomic, retain) IBOutlet UILabel                      *_titleNavigationLabel;
 
 @property (nonatomic, retain) IBOutlet TimeTableOverviewController  *_timeTableVC;
 @property (nonatomic, retain) IBOutlet MenuOverviewController       *_menuOverviewVC;

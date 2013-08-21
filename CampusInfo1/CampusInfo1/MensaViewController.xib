@@ -46,8 +46,6 @@
 						<int key="NSvFlags">290</int>
 						<string key="NSFrameSize">{320, 44}</string>
 						<reference key="NSSuperview" ref="191373211"/>
-						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 						<array key="IBUIItems">
@@ -63,7 +61,6 @@
 						<int key="NSvFlags">292</int>
 						<string key="NSFrame">{{66, 1}, {40, 39}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
-						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="857216638"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
 						<bool key="IBUIUserInteractionEnabled">NO</bool>
@@ -78,7 +75,6 @@
 						<int key="NSvFlags">292</int>
 						<string key="NSFrame">{{115, 0}, {205, 44}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
-						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="567394805"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
 						<bool key="IBUIOpaque">NO</bool>
@@ -110,7 +106,6 @@
 						<int key="NSvFlags">292</int>
 						<string key="NSFrame">{{20, 46}, {280, 34}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
-						<reference key="NSWindow"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
 						<bool key="IBUIOpaque">NO</bool>
 						<bool key="IBUIClipsSubviews">YES</bool>
@@ -138,7 +133,6 @@
 						<int key="NSvFlags">274</int>
 						<string key="NSFrame">{{0, 81}, {320, 380}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
-						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="651069988"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
 						<object class="NSColor" key="IBUIBackgroundColor">
@@ -158,7 +152,6 @@
 				</array>
 				<string key="NSFrame">{{0, 20}, {320, 548}}</string>
 				<reference key="NSSuperview"/>
-				<reference key="NSWindow"/>
 				<reference key="NSNextKeyView" ref="463652429"/>
 				<object class="NSColor" key="IBUIBackgroundColor">
 					<int key="NSColorSpace">3</int>
@@ -782,230 +775,7 @@
 			<nil key="sourceID"/>
 			<int key="maxID">173</int>
 		</object>
-		<object class="IBClassDescriber" key="IBDocument.Classes">
-			<array class="NSMutableArray" key="referencedPartialClassDescriptions">
-				<object class="IBPartialClassDescription">
-					<string key="className">ChooseDateViewController</string>
-					<string key="superclassName">UIViewController</string>
-					<dictionary class="NSMutableDictionary" key="actions">
-						<string key="acceptDateChoice:">id</string>
-						<string key="cancelDateChoice:">id</string>
-						<string key="moveToChooseDateSegmentedControl:">id</string>
-						<string key="setPickerToToday:">id</string>
-					</dictionary>
-					<dictionary class="NSMutableDictionary" key="actionInfosByName">
-						<object class="IBActionInfo" key="acceptDateChoice:">
-							<string key="name">acceptDateChoice:</string>
-							<string key="candidateClassName">id</string>
-						</object>
-						<object class="IBActionInfo" key="cancelDateChoice:">
-							<string key="name">cancelDateChoice:</string>
-							<string key="candidateClassName">id</string>
-						</object>
-						<object class="IBActionInfo" key="moveToChooseDateSegmentedControl:">
-							<string key="name">moveToChooseDateSegmentedControl:</string>
-							<string key="candidateClassName">id</string>
-						</object>
-						<object class="IBActionInfo" key="setPickerToToday:">
-							<string key="name">setPickerToToday:</string>
-							<string key="candidateClassName">id</string>
-						</object>
-					</dictionary>
-					<dictionary class="NSMutableDictionary" key="outlets">
-						<string key="_chooseDateSegmentedControl">UISegmentedControl</string>
-						<string key="_datePicker">UIDatePicker</string>
-						<string key="_titleLabel">UILabel</string>
-						<string key="_waitForChangeActivityIndicator">UIActivityIndicatorView</string>
-					</dictionary>
-					<dictionary class="NSMutableDictionary" key="toOneOutletInfosByName">
-						<object class="IBToOneOutletInfo" key="_chooseDateSegmentedControl">
-							<string key="name">_chooseDateSegmentedControl</string>
-							<string key="candidateClassName">UISegmentedControl</string>
-						</object>
-						<object class="IBToOneOutletInfo" key="_datePicker">
-							<string key="name">_datePicker</string>
-							<string key="candidateClassName">UIDatePicker</string>
-						</object>
-						<object class="IBToOneOutletInfo" key="_titleLabel">
-							<string key="name">_titleLabel</string>
-							<string key="candidateClassName">UILabel</string>
-						</object>
-						<object class="IBToOneOutletInfo" key="_waitForChangeActivityIndicator">
-							<string key="name">_waitForChangeActivityIndicator</string>
-							<string key="candidateClassName">UIActivityIndicatorView</string>
-						</object>
-					</dictionary>
-					<object class="IBClassDescriptionSource" key="sourceIdentifier">
-						<string key="majorKey">IBProjectSource</string>
-						<string key="minorKey">./Classes/ChooseDateViewController.h</string>
-					</object>
-				</object>
-				<object class="IBPartialClassDescription">
-					<string key="className">GradientButton</string>
-					<string key="superclassName">UIButton</string>
-					<object class="IBClassDescriptionSource" key="sourceIdentifier">
-						<string key="majorKey">IBProjectSource</string>
-						<string key="minorKey">./Classes/GradientButton.h</string>
-					</object>
-				</object>
-				<object class="IBPartialClassDescription">
-					<string key="className">MensaDetailViewController</string>
-					<string key="superclassName">UIViewController</string>
-					<object class="NSMutableDictionary" key="actions">
-						<string key="NS.key.0">backToMensaOverview:</string>
-						<string key="NS.object.0">id</string>
-					</object>
-					<object class="NSMutableDictionary" key="actionInfosByName">
-						<string key="NS.key.0">backToMensaOverview:</string>
-						<object class="IBActionInfo" key="NS.object.0">
-							<string key="name">backToMensaOverview:</string>
-							<string key="candidateClassName">id</string>
-						</object>
-					</object>
-					<dictionary class="NSMutableDictionary" key="outlets">
-						<string key="_backButton">UIButton</string>
-						<string key="_backLabel">UILabel</string>
-						<string key="_chooseDateVC">ChooseDateViewController</string>
-						<string key="_dateLabel">UILabel</string>
-						<string key="_dayNavigationItem">UINavigationItem</string>
-						<string key="_detailTable">UITableView</string>
-						<string key="_detailTableCell">UITableViewCell</string>
-						<string key="_gastronomyLabel">UILabel</string>
-						<string key="_leftSwipe">UISwipeGestureRecognizer</string>
-						<string key="_moveBackButton">GradientButton</string>
-						<string key="_rightSwipe">UISwipeGestureRecognizer</string>
-						<string key="_titleLabel">UILabel</string>
-						<string key="_waitForChangeActivityIndicator">UIActivityIndicatorView</string>
-					</dictionary>
-					<dictionary class="NSMutableDictionary" key="toOneOutletInfosByName">
-						<object class="IBToOneOutletInfo" key="_backButton">
-							<string key="name">_backButton</string>
-							<string key="candidateClassName">UIButton</string>
-						</object>
-						<object class="IBToOneOutletInfo" key="_backLabel">
-							<string key="name">_backLabel</string>
-							<string key="candidateClassName">UILabel</string>
-						</object>
-						<object class="IBToOneOutletInfo" key="_chooseDateVC">
-							<string key="name">_chooseDateVC</string>
-							<string key="candidateClassName">ChooseDateViewController</string>
-						</object>
-						<object class="IBToOneOutletInfo" key="_dateLabel">
-							<string key="name">_dateLabel</string>
-							<string key="candidateClassName">UILabel</string>
-						</object>
-						<object class="IBToOneOutletInfo" key="_dayNavigationItem">
-							<string key="name">_dayNavigationItem</string>
-							<string key="candidateClassName">UINavigationItem</string>
-						</object>
-						<object class="IBToOneOutletInfo" key="_detailTable">
-							<string key="name">_detailTable</string>
-							<string key="candidateClassName">UITableView</string>
-						</object>
-						<object class="IBToOneOutletInfo" key="_detailTableCell">
-							<string key="name">_detailTableCell</string>
-							<string key="candidateClassName">UITableViewCell</string>
-						</object>
-						<object class="IBToOneOutletInfo" key="_gastronomyLabel">
-							<string key="name">_gastronomyLabel</string>
-							<string key="candidateClassName">UILabel</string>
-						</object>
-						<object class="IBToOneOutletInfo" key="_leftSwipe">
-							<string key="name">_leftSwipe</string>
-							<string key="candidateClassName">UISwipeGestureRecognizer</string>
-						</object>
-						<object class="IBToOneOutletInfo" key="_moveBackButton">
-							<string key="name">_moveBackButton</string>
-							<string key="candidateClassName">GradientButton</string>
-						</object>
-						<object class="IBToOneOutletInfo" key="_rightSwipe">
-							<string key="name">_rightSwipe</string>
-							<string key="candidateClassName">UISwipeGestureRecognizer</string>
-						</object>
-						<object class="IBToOneOutletInfo" key="_titleLabel">
-							<string key="name">_titleLabel</string>
-							<string key="candidateClassName">UILabel</string>
-						</object>
-						<object class="IBToOneOutletInfo" key="_waitForChangeActivityIndicator">
-							<string key="name">_waitForChangeActivityIndicator</string>
-							<string key="candidateClassName">UIActivityIndicatorView</string>
-						</object>
-					</dictionary>
-					<object class="IBClassDescriptionSource" key="sourceIdentifier">
-						<string key="majorKey">IBProjectSource</string>
-						<string key="minorKey">./Classes/MensaDetailViewController.h</string>
-					</object>
-				</object>
-				<object class="IBPartialClassDescription">
-					<string key="className">MensaViewController</string>
-					<string key="superclassName">UIViewController</string>
-					<dictionary class="NSMutableDictionary" key="outlets">
-						<string key="_asyncTimeTableRequest">TimeTableAsyncRequest</string>
-						<string key="_dateLabel">UILabel</string>
-						<string key="_mensaDetailVC">MensaDetailViewController</string>
-						<string key="_mensaOverviewTable">UITableView</string>
-						<string key="_mensaOverviewTableCell">UITableViewCell</string>
-						<string key="_titleNavigationBar">UINavigationBar</string>
-						<string key="_titleNavigationItem">UINavigationItem</string>
-						<string key="_titleNavigationLabel">UILabel</string>
-					</dictionary>
-					<dictionary class="NSMutableDictionary" key="toOneOutletInfosByName">
-						<object class="IBToOneOutletInfo" key="_asyncTimeTableRequest">
-							<string key="name">_asyncTimeTableRequest</string>
-							<string key="candidateClassName">TimeTableAsyncRequest</string>
-						</object>
-						<object class="IBToOneOutletInfo" key="_dateLabel">
-							<string key="name">_dateLabel</string>
-							<string key="candidateClassName">UILabel</string>
-						</object>
-						<object class="IBToOneOutletInfo" key="_mensaDetailVC">
-							<string key="name">_mensaDetailVC</string>
-							<string key="candidateClassName">MensaDetailViewController</string>
-						</object>
-						<object class="IBToOneOutletInfo" key="_mensaOverviewTable">
-							<string key="name">_mensaOverviewTable</string>
-							<string key="candidateClassName">UITableView</string>
-						</object>
-						<object class="IBToOneOutletInfo" key="_mensaOverviewTableCell">
-							<string key="name">_mensaOverviewTableCell</string>
-							<string key="candidateClassName">UITableViewCell</string>
-						</object>
-						<object class="IBToOneOutletInfo" key="_titleNavigationBar">
-							<string key="name">_titleNavigationBar</string>
-							<string key="candidateClassName">UINavigationBar</string>
-						</object>
-						<object class="IBToOneOutletInfo" key="_titleNavigationItem">
-							<string key="name">_titleNavigationItem</string>
-							<string key="candidateClassName">UINavigationItem</string>
-						</object>
-						<object class="IBToOneOutletInfo" key="_titleNavigationLabel">
-							<string key="name">_titleNavigationLabel</string>
-							<string key="candidateClassName">UILabel</string>
-						</object>
-					</dictionary>
-					<object class="IBClassDescriptionSource" key="sourceIdentifier">
-						<string key="majorKey">IBProjectSource</string>
-						<string key="minorKey">./Classes/MensaViewController.h</string>
-					</object>
-				</object>
-				<object class="IBPartialClassDescription">
-					<string key="className">NSLayoutConstraint</string>
-					<string key="superclassName">NSObject</string>
-					<object class="IBClassDescriptionSource" key="sourceIdentifier">
-						<string key="majorKey">IBProjectSource</string>
-						<string key="minorKey">./Classes/NSLayoutConstraint.h</string>
-					</object>
-				</object>
-				<object class="IBPartialClassDescription">
-					<string key="className">TimeTableAsyncRequest</string>
-					<string key="superclassName">NSObject</string>
-					<object class="IBClassDescriptionSource" key="sourceIdentifier">
-						<string key="majorKey">IBProjectSource</string>
-						<string key="minorKey">./Classes/TimeTableAsyncRequest.h</string>
-					</object>
-				</object>
-			</array>
-		</object>
+		<object class="IBClassDescriber" key="IBDocument.Classes"/>
 		<int key="IBDocument.localizationMode">0</int>
 		<string key="IBDocument.TargetRuntimeIdentifier">IBCocoaTouchFramework</string>
 		<bool key="IBDocument.PluginDeclaredDependenciesTrackSystemTargetVersion">YES</bool>

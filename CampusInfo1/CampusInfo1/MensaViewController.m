@@ -72,10 +72,6 @@
 	}
     _mensaDetailVC.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
     
-    [self.view bringSubviewToFront:_dateLabel];
-    [_dateLabel setTextColor:[UIColor whiteColor]];
-    self.navigationItem.titleView = _dateLabel;
-    
     UIColor *_backgroundColor = [UIColor colorWithRed:1.0/255.0 green:100.0/255.0 blue:167.0/255.0 alpha:1.0];
 
     UIButton *backButton = [UIButton buttonWithType:101];

@@ -29,7 +29,6 @@
     IBOutlet UITableViewCell            *_detailTableCellWithButton;
     
     // titel labels
-    IBOutlet UILabel                    *_titleLabel;
     IBOutlet UILabel                    *_timeLabel;
     IBOutlet UILabel                    *_timeTableDescriptionLabel;
     IBOutlet UIButton                   *_backButton;
@@ -39,6 +38,10 @@
     NSString                            *_dayAndAcronymString;
 
     IBOutlet UIActivityIndicatorView    *_waitForChangeActivityIndicator;
+    
+    IBOutlet UINavigationBar            *_titleNavigationBar;
+    IBOutlet UINavigationItem           *_titleNavigationItem;
+    IBOutlet UILabel                    *_titleNavigationLabel;
 
 }
 
@@ -48,14 +51,15 @@
 @property (nonatomic, retain) IBOutlet UITableViewCell          *_detailTableCell;
 @property (nonatomic, retain) IBOutlet UITableViewCell          *_detailTableCellWithButton;
 
-@property (nonatomic, retain) IBOutlet UILabel                  *_titleLabel;
-@property (nonatomic, retain) IBOutlet UILabel                  *_timeLabel;
-@property (nonatomic, retain) IBOutlet UILabel                  *_timeTableDescriptionLabel;
-@property (nonatomic, retain) IBOutlet UILabel                  *_backLabel;
-@property (nonatomic, retain) IBOutlet UIButton                 *_backButton;
-
 @property (nonatomic, retain) NSString                          *_timeString;
 @property (nonatomic, retain) NSString                          *_dayAndAcronymString;
+
+@property (nonatomic, retain) IBOutlet UILabel                  *_titleLabel;
+@property (nonatomic, retain) IBOutlet UILabel                  *_timeTableDescriptionLabel;
+@property (nonatomic, retain) IBOutlet UINavigationBar          *_titleNavigationBar;
+@property (nonatomic, retain) IBOutlet UINavigationItem         *_titleNavigationItem;
+@property (nonatomic, retain) IBOutlet UILabel                  *_timeLabel;
+
 
 @property (nonatomic, retain) IBOutlet UIActivityIndicatorView  *_waitForChangeActivityIndicator;
 

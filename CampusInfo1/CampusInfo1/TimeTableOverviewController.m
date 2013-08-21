@@ -33,9 +33,6 @@
 @synthesize _searchVC;
 @synthesize _settingsVC;
 
-@synthesize _acronymLabel;
-@synthesize _titleLabel;
-
 @synthesize _timeTableSegmentedControl;
 
 @synthesize _ownStoredAcronymString;
@@ -95,6 +92,11 @@
 
 @synthesize _waitForLoadingActivityIndicator;
 
+@synthesize _acronymLabel;
+@synthesize _titleNavigationBar;
+@synthesize _titleNavigationItem;
+@synthesize _titleNavigationLabel;
+
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {   
@@ -137,11 +139,11 @@
 
     
     //NSLog(@"2 showScheduleDetails acronym: %@", self._actualShownAcronymString);
-    _detailsVC._dayAndAcronymString = [NSString stringWithFormat:@" für den %@ von %@ (%@)"
-                                       ,[[_dateFormatter _dayFormatter] stringFromDate:_actualDate]
+    _detailsVC._dayAndAcronymString = [NSString stringWithFormat:@"von %@ (%@)"
                                        ,newAcronym //self._actualShownAcronymString
                                        ,[_translator getGermanTypeTranslation:newAcronymType] //self._actualShownAcronymType]
                                        ];
+    
     [_timeTable reloadData];
 }
 
@@ -239,7 +241,7 @@
     [self setNewScheduleWithDate:_actualDate];
 }
 
-- (IBAction)moveBackToMenuOverview:(id)sender
+- (void)moveBackToMenuOverview:(id)sender
 {
     [self dismissModalViewControllerAnimated:YES];
     self.tabBarController.selectedIndex = 0;
@@ -389,7 +391,7 @@
 
         if (_ownStoredAcronymString != nil)
         {
-            _acronymLabel.text          = [NSString stringWithFormat:@"   von %@ (%@)"
+            _acronymLabel.text          = [NSString stringWithFormat:@"von %@ (%@)"
                                            ,_ownStoredAcronymString
                                            ,[_translator getGermanTypeTranslation:_ownStoredAcronymType]
                                            ];
@@ -468,11 +470,33 @@
     // title
     UIColor *_backgroundColor = [UIColor colorWithRed:1.0/255.0 green:100.0/255.0 blue:167.0/255.0 alpha:1.0];
     
-    [_titleLabel setBackgroundColor:_backgroundColor];
-    [_titleLabel setTextColor:[UIColor whiteColor]];
-    
     [_acronymLabel setBackgroundColor:_backgroundColor];
     [_acronymLabel setTextColor:[UIColor whiteColor]];
+    
+    UIButton *backButton = [UIButton buttonWithType:101];
+    UIView *backButtonView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, backButton.frame.size.width, backButton.frame.size.height)];
+    
+    [backButton addTarget:self action:@selector(moveBackToMenuOverview:) forControlEvents:UIControlEventTouchUpInside];
+    [backButton setTitle:@"zurück" forState:UIControlStateNormal];
+    [backButtonView addSubview:backButton];
+    
+    // set buttonview as custom view for bar button item
+    UIBarButtonItem *backButtonItem = [[UIBarButtonItem alloc] initWithCustomView:backButtonView];
+    [_titleNavigationItem setLeftBarButtonItem :backButtonItem animated :true];
+    
+    [_titleNavigationLabel setTextColor:[UIColor whiteColor]];
+    _titleNavigationLabel.text = @"Stundenplan";
+    _titleNavigationItem.title = @"";
+    
+    CGRect imageRect = CGRectMake(0, 0, _titleNavigationBar.frame.size.width, _titleNavigationBar.frame.size.height);
+    UIGraphicsBeginImageContext(imageRect.size);
+    [_backgroundColor set];
+    UIRectFill(imageRect);
+    UIImage *aImage = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    [_titleNavigationBar setBackgroundImage:aImage forBarMetrics:UIBarMetricsDefault];
+    
+    [_titleNavigationLabel setBackgroundColor:_backgroundColor];
     
     
     //----- Navigation Bar ----
@@ -499,7 +523,7 @@
     [_dateLabel addGestureRecognizer:tapGesture];
 
     // ----- DETAIL PAGE -----
-    if (_detailsVC == nil) 
+    if (_detailsVC == nil)
     {
 		_detailsVC = [[TimeTableDetailController alloc] init];
 	}
@@ -605,8 +629,18 @@
 
     //NSLog(@"viewWillAppear schedule type %@",_schedule._type);
     
+    if (_ownStoredAcronymString != nil)
+    {
+        [self._timeTableSegmentedControl setTitle:_ownStoredAcronymString forSegmentAtIndex:0];
+    }
+    else
+    {
+        [self._timeTableSegmentedControl setTitle:@"Kürzel" forSegmentAtIndex:0];
+    }
+    
+    
     // only reload, if acronym or date has changed
-    if ( _schedule._type                  == nil 
+    if ( _schedule._type                  == nil
      || [_schedule._type length]          == 0
      ||  _schedule._connectionEstablished == nil
      || ([_schedule._connectionEstablished compare: @"NO"] == NSOrderedSame)
@@ -639,7 +673,7 @@
 
             if (_ownStoredAcronymString != nil)
             {
-                self._acronymLabel.text          = [NSString stringWithFormat:@"   von %@ (%@)"
+                self._acronymLabel.text          = [NSString stringWithFormat:@"von %@ (%@)"
                                                     ,self._actualShownAcronymString
                                                     ,[_translator getGermanTypeTranslation:self._actualShownAcronymType]
                                                     ];
@@ -655,12 +689,10 @@
             
             
             //NSLog(@"2 showScheduleDetails acronym: %@", self._actualShownAcronymString);
-            _detailsVC._dayAndAcronymString = [NSString stringWithFormat:@" für den %@ von %@ (%@)"
-                                               ,[[_dateFormatter _dayFormatter] stringFromDate:_actualDate]
+            _detailsVC._dayAndAcronymString = [NSString stringWithFormat:@"von %@ (%@)"
                                                ,self._actualShownAcronymString
                                                ,[_translator getGermanTypeTranslation:self._actualShownAcronymType]
                                                ];
-            
             
             if (_actualShownAcronymTrials < 20)
             {
@@ -751,7 +783,7 @@
             
             if (_ownStoredAcronymString != nil)
             {
-                _acronymLabel.text                   = [NSString stringWithFormat:@"   von %@",_actualShownAcronymString];
+                _acronymLabel.text                   = [NSString stringWithFormat:@"von %@",_actualShownAcronymString];
                 [self._timeTableSegmentedControl setTitle:_ownStoredAcronymString forSegmentAtIndex:0];
             }
             else
@@ -836,7 +868,9 @@
 
     _detailsVC = nil;
     _chooseDateVC = nil;
- 
+    _settingsVC = nil;
+    _searchVC = nil;    
+    
     _dayNavigator = nil;
     _acronymLabel = nil;
     _dateLabel = nil;
@@ -845,11 +879,14 @@
     _leftSwipe = nil;
 
     [self set_errorMessageCell:nil];
-    _titleLabel = nil;
-    _searchVC = nil;
+    
     _waitForLoadingActivityIndicator = nil;
-    _settingsVC = nil;
+
     _timeTableSegmentedControl = nil;
+    
+    _titleNavigationBar = nil;
+    _titleNavigationItem = nil;
+    _titleNavigationLabel = nil;
     [super viewDidUnload];
 }
 
@@ -885,8 +922,7 @@
         //NSLog(@"showScheduleDetails date   : %@",[[self dayFormatter] stringFromDate:_actualDate]);
         //NSLog(@"1 showScheduleDetails acronym: %@", self._actualShownAcronymString);
     
-        _detailsVC._dayAndAcronymString = [NSString stringWithFormat:@" für den %@ von %@ (%@)"
-                                           ,[[_dateFormatter _dayFormatter] stringFromDate:_actualDate]
+        _detailsVC._dayAndAcronymString = [NSString stringWithFormat:@"von %@ (%@)"
                                            , self._actualShownAcronymString
                                            ,[_translator getGermanTypeTranslation:self._actualShownAcronymType]
                                            ];
@@ -896,7 +932,10 @@
         
         //NSLog(@"schedule event end time %@", _toString);
         
-        _detailsVC._timeString          = [NSString stringWithFormat:@"Modul von %@ bis %@",_fromString, _toString];
+        _detailsVC._timeString          = [NSString stringWithFormat:@"Modul für den %@ von %@ bis %@"
+                                           ,[[_dateFormatter _dayFormatter] stringFromDate:_actualDate]
+                                           ,_fromString
+                                           ,_toString];
         _detailsVC._timeLabel.text      = _detailsVC._timeString;
         
         [_detailsVC._detailTable reloadData];

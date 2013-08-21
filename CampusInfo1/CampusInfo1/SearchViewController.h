@@ -29,7 +29,6 @@
     
     IBOutlet UITableView            *_acronymAutocompleteTableView;
     
-    IBOutlet UILabel                *_titleLabel;
     IBOutlet UISegmentedControl     *_searchSegmentedControl;
     
     NSMutableArray                  *_suggestions;
@@ -40,13 +39,16 @@
     CoursesDto                      *_courses;
     RoomsDto                        *_rooms;
     ClassesDto                      *_classes;
+    
+    IBOutlet UINavigationBar        *_titleNavigationBar;
+    IBOutlet UINavigationItem       *_titleNavigationItem;
+    IBOutlet UILabel                *_titleNavigationLabel;
 }
 
 @property (nonatomic, retain) IBOutlet UITextField                  *_searchTextField;
 @property (nonatomic, retain) IBOutlet UIPickerView                 *_chooseSearchType;
 @property (nonatomic, retain) IBOutlet UITableView                  *_acronymAutocompleteTableView;
 
-@property (nonatomic, retain) IBOutlet UILabel                      *_titleLabel;
 @property (nonatomic, retain) IBOutlet UISegmentedControl           *_searchSegmentedControl;
 
 @property (nonatomic, retain) NSString                              *_searchType;
@@ -61,9 +63,12 @@
 @property (strong, nonatomic) RoomsDto                              *_rooms;
 @property (strong, nonatomic) ClassesDto                            *_classes;
 
-
+@property (nonatomic, retain) IBOutlet UINavigationBar              *_titleNavigationBar;
+@property (nonatomic, retain) IBOutlet UINavigationItem             *_titleNavigationItem;
+@property (nonatomic, retain) IBOutlet UILabel                      *_titleNavigationLabel;
 
 - (IBAction)searchTextFieldChanged:(id)sender;
+
 - (IBAction)moveToSearchSegmentedControl:(id)sender;
 
 @end
