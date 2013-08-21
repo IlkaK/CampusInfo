@@ -20,9 +20,9 @@
     NSString                    *_currentEmail;
     NSString                    *_currentPhoneNumber;
     
-    IBOutlet UILabel            *_titleLabel;
-    IBOutlet UIButton           *_backButton;
-    IBOutlet UILabel            *_backLabel;
+    IBOutlet UINavigationBar    *_titleNavigationBar;
+    IBOutlet UINavigationItem   *_titleNavigationItem;
+    IBOutlet UILabel            *_titleNavigationLabel;
 }
 
 @property (nonatomic, retain) IBOutlet UITableView          *_contactsTable;
@@ -34,10 +34,8 @@
 @property (nonatomic, retain) NSString                      *_currentEmail;
 @property (nonatomic, retain) NSString                      *_currentPhoneNumber;
 
-@property (nonatomic, retain) IBOutlet UILabel              *_titleLabel;
-@property (nonatomic, retain) IBOutlet UIButton             *_backButton;
-@property (nonatomic, retain) IBOutlet UILabel              *_backLabel;
-
-- (IBAction)moveBackToContactsOverview:(id)sender;
+@property (nonatomic, retain) IBOutlet UINavigationBar      *_titleNavigationBar;
+@property (nonatomic, retain) IBOutlet UINavigationItem     *_titleNavigationItem;
+@property (nonatomic, retain) IBOutlet UILabel              *_titleNavigationLabel;
 
 @end

@@ -14,10 +14,6 @@
 #import "LunchTimePlanDto.h"
 #import "WeekdayDto.h"
 
-#import "PButton.h"
-#import "PEffect.h"
-#import "PPath.h"
-
 @implementation MensaViewController
 
 @synthesize _mensaOverviewTable;
@@ -35,9 +31,11 @@
 @synthesize _translator;
 @synthesize _mensaDetailVC;
 
-@synthesize _titleLabel;
 @synthesize _dateLabel;
-@synthesize _backButton;
+
+@synthesize _titleNavigationLabel;
+@synthesize _titleNavigationItem;
+@synthesize _titleNavigationBar;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -80,50 +78,30 @@
     
     UIColor *_backgroundColor = [UIColor colorWithRed:1.0/255.0 green:100.0/255.0 blue:167.0/255.0 alpha:1.0];
 
-    [_titleLabel setBackgroundColor:_backgroundColor];
-    [_titleLabel setTextColor:[UIColor whiteColor]];
+    UIButton *backButton = [UIButton buttonWithType:101];
+    UIView *backButtonView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, backButton.frame.size.width, backButton.frame.size.height)];
     
-    NSString *backArrowString = @"\U000025C0\U0000FE0E"; //BLACK LEFT-POINTING TRIANGLE PLUS VARIATION SELECTOR
-    [_backButton setTitle:backArrowString forState:UIBarButtonItemStylePlain];
-    
-    
-    //UIBarButtonItem *backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:backArrowString style:UIBarButtonItemStylePlain target:nil action:nil];
-    //self.navigationItem.leftButtonItem = backBarButtonItem;
-    //[backBarButtonItem release];
-    
-    /*
-    UIButton *_helperButton = [UIButton buttonWithType:101];
-    UIView *backButtonView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, _helperButton.frame.size.width, _helperButton.frame.size.height)];
-    
-    [_helperButton addTarget:self action:@selector(backButtonTouched:) forControlEvents:UIControlEventTouchUpInside];
-    [_helperButton setTitle:@"Back" forState:UIControlStateNormal];
-    [backButtonView addSubview:_helperButton];
+    [backButton addTarget:self action:@selector(moveBackToMenuOverview:) forControlEvents:UIControlEventTouchUpInside];
+    [backButton setTitle:@"zurück" forState:UIControlStateNormal];
+    [backButtonView addSubview:backButton];
     
     // set buttonview as custom view for bar button item
-    _backButton = [_backButton  ]//initWithCustomView:backButtonView];
-    */
-    //_backButton = [UIButton buttonWithType:101];
+    UIBarButtonItem *backButtonItem = [[UIBarButtonItem alloc] initWithCustomView:backButtonView];
+    [_titleNavigationItem setLeftBarButtonItem :backButtonItem animated :true];
     
-    /*
-    PButton *navigationButton = [[PButton alloc] init];
-    navigationButton.frame = CGRectMake(30, 100, 100, 30);
-    navigationButton.buttonBorderPath = [PPath navigationBarItemPathArrowWidth:10 rect:CGRectMake(0, 0, 100, 28) radius:5];
-    [navigationButton setTitle:@"test" forState:UIControlStateNormal];
+    [_titleNavigationLabel setTextColor:[UIColor whiteColor]];
+    _titleNavigationLabel.text = @"Kontakte";
+    _titleNavigationItem.title = @"";
     
-    UIColor *topColor = [UIColor colorWithRed:166/255.0 green:162/255.0 blue:173/255.0 alpha:1.00f];
-    UIColor *bottomColor = [UIColor colorWithRed:88/255.0 green:95/255.0 blue:106/255.0 alpha:1.00f];
-    UIColor *borderColor = [UIColor colorWithRed:59/255.0f green:61/255.0f blue:63/255.0f alpha:1.00f];
-    [navigationButton.normalEffects addObjectsFromArray:@[
-     [PEffect border:navigationButton.buttonBorderPath.CGPath color:borderColor width:2],
-     [PEffect gradientColor:@[topColor, bottomColor] locations:nil startPoint:CGPointMake(0, 0) endPoint:CGPointMake(0, 30)],
-     [PEffect halfHighlight],
-     [PEffect innerShadow],
-     [PEffect outerShadow],
-     ]];
-    [navigationButton.highlightEffects addObjectsFromArray:@[
-     [PEffect gradientColor:@[[UIColor redColor], [UIColor blueColor]] locations:nil startPoint:CGPointMake(0, 0) endPoint:CGPointMake(0, 30)],
-     ]];
-    */
+    CGRect imageRect = CGRectMake(0, 0, _titleNavigationBar.frame.size.width, _titleNavigationBar.frame.size.height);
+    UIGraphicsBeginImageContext(imageRect.size);
+    [_backgroundColor set];
+    UIRectFill(imageRect);
+    UIImage *aImage = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    [_titleNavigationBar setBackgroundImage:aImage forBarMetrics:UIBarMetricsDefault];
+    
+    [_titleNavigationLabel setBackgroundColor:_backgroundColor];
 }
 
 
@@ -139,13 +117,18 @@
     _mensaOverviewTableCell = nil;
     _dateLabel = nil;
     _mensaDetailVC = nil;
-    _titleLabel = nil;
-    _backButton = nil;
-    _backButton = nil;
+    _titleNavigationBar = nil;
+    _titleNavigationItem = nil;
+    _titleNavigationLabel = nil;
     [super viewDidUnload];
 }
 
-// 
+- (void)moveBackToMenuOverview:(id)sender
+{
+    [self dismissModalViewControllerAnimated:YES];
+    self.tabBarController.selectedIndex = 0;
+}
+
 
 //-------------------------------
 // asynchronous request
@@ -288,11 +271,6 @@
 }
 
 
-- (IBAction)moveBackToMenuOverview:(id)sender
-{
-    [self dismissModalViewControllerAnimated:YES];
-    self.tabBarController.selectedIndex = 0;
-}
 
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView

@@ -26,20 +26,23 @@
     IBOutlet ChooseDateViewController   *_chooseDateVC;
     IBOutlet UITableView                *_detailTable;
     IBOutlet UITableViewCell            *_detailTableCell;
-    IBOutlet UILabel                    *_gastronomyLabel;
+
     
     MenuPlanArrayDto                    *_menuPlans;
     MenuDto                             *_actualMenu;
     
     NSDate                              *_actualDate;
     int                                 _actualCalendarWeek;
+    
     IBOutlet UISwipeGestureRecognizer   *_rightSwipe;
     IBOutlet UISwipeGestureRecognizer   *_leftSwipe;
-    IBOutlet UILabel                    *_titleLabel;
-    IBOutlet UIButton                   *_backButton;
-    IBOutlet UILabel                    *_backLabel;
     
     IBOutlet UIActivityIndicatorView    *_waitForChangeActivityIndicator;
+    
+    IBOutlet UINavigationBar            *_titleNavigationBar;
+    IBOutlet UINavigationItem           *_titleNavigationItem;
+    IBOutlet UILabel                    *_titleNavigationLabel;
+    IBOutlet UILabel                    *_gastronomyLabel;
 }
 
 @property (nonatomic, retain) GastronomicFacilityDto                    *_actualGastronomy;
@@ -54,7 +57,7 @@
 @property (nonatomic, retain) IBOutlet ChooseDateViewController         *_chooseDateVC;
 @property (nonatomic, retain) IBOutlet UITableView                      *_detailTable;
 @property (nonatomic, retain) IBOutlet UITableViewCell                  *_detailTableCell;
-@property (nonatomic, retain) IBOutlet UILabel                          *_gastronomyLabel;
+
 
 @property (nonatomic, retain) MenuPlanArrayDto                          *_menuPlans;
 @property (nonatomic, retain) MenuDto                                   *_actualMenu;
@@ -62,9 +65,10 @@
 @property (nonatomic, retain) IBOutlet UISwipeGestureRecognizer         *_rightSwipe;
 @property (nonatomic, retain) IBOutlet UISwipeGestureRecognizer         *_leftSwipe;
 
-@property (nonatomic, retain) IBOutlet UILabel                          *_titleLabel;
-@property (nonatomic, retain) IBOutlet UIButton                         *_backButton;
-@property (nonatomic, retain) IBOutlet UILabel                          *_backLabel;
+@property (nonatomic, retain) IBOutlet UINavigationBar                  *_titleNavigationBar;
+@property (nonatomic, retain) IBOutlet UINavigationItem                 *_titleNavigationItem;
+@property (nonatomic, retain) IBOutlet UILabel                          *_titleNavigationLabel;
+@property (nonatomic, retain) IBOutlet UILabel                          *_gastronomyLabel;
 
 @property (nonatomic, retain) IBOutlet UIActivityIndicatorView          *_waitForChangeActivityIndicator;
 

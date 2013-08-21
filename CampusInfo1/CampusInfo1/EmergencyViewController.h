@@ -18,9 +18,9 @@
     
     NSString                    *_emergencyCallNumber;
     
-    IBOutlet UILabel            *_titleLabel;
-    IBOutlet UIButton           *_backButton;
-    IBOutlet UILabel            *_backLabel;
+    IBOutlet UINavigationBar    *_titleNavigationBar;
+    IBOutlet UINavigationItem   *_titleNavigationItem;
+    IBOutlet UILabel            *_titleNavigationLabel;
 }
 
 @property (nonatomic, retain) IBOutlet UITableView          *_emergencyTable;
@@ -30,10 +30,8 @@
 
 @property (nonatomic, retain) NSString                      *_emergencyCallNumber;
 
-@property (nonatomic, retain) IBOutlet UILabel              *_titleLabel;
-@property (nonatomic, retain) IBOutlet UILabel              *_backLabel;
-@property (nonatomic, retain) IBOutlet UIButton             *_backButton;
-
-- (IBAction)moveBackToContactsOverview:(id)sender;
+@property (nonatomic, retain) IBOutlet UINavigationBar      *_titleNavigationBar;
+@property (nonatomic, retain) IBOutlet UINavigationItem     *_titleNavigationItem;
+@property (nonatomic, retain) IBOutlet UILabel              *_titleNavigationLabel;
 
 @end

@@ -11,7 +11,6 @@
 #import <DateFormation.h>
 #import <LanguageTranslation.h>
 #import <MensaDetailViewController.h>
-#import <PButton.h>
 
 @interface MensaViewController : UIViewController<TimeTableAsyncRequestDelegate, UITableViewDelegate>
 {
@@ -32,15 +31,19 @@
     LanguageTranslation                 *_translator;
     
     IBOutlet MensaDetailViewController  *_mensaDetailVC;
-    IBOutlet UILabel                    *_titleLabel;
-    IBOutlet PButton                    *_backButton;
+
+    IBOutlet UINavigationBar            *_titleNavigationBar;
+    IBOutlet UINavigationItem           *_titleNavigationItem;
+    IBOutlet UILabel                    *_titleNavigationLabel;
 }
 
 @property (nonatomic, retain) IBOutlet UITableView                  *_mensaOverviewTable;
 @property (nonatomic, retain) IBOutlet UITableViewCell              *_mensaOverviewTableCell;
 @property (nonatomic, retain) IBOutlet UILabel                      *_dateLabel;
-@property (nonatomic, retain) IBOutlet UILabel                      *_titleLabel;
-@property (nonatomic, retain) IBOutlet PButton                      *_backButton;
+
+@property (nonatomic, retain) IBOutlet UINavigationBar              *_titleNavigationBar;
+@property (nonatomic, retain) IBOutlet UINavigationItem             *_titleNavigationItem;
+@property (nonatomic, retain) IBOutlet UILabel                      *_titleNavigationLabel;
 
 @property (strong, nonatomic) NSDictionary                          *_generalDictionary;
 @property (nonatomic, retain) IBOutlet TimeTableAsyncRequest        *_asyncTimeTableRequest;
@@ -54,6 +57,5 @@
 @property (nonatomic, retain) DateFormation                         *_dateFormatter;
 @property (nonatomic, retain) LanguageTranslation                   *_translator;
 
-- (IBAction)moveBackToMenuOverview:(id)sender;
 
 @end

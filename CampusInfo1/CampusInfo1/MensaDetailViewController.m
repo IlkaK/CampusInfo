@@ -33,16 +33,15 @@
 @synthesize _detailTable;
 @synthesize _detailTableCell;
 
-@synthesize _gastronomyLabel;
-
 @synthesize _leftSwipe;
 @synthesize _rightSwipe;
 
-@synthesize _titleLabel;
-@synthesize _backButton;
-@synthesize _backLabel;
-
 @synthesize _waitForChangeActivityIndicator;
+
+@synthesize _gastronomyLabel;
+@synthesize _titleNavigationBar;
+@synthesize _titleNavigationItem;
+@synthesize _titleNavigationLabel;
 
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -108,7 +107,7 @@
     
     [_detailTable reloadData];
     
-    _gastronomyLabel.text = [NSString stringWithFormat:@"   %@",_actualGastronomy._name];
+    _gastronomyLabel.text = [NSString stringWithFormat:@"%@",_actualGastronomy._name];
     
     [_gastronomyLabel setBackgroundColor:_backgroundColor];
     [_gastronomyLabel setTextColor:[UIColor whiteColor]];
@@ -125,24 +124,34 @@
     [_leftSwipe setDirection:(UISwipeGestureRecognizerDirectionLeft)];
     [[self view] addGestureRecognizer:_leftSwipe];
     
-    [_titleLabel setBackgroundColor:_backgroundColor];
-    [_titleLabel setTextColor:[UIColor whiteColor]];
-    
-    [_backLabel setBackgroundColor:_backgroundColor];
-    [_backLabel setTextColor:[UIColor whiteColor]];
-    
-    [_backButton setBackgroundColor:_backgroundColor];
-    
-    NSMutableAttributedString *_backButtonTitleString = [[NSMutableAttributedString alloc] initWithString:@"zurück"];
-    
-    [_backButtonTitleString addAttribute:NSForegroundColorAttributeName value:[UIColor whiteColor] range:NSMakeRange(0, [_backButtonTitleString length])];
-    
-    [_backButton setAttributedTitle:_backButtonTitleString forState:UIControlStateNormal];
-    
     // set default values for spinner/activity indicator
     _waitForChangeActivityIndicator.hidesWhenStopped = YES;
     _waitForChangeActivityIndicator.hidden = YES;
     
+    UIButton *backButton = [UIButton buttonWithType:101];
+    UIView *backButtonView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, backButton.frame.size.width, backButton.frame.size.height)];
+    
+    [backButton addTarget:self action:@selector(backToMensaOverview:) forControlEvents:UIControlEventTouchUpInside];
+    [backButton setTitle:@"zurück" forState:UIControlStateNormal];
+    [backButtonView addSubview:backButton];
+    
+    // set buttonview as custom view for bar button item
+    UIBarButtonItem *backButtonItem = [[UIBarButtonItem alloc] initWithCustomView:backButtonView];
+    [_titleNavigationItem setLeftBarButtonItem :backButtonItem animated :true];
+    
+    [_titleNavigationLabel setTextColor:[UIColor whiteColor]];
+    _titleNavigationLabel.text = @"Kontakte";
+    _titleNavigationItem.title = @"";
+    
+    CGRect imageRect = CGRectMake(0, 0, _titleNavigationBar.frame.size.width, _titleNavigationBar.frame.size.height);
+    UIGraphicsBeginImageContext(imageRect.size);
+    [_backgroundColor set];
+    UIRectFill(imageRect);
+    UIImage *aImage = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    [_titleNavigationBar setBackgroundImage:aImage forBarMetrics:UIBarMetricsDefault];
+    
+    [_titleNavigationLabel setBackgroundColor:_backgroundColor];
 }
 
 - (void) threadWaitForChangeActivityIndicator:(id)data
@@ -262,7 +271,7 @@
     // Dispose of any resources that can be recreated.
 }
 
-- (IBAction)backToMensaOverview:(id)sender
+- (void)backToMensaOverview:(id)sender
 {
     [self dismissModalViewControllerAnimated:YES];
 }
@@ -278,10 +287,10 @@
     _gastronomyLabel = nil;
     _rightSwipe = nil;
     _leftSwipe = nil;
-    _titleLabel = nil;
-    _backButton = nil;
-    _backLabel = nil;
     _waitForChangeActivityIndicator = nil;
+    _titleNavigationBar = nil;
+    _titleNavigationItem = nil;
+    _titleNavigationLabel = nil;
     [super viewDidUnload];
 }
 
@@ -292,7 +301,7 @@
     [super viewWillAppear:animated];
     [self setActualDate:_actualDate];
     [_detailTable reloadData];
-    _gastronomyLabel.text = [NSString stringWithFormat:@"   %@",_actualGastronomy._name];
+    _gastronomyLabel.text = [NSString stringWithFormat:@"%@",_actualGastronomy._name];
 }
  
 
