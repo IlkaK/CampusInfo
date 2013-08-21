@@ -254,7 +254,7 @@
     {
 		if (self._ownStoredAcronymString == nil)
         {
-            //[_timeTableSegmentedControl setSelectedSegmentIndex:UISegmentedControlNoSegment];
+            [_timeTableSegmentedControl setSelectedSegmentIndex:UISegmentedControlNoSegment];
             [self presentModalViewController:_settingsVC animated:YES];
         }
         else
@@ -281,7 +281,7 @@
     // search
     if(_timeTableSegmentedControl.selectedSegmentIndex == 2)
     {
-        //[_timeTableSegmentedControl setSelectedSegmentIndex:UISegmentedControlNoSegment];
+        [_timeTableSegmentedControl setSelectedSegmentIndex:UISegmentedControlNoSegment];
         [self presentModalViewController:_searchVC animated:YES];
 	}
     

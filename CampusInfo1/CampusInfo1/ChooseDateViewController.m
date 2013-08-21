@@ -16,16 +16,13 @@
 
 @synthesize _titleLabel;
 
-@synthesize _cancelButton;
-@synthesize _todayButton;
-@synthesize _doneButton;
-
 @synthesize _actualDate;
 @synthesize _datePicker;
 
 @synthesize _chooseDateViewDelegate;
 
 @synthesize _waitForChangeActivityIndicator;
+@synthesize _chooseDateSegmentedControl;
 
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -62,6 +59,40 @@
     }
 }
 
+- (IBAction)moveToChooseDateSegmentedControl:(id)sender
+{
+    // cancel
+    if(_chooseDateSegmentedControl.selectedSegmentIndex == 0)
+    {
+        [_chooseDateSegmentedControl setSelectedSegmentIndex:UISegmentedControlNoSegment];
+        [self dismissModalViewControllerAnimated:YES];
+    }
+    // today
+    if(_chooseDateSegmentedControl.selectedSegmentIndex == 1)
+    {
+         [_datePicker setDate:[NSDate date]];
+    }
+    // done
+    if(_chooseDateSegmentedControl.selectedSegmentIndex == 2)
+    {
+        if([self._chooseDateViewDelegate respondsToSelector:@selector(setActualDate:)])
+        {
+            [NSThread detachNewThreadSelector:@selector(threadWaitForChangeActivityIndicator:) toTarget:self withObject:nil];
+            
+            [self._chooseDateViewDelegate setActualDate:_datePicker.date];
+            
+            [_waitForChangeActivityIndicator stopAnimating];
+            _waitForChangeActivityIndicator.hidden = YES;
+            
+            [_chooseDateSegmentedControl setSelectedSegmentIndex:UISegmentedControlNoSegment];
+            
+            
+            [self dismissModalViewControllerAnimated:YES];
+        }
+    }
+
+}
+
 - (IBAction)setPickerToToday:(id)sender
 {
     [_datePicker setDate:[NSDate date]];
@@ -77,10 +108,6 @@
     
     [_titleLabel setBackgroundColor:_backgroundColor];
     [_titleLabel setTextColor:[UIColor whiteColor]];
-    
-    [_todayButton useAlertStyle];
-    [_cancelButton useAlertStyle];
-    [_doneButton useAlertStyle];
     
     if (_actualDate == nil)
     {
@@ -105,11 +132,9 @@
 - (void)viewDidUnload
 {
     _datePicker = nil;
-    _todayButton = nil;
     _titleLabel = nil;
-    _cancelButton = nil;
-    _doneButton = nil;
     _waitForChangeActivityIndicator = nil;
+    _chooseDateSegmentedControl = nil;
     [super viewDidUnload];
 }
 
@@ -117,5 +142,6 @@
 {
     [_datePicker setDate:_actualDate];    
 }
+
 
 @end

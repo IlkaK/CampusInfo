@@ -17,14 +17,12 @@
 @synthesize _searchTypeArray;
 @synthesize _searchType;
 
-@synthesize _searchButton;
-@synthesize _cancelButton;
-
 @synthesize _acronymAutocompleteTableView;
 @synthesize _suggestions;
 @synthesize _autocomplete;
 
 @synthesize _titleLabel;
+@synthesize _searchSegmentedControl;
 
 @synthesize _students;
 @synthesize _lecturers;
@@ -47,15 +45,12 @@
     [_chooseSearchType selectRow:1 inComponent:0 animated:NO];
     
     self._searchTextField.delegate = self;
-    [_searchButton useAlertStyle];
-    [_cancelButton useAlertStyle];
     
     _students   = [[StudentsDto alloc]init];
     _lecturers  = [[LecturersDto alloc]init];
     _courses    = [[CoursesDto alloc]init];
     _classes    = [[ClassesDto alloc]init];
     _rooms      = [[RoomsDto alloc]init];
-    
     
     _autocomplete = [[Autocomplete alloc] initWithArray:_lecturers._lecturerArray];
 	_searchTextField.autocorrectionType = UITextAutocorrectionTypeNo;
@@ -152,10 +147,9 @@
 {
     _searchTextField = nil;
     _chooseSearchType = nil;
-    _searchButton = nil;
     _acronymAutocompleteTableView = nil;
     _titleLabel = nil;
-    _cancelButton = nil;
+    _searchSegmentedControl = nil;
     [super viewDidUnload];
 }
 
@@ -203,6 +197,47 @@
     [self.view addSubview:_acronymAutocompleteTableView];
     _acronymAutocompleteTableView.hidden = NO;
 	[_acronymAutocompleteTableView reloadData];
+    
+}
+
+- (IBAction)moveToSearchSegmentedControl:(id)sender
+{
+    // cancel
+    if(_searchSegmentedControl.selectedSegmentIndex == 0)
+    {
+        [_searchSegmentedControl setSelectedSegmentIndex:UISegmentedControlNoSegment];
+        [self dismissModalViewControllerAnimated:YES];
+    }
+    
+    // done
+    if(_searchSegmentedControl.selectedSegmentIndex == 1)
+    {
+        [_searchSegmentedControl setSelectedSegmentIndex:UISegmentedControlNoSegment];
+        if (_searchTextField.text == nil || [_searchTextField.text length] == 0)
+        {
+            UIAlertView *_acronymAlertView = [[UIAlertView alloc]
+                                              initWithTitle:@"Suche"
+                                              message:@"Bitte ein Kürzel eingeben."
+                                              delegate:self
+                                              cancelButtonTitle:@"OK"
+                                              otherButtonTitles:nil];
+            
+            [_acronymAlertView show];
+        }
+        else
+        {
+            // trim space in front of and after the string
+            NSString *_stringWithoutSpaces = [_searchTextField.text stringByTrimmingCharactersInSet:
+                                              [NSCharacterSet whitespaceAndNewlineCharacterSet]];
+            
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"SearchType" object:_searchType];
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"SearchText" object:_stringWithoutSpaces];
+            
+            //self.tabBarController.selectedIndex = 0;
+            [self dismissModalViewControllerAnimated:YES];
+        }
+
+    }
     
 }
 
