@@ -10,7 +10,6 @@
 #import <TimeTableAsyncRequest.h>
 #import <TimeTableDetailController.h>
 #import <ChooseDateViewController.h>
-#import <GradientButton.h>
 #import <LanguageTranslation.h>
 #import <DateFormation.h>
 #import <SearchViewController.h>
@@ -55,6 +54,9 @@ UIViewController
     IBOutlet UILabel                    *_acronymLabel;
     IBOutlet UILabel                    *_titleLabel;
     
+    IBOutlet UISegmentedControl         *_timeTableSegmentedControl;
+    
+    
     // choose dates for navigator
     IBOutlet ChooseDateViewController   *_chooseDateVC;
     
@@ -76,42 +78,38 @@ UIViewController
     IBOutlet UITableViewCell            *_oneSlotSevenRoomsTableCell;
     IBOutlet UITableViewCell            *_oneSlotEightRoomsTableCell;
             
-    IBOutlet UITableViewCell  *_twoSlotsOneRoomTableCell;
-    IBOutlet UITableViewCell  *_twoSlotsTwoRoomsTableCell;
-    IBOutlet UITableViewCell  *_twoSlotsThreeRoomsTableCell;
-    IBOutlet UITableViewCell  *_twoSlotsFourRoomsTableCell;
-    IBOutlet UITableViewCell  *_twoSlotsSixRoomsTableCell;
+    IBOutlet UITableViewCell            *_twoSlotsOneRoomTableCell;
+    IBOutlet UITableViewCell            *_twoSlotsTwoRoomsTableCell;
+    IBOutlet UITableViewCell            *_twoSlotsThreeRoomsTableCell;
+    IBOutlet UITableViewCell            *_twoSlotsFourRoomsTableCell;
+    IBOutlet UITableViewCell            *_twoSlotsSixRoomsTableCell;
 
-    IBOutlet UITableViewCell  *_threeSlotsOneRoomTableCell;
-    IBOutlet UITableViewCell  *_threeSlotsTwoRoomsTableCell;
-    IBOutlet UITableViewCell  *_threeSlotsThreeRoomsTableCell;
+    IBOutlet UITableViewCell            *_threeSlotsOneRoomTableCell;
+    IBOutlet UITableViewCell            *_threeSlotsTwoRoomsTableCell;
+    IBOutlet UITableViewCell            *_threeSlotsThreeRoomsTableCell;
     
-    IBOutlet UITableViewCell  *_fourSlotsOneRoomTableCell;
-    IBOutlet UITableViewCell  *_fourSlotsTwoRoomsTableCell;
-    IBOutlet UITableViewCell  *_fourSlotsThreeRoomsTableCell;
-    IBOutlet UITableViewCell  *_fourSlotsFiveRoomsTableCell;
+    IBOutlet UITableViewCell            *_fourSlotsOneRoomTableCell;
+    IBOutlet UITableViewCell            *_fourSlotsTwoRoomsTableCell;
+    IBOutlet UITableViewCell            *_fourSlotsThreeRoomsTableCell;
+    IBOutlet UITableViewCell            *_fourSlotsFiveRoomsTableCell;
     
-    IBOutlet UITableViewCell  *_fiveSlotsOneRoomTableCell;
+    IBOutlet UITableViewCell            *_fiveSlotsOneRoomTableCell;
     
-    IBOutlet UITableViewCell  *_sixSlotsOneRoomTableCell;
-    IBOutlet UITableViewCell  *_sixSlotsTwoRoomsTableCell;
+    IBOutlet UITableViewCell            *_sixSlotsOneRoomTableCell;
+    IBOutlet UITableViewCell            *_sixSlotsTwoRoomsTableCell;
     
-    IBOutlet UITableViewCell  *_sevenSlotsOneRoomTableCell;
+    IBOutlet UITableViewCell            *_sevenSlotsOneRoomTableCell;
     
-    IBOutlet UITableViewCell  *_eightSlotsOneRoomTableCell;
+    IBOutlet UITableViewCell            *_eightSlotsOneRoomTableCell;
     
-    IBOutlet UITableViewCell  *_emptyTableCell;
-    IBOutlet UITableViewCell  *_errorMessageCell;
+    IBOutlet UITableViewCell            *_emptyTableCell;
+    IBOutlet UITableViewCell            *_errorMessageCell;
     
-    IBOutlet UIButton         *_noConnectionButton;
-    IBOutlet UILabel          *_noConnectionLabel;
+    IBOutlet UIButton                   *_noConnectionButton;
+    IBOutlet UILabel                    *_noConnectionLabel;
     
-    NSString                  *_searchText;
-    NSString                  *_searchType;
-    
-    IBOutlet GradientButton             *_homeButton;
-    IBOutlet GradientButton             *_todayButton;
-    IBOutlet GradientButton             *_searchButton;
+    NSString                            *_searchText;
+    NSString                            *_searchType;
     
     IBOutlet UISwipeGestureRecognizer   *_rightSwipe;
     IBOutlet UISwipeGestureRecognizer   *_leftSwipe;
@@ -135,6 +133,8 @@ UIViewController
 
 @property (nonatomic, retain) IBOutlet UILabel                   *_acronymLabel;
 @property (nonatomic, retain) IBOutlet UILabel                   *_titleLabel;
+
+@property (nonatomic, retain) IBOutlet UISegmentedControl        *_timeTableSegmentedControl;
 
 @property (nonatomic, retain) IBOutlet UITableViewCell           *_oneSlotOneRoomTableCell;
 @property (nonatomic, retain) IBOutlet UITableViewCell           *_oneSlotTwoRoomsTableCell;
@@ -191,10 +191,6 @@ UIViewController
 @property (nonatomic, retain)          NSString                  *_searchText;
 @property (nonatomic, retain)          NSString                  *_searchType;
 
-@property (nonatomic, retain) IBOutlet GradientButton            *_homeButton;
-@property (nonatomic, retain) IBOutlet GradientButton            *_todayButton;
-@property (nonatomic, retain) IBOutlet GradientButton            *_searchButton;
-
 @property (nonatomic, retain) IBOutlet UISwipeGestureRecognizer  *_rightSwipe;
 @property (nonatomic, retain) IBOutlet UISwipeGestureRecognizer  *_leftSwipe;
 
@@ -206,9 +202,7 @@ UIViewController
 
 - (IBAction)tryConnectionAgain:(id)sender;
 
-- (IBAction)backToOwnAcronym:(id)sender;
-- (IBAction)backToToday:(id)sender;
-- (IBAction)moveToSearch:(id)sender;
 - (IBAction)moveBackToMenuOverview:(id)sender;
+- (IBAction)moveToTimeTableSegmentedControlFeature:(id)sender;
 
 @end

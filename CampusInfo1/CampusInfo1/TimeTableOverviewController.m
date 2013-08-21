@@ -36,6 +36,8 @@
 @synthesize _acronymLabel;
 @synthesize _titleLabel;
 
+@synthesize _timeTableSegmentedControl;
+
 @synthesize _ownStoredAcronymString;
 @synthesize _ownStoredAcronymType;
 @synthesize _ownStoredAcronymTrials;
@@ -85,10 +87,6 @@
 @synthesize _searchText;
 @synthesize _searchType;
 
-@synthesize _homeButton;
-@synthesize _todayButton;
-@synthesize _searchButton;
-
 @synthesize _leftSwipe;
 @synthesize _rightSwipe;
 
@@ -123,11 +121,11 @@
     
     if (_ownStoredAcronymString != nil)
     {
-        [self._homeButton setTitle:_ownStoredAcronymString forState:UIControlStateNormal];
+        [self._timeTableSegmentedControl setTitle:_ownStoredAcronymString forSegmentAtIndex:0];
     }
     else
     {
-        [self._homeButton setTitle:@"Kürzel" forState:UIControlStateNormal];
+        [self._timeTableSegmentedControl setTitle:@"Kürzel" forSegmentAtIndex:0];
     }
     
     self._actualShownAcronymTrials = 1;
@@ -241,40 +239,52 @@
     [self setNewScheduleWithDate:_actualDate];
 }
 
-- (IBAction)backToOwnAcronym:(id)sender
-{
-    if (self._ownStoredAcronymString == nil)
-    {
-        [self presentModalViewController:_settingsVC animated:YES];
-    }
-    else
-    {
-        
-        [self setNewScheduleWithAcronym:self._ownStoredAcronymString
-                        withAcronymType:self._ownStoredAcronymType
-                        withAcronymText:[NSString stringWithFormat:@"von %@ (%@)"
-                                         ,_ownStoredAcronymString
-                                         ,[_translator getGermanTypeTranslation:_ownStoredAcronymType]
-                                         ]
-         ];
-    }
-}
-
-- (IBAction)backToToday:(id)sender
-{    
-    NSDate *_today = [NSDate date];
-   [self setActualDate:_today];
-}
-
-- (IBAction)moveToSearch:(id)sender
-{
-  [self presentModalViewController:_searchVC animated:YES];
-}
-
 - (IBAction)moveBackToMenuOverview:(id)sender
 {
     [self dismissModalViewControllerAnimated:YES];
     self.tabBarController.selectedIndex = 0;
+}
+
+- (IBAction)moveToTimeTableSegmentedControlFeature:(id)sender
+{
+    //NSLog(@"_timeTableSegmentedControl.selectedSegmentIndex: %i", _timeTableSegmentedControl.selectedSegmentIndex);
+    
+    // acronym
+    if(_timeTableSegmentedControl.selectedSegmentIndex == 0)
+    {
+		if (self._ownStoredAcronymString == nil)
+        {
+            //[_timeTableSegmentedControl setSelectedSegmentIndex:UISegmentedControlNoSegment];
+            [self presentModalViewController:_settingsVC animated:YES];
+        }
+        else
+        {
+            //[_timeTableSegmentedControl setSelectedSegmentIndex:UISegmentedControlNoSegment];
+            [self setNewScheduleWithAcronym:self._ownStoredAcronymString
+                            withAcronymType:self._ownStoredAcronymType
+                            withAcronymText:[NSString stringWithFormat:@"von %@ (%@)"
+                                             ,_ownStoredAcronymString
+                                             ,[_translator getGermanTypeTranslation:_ownStoredAcronymType]
+                                             ]
+             ];
+        }
+	}
+    
+    // today
+	if(_timeTableSegmentedControl.selectedSegmentIndex == 1)
+    {
+        NSDate *_today = [NSDate date];
+        [self setActualDate:_today];
+        //[_timeTableSegmentedControl setSelectedSegmentIndex:UISegmentedControlNoSegment];
+	}
+
+    // search
+    if(_timeTableSegmentedControl.selectedSegmentIndex == 2)
+    {
+        //[_timeTableSegmentedControl setSelectedSegmentIndex:UISegmentedControlNoSegment];
+        [self presentModalViewController:_searchVC animated:YES];
+	}
+    
 }
 
 
@@ -383,12 +393,12 @@
                                            ,_ownStoredAcronymString
                                            ,[_translator getGermanTypeTranslation:_ownStoredAcronymType]
                                            ];
-            [self._homeButton setTitle:_ownStoredAcronymString forState:UIControlStateNormal];
+            [self._timeTableSegmentedControl setTitle:_ownStoredAcronymString forSegmentAtIndex:0];
         }
         else
         {
             _acronymLabel.text          = [NSString stringWithFormat:@""];
-            [self._homeButton setTitle:@"Kürzel" forState:UIControlStateNormal];
+            [self._timeTableSegmentedControl setTitle:@"Kürzel" forSegmentAtIndex:0];
         }
         
         // SET NEW ACRONYM WITH ACTUAL DATE
@@ -539,11 +549,6 @@
     _noConnectionButton.hidden = YES;
     _noConnectionLabel.hidden = YES;
     
-    // set style of buttons next to title
-    [_homeButton useAlertStyle];
-    [_todayButton useAlertStyle];
-    [_searchButton useAlertStyle];
-    
     // initialize swipe gestures
     _rightSwipe = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(dayBefore:)];
     [_rightSwipe setDirection:(UISwipeGestureRecognizerDirectionRight)];
@@ -638,12 +643,12 @@
                                                     ,self._actualShownAcronymString
                                                     ,[_translator getGermanTypeTranslation:self._actualShownAcronymType]
                                                     ];
-                [self._homeButton setTitle:_ownStoredAcronymString forState:UIControlStateNormal];
+                [self._timeTableSegmentedControl setTitle:_ownStoredAcronymString forSegmentAtIndex:0];
             }
             else
             {
                 self._acronymLabel.text          = [NSString stringWithFormat:@""];
-                [self._homeButton setTitle:@"Kürzel" forState:UIControlStateNormal];
+                [self._timeTableSegmentedControl setTitle:@"Kürzel" forSegmentAtIndex:0];
             }
             
             //self._schedule                 = [[ScheduleDto alloc] initWithAcronym:_actualShownAcronymString:_actualShownAcronymType:_actualDate];
@@ -747,12 +752,12 @@
             if (_ownStoredAcronymString != nil)
             {
                 _acronymLabel.text                   = [NSString stringWithFormat:@"   von %@",_actualShownAcronymString];
-                [self._homeButton setTitle:_ownStoredAcronymString forState:UIControlStateNormal];
+                [self._timeTableSegmentedControl setTitle:_ownStoredAcronymString forSegmentAtIndex:0];
             }
             else
             {
                 _acronymLabel.text                   = [NSString stringWithFormat:@""];
-                [self._homeButton setTitle:@"Kürzel" forState:UIControlStateNormal];
+                [self._timeTableSegmentedControl setTitle:@"Kürzel" forSegmentAtIndex:0];
             }
             
             NSUserDefaults *_acronymUserDefaults = [NSUserDefaults standardUserDefaults];
@@ -835,9 +840,6 @@
     _dayNavigator = nil;
     _acronymLabel = nil;
     _dateLabel = nil;
-
-    _homeButton = nil;
-    _todayButton = nil;
     
     _rightSwipe = nil;
     _leftSwipe = nil;
@@ -845,9 +847,9 @@
     [self set_errorMessageCell:nil];
     _titleLabel = nil;
     _searchVC = nil;
-    _searchButton = nil;
     _waitForLoadingActivityIndicator = nil;
     _settingsVC = nil;
+    _timeTableSegmentedControl = nil;
     [super viewDidUnload];
 }
 
