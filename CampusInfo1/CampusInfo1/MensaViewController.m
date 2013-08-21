@@ -14,22 +14,30 @@
 #import "LunchTimePlanDto.h"
 #import "WeekdayDto.h"
 
+#import "PButton.h"
+#import "PEffect.h"
+#import "PPath.h"
+
 @implementation MensaViewController
 
 @synthesize _mensaOverviewTable;
 @synthesize _mensaOverviewTableCell;
+
 @synthesize _generalDictionary;
 @synthesize _asyncTimeTableRequest;
 @synthesize _dataFromUrl;
 @synthesize _errorMessage;
 @synthesize _connectionTrials;
+
 @synthesize _gastronomyArray;
 @synthesize _actualDate;
 @synthesize _dateFormatter;
 @synthesize _translator;
-@synthesize _dateLabel;
 @synthesize _mensaDetailVC;
+
 @synthesize _titleLabel;
+@synthesize _dateLabel;
+@synthesize _backButton;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -74,6 +82,48 @@
 
     [_titleLabel setBackgroundColor:_backgroundColor];
     [_titleLabel setTextColor:[UIColor whiteColor]];
+    
+    NSString *backArrowString = @"\U000025C0\U0000FE0E"; //BLACK LEFT-POINTING TRIANGLE PLUS VARIATION SELECTOR
+    [_backButton setTitle:backArrowString forState:UIBarButtonItemStylePlain];
+    
+    
+    //UIBarButtonItem *backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:backArrowString style:UIBarButtonItemStylePlain target:nil action:nil];
+    //self.navigationItem.leftButtonItem = backBarButtonItem;
+    //[backBarButtonItem release];
+    
+    /*
+    UIButton *_helperButton = [UIButton buttonWithType:101];
+    UIView *backButtonView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, _helperButton.frame.size.width, _helperButton.frame.size.height)];
+    
+    [_helperButton addTarget:self action:@selector(backButtonTouched:) forControlEvents:UIControlEventTouchUpInside];
+    [_helperButton setTitle:@"Back" forState:UIControlStateNormal];
+    [backButtonView addSubview:_helperButton];
+    
+    // set buttonview as custom view for bar button item
+    _backButton = [_backButton  ]//initWithCustomView:backButtonView];
+    */
+    //_backButton = [UIButton buttonWithType:101];
+    
+    /*
+    PButton *navigationButton = [[PButton alloc] init];
+    navigationButton.frame = CGRectMake(30, 100, 100, 30);
+    navigationButton.buttonBorderPath = [PPath navigationBarItemPathArrowWidth:10 rect:CGRectMake(0, 0, 100, 28) radius:5];
+    [navigationButton setTitle:@"test" forState:UIControlStateNormal];
+    
+    UIColor *topColor = [UIColor colorWithRed:166/255.0 green:162/255.0 blue:173/255.0 alpha:1.00f];
+    UIColor *bottomColor = [UIColor colorWithRed:88/255.0 green:95/255.0 blue:106/255.0 alpha:1.00f];
+    UIColor *borderColor = [UIColor colorWithRed:59/255.0f green:61/255.0f blue:63/255.0f alpha:1.00f];
+    [navigationButton.normalEffects addObjectsFromArray:@[
+     [PEffect border:navigationButton.buttonBorderPath.CGPath color:borderColor width:2],
+     [PEffect gradientColor:@[topColor, bottomColor] locations:nil startPoint:CGPointMake(0, 0) endPoint:CGPointMake(0, 30)],
+     [PEffect halfHighlight],
+     [PEffect innerShadow],
+     [PEffect outerShadow],
+     ]];
+    [navigationButton.highlightEffects addObjectsFromArray:@[
+     [PEffect gradientColor:@[[UIColor redColor], [UIColor blueColor]] locations:nil startPoint:CGPointMake(0, 0) endPoint:CGPointMake(0, 30)],
+     ]];
+    */
 }
 
 
@@ -90,6 +140,8 @@
     _dateLabel = nil;
     _mensaDetailVC = nil;
     _titleLabel = nil;
+    _backButton = nil;
+    _backButton = nil;
     [super viewDidUnload];
 }
 

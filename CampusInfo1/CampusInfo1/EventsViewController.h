@@ -15,8 +15,6 @@
 {
     NewsChannelDto                      *_newsChannel;
 
-    IBOutlet UILabel                    *_titleLabel;
-    IBOutlet UILabel                    *_descriptionTitleLabel;
     IBOutlet UITableView                *_eventsTable;
     IBOutlet UITableViewCell            *_eventsTableCell;
     
@@ -27,6 +25,9 @@
     IBOutlet UILabel                    *_noConnectionLabel;
     IBOutlet UIButton                   *_noConnectionButton;
 
+    IBOutlet UINavigationBar            *_titleNavigationBar;
+    IBOutlet UINavigationItem           *_titleNavigationItem;
+    IBOutlet UILabel                    *_titleNavigationLabel;
 }
 
 @property (nonatomic, retain) NewsChannelDto                        *_newsChannel;
@@ -34,8 +35,10 @@
 @property (nonatomic, retain) DateFormation                         *_dateFormatter;
 @property (nonatomic, retain) UIColor                               *_blueColor;
 
-@property (nonatomic, retain) IBOutlet UILabel                      *_titleLabel;
-@property (nonatomic, retain) IBOutlet UILabel                      *_descriptionTitleLabel;
+@property (nonatomic, retain) IBOutlet UINavigationBar              *_titleNavigationBar;
+@property (nonatomic, retain) IBOutlet UINavigationItem             *_titleNavigationItem;
+@property (nonatomic, retain) IBOutlet UILabel                      *_titleNavigationLabel;
+
 @property (nonatomic, retain) IBOutlet UITableView                  *_eventsTable;
 @property (nonatomic, retain) IBOutlet UITableViewCell              *_eventsTableCell;
 
@@ -43,7 +46,6 @@
 @property (nonatomic, retain) IBOutlet UIButton                     *_noConnectionButton;
 @property (nonatomic, retain) IBOutlet UILabel                      *_noConnectionLabel;
 
-- (IBAction)moveBackToMenuOverview:(id)sender;
 - (IBAction)tryConnectionAgain:(id)sender;
 
 @end

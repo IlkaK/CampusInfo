@@ -13,8 +13,12 @@
 @end
 
 @implementation TechnikumViewController
-@synthesize _titleLabel;
+
 @synthesize _technikumWebView;
+
+@synthesize _titleNavigationBar;
+@synthesize _titleNavigationLabel;
+@synthesize _titleNavigationItem;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -35,8 +39,30 @@
     
     UIColor *_backgroundColor = [UIColor colorWithRed:1.0/255.0 green:100.0/255.0 blue:167.0/255.0 alpha:1.0];
     
-    [_titleLabel setBackgroundColor:_backgroundColor];
-    [_titleLabel setTextColor:[UIColor whiteColor]];
+    UIButton *backButton = [UIButton buttonWithType:101];
+    UIView *backButtonView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, backButton.frame.size.width, backButton.frame.size.height)];
+    
+    [backButton addTarget:self action:@selector(moveBackToMaps:) forControlEvents:UIControlEventTouchUpInside];
+    [backButton setTitle:@"zurück" forState:UIControlStateNormal];
+    [backButtonView addSubview:backButton];
+    
+    // set buttonview as custom view for bar button item
+    UIBarButtonItem *backButtonItem = [[UIBarButtonItem alloc] initWithCustomView:backButtonView];
+    [_titleNavigationItem setLeftBarButtonItem :backButtonItem animated :true];
+    
+    [_titleNavigationLabel setTextColor:[UIColor whiteColor]];
+    _titleNavigationLabel.text = @"Winterthur - Campus Technikumstrasse";
+    _titleNavigationItem.title = @"";
+    
+    CGRect imageRect = CGRectMake(0, 0, _titleNavigationBar.frame.size.width, _titleNavigationBar.frame.size.height);
+    UIGraphicsBeginImageContext(imageRect.size);
+    [_backgroundColor set];
+    UIRectFill(imageRect);
+    UIImage *aImage = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    [_titleNavigationBar setBackgroundImage:aImage forBarMetrics:UIBarMetricsDefault];
+    
+    [_titleNavigationLabel setBackgroundColor:_backgroundColor];
 }
 
 - (void)didReceiveMemoryWarning
@@ -45,14 +71,16 @@
     // Dispose of any resources that can be recreated.
 }
 
-- (IBAction)moveBackToMaps:(id)sender
+- (void)moveBackToMaps:(id)sender
 {
     [self dismissModalViewControllerAnimated:YES];    
 }
 
 - (void)viewDidUnload {
-    _titleLabel = nil;
     _technikumWebView = nil;
+    _titleNavigationBar = nil;
+    _titleNavigationItem = nil;
+    _titleNavigationLabel = nil;
     [super viewDidUnload];
 }
 @end

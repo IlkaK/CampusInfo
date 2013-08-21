@@ -10,13 +10,18 @@
 
 @interface ZurichViewController : UIViewController
 {
-    IBOutlet UILabel            *_titleLabel;
     IBOutlet UIWebView          *_zurichWebView;
+    
+    IBOutlet UINavigationBar    *_titleNavigationBar;
+    IBOutlet UINavigationItem   *_titleNavigationItem;
+    IBOutlet UILabel            *_titleNavigationLabel;
+    
 }
 
 @property (nonatomic, retain) IBOutlet UIWebView                      *_zurichWebView;
-@property (nonatomic, retain) IBOutlet UILabel                        *_titleLabel;
 
-- (IBAction)moveBackToMaps:(id)sender;
+@property (nonatomic, retain) IBOutlet UINavigationBar                *_titleNavigationBar;
+@property (nonatomic, retain) IBOutlet UINavigationItem               *_titleNavigationItem;
+@property (nonatomic, retain) IBOutlet UILabel                        *_titleNavigationLabel;
 
 @end

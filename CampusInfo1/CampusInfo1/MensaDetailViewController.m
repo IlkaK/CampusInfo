@@ -68,7 +68,7 @@
     //----- Navigation Bar ----
     // set current day
     [self setTitleToActualDate];
-    
+
     // set day navigator
     UIImage *_leftButtonImage  = [UIImage imageNamed:@"arrowLeft_small.png"];
     UIImage *_rightButtonImage = [UIImage imageNamed:@"arrowRight_small.png"];

@@ -15,22 +15,24 @@
 
 @interface MapsViewController : UIViewController<UITableViewDelegate>
 {
+    IBOutlet UINavigationBar            *_titleNavigationBar;
+    IBOutlet UINavigationItem           *_titleNavigationItem;
+    IBOutlet UILabel                    *_titleNavigationLabel;
 
-    IBOutlet UILabel                    *_titleLabel;
-    
     IBOutlet TechnikumViewController    *_technikumVC;
     IBOutlet ZurichViewController       *_zurichVC;
     IBOutlet UITableView                *_menuTableView;
 }
 
-@property (nonatomic, retain) IBOutlet UILabel                      *_titleLabel;
 
 @property (nonatomic, retain) IBOutlet UITableView                  *_menuTableView;
+
+@property (nonatomic, retain) IBOutlet UINavigationBar              *_titleNavigationBar;
+@property (nonatomic, retain) IBOutlet UINavigationItem             *_titleNavigationItem;
+@property (nonatomic, retain) IBOutlet UILabel                      *_titleNavigationLabel;
 
 @property (nonatomic, retain) IBOutlet TechnikumViewController      *_technikumVC;
 @property (nonatomic, retain) IBOutlet ZurichViewController         *_zurichVC;
 
-
-- (IBAction)moveBackToMenuOverview:(id)sender;
 
 @end

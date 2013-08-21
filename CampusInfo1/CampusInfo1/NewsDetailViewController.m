@@ -14,14 +14,17 @@
 
 @implementation NewsDetailViewController
 @synthesize _dateLabel;
-@synthesize _descriptionTitleLabel;
 @synthesize _linkButton;
-@synthesize _titleLabel;
 @synthesize _contentWebView;
 
 @synthesize _newsItem;
 
 @synthesize _dateFormatter;
+
+@synthesize _descriptionTitleLabel;
+@synthesize _titleNavigationLabel;
+@synthesize _titleNavigationBar;
+@synthesize _titleNavigationItem;
 
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -36,15 +39,38 @@
 
     UIColor *_blueColor = [UIColor colorWithRed:1.0/255.0 green:100.0/255.0 blue:167.0/255.0 alpha:1.0];
     
-    [_titleLabel setBackgroundColor:_blueColor];
-    [_titleLabel setTextColor:[UIColor whiteColor]];
-    
     [_descriptionTitleLabel setBackgroundColor:_blueColor];
     [_descriptionTitleLabel setTextColor:[UIColor whiteColor]];
     
     [_dateLabel     setTextColor:[UIColor lightGrayColor]];
     
     _dateFormatter = [[DateFormation alloc] init];
+    
+    UIButton *backButton = [UIButton buttonWithType:101];
+    UIView *backButtonView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, backButton.frame.size.width, backButton.frame.size.height)];
+    
+    [backButton addTarget:self action:@selector(moveBackToMenuOverview:) forControlEvents:UIControlEventTouchUpInside];
+    [backButton setTitle:@"zurück" forState:UIControlStateNormal];
+    [backButtonView addSubview:backButton];
+    
+    // set buttonview as custom view for bar button item
+    UIBarButtonItem *backButtonItem = [[UIBarButtonItem alloc] initWithCustomView:backButtonView];
+    [_titleNavigationItem setLeftBarButtonItem :backButtonItem animated :true];
+    
+    [_titleNavigationLabel setTextColor:[UIColor whiteColor]];
+    _titleNavigationLabel.text = @"News";
+    _titleNavigationItem.title = @"";
+    
+    CGRect imageRect = CGRectMake(0, 0, _titleNavigationBar.frame.size.width, _titleNavigationBar.frame.size.height);
+    UIGraphicsBeginImageContext(imageRect.size);
+    [_blueColor set];
+    UIRectFill(imageRect);
+    UIImage *aImage = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    [_titleNavigationBar setBackgroundImage:aImage forBarMetrics:UIBarMetricsDefault];
+    
+    [_titleNavigationLabel setBackgroundColor:_blueColor];
+    
 }
 
 - (void)didReceiveMemoryWarning
@@ -54,11 +80,13 @@
 }
 
 - (void)viewDidUnload {
-    _titleLabel = nil;
     _descriptionTitleLabel = nil;
     _dateLabel = nil;
     _linkButton = nil;
     _contentWebView = nil;
+    _titleNavigationBar = nil;
+    _titleNavigationItem = nil;
+    _titleNavigationLabel = nil;
     [super viewDidUnload];
 }
 
@@ -74,7 +102,7 @@
     
     if (self._newsItem != nil)
     {
-        _descriptionTitleLabel.text = [NSString stringWithFormat:@"   %@"
+        _descriptionTitleLabel.text = [NSString stringWithFormat:@"%@"
                                        ,_newsItem._title];
         _dateLabel.text             =  [NSString stringWithFormat:@"%@"
                                          ,[[_dateFormatter _dayFormatter] stringFromDate:_newsItem._pubDate]];
@@ -92,7 +120,7 @@
 }
 
 
-- (IBAction)moveBackToMenuOverview:(id)sender
+- (void)moveBackToMenuOverview:(id)sender
 {
         [self dismissModalViewControllerAnimated:YES];
 }

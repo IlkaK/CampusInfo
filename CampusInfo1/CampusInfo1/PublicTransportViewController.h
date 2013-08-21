@@ -10,12 +10,14 @@
 
 @interface PublicTransportViewController : UIViewController
 {
-    IBOutlet UILabel *_titleLabel;
-
+    IBOutlet UINavigationBar        *_publicTransportNavigationBar;
+    IBOutlet UINavigationItem       *_publicTransportNavigationItem;
+    IBOutlet UILabel                *_publicTransportNavigationLabel;
 }
 
-@property (nonatomic, retain) IBOutlet UILabel                      *_titleLabel;
+@property (nonatomic, retain) IBOutlet UINavigationBar              *_publicTransportNavigationBar;
+@property (nonatomic, retain) IBOutlet UINavigationItem             *_publicTransportNavigationItem;
+@property (nonatomic, retain) IBOutlet UILabel                      *_publicTransportNavigationLabel;
 
-- (IBAction)moveBackToMenuOverview:(id)sender;
 
 @end

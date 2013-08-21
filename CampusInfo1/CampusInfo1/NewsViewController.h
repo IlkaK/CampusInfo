@@ -17,9 +17,6 @@
 @interface NewsViewController : UIViewController<UITableViewDelegate>
 {
     NewsChannelDto                      *_newsChannel;
-
-    IBOutlet UILabel                    *_titleLabel;
-    IBOutlet UILabel                    *_descriptionTitleLabel;
     
     IBOutlet UITableView                *_newsTable;
     IBOutlet UITableViewCell            *_newsTableCell;
@@ -33,11 +30,17 @@
     IBOutlet UIButton                   *_noConnectionButton;
     IBOutlet UILabel                    *_noConnectionLabel;
     
+    IBOutlet UINavigationBar            *_titleNavigationBar;
+    IBOutlet UINavigationItem           *_titleNavigationItem;
+    IBOutlet UILabel                    *_titleNavigationLabel;
+    
 }
 
 @property (strong, nonatomic) NewsChannelDto                        *_newsChannel;
-@property (nonatomic, retain) IBOutlet UILabel                      *_titleLabel;
-@property (nonatomic, retain) IBOutlet UILabel                      *_descriptionTitleLabel;
+
+@property (nonatomic, retain) IBOutlet UINavigationBar              *_titleNavigationBar;
+@property (nonatomic, retain) IBOutlet UINavigationItem             *_titleNavigationItem;
+@property (nonatomic, retain) IBOutlet UILabel                      *_titleNavigationLabel;
 
 @property (nonatomic, retain) IBOutlet UITableView                  *_newsTable;
 @property (nonatomic, retain) IBOutlet UITableViewCell              *_newsTableCell;
@@ -53,6 +56,5 @@
 @property (nonatomic, retain) IBOutlet UILabel                      *_noConnectionLabel;
 
 - (IBAction)tryConnectionAgain:(id)sender;
-- (IBAction)moveBackToMenuOverview:(id)sender;
 
 @end
