@@ -15,6 +15,7 @@
 #import <SearchViewController.h>
 #import <SettingsViewController.h>
 #import <ColorSelection.h>
+#import <GradientButton.h>
 
 @class ScheduleDto;
 @class DayDto;
@@ -22,6 +23,7 @@
 @class TimeTableDetailController;
 @class SearchViewController;
 @class SettingsViewController;
+@class GradientButton;
 
 @interface TimeTableOverviewController : 
 UIViewController 
@@ -102,7 +104,7 @@ UIViewController
     IBOutlet UITableViewCell            *_emptyTableCell;
     IBOutlet UITableViewCell            *_errorMessageCell;
     
-    IBOutlet UIButton                   *_noConnectionButton;
+    IBOutlet GradientButton             *_noConnectionButton;
     IBOutlet UILabel                    *_noConnectionLabel;
     
     NSString                            *_searchText;

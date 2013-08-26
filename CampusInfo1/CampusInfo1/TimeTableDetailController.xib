@@ -109,7 +109,6 @@
 						<string key="NSFrame">{{115, 20}, {205, 19}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
 						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
 						<bool key="IBUIOpaque">NO</bool>
 						<bool key="IBUIClipsSubviews">YES</bool>
@@ -134,7 +133,7 @@
 					<object class="IBUILabel" id="373371274">
 						<reference key="NSNextResponder" ref="191373211"/>
 						<int key="NSvFlags">292</int>
-						<string key="NSFrame">{{0, 70}, {318, 21}}</string>
+						<string key="NSFrame">{{0, 48}, {318, 21}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
 						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="461656408"/>
@@ -145,7 +144,10 @@
 						<bool key="IBUIUserInteractionEnabled">NO</bool>
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 						<string key="IBUIText">Label</string>
-						<reference key="IBUITextColor" ref="728028439"/>
+						<object class="NSColor" key="IBUITextColor" id="106139780">
+							<int key="NSColorSpace">3</int>
+							<bytes key="NSWhite">MQA</bytes>
+						</object>
 						<nil key="IBUIHighlightedColor"/>
 						<int key="IBUIBaselineAdjustment">0</int>
 						<float key="IBUIMinimumFontSize">10</float>
@@ -170,10 +172,7 @@
 						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="12464141"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
-						<object class="NSColor" key="IBUIBackgroundColor">
-							<int key="NSColorSpace">3</int>
-							<bytes key="NSWhite">MQA</bytes>
-						</object>
+						<reference key="IBUIBackgroundColor" ref="106139780"/>
 						<bool key="IBUIClipsSubviews">YES</bool>
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 						<bool key="IBUIAlwaysBounceVertical">YES</bool>
@@ -187,7 +186,7 @@
 					<object class="IBUIActivityIndicatorView" id="461656408">
 						<reference key="NSNextResponder" ref="191373211"/>
 						<int key="NSvFlags">292</int>
-						<string key="NSFrame">{{145, 91}, {20, 20}}</string>
+						<string key="NSFrame">{{141, 70}, {37, 37}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
 						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="116715387"/>
@@ -195,10 +194,10 @@
 						<bool key="IBUIOpaque">NO</bool>
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 						<bool key="IBUIHidesWhenStopped">NO</bool>
-						<int key="IBUIStyle">2</int>
+						<int key="IBUIStyle">0</int>
 						<object class="NSColor" key="IBUIColor">
 							<int key="NSColorSpace">1</int>
-							<bytes key="NSRGB">MSAwLjA0ODg2ODQ3ODM1IDAuMTkxMTk3NjQ5AA</bytes>
+							<bytes key="NSRGB">MSAwLjk3NTMwODY0MiAwLjk3NTMwODY0MgA</bytes>
 						</object>
 					</object>
 				</array>
@@ -314,11 +313,11 @@
 						<array class="NSMutableArray" key="children">
 							<reference ref="116715387"/>
 							<reference ref="277438494"/>
-							<reference ref="373371274"/>
-							<reference ref="461656408"/>
 							<reference ref="991399763"/>
 							<reference ref="506646351"/>
 							<reference ref="12464141"/>
+							<reference ref="373371274"/>
+							<reference ref="461656408"/>
 						</array>
 						<reference key="parent" ref="0"/>
 					</object>
@@ -435,6 +434,7 @@
 						<string key="_titleLabel">UILabel</string>
 						<string key="_titleNavigationBar">UINavigationBar</string>
 						<string key="_titleNavigationItem">UINavigationItem</string>
+						<string key="_titleNavigationLabel">UILabel</string>
 						<string key="_waitForChangeActivityIndicator">UIActivityIndicatorView</string>
 					</dictionary>
 					<dictionary class="NSMutableDictionary" key="toOneOutletInfosByName">
@@ -477,6 +477,10 @@
 						<object class="IBToOneOutletInfo" key="_titleNavigationItem">
 							<string key="name">_titleNavigationItem</string>
 							<string key="candidateClassName">UINavigationItem</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="_titleNavigationLabel">
+							<string key="name">_titleNavigationLabel</string>
+							<string key="candidateClassName">UILabel</string>
 						</object>
 						<object class="IBToOneOutletInfo" key="_waitForChangeActivityIndicator">
 							<string key="name">_waitForChangeActivityIndicator</string>

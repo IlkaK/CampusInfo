@@ -52,6 +52,7 @@
     
     _noConnectionButton.hidden = YES;
     _noConnectionLabel.hidden = YES;
+    [_noConnectionButton useAlertStyle];
     
     UIButton *backButton = [UIButton buttonWithType:101];
     UIView *backButtonView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, backButton.frame.size.width, backButton.frame.size.height)];

@@ -106,6 +106,8 @@
     // set default values for spinner/activity indicator
     _waitForChangeActivityIndicator.hidesWhenStopped = YES;
     _waitForChangeActivityIndicator.hidden = YES;
+    
+    [self.view setBackgroundColor:_zhawColor._zhawLighterBlue];
 }
 
 

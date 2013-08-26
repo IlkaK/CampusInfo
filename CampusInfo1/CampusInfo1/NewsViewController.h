@@ -11,6 +11,7 @@
 #import <NewsDetailViewController.h>
 #import <DateFormation.h>
 #import <ColorSelection.h>
+#import <GradientButton.h>
 
 @class NewsDetailViewController;
 
@@ -28,7 +29,7 @@
     IBOutlet NewsDetailViewController   *_newsDetailVC;
     
     int                                 _actualTrials;
-    IBOutlet UIButton                   *_noConnectionButton;
+    IBOutlet GradientButton             *_noConnectionButton;
     IBOutlet UILabel                    *_noConnectionLabel;
     
     IBOutlet UINavigationBar            *_titleNavigationBar;
@@ -52,7 +53,7 @@
 @property (nonatomic, retain) IBOutlet NewsDetailViewController     *_newsDetailVC;
 
 @property (nonatomic, assign) int                                   _actualTrials;
-@property (nonatomic, retain) IBOutlet UIButton                     *_noConnectionButton;
+@property (nonatomic, retain) IBOutlet GradientButton               *_noConnectionButton;
 @property (nonatomic, retain) IBOutlet UILabel                      *_noConnectionLabel;
 
 - (IBAction)tryConnectionAgain:(id)sender;

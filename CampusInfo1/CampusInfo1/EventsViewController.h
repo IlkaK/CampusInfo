@@ -10,7 +10,7 @@
 #import <NewsChannelDto.h>
 #import <DateFormation.h>
 #import <ColorSelection.h>
-
+#import <GradientButton.h>
 
 @interface EventsViewController : UIViewController
 {
@@ -23,7 +23,7 @@
     
     int                                 _actualTrials;
     IBOutlet UILabel                    *_noConnectionLabel;
-    IBOutlet UIButton                   *_noConnectionButton;
+    IBOutlet GradientButton             *_noConnectionButton;
 
     IBOutlet UINavigationBar            *_titleNavigationBar;
     IBOutlet UINavigationItem           *_titleNavigationItem;
@@ -45,7 +45,7 @@
 @property (nonatomic, retain) IBOutlet UITableViewCell              *_eventsTableCell;
 
 @property (nonatomic, assign) int                                   _actualTrials;
-@property (nonatomic, retain) IBOutlet UIButton                     *_noConnectionButton;
+@property (nonatomic, retain) IBOutlet GradientButton               *_noConnectionButton;
 @property (nonatomic, retain) IBOutlet UILabel                      *_noConnectionLabel;
 
 - (IBAction)tryConnectionAgain:(id)sender;

@@ -567,12 +567,11 @@
 
     
     // ------ INITIALIZE NO CONNECTION BUTTON ------
-    if (_noConnectionButton == nil) {
-		_noConnectionButton = [[UIButton alloc] init];
-        _noConnectionLabel = [[UILabel alloc] init];
-	}
+    [_noConnectionButton useAlertStyle];
     _noConnectionButton.hidden = YES;
     _noConnectionLabel.hidden = YES;
+    //[_noConnectionButton setBackgroundColor:_zhawColor._zhawOriginalBlue];
+    //[_noConnectionButton setTintColor:_zhawColor._zhawOriginalBlue];
     
     // initialize swipe gestures
     _rightSwipe = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(dayBefore:)];
@@ -589,7 +588,7 @@
     
     [self.view setBackgroundColor:_zhawColor._zhawLighterBlue];
     
-    [_noConnectionButton setBackgroundColor:_zhawColor._zhawOriginalBlue];
+
     [_timeTableSegmentedControl setTintColor:_zhawColor._zhawOriginalBlue];
     
 }
