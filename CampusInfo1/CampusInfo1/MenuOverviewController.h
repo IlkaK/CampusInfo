@@ -13,6 +13,7 @@
 #import <EventsViewController.h>
 #import <PublicTransportViewController.h>
 #import <MapsViewController.h>
+#import <SocialMediaViewController.h>
 
 @class ContactsViewController;
 @class SettingsViewController;
@@ -20,6 +21,7 @@
 @class EventsViewController;
 @class PublicTransportViewController;
 @class MapsViewController;
+@class SocialMediaViewController;
 
 @interface MenuOverviewController : UIViewController<UITableViewDelegate>
 {
@@ -38,6 +40,7 @@
     IBOutlet PublicTransportViewController  *_publicTransportVC;
     IBOutlet EventsViewController           *_eventsVC;
     IBOutlet MapsViewController             *_mapsVC;
+    IBOutlet SocialMediaViewController      *_socialMediaVC;
     
     
 }
@@ -56,6 +59,7 @@
 @property (nonatomic, retain) IBOutlet EventsViewController                 *_eventsVC;
 @property (nonatomic, retain) IBOutlet PublicTransportViewController        *_publicTransportVC;
 @property (nonatomic, retain) IBOutlet MapsViewController                   *_mapsVC;
+@property (nonatomic, retain) IBOutlet SocialMediaViewController            *_socialMediaVC;
 
 
 @end

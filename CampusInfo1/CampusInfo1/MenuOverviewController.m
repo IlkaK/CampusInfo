@@ -27,6 +27,7 @@
 @synthesize _eventsVC;
 @synthesize _publicTransportVC;
 @synthesize _mapsVC;
+@synthesize _socialMediaVC;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -88,6 +89,12 @@
 		_mapsVC = [[MapsViewController alloc] init];
 	}
     _mapsVC.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
+    
+    if (_socialMediaVC == nil)
+    {
+		_socialMediaVC = [[SocialMediaViewController alloc] init];
+	}
+    _socialMediaVC.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
 }
 
 - (void)didReceiveMemoryWarning
@@ -108,6 +115,8 @@
     _eventsVC = nil;
     _publicTransportVC = nil;    
     _mapsVC = nil;
+    _socialMediaVC = nil;
+    
     [super viewDidUnload];
 }
 
@@ -146,9 +155,9 @@
     [self presentModalViewController:_eventsVC animated:YES];
 }
 
--(void) moveToFacebook:(id)sender event:(id)event
+-(void) moveToSocialMedia:(id)sender event:(id)event
 {
-    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"https://www.facebook.com/engineering.zhaw"]];
+    [self presentModalViewController:_socialMediaVC animated:YES];
 }
 
 -(void) moveToSettings:(id)sender event:(id)event
@@ -300,16 +309,16 @@
             self._menuNewsTableCell = nil;
         }
         
-        // facebook
-        UIButton *_facebookIconButton  = (UIButton *) [_cell viewWithTag:1];
-        _facebookIconButton.enabled = true;
-        [_facebookIconButton addTarget:self action:@selector(moveToFacebook:event:) forControlEvents:UIControlEventTouchUpInside];
-        UIButton *_facebookTitleButton  = (UIButton *) [_cell viewWithTag:2];
-        _facebookTitleButton.enabled = true;
-        [_facebookTitleButton addTarget:self action:@selector(moveToFacebook:event:) forControlEvents:UIControlEventTouchUpInside];
-        NSMutableAttributedString *_newsTitleString = [[NSMutableAttributedString alloc] initWithString:@"Facebook"];
-        [_newsTitleString addAttribute:NSForegroundColorAttributeName value:_fontColor range:NSMakeRange(0, [_newsTitleString length])];
-        [_facebookTitleButton setAttributedTitle:_newsTitleString forState:UIControlStateNormal];
+        // social Media
+        UIButton *_socialMediaIconButton  = (UIButton *) [_cell viewWithTag:1];
+        _socialMediaIconButton.enabled = true;
+        [_socialMediaIconButton addTarget:self action:@selector(moveToSocialMedia:event:) forControlEvents:UIControlEventTouchUpInside];
+        UIButton *_socialMediaTitleButton  = (UIButton *) [_cell viewWithTag:2];
+        _socialMediaTitleButton.enabled = true;
+        [_socialMediaTitleButton addTarget:self action:@selector(moveToSocialMedia:event:) forControlEvents:UIControlEventTouchUpInside];
+        NSMutableAttributedString *_socialMediaTitleString = [[NSMutableAttributedString alloc] initWithString:@"Social Media"];
+        [_socialMediaTitleString addAttribute:NSForegroundColorAttributeName value:_fontColor range:NSMakeRange(0, [_socialMediaTitleString length])];
+        [_socialMediaTitleButton setAttributedTitle:_socialMediaTitleString forState:UIControlStateNormal];
         
         // settings
         UIButton *_settingsIconButton  = (UIButton *) [_cell viewWithTag:3];
