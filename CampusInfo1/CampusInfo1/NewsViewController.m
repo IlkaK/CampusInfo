@@ -19,8 +19,7 @@
 @synthesize _newsTableCell;
 
 @synthesize _dateFormatter;
-
-@synthesize _blueColor;
+@synthesize _zhawColor;
 
 @synthesize _newsDetailVC;
 
@@ -45,9 +44,8 @@
     [super viewDidLoad];
 
     _newsChannel   = [[NewsChannelDto alloc]init];
-    _blueColor = [UIColor colorWithRed:1.0/255.0 green:100.0/255.0 blue:167.0/255.0 alpha:1.0];
-    
     _dateFormatter = [[DateFormation alloc] init];
+    _zhawColor     = [[ColorSelection alloc]init];
 
     // ----- DETAIL PAGE -----
     if (_newsDetailVC == nil)
@@ -75,19 +73,19 @@
     UIBarButtonItem *backButtonItem = [[UIBarButtonItem alloc] initWithCustomView:backButtonView];
     [_titleNavigationItem setLeftBarButtonItem :backButtonItem animated :true];
     
-    [_titleNavigationLabel setTextColor:[UIColor whiteColor]];
+    [_titleNavigationLabel setTextColor:_zhawColor._zhawWhite];
     _titleNavigationLabel.text = @"News - School of Engineering";
     _titleNavigationItem.title = @"";
     
     CGRect imageRect = CGRectMake(0, 0, _titleNavigationBar.frame.size.width, _titleNavigationBar.frame.size.height);
     UIGraphicsBeginImageContext(imageRect.size);
-    [_blueColor set];
+    [_zhawColor._zhawOriginalBlue set];
     UIRectFill(imageRect);
     UIImage *aImage = UIGraphicsGetImageFromCurrentImageContext();
     UIGraphicsEndImageContext();
     [_titleNavigationBar setBackgroundImage:aImage forBarMetrics:UIBarMetricsDefault];
     
-    [_titleNavigationLabel setBackgroundColor:_blueColor];
+    [_titleNavigationLabel setBackgroundColor:_zhawColor._zhawOriginalBlue];
     
 }
 
@@ -265,8 +263,11 @@
     if([_newsChannel._newsItemArray count] > 0)
     {
         //NSLog(@"item array count: %i >= _cellSelection: %i", [_newsChannel._newsItemArray count], _cellSelection);
-
-        if ([_newsChannel._newsItemArray count] >= _cellSelection)
+        
+        // might need to delay indexing the objects within array too early
+        int newsItemArrayCount = [_newsChannel._newsItemArray count];
+        
+        if (newsItemArrayCount >= _cellSelection)
         {
             NewsItemDto *_newsItem = [_newsChannel._newsItemArray objectAtIndex:_cellSelection];
             
@@ -277,8 +278,8 @@
                                        ,[[_dateFormatter _dayFormatter] stringFromDate:_newsItem._pubDate]];
             _descriptionLabel.text  = _newsItem._description;
     
-            [_oneTitleLabel setTextColor:_blueColor];
-            [_dateLabel     setTextColor:[UIColor lightGrayColor]];
+            [_oneTitleLabel setTextColor:_zhawColor._zhawOriginalBlue];
+            [_dateLabel     setTextColor:_zhawColor._zhawLightGrey];
         
             [_detailButton addTarget:self action:@selector(showNewsDetails  :event:) forControlEvents:UIControlEventTouchUpInside];
             _detailButton.hidden    = NO;

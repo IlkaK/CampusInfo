@@ -20,8 +20,7 @@
 @synthesize _eventsTableCell;
 
 @synthesize _dateFormatter;
-
-@synthesize _blueColor;
+@synthesize _zhawColor;
 
 @synthesize _actualTrials;
 @synthesize _noConnectionButton;
@@ -43,9 +42,8 @@
     [super viewDidLoad];
     
     _newsChannel = [[NewsChannelDto alloc]init];
-    
-    _blueColor = [UIColor colorWithRed:1.0/255.0 green:100.0/255.0 blue:167.0/255.0 alpha:1.0];
     _dateFormatter = [[DateFormation alloc] init];
+    _zhawColor = [[ColorSelection alloc]init];
     
     //[_newsChannel getEventsData];
     [_eventsTable reloadData];
@@ -66,19 +64,19 @@
     UIBarButtonItem *backButtonItem = [[UIBarButtonItem alloc] initWithCustomView:backButtonView];
     [_titleNavigationItem setLeftBarButtonItem :backButtonItem animated :true];
     
-    [_titleNavigationLabel setTextColor:[UIColor whiteColor]];
+    [_titleNavigationLabel setTextColor:_zhawColor._zhawWhite];
     _titleNavigationLabel.text = @"Events - School of Engineering";
     _titleNavigationItem.title = @"";
     
     CGRect imageRect = CGRectMake(0, 0, _titleNavigationBar.frame.size.width, _titleNavigationBar.frame.size.height);
     UIGraphicsBeginImageContext(imageRect.size);
-    [_blueColor set];
+    [_zhawColor._zhawOriginalBlue set];
     UIRectFill(imageRect);
     UIImage *aImage = UIGraphicsGetImageFromCurrentImageContext();
     UIGraphicsEndImageContext();
     [_titleNavigationBar setBackgroundImage:aImage forBarMetrics:UIBarMetricsDefault];
     
-    [_titleNavigationLabel setBackgroundColor:_blueColor];
+    [_titleNavigationLabel setBackgroundColor:_zhawColor._zhawOriginalBlue];
 }
 
 
@@ -199,7 +197,7 @@
             //NSLog(@"_newsItem._title: %@ - _cellSelection: %i", _newsItem._title, _cellSelection);
             
             _oneTitleLabel.text     = _newsItem._title;
-            [_oneTitleLabel setTextColor:_blueColor];
+            [_oneTitleLabel setTextColor:_zhawColor._zhawOriginalBlue];
             
             [_descriptionWebView loadHTMLString:_newsItem._description baseURL:nil];
             //[_descriptionWebView loadHTMLString:_newsItem._content baseURL:nil];

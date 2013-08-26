@@ -7,6 +7,7 @@
 //
 
 #import "MenuOverviewController.h"
+#import "ColorSelection.h"
 
 @interface MenuOverviewController ()
 
@@ -43,10 +44,10 @@
 		_menuTableView = [[UITableView alloc] init];
 	}
     
-    _cellBackgroundColor = [UIColor whiteColor];
-    _fontColor = [UIColor darkGrayColor];
+    ColorSelection *_zhawColor = [[ColorSelection alloc]init];
     
-    //_cellBackgroundColor = [UIColor colorWithRed:1.0/255.0 green:100.0/255.0 blue:167.0/255.0 alpha:1.0];
+    _cellBackgroundColor = _zhawColor._zhawWhite;
+    _fontColor           = _zhawColor._zhawDarkGrey;
     
     _menuTableView.separatorColor = _cellBackgroundColor;
     _menuTableView.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
@@ -338,7 +339,7 @@
         UIButton *_cardTitleButton  = (UIButton *) [_cell viewWithTag:6];
         _cardTitleButton.enabled = true;
         [_cardTitleButton addTarget:self action:@selector(moveToMaps:event:) forControlEvents:UIControlEventTouchUpInside];
-        NSMutableAttributedString *_cardTitleString = [[NSMutableAttributedString alloc] initWithString:@"Karten"];
+        NSMutableAttributedString *_cardTitleString = [[NSMutableAttributedString alloc] initWithString:@"Standorte"];
         [_cardTitleString addAttribute:NSForegroundColorAttributeName value:_fontColor range:NSMakeRange(0, [_cardTitleString length])];
         [_cardTitleButton setAttributedTitle:_cardTitleString forState:UIControlStateNormal];
         

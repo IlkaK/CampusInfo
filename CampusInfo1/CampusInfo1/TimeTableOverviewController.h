@@ -14,6 +14,7 @@
 #import <DateFormation.h>
 #import <SearchViewController.h>
 #import <SettingsViewController.h>
+#import <ColorSelection.h>
 
 @class ScheduleDto;
 @class DayDto;
@@ -119,6 +120,8 @@ UIViewController
     IBOutlet UINavigationBar            *_titleNavigationBar;
     IBOutlet UILabel                    *_titleNavigationLabel;
     IBOutlet UILabel                    *_acronymLabel;
+    
+    ColorSelection                      *_zhawColor;
 }
 
 
@@ -201,6 +204,9 @@ UIViewController
 @property (nonatomic, retain)          DateFormation             *_dateFormatter;
 
 @property (nonatomic, retain) IBOutlet UIActivityIndicatorView   *_waitForLoadingActivityIndicator;
+
+@property (nonatomic, retain)          ColorSelection            *_zhawColor;
+
 
 
 - (IBAction)tryConnectionAgain:(id)sender;

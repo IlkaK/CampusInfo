@@ -9,6 +9,7 @@
 #import "SearchViewController.h"
 #import "TimeTableAsyncRequest.h"
 #import "DBCachingForAutocomplete.h"
+#import "ColorSelection.h"
 
 @implementation SearchViewController
 
@@ -33,10 +34,12 @@
 @synthesize _titleNavigationItem;
 @synthesize _titleNavigationLabel;
 
-// Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    ColorSelection *_zhawColor = [[ColorSelection alloc]init];
     
     self._searchTypeArray = [[NSArray alloc] initWithObjects:
                          @"Kurs", @"Dozent", @"Student",
@@ -58,8 +61,6 @@
     _autocomplete = [[Autocomplete alloc] initWithArray:_lecturers._lecturerArray];
 	_searchTextField.autocorrectionType = UITextAutocorrectionTypeNo;
     
-    UIColor *_backgroundColor = [UIColor colorWithRed:1.0/255.0 green:100.0/255.0 blue:167.0/255.0 alpha:1.0];
-    
     UIButton *backButton = [UIButton buttonWithType:101];
     UIView *backButtonView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, backButton.frame.size.width, backButton.frame.size.height)];
     
@@ -71,19 +72,25 @@
     UIBarButtonItem *backButtonItem = [[UIBarButtonItem alloc] initWithCustomView:backButtonView];
     [_titleNavigationItem setLeftBarButtonItem :backButtonItem animated :true];
     
-    [_titleNavigationLabel setTextColor:[UIColor whiteColor]];
+    [_titleNavigationLabel setTextColor:_zhawColor._zhawWhite];
     _titleNavigationLabel.text = @"Stundenplan Suche";
     _titleNavigationItem.title = @"";
     
     CGRect imageRect = CGRectMake(0, 0, _titleNavigationBar.frame.size.width, _titleNavigationBar.frame.size.height);
     UIGraphicsBeginImageContext(imageRect.size);
-    [_backgroundColor set];
+    [_zhawColor._zhawOriginalBlue set];
     UIRectFill(imageRect);
     UIImage *aImage = UIGraphicsGetImageFromCurrentImageContext();
     UIGraphicsEndImageContext();
     [_titleNavigationBar setBackgroundImage:aImage forBarMetrics:UIBarMetricsDefault];
     
-    [_titleNavigationLabel setBackgroundColor:_backgroundColor];
+    [_titleNavigationLabel setBackgroundColor:_zhawColor._zhawOriginalBlue];
+    
+    [self.view setBackgroundColor:_zhawColor._zhawLighterBlue];
+    
+    [_searchSegmentedControl setTintColor:_zhawColor._zhawOriginalBlue];
+    
+    [_acronymAutocompleteTableView setBackgroundColor:_zhawColor._zhawLighterBlue];
 }
 
 -(void)loadDataWithSearchType

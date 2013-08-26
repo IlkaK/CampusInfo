@@ -46,7 +46,7 @@
     UIBarButtonItem *backButtonItem = [[UIBarButtonItem alloc] initWithCustomView:backButtonView];
     [_titleNavigationItem setLeftBarButtonItem :backButtonItem animated :true];
     
-    [_titleNavigationLabel setTextColor:[UIColor whiteColor]];
+    [_titleNavigationLabel setTextColor:_zhawColors._zhawWhite];
     _titleNavigationLabel.text = @"Service Desk";
     _titleNavigationItem.title = @"";
     

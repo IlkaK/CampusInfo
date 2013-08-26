@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 #import <NewsChannelDto.h>
 #import <DateFormation.h>
+#import <ColorSelection.h>
 
 
 @interface EventsViewController : UIViewController
@@ -19,7 +20,6 @@
     IBOutlet UITableViewCell            *_eventsTableCell;
     
     DateFormation                       *_dateFormatter;
-    UIColor                             *_blueColor;
     
     int                                 _actualTrials;
     IBOutlet UILabel                    *_noConnectionLabel;
@@ -28,12 +28,14 @@
     IBOutlet UINavigationBar            *_titleNavigationBar;
     IBOutlet UINavigationItem           *_titleNavigationItem;
     IBOutlet UILabel                    *_titleNavigationLabel;
+    
+    ColorSelection                      *_zhawColor;
 }
 
 @property (nonatomic, retain) NewsChannelDto                        *_newsChannel;
 
 @property (nonatomic, retain) DateFormation                         *_dateFormatter;
-@property (nonatomic, retain) UIColor                               *_blueColor;
+@property (nonatomic, retain) ColorSelection                        *_zhawColor;
 
 @property (nonatomic, retain) IBOutlet UINavigationBar              *_titleNavigationBar;
 @property (nonatomic, retain) IBOutlet UINavigationItem             *_titleNavigationItem;

@@ -14,6 +14,7 @@
 #import "CalendarWeekDto.h"
 #import "MenuDto.h"
 #import "MenuPlanArrayDto.h"
+#import "ColorSelection.h"
 
 @implementation MensaDetailViewController
 
@@ -43,6 +44,8 @@
 @synthesize _titleNavigationItem;
 @synthesize _titleNavigationLabel;
 
+@synthesize _zhawColor;
+
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -54,15 +57,12 @@
 {
     [super viewDidLoad];
     
-    UIColor *_backgroundColor = [UIColor colorWithRed:1.0/255.0 green:100.0/255.0 blue:167.0/255.0 alpha:1.0];
+    _zhawColor = [[ColorSelection alloc]init];
     
     _dateFormatter  = [[DateFormation alloc] init];
-    //_actualGastronomy = [[GastronomicFacilityDto alloc]init:nil withGastroId:nil withLocation:nil withName:nil withServiceTimePeriods:nil withType:nil withVersion:nil];
+    //_actualGastronomy = [[GastronomicFacilityDto alloc]init:nil withGastroId:nil withLocation:nil withName:nil withServiceTimePeriods:nil withType:nil withVersion:ni0l];
     
-    //TODO
-    //[_moveBackButton useAlertStyle];
-    [_moveBackButton setBackgroundColor:_backgroundColor];
-    //[_moveBackButton setTextColor:[UIColor whiteColor]];
+    [_moveBackButton setBackgroundColor:_zhawColor._zhawOriginalBlue];
 
     //----- Navigation Bar ----
     // set current day
@@ -102,15 +102,15 @@
     if (_detailTable == nil) {
 		_detailTable = [[UITableView alloc] init];
 	}
-    _detailTable.separatorColor = [UIColor lightGrayColor];
+    _detailTable.separatorColor = _zhawColor._zhawLightGrey;
     _detailTable.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
     
     [_detailTable reloadData];
     
     _gastronomyLabel.text = [NSString stringWithFormat:@"%@",_actualGastronomy._name];
     
-    [_gastronomyLabel setBackgroundColor:_backgroundColor];
-    [_gastronomyLabel setTextColor:[UIColor whiteColor]];
+    [_gastronomyLabel setBackgroundColor:_zhawColor._zhawOriginalBlue];
+    [_gastronomyLabel setTextColor:_zhawColor._zhawWhite];
     
     self._menuPlans     = [[MenuPlanArrayDto alloc] init:nil];
     self._actualMenu    = [[MenuDto alloc] init:nil withDishes:nil withOfferedOn:nil withVersion:nil];
@@ -139,19 +139,22 @@
     UIBarButtonItem *backButtonItem = [[UIBarButtonItem alloc] initWithCustomView:backButtonView];
     [_titleNavigationItem setLeftBarButtonItem :backButtonItem animated :true];
     
-    [_titleNavigationLabel setTextColor:[UIColor whiteColor]];
-    _titleNavigationLabel.text = @"Kontakte";
+    [_titleNavigationLabel setTextColor:_zhawColor._zhawWhite];
+    _titleNavigationLabel.text = @"Mensa";
     _titleNavigationItem.title = @"";
     
     CGRect imageRect = CGRectMake(0, 0, _titleNavigationBar.frame.size.width, _titleNavigationBar.frame.size.height);
     UIGraphicsBeginImageContext(imageRect.size);
-    [_backgroundColor set];
+    [_zhawColor._zhawOriginalBlue set];
     UIRectFill(imageRect);
     UIImage *aImage = UIGraphicsGetImageFromCurrentImageContext();
     UIGraphicsEndImageContext();
     [_titleNavigationBar setBackgroundImage:aImage forBarMetrics:UIBarMetricsDefault];
     
-    [_titleNavigationLabel setBackgroundColor:_backgroundColor];
+    [_titleNavigationLabel setBackgroundColor:_zhawColor._zhawOriginalBlue];
+    
+    // set background to zhaw blue
+    [self.view setBackgroundColor:_zhawColor._zhawOriginalBlue];
 }
 
 - (void) threadWaitForChangeActivityIndicator:(id)data
@@ -248,7 +251,7 @@
                              ,[[_dateFormatter _weekDayFormatter] stringFromDate:showDate]
                              ,[[_dateFormatter _dayFormatter]     stringFromDate:showDate]];
     
-    [_dateLabel setTextColor:[UIColor whiteColor]];
+    [_dateLabel setTextColor:_zhawColor._zhawWhite];
     _dateLabel.text = _dateString;
     _dayNavigationItem.title = @"";
     

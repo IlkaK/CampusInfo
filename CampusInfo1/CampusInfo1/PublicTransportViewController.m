@@ -7,6 +7,7 @@
 //
 
 #import "PublicTransportViewController.h"
+#import "ColorSelection.h"
 
 @interface PublicTransportViewController ()
 @end
@@ -34,9 +35,9 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    UIColor *_backgroundColor = [UIColor colorWithRed:1.0/255.0 green:100.0/255.0 blue:167.0/255.0 alpha:1.0];
     
-
+    ColorSelection *_zhawColor = [[ColorSelection alloc]init];
+    
     UIButton *backButton = [UIButton buttonWithType:101];
     UIView *backButtonView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, backButton.frame.size.width, backButton.frame.size.height)];
     
@@ -48,19 +49,19 @@
     UIBarButtonItem *backButtonItem = [[UIBarButtonItem alloc] initWithCustomView:backButtonView];
     [_publicTransportNavigationItem setLeftBarButtonItem :backButtonItem animated :true];
     
-    [_publicTransportNavigationLabel setTextColor:[UIColor whiteColor]];
+    [_publicTransportNavigationLabel setTextColor:_zhawColor._zhawWhite];
     _publicTransportNavigationLabel.text = @"ÖV-Fahrplan";
     _publicTransportNavigationItem.title = @"";
     
     CGRect imageRect = CGRectMake(0, 0, _publicTransportNavigationBar.frame.size.width, _publicTransportNavigationBar.frame.size.height);
     UIGraphicsBeginImageContext(imageRect.size);
-    [_backgroundColor set];
+    [_zhawColor._zhawOriginalBlue set];
     UIRectFill(imageRect);
     UIImage *aImage = UIGraphicsGetImageFromCurrentImageContext();
     UIGraphicsEndImageContext();
     [_publicTransportNavigationBar setBackgroundImage:aImage forBarMetrics:UIBarMetricsDefault];
     
-    [_publicTransportNavigationLabel setBackgroundColor:_backgroundColor];
+    [_publicTransportNavigationLabel setBackgroundColor:_zhawColor._zhawOriginalBlue];
 }
 
 - (void)didReceiveMemoryWarning

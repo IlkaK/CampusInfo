@@ -10,6 +10,7 @@
 #import <NewsChannelDto.h>
 #import <NewsDetailViewController.h>
 #import <DateFormation.h>
+#import <ColorSelection.h>
 
 @class NewsDetailViewController;
 
@@ -23,7 +24,7 @@
     
     DateFormation                       *_dateFormatter;
     
-    UIColor                             *_blueColor;
+    ColorSelection                      *_zhawColor;
     IBOutlet NewsDetailViewController   *_newsDetailVC;
     
     int                                 _actualTrials;
@@ -46,8 +47,7 @@
 @property (nonatomic, retain) IBOutlet UITableViewCell              *_newsTableCell;
 
 @property (nonatomic, retain) DateFormation                         *_dateFormatter;
-
-@property (nonatomic, retain) UIColor                               *_blueColor;
+@property (nonatomic, retain) ColorSelection                        *_zhawColor;
 
 @property (nonatomic, retain) IBOutlet NewsDetailViewController     *_newsDetailVC;
 

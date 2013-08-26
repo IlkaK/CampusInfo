@@ -13,7 +13,7 @@
 #import <ChooseDateViewController.h>
 #import <MenuDto.h>
 #import <MenuPlanArrayDto.h>
-
+#import <ColorSelection.h>
 
 @interface MensaDetailViewController : UIViewController <ChooseDateViewDelegate, UITableViewDataSource, UITableViewDelegate>
 {
@@ -43,6 +43,8 @@
     IBOutlet UINavigationItem           *_titleNavigationItem;
     IBOutlet UILabel                    *_titleNavigationLabel;
     IBOutlet UILabel                    *_gastronomyLabel;
+    
+    ColorSelection                      *_zhawColor;
 }
 
 @property (nonatomic, retain) GastronomicFacilityDto                    *_actualGastronomy;
@@ -71,6 +73,8 @@
 @property (nonatomic, retain) IBOutlet UILabel                          *_gastronomyLabel;
 
 @property (nonatomic, retain) IBOutlet UIActivityIndicatorView          *_waitForChangeActivityIndicator;
+
+@property (nonatomic, retain) ColorSelection                            *_zhawColor;
 
 
 - (IBAction)backToMensaOverview:(id)sender;

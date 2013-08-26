@@ -7,6 +7,7 @@
 //
 
 #import "SettingsViewController.h"
+#import "ColorSelection.h"
 
 @interface SettingsViewController ()
 
@@ -41,9 +42,9 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-
-    UIColor *_backgroundColor = [UIColor colorWithRed:1.0/255.0 green:100.0/255.0 blue:167.0/255.0 alpha:1.0];
     
+    ColorSelection *_zhawColor = [[ColorSelection alloc]init];
+
     _students = [[StudentsDto alloc]init];
     _lecturers = [[LecturersDto alloc]init];
 
@@ -80,19 +81,19 @@
     UIBarButtonItem *backButtonItem = [[UIBarButtonItem alloc] initWithCustomView:backButtonView];
     [_titleNavigationItem setLeftBarButtonItem :backButtonItem animated :true];
     
-    [_titleNavigationLabel setTextColor:[UIColor whiteColor]];
+    [_titleNavigationLabel setTextColor:_zhawColor._zhawWhite];
     _titleNavigationLabel.text = @"Einstellungen";
     _titleNavigationItem.title = @"";
     
     CGRect imageRect = CGRectMake(0, 0, _titleNavigationBar.frame.size.width, _titleNavigationBar.frame.size.height);
     UIGraphicsBeginImageContext(imageRect.size);
-    [_backgroundColor set];
+    [_zhawColor._zhawOriginalBlue set];
     UIRectFill(imageRect);
     UIImage *aImage = UIGraphicsGetImageFromCurrentImageContext();
     UIGraphicsEndImageContext();
     [_titleNavigationBar setBackgroundImage:aImage forBarMetrics:UIBarMetricsDefault];
     
-    [_titleNavigationLabel setBackgroundColor:_backgroundColor];
+    [_titleNavigationLabel setBackgroundColor:_zhawColor._zhawOriginalBlue];
     
 }
 

@@ -97,6 +97,7 @@
 @synthesize _titleNavigationItem;
 @synthesize _titleNavigationLabel;
 
+@synthesize _zhawColor;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {   
@@ -303,7 +304,7 @@
                                                         ,[[_dateFormatter _weekDayFormatter] stringFromDate:showDate]
                                                         ,[[_dateFormatter _dayFormatter]     stringFromDate:showDate]];
 
-    [_dateLabel setTextColor:[UIColor whiteColor]];
+    [_dateLabel setTextColor:_zhawColor._zhawWhite];
     _dateLabel.text = _dateString;
     _dayNavigator.title = @"";
 }
@@ -458,6 +459,7 @@
     
     _translator     = [[LanguageTranslation alloc] init];
     _dateFormatter  = [[DateFormation alloc] init];
+    _zhawColor      = [[ColorSelection alloc] init];
     
     //----- TimeTableViewController ----
     // set table controller
@@ -465,13 +467,12 @@
 		_timeTable = [[UITableView alloc] init];
 	}
     // clear border colour between table cells
-    _timeTable.separatorColor = [UIColor lightGrayColor];
+    _timeTable.separatorColor = _zhawColor._zhawLightGrey;
     
     // title
-    UIColor *_backgroundColor = [UIColor colorWithRed:1.0/255.0 green:100.0/255.0 blue:167.0/255.0 alpha:1.0];
-    
-    [_acronymLabel setBackgroundColor:_backgroundColor];
-    [_acronymLabel setTextColor:[UIColor whiteColor]];
+     
+    [_acronymLabel setBackgroundColor:_zhawColor._zhawOriginalBlue];
+    [_acronymLabel setTextColor:_zhawColor._zhawWhite];
     
     UIButton *backButton = [UIButton buttonWithType:101];
     UIView *backButtonView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, backButton.frame.size.width, backButton.frame.size.height)];
@@ -484,19 +485,19 @@
     UIBarButtonItem *backButtonItem = [[UIBarButtonItem alloc] initWithCustomView:backButtonView];
     [_titleNavigationItem setLeftBarButtonItem :backButtonItem animated :true];
     
-    [_titleNavigationLabel setTextColor:[UIColor whiteColor]];
+    [_titleNavigationLabel setTextColor:_zhawColor._zhawWhite];
     _titleNavigationLabel.text = @"Stundenplan";
     _titleNavigationItem.title = @"";
     
     CGRect imageRect = CGRectMake(0, 0, _titleNavigationBar.frame.size.width, _titleNavigationBar.frame.size.height);
     UIGraphicsBeginImageContext(imageRect.size);
-    [_backgroundColor set];
+    [_zhawColor._zhawOriginalBlue set];
     UIRectFill(imageRect);
     UIImage *aImage = UIGraphicsGetImageFromCurrentImageContext();
     UIGraphicsEndImageContext();
     [_titleNavigationBar setBackgroundImage:aImage forBarMetrics:UIBarMetricsDefault];
     
-    [_titleNavigationLabel setBackgroundColor:_backgroundColor];
+    [_titleNavigationLabel setBackgroundColor:_zhawColor._zhawOriginalBlue];
     
     
     //----- Navigation Bar ----
@@ -585,6 +586,12 @@
     // set default values for spinner/activity indicator
     _waitForLoadingActivityIndicator.hidesWhenStopped = YES;
     _waitForLoadingActivityIndicator.hidden = YES;
+    
+    [self.view setBackgroundColor:_zhawColor._zhawLighterBlue];
+    
+    [_noConnectionButton setBackgroundColor:_zhawColor._zhawOriginalBlue];
+    [_timeTableSegmentedControl setTintColor:_zhawColor._zhawOriginalBlue];
+    
 }
 
 
@@ -1628,10 +1635,7 @@
             withStartTimeString:_startTimeString
               withEndTimeString:_endTimeString])
     {
-        //NSLog(@"1 set red for %@", _labelDate.text);
-        // orangered 2 #EE4000	238	64	0 16622
-        UIColor *_actualSelectionBackgroundColor = [UIColor colorWithRed:238.0/255.0 green:64.0/255.0 blue:0.0/255.0 alpha:1.0];
-        _labelDate.backgroundColor = _actualSelectionBackgroundColor;
+        _labelDate.backgroundColor = _zhawColor._zhawRed;
     }
     else
     {
@@ -1646,19 +1650,6 @@
                     withStartTime:(NSDate *)startTime
                       withEndTime:(NSDate *)endTime
 {
-
-    //lightsteelblue 1	#CAE1FF	202	225	255	16769482
-    UIColor *_lectureBackgroundColor = [UIColor colorWithRed:202.0/255.0 green:225.0/255.0 blue:255.0/255.0 alpha:1.0];
-    
-    // lightblue 1	#BFEFFF	191	239	255	16773055
-    //UIColor *_lectureBackgroundColor= [UIColor colorWithRed:191.0/255.0 green:239.0/255.0 blue:255.0/255.0 alpha:1.0];
-    
-    //darkseagreen 1	#C1FFC1	193	255	193	12713921
-    //UIColor *_actualSelectionBackgroundColor = [UIColor colorWithRed:193.0/255.0 green:225.0/255.0 blue:193.0/255.0 alpha:1.0];
-    
-    // orangered 2 #EE4000	238	64	0 16622
-    //UIColor *_actualSelectionBackgroundColor = [UIColor colorWithRed:238.0/255.0 green:64.0/255.0 blue:0.0/255.0 alpha:1.0];
-    
     //NSString *_startTimeString = [[_dateFormatter _timeFormatter] stringFromDate:startTime];
     //NSString *_endTimeString   = [[_dateFormatter _timeFormatter] stringFromDate:endTime];
     
@@ -1673,7 +1664,7 @@
     //{
         if (isLecture)
         {
-            cell.contentView.backgroundColor = _lectureBackgroundColor;
+            cell.contentView.backgroundColor = _zhawColor._zhawLightestBlue;
             cell.backgroundColor = cell.contentView.backgroundColor;
         }
         else
@@ -1778,10 +1769,7 @@
                     withStartTimeString:_startTimeString
                       withEndTimeString:_endTimeString])
             {
-                //NSLog(@"2 set red for %@", _labelDate.text);
-                // orangered 2 #EE4000	238	64	0 16622
-                UIColor *_actualSelectionBackgroundColor = [UIColor colorWithRed:238.0/255.0 green:64.0/255.0 blue:0.0/255.0 alpha:1.0];
-                _labelDate.backgroundColor = _actualSelectionBackgroundColor;
+                _labelDate.backgroundColor = _zhawColor._zhawRed;
             }
             else
             {
