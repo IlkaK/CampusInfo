@@ -16,6 +16,7 @@
 
 @synthesize _contactsVC;
 @synthesize _emergencyVC;
+@synthesize _serviceDeskVC;
 
 @synthesize _menuTableView;
 @synthesize _menuTableCell;
@@ -47,6 +48,13 @@
 		_emergencyVC = [[EmergencyViewController alloc] init];
 	}
     _emergencyVC.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
+    
+    if (_serviceDeskVC == nil)
+    {
+		_serviceDeskVC = [[ServiceDeskViewController alloc] init];
+	}
+    _serviceDeskVC.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
+    
     
     UIButton *backButton = [UIButton buttonWithType:101];
     UIView *backButtonView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, backButton.frame.size.width, backButton.frame.size.height)];
@@ -89,6 +97,7 @@
     _titleNavigationBar = nil;
     _titleNavigationItem = nil;
     _titleNavigationLabel = nil;
+    _serviceDeskVC = nil;
     [super viewDidUnload];
 }
 
@@ -103,7 +112,7 @@
 //---------- Handling of menu table -----
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return 2;
+    return 3;
 }
 
 // Customize the number of rows in the table view.
@@ -128,11 +137,14 @@
     {
         [self presentModalViewController:_contactsVC animated:YES];
     }
-    else
+    if (_cellSelection == 1)
     {
         [self presentModalViewController:_emergencyVC animated:YES];
     }
-    
+    if (_cellSelection == 2)
+    {
+        [self presentModalViewController:_serviceDeskVC animated:YES];
+    }
 }
 
 
@@ -161,7 +173,7 @@
         
         //[_menuButton addTarget:self action:@selector(moveToSecretaryContacts  :event:) forControlEvents:UIControlEventTouchUpInside];
     }
-    else
+    if (_cellSelection == 1)
     {
         cell.textLabel.text = @"Notfall";
         //NSMutableAttributedString *_titleString = [[NSMutableAttributedString alloc] initWithString:@"Notfall"];
@@ -169,15 +181,13 @@
         
         //[_menuButton addTarget:self action:@selector(moveToEmergencyContacts  :event:) forControlEvents:UIControlEventTouchUpInside];
     }
-     
+    if (_cellSelection == 2)
+    {
+        cell.textLabel.text = @"Service Desk";
+    }
         
     return cell;
 }
-
-
-
-
-
 
 
 @end

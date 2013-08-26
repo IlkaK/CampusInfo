@@ -9,12 +9,13 @@
 #import <UIKit/UIKit.h>
 #import <ContactsViewController.h>
 #import <EmergencyViewController.h>
-
+#import <ServiceDeskViewController.h>
 
 @interface ContactsOverViewController : UIViewController<UITableViewDelegate>
 {
     IBOutlet ContactsViewController     *_contactsVC;
     IBOutlet EmergencyViewController    *_emergencyVC;
+    IBOutlet ServiceDeskViewController  *_serviceDeskVC;
     
     IBOutlet UITableView                *_menuTableView;
     IBOutlet UITableViewCell            *_menuTableCell;
@@ -30,6 +31,7 @@
 
 @property (nonatomic, retain) IBOutlet ContactsViewController       *_contactsVC;
 @property (nonatomic, retain) IBOutlet EmergencyViewController      *_emergencyVC;
+@property (nonatomic, retain) IBOutlet ServiceDeskViewController    *_serviceDeskVC;
 
 @property (nonatomic, retain) IBOutlet UITableView                  *_menuTableView;
 @property (nonatomic, retain) IBOutlet UITableViewCell              *_menuTableCell;

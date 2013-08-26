@@ -107,6 +107,9 @@
 		E1252E5617CB423400E61732 /* SocialMediaViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E1252E5417CB423400E61732 /* SocialMediaViewController.xib */; };
 		E1252E5917CB4BB100E61732 /* ColorSelection.m in Sources */ = {isa = PBXBuildFile; fileRef = E1252E5817CB4BB100E61732 /* ColorSelection.m */; };
 		E1252E5B17CB4D7800E61732 /* SocialMediaTableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E1252E5A17CB4D7800E61732 /* SocialMediaTableCell.xib */; };
+		E1252E5F17CB72AD00E61732 /* ServiceDeskViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E1252E5D17CB72AD00E61732 /* ServiceDeskViewController.m */; };
+		E1252E6017CB72AD00E61732 /* ServiceDeskViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E1252E5E17CB72AD00E61732 /* ServiceDeskViewController.xib */; };
+		E1252E6217CB7E5800E61732 /* ServiceDeskTableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E1252E6117CB7E5800E61732 /* ServiceDeskTableCell.xib */; };
 		E12AD04917B0E9E4009A9B1B /* SenTestingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E12AD04817B0E9E4009A9B1B /* SenTestingKit.framework */; };
 		E12AD04A17B0E9E4009A9B1B /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A35A34181520814800181E3F /* UIKit.framework */; };
 		E12AD04B17B0E9E4009A9B1B /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A35A341A1520814800181E3F /* Foundation.framework */; };
@@ -325,6 +328,10 @@
 		E1252E5717CB4BB100E61732 /* ColorSelection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ColorSelection.h; sourceTree = "<group>"; };
 		E1252E5817CB4BB100E61732 /* ColorSelection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ColorSelection.m; sourceTree = "<group>"; };
 		E1252E5A17CB4D7800E61732 /* SocialMediaTableCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SocialMediaTableCell.xib; sourceTree = "<group>"; };
+		E1252E5C17CB72AD00E61732 /* ServiceDeskViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ServiceDeskViewController.h; sourceTree = "<group>"; };
+		E1252E5D17CB72AD00E61732 /* ServiceDeskViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ServiceDeskViewController.m; sourceTree = "<group>"; };
+		E1252E5E17CB72AD00E61732 /* ServiceDeskViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ServiceDeskViewController.xib; sourceTree = "<group>"; };
+		E1252E6117CB7E5800E61732 /* ServiceDeskTableCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ServiceDeskTableCell.xib; sourceTree = "<group>"; };
 		E12AD04717B0E9E4009A9B1B /* CampusInfoLogicTests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CampusInfoLogicTests.octest; sourceTree = BUILT_PRODUCTS_DIR; };
 		E12AD04817B0E9E4009A9B1B /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
 		E12AD04E17B0E9E4009A9B1B /* CampusInfoLogicTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "CampusInfoLogicTests-Info.plist"; sourceTree = "<group>"; };
@@ -461,6 +468,10 @@
 		2724546417B7EBB7005F979C /* Contacts */ = {
 			isa = PBXGroup;
 			children = (
+				E1252E5C17CB72AD00E61732 /* ServiceDeskViewController.h */,
+				E1252E5D17CB72AD00E61732 /* ServiceDeskViewController.m */,
+				E1252E5E17CB72AD00E61732 /* ServiceDeskViewController.xib */,
+				E1252E6117CB7E5800E61732 /* ServiceDeskTableCell.xib */,
 				2724546517B7EBE4005F979C /* ContactsOverViewController.h */,
 				2724546617B7EBE4005F979C /* ContactsOverViewController.m */,
 				2724546717B7EBE4005F979C /* ContactsOverViewController.xib */,
@@ -1096,6 +1107,8 @@
 				E1D35BDC17C385C900CCDB1D /* Icon@2x.png in Resources */,
 				E1252E5617CB423400E61732 /* SocialMediaViewController.xib in Resources */,
 				E1252E5B17CB4D7800E61732 /* SocialMediaTableCell.xib in Resources */,
+				E1252E6017CB72AD00E61732 /* ServiceDeskViewController.xib in Resources */,
+				E1252E6217CB7E5800E61732 /* ServiceDeskTableCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1190,6 +1203,7 @@
 				E1D35BD717C3593300CCDB1D /* MenuPlanArrayDto.m in Sources */,
 				E1252E5517CB423400E61732 /* SocialMediaViewController.m in Sources */,
 				E1252E5917CB4BB100E61732 /* ColorSelection.m in Sources */,
+				E1252E5F17CB72AD00E61732 /* ServiceDeskViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
