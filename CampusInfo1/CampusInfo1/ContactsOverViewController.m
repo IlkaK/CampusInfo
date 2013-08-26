@@ -154,7 +154,7 @@
     
     if (_cellSelection == 0)
     {
-        cell.textLabel.text = @"Sekretariat";
+        cell.textLabel.text = @"Sekretariate";
         
         //NSMutableAttributedString *_titleString = [[NSMutableAttributedString alloc] initWithString:@"Sekretariat"];
         //[_menuButton setAttributedTitle:_titleString forState:UIControlStateNormal];

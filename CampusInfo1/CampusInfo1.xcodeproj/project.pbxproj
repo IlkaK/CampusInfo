@@ -15,7 +15,6 @@
 		2709DED417AEDEF5002E714F /* ContactsPlaceTableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2709DED317AEDEF5002E714F /* ContactsPlaceTableCell.xib */; };
 		270ACE1D174EA09D00F72E2A /* TwoSlotsThreeRoomsTableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 270ACE1C174EA09D00F72E2A /* TwoSlotsThreeRoomsTableCell.xib */; };
 		271CB2BE17AD196A005CC185 /* EmergencyDetailTableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 271CB2BD17AD196A005CC185 /* EmergencyDetailTableCell.xib */; };
-		271CB2C017AD198E005CC185 /* EmergencyOverviewTableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 271CB2BF17AD198E005CC185 /* EmergencyOverviewTableCell.xib */; };
 		271CB2C217AD26F3005CC185 /* EmergencyInformTableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 271CB2C117AD26F2005CC185 /* EmergencyInformTableCell.xib */; };
 		2724546817B7EBE4005F979C /* ContactsOverViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2724546617B7EBE4005F979C /* ContactsOverViewController.m */; };
 		2724546917B7EBE4005F979C /* ContactsOverViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2724546717B7EBE4005F979C /* ContactsOverViewController.xib */; };
@@ -47,7 +46,6 @@
 		277DDD821534A54B006136B5 /* arrowRight_small.png in Resources */ = {isa = PBXBuildFile; fileRef = 277DDD811534A54B006136B5 /* arrowRight_small.png */; };
 		277EDF79155D60DC002BCE1F /* ScheduleCourseDto.m in Sources */ = {isa = PBXBuildFile; fileRef = 277EDF78155D60DC002BCE1F /* ScheduleCourseDto.m */; };
 		27943588174686E40077923D /* settings.png in Resources */ = {isa = PBXBuildFile; fileRef = 27943587174686E40077923D /* settings.png */; };
-		27AC5C7617AEAE14006A1774 /* ContactsOverviewTableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 27AC5C7517AEAE14006A1774 /* ContactsOverviewTableCell.xib */; };
 		27AC5C7A17AEAF9B006A1774 /* ContactsPhoneTableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 27AC5C7917AEAF9B006A1774 /* ContactsPhoneTableCell.xib */; };
 		27B66927153AE0D8004D3ABC /* TimeTableAsyncRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 27B66926153AE0D8004D3ABC /* TimeTableAsyncRequest.m */; };
 		27BEC5D41567845A00F9AA4E /* TwoSlotsOneRoomTableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 27BEC5D31567845A00F9AA4E /* TwoSlotsOneRoomTableCell.xib */; };
@@ -99,7 +97,6 @@
 		E10B72FB1797DE42005D9D32 /* OpeningTimePlanDto.m in Sources */ = {isa = PBXBuildFile; fileRef = E10B72FA1797DE42005D9D32 /* OpeningTimePlanDto.m */; };
 		E10B72FE1797DE73005D9D32 /* LocationDto.m in Sources */ = {isa = PBXBuildFile; fileRef = E10B72FD1797DE73005D9D32 /* LocationDto.m */; };
 		E10B73011797DFAF005D9D32 /* HolidayDto.m in Sources */ = {isa = PBXBuildFile; fileRef = E10B73001797DFAF005D9D32 /* HolidayDto.m */; };
-		E10D601217AFAE4E00036690 /* ContactsSocialMediaTableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E10D601117AFAE4E00036690 /* ContactsSocialMediaTableCell.xib */; };
 		E10D601817AFAF4100036690 /* facebook.png in Resources */ = {isa = PBXBuildFile; fileRef = E10D601317AFAF4100036690 /* facebook.png */; };
 		E10D601917AFAF4100036690 /* issuu.png in Resources */ = {isa = PBXBuildFile; fileRef = E10D601417AFAF4100036690 /* issuu.png */; };
 		E10D601A17AFAF4100036690 /* twitter.png in Resources */ = {isa = PBXBuildFile; fileRef = E10D601517AFAF4100036690 /* twitter.png */; };
@@ -205,7 +202,6 @@
 		2709DED317AEDEF5002E714F /* ContactsPlaceTableCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ContactsPlaceTableCell.xib; sourceTree = "<group>"; };
 		270ACE1C174EA09D00F72E2A /* TwoSlotsThreeRoomsTableCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TwoSlotsThreeRoomsTableCell.xib; sourceTree = "<group>"; };
 		271CB2BD17AD196A005CC185 /* EmergencyDetailTableCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EmergencyDetailTableCell.xib; sourceTree = "<group>"; };
-		271CB2BF17AD198E005CC185 /* EmergencyOverviewTableCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EmergencyOverviewTableCell.xib; sourceTree = "<group>"; };
 		271CB2C117AD26F2005CC185 /* EmergencyInformTableCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EmergencyInformTableCell.xib; sourceTree = "<group>"; };
 		2724546517B7EBE4005F979C /* ContactsOverViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContactsOverViewController.h; sourceTree = "<group>"; };
 		2724546617B7EBE4005F979C /* ContactsOverViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContactsOverViewController.m; sourceTree = "<group>"; };
@@ -241,7 +237,6 @@
 		277EDF77155D60DB002BCE1F /* ScheduleCourseDto.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ScheduleCourseDto.h; sourceTree = "<group>"; };
 		277EDF78155D60DC002BCE1F /* ScheduleCourseDto.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ScheduleCourseDto.m; sourceTree = "<group>"; };
 		27943587174686E40077923D /* settings.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = settings.png; path = CampusInfo1/resources/icons/settings.png; sourceTree = "<group>"; };
-		27AC5C7517AEAE14006A1774 /* ContactsOverviewTableCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ContactsOverviewTableCell.xib; sourceTree = "<group>"; };
 		27AC5C7917AEAF9B006A1774 /* ContactsPhoneTableCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ContactsPhoneTableCell.xib; sourceTree = "<group>"; };
 		27B66925153AE0D8004D3ABC /* TimeTableAsyncRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TimeTableAsyncRequest.h; sourceTree = "<group>"; };
 		27B66926153AE0D8004D3ABC /* TimeTableAsyncRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TimeTableAsyncRequest.m; sourceTree = "<group>"; };
@@ -318,7 +313,6 @@
 		E10B72FD1797DE73005D9D32 /* LocationDto.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LocationDto.m; sourceTree = "<group>"; };
 		E10B72FF1797DFAF005D9D32 /* HolidayDto.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HolidayDto.h; sourceTree = "<group>"; };
 		E10B73001797DFAF005D9D32 /* HolidayDto.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HolidayDto.m; sourceTree = "<group>"; };
-		E10D601117AFAE4E00036690 /* ContactsSocialMediaTableCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ContactsSocialMediaTableCell.xib; sourceTree = "<group>"; };
 		E10D601317AFAF4100036690 /* facebook.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = facebook.png; path = CampusInfo1/resources/icons/facebook.png; sourceTree = "<group>"; };
 		E10D601417AFAF4100036690 /* issuu.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = issuu.png; path = CampusInfo1/resources/icons/issuu.png; sourceTree = "<group>"; };
 		E10D601517AFAF4100036690 /* twitter.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = twitter.png; path = CampusInfo1/resources/icons/twitter.png; sourceTree = "<group>"; };
@@ -486,7 +480,6 @@
 			isa = PBXGroup;
 			children = (
 				271CB2BD17AD196A005CC185 /* EmergencyDetailTableCell.xib */,
-				271CB2BF17AD198E005CC185 /* EmergencyOverviewTableCell.xib */,
 				271CB2C117AD26F2005CC185 /* EmergencyInformTableCell.xib */,
 			);
 			name = EmergencyTableCells;
@@ -495,10 +488,8 @@
 		27AC5C7417AEADD8006A1774 /* ContactsTableCells */ = {
 			isa = PBXGroup;
 			children = (
-				27AC5C7517AEAE14006A1774 /* ContactsOverviewTableCell.xib */,
 				27AC5C7917AEAF9B006A1774 /* ContactsPhoneTableCell.xib */,
 				2709DED317AEDEF5002E714F /* ContactsPlaceTableCell.xib */,
-				E10D601117AFAE4E00036690 /* ContactsSocialMediaTableCell.xib */,
 			);
 			name = ContactsTableCells;
 			sourceTree = "<group>";
@@ -1063,12 +1054,9 @@
 				E16C642617ABDC0100BEDBB3 /* ContactsViewController.xib in Resources */,
 				E16C642B17ABDC4600BEDBB3 /* EmergencyViewController.xib in Resources */,
 				271CB2BE17AD196A005CC185 /* EmergencyDetailTableCell.xib in Resources */,
-				271CB2C017AD198E005CC185 /* EmergencyOverviewTableCell.xib in Resources */,
 				271CB2C217AD26F3005CC185 /* EmergencyInformTableCell.xib in Resources */,
-				27AC5C7617AEAE14006A1774 /* ContactsOverviewTableCell.xib in Resources */,
 				27AC5C7A17AEAF9B006A1774 /* ContactsPhoneTableCell.xib in Resources */,
 				2709DED417AEDEF5002E714F /* ContactsPlaceTableCell.xib in Resources */,
-				E10D601217AFAE4E00036690 /* ContactsSocialMediaTableCell.xib in Resources */,
 				E10D601817AFAF4100036690 /* facebook.png in Resources */,
 				E10D601917AFAF4100036690 /* issuu.png in Resources */,
 				E10D601A17AFAF4100036690 /* twitter.png in Resources */,

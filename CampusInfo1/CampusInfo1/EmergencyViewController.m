@@ -15,7 +15,6 @@
 @implementation EmergencyViewController
 
 @synthesize _emergencyDetailTableCell;
-@synthesize _emergencyOverviewTableCell;
 @synthesize _emergencyTable;
 @synthesize _emergencyInformTableCell;
 @synthesize _emergencyCallNumber;
@@ -58,37 +57,39 @@
     CGPoint           _currentTouchPosition = [_touch locationInView:self._emergencyTable];
     
     NSIndexPath      *_indexPath            = [self._emergencyTable indexPathForRowAtPoint: _currentTouchPosition];
+    NSUInteger        _cellSelection        = _indexPath.section;
+    NSUInteger        _cellRow              = _indexPath.row;
     
     //NSLog(@"_indexPath %i", _indexPath.section);
     NSString *_callWhom;
     NSString *_callNumber;
     
-    if(_indexPath.section == 1)
+    if(_cellSelection == 0 && _cellRow == 0)
     {
         _callWhom = @"Die Polizei";
         _callNumber = @"117";
     }
-    if(_indexPath.section == 2)
+    if(_cellSelection == 0 && _cellRow == 1)
     {
         _callWhom = @"Die Feuerwehr";
         _callNumber = @"118";
     }
-    if(_indexPath.section == 3)
+    if(_cellSelection == 0 && _cellRow == 2)
     {
         _callWhom = @"Die Sanität";
         _callNumber = @"144";
     }
-    if(_indexPath.section == 4)
+    if(_cellSelection == 0 && _cellRow == 3)
     {
         _callWhom = @"Das Tox-Zentrum";
         _callNumber = @"145";
     }
-    if(_indexPath.section == 5)
+    if(_cellSelection == 0 && _cellRow == 4)
     {
         _callWhom = @"Die REGA";
         _callNumber = @"1414";
     }
-    if(_indexPath.section == 7)
+    if(_cellSelection == 1 && _cellRow == 0)
     {
         _callWhom = @"Die ZHAW-Notfallnummer";
         _callNumber = @"0589347070";
@@ -160,7 +161,6 @@
 - (void)viewDidUnload {
     _emergencyTable = nil;
     _emergencyDetailTableCell = nil;
-    _emergencyOverviewTableCell = nil;
     _emergencyInformTableCell = nil;
     _titleNavigationBar = nil;
     _titleNavigationItem = nil;
@@ -170,119 +170,124 @@
 
 
 // table and table cell handling
+- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
+{
+    NSString *_sectionName;
+    switch (section)
+    {
+        case 0:
+            _sectionName = @"1. Alarmieren > wenn nötig";
+            break;
+        default:
+            _sectionName = @"2. Informieren > immer";
+            break;
+    }
+    return _sectionName;
+}
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return 8;
+    return 2;
 }
 
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return 1;
+    NSInteger *_numberRows;
+    switch (section)
+    {
+        case 0:
+            _numberRows = 5;
+            break;
+        default:
+            _numberRows = 1;
+            break;
+    }
+    return _numberRows;
 }
 
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     NSUInteger        _cellSelection = indexPath.section;
-    
-    if (_cellSelection == 0 || _cellSelection == 6)
+    CGFloat           _cellHeight    = 30;    
+    if (_cellSelection == 0)
     {
-        return 40;
+        _cellHeight = 30;
     }
-    if(_cellSelection == 7)
+    if(_cellSelection == 1)
     {
-        return 114;
+        return 47;
     }
-    return 30;
+    return _cellHeight;
 }
 
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     NSUInteger        _cellSelection = indexPath.section;
+    NSUInteger        _cellRow       = indexPath.row;
+
     static NSString *_cellIdentifier;
     UITableViewCell *_cell;
     
-    if (_cellSelection == 0 || _cellSelection == 6)
+    UIButton        *_buttonNumber;
+    NSString        *_buttonNumberTitle;
+    
+    // 2. informieren immer
+    if (_cellSelection == 1)
     {
-        _cellIdentifier  = @"EmergencyOverviewTableCell";
+        _cellIdentifier  = @"EmergencyInformTableCell";
         _cell            = [tableView dequeueReusableCellWithIdentifier:_cellIdentifier];
         if (_cell == nil)
         {
-            [[NSBundle mainBundle] loadNibNamed:@"EmergencyOverviewTableCell" owner:self options:nil];
-            _cell = _emergencyOverviewTableCell;
-            self._emergencyOverviewTableCell = nil;
+            [[NSBundle mainBundle] loadNibNamed:@"EmergencyInformTableCell" owner:self options:nil];
+            _cell = _emergencyInformTableCell;
+            self._emergencyInformTableCell = nil;
         }
-        UILabel         *_labelTitle      = (UILabel *) [_cell viewWithTag:1];
-        if (_cellSelection == 0)
-        {
-            _labelTitle.text = @"1. Alarmieren > wenn nötig";
-        }
-        if (_cellSelection == 6)
-        {
-            _labelTitle.text = @"2. Informieren > immer";
-        }
+        _buttonNumber          = (UIButton *) [_cell viewWithTag:6];
+        _buttonNumberTitle     = @"(0)058 9347070";
     }
     else
     {
-        UIButton        *_buttonNumber;
-        NSString        *_buttonNumberTitle;
-        
-        if (_cellSelection == 7)
+        _cellIdentifier  = @"EmergencyDetailTableCell";
+        _cell            = [tableView dequeueReusableCellWithIdentifier:_cellIdentifier];
+        if (_cell == nil)
         {
-            _cellIdentifier  = @"EmergencyInformTableCell";
-            _cell            = [tableView dequeueReusableCellWithIdentifier:_cellIdentifier];
-            if (_cell == nil)
-            {
-                [[NSBundle mainBundle] loadNibNamed:@"EmergencyInformTableCell" owner:self options:nil];
-                _cell = _emergencyInformTableCell;
-                self._emergencyInformTableCell = nil;
-            }
-            _buttonNumber          = (UIButton *) [_cell viewWithTag:6];
-            _buttonNumberTitle     = @"(0)058 9347070";
+            [[NSBundle mainBundle] loadNibNamed:@"EmergencyDetailTableCell" owner:self options:nil];
+            _cell = _emergencyDetailTableCell;
+            self._emergencyDetailTableCell = nil;
         }
-        else
+        
+        UILabel         *_labelDescription      = (UILabel *) [_cell viewWithTag:1];
+        _buttonNumber          = (UIButton *) [_cell viewWithTag:2];
+        
+        if (_cellRow == 0)
         {
-        
-            _cellIdentifier  = @"EmergencyDetailTableCell";
-            _cell            = [tableView dequeueReusableCellWithIdentifier:_cellIdentifier];
-            if (_cell == nil)
-            {
-                [[NSBundle mainBundle] loadNibNamed:@"EmergencyDetailTableCell" owner:self options:nil];
-                _cell = _emergencyDetailTableCell;
-                self._emergencyDetailTableCell = nil;
-            }
-            UILabel         *_labelDescription      = (UILabel *) [_cell viewWithTag:1];
-            _buttonNumber          = (UIButton *) [_cell viewWithTag:2];
-        
-            if (_cellSelection == 1)
-            {
-                _labelDescription.text = @"Polizei";
-                _buttonNumberTitle = @"(0)117";
-            }
-            if (_cellSelection == 2)
-            {
-                _labelDescription.text = @"Feuerwehr";
-                _buttonNumberTitle = @"(0)118";
-            }
-            if (_cellSelection == 3)
-            {
-                _labelDescription.text = @"Sanität";
-                _buttonNumberTitle = @"(0)144";
-            }
-            if (_cellSelection == 4)
-            {
-                _labelDescription.text = @"Tox-Zentrum";
-                _buttonNumberTitle = @"(0)145";
-            }
-            if (_cellSelection == 5)
-            {
-                _labelDescription.text = @"REGA";
-                _buttonNumberTitle = @"(0)1414";
-            }
+            _labelDescription.text = @"Polizei";
+            _buttonNumberTitle = @"(0)117";
         }
+        if (_cellRow == 1)
+        {
+            _labelDescription.text = @"Feuerwehr";
+            _buttonNumberTitle = @"(0)118";
+        }
+        if (_cellRow == 2)
+        {
+            _labelDescription.text = @"Sanität";
+            _buttonNumberTitle = @"(0)144";
+        }
+        if (_cellRow == 3)
+        {
+            _labelDescription.text = @"Tox-Zentrum";
+            _buttonNumberTitle = @"(0)145";
+        }
+        if (_cellRow == 4)
+        {
+            _labelDescription.text = @"REGA";
+            _buttonNumberTitle = @"(0)1414";
+        }
+        
         _buttonNumber.enabled = true;
         [_buttonNumber addTarget:self action:@selector(callGivenNumber  :event:) forControlEvents:UIControlEventTouchUpInside];
             
@@ -291,8 +296,6 @@
         [_titleString addAttribute:NSUnderlineStyleAttributeName value:[NSNumber numberWithInteger:NSUnderlineStyleSingle] range:NSMakeRange(0, [_titleString length])];
         
         [_buttonNumber setAttributedTitle:_titleString forState:UIControlStateNormal];
-        
-
     }
     return _cell;
 }
