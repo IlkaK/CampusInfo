@@ -64,6 +64,7 @@
 @synthesize _fourSlotsOneRoomTableCell;
 @synthesize _fourSlotsTwoRoomsTableCell;
 @synthesize _fourSlotsThreeRoomsTableCell;
+@synthesize _fourSlotsFourRoomsTableCell;
 @synthesize _fourSlotsFiveRoomsTableCell;
 
 @synthesize _fiveSlotsOneRoomTableCell;
@@ -72,8 +73,11 @@
 @synthesize _sixSlotsTwoRoomsTableCell;
 
 @synthesize _sevenSlotsOneRoomTableCell;
+@synthesize _sevenSlotsEightRoomsTableCell;
 
 @synthesize _eightSlotsOneRoomTableCell;
+
+@synthesize _nineSlotsThreeRoomsTableCell;
 
 @synthesize _emptyTableCell;
 @synthesize _errorMessageCell;
@@ -899,6 +903,9 @@
     _titleNavigationItem = nil;
     _titleNavigationLabel = nil;
     _dateButton = nil;
+    _fourSlotsFourRoomsTableCell = nil;
+    _nineSlotsThreeRoomsTableCell = nil;
+    _sevenSlotsEightRoomsTableCell = nil;
     [super viewDidUnload];
 }
 
@@ -2748,6 +2755,53 @@
 }
 
 
+- (UITableViewCell *)fourSlotsFourRoomsWithView       :(UITableView *)     actualTableView
+                                  withScheduleEvent   :(ScheduleEventDto *)actualScheduleEvent
+{
+    static NSString *_cellIdentifier = @"FourSlotsFourRoomsTableCell";
+    UITableViewCell *_cell           = [actualTableView dequeueReusableCellWithIdentifier:_cellIdentifier];
+    
+    if (_cell == nil)
+    {
+        [[NSBundle mainBundle] loadNibNamed:@"FourSlotsFourRoomsTableCell" owner:self options:nil];
+        _cell = _fourSlotsFourRoomsTableCell;
+        self._fourSlotsFourRoomsTableCell = nil;
+    }
+    
+    ScheduleEventRealizationDto *_localRealization1 = [actualScheduleEvent._scheduleEventRealizations objectAtIndex:0];
+    ScheduleEventRealizationDto *_localRealization2 = [actualScheduleEvent._scheduleEventRealizations objectAtIndex:1];
+    ScheduleEventRealizationDto *_localRealization3 = [actualScheduleEvent._scheduleEventRealizations objectAtIndex:2];
+    ScheduleEventRealizationDto *_localRealization4 = [actualScheduleEvent._scheduleEventRealizations objectAtIndex:3];
+    SlotDto *_timeSlot1 = [actualScheduleEvent._slots objectAtIndex:0];
+    SlotDto *_timeSlot2 = [actualScheduleEvent._slots objectAtIndex:1];
+    SlotDto *_timeSlot3 = [actualScheduleEvent._slots objectAtIndex:2];
+    SlotDto *_timeSlot4 = [actualScheduleEvent._slots objectAtIndex:3];
+    
+    [self setDateLabelWithCell:_cell withTag:1 withStartTime:_timeSlot1._startTime withEndTime:_timeSlot1._endTime];
+    [self setDateLabelWithCell:_cell withTag:2 withStartTime:_timeSlot2._startTime withEndTime:_timeSlot2._endTime];
+    [self setDateLabelWithCell:_cell withTag:3 withStartTime:_timeSlot3._startTime withEndTime:_timeSlot3._endTime];
+    [self setDateLabelWithCell:_cell withTag:4 withStartTime:_timeSlot4._startTime withEndTime:_timeSlot4._endTime];
+    
+    [self setLectureButtonWithCell:_cell withTag:5 withTitle:actualScheduleEvent._name doEnable:TRUE];
+    
+    [self setRoomButtonWithCell:_cell withTag:6 withTitle:_localRealization1._room._name withSelector:1];
+    [self setRoomButtonWithCell:_cell withTag:7 withTitle:_localRealization2._room._name withSelector:2];
+    [self setRoomButtonWithCell:_cell withTag:8 withTitle:_localRealization3._room._name withSelector:3];
+    [self setRoomButtonWithCell:_cell withTag:9 withTitle:_localRealization4._room._name withSelector:3];
+    
+    [self setDetailButtonWithCell:_cell withTag:10];
+    
+    [self  setActualLectureButtonWithCell:_cell
+                      withTag            :11
+                      withStartTime      :actualScheduleEvent._startTime
+                      withEndTime        :actualScheduleEvent._endTime
+     ];
+    
+    [self setBackgroundColorOfCell:_cell withIsLecture:YES];
+    return _cell;
+}
+
+
 
 - (UITableViewCell *)fourSlotsFiveRoomsWithView     :(UITableView *)     actualTableView
                                 withScheduleEvent   :(ScheduleEventDto *)actualScheduleEvent
@@ -2847,6 +2901,68 @@
 }
 
 
+- (UITableViewCell *)sevenSlotsEightRoomsWithView   :(UITableView *)     actualTableView
+                                withScheduleEvent   :(ScheduleEventDto *)actualScheduleEvent
+{
+    static NSString *_cellIdentifier = @"SevenSlotsEightRoomsTableCell";
+    UITableViewCell *_cell           = [actualTableView dequeueReusableCellWithIdentifier:_cellIdentifier];
+    
+    if (_cell == nil)
+    {
+        [[NSBundle mainBundle] loadNibNamed:@"SevenSlotsEightRoomsTableCell" owner:self options:nil];
+        _cell = _sevenSlotsEightRoomsTableCell;
+        self._sevenSlotsEightRoomsTableCell = nil;
+    }
+    
+    ScheduleEventRealizationDto *_localRealization1 = [actualScheduleEvent._scheduleEventRealizations objectAtIndex:0];
+    ScheduleEventRealizationDto *_localRealization2 = [actualScheduleEvent._scheduleEventRealizations objectAtIndex:1];
+    ScheduleEventRealizationDto *_localRealization3 = [actualScheduleEvent._scheduleEventRealizations objectAtIndex:2];
+    ScheduleEventRealizationDto *_localRealization4 = [actualScheduleEvent._scheduleEventRealizations objectAtIndex:3];
+    ScheduleEventRealizationDto *_localRealization5 = [actualScheduleEvent._scheduleEventRealizations objectAtIndex:4];
+    ScheduleEventRealizationDto *_localRealization6 = [actualScheduleEvent._scheduleEventRealizations objectAtIndex:5];
+    ScheduleEventRealizationDto *_localRealization7 = [actualScheduleEvent._scheduleEventRealizations objectAtIndex:6];
+    ScheduleEventRealizationDto *_localRealization8 = [actualScheduleEvent._scheduleEventRealizations objectAtIndex:7];
+    
+    SlotDto *_timeSlot1 = [actualScheduleEvent._slots objectAtIndex:0];
+    SlotDto *_timeSlot2 = [actualScheduleEvent._slots objectAtIndex:1];
+    SlotDto *_timeSlot3 = [actualScheduleEvent._slots objectAtIndex:2];
+    SlotDto *_timeSlot4 = [actualScheduleEvent._slots objectAtIndex:3];
+    SlotDto *_timeSlot5 = [actualScheduleEvent._slots objectAtIndex:4];
+    SlotDto *_timeSlot6 = [actualScheduleEvent._slots objectAtIndex:5];
+    SlotDto *_timeSlot7 = [actualScheduleEvent._slots objectAtIndex:6];
+    
+    [self setDateLabelWithCell:_cell withTag:1 withStartTime:_timeSlot1._startTime withEndTime:_timeSlot1._endTime];
+    [self setDateLabelWithCell:_cell withTag:2 withStartTime:_timeSlot2._startTime withEndTime:_timeSlot2._endTime];
+    [self setDateLabelWithCell:_cell withTag:3 withStartTime:_timeSlot3._startTime withEndTime:_timeSlot3._endTime];
+    [self setDateLabelWithCell:_cell withTag:4 withStartTime:_timeSlot4._startTime withEndTime:_timeSlot4._endTime];
+    [self setDateLabelWithCell:_cell withTag:5 withStartTime:_timeSlot5._startTime withEndTime:_timeSlot5._endTime];
+    [self setDateLabelWithCell:_cell withTag:6 withStartTime:_timeSlot6._startTime withEndTime:_timeSlot6._endTime];
+    [self setDateLabelWithCell:_cell withTag:7 withStartTime:_timeSlot7._startTime withEndTime:_timeSlot7._endTime];
+    
+    [self setLectureButtonWithCell:_cell withTag:8 withTitle:actualScheduleEvent._name doEnable:TRUE];
+    
+    [self setRoomButtonWithCell:_cell withTag:9 withTitle:_localRealization1._room._name withSelector:1];
+    [self setRoomButtonWithCell:_cell withTag:10 withTitle:_localRealization2._room._name withSelector:2];
+    [self setRoomButtonWithCell:_cell withTag:11 withTitle:_localRealization3._room._name withSelector:3];
+    [self setRoomButtonWithCell:_cell withTag:12 withTitle:_localRealization4._room._name withSelector:4];
+    [self setRoomButtonWithCell:_cell withTag:13 withTitle:_localRealization5._room._name withSelector:5];
+    [self setRoomButtonWithCell:_cell withTag:14 withTitle:_localRealization6._room._name withSelector:6];
+    [self setRoomButtonWithCell:_cell withTag:15 withTitle:_localRealization7._room._name withSelector:7];
+    [self setRoomButtonWithCell:_cell withTag:16 withTitle:_localRealization8._room._name withSelector:8];
+    
+    [self setDetailButtonWithCell:_cell withTag:17];
+    
+    [self  setActualLectureButtonWithCell:_cell
+                      withTag            :18
+                      withStartTime      :actualScheduleEvent._startTime
+                      withEndTime        :actualScheduleEvent._endTime
+     ];
+    
+    [self setBackgroundColorOfCell:_cell withIsLecture:YES];
+    return _cell;
+}
+
+
 - (UITableViewCell *)eightSlotsOneRoomWithView      :(UITableView *)     actualTableView
                                 withScheduleEvent   :(ScheduleEventDto *)actualScheduleEvent
 {
@@ -2894,6 +3010,62 @@
     [self setBackgroundColorOfCell:_cell withIsLecture:YES];
     return _cell;
 }
+
+- (UITableViewCell *)nineSlotsThreeRoomsWithView    :(UITableView *)     actualTableView
+                                withScheduleEvent   :(ScheduleEventDto *)actualScheduleEvent
+{
+    static NSString *_cellIdentifier = @"NineSlotsThreeRoomsTableCell";
+    UITableViewCell *_cell           = [actualTableView dequeueReusableCellWithIdentifier:_cellIdentifier];
+    
+    if (_cell == nil)
+    {
+        [[NSBundle mainBundle] loadNibNamed:@"NineSlotsThreeRoomsTableCell" owner:self options:nil];
+        _cell = _nineSlotsThreeRoomsTableCell;
+        self._nineSlotsThreeRoomsTableCell = nil;
+    }
+    
+    ScheduleEventRealizationDto *_localRealization1 = [actualScheduleEvent._scheduleEventRealizations objectAtIndex:0];
+    ScheduleEventRealizationDto *_localRealization2 = [actualScheduleEvent._scheduleEventRealizations objectAtIndex:1];
+    ScheduleEventRealizationDto *_localRealization3 = [actualScheduleEvent._scheduleEventRealizations objectAtIndex:2];
+    
+    SlotDto *_timeSlot1 = [actualScheduleEvent._slots objectAtIndex:0];
+    SlotDto *_timeSlot2 = [actualScheduleEvent._slots objectAtIndex:1];
+    SlotDto *_timeSlot3 = [actualScheduleEvent._slots objectAtIndex:2];
+    SlotDto *_timeSlot4 = [actualScheduleEvent._slots objectAtIndex:3];
+    SlotDto *_timeSlot5 = [actualScheduleEvent._slots objectAtIndex:4];
+    SlotDto *_timeSlot6 = [actualScheduleEvent._slots objectAtIndex:5];
+    SlotDto *_timeSlot7 = [actualScheduleEvent._slots objectAtIndex:6];
+    SlotDto *_timeSlot8 = [actualScheduleEvent._slots objectAtIndex:7];
+    SlotDto *_timeSlot9 = [actualScheduleEvent._slots objectAtIndex:8];
+    
+    [self setDateLabelWithCell:_cell withTag:1 withStartTime:_timeSlot1._startTime withEndTime:_timeSlot1._endTime];
+    [self setDateLabelWithCell:_cell withTag:2 withStartTime:_timeSlot2._startTime withEndTime:_timeSlot2._endTime];
+    [self setDateLabelWithCell:_cell withTag:3 withStartTime:_timeSlot3._startTime withEndTime:_timeSlot3._endTime];
+    [self setDateLabelWithCell:_cell withTag:4 withStartTime:_timeSlot4._startTime withEndTime:_timeSlot4._endTime];
+    [self setDateLabelWithCell:_cell withTag:5 withStartTime:_timeSlot5._startTime withEndTime:_timeSlot5._endTime];
+    [self setDateLabelWithCell:_cell withTag:6 withStartTime:_timeSlot6._startTime withEndTime:_timeSlot6._endTime];
+    [self setDateLabelWithCell:_cell withTag:7 withStartTime:_timeSlot7._startTime withEndTime:_timeSlot7._endTime];
+    [self setDateLabelWithCell:_cell withTag:8 withStartTime:_timeSlot8._startTime withEndTime:_timeSlot8._endTime];
+    [self setDateLabelWithCell:_cell withTag:9 withStartTime:_timeSlot9._startTime withEndTime:_timeSlot9._endTime];
+    
+    [self setLectureButtonWithCell:_cell withTag:10 withTitle:actualScheduleEvent._name doEnable:TRUE];
+    
+    [self setRoomButtonWithCell:_cell withTag:11 withTitle:_localRealization1._room._name withSelector:1];
+    [self setRoomButtonWithCell:_cell withTag:12 withTitle:_localRealization2._room._name withSelector:2];
+    [self setRoomButtonWithCell:_cell withTag:13 withTitle:_localRealization3._room._name withSelector:3];
+    
+    [self setDetailButtonWithCell:_cell withTag:14];
+    
+    [self  setActualLectureButtonWithCell:_cell
+                      withTag            :15
+                      withStartTime      :actualScheduleEvent._startTime
+                      withEndTime        :actualScheduleEvent._endTime
+     ];
+    
+    [self setBackgroundColorOfCell:_cell withIsLecture:YES];
+    return _cell;
+}
+
 
 
 
@@ -3089,6 +3261,13 @@
                                            withScheduleEvent   :_scheduleEvent];
                 }
                 if (   [_scheduleEvent._slots                     count] == 4
+                    && [_scheduleEvent._scheduleEventRealizations count] == 4
+                    )
+                {
+                    return [self fourSlotsFourRoomsWithView   :tableView
+                                           withScheduleEvent  :_scheduleEvent];
+                }
+                if (   [_scheduleEvent._slots                     count] == 4
                     && [_scheduleEvent._scheduleEventRealizations count] == 5
                     )
                 {
@@ -3131,13 +3310,28 @@
                     return [self sevenSlotsOneRoomWithView  :tableView
                                     withScheduleEvent       :_scheduleEvent];
                 }
-
+                if (   [_scheduleEvent._slots                     count] == 7
+                    && [_scheduleEvent._scheduleEventRealizations count] == 8)
+                {
+                    return [self sevenSlotsEightRoomsWithView:tableView
+                                    withScheduleEvent       :_scheduleEvent];
+                }
+                
                 //----------------------------
                 // eight slots, one or more rooms
                 if (   [_scheduleEvent._slots                     count] == 8
                     && [_scheduleEvent._scheduleEventRealizations count] == 1)
                 {
                     return [self eightSlotsOneRoomWithView  :tableView
+                                    withScheduleEvent       :_scheduleEvent];
+                }
+
+                //----------------------------
+                // nine slots, several rooms
+                if (   [_scheduleEvent._slots                     count] == 9
+                    && [_scheduleEvent._scheduleEventRealizations count] == 3)
+                {
+                    return [self nineSlotsThreeRoomsWithView:tableView
                                     withScheduleEvent       :_scheduleEvent];
                 }
                 
@@ -3194,9 +3388,15 @@
             if (_scheduleEvent != nil) 
             {  
                 // depending on how many rooms and time slots there are take cell
+                if (   [_scheduleEvent._slots                     count] >= 9
+                    || [_scheduleEvent._scheduleEventRealizations count] >= 9
+                    )
+                {
+                    return 315;
+                }
                 
-                if (   [_scheduleEvent._slots                     count] >= 8
-                    || [_scheduleEvent._scheduleEventRealizations count] >= 8
+                if (   [_scheduleEvent._slots                     count] == 8
+                    || [_scheduleEvent._scheduleEventRealizations count] == 8
                     )
                 {
                     return 280;

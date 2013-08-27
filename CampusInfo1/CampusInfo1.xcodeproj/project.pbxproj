@@ -14,6 +14,9 @@
 		2700DD2F1699F854002906D0 /* ThreeSlotsThreeRoomsTableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2700DD2E1699F854002906D0 /* ThreeSlotsThreeRoomsTableCell.xib */; };
 		2709DED417AEDEF5002E714F /* ContactsPlaceTableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2709DED317AEDEF5002E714F /* ContactsPlaceTableCell.xib */; };
 		270A753917CCCE5C00DEAA94 /* 044_actual_lesson.png in Resources */ = {isa = PBXBuildFile; fileRef = 270A753817CCCE5C00DEAA94 /* 044_actual_lesson.png */; };
+		270A753B17CCE8D100DEAA94 /* FourSlotsFourRoomsTableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 270A753A17CCE8D000DEAA94 /* FourSlotsFourRoomsTableCell.xib */; };
+		270A753D17CCEA2500DEAA94 /* NineSlotsThreeRoomsTableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 270A753C17CCEA2500DEAA94 /* NineSlotsThreeRoomsTableCell.xib */; };
+		270A753F17CCEB7000DEAA94 /* SevenSlotsEightRoomsTableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 270A753E17CCEB7000DEAA94 /* SevenSlotsEightRoomsTableCell.xib */; };
 		270ACE1D174EA09D00F72E2A /* TwoSlotsThreeRoomsTableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 270ACE1C174EA09D00F72E2A /* TwoSlotsThreeRoomsTableCell.xib */; };
 		271CB2BE17AD196A005CC185 /* EmergencyDetailTableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 271CB2BD17AD196A005CC185 /* EmergencyDetailTableCell.xib */; };
 		271CB2C217AD26F3005CC185 /* EmergencyInformTableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 271CB2C117AD26F2005CC185 /* EmergencyInformTableCell.xib */; };
@@ -205,6 +208,9 @@
 		2700DD2E1699F854002906D0 /* ThreeSlotsThreeRoomsTableCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ThreeSlotsThreeRoomsTableCell.xib; sourceTree = "<group>"; };
 		2709DED317AEDEF5002E714F /* ContactsPlaceTableCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ContactsPlaceTableCell.xib; sourceTree = "<group>"; };
 		270A753817CCCE5C00DEAA94 /* 044_actual_lesson.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = 044_actual_lesson.png; path = CampusInfo1/resources/actual_lesson/044_actual_lesson.png; sourceTree = "<group>"; };
+		270A753A17CCE8D000DEAA94 /* FourSlotsFourRoomsTableCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FourSlotsFourRoomsTableCell.xib; sourceTree = "<group>"; };
+		270A753C17CCEA2500DEAA94 /* NineSlotsThreeRoomsTableCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NineSlotsThreeRoomsTableCell.xib; sourceTree = "<group>"; };
+		270A753E17CCEB7000DEAA94 /* SevenSlotsEightRoomsTableCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SevenSlotsEightRoomsTableCell.xib; sourceTree = "<group>"; };
 		270ACE1C174EA09D00F72E2A /* TwoSlotsThreeRoomsTableCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TwoSlotsThreeRoomsTableCell.xib; sourceTree = "<group>"; };
 		271CB2BD17AD196A005CC185 /* EmergencyDetailTableCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EmergencyDetailTableCell.xib; sourceTree = "<group>"; };
 		271CB2C117AD26F2005CC185 /* EmergencyInformTableCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EmergencyInformTableCell.xib; sourceTree = "<group>"; };
@@ -539,12 +545,15 @@
 				27650DEE156D749E004B0FA2 /* FourSlotsOneRoomTableCell.xib */,
 				27761DB21579427500477BC0 /* FourSlotsTwoRoomsTableCell.xib */,
 				27761DB415794AB900477BC0 /* FourSlotsThreeRoomsTableCell.xib */,
+				270A753A17CCE8D000DEAA94 /* FourSlotsFourRoomsTableCell.xib */,
 				E108614817944B110001C8E1 /* FourSlotsFiveRoomsTableCell.xib */,
 				27C1ED1C157A6867000DF028 /* FiveSlotsOneRoomTableCell.xib */,
 				275ACACE173D3BB50091B266 /* SixSlotsOneRoomTableCell.xib */,
 				275ACACC173D36C90091B266 /* SixSlotsTwoRoomsTableCell.xib */,
 				E1086146179432460001C8E1 /* SevenSlotsOneRoomTableCell.xib */,
+				270A753E17CCEB7000DEAA94 /* SevenSlotsEightRoomsTableCell.xib */,
 				2700DD201699DD1A002906D0 /* EightSlotsOneRoomTableCell.xib */,
+				270A753C17CCEA2500DEAA94 /* NineSlotsThreeRoomsTableCell.xib */,
 			);
 			name = TimeTableCells;
 			sourceTree = "<group>";
@@ -1121,6 +1130,9 @@
 				E1252E6017CB72AD00E61732 /* ServiceDeskViewController.xib in Resources */,
 				E1252E6217CB7E5800E61732 /* ServiceDeskTableCell.xib in Resources */,
 				270A753917CCCE5C00DEAA94 /* 044_actual_lesson.png in Resources */,
+				270A753B17CCE8D100DEAA94 /* FourSlotsFourRoomsTableCell.xib in Resources */,
+				270A753D17CCEA2500DEAA94 /* NineSlotsThreeRoomsTableCell.xib in Resources */,
+				270A753F17CCEB7000DEAA94 /* SevenSlotsEightRoomsTableCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -90,6 +90,7 @@ UIViewController
     IBOutlet UITableViewCell            *_fourSlotsOneRoomTableCell;
     IBOutlet UITableViewCell            *_fourSlotsTwoRoomsTableCell;
     IBOutlet UITableViewCell            *_fourSlotsThreeRoomsTableCell;
+    IBOutlet UITableViewCell            *_fourSlotsFourRoomsTableCell;
     IBOutlet UITableViewCell            *_fourSlotsFiveRoomsTableCell;
     
     IBOutlet UITableViewCell            *_fiveSlotsOneRoomTableCell;
@@ -98,8 +99,11 @@ UIViewController
     IBOutlet UITableViewCell            *_sixSlotsTwoRoomsTableCell;
     
     IBOutlet UITableViewCell            *_sevenSlotsOneRoomTableCell;
+    IBOutlet UITableViewCell            *_sevenSlotsEightRoomsTableCell;
     
     IBOutlet UITableViewCell            *_eightSlotsOneRoomTableCell;
+    
+    IBOutlet UITableViewCell            *_nineSlotsThreeRoomsTableCell;
     
     IBOutlet UITableViewCell            *_emptyTableCell;
     IBOutlet UITableViewCell            *_errorMessageCell;
@@ -166,6 +170,7 @@ UIViewController
 @property (nonatomic, retain) IBOutlet UITableViewCell           *_fourSlotsOneRoomTableCell;
 @property (nonatomic, retain) IBOutlet UITableViewCell           *_fourSlotsTwoRoomsTableCell;
 @property (nonatomic, retain) IBOutlet UITableViewCell           *_fourSlotsThreeRoomsTableCell;
+@property (nonatomic, retain) IBOutlet UITableViewCell           *_fourSlotsFourRoomsTableCell;
 @property (nonatomic, retain) IBOutlet UITableViewCell           *_fourSlotsFiveRoomsTableCell;
 
 @property (nonatomic, retain) IBOutlet UITableViewCell           *_fiveSlotsOneRoomTableCell;
@@ -174,8 +179,11 @@ UIViewController
 @property (nonatomic, retain) IBOutlet UITableViewCell           *_sixSlotsTwoRoomsTableCell;
 
 @property (nonatomic, retain) IBOutlet UITableViewCell           *_sevenSlotsOneRoomTableCell;
+@property (nonatomic, retain) IBOutlet UITableViewCell           *_sevenSlotsEightRoomsTableCell;
 
 @property (nonatomic, retain) IBOutlet UITableViewCell           *_eightSlotsOneRoomTableCell;
+
+@property (nonatomic, retain) IBOutlet UITableViewCell           *_nineSlotsThreeRoomsTableCell;
 
 @property (nonatomic, retain) IBOutlet UITableViewCell           *_emptyTableCell;
 @property (nonatomic, retain) IBOutlet UITableViewCell           *_errorMessageCell;
