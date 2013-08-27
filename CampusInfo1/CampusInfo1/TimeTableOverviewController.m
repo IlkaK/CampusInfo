@@ -1568,45 +1568,49 @@
 {
      UIButton *_roomButton = (UIButton *)[cell viewWithTag:indexTag];
     [_roomButton    setTitle:@"" forState:UIControlStateNormal];
-    _roomButton.enabled     = TRUE;
     
-    NSMutableAttributedString *_titleString = [[NSMutableAttributedString alloc] initWithString:title];
-    [_titleString addAttribute:NSUnderlineStyleAttributeName value:[NSNumber numberWithInteger:NSUnderlineStyleSingle] range:NSMakeRange(0, [_titleString length])];
-    [_roomButton    setAttributedTitle:_titleString forState:UIControlStateNormal];
+    if ([title length] > 0)
+    {
     
-    if (selector == 1)
-    {
-        [_roomButton    addTarget:self action:@selector(changeToRoomSchedule1   :event:) forControlEvents:UIControlEventTouchUpInside];
-    }
-    if (selector == 2)
-    {
-        [_roomButton   addTarget:self action:@selector(changeToRoomSchedule2   :event:) forControlEvents:UIControlEventTouchUpInside];
-    }
-    if (selector == 3)
-    {
-        [_roomButton   addTarget:self action:@selector(changeToRoomSchedule3   :event:) forControlEvents:UIControlEventTouchUpInside];
-    }
-    if (selector == 4)
-    {
-        [_roomButton   addTarget:self action:@selector(changeToRoomSchedule4   :event:) forControlEvents:UIControlEventTouchUpInside];
-    }
-    if (selector == 5)
-    {
-        [_roomButton   addTarget:self action:@selector(changeToRoomSchedule5   :event:) forControlEvents:UIControlEventTouchUpInside];
-    }
-    if (selector == 6)
-    {
-        [_roomButton   addTarget:self action:@selector(changeToRoomSchedule6   :event:) forControlEvents:UIControlEventTouchUpInside];
-    }
-    if (selector == 7)
-    {
-        [_roomButton   addTarget:self action:@selector(changeToRoomSchedule7   :event:) forControlEvents:UIControlEventTouchUpInside];
-    }
-    if (selector == 8)
-    {
-        [_roomButton   addTarget:self action:@selector(changeToRoomSchedule8   :event:) forControlEvents:UIControlEventTouchUpInside];
-    }
+        _roomButton.enabled     = TRUE;
     
+        NSMutableAttributedString *_titleString = [[NSMutableAttributedString alloc] initWithString:title];
+        [_titleString addAttribute:NSUnderlineStyleAttributeName value:[NSNumber numberWithInteger:NSUnderlineStyleSingle] range:NSMakeRange(0, [_titleString length])];
+        [_roomButton    setAttributedTitle:_titleString forState:UIControlStateNormal];
+    
+        if (selector == 1)
+        {
+            [_roomButton    addTarget:self action:@selector(changeToRoomSchedule1   :event:) forControlEvents:UIControlEventTouchUpInside];
+        }
+        if (selector == 2)
+        {
+            [_roomButton   addTarget:self action:@selector(changeToRoomSchedule2   :event:) forControlEvents:UIControlEventTouchUpInside];
+        }
+        if (selector == 3)
+        {
+            [_roomButton   addTarget:self action:@selector(changeToRoomSchedule3   :event:) forControlEvents:UIControlEventTouchUpInside];
+        }
+        if (selector == 4)
+        {
+            [_roomButton   addTarget:self action:@selector(changeToRoomSchedule4   :event:) forControlEvents:UIControlEventTouchUpInside];
+        }
+        if (selector == 5)
+        {
+            [_roomButton   addTarget:self action:@selector(changeToRoomSchedule5   :event:) forControlEvents:UIControlEventTouchUpInside];
+        }
+        if (selector == 6)
+        {
+            [_roomButton   addTarget:self action:@selector(changeToRoomSchedule6   :event:) forControlEvents:UIControlEventTouchUpInside];
+        }
+        if (selector == 7)
+        {
+            [_roomButton   addTarget:self action:@selector(changeToRoomSchedule7   :event:) forControlEvents:UIControlEventTouchUpInside];
+        }
+        if (selector == 8)
+        {
+            [_roomButton   addTarget:self action:@selector(changeToRoomSchedule8   :event:) forControlEvents:UIControlEventTouchUpInside];
+        }
+    }
 }
 
 
@@ -1636,48 +1640,43 @@
                        _startTimeString,
                        _endTimeString
                        ];
+}
+
+
+- (void)setActualLectureButtonWithCell:(UITableViewCell *)cell
+                   withTag            :(int)       indexTag
+                   withStartTime      :(NSDate *)  startTime
+                   withEndTime        :(NSDate *)  endTime
+{
+
+    UIButton         *_actualLessonButton   = (UIButton *)[cell viewWithTag:indexTag];
+    _actualLessonButton.hidden = YES;
+    
+    NSString *_startTimeString = [[_dateFormatter _timeFormatter] stringFromDate:startTime];
+    NSString *_endTimeString   = [[_dateFormatter _timeFormatter] stringFromDate:endTime];
+        
     if([self isActualDayAndTime:_actualDate
             withStartTimeString:_startTimeString
               withEndTimeString:_endTimeString])
     {
-        _labelDate.backgroundColor = _zhawColor._zhawRed;
-    }
-    else
-    {
-        _labelDate.backgroundColor = [UIColor clearColor];
+            _actualLessonButton.hidden = NO;
     }
 }
 
 
-
 - (void) setBackgroundColorOfCell:(UITableViewCell *)cell
                     withIsLecture:(BOOL)isLecture
-                    withStartTime:(NSDate *)startTime
-                      withEndTime:(NSDate *)endTime
 {
-    //NSString *_startTimeString = [[_dateFormatter _timeFormatter] stringFromDate:startTime];
-    //NSString *_endTimeString   = [[_dateFormatter _timeFormatter] stringFromDate:endTime];
-    
-    //if ([self isActualDayAndTime:_actualDate
-    //               withStartTimeString:_startTimeString
-    //                 withEndTimeString:_endTimeString])
-    //{
-        //cell.contentView.backgroundColor = _actualSelectionBackgroundColor;
-        //cell.backgroundColor = cell.contentView.backgroundColor;
-    //}
-    //else
-    //{
-        if (isLecture)
-        {
-            cell.contentView.backgroundColor = _zhawColor._zhawLightestBlue;
-            cell.backgroundColor = cell.contentView.backgroundColor;
-        }
-        else
-        {
-            cell.contentView.backgroundColor = [UIColor clearColor];
-            cell.backgroundColor = cell.contentView.backgroundColor;
-        }
-    //}
+    if (isLecture)
+    {
+        cell.contentView.backgroundColor = _zhawColor._zhawLightestBlue;
+        cell.backgroundColor = cell.contentView.backgroundColor;
+    }
+    else
+    {
+        cell.contentView.backgroundColor = [UIColor clearColor];
+        cell.backgroundColor = cell.contentView.backgroundColor;
+    }
 }
 
 
@@ -1707,8 +1706,6 @@
     }
     [self setBackgroundColorOfCell:_cell
                      withIsLecture:NO
-                     withStartTime:[[_dateFormatter _timeFormatter] dateFromString:@"08:00"]
-                       withEndTime:[[_dateFormatter _timeFormatter] dateFromString:@"08:45"]
     ];
     return _cell;
 }
@@ -1727,13 +1724,15 @@
         self._emptyTableCell = nil;
     }
 
-    UILabel          *_labelDate     = (UILabel  *)[_cell viewWithTag:1];
-    UIButton         *_lectureButton = (UIButton *)[_cell viewWithTag:2];
+    UILabel          *_labelDate            = (UILabel  *)[_cell viewWithTag:1];
+    UIButton         *_lectureButton        = (UIButton *)[_cell viewWithTag:2];
+    UIButton         *_actualLessonButton   = (UIButton *)[_cell viewWithTag:3];
     NSDate           *_startTime;
     NSDate           *_endTime;
     
     // initially always disable detail button
     _lectureButton.enabled = FALSE;
+    _actualLessonButton.hidden = YES;
     
     // initialize values for buttons and labels
     [_lectureButton setTitle:@"" forState:UIControlStateNormal];
@@ -1774,19 +1773,18 @@
                     withStartTimeString:_startTimeString
                       withEndTimeString:_endTimeString])
             {
-                _labelDate.backgroundColor = _zhawColor._zhawRed;
+                _actualLessonButton.hidden = NO;
+                //_labelDate.backgroundColor = _zhawColor._zhawRed;
             }
             else
             {
-                _labelDate.backgroundColor = [UIColor clearColor];
+                _actualLessonButton.hidden = YES;
             }
         }
     }
     
     [self setBackgroundColorOfCell:_cell
                      withIsLecture:NO
-                     withStartTime:_startTime
-                       withEndTime:_endTime
      ];
     return _cell;
 }
@@ -1807,7 +1805,11 @@
 
     ScheduleEventRealizationDto *_localRealization = [actualScheduleEvent._scheduleEventRealizations objectAtIndex:0];
     
-    [self setDateLabelWithCell:_cell withTag:1 withStartTime:actualScheduleEvent._startTime withEndTime:actualScheduleEvent._endTime];
+    [self setDateLabelWithCell:_cell
+                       withTag:1
+                 withStartTime:actualScheduleEvent._startTime
+                   withEndTime:actualScheduleEvent._endTime
+     ];
     
     [self setLectureButtonWithCell:_cell withTag:2 withTitle:actualScheduleEvent._name doEnable:TRUE];
     
@@ -1815,11 +1817,13 @@
 
     [self setDetailButtonWithCell:_cell withTag:4];
 
-    [self setBackgroundColorOfCell:_cell
-                     withIsLecture:YES
-                     withStartTime:actualScheduleEvent._startTime
-                       withEndTime:actualScheduleEvent._endTime
+    [self  setActualLectureButtonWithCell:_cell
+                      withTag            :5
+                      withStartTime      :actualScheduleEvent._startTime
+                      withEndTime        :actualScheduleEvent._endTime
      ];
+    
+    [self setBackgroundColorOfCell:_cell withIsLecture:YES];
     return _cell;
 }
 
@@ -1851,11 +1855,13 @@
     
     [self setDetailButtonWithCell:_cell withTag:5];
     
-    [self setBackgroundColorOfCell:_cell
-                     withIsLecture:YES
-                     withStartTime:actualScheduleEvent._startTime
-                       withEndTime:actualScheduleEvent._endTime
+    [self  setActualLectureButtonWithCell:_cell
+                      withTag            :6
+                      withStartTime      :actualScheduleEvent._startTime
+                      withEndTime        :actualScheduleEvent._endTime
      ];
+    
+    [self setBackgroundColorOfCell:_cell withIsLecture:YES];
     return _cell;
 }
 
@@ -1888,11 +1894,13 @@
     
     [self setDetailButtonWithCell:_cell withTag:6];
     
-    [self setBackgroundColorOfCell:_cell
-                     withIsLecture:YES
-                     withStartTime:actualScheduleEvent._startTime
-                       withEndTime:actualScheduleEvent._endTime
+    [self  setActualLectureButtonWithCell:_cell
+                      withTag            :7
+                      withStartTime      :actualScheduleEvent._startTime
+                      withEndTime        :actualScheduleEvent._endTime
      ];
+    
+    [self setBackgroundColorOfCell:_cell withIsLecture:YES];
     return _cell;        
 }
 
@@ -1924,11 +1932,13 @@
     
     [self setDetailButtonWithCell:_cell withTag:5];
     
-    [self setBackgroundColorOfCell:_cell
-                     withIsLecture:YES
-                     withStartTime:actualScheduleEvent._startTime
-                       withEndTime:actualScheduleEvent._endTime
+    [self  setActualLectureButtonWithCell:_cell
+                      withTag            :6
+                      withStartTime      :actualScheduleEvent._startTime
+                      withEndTime        :actualScheduleEvent._endTime
      ];
+    
+    [self setBackgroundColorOfCell:_cell withIsLecture:YES];
     return _cell;
 }
 
@@ -1962,11 +1972,13 @@
     
     [self setDetailButtonWithCell:_cell withTag:6];
     
-    [self setBackgroundColorOfCell:_cell
-                     withIsLecture:YES
-                     withStartTime:actualScheduleEvent._startTime
-                       withEndTime:actualScheduleEvent._endTime
+    [self  setActualLectureButtonWithCell:_cell
+                      withTag            :7
+                      withStartTime      :actualScheduleEvent._startTime
+                      withEndTime        :actualScheduleEvent._endTime
      ];
+    
+    [self setBackgroundColorOfCell:_cell withIsLecture:YES];
     return _cell;
 }
 
@@ -2001,11 +2013,13 @@
     
     [self setDetailButtonWithCell:_cell withTag:6];
 
-    [self setBackgroundColorOfCell:_cell
-                     withIsLecture:YES
-                     withStartTime:actualScheduleEvent._startTime
-                       withEndTime:actualScheduleEvent._endTime
+    [self  setActualLectureButtonWithCell:_cell
+                      withTag            :7
+                      withStartTime      :actualScheduleEvent._startTime
+                      withEndTime        :actualScheduleEvent._endTime
      ];
+    
+    [self setBackgroundColorOfCell:_cell withIsLecture:YES];
     return _cell;
 }
 
@@ -2041,11 +2055,13 @@
     
     [self setDetailButtonWithCell:_cell withTag:7];
     
-    [self setBackgroundColorOfCell:_cell
-                     withIsLecture:YES
-                     withStartTime:actualScheduleEvent._startTime
-                       withEndTime:actualScheduleEvent._endTime
+    [self  setActualLectureButtonWithCell:_cell
+                      withTag            :8
+                      withStartTime      :actualScheduleEvent._startTime
+                      withEndTime        :actualScheduleEvent._endTime
      ];
+    
+    [self setBackgroundColorOfCell:_cell withIsLecture:YES];
     return _cell;
 }
 
@@ -2084,11 +2100,13 @@
     
     [self setDetailButtonWithCell:_cell withTag:8 ];
     
-    [self setBackgroundColorOfCell:_cell
-                     withIsLecture:YES
-                     withStartTime:actualScheduleEvent._startTime
-                       withEndTime:actualScheduleEvent._endTime
+    [self  setActualLectureButtonWithCell:_cell
+                      withTag            :9
+                      withStartTime      :actualScheduleEvent._startTime
+                      withEndTime        :actualScheduleEvent._endTime
      ];
+    
+    [self setBackgroundColorOfCell:_cell withIsLecture:YES];
     return _cell;
 }
 
@@ -2128,11 +2146,13 @@
     
     [self setDetailButtonWithCell:_cell withTag:9];
     
-    [self setBackgroundColorOfCell:_cell
-                     withIsLecture:YES
-                     withStartTime:actualScheduleEvent._startTime
-                       withEndTime:actualScheduleEvent._endTime
+    [self  setActualLectureButtonWithCell:_cell
+                      withTag            :10
+                      withStartTime      :actualScheduleEvent._startTime
+                      withEndTime        :actualScheduleEvent._endTime
      ];
+    
+    [self setBackgroundColorOfCell:_cell withIsLecture:YES];
     return _cell;
 }
 
@@ -2168,11 +2188,13 @@
     
     [self setDetailButtonWithCell:_cell withTag:7];
     
-    [self setBackgroundColorOfCell:_cell
-                     withIsLecture:YES
-                     withStartTime:actualScheduleEvent._startTime
-                       withEndTime:actualScheduleEvent._endTime
+    [self  setActualLectureButtonWithCell:_cell
+                      withTag            :8
+                      withStartTime      :actualScheduleEvent._startTime
+                      withEndTime        :actualScheduleEvent._endTime
      ];
+    
+    [self setBackgroundColorOfCell:_cell withIsLecture:YES];
     return _cell;
 }
 
@@ -2210,11 +2232,13 @@
     
     [self setDetailButtonWithCell:_cell withTag:8];
     
-    [self setBackgroundColorOfCell:_cell
-                     withIsLecture:YES
-                     withStartTime:actualScheduleEvent._startTime
-                       withEndTime:actualScheduleEvent._endTime
+    [self  setActualLectureButtonWithCell:_cell
+                      withTag            :9
+                      withStartTime      :actualScheduleEvent._startTime
+                      withEndTime        :actualScheduleEvent._endTime
      ];
+    
+    [self setBackgroundColorOfCell:_cell withIsLecture:YES];
     return _cell;
 }
 
@@ -2255,11 +2279,13 @@
     
     [self setDetailButtonWithCell:_cell withTag:10];
     
-    [self setBackgroundColorOfCell:_cell
-                     withIsLecture:YES
-                     withStartTime:actualScheduleEvent._startTime
-                       withEndTime:actualScheduleEvent._endTime
+    [self  setActualLectureButtonWithCell:_cell
+                      withTag            :11
+                      withStartTime      :actualScheduleEvent._startTime
+                      withEndTime        :actualScheduleEvent._endTime
      ];
+    
+    [self setBackgroundColorOfCell:_cell withIsLecture:YES];
     return _cell;
 }
 
@@ -2301,11 +2327,13 @@
     
     [self setDetailButtonWithCell:_cell withTag:10];
     
-    [self setBackgroundColorOfCell:_cell
-                     withIsLecture:YES
-                     withStartTime:actualScheduleEvent._startTime
-                       withEndTime:actualScheduleEvent._endTime
+    [self  setActualLectureButtonWithCell:_cell
+                      withTag            :11
+                      withStartTime      :actualScheduleEvent._startTime
+                      withEndTime        :actualScheduleEvent._endTime
      ];
+    
+    [self setBackgroundColorOfCell:_cell withIsLecture:YES];
     return _cell;
 }
 
@@ -2349,11 +2377,13 @@
     
     [self setDetailButtonWithCell:_cell withTag:11];
         
-    [self setBackgroundColorOfCell:_cell
-                     withIsLecture:YES
-                     withStartTime:actualScheduleEvent._startTime
-                       withEndTime:actualScheduleEvent._endTime
+    [self  setActualLectureButtonWithCell:_cell
+                      withTag            :12
+                      withStartTime      :actualScheduleEvent._startTime
+                      withEndTime        :actualScheduleEvent._endTime
      ];
+    
+    [self setBackgroundColorOfCell:_cell withIsLecture:YES];
     return _cell;
 }
 
@@ -2387,11 +2417,13 @@
     
     [self setDetailButtonWithCell:_cell withTag:7];
         
-    [self setBackgroundColorOfCell:_cell
-                     withIsLecture:YES
-                     withStartTime:actualScheduleEvent._startTime
-                       withEndTime:actualScheduleEvent._endTime
+    [self  setActualLectureButtonWithCell:_cell
+                      withTag            :8
+                      withStartTime      :actualScheduleEvent._startTime
+                      withEndTime        :actualScheduleEvent._endTime
      ];
+    
+    [self setBackgroundColorOfCell:_cell withIsLecture:YES];
     return _cell;
 }
 
@@ -2435,11 +2467,13 @@
     
     [self setDetailButtonWithCell:_cell withTag:7];
     
-    [self setBackgroundColorOfCell:_cell
-                     withIsLecture:YES
-                     withStartTime:actualScheduleEvent._startTime
-                       withEndTime:actualScheduleEvent._endTime
+    [self  setActualLectureButtonWithCell:_cell
+                      withTag            :8
+                      withStartTime      :actualScheduleEvent._startTime
+                      withEndTime        :actualScheduleEvent._endTime
      ];
+    
+    [self setBackgroundColorOfCell:_cell withIsLecture:YES];
     return _cell;
 }
 
@@ -2477,11 +2511,13 @@
     
     [self setDetailButtonWithCell:_cell withTag:8];
     
-    [self setBackgroundColorOfCell:_cell
-                     withIsLecture:YES
-                     withStartTime:actualScheduleEvent._startTime
-                       withEndTime:actualScheduleEvent._endTime
+    [self  setActualLectureButtonWithCell:_cell
+                      withTag            :9
+                      withStartTime      :actualScheduleEvent._startTime
+                      withEndTime        :actualScheduleEvent._endTime
      ];
+    
+    [self setBackgroundColorOfCell:_cell withIsLecture:YES];
     return _cell;
 }
 
@@ -2520,11 +2556,13 @@
     
     [self setDetailButtonWithCell:_cell withTag:9];
     
-    [self setBackgroundColorOfCell:_cell
-                     withIsLecture:YES
-                     withStartTime:actualScheduleEvent._startTime
-                       withEndTime:actualScheduleEvent._endTime
+    [self  setActualLectureButtonWithCell:_cell
+                      withTag            :10
+                      withStartTime      :actualScheduleEvent._startTime
+                      withEndTime        :actualScheduleEvent._endTime
      ];
+    
+    [self setBackgroundColorOfCell:_cell withIsLecture:YES];
     return _cell;
 }
 
@@ -2567,11 +2605,13 @@
     
     [self setDetailButtonWithCell:_cell withTag:10];
     
-    [self setBackgroundColorOfCell:_cell
-                     withIsLecture:YES
-                     withStartTime:actualScheduleEvent._startTime
-                       withEndTime:actualScheduleEvent._endTime
+    [self  setActualLectureButtonWithCell:_cell
+                      withTag            :11
+                      withStartTime      :actualScheduleEvent._startTime
+                      withEndTime        :actualScheduleEvent._endTime
      ];
+    
+    [self setBackgroundColorOfCell:_cell withIsLecture:YES];
     return _cell;
 }
 
@@ -2608,11 +2648,13 @@
 
     [self setDetailButtonWithCell:_cell withTag:8];
     
-    [self setBackgroundColorOfCell:_cell
-                     withIsLecture:YES
-                     withStartTime:actualScheduleEvent._startTime
-                       withEndTime:actualScheduleEvent._endTime
+    [self  setActualLectureButtonWithCell:_cell
+                      withTag            :9
+                      withStartTime      :actualScheduleEvent._startTime
+                      withEndTime        :actualScheduleEvent._endTime
      ];
+    
+    [self setBackgroundColorOfCell:_cell withIsLecture:YES];
     return _cell;
 }
 
@@ -2649,11 +2691,13 @@
     
     [self setDetailButtonWithCell:_cell withTag:8];
     
-    [self setBackgroundColorOfCell:_cell
-                     withIsLecture:YES
-                     withStartTime:actualScheduleEvent._startTime
-                       withEndTime:actualScheduleEvent._endTime
+    [self  setActualLectureButtonWithCell:_cell
+                      withTag            :9
+                      withStartTime      :actualScheduleEvent._startTime
+                      withEndTime        :actualScheduleEvent._endTime
      ];
+    
+    [self setBackgroundColorOfCell:_cell withIsLecture:YES];
     return _cell;
 }
 
@@ -2693,11 +2737,13 @@
     
     [self setDetailButtonWithCell:_cell withTag:9];
     
-    [self setBackgroundColorOfCell:_cell
-                     withIsLecture:YES
-                     withStartTime:actualScheduleEvent._startTime
-                       withEndTime:actualScheduleEvent._endTime
+    [self  setActualLectureButtonWithCell:_cell
+                      withTag            :10
+                      withStartTime      :actualScheduleEvent._startTime
+                      withEndTime        :actualScheduleEvent._endTime
      ];
+    
+    [self setBackgroundColorOfCell:_cell withIsLecture:YES];
     return _cell;
 }
 
@@ -2742,11 +2788,13 @@
     
     [self setDetailButtonWithCell:_cell withTag:11];
     
-    [self setBackgroundColorOfCell:_cell
-                     withIsLecture:YES
-                     withStartTime:actualScheduleEvent._startTime
-                       withEndTime:actualScheduleEvent._endTime
+    [self  setActualLectureButtonWithCell:_cell
+                      withTag            :12
+                      withStartTime      :actualScheduleEvent._startTime
+                      withEndTime        :actualScheduleEvent._endTime
      ];
+    
+    [self setBackgroundColorOfCell:_cell withIsLecture:YES];
     return _cell;
 }
 
@@ -2788,11 +2836,13 @@
     
     [self setDetailButtonWithCell:_cell withTag:10];
     
-    [self setBackgroundColorOfCell:_cell
-                     withIsLecture:YES
-                     withStartTime:actualScheduleEvent._startTime
-                       withEndTime:actualScheduleEvent._endTime
+    [self  setActualLectureButtonWithCell:_cell
+                      withTag            :11
+                      withStartTime      :actualScheduleEvent._startTime
+                      withEndTime        :actualScheduleEvent._endTime
      ];
+    
+    [self setBackgroundColorOfCell:_cell withIsLecture:YES];
     return _cell;
 }
 
@@ -2835,11 +2885,13 @@
     
     [self setDetailButtonWithCell:_cell withTag:11];
     
-    [self setBackgroundColorOfCell:_cell
-                     withIsLecture:YES
-                     withStartTime:actualScheduleEvent._startTime
-                       withEndTime:actualScheduleEvent._endTime
+    [self  setActualLectureButtonWithCell:_cell
+                      withTag            :12
+                      withStartTime      :actualScheduleEvent._startTime
+                      withEndTime        :actualScheduleEvent._endTime
      ];
+    
+    [self setBackgroundColorOfCell:_cell withIsLecture:YES];
     return _cell;
 }
 
@@ -2894,6 +2946,12 @@
                     //NSLog(@"slots and events are null => emptyCellOrHoliday is called");
                     return [self emptyCellOrHoliday:tableView:_scheduleEvent];
                 }
+                
+                //NSLog(@"---- _scheduleEvent %@ _slot count %i realization count %i",
+                //      _scheduleEvent._name,
+                //      [_scheduleEvent._slots count],
+                //      [_scheduleEvent._scheduleEventRealizations count]
+                //      );
                 
                 //----------------------------
                 // one slot, one or more rooms
@@ -3093,7 +3151,7 @@
             }
         }
     }
-    NSLog(@" _scheduleEvent %@ _slot count %i realization count %i",
+    NSLog(@" NO MATCH FOUND _scheduleEvent %@ _slot count %i realization count %i",
           _scheduleEvent._name,
           [_scheduleEvent._slots count],
           [_scheduleEvent._scheduleEventRealizations count]
@@ -3137,8 +3195,8 @@
             {  
                 // depending on how many rooms and time slots there are take cell
                 
-                if (   [_scheduleEvent._slots                     count] == 8
-                    || [_scheduleEvent._scheduleEventRealizations count] == 8
+                if (   [_scheduleEvent._slots                     count] >= 8
+                    || [_scheduleEvent._scheduleEventRealizations count] >= 8
                     )
                 {
                     return 280;

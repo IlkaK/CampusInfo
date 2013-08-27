@@ -13,6 +13,7 @@
 		2700DD2D1699F2C4002906D0 /* ThreeSlotsTwoRoomsTableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2700DD2C1699F2C4002906D0 /* ThreeSlotsTwoRoomsTableCell.xib */; };
 		2700DD2F1699F854002906D0 /* ThreeSlotsThreeRoomsTableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2700DD2E1699F854002906D0 /* ThreeSlotsThreeRoomsTableCell.xib */; };
 		2709DED417AEDEF5002E714F /* ContactsPlaceTableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2709DED317AEDEF5002E714F /* ContactsPlaceTableCell.xib */; };
+		270A753917CCCE5C00DEAA94 /* 044_actual_lesson.png in Resources */ = {isa = PBXBuildFile; fileRef = 270A753817CCCE5C00DEAA94 /* 044_actual_lesson.png */; };
 		270ACE1D174EA09D00F72E2A /* TwoSlotsThreeRoomsTableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 270ACE1C174EA09D00F72E2A /* TwoSlotsThreeRoomsTableCell.xib */; };
 		271CB2BE17AD196A005CC185 /* EmergencyDetailTableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 271CB2BD17AD196A005CC185 /* EmergencyDetailTableCell.xib */; };
 		271CB2C217AD26F3005CC185 /* EmergencyInformTableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 271CB2C117AD26F2005CC185 /* EmergencyInformTableCell.xib */; };
@@ -203,6 +204,7 @@
 		2700DD2C1699F2C4002906D0 /* ThreeSlotsTwoRoomsTableCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ThreeSlotsTwoRoomsTableCell.xib; sourceTree = "<group>"; };
 		2700DD2E1699F854002906D0 /* ThreeSlotsThreeRoomsTableCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ThreeSlotsThreeRoomsTableCell.xib; sourceTree = "<group>"; };
 		2709DED317AEDEF5002E714F /* ContactsPlaceTableCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ContactsPlaceTableCell.xib; sourceTree = "<group>"; };
+		270A753817CCCE5C00DEAA94 /* 044_actual_lesson.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = 044_actual_lesson.png; path = CampusInfo1/resources/actual_lesson/044_actual_lesson.png; sourceTree = "<group>"; };
 		270ACE1C174EA09D00F72E2A /* TwoSlotsThreeRoomsTableCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TwoSlotsThreeRoomsTableCell.xib; sourceTree = "<group>"; };
 		271CB2BD17AD196A005CC185 /* EmergencyDetailTableCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EmergencyDetailTableCell.xib; sourceTree = "<group>"; };
 		271CB2C117AD26F2005CC185 /* EmergencyInformTableCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EmergencyInformTableCell.xib; sourceTree = "<group>"; };
@@ -465,6 +467,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		270A753717CCCE1100DEAA94 /* actual_lesson */ = {
+			isa = PBXGroup;
+			children = (
+				270A753817CCCE5C00DEAA94 /* 044_actual_lesson.png */,
+			);
+			name = actual_lesson;
+			sourceTree = "<group>";
+		};
 		2724546417B7EBB7005F979C /* Contacts */ = {
 			isa = PBXGroup;
 			children = (
@@ -531,8 +541,8 @@
 				27761DB415794AB900477BC0 /* FourSlotsThreeRoomsTableCell.xib */,
 				E108614817944B110001C8E1 /* FourSlotsFiveRoomsTableCell.xib */,
 				27C1ED1C157A6867000DF028 /* FiveSlotsOneRoomTableCell.xib */,
-				275ACACC173D36C90091B266 /* SixSlotsTwoRoomsTableCell.xib */,
 				275ACACE173D3BB50091B266 /* SixSlotsOneRoomTableCell.xib */,
+				275ACACC173D36C90091B266 /* SixSlotsTwoRoomsTableCell.xib */,
 				E1086146179432460001C8E1 /* SevenSlotsOneRoomTableCell.xib */,
 				2700DD201699DD1A002906D0 /* EightSlotsOneRoomTableCell.xib */,
 			);
@@ -629,6 +639,7 @@
 		A35A344E152082F600181E3F /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				270A753717CCCE1100DEAA94 /* actual_lesson */,
 				A35A34501520830700181E3F /* Icon */,
 			);
 			name = Resources;
@@ -1109,6 +1120,7 @@
 				E1252E5B17CB4D7800E61732 /* SocialMediaTableCell.xib in Resources */,
 				E1252E6017CB72AD00E61732 /* ServiceDeskViewController.xib in Resources */,
 				E1252E6217CB7E5800E61732 /* ServiceDeskTableCell.xib in Resources */,
+				270A753917CCCE5C00DEAA94 /* 044_actual_lesson.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
