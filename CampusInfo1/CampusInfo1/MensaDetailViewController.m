@@ -122,6 +122,8 @@
     // set default values for spinner/activity indicator
     _waitForChangeActivityIndicator.hidesWhenStopped = YES;
     _waitForChangeActivityIndicator.hidden = YES;
+    [_waitForChangeActivityIndicator setBackgroundColor:_zhawColor._zhawOriginalBlue];
+    [self.view bringSubviewToFront:_waitForChangeActivityIndicator];
     
     UIButton *backButton = [UIButton buttonWithType:101];
     UIView *backButtonView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, backButton.frame.size.width, backButton.frame.size.height)];

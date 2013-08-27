@@ -27,6 +27,8 @@
 @synthesize _titleNavigationItem;
 @synthesize _titleNavigationBar;
 
+@synthesize _backgroundImageView;
+
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -157,11 +159,15 @@
     // set default values for spinner/activity indicator
     _waitForChangeActivityIndicator.hidesWhenStopped = YES;
     _waitForChangeActivityIndicator.hidden = YES;
+    [_waitForChangeActivityIndicator setBackgroundColor:_zhawColor._zhawOriginalBlue];
+    [self.view bringSubviewToFront:_waitForChangeActivityIndicator];
     
     // set background to zhaw blue
-    [self.view setBackgroundColor:_zhawColor._zhawLighterBlue];
+    //[self.view setBackgroundColor:_zhawColor._zhawLighterBlue];
     
     [_chooseDateSegmentedControl setTintColor:_zhawColor._zhawOriginalBlue];
+    
+    [_backgroundImageView setBackgroundColor:_zhawColor._zhawLighterBlue];
 }
 
 
@@ -178,6 +184,7 @@
     _titleNavigationBar = nil;
     _titleNavigationItem = nil;
     _titleNavigationLabel = nil;
+    _backgroundImageView = nil;
     [super viewDidUnload];
 }
 
