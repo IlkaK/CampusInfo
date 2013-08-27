@@ -26,7 +26,7 @@
 @synthesize _schedule;
 @synthesize _actualDayDto;
 @synthesize _dayNavigator;
-@synthesize _dateLabel;
+@synthesize _dateButton;
 
 @synthesize _detailsVC;
 @synthesize _chooseDateVC;
@@ -250,19 +250,15 @@
 
 - (IBAction)moveToTimeTableSegmentedControlFeature:(id)sender
 {
-    //NSLog(@"_timeTableSegmentedControl.selectedSegmentIndex: %i", _timeTableSegmentedControl.selectedSegmentIndex);
-    
     // acronym
     if(_timeTableSegmentedControl.selectedSegmentIndex == 0)
     {
 		if (self._ownStoredAcronymString == nil)
         {
-            [_timeTableSegmentedControl setSelectedSegmentIndex:UISegmentedControlNoSegment];
             [self presentModalViewController:_settingsVC animated:YES];
         }
         else
         {
-            //[_timeTableSegmentedControl setSelectedSegmentIndex:UISegmentedControlNoSegment];
             [self setNewScheduleWithAcronym:self._ownStoredAcronymString
                             withAcronymType:self._ownStoredAcronymType
                             withAcronymText:[NSString stringWithFormat:@"von %@ (%@)"
@@ -278,16 +274,20 @@
     {
         NSDate *_today = [NSDate date];
         [self setActualDate:_today];
-        //[_timeTableSegmentedControl setSelectedSegmentIndex:UISegmentedControlNoSegment];
 	}
 
     // search
     if(_timeTableSegmentedControl.selectedSegmentIndex == 2)
     {
-        [_timeTableSegmentedControl setSelectedSegmentIndex:UISegmentedControlNoSegment];
         [self presentModalViewController:_searchVC animated:YES];
 	}
     
+}
+
+- (IBAction)moveToChooseDateView:(id)sender
+{
+    _chooseDateVC._actualDate = self._actualDate;
+    [self presentModalViewController:_chooseDateVC animated:YES];
 }
 
 
@@ -303,9 +303,7 @@
     NSString *_dateString = [NSString stringWithFormat:@"%@, %@"
                                                         ,[[_dateFormatter _weekDayFormatter] stringFromDate:showDate]
                                                         ,[[_dateFormatter _dayFormatter]     stringFromDate:showDate]];
-
-    [_dateLabel setTextColor:_zhawColor._zhawWhite];
-    _dateLabel.text = _dateString;
+    [_dateButton setTitle:_dateString forState:UIControlStateNormal];
     _dayNavigator.title = @"";
 }
 
@@ -313,11 +311,20 @@
 
 - (void)setActualDate:(NSDate *)newDate
 {
-    self._actualDate      = newDate;
-    [self setNewScheduleWithDate:newDate];
-    [self setDateInNavigatorWithActualDate:_actualDate];
-    _actualDayDto        = [self getDayDto];
-    [_timeTable reloadData];
+    NSString *_actualDayString    = [[_dateFormatter _dayFormatter] stringFromDate:_actualDate];
+    NSString *_todayString        = [[_dateFormatter _dayFormatter] stringFromDate:newDate];
+    
+    // compare dates
+    if (![_actualDayString isEqualToString: _todayString])
+    {
+    
+        self._actualDate      = newDate;
+        [self setNewScheduleWithDate:newDate];
+        [self setDateInNavigatorWithActualDate:_actualDate];
+        _actualDayDto        = [self getDayDto];
+        [_timeTable reloadData];
+        [_timeTableSegmentedControl setSelectedSegmentIndex:UISegmentedControlNoSegment];
+    }
 }
 
 
@@ -519,9 +526,7 @@
     [_dayNavigator setLeftBarButtonItem :_leftButton animated :true];
     [_dayNavigator setRightBarButtonItem:_rightButton animated:true];
     
-    _dateLabel.userInteractionEnabled = YES;
-    UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(openChooseDateView)];
-    [_dateLabel addGestureRecognizer:tapGesture];
+     [_dateButton useAlertStyle];
 
     // ----- DETAIL PAGE -----
     if (_detailsVC == nil)
@@ -732,6 +737,7 @@
             }
         }
     }
+    [_timeTableSegmentedControl setSelectedSegmentIndex:UISegmentedControlNoSegment];
 }
 
 
@@ -879,7 +885,6 @@
     
     _dayNavigator = nil;
     _acronymLabel = nil;
-    _dateLabel = nil;
     
     _rightSwipe = nil;
     _leftSwipe = nil;
@@ -893,6 +898,7 @@
     _titleNavigationBar = nil;
     _titleNavigationItem = nil;
     _titleNavigationLabel = nil;
+    _dateButton = nil;
     [super viewDidUnload];
 }
 

@@ -7,6 +7,7 @@
 //
 
 #import "GradientButton.h"
+#import "ColorSelection.h"
 
 @interface GradientButton()
 @property (nonatomic, readonly) CGGradientRef normalGradient;
@@ -78,12 +79,28 @@
     // Oddly enough, if I create the color array using arrayWithObjects:, it
     // doesn't work - the gradient comes back NULL
     NSMutableArray *colors = [NSMutableArray arrayWithCapacity:3];
-    UIColor *color = [UIColor colorWithRed:0.283 green:0.32 blue:0.414 alpha:1.0];
+    UIColor *color;
+    //ColorSelection *_zhawColor = [[ColorSelection alloc]init];
+    //[colors addObject:(id)[_zhawColor._zhawLighterBlue CGColor]];
+    
+    color = [UIColor colorWithRed:101.0/255 green:124.0/255 blue:159.0/255 alpha:1.0];
     [colors addObject:(id)[color CGColor]];
-    color = [UIColor colorWithRed:0.82 green:0.834 blue:0.87 alpha:1.0];
+    
+    //UIColor *color = [UIColor colorWithRed:0.283 green:0.32 blue:0.414 alpha:1.0];
+    // 72 82 106
+    //[colors addObject:(id)[color CGColor]];
+    //color = [UIColor colorWithRed:0.82 green:0.834 blue:0.87 alpha:1.0];
+    // 209 213 222
+    color = [UIColor colorWithRed:167.0/255 green:182.0/255 blue:205.0/255 alpha:1.0];
+    
     [colors addObject:(id)[color CGColor]];
-    color = [UIColor colorWithRed:0.186 green:0.223 blue:0.326 alpha:1.0];
+    //color = [UIColor colorWithRed:0.186 green:0.223 blue:0.326 alpha:1.0];
+    // 47 57 83
+    //[colors addObject:(id)[color CGColor]];
+    color = [UIColor colorWithRed:46.0/255 green:71.0/255 blue:135.0/255 alpha:1.0];
     [colors addObject:(id)[color CGColor]];
+    //[colors addObject:(id)[_zhawColor._zhawOriginalBlue CGColor]];
+    
     self.normalGradientColors = colors;
     self.normalGradientLocations = [NSArray arrayWithObjects:
                                     [NSNumber numberWithFloat:0.0f],

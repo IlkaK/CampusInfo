@@ -51,7 +51,7 @@ UIViewController
     
     // setting the navigation bar
     IBOutlet UINavigationItem           *_dayNavigator;
-    IBOutlet UILabel                    *_dateLabel;
+    IBOutlet GradientButton             *_dateButton;
     
     IBOutlet UISegmentedControl         *_timeTableSegmentedControl;
     
@@ -135,7 +135,7 @@ UIViewController
 @property (nonatomic, retain) IBOutlet UITableView               *_timeTable;
 
 @property (nonatomic, retain) IBOutlet UINavigationItem          *_dayNavigator;
-@property (nonatomic, retain) IBOutlet UILabel                   *_dateLabel;
+@property (nonatomic, retain) IBOutlet GradientButton            *_dateButton;
 
 @property (nonatomic, retain) IBOutlet UILabel                   *_acronymLabel;
 @property (nonatomic, retain) IBOutlet UILabel                   *_titleNavigationLabel;
@@ -214,5 +214,6 @@ UIViewController
 - (IBAction)tryConnectionAgain:(id)sender;
 
 - (IBAction)moveToTimeTableSegmentedControlFeature:(id)sender;
+- (IBAction)moveToChooseDateView:(id)sender;
 
 @end

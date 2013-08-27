@@ -14,13 +14,14 @@
 #import <MenuDto.h>
 #import <MenuPlanArrayDto.h>
 #import <ColorSelection.h>
+#import <GradientButton.h>
 
 @interface MensaDetailViewController : UIViewController <ChooseDateViewDelegate, UITableViewDataSource, UITableViewDelegate>
 {
     GastronomicFacilityDto              *_actualGastronomy;
     IBOutlet GradientButton             *_moveBackButton;
     IBOutlet UINavigationItem           *_dayNavigationItem;
-    IBOutlet UILabel                    *_dateLabel;
+    IBOutlet GradientButton             *_dateButton;
     DateFormation                       *_dateFormatter;
 
     IBOutlet ChooseDateViewController   *_chooseDateVC;
@@ -50,7 +51,7 @@
 @property (nonatomic, retain) GastronomicFacilityDto                    *_actualGastronomy;
 @property (nonatomic, retain) GradientButton                            *_moveBackButton;
 @property (nonatomic, retain) IBOutlet UINavigationItem                 *_dayNavigationItem;
-@property (nonatomic, retain) IBOutlet UILabel                          *_dateLabel;
+@property (nonatomic, retain) IBOutlet GradientButton                   *_dateButton;
 @property (nonatomic, retain) DateFormation                             *_dateFormatter;
 
 @property (nonatomic, retain) NSDate                                    *_actualDate;
@@ -77,6 +78,9 @@
 @property (nonatomic, retain) ColorSelection                            *_zhawColor;
 
 
+
+
 - (IBAction)backToMensaOverview:(id)sender;
+- (IBAction)moveToChooseDateView:(id)sender;
 
 @end

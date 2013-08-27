@@ -45,5 +45,6 @@
 - (IBAction)cancelDateChoice:(id)sender;
 - (IBAction)acceptDateChoice:(id)sender;
 - (IBAction)moveToChooseDateSegmentedControl:(id)sender;
+- (IBAction)datePickerChanged:(id)sender;
 
 @end

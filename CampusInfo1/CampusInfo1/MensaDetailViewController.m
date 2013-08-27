@@ -25,8 +25,7 @@
 @synthesize _menuPlans;
 
 @synthesize _moveBackButton;
-
-@synthesize _dateLabel;
+@synthesize _dateButton;
 @synthesize _dayNavigationItem;
 @synthesize _dateFormatter;
 
@@ -45,6 +44,7 @@
 @synthesize _titleNavigationLabel;
 
 @synthesize _zhawColor;
+
 
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -82,11 +82,6 @@
                                                                     action:@selector(dayAfter:)];
     [_dayNavigationItem setLeftBarButtonItem :_leftButton animated :true];
     [_dayNavigationItem setRightBarButtonItem:_rightButton animated:true];
-    
-    _dateLabel.userInteractionEnabled = YES;
-    UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(openChooseDateView)];
-    [_dateLabel addGestureRecognizer:tapGesture];
-    [self.view bringSubviewToFront:_dateLabel];
     
     
     // ------ CHOOSE DATE FREELY ----
@@ -155,6 +150,8 @@
     
     // set background to zhaw blue
     [self.view setBackgroundColor:_zhawColor._zhawOriginalBlue];
+    
+    [_dateButton useAlertStyle];
 }
 
 - (void) threadWaitForChangeActivityIndicator:(id)data
@@ -251,20 +248,13 @@
                              ,[[_dateFormatter _weekDayFormatter] stringFromDate:showDate]
                              ,[[_dateFormatter _dayFormatter]     stringFromDate:showDate]];
     
-    [_dateLabel setTextColor:_zhawColor._zhawWhite];
-    _dateLabel.text = _dateString;
+    [_dateButton setTitle:_dateString forState:UIControlStateNormal];
     _dayNavigationItem.title = @"";
     
-    self.navigationItem.titleView = _dateLabel;
+    //self.navigationItem.titleView = _dateLabel;
     
     self._actualMenu = [_menuPlans getActualMenu:showDate withGastroId:_actualGastronomy._gastroId];
     [_detailTable reloadData];
-}
-
--(void) openChooseDateView
-{
-    _chooseDateVC._actualDate = self._actualDate;
-    [self presentModalViewController:_chooseDateVC animated:YES];
 }
 
 
@@ -279,11 +269,16 @@
     [self dismissModalViewControllerAnimated:YES];
 }
 
+- (IBAction)moveToChooseDateView:(id)sender
+{
+    _chooseDateVC._actualDate = self._actualDate;
+    [self presentModalViewController:_chooseDateVC animated:YES];
+}
+
 - (void)viewDidUnload
 {
     _moveBackButton = nil;
     _dayNavigationItem = nil;
-    _dateLabel = nil;
     _chooseDateVC = nil;
     _detailTable = nil;
     _detailTableCell = nil;
@@ -294,6 +289,7 @@
     _titleNavigationBar = nil;
     _titleNavigationItem = nil;
     _titleNavigationLabel = nil;
+    _dateButton = nil;
     [super viewDidUnload];
 }
 

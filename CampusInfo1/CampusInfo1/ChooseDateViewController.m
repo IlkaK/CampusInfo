@@ -102,6 +102,11 @@
 
 }
 
+- (IBAction)datePickerChanged:(id)sender
+{
+     [_chooseDateSegmentedControl setSelectedSegmentIndex:UISegmentedControlNoSegment];
+}
+
 - (IBAction)setPickerToToday:(id)sender
 {
     [_datePicker setDate:[NSDate date]];

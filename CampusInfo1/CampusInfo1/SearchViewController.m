@@ -250,7 +250,7 @@
     // done
     if(_searchSegmentedControl.selectedSegmentIndex == 1)
     {
-        [_searchSegmentedControl setSelectedSegmentIndex:UISegmentedControlNoSegment];
+
         if (_searchTextField.text == nil || [_searchTextField.text length] == 0)
         {
             UIAlertView *_acronymAlertView = [[UIAlertView alloc]
@@ -274,6 +274,7 @@
             //self.tabBarController.selectedIndex = 0;
             [self dismissModalViewControllerAnimated:YES];
         }
+        [_searchSegmentedControl setSelectedSegmentIndex:UISegmentedControlNoSegment];
 
     }
     
