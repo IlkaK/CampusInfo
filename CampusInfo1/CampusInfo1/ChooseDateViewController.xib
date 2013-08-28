@@ -163,6 +163,7 @@
 						<string key="NSFrame">{{142, 180}, {37, 37}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
 						<reference key="NSWindow"/>
+						<reference key="NSNextKeyView"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
 						<bool key="IBUIOpaque">NO</bool>
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
@@ -1011,6 +1012,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA</b
 						</object>
 					</dictionary>
 					<dictionary class="NSMutableDictionary" key="outlets">
+						<string key="_backgroundImageView">UIImageView</string>
 						<string key="_chooseDateSegmentedControl">UISegmentedControl</string>
 						<string key="_datePicker">UIDatePicker</string>
 						<string key="_titleNavigationBar">UINavigationBar</string>
@@ -1019,6 +1021,10 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA</b
 						<string key="_waitForChangeActivityIndicator">UIActivityIndicatorView</string>
 					</dictionary>
 					<dictionary class="NSMutableDictionary" key="toOneOutletInfosByName">
+						<object class="IBToOneOutletInfo" key="_backgroundImageView">
+							<string key="name">_backgroundImageView</string>
+							<string key="candidateClassName">UIImageView</string>
+						</object>
 						<object class="IBToOneOutletInfo" key="_chooseDateSegmentedControl">
 							<string key="name">_chooseDateSegmentedControl</string>
 							<string key="candidateClassName">UISegmentedControl</string>

@@ -172,10 +172,11 @@
     NSCalendar *_calendar = [NSCalendar currentCalendar];
     int         _newWeekNumber = [[_calendar components: NSWeekOfYearCalendarUnit fromDate:newDate] weekOfYear];
 
-        _actualCalendarWeek = _newWeekNumber;
+    _actualCalendarWeek = _newWeekNumber;
         
-        NSDateComponents *components = [_calendar components:NSDayCalendarUnit | NSMonthCalendarUnit | NSYearCalendarUnit fromDate:_actualDate];
-        int _newYear = [components year];
+    NSDateComponents *components = [_calendar components:NSDayCalendarUnit | NSMonthCalendarUnit | NSYearCalendarUnit fromDate:_actualDate];
+    int _newYear = [components year];
+    
     
     [NSThread detachNewThreadSelector:@selector(threadWaitForChangeActivityIndicator:) toTarget:self withObject:nil];
     

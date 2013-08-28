@@ -184,6 +184,7 @@
 		E1BC5622179D290A007E235D /* MensaDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E1BC5620179D290A007E235D /* MensaDetailViewController.m */; };
 		E1BC5623179D290A007E235D /* MensaDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E1BC5621179D290A007E235D /* MensaDetailViewController.xib */; };
 		E1BC5628179D7638007E235D /* MensaDetailTableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E1BC5627179D7638007E235D /* MensaDetailTableCell.xib */; };
+		E1C23D6117CDDA1E00C58E10 /* GastronomicFacilityArrayDto.m in Sources */ = {isa = PBXBuildFile; fileRef = E1C23D6017CDDA1E00C58E10 /* GastronomicFacilityArrayDto.m */; };
 		E1C9B22A1743894F00BD3DAE /* TwoSlotsFourRoomsTableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E1C9B2291743894F00BD3DAE /* TwoSlotsFourRoomsTableCell.xib */; };
 		E1D35BD717C3593300CCDB1D /* MenuPlanArrayDto.m in Sources */ = {isa = PBXBuildFile; fileRef = E1D35BD617C3593300CCDB1D /* MenuPlanArrayDto.m */; };
 		E1D35BDA17C385BC00CCDB1D /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = E1D35BD817C3858700CCDB1D /* Icon.png */; };
@@ -425,6 +426,8 @@
 		E1BC5620179D290A007E235D /* MensaDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MensaDetailViewController.m; sourceTree = "<group>"; };
 		E1BC5621179D290A007E235D /* MensaDetailViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MensaDetailViewController.xib; sourceTree = "<group>"; };
 		E1BC5627179D7638007E235D /* MensaDetailTableCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MensaDetailTableCell.xib; sourceTree = "<group>"; };
+		E1C23D5F17CDDA1E00C58E10 /* GastronomicFacilityArrayDto.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GastronomicFacilityArrayDto.h; sourceTree = "<group>"; };
+		E1C23D6017CDDA1E00C58E10 /* GastronomicFacilityArrayDto.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GastronomicFacilityArrayDto.m; sourceTree = "<group>"; };
 		E1C9B2291743894F00BD3DAE /* TwoSlotsFourRoomsTableCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TwoSlotsFourRoomsTableCell.xib; sourceTree = "<group>"; };
 		E1D35BD517C3593300CCDB1D /* MenuPlanArrayDto.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MenuPlanArrayDto.h; sourceTree = "<group>"; };
 		E1D35BD617C3593300CCDB1D /* MenuPlanArrayDto.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MenuPlanArrayDto.m; sourceTree = "<group>"; };
@@ -851,6 +854,8 @@
 				E10B72FD1797DE73005D9D32 /* LocationDto.m */,
 				E10B72FF1797DFAF005D9D32 /* HolidayDto.h */,
 				E10B73001797DFAF005D9D32 /* HolidayDto.m */,
+				E1C23D5F17CDDA1E00C58E10 /* GastronomicFacilityArrayDto.h */,
+				E1C23D6017CDDA1E00C58E10 /* GastronomicFacilityArrayDto.m */,
 			);
 			name = MensaOverviewDto;
 			sourceTree = "<group>";
@@ -1228,6 +1233,7 @@
 				E1252E5517CB423400E61732 /* SocialMediaViewController.m in Sources */,
 				E1252E5917CB4BB100E61732 /* ColorSelection.m in Sources */,
 				E1252E5F17CB72AD00E61732 /* ServiceDeskViewController.m in Sources */,
+				E1C23D6117CDDA1E00C58E10 /* GastronomicFacilityArrayDto.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

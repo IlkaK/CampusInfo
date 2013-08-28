@@ -38,6 +38,10 @@
     
     
     //[_request setValue:userAgent forHTTPHeaderField:@"ZHAWCampusInfoForIPhone"];
+    
+    //NSLog(@"_request all http header fields: %@", [_request allHTTPHeaderFields]);
+    //NSLog(@"_request value for http header field: %@",[_request valueForHTTPHeaderField:field]);
+    
     NSURLConnection   *_connection=[[NSURLConnection alloc] initWithRequest:_request delegate:self];
     
     if (_connection) 

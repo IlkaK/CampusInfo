@@ -20,23 +20,23 @@
 @synthesize _mensaOverviewTable;
 @synthesize _mensaOverviewTableCell;
 
-@synthesize _generalDictionary;
-@synthesize _asyncTimeTableRequest;
-@synthesize _dataFromUrl;
-@synthesize _errorMessage;
-@synthesize _connectionTrials;
+@synthesize _gastronomyFacilityArray;
 
-@synthesize _gastronomyArray;
 @synthesize _actualDate;
 @synthesize _dateFormatter;
 @synthesize _translator;
 @synthesize _mensaDetailVC;
 
 @synthesize _dateLabel;
+@synthesize _backgroundImageView;
+@synthesize _noConnectionLabel;
+@synthesize _noConnectionButton;
 
 @synthesize _titleNavigationLabel;
 @synthesize _titleNavigationItem;
 @synthesize _titleNavigationBar;
+
+@synthesize _waitForChangeActivityIndicator;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -52,10 +52,7 @@
     _translator     = [[LanguageTranslation alloc] init];
     ColorSelection *_zhawColor = [[ColorSelection alloc]init];
     
-    _generalDictionary = nil;
-    self._connectionTrials = 1;
-    
-    self._gastronomyArray = [[NSMutableArray alloc] init];
+    self._gastronomyFacilityArray = [[GastronomicFacilityArrayDto alloc] init:nil];
     
     self._actualDate = [NSDate date];
     //self._actualDate    = [[_dateFormatter _dayFormatter] dateFromString:@"20.02.2013"];
@@ -98,6 +95,25 @@
     [_titleNavigationBar setBackgroundImage:aImage forBarMetrics:UIBarMetricsDefault];
     
     [_titleNavigationLabel setBackgroundColor:_zhawColor._zhawOriginalBlue];
+    
+    // set default values for spinner/activity indicator
+    _waitForChangeActivityIndicator.hidesWhenStopped = YES;
+    _waitForChangeActivityIndicator.hidden = YES;
+    [_waitForChangeActivityIndicator setBackgroundColor:_zhawColor._zhawOriginalBlue];
+    [self.view bringSubviewToFront:_waitForChangeActivityIndicator];
+    
+    
+    [self.view bringSubviewToFront:_noConnectionButton];
+    [self.view bringSubviewToFront:_noConnectionLabel];
+    [self.view bringSubviewToFront:_dateLabel];
+    
+    [_backgroundImageView setBackgroundColor:_zhawColor._zhawLighterBlue];
+    [_noConnectionLabel setTextColor:_zhawColor._zhawWhite];
+    [_dateLabel setTextColor:_zhawColor._zhawWhite];
+    
+    _noConnectionButton.hidden = YES;
+    _noConnectionLabel.hidden = YES;
+    [_noConnectionButton useAlertStyle];
 }
 
 
@@ -116,6 +132,10 @@
     _titleNavigationBar = nil;
     _titleNavigationItem = nil;
     _titleNavigationLabel = nil;
+    _waitForChangeActivityIndicator = nil;
+    _noConnectionLabel = nil;
+    _noConnectionButton = nil;
+    _backgroundImageView = nil;
     [super viewDidUnload];
 }
 
@@ -126,144 +146,55 @@
 }
 
 
-//-------------------------------
-// asynchronous request
-//-------------------------------
-
--(void) dataDownloadDidFinish:(NSData*) data
+- (void) threadWaitForChangeActivityIndicator:(id)data
 {
+    _waitForChangeActivityIndicator.hidden = NO;
+    [_waitForChangeActivityIndicator startAnimating];
+}
+
+- (void) getGastronomyFacilityArray
+{
+    //int _actualTrials = 0;
     
-    self._dataFromUrl = data;
+    [NSThread detachNewThreadSelector:@selector(threadWaitForChangeActivityIndicator:) toTarget:self withObject:nil];
     
-    // NSLog(@"dataDownloadDidFinish 1 %@",[NSThread callStackSymbols]);
+    //NSLog(@"gastronomy faciliities count: %i",[_gastronomyFacilityArray._gastronomicFacilities count]);
     
-    if (self._dataFromUrl != nil)
+    //while (_actualTrials < 20 && [_gastronomyFacilityArray._gastronomicFacilities count] == 0)
+    //{
+        //NSLog(@"viewWillAppear Loop: %i", _actualTrials);
+        [_gastronomyFacilityArray getData];
+        //_actualTrials++;
+    //}
+    
+    [_mensaOverviewTable reloadData];
+    
+    [_waitForChangeActivityIndicator stopAnimating];
+    _waitForChangeActivityIndicator.hidden = YES;
+    
+    if ([_gastronomyFacilityArray._gastronomicFacilities count] == 0)
     {
-        //NSString *_receivedString = [[NSString alloc] initWithData:self._dataFromUrl encoding:NSASCIIStringEncoding];
-        //_receivedString = [_receivedString substringToIndex:5000];
-        //NSLog(@"dataDownloadDidFinish for MensaViewController %@", _receivedString);
-        
-        NSError *_error;
-        
-        //if (_generalDictionary == nil)
-        //{
-        
-        [_gastronomyArray removeAllObjects];
-        
-        _generalDictionary = [NSJSONSerialization
-                              JSONObjectWithData:_dataFromUrl
-                              options:kNilOptions
-                              error:&_error];
-        
-        NSArray  *_gastronomicArray;
-        int _gastronomicArrayI;
-        
-        GastronomicFacilityDto *_localGastronomicFacilty = [[GastronomicFacilityDto alloc]init:nil withGastroId:nil withLocation:nil withName:nil withServiceTimePeriods:nil withType:nil withVersion:nil];
-        
-        for (id generalKey in _generalDictionary)
-        {
-            //NSLog(@"generalDictionary key: %@", generalKey);
-            if ([generalKey isEqualToString:@"Message"])
-            {
-                NSString *_message = [_generalDictionary objectForKey:generalKey];
-                //self._errorMessage = _message;
-                NSLog(@"Message: %@",_message);
-            }
-            else
-            {
-                //self._errorMessage = nil;
-                // define type of schedule
-                if ([generalKey isEqualToString:@"gastronomicFacilities"])
-                {
-                    _gastronomicArray = [_generalDictionary objectForKey:generalKey];
-                    
-                    //NSLog(@"count of _gastronomicArray: %i", [_gastronomicArray count]);
-                    
-                    for (_gastronomicArrayI = 0; _gastronomicArrayI < [_gastronomicArray count]; _gastronomicArrayI++)
-                    {
-                        _localGastronomicFacilty = [_localGastronomicFacilty getGastronomicFacility:[_gastronomicArray objectAtIndex:_gastronomicArrayI]];
-                        [_gastronomyArray addObject:_localGastronomicFacilty];
-                    }
-                }
-            }
-        }
-        [_mensaOverviewTable reloadData];
-    }
-}
-
-
--(void)threadDone:(NSNotification*)arg
-{
-    //NSLog(@"Thread exiting");
-}
-
-
--(void) downloadData
-{
-    NSString *_urlString = [NSString stringWithFormat:@"https://srv-lab-t-874.zhaw.ch/v1/catering/facilities"];
-    
-    NSLog(@"urlString: %@", _urlString);
-    
-    NSURL *_url = [NSURL URLWithString:_urlString];
-    [_asyncTimeTableRequest downloadData:_url];
-}
-
-
-- (NSDictionary *) getDictionaryFromUrl
-{
-    
-    _asyncTimeTableRequest = [[TimeTableAsyncRequest alloc] init];
-    _asyncTimeTableRequest._timeTableAsynchRequestDelegate = self;
-    [self performSelectorInBackground:@selector(downloadData) withObject:nil];
-    
-    [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(threadDone:)
-                                                 name:NSThreadWillExitNotification
-                                               object:nil];
-    
-    NSError      *_error = nil;
-    NSDictionary *_scheduleDictionary;
-    
-    if (_dataFromUrl == nil)
-    {
-        return nil;
+        _noConnectionButton.hidden = NO;
+        _noConnectionLabel.hidden = NO;
     }
     else
     {
-        //NSLog(@"getDictionaryFromUrl got some data putting it now into dictionary");
-        _scheduleDictionary = [NSJSONSerialization
-                               JSONObjectWithData:_dataFromUrl
-                               options:kNilOptions
-                               error:&_error];
-        
+        _noConnectionButton.hidden = YES;
+        _noConnectionLabel.hidden = YES;
     }
-    return _scheduleDictionary;
+
 }
 
-
-
--(void) getData
+- (IBAction)tryConnectionAgain:(id)sender
 {
-    //self._generalDictionary = nil;
-    self._generalDictionary = [self getDictionaryFromUrl];
-    
-    if (self._generalDictionary == nil)
-    {
-        NSLog(@"MensaViewController: no connection");
-    }
+    [self getGastronomyFacilityArray];
 }
 
 
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-
-    if (_connectionTrials < 20 && self._generalDictionary == nil)
-    {
-        //NSLog(@"viewWillAppear try connecting");
-        _connectionTrials++;
-       [self getData];
-    }
+    [self getGastronomyFacilityArray];
 }
 
 
@@ -271,7 +202,14 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return [self._gastronomyArray count];
+    if ([_gastronomyFacilityArray._gastronomicFacilities  lastObject] == nil)
+    {
+        return 1;
+    }
+    else
+    {
+        return [_gastronomyFacilityArray._gastronomicFacilities count];
+    }
 }
 
 
@@ -338,10 +276,10 @@
     
     //NSLog(@"_gastronomyArray count %i cellSelection %i", [_gastronomyArray count], _cellSelection);
     
-    if (    [_gastronomyArray lastObject] != nil
-        &&  [_gastronomyArray count] > _cellSelection)
+    if (    [_gastronomyFacilityArray._gastronomicFacilities lastObject] != nil
+        &&  [_gastronomyFacilityArray._gastronomicFacilities count] > _cellSelection)
     {
-        GastronomicFacilityDto *_oneGastronomy = [_gastronomyArray objectAtIndex:_cellSelection];
+        GastronomicFacilityDto *_oneGastronomy = [_gastronomyFacilityArray._gastronomicFacilities objectAtIndex:_cellSelection];
         _gastronomyName = _oneGastronomy._name;
         _gastronomyType = _oneGastronomy._type;
         HolidayDto *_oneHoliday;
@@ -466,7 +404,7 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     NSUInteger    _cellSelection = indexPath.section;
-    GastronomicFacilityDto *_oneGastronomy = [_gastronomyArray objectAtIndex:_cellSelection];
+    GastronomicFacilityDto *_oneGastronomy = [_gastronomyFacilityArray._gastronomicFacilities objectAtIndex:_cellSelection];
     
     //NSString *_actualDateString = [[_dateFormatter _dayFormatter] stringFromDate:_actualDate];
     //NSLog(@"you've selected %@ for date %@", _oneGastronomy._name, _actualDateString);

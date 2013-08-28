@@ -162,9 +162,6 @@
     [_waitForChangeActivityIndicator setBackgroundColor:_zhawColor._zhawOriginalBlue];
     [self.view bringSubviewToFront:_waitForChangeActivityIndicator];
     
-    // set background to zhaw blue
-    //[self.view setBackgroundColor:_zhawColor._zhawLighterBlue];
-    
     [_chooseDateSegmentedControl setTintColor:_zhawColor._zhawOriginalBlue];
     
     [_backgroundImageView setBackgroundColor:_zhawColor._zhawLighterBlue];
