@@ -127,12 +127,18 @@
 - (IBAction)moveToFromStopController:(id)sender
 {
     _publicStopVC._actualStationType = @"from";
+
+    NSLog(@"to button title: %@", _fromButton.titleLabel.text);    
+    _publicStopVC._publicStopTextFieldString = _fromButton.titleLabel.text;
     [self presentModalViewController:_publicStopVC animated:YES];
 }
 
 - (IBAction)moveToToStopController:(id)sender
 {
     _publicStopVC._actualStationType = @"to";
+    
+    NSLog(@"to button title: %@", _toButton.titleLabel.text);
+    _publicStopVC._publicStopTextFieldString = _toButton.titleLabel.text;
     [self presentModalViewController:_publicStopVC animated:YES];
 }
 

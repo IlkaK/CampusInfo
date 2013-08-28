@@ -262,9 +262,9 @@
     
     if (self._dataFromUrl != nil)
     {
-        NSString *_receivedString = [[NSString alloc] initWithData:self._dataFromUrl encoding:NSASCIIStringEncoding];
+        //NSString *_receivedString = [[NSString alloc] initWithData:self._dataFromUrl encoding:NSASCIIStringEncoding];
         //_receivedString = [_receivedString substringToIndex:4000];
-        NSLog(@"dataDownloadDidFinish FOR something %@", _receivedString);
+        //NSLog(@"dataDownloadDidFinish FOR something %@", _receivedString);
         
         NSXMLParser *XML=[[NSXMLParser alloc] initWithData:self._dataFromUrl];
         XML.delegate = self;
@@ -306,7 +306,7 @@
         _urlString = [NSString stringWithFormat:@"https://srv-lab-t-874.zhaw.ch/v1/feeds/soe-news/feed"];
     }
         
-    NSLog(@"urlString NewsChannelDto: %@", _urlString);
+    //NSLog(@"urlString NewsChannelDto: %@", _urlString);
     
     NSURL *_url = [NSURL URLWithString:_urlString];
     [_asyncTimeTableRequest downloadData:_url];

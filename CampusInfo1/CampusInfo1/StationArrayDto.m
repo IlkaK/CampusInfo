@@ -122,7 +122,41 @@
 
 -(void) downloadData
 {
+    
+    _actualStation = [_actualStation stringByReplacingOccurrencesOfString:@"%" withString:@"%25"];
+    _actualStation = [_actualStation stringByReplacingOccurrencesOfString:@" " withString:@"%20"];
+    _actualStation = [_actualStation stringByReplacingOccurrencesOfString:@"(" withString:@"%28"];
+    _actualStation = [_actualStation stringByReplacingOccurrencesOfString:@")" withString:@"%29"];
+    
+    _actualStation = [_actualStation stringByReplacingOccurrencesOfString:@"*" withString:@"%2A"];
+    _actualStation = [_actualStation stringByReplacingOccurrencesOfString:@"+" withString:@"%2B"];
+    _actualStation = [_actualStation stringByReplacingOccurrencesOfString:@"," withString:@"%2C"];
+    _actualStation = [_actualStation stringByReplacingOccurrencesOfString:@"-" withString:@"%2D"];
+    _actualStation = [_actualStation stringByReplacingOccurrencesOfString:@"." withString:@"%2E"];
+    _actualStation = [_actualStation stringByReplacingOccurrencesOfString:@"/" withString:@"%2F"];
+    
+    _actualStation = [_actualStation stringByReplacingOccurrencesOfString:@":" withString:@"%3A"];
+    _actualStation = [_actualStation stringByReplacingOccurrencesOfString:@";" withString:@"%3B"];
+    _actualStation = [_actualStation stringByReplacingOccurrencesOfString:@"<" withString:@"%3C"];
+    _actualStation = [_actualStation stringByReplacingOccurrencesOfString:@"=" withString:@"%3D"];
+    _actualStation = [_actualStation stringByReplacingOccurrencesOfString:@">" withString:@"%3E"];
+    _actualStation = [_actualStation stringByReplacingOccurrencesOfString:@"?" withString:@"%3F"];
+    
+    _actualStation = [_actualStation stringByReplacingOccurrencesOfString:@"\\" withString:@"%5C"];
+    
+    _actualStation = [_actualStation stringByReplacingOccurrencesOfString:@"ü" withString:@"u"];
+    _actualStation = [_actualStation stringByReplacingOccurrencesOfString:@"Ü" withString:@"U"];
+    _actualStation = [_actualStation stringByReplacingOccurrencesOfString:@"ä" withString:@"a"];
+    _actualStation = [_actualStation stringByReplacingOccurrencesOfString:@"Ä" withString:@"A"];
+    _actualStation = [_actualStation stringByReplacingOccurrencesOfString:@"ö" withString:@"o"];
+    _actualStation = [_actualStation stringByReplacingOccurrencesOfString:@"Ö" withString:@"O"];
+
+//    u => \u00fc
+    
+    
     NSString *_urlString = [NSString stringWithFormat:@"https://srv-lab-t-874.zhaw.ch/transport/web/api.php/v1/locations?query=%@", _actualStation];
+    
+    NSLog(@"url StationArrayDto: %@", _urlString);
     
     _url = [NSURL URLWithString:_urlString];
     [_asyncTimeTableRequest downloadData:_url];

@@ -29,6 +29,9 @@
 @synthesize _noConnectionButton;
 @synthesize _noConnectionLabel;
 
+@synthesize _publicStopTextField;
+@synthesize _publicStopTextFieldString;
+
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -42,7 +45,13 @@
 
 - (IBAction)tryConnectionAgain:(id)sender
 {
-    [self getStationArray];
+    [self getStationArray:_publicStopTextFieldString];
+}
+
+- (IBAction)publicStopTextFieldChanged:(id)sender
+{
+    _publicStopTextFieldString = ((UITextField*)sender).text;
+    [self getStationArray:_publicStopTextFieldString];
 }
 
 
@@ -94,12 +103,12 @@
 }
 
 
-- (void) getStationArray
+- (void) getStationArray:(NSString *)proposalStation
 {
     
     //[NSThread detachNewThreadSelector:@selector(threadWaitForChangeActivityIndicator:) toTarget:self withObject:nil];
     
-    [_stationArray getData:@"Winter"];
+    [_stationArray getData:proposalStation];
     
     //[_waitForChangeActivityIndicator stopAnimating];
     //_waitForChangeActivityIndicator.hidden = YES;
@@ -122,7 +131,9 @@
 {
     [super viewWillAppear:animated];
     _actualStation = nil;
-    [self getStationArray];    
+    _publicStopTextField.text = _publicStopTextFieldString;
+    
+    [self getStationArray:_publicStopTextFieldString];
 }
 
 - (void)viewDidUnload
@@ -133,6 +144,7 @@
     _publicStopTableView = nil;
     _noConnectionLabel = nil;
     _noConnectionButton = nil;
+    _publicStopTextField = nil;
     [super viewDidUnload];
 }
 

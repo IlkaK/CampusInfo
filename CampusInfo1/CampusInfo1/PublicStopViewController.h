@@ -25,6 +25,9 @@
     
     IBOutlet UILabel                    *_noConnectionLabel;
     IBOutlet GradientButton             *_noConnectionButton;
+    
+    IBOutlet UITextField                *_publicStopTextField;
+    NSString                            *_publicStopTextFieldString;
 }
 
 @property (nonatomic, retain) StationArrayDto                       *_stationArray;
@@ -40,6 +43,11 @@
 @property (nonatomic, retain) IBOutlet UILabel                      *_noConnectionLabel;
 @property (nonatomic, retain) IBOutlet GradientButton               *_noConnectionButton;
 
+@property (nonatomic, retain) IBOutlet UITextField                  *_publicStopTextField;
+@property (nonatomic, retain) NSString                              *_publicStopTextFieldString;
+
+
 - (IBAction)tryConnectionAgain:(id)sender;
+- (IBAction)publicStopTextFieldChanged:(id)sender;
 
 @end
