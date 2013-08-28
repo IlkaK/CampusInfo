@@ -18,6 +18,12 @@
 @synthesize _publicTransportNavigationItem;
 @synthesize _publicTransportNavigationLabel;
 
+@synthesize _fromButton;
+@synthesize _searchButton;
+@synthesize _toButton;
+
+@synthesize _pubilcTransportOverviewTableCell;
+@synthesize _publicStopVC;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -62,7 +68,40 @@
     [_publicTransportNavigationBar setBackgroundImage:aImage forBarMetrics:UIBarMetricsDefault];
     
     [_publicTransportNavigationLabel setBackgroundColor:_zhawColor._zhawOriginalBlue];
+    
+    [_fromButton useAlertStyle];
+    [_toButton useAlertStyle];
+    [_searchButton useAlertStyle];
+    
+    if (_publicStopVC == nil)
+    {
+		_publicStopVC = [[PublicStopViewController alloc] init];
+	}
+    _publicStopVC.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
+
 }
+
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    
+    if(_publicStopVC._actualStation != nil)
+    {
+        NSString *_stationName =  _publicStopVC._actualStation._name;
+        NSLog(@"actual Station: %@",_stationName);
+        if ([_publicStopVC._actualStationType isEqualToString:@"to"])
+        {
+            [_toButton setTitle:_stationName forState:UIControlStateNormal];
+        }
+        else
+        {
+            [_fromButton setTitle:_stationName forState:UIControlStateNormal];
+        }
+        
+    }
+}
+
 
 - (void)didReceiveMemoryWarning
 {
@@ -76,6 +115,85 @@
     _publicTransportNavigationBar = nil;
     _publicTransportNavigationItem = nil;
     _publicTransportNavigationLabel = nil;
+    _fromButton = nil;
+    _toButton = nil;
+    _searchButton = nil;
+    _pubilcTransportOverviewTableCell = nil;
+    _publicStopVC = nil;
     [super viewDidUnload];
 }
+
+
+- (IBAction)moveToFromStopController:(id)sender
+{
+    _publicStopVC._actualStationType = @"from";
+    [self presentModalViewController:_publicStopVC animated:YES];
+}
+
+- (IBAction)moveToToStopController:(id)sender
+{
+    _publicStopVC._actualStationType = @"to";
+    [self presentModalViewController:_publicStopVC animated:YES];
+}
+
+- (IBAction)startConnectionSearch:(id)sender
+{
+    
+}
+
+
+// needed for table delegate
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
+{
+    return 1;
+}
+
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+    return 1;
+}
+
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    static NSString *_cellIdentifier = @"PublicTransportOverviewTableCell";
+    UITableViewCell *_cell           = [tableView dequeueReusableCellWithIdentifier:_cellIdentifier];
+    if (_cell == nil)
+    {
+        [[NSBundle mainBundle] loadNibNamed:@"PublicTransportOverviewTableCell" owner:self options:nil];
+        _cell = _pubilcTransportOverviewTableCell;
+        self._pubilcTransportOverviewTableCell = nil;
+    }
+    
+    /*
+    UILabel          *_mensaLabel           = (UILabel  *)[_cell viewWithTag:1];
+    UILabel          *_openingTimesLabel    = (UILabel  *)[_cell viewWithTag:2];
+    UILabel          *_lunchTimesLabel      = (UILabel  *)[_cell viewWithTag:3];
+    
+    _mensaLabel.text = [NSString stringWithFormat:@"%@ (%@)", gastronomyName
+                        ,[_translator getGermanGastronomyTypeTranslation:gastronomyType]
+                        ];
+    
+    _openingTimesLabel.text = openingTime;
+    _lunchTimesLabel.text   = lunchTime;
+    */
+    
+    return _cell;
+}
+
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return 35;
+}
+
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    //NSUInteger    _cellSelection = indexPath.section;
+    
+}
+
+
 @end
