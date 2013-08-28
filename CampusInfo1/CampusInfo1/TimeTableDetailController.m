@@ -70,6 +70,7 @@
     _detailTable.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
     
     _timeLabel.text          = _timeString;
+    [_timeLabel setBackgroundColor:_zhawColor._zhawLighterBlue];
     
     [self setNavigationTitle:_dayAndAcronymString];
     
@@ -98,7 +99,6 @@
     UIImage *aImage = UIGraphicsGetImageFromCurrentImageContext();
     UIGraphicsEndImageContext();
     [_titleNavigationBar setBackgroundImage:aImage forBarMetrics:UIBarMetricsDefault];
-    
     [_titleNavigationLabel setBackgroundColor:_zhawColor._zhawOriginalBlue];
     
     [_detailTable reloadData];    
@@ -106,8 +106,11 @@
     // set default values for spinner/activity indicator
     _waitForChangeActivityIndicator.hidesWhenStopped = YES;
     _waitForChangeActivityIndicator.hidden = YES;
+    [_waitForChangeActivityIndicator setBackgroundColor:_zhawColor._zhawOriginalBlue];
+    [self.view bringSubviewToFront:_waitForChangeActivityIndicator];
     
-    [self.view setBackgroundColor:_zhawColor._zhawLighterBlue];
+    
+    //[self.view setBackgroundColor:_zhawColor._zhawLighterBlue];
 }
 
 

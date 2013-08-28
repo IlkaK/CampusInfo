@@ -23,6 +23,7 @@
 @synthesize _autocomplete;
 
 @synthesize _searchSegmentedControl;
+@synthesize _backgroundImageView;
 
 @synthesize _students;
 @synthesize _lecturers;
@@ -86,11 +87,14 @@
     
     [_titleNavigationLabel setBackgroundColor:_zhawColor._zhawOriginalBlue];
     
-    [self.view setBackgroundColor:_zhawColor._zhawLighterBlue];
+    //[self.view setBackgroundColor:_zhawColor._zhawLighterBlue];
     
     [_searchSegmentedControl setTintColor:_zhawColor._zhawOriginalBlue];
+    [self.view bringSubviewToFront:_searchSegmentedControl];
     
-    [_acronymAutocompleteTableView setBackgroundColor:_zhawColor._zhawLighterBlue];
+    //[_acronymAutocompleteTableView setBackgroundColor:_zhawColor._zhawLighterBlue];
+    
+    [_backgroundImageView setBackgroundColor:_zhawColor._zhawLighterBlue];
 }
 
 -(void)loadDataWithSearchType
@@ -184,6 +188,7 @@
     _titleNavigationBar = nil;
     _titleNavigationItem = nil;
     _titleNavigationLabel = nil;
+    _backgroundImageView = nil;
     [super viewDidUnload];
 }
 
