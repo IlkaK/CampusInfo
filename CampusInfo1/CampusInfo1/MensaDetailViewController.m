@@ -45,6 +45,9 @@
 
 @synthesize _zhawColor;
 
+@synthesize _noConnectionLabel;
+@synthesize _noConnectionButton;
+@synthesize _backgroundImageView;
 
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -150,10 +153,17 @@
     
     [_titleNavigationLabel setBackgroundColor:_zhawColor._zhawOriginalBlue];
     
-    // set background to zhaw blue
-    [self.view setBackgroundColor:_zhawColor._zhawOriginalBlue];
-    
     [_dateButton useAlertStyle];
+    
+    [self.view bringSubviewToFront:_noConnectionButton];
+    [self.view bringSubviewToFront:_noConnectionLabel];
+    
+    [_backgroundImageView setBackgroundColor:_zhawColor._zhawLighterBlue];
+    [_noConnectionLabel setTextColor:_zhawColor._zhawWhite];
+    
+    _noConnectionButton.hidden = YES;
+    _noConnectionLabel.hidden = YES;
+    [_noConnectionButton useAlertStyle];
 }
 
 - (void) threadWaitForChangeActivityIndicator:(id)data
@@ -165,7 +175,7 @@
 
 - (void)setActualDate:(NSDate *)newDate
 {
-    int _actualTrials = 0;
+    //int _actualTrials = 0;
     self._actualDate      = newDate;
     [self setDateInNavigatorWithActualDate:_actualDate];
     
@@ -180,8 +190,8 @@
     
     [NSThread detachNewThreadSelector:@selector(threadWaitForChangeActivityIndicator:) toTarget:self withObject:nil];
     
-    while (_actualTrials < 20 && [_actualMenu._dishes count] == 0)
-    {
+    //while (_actualTrials < 20 && [_actualMenu._dishes count] == 0)
+    //{
         [_menuPlans getData:_newWeekNumber
                    withYear:_newYear
              withActualDate:_actualDate
@@ -189,17 +199,28 @@
          ];
     
         self._actualMenu = [_menuPlans getActualMenu:_actualDate withGastroId:_actualGastronomy._gastroId];
-        _actualTrials++;
+        //_actualTrials++;
         
         //NSLog(@"setActualDate => _actualDate: %@ - _actualGastronomy._gastroId: %i - actual Menu dishes count: %i",[[_dateFormatter _dayFormatter]     stringFromDate:_actualDate], _actualGastronomy._gastroId, [_actualMenu._dishes count]);
-    }
+    //}
     
-    [_detailTable reloadData];
+    if ([_menuPlans._menuPlans count] == 0)
+    {
+        _noConnectionButton.hidden = NO;
+        _noConnectionLabel.hidden = NO;
+    }
+    else
+    {
+        _noConnectionButton.hidden = YES;
+        _noConnectionLabel.hidden = YES;
+
+    }
     
 
     //NSLog(@"stop animating!!!");
     [_waitForChangeActivityIndicator stopAnimating];
     _waitForChangeActivityIndicator.hidden = YES;
+        [_detailTable reloadData];
 }
 
 
@@ -267,6 +288,11 @@
     // Dispose of any resources that can be recreated.
 }
 
+- (IBAction)tryConnectionAgain:(id)sender
+{
+    [self setActualDate:_actualDate];
+}
+
 - (void)backToMensaOverview:(id)sender
 {
     [self dismissModalViewControllerAnimated:YES];
@@ -293,6 +319,9 @@
     _titleNavigationItem = nil;
     _titleNavigationLabel = nil;
     _dateButton = nil;
+    _backgroundImageView = nil;
+    _noConnectionLabel = nil;
+    _noConnectionButton = nil;
     [super viewDidUnload];
 }
 

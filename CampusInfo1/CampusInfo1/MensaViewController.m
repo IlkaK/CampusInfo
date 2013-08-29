@@ -166,8 +166,7 @@
         [_gastronomyFacilityArray getData];
         //_actualTrials++;
     //}
-    
-    [_mensaOverviewTable reloadData];
+
     
     [_waitForChangeActivityIndicator stopAnimating];
     _waitForChangeActivityIndicator.hidden = YES;
@@ -179,8 +178,12 @@
     }
     else
     {
-        _noConnectionButton.hidden = YES;
-        _noConnectionLabel.hidden = YES;
+        if (_gastronomyFacilityArray._threadDone == YES)
+        {
+            _noConnectionButton.hidden = YES;
+            _noConnectionLabel.hidden = YES;
+            [_mensaOverviewTable reloadData];
+        }
     }
 
 }
@@ -202,20 +205,21 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    if ([_gastronomyFacilityArray._gastronomicFacilities  lastObject] == nil)
-    {
-        return 1;
-    }
-    else
-    {
-        return [_gastronomyFacilityArray._gastronomicFacilities count];
-    }
+    return 1;
 }
 
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return 1;
+    if ([_gastronomyFacilityArray._gastronomicFacilities  lastObject] == nil)
+    {
+        return 0;
+    }
+    else
+    {
+        return [_gastronomyFacilityArray._gastronomicFacilities count];
+    }
+
 }
 
 - (UITableViewCell *)showGastronomy:(UITableView *)actualTableView
@@ -250,7 +254,7 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    NSUInteger    _cellSelection = indexPath.section;
+    NSUInteger    _cellRow = indexPath.row;
     NSString     *_gastronomyName;
     NSString     *_gastronomyType;
     NSString     *_openingTime;
@@ -274,14 +278,20 @@
     WeekdayDto              *_oneWeekdayForOpeningTimePlan;
     WeekdayDto              *_oneWeekdayForLunchTimePlan;
     
-    //NSLog(@"_gastronomyArray count %i cellSelection %i", [_gastronomyArray count], _cellSelection);
     
     if (    [_gastronomyFacilityArray._gastronomicFacilities lastObject] != nil
-        &&  [_gastronomyFacilityArray._gastronomicFacilities count] > _cellSelection)
+        &&  [_gastronomyFacilityArray._gastronomicFacilities count] > _cellRow)
     {
-        GastronomicFacilityDto *_oneGastronomy = [_gastronomyFacilityArray._gastronomicFacilities objectAtIndex:_cellSelection];
+        NSLog(@"_gastronomyArray count %i cellSelection %i", [_gastronomyFacilityArray._gastronomicFacilities count], _cellRow);
+
+        
+        GastronomicFacilityDto *_oneGastronomy = [_gastronomyFacilityArray._gastronomicFacilities objectAtIndex:_cellRow];
         _gastronomyName = _oneGastronomy._name;
         _gastronomyType = _oneGastronomy._type;
+        
+        NSLog(@"_gastronomyName %@ _gastronomyType %@", _gastronomyName, _gastronomyType);
+
+        
         HolidayDto *_oneHoliday;
         
         if ([_oneGastronomy._holidays lastObject] != nil)

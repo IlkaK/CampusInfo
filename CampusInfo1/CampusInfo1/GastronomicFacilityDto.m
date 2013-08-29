@@ -123,7 +123,7 @@
         }
     }
     //NSLog(@"- found service time period array count: %i", [_localServiceTimePeriods count]);
-    _localGastronomicFacilty = [[GastronomicFacilityDto alloc]init:_localHolidays withGastroId:_localGastroId withLocation:_localLocation withName:_localName withServiceTimePeriods:_localServiceTimePeriods withType:_localType withVersion:_localVersion];
+    _localGastronomicFacilty = [_localGastronomicFacilty init:_localHolidays withGastroId:_localGastroId withLocation:_localLocation withName:_localName withServiceTimePeriods:_localServiceTimePeriods withType:_localType withVersion:_localVersion];
     return _localGastronomicFacilty;
 }
 
