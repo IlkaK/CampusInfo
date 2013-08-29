@@ -89,7 +89,7 @@
     if(_publicStopVC._actualStation != nil)
     {
         NSString *_stationName =  _publicStopVC._actualStation._name;
-        NSLog(@"actual Station: %@",_stationName);
+        //NSLog(@"actual Station: %@",_stationName);
         if ([_publicStopVC._actualStationType isEqualToString:@"to"])
         {
             [_toButton setTitle:_stationName forState:UIControlStateNormal];
@@ -128,7 +128,7 @@
 {
     _publicStopVC._actualStationType = @"from";
 
-    NSLog(@"to button title: %@", _fromButton.titleLabel.text);    
+    //NSLog(@"to button title: %@", _fromButton.titleLabel.text);
     _publicStopVC._publicStopTextFieldString = _fromButton.titleLabel.text;
     [self presentModalViewController:_publicStopVC animated:YES];
 }
@@ -137,7 +137,7 @@
 {
     _publicStopVC._actualStationType = @"to";
     
-    NSLog(@"to button title: %@", _toButton.titleLabel.text);
+    //NSLog(@"to button title: %@", _toButton.titleLabel.text);
     _publicStopVC._publicStopTextFieldString = _toButton.titleLabel.text;
     [self presentModalViewController:_publicStopVC animated:YES];
 }

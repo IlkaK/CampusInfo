@@ -34,7 +34,7 @@
     
     ColorSelection *_zhawColor = [[ColorSelection alloc]init];
     
-    NSURL *_targetURL = [[NSBundle mainBundle] URLForResource:@"Anfahrtsplan-Zuerich" withExtension:@"pdf"];
+    NSURL *_targetURL = [[NSBundle mainBundle] URLForResource:@"Zuerich" withExtension:@"pdf"];
     
     NSURLRequest *_urlRequest = [NSURLRequest requestWithURL:_targetURL cachePolicy:NSURLRequestReloadIgnoringCacheData timeoutInterval:60.0];
     [_zurichWebView loadRequest:_urlRequest];

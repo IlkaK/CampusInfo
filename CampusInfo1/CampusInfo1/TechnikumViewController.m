@@ -33,7 +33,7 @@
     
     ColorSelection *_zhawColor = [[ColorSelection alloc]init];
     
-    NSURL *_targetURL = [[NSBundle mainBundle] URLForResource:@"technikumstr_neu" withExtension:@"pdf"];
+    NSURL *_targetURL = [[NSBundle mainBundle] URLForResource:@"Technikumstrasse" withExtension:@"pdf"];
     
     NSURLRequest *_urlRequest = [NSURLRequest requestWithURL:_targetURL cachePolicy:NSURLRequestReloadIgnoringCacheData timeoutInterval:60.0];
     

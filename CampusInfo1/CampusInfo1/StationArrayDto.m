@@ -143,15 +143,14 @@
     _actualStation = [_actualStation stringByReplacingOccurrencesOfString:@"?" withString:@"%3F"];
     
     _actualStation = [_actualStation stringByReplacingOccurrencesOfString:@"\\" withString:@"%5C"];
-    
-    _actualStation = [_actualStation stringByReplacingOccurrencesOfString:@"ü" withString:@"u"];
-    _actualStation = [_actualStation stringByReplacingOccurrencesOfString:@"Ü" withString:@"U"];
-    _actualStation = [_actualStation stringByReplacingOccurrencesOfString:@"ä" withString:@"a"];
-    _actualStation = [_actualStation stringByReplacingOccurrencesOfString:@"Ä" withString:@"A"];
-    _actualStation = [_actualStation stringByReplacingOccurrencesOfString:@"ö" withString:@"o"];
-    _actualStation = [_actualStation stringByReplacingOccurrencesOfString:@"Ö" withString:@"O"];
 
-//    u => \u00fc
+    _actualStation = [_actualStation stringByReplacingOccurrencesOfString:@"ä" withString:@"&auml;"];		
+    _actualStation = [_actualStation stringByReplacingOccurrencesOfString:@"Ä" withString:@"&Auml;"];		
+    _actualStation = [_actualStation stringByReplacingOccurrencesOfString:@"ö" withString:@"&ouml;"];		
+    _actualStation = [_actualStation stringByReplacingOccurrencesOfString:@"Ö" withString:@"&Ouml;"];		
+    _actualStation = [_actualStation stringByReplacingOccurrencesOfString:@"ü" withString:@"&uuml;"];	
+    _actualStation = [_actualStation stringByReplacingOccurrencesOfString:@"Ü" withString:@"&Uuml;"];		
+    _actualStation = [_actualStation stringByReplacingOccurrencesOfString:@"ß" withString:@"&szlig;"];		
     
     
     NSString *_urlString = [NSString stringWithFormat:@"https://srv-lab-t-874.zhaw.ch/transport/web/api.php/v1/locations?query=%@", _actualStation];

@@ -188,7 +188,7 @@
                 //NSLog(@"-- item description: %@", _actualValue);
                 _newsItem._description = [NSString stringWithFormat:@"%@%@",_newsItem._description, _actualValue];
             }
-            if ([_actualStartElement isEqualToString:@"content:encoded"])
+            if ([_actualStartElement isEqualToString:@"content"])
             {
                 //NSLog(@"-- item content: %@", _actualValue);
                 _newsItem._content = [NSString stringWithFormat:@"%@%@",_newsItem._content, _actualValue];
