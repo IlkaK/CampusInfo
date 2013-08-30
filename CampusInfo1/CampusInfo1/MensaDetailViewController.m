@@ -15,6 +15,7 @@
 #import "MenuDto.h"
 #import "MenuPlanArrayDto.h"
 #import "ColorSelection.h"
+#import "UIConstantStrings.h"
 
 @implementation MensaDetailViewController
 
@@ -24,7 +25,6 @@
 @synthesize _actualMenu;
 @synthesize _menuPlans;
 
-@synthesize _moveBackButton;
 @synthesize _dateButton;
 @synthesize _dayNavigationItem;
 @synthesize _dateFormatter;
@@ -47,7 +47,7 @@
 
 @synthesize _noConnectionLabel;
 @synthesize _noConnectionButton;
-@synthesize _backgroundImageView;
+
 
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -60,31 +60,55 @@
 {
     [super viewDidLoad];
     
+    // general initializer
     _zhawColor = [[ColorSelection alloc]init];
-    
     _dateFormatter  = [[DateFormation alloc] init];
-    //_actualGastronomy = [[GastronomicFacilityDto alloc]init:nil withGastroId:nil withLocation:nil withName:nil withServiceTimePeriods:nil withType:nil withVersion:ni0l];
+    self._menuPlans     = [[MenuPlanArrayDto alloc] init:nil];
+    self._actualMenu    = [[MenuDto alloc] init:nil withDishes:nil withOfferedOn:nil withVersion:nil];
+    self._actualCalendarWeek = 0;
     
-    [_moveBackButton setBackgroundColor:_zhawColor._zhawOriginalBlue];
-
+    // title
+    UIBarButtonItem *backButtonItem = [[UIBarButtonItem alloc] initWithTitle:LeftArrowSymbol style:UIBarButtonItemStylePlain target:self action:@selector(backToMensaOverview:)];
+    [backButtonItem setTintColor:_zhawColor._zhawOriginalBlue];
+    [_titleNavigationItem setLeftBarButtonItem :backButtonItem animated :true];
+    
+    [_titleNavigationLabel setTextColor:_zhawColor._zhawWhite];
+    _titleNavigationLabel.text = @"Mensa";
+    _titleNavigationItem.title = @"";
+    
+    CGRect imageRect = CGRectMake(0, 0, _titleNavigationBar.frame.size.width, _titleNavigationBar.frame.size.height);
+    UIGraphicsBeginImageContext(imageRect.size);
+    [_zhawColor._zhawOriginalBlue set];
+    UIRectFill(imageRect);
+    UIImage *aImage = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    [_titleNavigationBar setBackgroundImage:aImage forBarMetrics:UIBarMetricsDefault];
+    [_titleNavigationLabel setBackgroundColor:_zhawColor._zhawOriginalBlue];
+    
+    _gastronomyLabel.text = [NSString stringWithFormat:@"%@",_actualGastronomy._name];
+    [_gastronomyLabel setBackgroundColor:_zhawColor._zhawOriginalBlue];
+    [_gastronomyLabel setTextColor:_zhawColor._zhawWhite];
+    
+    
     //----- Navigation Bar ----
     // set current day
     [self setTitleToActualDate];
 
     // set day navigator
-    UIImage *_leftButtonImage  = [UIImage imageNamed:@"arrowLeft_small.png"];
-    UIImage *_rightButtonImage = [UIImage imageNamed:@"arrowRight_small.png"];
-    
-    UIBarButtonItem *_leftButton  = [[UIBarButtonItem alloc] initWithImage: _leftButtonImage
-                                                                     style:UIBarButtonItemStylePlain
-                                                                    target:self
-                                                                    action:@selector(dayBefore:)];
-    UIBarButtonItem *_rightButton = [[UIBarButtonItem alloc] initWithImage: _rightButtonImage
+    UIBarButtonItem *_rightButton = [[UIBarButtonItem alloc] initWithTitle:RightArrowSymbol
                                                                      style:UIBarButtonItemStylePlain
                                                                     target:self
                                                                     action:@selector(dayAfter:)];
+    UIBarButtonItem *_leftButton = [[UIBarButtonItem alloc] initWithTitle:LeftArrowSymbol
+                                                                    style:UIBarButtonItemStylePlain
+                                                                   target:self
+                                                                   action:@selector(dayBefore:)];
+    [_rightButton setTintColor:_zhawColor._zhawOriginalBlue];
+    [_leftButton  setTintColor:_zhawColor._zhawOriginalBlue];
     [_dayNavigationItem setLeftBarButtonItem :_leftButton animated :true];
     [_dayNavigationItem setRightBarButtonItem:_rightButton animated:true];
+    
+    [_dateButton useAlertStyle];
     
     
     // ------ CHOOSE DATE FREELY ----
@@ -105,15 +129,7 @@
     
     [_detailTable reloadData];
     
-    _gastronomyLabel.text = [NSString stringWithFormat:@"%@",_actualGastronomy._name];
-    
-    [_gastronomyLabel setBackgroundColor:_zhawColor._zhawOriginalBlue];
-    [_gastronomyLabel setTextColor:_zhawColor._zhawWhite];
-    
-    self._menuPlans     = [[MenuPlanArrayDto alloc] init:nil];
-    self._actualMenu    = [[MenuDto alloc] init:nil withDishes:nil withOfferedOn:nil withVersion:nil];
-    self._actualCalendarWeek = 0;
-    
+
     _rightSwipe = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(dayBefore:)];
     [_rightSwipe setDirection:(UISwipeGestureRecognizerDirectionRight)];
     [[self view] addGestureRecognizer:_rightSwipe];
@@ -122,44 +138,16 @@
     [_leftSwipe setDirection:(UISwipeGestureRecognizerDirectionLeft)];
     [[self view] addGestureRecognizer:_leftSwipe];
     
-    // set default values for spinner/activity indicator
+    // activity indicator
     _waitForChangeActivityIndicator.hidesWhenStopped = YES;
     _waitForChangeActivityIndicator.hidden = YES;
     [_waitForChangeActivityIndicator setBackgroundColor:_zhawColor._zhawOriginalBlue];
     [self.view bringSubviewToFront:_waitForChangeActivityIndicator];
     
-    UIButton *backButton = [UIButton buttonWithType:101];
-    UIView *backButtonView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, backButton.frame.size.width, backButton.frame.size.height)];
     
-    [backButton addTarget:self action:@selector(backToMensaOverview:) forControlEvents:UIControlEventTouchUpInside];
-    [backButton setTitle:@"zurück" forState:UIControlStateNormal];
-    [backButtonView addSubview:backButton];
-    
-    // set buttonview as custom view for bar button item
-    UIBarButtonItem *backButtonItem = [[UIBarButtonItem alloc] initWithCustomView:backButtonView];
-    [_titleNavigationItem setLeftBarButtonItem :backButtonItem animated :true];
-    
-    [_titleNavigationLabel setTextColor:_zhawColor._zhawWhite];
-    _titleNavigationLabel.text = @"Mensa";
-    _titleNavigationItem.title = @"";
-    
-    CGRect imageRect = CGRectMake(0, 0, _titleNavigationBar.frame.size.width, _titleNavigationBar.frame.size.height);
-    UIGraphicsBeginImageContext(imageRect.size);
-    [_zhawColor._zhawOriginalBlue set];
-    UIRectFill(imageRect);
-    UIImage *aImage = UIGraphicsGetImageFromCurrentImageContext();
-    UIGraphicsEndImageContext();
-    [_titleNavigationBar setBackgroundImage:aImage forBarMetrics:UIBarMetricsDefault];
-    
-    [_titleNavigationLabel setBackgroundColor:_zhawColor._zhawOriginalBlue];
-    
-    [_dateButton useAlertStyle];
-    
+    // no connection button/label
     [self.view bringSubviewToFront:_noConnectionButton];
     [self.view bringSubviewToFront:_noConnectionLabel];
-    
-    [_backgroundImageView setBackgroundColor:_zhawColor._zhawLighterBlue];
-    [_noConnectionLabel setTextColor:_zhawColor._zhawWhite];
     
     _noConnectionButton.hidden = YES;
     _noConnectionLabel.hidden = YES;
@@ -306,7 +294,6 @@
 
 - (void)viewDidUnload
 {
-    _moveBackButton = nil;
     _dayNavigationItem = nil;
     _chooseDateVC = nil;
     _detailTable = nil;
@@ -319,7 +306,6 @@
     _titleNavigationItem = nil;
     _titleNavigationLabel = nil;
     _dateButton = nil;
-    _backgroundImageView = nil;
     _noConnectionLabel = nil;
     _noConnectionButton = nil;
     [super viewDidUnload];

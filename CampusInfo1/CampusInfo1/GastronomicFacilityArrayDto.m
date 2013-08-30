@@ -67,7 +67,7 @@
         //NSLog(@"dataDownloadDidFinish for GastronomyFacilityArrayDto: %@", _receivedString);
         
         NSError *_error;
-        _gastronomicFacilities = [[NSMutableArray alloc] init];
+        //_gastronomicFacilities = [[NSMutableArray alloc] init];
         
         //if (_generalDictionary == nil)
         //{
@@ -102,7 +102,7 @@
                     {
                         _gastronomicArray = [_generalDictionary objectForKey:generalKey];
                     
-                        NSLog(@"vorher count of _gastronomicArray: %i", [_gastronomicArray count]);
+                        //NSLog(@"vorher count of _gastronomicArray: %i", [_gastronomicArray count]);
                         
                         for (_gastronomicArrayI = 0; _gastronomicArrayI < [_gastronomicArray count]; _gastronomicArrayI++)
                         {
@@ -111,7 +111,7 @@
                         }
                     }
                 }
-                NSLog(@"nacher gastronomies count: %i", [_gastronomicFacilities count]);
+                //NSLog(@"nacher gastronomies count: %i", [_gastronomicFacilities count]);
 
             }
         }

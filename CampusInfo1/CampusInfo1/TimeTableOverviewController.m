@@ -537,24 +537,7 @@
     [_dayNavigator setLeftBarButtonItem :_leftButton animated :true];
     [_dayNavigator setRightBarButtonItem:_rightButton animated:true];
     
-    //[_dateButton setTintColor:_zhawColor._zhawOriginalBlue];
-    //[_dateButton setBackgroundColor:_zhawColor._zhawOriginalBlue];
-    //[_dateButton setTitleColor:_zhawColor._zhawWhite forState:UIBarButtonItemStylePlain];
     [_dateButton useAlertStyle];
-    
-    
-    //NSMutableAttributedString *_titleString = [[[NSMutableAttributedString alloc] initWithString:@""];
-     //                                          [_titleString addAttribute:NSBackgroundColorAttributeName value:_zhawColor._zhawOriginalBlue range:NSMakeRange(0, [_titleString length])];
-    
-    //[_titleString addAttribute:NSUnderlineStyleAttributeName value:[NSNumber numberWithInteger:NSUnderlineStyleSingle] range:NSMakeRange(0, [_titleString length])];
-    
-    //[_dateButton setAttributedTitle:_titleString forState:UIControlStateNormal];
-    
-    
-    
-    //[_dateButton setAttributedTitle:<#(NSAttributedString *)#> forState:]
-    
-    //[_dateButton useAlertStyle];
 
     // ----- DETAIL PAGE -----
     if (_detailsVC == nil)
