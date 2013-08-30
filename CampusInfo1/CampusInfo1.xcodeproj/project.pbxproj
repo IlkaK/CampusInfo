@@ -202,6 +202,7 @@
 		E1D7EFF7178DA03D00100293 /* DateFormation.m in Sources */ = {isa = PBXBuildFile; fileRef = E1D7EFF6178DA03D00100293 /* DateFormation.m */; };
 		E1DA967C1740E41C00CA206F /* SettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E1DA967A1740E41C00CA206F /* SettingsViewController.m */; };
 		E1DA967D1740E41C00CA206F /* SettingsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E1DA967B1740E41C00CA206F /* SettingsViewController.xib */; };
+		E1DC175317D09D5D00DB51F6 /* UIConstantStrings.m in Sources */ = {isa = PBXBuildFile; fileRef = E1DC175217D09D5D00DB51F6 /* UIConstantStrings.m */; };
 		E1F32A5117BCE4C4000D69F3 /* NewsChannelDto.m in Sources */ = {isa = PBXBuildFile; fileRef = E1F32A5017BCE4C4000D69F3 /* NewsChannelDto.m */; };
 		E1F32A5417BCE4DB000D69F3 /* NewsImageDto.m in Sources */ = {isa = PBXBuildFile; fileRef = E1F32A5317BCE4DB000D69F3 /* NewsImageDto.m */; };
 		E1F32A5717BCE4F9000D69F3 /* NewsItemDto.m in Sources */ = {isa = PBXBuildFile; fileRef = E1F32A5617BCE4F9000D69F3 /* NewsItemDto.m */; };
@@ -460,6 +461,8 @@
 		E1DA96791740E41C00CA206F /* SettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingsViewController.h; sourceTree = "<group>"; };
 		E1DA967A1740E41C00CA206F /* SettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingsViewController.m; sourceTree = "<group>"; };
 		E1DA967B1740E41C00CA206F /* SettingsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SettingsViewController.xib; sourceTree = "<group>"; };
+		E1DC175117D09D5C00DB51F6 /* UIConstantStrings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIConstantStrings.h; sourceTree = "<group>"; };
+		E1DC175217D09D5D00DB51F6 /* UIConstantStrings.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIConstantStrings.m; sourceTree = "<group>"; };
 		E1F32A4F17BCE4C4000D69F3 /* NewsChannelDto.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewsChannelDto.h; sourceTree = "<group>"; };
 		E1F32A5017BCE4C4000D69F3 /* NewsChannelDto.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewsChannelDto.m; sourceTree = "<group>"; };
 		E1F32A5217BCE4DB000D69F3 /* NewsImageDto.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewsImageDto.h; sourceTree = "<group>"; };
@@ -989,6 +992,8 @@
 				E1D7EFF6178DA03D00100293 /* DateFormation.m */,
 				E1252E5717CB4BB100E61732 /* ColorSelection.h */,
 				E1252E5817CB4BB100E61732 /* ColorSelection.m */,
+				E1DC175117D09D5C00DB51F6 /* UIConstantStrings.h */,
+				E1DC175217D09D5D00DB51F6 /* UIConstantStrings.m */,
 			);
 			name = Helper;
 			sourceTree = "<group>";
@@ -1286,6 +1291,7 @@
 				E1C23D6C17CE33BA00C58E10 /* StationArrayDto.m in Sources */,
 				E1C23D6F17CE421C00C58E10 /* StationDto.m in Sources */,
 				E1C23D7217CE427500C58E10 /* CoordinateDto.m in Sources */,
+				E1DC175317D09D5D00DB51F6 /* UIConstantStrings.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

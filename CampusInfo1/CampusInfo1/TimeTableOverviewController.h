@@ -51,6 +51,7 @@ UIViewController
     
     // setting the navigation bar
     IBOutlet UINavigationItem           *_dayNavigator;
+    
     IBOutlet GradientButton             *_dateButton;
     
     IBOutlet UISegmentedControl         *_timeTableSegmentedControl;

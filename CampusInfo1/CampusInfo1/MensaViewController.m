@@ -178,12 +178,12 @@
     }
     else
     {
-        if (_gastronomyFacilityArray._threadDone == YES)
-        {
+        //if (_gastronomyFacilityArray._threadDone == YES)
+        //{
             _noConnectionButton.hidden = YES;
             _noConnectionLabel.hidden = YES;
             [_mensaOverviewTable reloadData];
-        }
+        //}
     }
 
 }
