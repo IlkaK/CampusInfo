@@ -8,6 +8,7 @@
 
 #import "ZurichViewController.h"
 #import "ColorSelection.h"
+#import "UIConstantStrings.h"
 
 @interface ZurichViewController ()
 
@@ -32,27 +33,17 @@
 {
     [super viewDidLoad];
     
+    // initialization
     ColorSelection *_zhawColor = [[ColorSelection alloc]init];
     
-    NSURL *_targetURL = [[NSBundle mainBundle] URLForResource:@"Zuerich" withExtension:@"pdf"];
+    // title
+    UIBarButtonItem *backButtonItem = [[UIBarButtonItem alloc] initWithTitle:LeftArrowSymbol style:UIBarButtonItemStylePlain target:self action:@selector(moveBackToMaps:)];
+    [backButtonItem setTintColor:_zhawColor._zhawOriginalBlue];
     
-    NSURLRequest *_urlRequest = [NSURLRequest requestWithURL:_targetURL cachePolicy:NSURLRequestReloadIgnoringCacheData timeoutInterval:60.0];
-    [_zurichWebView loadRequest:_urlRequest];
-    _zurichWebView.scalesPageToFit=YES;
-    
-    UIButton *backButton = [UIButton buttonWithType:101];
-    UIView *backButtonView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, backButton.frame.size.width, backButton.frame.size.height)];
-    
-    [backButton addTarget:self action:@selector(moveBackToMaps:) forControlEvents:UIControlEventTouchUpInside];
-    [backButton setTitle:@"zurück" forState:UIControlStateNormal];
-    [backButtonView addSubview:backButton];
-    
-    // set buttonview as custom view for bar button item
-    UIBarButtonItem *backButtonItem = [[UIBarButtonItem alloc] initWithCustomView:backButtonView];
     [_titleNavigationItem setLeftBarButtonItem :backButtonItem animated :true];
     
     [_titleNavigationLabel setTextColor:_zhawColor._zhawWhite];
-    _titleNavigationLabel.text = @"Zürich - Campus Lagerstrasse";
+    _titleNavigationLabel.text = ZurichVCTitle;
     _titleNavigationItem.title = @"";
     
     CGRect imageRect = CGRectMake(0, 0, _titleNavigationBar.frame.size.width, _titleNavigationBar.frame.size.height);
@@ -62,8 +53,14 @@
     UIImage *aImage = UIGraphicsGetImageFromCurrentImageContext();
     UIGraphicsEndImageContext();
     [_titleNavigationBar setBackgroundImage:aImage forBarMetrics:UIBarMetricsDefault];
-    
     [_titleNavigationLabel setBackgroundColor:_zhawColor._zhawOriginalBlue];
+    
+    
+    // web view
+    NSURL        *_targetURL  = [[NSBundle mainBundle] URLForResource:ZurichVCFileName withExtension:ZurichVCFileFormat];
+    NSURLRequest *_urlRequest = [NSURLRequest requestWithURL:_targetURL cachePolicy:NSURLRequestReloadIgnoringCacheData timeoutInterval:60.0];
+    [_zurichWebView loadRequest:_urlRequest];
+    _zurichWebView.scalesPageToFit=YES;
 }
 
 - (void)didReceiveMemoryWarning
