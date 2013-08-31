@@ -8,6 +8,7 @@
 
 #import "PublicTransportViewController.h"
 #import "ColorSelection.h"
+#import "UIConstantStrings.h"
 
 @interface PublicTransportViewController ()
 @end
@@ -44,19 +45,15 @@
     
     ColorSelection *_zhawColor = [[ColorSelection alloc]init];
     
-    UIButton *backButton = [UIButton buttonWithType:101];
-    UIView *backButtonView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, backButton.frame.size.width, backButton.frame.size.height)];
+    // title
+    UIBarButtonItem *backButtonItem = [[UIBarButtonItem alloc] initWithTitle:LeftArrowSymbol style:UIBarButtonItemStylePlain target:self action:@selector(moveBackToMenuOverview:)];
     
-    [backButton addTarget:self action:@selector(moveBackToMenuOverview:) forControlEvents:UIControlEventTouchUpInside];
-    [backButton setTitle:@"zurück" forState:UIControlStateNormal];
-    [backButtonView addSubview:backButton];
-    
-    // set buttonview as custom view for bar button item
-    UIBarButtonItem *backButtonItem = [[UIBarButtonItem alloc] initWithCustomView:backButtonView];
+    [backButtonItem setTintColor:_zhawColor._zhawOriginalBlue];
     [_publicTransportNavigationItem setLeftBarButtonItem :backButtonItem animated :true];
+
     
     [_publicTransportNavigationLabel setTextColor:_zhawColor._zhawWhite];
-    _publicTransportNavigationLabel.text = @"ÖV-Fahrplan";
+    _publicTransportNavigationLabel.text = PublicTransportVCTitle;
     _publicTransportNavigationItem.title = @"";
     
     CGRect imageRect = CGRectMake(0, 0, _publicTransportNavigationBar.frame.size.width, _publicTransportNavigationBar.frame.size.height);

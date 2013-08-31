@@ -35,9 +35,16 @@ extern NSString * const ToessfeldVCFileFormat;
 // strings for settings
 extern NSString * const TimeTableTypeStudent;
 extern NSString * const TimeTableTypeDozent;
+extern NSString * const TimeTableTypeKurs   ;
+extern NSString * const TimeTableTypeRaum   ;
+extern NSString * const TimeTableTypeKlasse  ;
+
 extern NSString * const SettingsVCTitle;
 extern NSString * const SettingsVCSearchType;
 extern NSString * const SettingsVCSearchText;
+
+extern NSString * const SearchVCTitle;
+extern NSString * const SearchVCHint;
 
 // store acronym for own time table
 extern NSString * const TimeTableAcronym;
@@ -188,4 +195,33 @@ extern NSString * const AlertViewOk     ;
 extern NSString * const AlertViewCancel ;
 
 
+// social media
+extern NSString * const SocialMediaVCTitle;
+
+// news and events
+extern NSString * const NewsVCTitle;
+extern NSString * const NewsVCSmallTitle;
+extern NSString * const NewsDetailVCTitle;
+extern NSString * const EventsVCTitle;
+extern NSString * const EventsVCSmallTitle;
+
+
+// public transportation
+extern NSString * const PublicTransportVCTitle;
+
+// time table
+extern NSString * const TimeTableOverVCTitle;
+
+// mensa
+extern NSString * const MensaVCTitle;
+
+
+
 @end
+
+
+
+
+
+
+

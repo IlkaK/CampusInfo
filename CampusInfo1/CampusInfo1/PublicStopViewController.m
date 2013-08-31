@@ -9,6 +9,7 @@
 #import "PublicStopViewController.h"
 #import "ColorSelection.h"
 #import "StationDto.h"
+#import "UIConstantStrings.h"
 
 @interface PublicStopViewController ()
 
@@ -61,19 +62,14 @@
     
     ColorSelection *_zhawColors = [[ColorSelection alloc]init];
     
-    UIButton *backButton = [UIButton buttonWithType:101];
-    UIView *backButtonView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, backButton.frame.size.width, backButton.frame.size.height)];
+    // title
+    UIBarButtonItem *backButtonItem = [[UIBarButtonItem alloc] initWithTitle:LeftArrowSymbol style:UIBarButtonItemStylePlain target:self action:@selector(moveBackToPublicTransport:)];
     
-    [backButton addTarget:self action:@selector(moveBackToPublicTransport:) forControlEvents:UIControlEventTouchUpInside];
-    [backButton setTitle:@"zurück" forState:UIControlStateNormal];
-    [backButtonView addSubview:backButton];
-    
-    // set buttonview as custom view for bar button item
-    UIBarButtonItem *backButtonItem = [[UIBarButtonItem alloc] initWithCustomView:backButtonView];
+    [backButtonItem setTintColor:_zhawColors._zhawOriginalBlue];
     [_titleNavigationItem setLeftBarButtonItem :backButtonItem animated :true];
     
     [_titleNavigationLabel setTextColor:[UIColor whiteColor]];
-    _titleNavigationLabel.text = @"ÖV-Fahrplan";
+    _titleNavigationLabel.text = PublicTransportVCTitle;
     _titleNavigationItem.title = @"";
     
     CGRect imageRect = CGRectMake(0, 0, _titleNavigationBar.frame.size.width, _titleNavigationBar.frame.size.height);

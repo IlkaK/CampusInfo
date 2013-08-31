@@ -7,6 +7,7 @@
 //
 
 #import "EventsViewController.h"
+#import "UIConstantStrings.h"
 
 @interface EventsViewController ()
 
@@ -41,32 +42,22 @@
 {
     [super viewDidLoad];
     
+    // general initialization
     _newsChannel = [[NewsChannelDto alloc]init];
     _dateFormatter = [[DateFormation alloc] init];
     _zhawColor = [[ColorSelection alloc]init];
-    
-    //[_newsChannel getEventsData];
-    [_eventsTable reloadData];
-    
     self._actualTrials = 1;
     
-    _noConnectionButton.hidden = YES;
-    _noConnectionLabel.hidden = YES;
-    [_noConnectionButton useAlertStyle];
+
+    // title
+    UIBarButtonItem *backButtonItem = [[UIBarButtonItem alloc] initWithTitle:LeftArrowSymbol style:UIBarButtonItemStylePlain target:self action:@selector(moveBackToMenuOverview:)];
     
-    UIButton *backButton = [UIButton buttonWithType:101];
-    UIView *backButtonView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, backButton.frame.size.width, backButton.frame.size.height)];
-    
-    [backButton addTarget:self action:@selector(moveBackToMenuOverview:) forControlEvents:UIControlEventTouchUpInside];
-    [backButton setTitle:@"zurück" forState:UIControlStateNormal];
-    [backButtonView addSubview:backButton];
-    
-    // set buttonview as custom view for bar button item
-    UIBarButtonItem *backButtonItem = [[UIBarButtonItem alloc] initWithCustomView:backButtonView];
+    [backButtonItem setTintColor:_zhawColor._zhawOriginalBlue];
     [_titleNavigationItem setLeftBarButtonItem :backButtonItem animated :true];
     
+    
     [_titleNavigationLabel setTextColor:_zhawColor._zhawWhite];
-    _titleNavigationLabel.text = @"Events - School of Engineering";
+    _titleNavigationLabel.text = EventsVCTitle;
     _titleNavigationItem.title = @"";
     
     CGRect imageRect = CGRectMake(0, 0, _titleNavigationBar.frame.size.width, _titleNavigationBar.frame.size.height);
@@ -78,6 +69,17 @@
     [_titleNavigationBar setBackgroundImage:aImage forBarMetrics:UIBarMetricsDefault];
     
     [_titleNavigationLabel setBackgroundColor:_zhawColor._zhawOriginalBlue];
+    
+    
+    // set no connection label and button
+    _noConnectionButton.hidden = YES;
+    _noConnectionLabel.hidden = YES;
+    [_noConnectionButton useAlertStyle];
+    
+    
+    // event table reload
+    [_eventsTable reloadData];
+    
 }
 
 

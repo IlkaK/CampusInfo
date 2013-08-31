@@ -493,7 +493,7 @@
     [_titleNavigationItem setLeftBarButtonItem :backButtonItem animated :true];
     
     [_titleNavigationLabel setTextColor:_zhawColor._zhawWhite];
-    _titleNavigationLabel.text = @"Stundenplan";
+    _titleNavigationLabel.text = TimeTableOverVCTitle;
     _titleNavigationItem.title = @"";
     
     CGRect imageRect = CGRectMake(0, 0, _titleNavigationBar.frame.size.width, _titleNavigationBar.frame.size.height);

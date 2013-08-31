@@ -81,7 +81,7 @@
     [_titleNavigationItem setLeftBarButtonItem :backButtonItem animated :true];
     
     [_titleNavigationLabel setTextColor:_zhawColor._zhawWhite];
-    _titleNavigationLabel.text = @"Mensa";
+    _titleNavigationLabel.text = MensaVCTitle;
     _titleNavigationItem.title = @"";
     
     CGRect imageRect = CGRectMake(0, 0, _titleNavigationBar.frame.size.width, _titleNavigationBar.frame.size.height);

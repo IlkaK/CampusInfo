@@ -30,7 +30,6 @@
     IBOutlet UITableView            *_acronymAutocompleteTableView;
     
     IBOutlet UISegmentedControl     *_searchSegmentedControl;
-    IBOutlet UIImageView            *_backgroundImageView;
     
     NSMutableArray                  *_suggestions;
     Autocomplete                    *_autocomplete;
@@ -50,7 +49,6 @@
 @property (nonatomic, retain) IBOutlet UIPickerView                 *_chooseSearchType;
 @property (nonatomic, retain) IBOutlet UITableView                  *_acronymAutocompleteTableView;
 
-@property (nonatomic, retain) IBOutlet UIImageView                  *_backgroundImageView;
 @property (nonatomic, retain) IBOutlet UISegmentedControl           *_searchSegmentedControl;
 
 @property (nonatomic, retain) NSString                              *_searchType;

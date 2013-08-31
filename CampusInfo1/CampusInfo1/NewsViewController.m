@@ -7,6 +7,7 @@
 //
 
 #import "NewsViewController.h"
+#import "UIConstantStrings.h"
 
 @interface NewsViewController ()
 
@@ -43,39 +44,21 @@
     //NSLog(@"news view controller: viewDidLoad");
     [super viewDidLoad];
 
+    // general initializing
     _newsChannel   = [[NewsChannelDto alloc]init];
     _dateFormatter = [[DateFormation alloc] init];
     _zhawColor     = [[ColorSelection alloc]init];
 
-    // ----- DETAIL PAGE -----
-    if (_newsDetailVC == nil)
-    {
-		_newsDetailVC = [[NewsDetailViewController alloc] init];
-	}
-    _newsDetailVC.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
-    
-    //[_newsChannel getNewsData];
-    [_newsTable reloadData];
-    
     self._actualTrials = 1;
+
+    // title
+    UIBarButtonItem *backButtonItem = [[UIBarButtonItem alloc] initWithTitle:LeftArrowSymbol style:UIBarButtonItemStylePlain target:self action:@selector(moveBackToMenuOverview:)];
     
-    _noConnectionButton.hidden = YES;
-    _noConnectionLabel.hidden = YES;
-    [_noConnectionButton useAlertStyle];
-    
-    UIButton *backButton = [UIButton buttonWithType:101];
-    UIView *backButtonView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, backButton.frame.size.width, backButton.frame.size.height)];
-    
-    [backButton addTarget:self action:@selector(moveBackToMenuOverview:) forControlEvents:UIControlEventTouchUpInside];
-    [backButton setTitle:@"zurück" forState:UIControlStateNormal];
-    [backButtonView addSubview:backButton];
-    
-    // set buttonview as custom view for bar button item
-    UIBarButtonItem *backButtonItem = [[UIBarButtonItem alloc] initWithCustomView:backButtonView];
+    [backButtonItem setTintColor:_zhawColor._zhawOriginalBlue];
     [_titleNavigationItem setLeftBarButtonItem :backButtonItem animated :true];
     
     [_titleNavigationLabel setTextColor:_zhawColor._zhawWhite];
-    _titleNavigationLabel.text = @"News - School of Engineering";
+    _titleNavigationLabel.text = NewsVCTitle;
     _titleNavigationItem.title = @"";
     
     CGRect imageRect = CGRectMake(0, 0, _titleNavigationBar.frame.size.width, _titleNavigationBar.frame.size.height);
@@ -87,7 +70,24 @@
     [_titleNavigationBar setBackgroundImage:aImage forBarMetrics:UIBarMetricsDefault];
     
     [_titleNavigationLabel setBackgroundColor:_zhawColor._zhawOriginalBlue];
+ 
     
+    // set no connection button and label
+    _noConnectionButton.hidden = YES;
+    _noConnectionLabel.hidden = YES;
+    [_noConnectionButton useAlertStyle];
+    
+    
+    // ----- DETAIL PAGE -----
+    if (_newsDetailVC == nil)
+    {
+		_newsDetailVC = [[NewsDetailViewController alloc] init];
+	}
+    _newsDetailVC.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
+
+    
+    // reload table
+    [_newsTable reloadData];
 }
 
 - (void)didReceiveMemoryWarning

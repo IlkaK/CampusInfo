@@ -16,7 +16,6 @@
     IBOutlet UINavigationItem       *_titleNavigationItem;
     IBOutlet UILabel                *_titleNavigationLabel;
     
-    ColorSelection                  *_zhawColors;
     IBOutlet UITableViewCell        *_socialMediaTableCell;
     
 }
@@ -25,7 +24,5 @@
 @property (nonatomic, retain) IBOutlet UINavigationItem             *_titleNavigationItem;
 @property (nonatomic, retain) IBOutlet UILabel                      *_titleNavigationLabel;
 @property (nonatomic, retain) IBOutlet UITableViewCell              *_socialMediaTableCell;
-
-@property (nonatomic, retain) IBOutlet ColorSelection               *_zhawColors;
 
 @end

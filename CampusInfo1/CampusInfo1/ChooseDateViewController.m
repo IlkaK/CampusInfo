@@ -127,7 +127,6 @@
     [backButtonItem setTintColor:_zhawColor._zhawOriginalBlue];
     [_titleNavigationItem setLeftBarButtonItem :backButtonItem animated :true];
     
-    
     [_titleNavigationLabel setTextColor:_zhawColor._zhawWhite];
     _titleNavigationLabel.text = @"Datum wählen";
     _titleNavigationItem.title = @"";

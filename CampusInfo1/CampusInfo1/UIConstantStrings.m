@@ -37,9 +37,17 @@ NSString * const ToessfeldVCFileFormat = @"pdf";
 // strings for settings
 NSString * const TimeTableTypeStudent = @"Student";
 NSString * const TimeTableTypeDozent  = @"Dozent";
+NSString * const TimeTableTypeKurs    = @"Kurs";
+NSString * const TimeTableTypeRaum    = @"Raum";
+NSString * const TimeTableTypeKlasse  = @"Klasse";
+
+
 NSString * const SettingsVCTitle      = @"Einstellungen";
 NSString * const SettingsVCSearchType = @"SearchType";
 NSString * const SettingsVCSearchText = @"SearchText";
+
+NSString * const SearchVCTitle        = @"Stundenplan Suche";
+NSString * const SearchVCHint         = @"Bitte ein Kürzel eingeben.";
 
 // store acronym for own time table
 NSString * const TimeTableAcronym     = @"TimeTableAcronym";
@@ -188,5 +196,25 @@ NSString * const ServiceDeskVCDescriptionPhone  = @"Tel.:";
 // alert view button titles
 NSString * const AlertViewOk         = @"OK";
 NSString * const AlertViewCancel     = @"Cancel";
+
+// social media
+NSString * const SocialMediaVCTitle = @"Social Media";
+
+// news and events
+NSString * const NewsVCTitle        = @"News - School of Engineering";
+NSString * const NewsVCSmallTitle   = @"News";
+NSString * const NewsDetailVCTitle  = @"News";
+NSString * const EventsVCTitle      = @"Events - School of Engineering";
+NSString * const EventsVCSmallTitle = @"Events";
+
+// public transportation
+NSString * const PublicTransportVCTitle = @"Fahrplan";
+
+// time table
+NSString * const TimeTableOverVCTitle = @"Stundenplan";
+
+// mensa
+NSString * const MensaVCTitle = @"Mensa";
+
 
 @end
