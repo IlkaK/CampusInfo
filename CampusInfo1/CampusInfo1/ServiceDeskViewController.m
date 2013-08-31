@@ -8,6 +8,7 @@
 
 #import "ServiceDeskViewController.h"
 #import "ColorSelection.h"
+#import "UIConstantStrings.h"
 
 @interface ServiceDeskViewController ()
 
@@ -33,21 +34,18 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    // general initialization
     ColorSelection *_zhawColors = [[ColorSelection alloc]init];
     
-    UIButton *backButton = [UIButton buttonWithType:101];
-    UIView *backButtonView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, backButton.frame.size.width, backButton.frame.size.height)];
+    // title
+    UIBarButtonItem *backButtonItem = [[UIBarButtonItem alloc] initWithTitle:LeftArrowSymbol style:UIBarButtonItemStylePlain target:self action:@selector(moveBackToContactsOverview:)];
     
-    [backButton addTarget:self action:@selector(moveBackToContactsOverview:) forControlEvents:UIControlEventTouchUpInside];
-    [backButton setTitle:@"zurück" forState:UIControlStateNormal];
-    [backButtonView addSubview:backButton];
-    
-    // set buttonview as custom view for bar button item
-    UIBarButtonItem *backButtonItem = [[UIBarButtonItem alloc] initWithCustomView:backButtonView];
+    [backButtonItem setTintColor:_zhawColors._zhawOriginalBlue];
     [_titleNavigationItem setLeftBarButtonItem :backButtonItem animated :true];
     
     [_titleNavigationLabel setTextColor:_zhawColors._zhawWhite];
-    _titleNavigationLabel.text = @"Service Desk";
+    _titleNavigationLabel.text = ServiceDeskVCTitle;
     _titleNavigationItem.title = @"";
     
     CGRect imageRect = CGRectMake(0, 0, _titleNavigationBar.frame.size.width, _titleNavigationBar.frame.size.height);
@@ -106,16 +104,16 @@
 
 -(void) sendEmailToGivenAdress:(id)sender event:(id)event
 {
-    NSString *_email = @"servicedesk@zhaw.ch";
-    NSString *_messageForCalling = [NSString stringWithFormat:@"Sende Email an %@?"
-                                    , _email];
+    NSString *_email = ServiceDeskVCRealEmail;
+    NSString *_messageForCalling = [NSString stringWithFormat:@"%@ %@?"
+                                    ,ContactsVCMessageSendEmail, _email];
     
     UIAlertView *_acronymAlertView = [[UIAlertView alloc]
-                                      initWithTitle:@"Service Desk"
+                                      initWithTitle:ContactsVCTitle
                                       message:_messageForCalling
                                       delegate:self
-                                      cancelButtonTitle:@"OK"
-                                      otherButtonTitles:@"Cancel", nil];
+                                      cancelButtonTitle:AlertViewOk
+                                      otherButtonTitles:AlertViewCancel, nil];
     _currentEmail       = _email;
     _currentPhoneNumber = nil;
     [_acronymAlertView show];
@@ -124,18 +122,18 @@
 
 -(void) callGivenNumber:(id)sender event:(id)event
 {
-    NSString        *_callWhom      = @"Service Desk";
-    NSString        *_callNumber    = @"0041589346677";
+    NSString        *_callWhom      = ServiceDeskVCTitle;
+    NSString        *_callNumber    = ServiceDeskVCRealPhone;
     
-    NSString *_messageForCalling = [NSString stringWithFormat:@"%@ anrufen (%@)?"
-                                    , _callWhom, _callNumber];
+    NSString *_messageForCalling = [NSString stringWithFormat:@"%@ %@ (%@)?"
+                                    , _callWhom, ContactsVCMessageCall , _callNumber];
     
     UIAlertView *_acronymAlertView = [[UIAlertView alloc]
-                                      initWithTitle:@"Service Desk"
+                                      initWithTitle:ContactsVCTitle
                                       message:_messageForCalling
                                       delegate:self
-                                      cancelButtonTitle:@"OK"
-                                      otherButtonTitles:@"Cancel", nil];
+                                      cancelButtonTitle:AlertViewOk
+                                      otherButtonTitles:AlertViewCancel, nil];
     _currentEmail       = nil;
     _currentPhoneNumber = _callNumber;
     [_acronymAlertView show];
@@ -182,14 +180,14 @@
     
     if (_cellRow == 0)
     {
-        _labelTitle.text    = @"Email:";
-        _buttonNumberTitle  = @"servicedesk(at)zhaw.ch";
+        _labelTitle.text    = ServiceDeskVCDescriptionEmail;
+        _buttonNumberTitle  = ServiceDeskVCDisplayEmail;
         [_actionButton addTarget:self action:@selector(sendEmailToGivenAdress  :event:) forControlEvents:UIControlEventTouchUpInside];
     }
     if (_cellRow == 1)
     {
-        _labelTitle.text    = @"Tel.:";
-        _buttonNumberTitle  = @"(0)058 934 66 77";
+        _labelTitle.text    = ServiceDeskVCDescriptionPhone;
+        _buttonNumberTitle  = ServiceDeskVCDisplayPhone;
         [_actionButton addTarget:self action:@selector(callGivenNumber  :event:) forControlEvents:UIControlEventTouchUpInside];
     }
     

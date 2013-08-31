@@ -398,7 +398,7 @@
         self._ownStoredAcronymType           = [self getAcronymType:_ownStoredAcronymString];
         
         NSUserDefaults *_acronymUserDefaults = [NSUserDefaults standardUserDefaults];
-        [_acronymUserDefaults setObject:_ownStoredAcronymString forKey:@"TimeTableAcronym"];
+        [_acronymUserDefaults setObject:_ownStoredAcronymString forKey:TimeTableAcronym];
         [_acronymUserDefaults synchronize];
        
 
@@ -574,11 +574,11 @@
     //----- SET ACRONYM WHEN COMING FROM SEARCH TAB -----
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(handleSearchType:)
-                                                 name:@"SearchType"
+                                                 name:SettingsVCSearchType
                                                object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(handleSearchText:)
-                                                 name:@"SearchText"
+                                                 name:SettingsVCSearchText
                                                object:nil];
 
     
@@ -679,7 +679,7 @@
                 if (self._ownStoredAcronymString == nil || [_ownStoredAcronymString length] == 0)
                 {
                     NSUserDefaults *_acronymUserDefaults = [NSUserDefaults standardUserDefaults];
-                    self._ownStoredAcronymString         = [_acronymUserDefaults stringForKey:@"TimeTableAcronym"];
+                    self._ownStoredAcronymString         = [_acronymUserDefaults stringForKey:TimeTableAcronym];
                     self._ownStoredAcronymType           = [self getAcronymType:_ownStoredAcronymString];
                 }
                 self._actualShownAcronymString       = self._ownStoredAcronymString;
@@ -758,7 +758,7 @@
     [self becomeFirstResponder];
     
     NSUserDefaults *_acronymUserDefaults = [NSUserDefaults standardUserDefaults];
-    self._ownStoredAcronymString         = [_acronymUserDefaults stringForKey:@"TimeTableAcronym"];
+    self._ownStoredAcronymString         = [_acronymUserDefaults stringForKey:TimeTableAcronym];
     self._ownStoredAcronymType           = [self getAcronymType:_ownStoredAcronymString];
     
     // go to acronym page to enforce setting an acronym
@@ -813,7 +813,7 @@
             }
             
             NSUserDefaults *_acronymUserDefaults = [NSUserDefaults standardUserDefaults];
-            [_acronymUserDefaults setObject:_actualShownAcronymString forKey:@"TimeTableAcronym"];
+            [_acronymUserDefaults setObject:_actualShownAcronymString forKey:TimeTableAcronym];
             [_acronymUserDefaults synchronize];
         }
         // NSLog(@"ok button is pushed: %@ %@", _textField.text, _acronymString);
