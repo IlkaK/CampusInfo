@@ -12,6 +12,9 @@
 		2700DD2A1699EC2C002906D0 /* OneSlotSevenRoomsTableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2700DD291699EC2C002906D0 /* OneSlotSevenRoomsTableCell.xib */; };
 		2700DD2D1699F2C4002906D0 /* ThreeSlotsTwoRoomsTableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2700DD2C1699F2C4002906D0 /* ThreeSlotsTwoRoomsTableCell.xib */; };
 		2700DD2F1699F854002906D0 /* ThreeSlotsThreeRoomsTableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2700DD2E1699F854002906D0 /* ThreeSlotsThreeRoomsTableCell.xib */; };
+		27042E7817D24C8E008057B4 /* PrognosisDto.m in Sources */ = {isa = PBXBuildFile; fileRef = 27042E7717D24C8E008057B4 /* PrognosisDto.m */; };
+		27042E7B17D25041008057B4 /* FromOrToDto.m in Sources */ = {isa = PBXBuildFile; fileRef = 27042E7A17D25041008057B4 /* FromOrToDto.m */; };
+		27042E7E17D27836008057B4 /* ServiceDto.m in Sources */ = {isa = PBXBuildFile; fileRef = 27042E7D17D27836008057B4 /* ServiceDto.m */; };
 		2709DED417AEDEF5002E714F /* ContactsPlaceTableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2709DED317AEDEF5002E714F /* ContactsPlaceTableCell.xib */; };
 		270A753917CCCE5C00DEAA94 /* 044_actual_lesson.png in Resources */ = {isa = PBXBuildFile; fileRef = 270A753817CCCE5C00DEAA94 /* 044_actual_lesson.png */; };
 		270A753B17CCE8D100DEAA94 /* FourSlotsFourRoomsTableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 270A753A17CCE8D000DEAA94 /* FourSlotsFourRoomsTableCell.xib */; };
@@ -215,6 +218,12 @@
 		2700DD291699EC2C002906D0 /* OneSlotSevenRoomsTableCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OneSlotSevenRoomsTableCell.xib; sourceTree = "<group>"; };
 		2700DD2C1699F2C4002906D0 /* ThreeSlotsTwoRoomsTableCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ThreeSlotsTwoRoomsTableCell.xib; sourceTree = "<group>"; };
 		2700DD2E1699F854002906D0 /* ThreeSlotsThreeRoomsTableCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ThreeSlotsThreeRoomsTableCell.xib; sourceTree = "<group>"; };
+		27042E7617D24C8E008057B4 /* PrognosisDto.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PrognosisDto.h; sourceTree = "<group>"; };
+		27042E7717D24C8E008057B4 /* PrognosisDto.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PrognosisDto.m; sourceTree = "<group>"; };
+		27042E7917D25040008057B4 /* FromOrToDto.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FromOrToDto.h; sourceTree = "<group>"; };
+		27042E7A17D25041008057B4 /* FromOrToDto.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FromOrToDto.m; sourceTree = "<group>"; };
+		27042E7C17D27835008057B4 /* ServiceDto.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ServiceDto.h; sourceTree = "<group>"; };
+		27042E7D17D27836008057B4 /* ServiceDto.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ServiceDto.m; sourceTree = "<group>"; };
 		2709DED317AEDEF5002E714F /* ContactsPlaceTableCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ContactsPlaceTableCell.xib; sourceTree = "<group>"; };
 		270A753817CCCE5C00DEAA94 /* 044_actual_lesson.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = 044_actual_lesson.png; path = CampusInfo1/resources/actual_lesson/044_actual_lesson.png; sourceTree = "<group>"; };
 		270A753A17CCE8D000DEAA94 /* FourSlotsFourRoomsTableCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FourSlotsFourRoomsTableCell.xib; sourceTree = "<group>"; };
@@ -498,6 +507,19 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		27042E7517D24C3C008057B4 /* PublicTransportConnectionDto */ = {
+			isa = PBXGroup;
+			children = (
+				27042E7617D24C8E008057B4 /* PrognosisDto.h */,
+				27042E7717D24C8E008057B4 /* PrognosisDto.m */,
+				27042E7917D25040008057B4 /* FromOrToDto.h */,
+				27042E7A17D25041008057B4 /* FromOrToDto.m */,
+				27042E7C17D27835008057B4 /* ServiceDto.h */,
+				27042E7D17D27836008057B4 /* ServiceDto.m */,
+			);
+			name = PublicTransportConnectionDto;
+			sourceTree = "<group>";
+		};
 		270A753717CCCE1100DEAA94 /* actual_lesson */ = {
 			isa = PBXGroup;
 			children = (
@@ -637,6 +659,7 @@
 				E1252E5117CB41E900E61732 /* SocialMedia */,
 				E15AA5A517C23111007E9F00 /* Maps */,
 				E1C23D6917CE323300C58E10 /* PublicTransportDto */,
+				27042E7517D24C3C008057B4 /* PublicTransportConnectionDto */,
 				E10190A417BBE58B00242A87 /* PublicTransport */,
 				E101909717BBAEBD00242A87 /* NewsDto */,
 				E101909617BBAEA400242A87 /* News */,
@@ -1294,6 +1317,9 @@
 				E1C23D7217CE427500C58E10 /* CoordinateDto.m in Sources */,
 				E1DC175317D09D5D00DB51F6 /* UIConstantStrings.m in Sources */,
 				E1DC175717D0D35D00DB51F6 /* ToessfeldViewController.m in Sources */,
+				27042E7817D24C8E008057B4 /* PrognosisDto.m in Sources */,
+				27042E7B17D25041008057B4 /* FromOrToDto.m in Sources */,
+				27042E7E17D27836008057B4 /* ServiceDto.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
