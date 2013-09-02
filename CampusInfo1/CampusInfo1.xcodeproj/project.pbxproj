@@ -206,6 +206,10 @@
 		E1DC175317D09D5D00DB51F6 /* UIConstantStrings.m in Sources */ = {isa = PBXBuildFile; fileRef = E1DC175217D09D5D00DB51F6 /* UIConstantStrings.m */; };
 		E1DC175717D0D35D00DB51F6 /* ToessfeldViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E1DC175517D0D35C00DB51F6 /* ToessfeldViewController.m */; };
 		E1DC175817D0D35D00DB51F6 /* ToessfeldViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E1DC175617D0D35C00DB51F6 /* ToessfeldViewController.xib */; };
+		E1EC0FD317D4A8BC00AB4898 /* JourneyDto.m in Sources */ = {isa = PBXBuildFile; fileRef = E1EC0FD217D4A8BC00AB4898 /* JourneyDto.m */; };
+		E1EC0FD617D4B98300AB4898 /* SectionDto.m in Sources */ = {isa = PBXBuildFile; fileRef = E1EC0FD517D4B98300AB4898 /* SectionDto.m */; };
+		E1EC0FD917D4C03C00AB4898 /* ConnectionDto.m in Sources */ = {isa = PBXBuildFile; fileRef = E1EC0FD817D4C03C00AB4898 /* ConnectionDto.m */; };
+		E1EC0FDF17D4C70600AB4898 /* ConnectionArrayDto.m in Sources */ = {isa = PBXBuildFile; fileRef = E1EC0FDE17D4C70500AB4898 /* ConnectionArrayDto.m */; };
 		E1F32A5117BCE4C4000D69F3 /* NewsChannelDto.m in Sources */ = {isa = PBXBuildFile; fileRef = E1F32A5017BCE4C4000D69F3 /* NewsChannelDto.m */; };
 		E1F32A5417BCE4DB000D69F3 /* NewsImageDto.m in Sources */ = {isa = PBXBuildFile; fileRef = E1F32A5317BCE4DB000D69F3 /* NewsImageDto.m */; };
 		E1F32A5717BCE4F9000D69F3 /* NewsItemDto.m in Sources */ = {isa = PBXBuildFile; fileRef = E1F32A5617BCE4F9000D69F3 /* NewsItemDto.m */; };
@@ -473,6 +477,14 @@
 		E1DC175417D0D35C00DB51F6 /* ToessfeldViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ToessfeldViewController.h; sourceTree = "<group>"; };
 		E1DC175517D0D35C00DB51F6 /* ToessfeldViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ToessfeldViewController.m; sourceTree = "<group>"; };
 		E1DC175617D0D35C00DB51F6 /* ToessfeldViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ToessfeldViewController.xib; sourceTree = "<group>"; };
+		E1EC0FD117D4A8BC00AB4898 /* JourneyDto.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JourneyDto.h; sourceTree = "<group>"; };
+		E1EC0FD217D4A8BC00AB4898 /* JourneyDto.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JourneyDto.m; sourceTree = "<group>"; };
+		E1EC0FD417D4B98300AB4898 /* SectionDto.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SectionDto.h; sourceTree = "<group>"; };
+		E1EC0FD517D4B98300AB4898 /* SectionDto.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SectionDto.m; sourceTree = "<group>"; };
+		E1EC0FD717D4C03C00AB4898 /* ConnectionDto.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConnectionDto.h; sourceTree = "<group>"; };
+		E1EC0FD817D4C03C00AB4898 /* ConnectionDto.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ConnectionDto.m; sourceTree = "<group>"; };
+		E1EC0FDD17D4C70500AB4898 /* ConnectionArrayDto.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConnectionArrayDto.h; sourceTree = "<group>"; };
+		E1EC0FDE17D4C70500AB4898 /* ConnectionArrayDto.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ConnectionArrayDto.m; sourceTree = "<group>"; };
 		E1F32A4F17BCE4C4000D69F3 /* NewsChannelDto.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewsChannelDto.h; sourceTree = "<group>"; };
 		E1F32A5017BCE4C4000D69F3 /* NewsChannelDto.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewsChannelDto.m; sourceTree = "<group>"; };
 		E1F32A5217BCE4DB000D69F3 /* NewsImageDto.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewsImageDto.h; sourceTree = "<group>"; };
@@ -516,6 +528,14 @@
 				27042E7A17D25041008057B4 /* FromOrToDto.m */,
 				27042E7C17D27835008057B4 /* ServiceDto.h */,
 				27042E7D17D27836008057B4 /* ServiceDto.m */,
+				E1EC0FD117D4A8BC00AB4898 /* JourneyDto.h */,
+				E1EC0FD217D4A8BC00AB4898 /* JourneyDto.m */,
+				E1EC0FD417D4B98300AB4898 /* SectionDto.h */,
+				E1EC0FD517D4B98300AB4898 /* SectionDto.m */,
+				E1EC0FD717D4C03C00AB4898 /* ConnectionDto.h */,
+				E1EC0FD817D4C03C00AB4898 /* ConnectionDto.m */,
+				E1EC0FDD17D4C70500AB4898 /* ConnectionArrayDto.h */,
+				E1EC0FDE17D4C70500AB4898 /* ConnectionArrayDto.m */,
 			);
 			name = PublicTransportConnectionDto;
 			sourceTree = "<group>";
@@ -1320,6 +1340,10 @@
 				27042E7817D24C8E008057B4 /* PrognosisDto.m in Sources */,
 				27042E7B17D25041008057B4 /* FromOrToDto.m in Sources */,
 				27042E7E17D27836008057B4 /* ServiceDto.m in Sources */,
+				E1EC0FD317D4A8BC00AB4898 /* JourneyDto.m in Sources */,
+				E1EC0FD617D4B98300AB4898 /* SectionDto.m in Sources */,
+				E1EC0FD917D4C03C00AB4898 /* ConnectionDto.m in Sources */,
+				E1EC0FDF17D4C70600AB4898 /* ConnectionArrayDto.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

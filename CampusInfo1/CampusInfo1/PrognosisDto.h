@@ -7,25 +7,30 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <DateFormation.h>
 
 @interface PrognosisDto : NSObject
 {
     NSString        *_platform;
-    NSString        *_arrival;
-    NSString        *_departure;
+    NSDate          *_arrival;
+    NSDate          *_departure;
     int               _capacity1st;
     int               _capacity2nd;
+
+    DateFormation   *_dateFormatter;
 }
 
 @property (nonatomic, retain) NSString          *_platform;
-@property (nonatomic, retain) NSString          *_arrival;
-@property (nonatomic, retain) NSString          *_departure;
+@property (nonatomic, retain) NSDate            *_arrival;
+@property (nonatomic, retain) NSDate            *_departure;
 @property (nonatomic, assign) int               _capacity1st;
 @property (nonatomic, assign) int               _capacity2nd;
 
+@property (nonatomic, retain) DateFormation     *_dateFormatter;
+
 -(id)                   init: (NSString *)newPlatform
-                 withArrival: (NSString *)newArrival
-               withDeparture: (NSString *)newDeparture
+                 withArrival: (NSDate *)  newArrival
+               withDeparture: (NSDate *)  newDeparture
              withCapacity1st: (int) newCapacity1st
              withCapacity2nd: (int) newCapacity2nd;
 

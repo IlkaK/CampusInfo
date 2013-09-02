@@ -9,6 +9,8 @@
 #import <UIKit/UIKit.h>
 #import <GradientButton.h>
 #import <PublicStopViewController.h>
+#import <ConnectionArrayDto.h>
+
 
 @class PublicStopViewController;
 
@@ -23,7 +25,12 @@
     IBOutlet GradientButton             *_searchButton;
     
     IBOutlet UITableViewCell            *_pubilcTransportOverviewTableCell;
+    IBOutlet UITableView                *_publicTransportTableView;
+    
     IBOutlet PublicStopViewController   *_publicStopVC;
+    
+    ConnectionArrayDto                  *_connectionArray;
+
 
 }
 
@@ -36,8 +43,12 @@
 @property (nonatomic, retain) IBOutlet GradientButton               *_searchButton;
 
 @property (nonatomic, retain) IBOutlet UITableViewCell              *_pubilcTransportOverviewTableCell;
+@property (nonatomic, retain) IBOutlet UITableView                  *_publicTransportTableView;
 
 @property (nonatomic, retain) IBOutlet PublicStopViewController     *_publicStopVC;
+
+@property (nonatomic, retain) ConnectionArrayDto                    *_connectionArray;
+
 
 - (IBAction)moveToFromStopController:(id)sender;
 - (IBAction)moveToToStopController:(id)sender;

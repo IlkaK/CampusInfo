@@ -14,14 +14,16 @@
 @synthesize _capacity2nd;
 @synthesize _departure;
 @synthesize _platform;
+@synthesize _dateFormatter;
 
 -(id)                   init: (NSString *)newPlatform
-                 withArrival: (NSString *)newArrival
-               withDeparture: (NSString *)newDeparture
+                 withArrival: (NSDate *)newArrival
+               withDeparture: (NSDate *)newDeparture
              withCapacity1st: (int) newCapacity1st
              withCapacity2nd: (int) newCapacity2nd
 {
     self = [super init];
+    _dateFormatter  = [[DateFormation alloc] init];
     if (self)
     {
         self._platform          = newPlatform;
@@ -36,8 +38,8 @@
 - (PrognosisDto *)getPrognosis:(NSDictionary *)prognosisDictionary
 {
     NSString        *_localPlatform;
-    NSString        *_localArrival;
-    NSString        *_localDeparture;
+    NSDate          *_localArrival;
+    NSDate          *_localDeparture;
     int               _localCapacity1st;
     int               _localCapacity2nd;
 
@@ -69,13 +71,13 @@
             
             if ([prognosisKey isEqualToString:@"arrival"])
             {
-                _localArrival = [prognosisDictionary objectForKey:prognosisKey];
+                _localArrival = [_dateFormatter parseDate:[prognosisDictionary objectForKey:prognosisKey]];
                 //NSLog(@"StationDto _localDistance: %@", _localDistance);
             }
             
             if ([prognosisKey isEqualToString:@"departure"])
             {
-                _localDeparture = [prognosisDictionary objectForKey:prognosisKey];
+                _localDeparture = [_dateFormatter parseDate:[prognosisDictionary objectForKey:prognosisKey]];
             }
         }
     }
