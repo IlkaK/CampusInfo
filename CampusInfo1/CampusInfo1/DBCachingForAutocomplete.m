@@ -71,7 +71,8 @@
         [self createTableWithName:@"CLASSES"    withDB:_timeTableNamesDB];
         [self createTableWithName:@"COURSES"    withDB:_timeTableNamesDB];
         [self createTableWithName:@"STUDENTS"   withDB:_timeTableNamesDB];
-        
+        [self createTableWithName:@"START_STATIONS" withDB:_timeTableNamesDB];
+        [self createTableWithName:@"STOP_STATIONS"  withDB:_timeTableNamesDB];
         sqlite3_close(_timeTableNamesDB);
     }
     else
@@ -117,6 +118,28 @@
             }
             sqlite3_finalize(_statement);            
         }
+        sqlite3_close(_timeTableNamesDB);
+    }
+}
+
+
+-(void) addToTable:(NSString *)tableName
+        withString:(NSString *)stringToStore
+{
+    sqlite3_stmt    *_statement;
+    sqlite3         *_timeTableNamesDB;
+    
+    if (sqlite3_open([_timeTableDBPath UTF8String], &_timeTableNamesDB) == SQLITE_OK)
+    {
+        NSString *_insertSQL = [NSString stringWithFormat:@"INSERT INTO %@ (name, shortname) VALUES (\"%@\")",tableName, stringToStore];
+            
+        sqlite3_prepare_v2(_timeTableNamesDB, [_insertSQL UTF8String],-1, &_statement, nil);
+            
+        if (sqlite3_step(_statement) != SQLITE_DONE)
+        {
+            NSLog(@"Failed to add to %@: %@ with statement: %d", tableName, stringToStore, sqlite3_step(_statement));
+        }
+        sqlite3_finalize(_statement);
         sqlite3_close(_timeTableNamesDB);
     }
 }
@@ -208,5 +231,29 @@
 {
     return [self getNamesFromTable:@"STUDENTS"];
 }
+
+
+// public transportation
+-(NSMutableArray *)getStartStations
+{
+    return [self getNamesFromTable:@"START_STATIONS"];
+}
+
+-(void) addStartStation:(NSString *)startStation
+{
+    [self addToTable:@"START_STATIONS" withString:startStation];
+}
+
+
+-(NSMutableArray *)getStopStations
+{
+    return [self getNamesFromTable:@"STOP_STATIONS"];
+}
+
+-(void) addStopStation:(NSString *)stopStation
+{
+    [self addToTable:@"STOP_STATIONS" withString:stopStation];
+}
+
 
 @end

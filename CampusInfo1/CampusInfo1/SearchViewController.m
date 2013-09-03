@@ -8,7 +8,6 @@
 
 #import "SearchViewController.h"
 #import "TimeTableAsyncRequest.h"
-#import "DBCachingForAutocomplete.h"
 #import "ColorSelection.h"
 #import "UIConstantStrings.h"
 

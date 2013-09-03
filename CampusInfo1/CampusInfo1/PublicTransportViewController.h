@@ -11,7 +11,7 @@
 #import <PublicStopViewController.h>
 #import <ConnectionArrayDto.h>
 #import <DateFormation.h>
-
+#import <DBCachingForAutocomplete.h>
 
 
 @class PublicStopViewController;
@@ -38,6 +38,14 @@
     NSString                            *_startStation;
     NSString                            *_stopStation;
     BOOL                                _changedOneStation;
+    
+    DBCachingForAutocomplete            *_dbCachingForAutocomplete;
+    NSMutableArray                      *_storedStartStationArray;
+    NSMutableArray                      *_storedStopStationArray;
+
+    IBOutlet UIButton                   *_lastStart1Button;
+    IBOutlet UIButton                   *_lastStart2Button;
+    IBOutlet UIButton                   *_lastStart3Button;
 }
 
 
@@ -63,8 +71,17 @@
 
 @property (nonatomic, assign) BOOL                                  _changedOneStation;
 
+@property (nonatomic, retain) DBCachingForAutocomplete              *_dbCachingForAutocomplete;
+@property (nonatomic, retain) NSMutableArray                        *_storedStartStationArray;
+@property (nonatomic, retain) NSMutableArray                        *_storedStopStationArray;
+
+@property (nonatomic, retain) IBOutlet UIButton                     *_lastStart1Button;
+@property (nonatomic, retain) IBOutlet UIButton                     *_lastStart2Button;
+@property (nonatomic, retain) IBOutlet UIButton                     *_lastStart3Button;
+
 - (IBAction)moveToFromStopController:(id)sender;
 - (IBAction)moveToToStopController:(id)sender;
 - (IBAction)startConnectionSearch:(id)sender;
+- (IBAction)startTextFieldChanged:(id)sender;
 
 @end

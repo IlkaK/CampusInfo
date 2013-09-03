@@ -36,6 +36,14 @@
 @synthesize _stopStation;
 @synthesize _changedOneStation;
 
+@synthesize _dbCachingForAutocomplete;
+@synthesize _storedStartStationArray;
+@synthesize _storedStopStationArray;
+
+@synthesize _lastStart1Button;
+@synthesize _lastStart2Button;
+@synthesize _lastStart3Button;
+
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -58,6 +66,7 @@
     ColorSelection *_zhawColor = [[ColorSelection alloc]init];
     _connectionArray = [[ConnectionArrayDto alloc]init:nil];
     _dateFormatter = [[DateFormation alloc] init];
+    _dbCachingForAutocomplete = [[DBCachingForAutocomplete alloc]init];
     
     // title
     UIBarButtonItem *backButtonItem = [[UIBarButtonItem alloc] initWithTitle:LeftArrowSymbol style:UIBarButtonItemStylePlain target:self action:@selector(moveBackToMenuOverview:)];
@@ -93,7 +102,24 @@
     _startStation   = _fromButton.titleLabel.text;
     _stopStation    = _toButton.titleLabel.text;
     _changedOneStation = NO;
+    
+    _storedStartStationArray = [_dbCachingForAutocomplete getStartStations];
+    _storedStopStationArray  = [_dbCachingForAutocomplete getStopStations];
     //NSLog(@"viewDidLoad -> _startStation: %@ _stopStation: %@", _startStation, _stopStation);
+    
+    
+    // set start/stop buttons with last results
+    [self.view bringSubviewToFront:_lastStart1Button];
+    [self.view bringSubviewToFront:_lastStart2Button];
+    [self.view bringSubviewToFront:_lastStart3Button];
+    _lastStart1Button.hidden = YES;
+    _lastStart2Button.hidden = YES;
+    _lastStart3Button.hidden = YES;
+    _lastStart1Button.titleLabel.text = @"";
+    _lastStart2Button.titleLabel.text = @"";
+    _lastStart3Button.titleLabel.text = @"";
+    
+    
 }
 
 
@@ -116,19 +142,47 @@
         
     }
     
-    if (!(    [_fromButton.titleLabel.text isEqualToString:_startStation]
+    if (  [_fromButton.titleLabel.text isEqualToString:_startStation]
         &&  [_toButton.titleLabel.text isEqualToString:_stopStation]
-        ))
-    {
-        _changedOneStation = YES;
-        _startStation   = _fromButton.titleLabel.text;
-        _stopStation    = _toButton.titleLabel.text;
-    }
-    else
+        )
     {
         _changedOneStation = NO;
     }
-    
+    else
+    {
+        _changedOneStation = YES;
+        
+        if (![_fromButton.titleLabel.text isEqualToString:_startStation])
+        {
+            _startStation   = _fromButton.titleLabel.text;
+            [_dbCachingForAutocomplete addStartStation:_startStation];
+            
+            if([_lastStart1Button.titleLabel.text isEqualToString:@""])
+            {
+                _lastStart1Button.titleLabel.text = _startStation;
+            }
+            else
+            {
+                if([_lastStart2Button.titleLabel.text isEqualToString:@""])
+                {
+                    _lastStart2Button.titleLabel.text = _startStation;
+                }
+                else
+                {
+                    if([_lastStart3Button.titleLabel.text isEqualToString:@""])
+                    {
+                        _lastStart3Button.titleLabel.text = _startStation;
+                    }
+                }
+            }
+            
+        }
+        if (![_toButton.titleLabel.text isEqualToString:_stopStation])
+        {
+            _stopStation   = _toButton.titleLabel.text;
+            [_dbCachingForAutocomplete addStopStation:_stopStation];
+        }
+    }
     [self getConnectionArray];
 }
 
@@ -181,6 +235,9 @@
     _pubilcTransportOverviewTableCell = nil;
     _publicStopVC = nil;
     _publicTransportTableView = nil;
+    _lastStart1Button = nil;
+    _lastStart2Button = nil;
+    _lastStart3Button = nil;
     [super viewDidUnload];
 }
 
@@ -207,6 +264,13 @@
 {
     NSLog(@"startConnectionSearch -> _startStation: %@ _stopStation: %@", _startStation, _stopStation);
     [self getConnectionArray];
+}
+
+- (IBAction)startTextFieldChanged:(id)sender
+{
+    _lastStart1Button.hidden = NO;
+    _lastStart2Button.hidden = NO;
+    _lastStart3Button.hidden = NO;
 }
 
 

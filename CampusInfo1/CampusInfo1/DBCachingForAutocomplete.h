@@ -35,4 +35,11 @@
 -(void) storeStudents:(NSMutableArray *)studentsArray;
 -(NSMutableArray *) getStudents;
 
+-(void) addStartStation:(NSString *)startStation;
+-(NSMutableArray *) getStartStations;
+
+-(void) addStopStation:(NSString *)stopStation;
+-(NSMutableArray *) getStopStations;
+
+
 @end
