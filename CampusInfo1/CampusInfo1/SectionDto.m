@@ -37,8 +37,26 @@
     SectionDto *_localSection = [[SectionDto alloc]init:nil withWalk:nil withDeparture:nil withArrival:nil];
     JourneyDto      *_localJourney = [[JourneyDto alloc]init:nil withCategory:nil withCategoryCode:nil withJourneyNumber:nil withOperator:nil withTo:nil withPassList:nil withCapacity1st:nil withCapacity2nd:nil];
     NSString        *_localWalk;
-    FromOrToDto     *_localDeparture = [[FromOrToDto alloc]init:nil withLocation:nil withPrognosis:nil withDelay:nil withArrival:nil withDeparture:nil withPlatform:nil];
-    FromOrToDto     *_localArrival = [[FromOrToDto alloc]init:nil withLocation:nil withPrognosis:nil withDelay:nil withArrival:nil withDeparture:nil withPlatform:nil];
+    
+    FromOrToDto     *_localDeparture = [[FromOrToDto alloc]init:nil
+                                                   withLocation:nil
+                                                  withPrognosis:nil
+                                                      withDelay:nil
+                                                    withArrivalDate:nil
+                                                withArrivalTime:nil
+                                              withDepartureDate:nil
+                                              withDepartureTime:nil
+                                                   withPlatform:nil];
+    
+    FromOrToDto     *_localArrival = [[FromOrToDto alloc]init:nil
+                                                 withLocation:nil
+                                                withPrognosis:nil
+                                                    withDelay:nil
+                                              withArrivalDate:nil
+                                              withArrivalTime:nil
+                                            withDepartureDate:nil
+                                            withDepartureTime:nil
+                                                 withPlatform:nil];
     
     for (id sectionKey in sectionDictionary)
     {

@@ -30,6 +30,8 @@
 @synthesize _publicStopVC;
 
 @synthesize _connectionArray;
+@synthesize _dateFormatter;
+
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -50,6 +52,7 @@
     
     ColorSelection *_zhawColor = [[ColorSelection alloc]init];
     _connectionArray = [[ConnectionArrayDto alloc]init:nil];
+    _dateFormatter = [[DateFormation alloc] init];
     
     // title
     UIBarButtonItem *backButtonItem = [[UIBarButtonItem alloc] initWithTitle:LeftArrowSymbol style:UIBarButtonItemStylePlain target:self action:@selector(moveBackToMenuOverview:)];
@@ -111,13 +114,15 @@
     
     //[NSThread detachNewThreadSelector:@selector(threadWaitForChangeActivityIndicator:) toTarget:self withObject:nil];
     
-    [_connectionArray getData];
+
     
     //[_waitForChangeActivityIndicator stopAnimating];
     //_waitForChangeActivityIndicator.hidden = YES;
     
-    //if (_connectionArray._connections count] == 0)
-    //{
+    if ([_connectionArray._connections count] == 0)
+    {
+        [_connectionArray getData];
+        
         //_noConnectionButton.hidden = NO;
         //_noConnectionLabel.hidden = NO;
     //}
@@ -125,8 +130,9 @@
     //{
         //_noConnectionButton.hidden = YES;
         //_noConnectionLabel.hidden = YES;
-        [_publicTransportTableView reloadData];
-    //}
+
+    }
+    [_publicTransportTableView reloadData];
 }
 
 
@@ -186,6 +192,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
+    NSLog(@"numberOfRowsInSection connection count: %i", [_connectionArray._connections count]);
     return [_connectionArray._connections count] + 1;
 }
 
@@ -202,24 +209,31 @@
         self._pubilcTransportOverviewTableCell = nil;
     }
     
-    UILabel          *_stopLabel            = (UILabel  *)[_cell viewWithTag:1];
-    UILabel          *_dateLabel            = (UILabel  *)[_cell viewWithTag:2];
-    UILabel          *_timeLabel            = (UILabel  *)[_cell viewWithTag:3];
+    UILabel          *_startLabel           = (UILabel  *)[_cell viewWithTag:1];
+    UILabel          *_startDateLabel       = (UILabel  *)[_cell viewWithTag:2];
+    UILabel          *_startTimeLabel       = (UILabel  *)[_cell viewWithTag:3];
     UILabel          *_durationLabel        = (UILabel  *)[_cell viewWithTag:4];
     UILabel          *_transfersLabel       = (UILabel  *)[_cell viewWithTag:5];
     UILabel          *_transportationLabel  = (UILabel  *)[_cell viewWithTag:6];
+    UILabel          *_stopLabel            = (UILabel  *)[_cell viewWithTag:7];
+    UILabel          *_stopDateLabel        = (UILabel  *)[_cell viewWithTag:8];
+    UILabel          *_stopTimeLabel        = (UILabel  *)[_cell viewWithTag:9];
+
     
-    NSLog(@"connection count: %i", [_connectionArray._connections count]);
+    NSLog(@" cellForRowAtIndexPath - connection count: %i _cellRow: %i", [_connectionArray._connections count], _cellRow);
     
     // title row
     if (_cellRow == 0)
     {
-        _stopLabel.text = @"Bahnhof, Haltestelle";
-        _dateLabel.text = @"Datum";
-        _timeLabel.text = @"Zeit";
-        _durationLabel.text = @"Dauer";
-        _transfersLabel.text = @"U.";
-        _transportationLabel.text = @"Reise mit";
+        _startLabel.text            = @"Bahnhof, Haltestelle";
+        _startDateLabel.text        = @"Datum";
+        _startTimeLabel.text        = @"Zeit";
+        _durationLabel.text         = @"Dauer";
+        _transfersLabel.text        = @"U.";
+        _transportationLabel.text   = @"Reise mit";
+        _stopLabel.text             = @"";
+        _stopDateLabel.text         = @"";
+        _stopTimeLabel.text         = @"";
     }
     else
     {
@@ -228,11 +242,14 @@
             &&  [_connectionArray._connections count] > _cellRow)
         {
             ConnectionDto *_localConnection = [_connectionArray._connections objectAtIndex:_cellRow];
-            _stopLabel.text = @"Bahnhof, Haltestelle";
-            _dateLabel.text = @"Datum";
-            _timeLabel.text = @"Zeit";
-            _durationLabel.text = _localConnection._duration;
-            _transfersLabel.text = [NSString stringWithFormat:@"%i",_localConnection._transfers];
+            
+            _startLabel.text        = _localConnection._from._station._name;
+            _startDateLabel.text    = [[_dateFormatter _dayFormatter] stringFromDate:_localConnection._from._departureDate];
+            _startTimeLabel.text    = [NSString stringWithFormat:@"ab %@", [[_dateFormatter _timeFormatter] stringFromDate:_localConnection._from._departureTime]];
+            
+            _durationLabel.text     = _localConnection._duration;
+            _transfersLabel.text    = [NSString stringWithFormat:@"%i",_localConnection._transfers];
+            
             
             int _productsArrayI;
             NSString *_productsString;
@@ -249,6 +266,10 @@
                 }
             }
             _transportationLabel.text = _productsString;
+            
+            _stopLabel.text       = _localConnection._to._station._name;
+            _stopDateLabel.text   = [[_dateFormatter _dayFormatter] stringFromDate:_localConnection._to._arrivalDate];
+            _stopTimeLabel.text   = [NSString stringWithFormat:@"an %@", [[_dateFormatter _timeFormatter] stringFromDate:_localConnection._to._arrivalTime]];
         }
     }
         
@@ -258,7 +279,7 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return 35;
+    return 70;
 }
 
 

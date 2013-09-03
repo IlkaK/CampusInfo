@@ -10,6 +10,8 @@
 #import <GradientButton.h>
 #import <PublicStopViewController.h>
 #import <ConnectionArrayDto.h>
+#import <DateFormation.h>
+
 
 
 @class PublicStopViewController;
@@ -30,9 +32,10 @@
     IBOutlet PublicStopViewController   *_publicStopVC;
     
     ConnectionArrayDto                  *_connectionArray;
-
-
+    
+    DateFormation                       *_dateFormatter;
 }
+
 
 @property (nonatomic, retain) IBOutlet UINavigationBar              *_publicTransportNavigationBar;
 @property (nonatomic, retain) IBOutlet UINavigationItem             *_publicTransportNavigationItem;
@@ -49,6 +52,7 @@
 
 @property (nonatomic, retain) ConnectionArrayDto                    *_connectionArray;
 
+@property (nonatomic, retain)          DateFormation                *_dateFormatter;
 
 - (IBAction)moveToFromStopController:(id)sender;
 - (IBAction)moveToToStopController:(id)sender;

@@ -119,7 +119,15 @@
                 
                 //NSLog(@"count of _stationArray: %i", [_stationArray count]);
             
-                FromOrToDto *_localFromOrTo = [[FromOrToDto alloc]init:nil withLocation:nil withPrognosis:nil withDelay:nil withArrival:nil withDeparture:nil withPlatform:nil];
+                FromOrToDto *_localFromOrTo = [[FromOrToDto alloc]init:nil
+                                                          withLocation:nil
+                                                         withPrognosis:nil
+                                                             withDelay:nil
+                                                       withArrivalDate:nil
+                                                       withArrivalTime:nil
+                                                     withDepartureDate:nil
+                                                     withDepartureTime:nil
+                                                          withPlatform:nil];
             
                 for (_passListArrayI = 0; _passListArrayI < [_passListArray count]; _passListArrayI++)
                 {
