@@ -37,7 +37,8 @@
     IBOutlet UILabel                    *_dateLabel;
     IBOutlet UILabel                    *_noConnectionLabel;
     IBOutlet GradientButton             *_noConnectionButton;
-    IBOutlet UIImageView                *_backgroundImageView;
+
+    int                                 _tableRows;
 }
 
 @property (nonatomic, retain) IBOutlet UITableView                  *_mensaOverviewTable;
@@ -59,7 +60,9 @@
 @property (nonatomic, retain) IBOutlet UILabel                      *_dateLabel;
 @property (nonatomic, retain) IBOutlet UILabel                      *_noConnectionLabel;
 @property (nonatomic, retain) IBOutlet GradientButton               *_noConnectionButton;
-@property (nonatomic, retain) IBOutlet UIImageView                  *_backgroundImageView;
+
+
+@property (nonatomic, assign) int                                       _tableRows;
 
 - (IBAction)tryConnectionAgain:(id)sender;
 

@@ -7,6 +7,7 @@
 //
 
 #import "SocialMediaViewController.h"
+#import "UIConstantStrings.h"
 
 @interface SocialMediaViewController ()
 
@@ -19,8 +20,6 @@
 
 @synthesize _socialMediaTableCell;
 
-@synthesize _zhawColors;
-
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -31,33 +30,30 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+   
+    // general intialization
+    ColorSelection *_zhawColor = [[ColorSelection alloc]init];
+
     
-    _zhawColors = [[ColorSelection alloc]init];
+    // title
+    UIBarButtonItem *backButtonItem = [[UIBarButtonItem alloc] initWithTitle:LeftArrowSymbol style:UIBarButtonItemStylePlain target:self action:@selector(moveBackToMenuOverview:)];
     
-    UIButton *backButton = [UIButton buttonWithType:101];
-    UIView *backButtonView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, backButton.frame.size.width, backButton.frame.size.height)];
-    
-    [backButton addTarget:self action:@selector(moveBackToMenuOverview:) forControlEvents:UIControlEventTouchUpInside];
-    [backButton setTitle:@"zurück" forState:UIControlStateNormal];
-    [backButtonView addSubview:backButton];
-    
-    // set buttonview as custom view for bar button item
-    UIBarButtonItem *backButtonItem = [[UIBarButtonItem alloc] initWithCustomView:backButtonView];
+    [backButtonItem setTintColor:_zhawColor._zhawOriginalBlue];
     [_titleNavigationItem setLeftBarButtonItem :backButtonItem animated :true];
     
     [_titleNavigationLabel setTextColor:[UIColor whiteColor]];
-    _titleNavigationLabel.text = @"Social Media";
+    _titleNavigationLabel.text = SocialMediaVCTitle;
     _titleNavigationItem.title = @"";
     
     CGRect imageRect = CGRectMake(0, 0, _titleNavigationBar.frame.size.width, _titleNavigationBar.frame.size.height);
     UIGraphicsBeginImageContext(imageRect.size);
-    [_zhawColors._zhawOriginalBlue set];
+    [_zhawColor._zhawOriginalBlue set];
     UIRectFill(imageRect);
     UIImage *aImage = UIGraphicsGetImageFromCurrentImageContext();
     UIGraphicsEndImageContext();
     [_titleNavigationBar setBackgroundImage:aImage forBarMetrics:UIBarMetricsDefault];
     
-    [_titleNavigationLabel setBackgroundColor:_zhawColors._zhawOriginalBlue];
+    [_titleNavigationLabel setBackgroundColor:_zhawColor._zhawOriginalBlue];
 }
 
 - (void)moveBackToMenuOverview:(id)sender
@@ -68,7 +64,6 @@
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
 - (void)viewDidUnload {
@@ -191,7 +186,14 @@
 
 -(void) openURLFacebook:(id)sender event:(id)event
 {
-    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"https://www.facebook.com/engineering.zhaw"]];
+    if ([[UIApplication sharedApplication] canOpenURL:[NSURL URLWithString:@"fb://profile/108051929285833"]])
+    {
+        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"fb://profile/108051929285833"]];
+    }
+    else
+    {
+        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"https://www.facebook.com/engineering.zhaw"]];
+    }
 }
 
 -(void) openURLYoutube:(id)sender event:(id)event
@@ -201,7 +203,15 @@
 
 -(void) openURLTwitter:(id)sender event:(id)event
 {
-    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"https://twitter.com/engineeringzhaw"]];
+    if ([[UIApplication sharedApplication] canOpenURL:[NSURL URLWithString:@"twitter://user?screen_name=engineeringzhaw"]])
+    {
+        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"twitter://user?screen_name=engineeringzhaw"]];
+    }
+    else
+    {
+        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"https://twitter.com/engineeringzhaw"]];
+    }
+    
 }
 
 -(void) openURLIssuu:(id)sender event:(id)event

@@ -8,6 +8,7 @@
 
 #import "ChooseDateViewController.h"
 #import "ColorSelection.h"
+#import "UIConstantStrings.h"
 
 @interface ChooseDateViewController ()
 
@@ -27,7 +28,6 @@
 @synthesize _titleNavigationItem;
 @synthesize _titleNavigationBar;
 
-@synthesize _backgroundImageView;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -97,7 +97,6 @@
             
             [_chooseDateSegmentedControl setSelectedSegmentIndex:UISegmentedControlNoSegment];
             
-            
             [self dismissModalViewControllerAnimated:YES];
         }
     }
@@ -122,15 +121,10 @@
     
     ColorSelection *_zhawColor = [[ColorSelection alloc]init];
     
-    UIButton *backButton = [UIButton buttonWithType:101];
-    UIView *backButtonView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, backButton.frame.size.width, backButton.frame.size.height)];
+    // set title
+    UIBarButtonItem *backButtonItem = [[UIBarButtonItem alloc] initWithTitle:LeftArrowSymbol style:UIBarButtonItemStylePlain target:self action:@selector(moveBackToTimeTable:)];
     
-    [backButton addTarget:self action:@selector(moveBackToTimeTable:) forControlEvents:UIControlEventTouchUpInside];
-    [backButton setTitle:@"zurück" forState:UIControlStateNormal];
-    [backButtonView addSubview:backButton];
-    
-    // set buttonview as custom view for bar button item
-    UIBarButtonItem *backButtonItem = [[UIBarButtonItem alloc] initWithCustomView:backButtonView];
+    [backButtonItem setTintColor:_zhawColor._zhawOriginalBlue];
     [_titleNavigationItem setLeftBarButtonItem :backButtonItem animated :true];
     
     [_titleNavigationLabel setTextColor:_zhawColor._zhawWhite];
@@ -146,7 +140,19 @@
     [_titleNavigationBar setBackgroundImage:aImage forBarMetrics:UIBarMetricsDefault];
     
     [_titleNavigationLabel setBackgroundColor:_zhawColor._zhawOriginalBlue];
+
     
+    // set activity indicator
+    _waitForChangeActivityIndicator.hidesWhenStopped = YES;
+    _waitForChangeActivityIndicator.hidden = YES;
+    [_waitForChangeActivityIndicator setBackgroundColor:_zhawColor._zhawOriginalBlue];
+    [self.view bringSubviewToFront:_waitForChangeActivityIndicator];
+    
+    // segmented controls
+    [_chooseDateSegmentedControl setTintColor:_zhawColor._zhawOriginalBlue];
+    [self.view bringSubviewToFront:_chooseDateSegmentedControl];
+    
+    // set date picker
     if (_actualDate == nil)
     {
         [_datePicker setDate:[NSDate date]];
@@ -156,15 +162,6 @@
         [_datePicker setDate:_actualDate];
     }
     
-    // set default values for spinner/activity indicator
-    _waitForChangeActivityIndicator.hidesWhenStopped = YES;
-    _waitForChangeActivityIndicator.hidden = YES;
-    [_waitForChangeActivityIndicator setBackgroundColor:_zhawColor._zhawOriginalBlue];
-    [self.view bringSubviewToFront:_waitForChangeActivityIndicator];
-    
-    [_chooseDateSegmentedControl setTintColor:_zhawColor._zhawOriginalBlue];
-    
-    [_backgroundImageView setBackgroundColor:_zhawColor._zhawLighterBlue];
 }
 
 
@@ -181,7 +178,6 @@
     _titleNavigationBar = nil;
     _titleNavigationItem = nil;
     _titleNavigationLabel = nil;
-    _backgroundImageView = nil;
     [super viewDidUnload];
 }
 

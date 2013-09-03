@@ -19,7 +19,7 @@
 @interface MensaDetailViewController : UIViewController <ChooseDateViewDelegate, UITableViewDataSource, UITableViewDelegate>
 {
     GastronomicFacilityDto              *_actualGastronomy;
-    IBOutlet GradientButton             *_moveBackButton;
+
     IBOutlet UINavigationItem           *_dayNavigationItem;
     IBOutlet GradientButton             *_dateButton;
     DateFormation                       *_dateFormatter;
@@ -46,12 +46,16 @@
     IBOutlet UILabel                    *_gastronomyLabel;
     
     ColorSelection                      *_zhawColor;
+    
+    IBOutlet UILabel                    *_noConnectionLabel;
+    IBOutlet GradientButton             *_noConnectionButton;
 }
 
 @property (nonatomic, retain) GastronomicFacilityDto                    *_actualGastronomy;
-@property (nonatomic, retain) GradientButton                            *_moveBackButton;
+
 @property (nonatomic, retain) IBOutlet UINavigationItem                 *_dayNavigationItem;
 @property (nonatomic, retain) IBOutlet GradientButton                   *_dateButton;
+
 @property (nonatomic, retain) DateFormation                             *_dateFormatter;
 
 @property (nonatomic, retain) NSDate                                    *_actualDate;
@@ -77,8 +81,11 @@
 
 @property (nonatomic, retain) ColorSelection                            *_zhawColor;
 
+@property (nonatomic, retain) IBOutlet UILabel                          *_noConnectionLabel;
+@property (nonatomic, retain) IBOutlet GradientButton                   *_noConnectionButton;
 
 
+- (IBAction)tryConnectionAgain:(id)sender;
 
 - (IBAction)backToMensaOverview:(id)sender;
 - (IBAction)moveToChooseDateView:(id)sender;

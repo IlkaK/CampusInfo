@@ -8,6 +8,7 @@
 
 #import "EmergencyViewController.h"
 #import "ColorSelection.h"
+#import "UIConstantStrings.h"
 
 @interface EmergencyViewController ()
 
@@ -42,10 +43,8 @@
 {
     if (buttonIndex != [alertView firstOtherButtonIndex])
     {
-        
         NSString *_urlString = [NSString stringWithFormat:@"tel://%@", self._emergencyCallNumber];
-        NSLog(@"calling %@", _urlString);
-        
+        //NSLog(@"calling %@", _urlString);
         [[UIApplication sharedApplication] openURL:[NSURL URLWithString:_urlString]];
     }
 }
@@ -67,44 +66,44 @@
     
     if(_cellSelection == 0 && _cellRow == 0)
     {
-        _callWhom = @"Die Polizei";
-        _callNumber = @"117";
+        _callWhom = EmergencyVCDisplayTextPolice;
+        _callNumber = EmergencyVCRealPhonePolice;
     }
     if(_cellSelection == 0 && _cellRow == 1)
     {
-        _callWhom = @"Die Feuerwehr";
-        _callNumber = @"118";
+        _callWhom = EmergencyVCDisplayTextFire;
+        _callNumber = EmergencyVCRealPhoneFire;
     }
     if(_cellSelection == 0 && _cellRow == 2)
     {
-        _callWhom = @"Die Sanität";
-        _callNumber = @"144";
+        _callWhom = EmergencyVCDisplayTextSanitary;
+        _callNumber = EmergencyVCRealPhoneSanitary;
     }
     if(_cellSelection == 0 && _cellRow == 3)
     {
-        _callWhom = @"Das Tox-Zentrum";
-        _callNumber = @"145";
+        _callWhom = EmergencyVCDisplayTextToxCentre;
+        _callNumber = EmergencyVCRealPhoneToxCentre;
     }
     if(_cellSelection == 0 && _cellRow == 4)
     {
-        _callWhom = @"Die REGA";
-        _callNumber = @"1414";
+        _callWhom = EmergencyVCDisplayTextRega;
+        _callNumber = EmergencyVCRealPhoneRega;
     }
     if(_cellSelection == 1 && _cellRow == 0)
     {
-        _callWhom = @"Die ZHAW-Notfallnummer";
-        _callNumber = @"0589347070";
+        _callWhom = EmergencyVCDisplayTextZHAWEmergency;
+        _callNumber = EmergencyVCRealPhoneZHAWEmergency;
     }
     
-    NSString *_messageForCalling = [NSString stringWithFormat:@"%@ anrufen (%@)?"
-                                   , _callWhom, _callNumber];
+    NSString *_messageForCalling = [NSString stringWithFormat:@"%@ %@ (%@)?"
+                                   , _callWhom, ContactsVCMessageCall, _callNumber];
     
     UIAlertView *_acronymAlertView = [[UIAlertView alloc]
-                                      initWithTitle:@"Weitere Dienste"
+                                      initWithTitle:ContactsVCTitle
                                       message:_messageForCalling
                                       delegate:self
-                                      cancelButtonTitle:@"OK"
-                                      otherButtonTitles:@"Cancel", nil];
+                                      cancelButtonTitle:AlertViewOk
+                                      otherButtonTitles:AlertViewCancel, nil];
     _emergencyCallNumber = _callNumber;
     [_acronymAlertView show];
 // [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"tel://1456987452"]];
@@ -118,19 +117,13 @@
     ColorSelection *_zhawColor = [[ColorSelection alloc]init];
     _emergencyCallNumber = @"";
     
-    UIButton *backButton = [UIButton buttonWithType:101];
-    UIView *backButtonView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, backButton.frame.size.width, backButton.frame.size.height)];
+    UIBarButtonItem *backButtonItem = [[UIBarButtonItem alloc] initWithTitle:LeftArrowSymbol style:UIBarButtonItemStylePlain target:self action:@selector(moveBackToContactsOverview:)];
     
-    [backButton addTarget:self action:@selector(moveBackToContactsOverview:) forControlEvents:UIControlEventTouchUpInside];
-    [backButton setTitle:@"zurück" forState:UIControlStateNormal];
-    [backButtonView addSubview:backButton];
-    
-    // set buttonview as custom view for bar button item
-    UIBarButtonItem *backButtonItem = [[UIBarButtonItem alloc] initWithCustomView:backButtonView];
+    [backButtonItem setTintColor:_zhawColor._zhawOriginalBlue];
     [_titleNavigationItem setLeftBarButtonItem :backButtonItem animated :true];
     
     [_titleNavigationLabel setTextColor:_zhawColor._zhawWhite];
-    _titleNavigationLabel.text = @"Notfall";
+    _titleNavigationLabel.text = EmergencyVCTitle;
     _titleNavigationItem.title = @"";
     
     CGRect imageRect = CGRectMake(0, 0, _titleNavigationBar.frame.size.width, _titleNavigationBar.frame.size.height);
@@ -168,10 +161,10 @@
     switch (section)
     {
         case 0:
-            _sectionName = @"1. Alarmieren > wenn nötig";
+            _sectionName = EmergencyVCSectionTitleAlarm;
             break;
         default:
-            _sectionName = @"2. Informieren > immer";
+            _sectionName = EmergencyVCSectionTitleInform;
             break;
     }
     return _sectionName;
@@ -237,8 +230,14 @@
             _cell = _emergencyInformTableCell;
             self._emergencyInformTableCell = nil;
         }
-        _buttonNumber          = (UIButton *) [_cell viewWithTag:6];
-        _buttonNumberTitle     = @"(0)058 9347070";
+        UILabel         *_labelDescription      = (UILabel *) [_cell viewWithTag:1];
+        _labelDescription.text = EmergencyVCDisplayTitleZHAWEmergency;
+
+        UILabel         *_labelAvailability     = (UILabel *) [_cell viewWithTag:2];
+        _labelAvailability.text = EmergencyVCDisplayZHAWEmergencyAvailability;
+        
+        _buttonNumber          = (UIButton *) [_cell viewWithTag:3];
+        _buttonNumberTitle     = EmergencyVCDisplayPhoneZHAWEmergency;
     }
     else
     {
@@ -256,39 +255,39 @@
         
         if (_cellRow == 0)
         {
-            _labelDescription.text = @"Polizei";
-            _buttonNumberTitle = @"(0)117";
+            _labelDescription.text = EmergencyVCDisplayTitlePolice;
+            _buttonNumberTitle = EmergencyVCDisplayPhonePolice;
         }
         if (_cellRow == 1)
         {
-            _labelDescription.text = @"Feuerwehr";
-            _buttonNumberTitle = @"(0)118";
+            _labelDescription.text = EmergencyVCDisplayTitleFire;
+            _buttonNumberTitle = EmergencyVCDisplayPhoneFire;
         }
         if (_cellRow == 2)
         {
-            _labelDescription.text = @"Sanität";
-            _buttonNumberTitle = @"(0)144";
+            _labelDescription.text = EmergencyVCDisplayTitleSanitary;
+            _buttonNumberTitle = EmergencyVCDisplayPhoneSanitary;
         }
         if (_cellRow == 3)
         {
-            _labelDescription.text = @"Tox-Zentrum";
-            _buttonNumberTitle = @"(0)145";
+            _labelDescription.text = EmergencyVCDisplayTitleToxCentre;
+            _buttonNumberTitle = EmergencyVCDisplayPhoneToxCentre;
         }
         if (_cellRow == 4)
         {
-            _labelDescription.text = @"REGA";
-            _buttonNumberTitle = @"(0)1414";
+            _labelDescription.text = EmergencyVCDisplayTitleRega;
+            _buttonNumberTitle = EmergencyVCDisplayPhoneRega;
         }
-        
-        _buttonNumber.enabled = true;
-        [_buttonNumber addTarget:self action:@selector(callGivenNumber  :event:) forControlEvents:UIControlEventTouchUpInside];
-            
-        NSMutableAttributedString *_titleString = [[NSMutableAttributedString alloc] initWithString:_buttonNumberTitle];
-        
-        [_titleString addAttribute:NSUnderlineStyleAttributeName value:[NSNumber numberWithInteger:NSUnderlineStyleSingle] range:NSMakeRange(0, [_titleString length])];
-        
-        [_buttonNumber setAttributedTitle:_titleString forState:UIControlStateNormal];
     }
+    
+    _buttonNumber.enabled = true;
+    [_buttonNumber addTarget:self action:@selector(callGivenNumber  :event:) forControlEvents:UIControlEventTouchUpInside];
+            
+    NSMutableAttributedString *_titleString = [[NSMutableAttributedString alloc] initWithString:_buttonNumberTitle];
+        
+    [_titleString addAttribute:NSUnderlineStyleAttributeName value:[NSNumber numberWithInteger:NSUnderlineStyleSingle] range:NSMakeRange(0, [_titleString length])];
+        
+    [_buttonNumber setAttributedTitle:_titleString forState:UIControlStateNormal];
     return _cell;
 }
 

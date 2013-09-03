@@ -8,6 +8,8 @@
 
 #import "PublicTransportViewController.h"
 #import "ColorSelection.h"
+#import "UIConstantStrings.h"
+#import "ConnectionDto.h"
 
 @interface PublicTransportViewController ()
 @end
@@ -23,7 +25,13 @@
 @synthesize _toButton;
 
 @synthesize _pubilcTransportOverviewTableCell;
+@synthesize _publicTransportTableView;
+
 @synthesize _publicStopVC;
+
+@synthesize _connectionArray;
+@synthesize _dateFormatter;
+
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -43,20 +51,18 @@
     [super viewDidLoad];
     
     ColorSelection *_zhawColor = [[ColorSelection alloc]init];
+    _connectionArray = [[ConnectionArrayDto alloc]init:nil];
+    _dateFormatter = [[DateFormation alloc] init];
     
-    UIButton *backButton = [UIButton buttonWithType:101];
-    UIView *backButtonView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, backButton.frame.size.width, backButton.frame.size.height)];
+    // title
+    UIBarButtonItem *backButtonItem = [[UIBarButtonItem alloc] initWithTitle:LeftArrowSymbol style:UIBarButtonItemStylePlain target:self action:@selector(moveBackToMenuOverview:)];
     
-    [backButton addTarget:self action:@selector(moveBackToMenuOverview:) forControlEvents:UIControlEventTouchUpInside];
-    [backButton setTitle:@"zurück" forState:UIControlStateNormal];
-    [backButtonView addSubview:backButton];
-    
-    // set buttonview as custom view for bar button item
-    UIBarButtonItem *backButtonItem = [[UIBarButtonItem alloc] initWithCustomView:backButtonView];
+    [backButtonItem setTintColor:_zhawColor._zhawOriginalBlue];
     [_publicTransportNavigationItem setLeftBarButtonItem :backButtonItem animated :true];
+
     
     [_publicTransportNavigationLabel setTextColor:_zhawColor._zhawWhite];
-    _publicTransportNavigationLabel.text = @"ÖV-Fahrplan";
+    _publicTransportNavigationLabel.text = PublicTransportVCTitle;
     _publicTransportNavigationItem.title = @"";
     
     CGRect imageRect = CGRectMake(0, 0, _publicTransportNavigationBar.frame.size.width, _publicTransportNavigationBar.frame.size.height);
@@ -100,7 +106,35 @@
         }
         
     }
+    [self getConnectionArray];
 }
+
+- (void) getConnectionArray
+{
+    
+    //[NSThread detachNewThreadSelector:@selector(threadWaitForChangeActivityIndicator:) toTarget:self withObject:nil];
+    
+
+    
+    //[_waitForChangeActivityIndicator stopAnimating];
+    //_waitForChangeActivityIndicator.hidden = YES;
+    
+    if ([_connectionArray._connections count] == 0)
+    {
+        [_connectionArray getData];
+        
+        //_noConnectionButton.hidden = NO;
+        //_noConnectionLabel.hidden = NO;
+    //}
+    //else
+    //{
+        //_noConnectionButton.hidden = YES;
+        //_noConnectionLabel.hidden = YES;
+
+    }
+    [_publicTransportTableView reloadData];
+}
+
 
 
 - (void)didReceiveMemoryWarning
@@ -120,6 +154,7 @@
     _searchButton = nil;
     _pubilcTransportOverviewTableCell = nil;
     _publicStopVC = nil;
+    _publicTransportTableView = nil;
     [super viewDidUnload];
 }
 
@@ -144,7 +179,7 @@
 
 - (IBAction)startConnectionSearch:(id)sender
 {
-    
+    [self getConnectionArray];
 }
 
 
@@ -157,12 +192,14 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return 1;
+    NSLog(@"numberOfRowsInSection connection count: %i", [_connectionArray._connections count]);
+    return [_connectionArray._connections count] + 1;
 }
 
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    NSUInteger        _cellRow = indexPath.row;
     static NSString *_cellIdentifier = @"PublicTransportOverviewTableCell";
     UITableViewCell *_cell           = [tableView dequeueReusableCellWithIdentifier:_cellIdentifier];
     if (_cell == nil)
@@ -172,26 +209,77 @@
         self._pubilcTransportOverviewTableCell = nil;
     }
     
-    /*
-    UILabel          *_mensaLabel           = (UILabel  *)[_cell viewWithTag:1];
-    UILabel          *_openingTimesLabel    = (UILabel  *)[_cell viewWithTag:2];
-    UILabel          *_lunchTimesLabel      = (UILabel  *)[_cell viewWithTag:3];
+    UILabel          *_startLabel           = (UILabel  *)[_cell viewWithTag:1];
+    UILabel          *_startDateLabel       = (UILabel  *)[_cell viewWithTag:2];
+    UILabel          *_startTimeLabel       = (UILabel  *)[_cell viewWithTag:3];
+    UILabel          *_durationLabel        = (UILabel  *)[_cell viewWithTag:4];
+    UILabel          *_transfersLabel       = (UILabel  *)[_cell viewWithTag:5];
+    UILabel          *_transportationLabel  = (UILabel  *)[_cell viewWithTag:6];
+    UILabel          *_stopLabel            = (UILabel  *)[_cell viewWithTag:7];
+    UILabel          *_stopDateLabel        = (UILabel  *)[_cell viewWithTag:8];
+    UILabel          *_stopTimeLabel        = (UILabel  *)[_cell viewWithTag:9];
+
     
-    _mensaLabel.text = [NSString stringWithFormat:@"%@ (%@)", gastronomyName
-                        ,[_translator getGermanGastronomyTypeTranslation:gastronomyType]
-                        ];
+    NSLog(@" cellForRowAtIndexPath - connection count: %i _cellRow: %i", [_connectionArray._connections count], _cellRow);
     
-    _openingTimesLabel.text = openingTime;
-    _lunchTimesLabel.text   = lunchTime;
-    */
-    
+    // title row
+    if (_cellRow == 0)
+    {
+        _startLabel.text            = @"Bahnhof, Haltestelle";
+        _startDateLabel.text        = @"Datum";
+        _startTimeLabel.text        = @"Zeit";
+        _durationLabel.text         = @"Dauer";
+        _transfersLabel.text        = @"U.";
+        _transportationLabel.text   = @"Reise mit";
+        _stopLabel.text             = @"";
+        _stopDateLabel.text         = @"";
+        _stopTimeLabel.text         = @"";
+    }
+    else
+    {
+        _cellRow = _cellRow-1;
+        if (    [_connectionArray._connections lastObject] != nil
+            &&  [_connectionArray._connections count] > _cellRow)
+        {
+            ConnectionDto *_localConnection = [_connectionArray._connections objectAtIndex:_cellRow];
+            
+            _startLabel.text        = _localConnection._from._station._name;
+            _startDateLabel.text    = [[_dateFormatter _dayFormatter] stringFromDate:_localConnection._from._departureDate];
+            _startTimeLabel.text    = [NSString stringWithFormat:@"ab %@", [[_dateFormatter _timeFormatter] stringFromDate:_localConnection._from._departureTime]];
+            
+            _durationLabel.text     = _localConnection._duration;
+            _transfersLabel.text    = [NSString stringWithFormat:@"%i",_localConnection._transfers];
+            
+            
+            int _productsArrayI;
+            NSString *_productsString;
+            for (_productsArrayI=0; _productsArrayI < [_localConnection._products count]; _productsArrayI++)
+            {
+                NSString *_oneProduct = [_localConnection._products objectAtIndex:_productsArrayI];
+                if (_productsArrayI > 0)
+                {   
+                    _productsString = [NSString stringWithFormat:@"%@, %@",_productsString, _oneProduct];
+                }
+                else
+                {
+                    _productsString = [NSString stringWithFormat:@"%@",_oneProduct];
+                }
+            }
+            _transportationLabel.text = _productsString;
+            
+            _stopLabel.text       = _localConnection._to._station._name;
+            _stopDateLabel.text   = [[_dateFormatter _dayFormatter] stringFromDate:_localConnection._to._arrivalDate];
+            _stopTimeLabel.text   = [NSString stringWithFormat:@"an %@", [[_dateFormatter _timeFormatter] stringFromDate:_localConnection._to._arrivalTime]];
+        }
+    }
+        
     return _cell;
 }
 
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return 35;
+    return 70;
 }
 
 

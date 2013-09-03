@@ -8,6 +8,7 @@
 
 #import "MapsViewController.h"
 #import "ColorSelection.h"
+#import "UIConstantStrings.h"
 
 @interface MapsViewController ()
 
@@ -15,9 +16,9 @@
 
 @implementation MapsViewController
 
-
 @synthesize _technikumVC;
 @synthesize _zurichVC;
+@synthesize _toessfeldVC;
 
 @synthesize _menuTableView;
 
@@ -35,8 +36,32 @@
 {
     [super viewDidLoad];
     
+    // general initialization
     ColorSelection *_zhawColor = [[ColorSelection alloc]init];
+
     
+    // title
+    UIBarButtonItem *backButtonItem = [[UIBarButtonItem alloc] initWithTitle:LeftArrowSymbol style:UIBarButtonItemStylePlain target:self action:@selector(moveBackToMenuOverview:)];
+    [backButtonItem setTintColor:_zhawColor._zhawOriginalBlue];
+    
+    [_titleNavigationItem setLeftBarButtonItem :backButtonItem animated :true];
+    
+    [_titleNavigationLabel setTextColor:_zhawColor._zhawWhite];
+    _titleNavigationLabel.text = MapsVCTitle;
+    _titleNavigationItem.title = @"";
+    
+    CGRect imageRect = CGRectMake(0, 0, _titleNavigationBar.frame.size.width, _titleNavigationBar.frame.size.height);
+    UIGraphicsBeginImageContext(imageRect.size);
+    [_zhawColor._zhawOriginalBlue set];
+    UIRectFill(imageRect);
+    UIImage *aImage = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    [_titleNavigationBar setBackgroundImage:aImage forBarMetrics:UIBarMetricsDefault];
+    
+    [_titleNavigationLabel setBackgroundColor:_zhawColor._zhawOriginalBlue];
+
+    
+    // view controller
     if (_zurichVC == nil)
     {
 		_zurichVC = [[ZurichViewController alloc] init];
@@ -49,30 +74,11 @@
 	}
     _technikumVC.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
     
-    UIButton *backButton = [UIButton buttonWithType:101];
-    UIView *backButtonView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, backButton.frame.size.width, backButton.frame.size.height)];
-    
-    [backButton addTarget:self action:@selector(moveBackToMenuOverview:) forControlEvents:UIControlEventTouchUpInside];
-    [backButton setTitle:@"zurück" forState:UIControlStateNormal];
-    [backButtonView addSubview:backButton];
-    
-    // set buttonview as custom view for bar button item
-    UIBarButtonItem *backButtonItem = [[UIBarButtonItem alloc] initWithCustomView:backButtonView];
-    [_titleNavigationItem setLeftBarButtonItem :backButtonItem animated :true];
-    
-    [_titleNavigationLabel setTextColor:_zhawColor._zhawWhite];
-    _titleNavigationLabel.text = @"Standorte";
-    _titleNavigationItem.title = @"";
-    
-    CGRect imageRect = CGRectMake(0, 0, _titleNavigationBar.frame.size.width, _titleNavigationBar.frame.size.height);
-    UIGraphicsBeginImageContext(imageRect.size);
-    [_zhawColor._zhawOriginalBlue set];
-    UIRectFill(imageRect);
-    UIImage *aImage = UIGraphicsGetImageFromCurrentImageContext();
-    UIGraphicsEndImageContext();
-    [_titleNavigationBar setBackgroundImage:aImage forBarMetrics:UIBarMetricsDefault];
-    
-    [_titleNavigationLabel setBackgroundColor:_zhawColor._zhawOriginalBlue];
+    if (_toessfeldVC == nil)
+    {
+		_toessfeldVC = [[ToessfeldViewController alloc] init];
+	}
+    _toessfeldVC.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
     
 }
 
@@ -101,6 +107,7 @@
 {
     _technikumVC = nil;
     _zurichVC = nil;
+    _toessfeldVC = nil;
     
     _menuTableView = nil;
     
@@ -114,20 +121,13 @@
 //---------- Handling of menu table -----
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return 2;
+    return 3;
 }
 
 // Customize the number of rows in the table view.
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-	if(section == 0)
-    {
-        return 1;
-	}
-	else
-    {
-		return 1;
-	}
+	return 1;
 }
 
 
@@ -139,9 +139,13 @@
     {
         [self presentModalViewController:_technikumVC animated:YES];
     }
-    else
+    if (_cellSelection == 1)
     {
         [self presentModalViewController:_zurichVC animated:YES];
+    }
+    if (_cellSelection == 2)
+    {
+        [self presentModalViewController:_toessfeldVC animated:YES];
     }
 }
 
@@ -149,7 +153,7 @@
 // Customize the appearance of table view cells.
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    NSUInteger        _cellSelection = indexPath.section; //indexPath.section;
+    NSUInteger        _cellSelection = indexPath.section; 
     static NSString *CellIdentifier = @"Cell";
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil)
@@ -158,12 +162,17 @@
     }    
     if (_cellSelection == 0)
     {
-        cell.textLabel.text = @"Winterthur, Technikum";
+        cell.textLabel.text = MapsVCTechnikum;
     }
-    else
+    if (_cellSelection == 1)
     {
-        cell.textLabel.text = @"Zürich, Lagerstrasse";
+        cell.textLabel.text = MapsVCZurich;
     }
+    if (_cellSelection == 2)
+    {
+        cell.textLabel.text = MapsVCToessfeld;
+    }
+
     return cell;
 }
 

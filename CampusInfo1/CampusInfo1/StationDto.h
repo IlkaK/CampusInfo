@@ -13,20 +13,20 @@
 
 @interface StationDto : NSObject
 {
-    int               _stationId;
+    NSString         *_stationId;
     int               _score;    
     NSString         *_name;
     NSString         *_distance;
     CoordinateDto    *_coordinate;
 }
 
-@property (nonatomic, assign) int               _stationId;
+@property (nonatomic, retain) NSString          *_stationId;
 @property (nonatomic, assign) int               _score;
 @property (nonatomic, retain) NSString          *_name;
 @property (nonatomic, retain) NSString          *_distance;
 @property (nonatomic, retain) CoordinateDto     *_coordinate;
 
--(id)                   init: (int) newStationId
+-(id)                   init: (NSString *) newStationId
                    withScore: (int) newScore
                     withName: (NSString *)newName
                 withDistance: (NSString *)newDistance

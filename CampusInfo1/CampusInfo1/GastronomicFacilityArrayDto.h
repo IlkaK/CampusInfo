@@ -22,6 +22,8 @@
     NSString                    *_errorMessage;
     int                         _connectionTrials;
     NSURL                       *_url;
+    
+    BOOL                        _threadDone;
 }
 
 @property (nonatomic, retain) NSMutableArray                    *_gastronomicFacilities;
@@ -33,6 +35,9 @@
 @property (nonatomic, retain) NSString                          *_errorMessage;
 @property (nonatomic, assign) int                               _connectionTrials;
 @property (nonatomic, retain) NSURL                             *_url;
+
+@property (nonatomic, assign) BOOL                              _threadDone;
+
 
 -(id)   init : (NSMutableArray *) newGastronomicFacilities;
 

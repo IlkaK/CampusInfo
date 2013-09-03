@@ -8,6 +8,7 @@
 
 #import "NewsDetailViewController.h"
 #import "ColorSelection.h"
+#import "UIConstantStrings.h"
 
 @interface NewsDetailViewController ()
 
@@ -38,27 +39,19 @@
 {
     [super viewDidLoad];
 
+    // general initialization
     ColorSelection *_zhawColor = [[ColorSelection alloc]init];
-    
-    [_descriptionTitleLabel setBackgroundColor:_zhawColor._zhawOriginalBlue];
-    [_descriptionTitleLabel setTextColor:_zhawColor._zhawWhite];
-    [_dateLabel             setTextColor:_zhawColor._zhawLightGrey];
-    
     _dateFormatter = [[DateFormation alloc] init];
     
-    UIButton *backButton = [UIButton buttonWithType:101];
-    UIView *backButtonView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, backButton.frame.size.width, backButton.frame.size.height)];
+
+    // title
+    UIBarButtonItem *backButtonItem = [[UIBarButtonItem alloc] initWithTitle:LeftArrowSymbol style:UIBarButtonItemStylePlain target:self action:@selector(moveBackToMenuOverview:)];
     
-    [backButton addTarget:self action:@selector(moveBackToMenuOverview:) forControlEvents:UIControlEventTouchUpInside];
-    [backButton setTitle:@"zurück" forState:UIControlStateNormal];
-    [backButtonView addSubview:backButton];
-    
-    // set buttonview as custom view for bar button item
-    UIBarButtonItem *backButtonItem = [[UIBarButtonItem alloc] initWithCustomView:backButtonView];
+    [backButtonItem setTintColor:_zhawColor._zhawOriginalBlue];
     [_titleNavigationItem setLeftBarButtonItem :backButtonItem animated :true];
     
     [_titleNavigationLabel setTextColor:_zhawColor._zhawWhite];
-    _titleNavigationLabel.text = @"News";
+    _titleNavigationLabel.text = NewsDetailVCTitle;
     _titleNavigationItem.title = @"";
     
     CGRect imageRect = CGRectMake(0, 0, _titleNavigationBar.frame.size.width, _titleNavigationBar.frame.size.height);
@@ -70,12 +63,17 @@
     [_titleNavigationBar setBackgroundImage:aImage forBarMetrics:UIBarMetricsDefault];
     [_titleNavigationLabel setBackgroundColor:_zhawColor._zhawOriginalBlue];
     
+    
+    // setting description and date labels
+    [_descriptionTitleLabel setBackgroundColor:_zhawColor._zhawOriginalBlue];
+    [_descriptionTitleLabel setTextColor:_zhawColor._zhawWhite];
+    [_dateLabel             setTextColor:_zhawColor._zhawLightGrey];
+    
 }
 
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
 - (void)viewDidUnload {

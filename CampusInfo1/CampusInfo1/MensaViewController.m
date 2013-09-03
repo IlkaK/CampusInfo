@@ -14,6 +14,7 @@
 #import "LunchTimePlanDto.h"
 #import "WeekdayDto.h"
 #import "ColorSelection.h"
+#import "UIConstantStrings.h"
 
 @implementation MensaViewController
 
@@ -28,7 +29,6 @@
 @synthesize _mensaDetailVC;
 
 @synthesize _dateLabel;
-@synthesize _backgroundImageView;
 @synthesize _noConnectionLabel;
 @synthesize _noConnectionButton;
 
@@ -37,6 +37,8 @@
 @synthesize _titleNavigationBar;
 
 @synthesize _waitForChangeActivityIndicator;
+
+@synthesize _tableRows;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -51,6 +53,8 @@
     _dateFormatter  = [[DateFormation alloc] init];
     _translator     = [[LanguageTranslation alloc] init];
     ColorSelection *_zhawColor = [[ColorSelection alloc]init];
+    
+    _tableRows = 0;
     
     self._gastronomyFacilityArray = [[GastronomicFacilityArrayDto alloc] init:nil];
     
@@ -71,19 +75,13 @@
 	}
     _mensaDetailVC.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
     
-    UIButton *backButton = [UIButton buttonWithType:101];
-    UIView *backButtonView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, backButton.frame.size.width, backButton.frame.size.height)];
+    UIBarButtonItem *backButtonItem = [[UIBarButtonItem alloc] initWithTitle:LeftArrowSymbol style:UIBarButtonItemStylePlain target:self action:@selector(moveBackToMenuOverview:)];
+    [backButtonItem setTintColor:_zhawColor._zhawOriginalBlue];
     
-    [backButton addTarget:self action:@selector(moveBackToMenuOverview:) forControlEvents:UIControlEventTouchUpInside];
-    [backButton setTitle:@"zurück" forState:UIControlStateNormal];
-    [backButtonView addSubview:backButton];
-    
-    // set buttonview as custom view for bar button item
-    UIBarButtonItem *backButtonItem = [[UIBarButtonItem alloc] initWithCustomView:backButtonView];
     [_titleNavigationItem setLeftBarButtonItem :backButtonItem animated :true];
     
     [_titleNavigationLabel setTextColor:_zhawColor._zhawWhite];
-    _titleNavigationLabel.text = @"Mensa";
+    _titleNavigationLabel.text = MensaVCTitle;
     _titleNavigationItem.title = @"";
     
     CGRect imageRect = CGRectMake(0, 0, _titleNavigationBar.frame.size.width, _titleNavigationBar.frame.size.height);
@@ -102,13 +100,11 @@
     [_waitForChangeActivityIndicator setBackgroundColor:_zhawColor._zhawOriginalBlue];
     [self.view bringSubviewToFront:_waitForChangeActivityIndicator];
     
-    
     [self.view bringSubviewToFront:_noConnectionButton];
     [self.view bringSubviewToFront:_noConnectionLabel];
     [self.view bringSubviewToFront:_dateLabel];
     
-    [_backgroundImageView setBackgroundColor:_zhawColor._zhawLighterBlue];
-    [_noConnectionLabel setTextColor:_zhawColor._zhawWhite];
+    //[_noConnectionLabel setTextColor:_zhawColor._zhawWhite];
     [_dateLabel setTextColor:_zhawColor._zhawWhite];
     
     _noConnectionButton.hidden = YES;
@@ -135,7 +131,6 @@
     _waitForChangeActivityIndicator = nil;
     _noConnectionLabel = nil;
     _noConnectionButton = nil;
-    _backgroundImageView = nil;
     [super viewDidUnload];
 }
 
@@ -166,8 +161,7 @@
         [_gastronomyFacilityArray getData];
         //_actualTrials++;
     //}
-    
-    [_mensaOverviewTable reloadData];
+
     
     [_waitForChangeActivityIndicator stopAnimating];
     _waitForChangeActivityIndicator.hidden = YES;
@@ -179,8 +173,12 @@
     }
     else
     {
-        _noConnectionButton.hidden = YES;
-        _noConnectionLabel.hidden = YES;
+        //if (_gastronomyFacilityArray._threadDone == YES)
+        //{
+            _noConnectionButton.hidden = YES;
+            _noConnectionLabel.hidden = YES;
+            [_mensaOverviewTable reloadData];
+        //}
     }
 
 }
@@ -194,7 +192,14 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    [self getGastronomyFacilityArray];
+    if ([_gastronomyFacilityArray._gastronomicFacilities count] == 0)
+    {
+        [self getGastronomyFacilityArray];
+    }
+    if (_tableRows < [_gastronomyFacilityArray._gastronomicFacilities count])
+    {
+        [_mensaOverviewTable reloadData];
+    }
 }
 
 
@@ -202,20 +207,22 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    if ([_gastronomyFacilityArray._gastronomicFacilities  lastObject] == nil)
-    {
-        return 1;
-    }
-    else
-    {
-        return [_gastronomyFacilityArray._gastronomicFacilities count];
-    }
+    return 1;
 }
 
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return 1;
+    if ([_gastronomyFacilityArray._gastronomicFacilities  lastObject] == nil)
+    {
+        return 0;
+    }
+    else
+    {
+        _tableRows = [_gastronomyFacilityArray._gastronomicFacilities count];
+        return [_gastronomyFacilityArray._gastronomicFacilities count];
+    }
+
 }
 
 - (UITableViewCell *)showGastronomy:(UITableView *)actualTableView
@@ -250,7 +257,7 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    NSUInteger    _cellSelection = indexPath.section;
+    NSUInteger    _cellRow = indexPath.row;
     NSString     *_gastronomyName;
     NSString     *_gastronomyType;
     NSString     *_openingTime;
@@ -274,14 +281,17 @@
     WeekdayDto              *_oneWeekdayForOpeningTimePlan;
     WeekdayDto              *_oneWeekdayForLunchTimePlan;
     
-    //NSLog(@"_gastronomyArray count %i cellSelection %i", [_gastronomyArray count], _cellSelection);
     
     if (    [_gastronomyFacilityArray._gastronomicFacilities lastObject] != nil
-        &&  [_gastronomyFacilityArray._gastronomicFacilities count] > _cellSelection)
+        &&  [_gastronomyFacilityArray._gastronomicFacilities count] > _cellRow)
     {
-        GastronomicFacilityDto *_oneGastronomy = [_gastronomyFacilityArray._gastronomicFacilities objectAtIndex:_cellSelection];
+        //NSLog(@"xx _gastronomyArray count %i _cellRow %i", [_gastronomyFacilityArray._gastronomicFacilities count], _cellRow);
+        GastronomicFacilityDto *_oneGastronomy = [_gastronomyFacilityArray._gastronomicFacilities objectAtIndex:_cellRow];
         _gastronomyName = _oneGastronomy._name;
         _gastronomyType = _oneGastronomy._type;
+        
+        //NSLog(@"xxxx _gastronomyName %@ _gastronomyType %@", _gastronomyName, _gastronomyType);
+        
         HolidayDto *_oneHoliday;
         
         if ([_oneGastronomy._holidays lastObject] != nil)
@@ -403,7 +413,7 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    NSUInteger    _cellSelection = indexPath.section;
+    NSUInteger    _cellSelection = indexPath.row;
     GastronomicFacilityDto *_oneGastronomy = [_gastronomyFacilityArray._gastronomicFacilities objectAtIndex:_cellSelection];
     
     //NSString *_actualDateString = [[_dateFormatter _dayFormatter] stringFromDate:_actualDate];

@@ -26,8 +26,6 @@
     IBOutlet UINavigationBar            *_titleNavigationBar;
     IBOutlet UINavigationItem           *_titleNavigationItem;
     IBOutlet UILabel                    *_titleNavigationLabel;
-    
-    IBOutlet UIImageView                *_backgroundImageView;
 }
 
 
@@ -42,8 +40,6 @@
 
 @property (nonatomic, retain) IBOutlet UIActivityIndicatorView  *_waitForChangeActivityIndicator;
 @property (nonatomic, retain) IBOutlet UISegmentedControl       *_chooseDateSegmentedControl;
-
-@property (nonatomic, retain) IBOutlet UIImageView              *_backgroundImageView;
 
 
 - (IBAction)setPickerToToday:(id)sender;

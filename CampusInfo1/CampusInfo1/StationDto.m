@@ -16,7 +16,7 @@
 @synthesize _score;
 @synthesize _stationId;
 
--(id)                   init: (int) newStationId
+-(id)                   init: (NSString *) newStationId
                    withScore: (int) newScore
                     withName: (NSString *)newName
                 withDistance: (NSString *)newDistance
@@ -37,7 +37,7 @@
 
 - (StationDto *)getStation:(NSDictionary *)stationDictionary
 {
-    int             _localStationId;
+    NSString        *_localStationId;
     int             _localScore;
     NSString        *_localName;
     NSString        *_localDistance;
@@ -51,7 +51,7 @@
             
             if ([stationKey isEqualToString:@"id"])
             {
-                _localStationId = [[stationDictionary objectForKey:stationKey] intValue];
+                _localStationId = [stationDictionary objectForKey:stationKey];
                 //NSLog(@"StationDto _localStationId: %i", _localStationId);
             }
 

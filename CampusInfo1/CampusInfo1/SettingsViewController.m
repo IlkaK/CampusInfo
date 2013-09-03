@@ -8,6 +8,7 @@
 
 #import "SettingsViewController.h"
 #import "ColorSelection.h"
+#import "UIConstantStrings.h"
 
 @interface SettingsViewController ()
 
@@ -25,9 +26,6 @@
 @synthesize _lecturers;
 @synthesize _students;
 
-@synthesize _timeTableVC;
-@synthesize _menuOverviewVC;
-
 @synthesize _titleNavigationLabel;
 @synthesize _titleNavigationItem;
 @synthesize _titleNavigationBar;
@@ -43,6 +41,7 @@
 {
     [super viewDidLoad];
     
+    // general initializations
     ColorSelection *_zhawColor = [[ColorSelection alloc]init];
 
     _students = [[StudentsDto alloc]init];
@@ -51,38 +50,16 @@
     self._acronymTextField.delegate = self;    
     _autocomplete = [[Autocomplete alloc] initWithArray:_students._studentArray];
 	_acronymTextField.autocorrectionType = UITextAutocorrectionTypeNo;
-    
-    NSUserDefaults *_acronymUserDefaults = [NSUserDefaults standardUserDefaults];
-    _acronymTextField.text                = [_acronymUserDefaults stringForKey:@"TimeTableAcronym"];
 
-    [self._acronymAutocompleteTableView setSeparatorStyle:UITableViewCellSeparatorStyleNone];    
-        
-    // ----- TIME TABLE PAGE -----
-    if (_timeTableVC == nil)
-    {
-		_timeTableVC = [[TimeTableOverviewController alloc] init];
-	}
-    _timeTableVC.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
     
-    if (_menuOverviewVC == nil)
-    {
-		_menuOverviewVC = [[MenuOverviewController alloc] init];
-	}
-    _menuOverviewVC.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
+    // title
+    UIBarButtonItem *backButtonItem = [[UIBarButtonItem alloc] initWithTitle:LeftArrowSymbol style:UIBarButtonItemStylePlain target:self action:@selector(moveBackToMenuOverview:)];
     
-    UIButton *backButton = [UIButton buttonWithType:101];
-    UIView *backButtonView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, backButton.frame.size.width, backButton.frame.size.height)];
-    
-    [backButton addTarget:self action:@selector(moveBackToMenuOverview:) forControlEvents:UIControlEventTouchUpInside];
-    [backButton setTitle:@"zurück" forState:UIControlStateNormal];
-    [backButtonView addSubview:backButton];
-    
-    // set buttonview as custom view for bar button item
-    UIBarButtonItem *backButtonItem = [[UIBarButtonItem alloc] initWithCustomView:backButtonView];
+    [backButtonItem setTintColor:_zhawColor._zhawOriginalBlue];
     [_titleNavigationItem setLeftBarButtonItem :backButtonItem animated :true];
     
     [_titleNavigationLabel setTextColor:_zhawColor._zhawWhite];
-    _titleNavigationLabel.text = @"Einstellungen";
+    _titleNavigationLabel.text = SettingsVCTitle;
     _titleNavigationItem.title = @"";
     
     CGRect imageRect = CGRectMake(0, 0, _titleNavigationBar.frame.size.width, _titleNavigationBar.frame.size.height);
@@ -94,7 +71,13 @@
     [_titleNavigationBar setBackgroundImage:aImage forBarMetrics:UIBarMetricsDefault];
     
     [_titleNavigationLabel setBackgroundColor:_zhawColor._zhawOriginalBlue];
+
     
+    // user defaults and acronym text field
+    NSUserDefaults *_acronymUserDefaults = [NSUserDefaults standardUserDefaults];
+    _acronymTextField.text                = [_acronymUserDefaults stringForKey:TimeTableAcronym];
+    [self._acronymAutocompleteTableView setSeparatorStyle:UITableViewCellSeparatorStyleNone];        
+        
 }
 
 
@@ -157,8 +140,6 @@
     _acronymTextField = nil;
     _acronymAutocompleteTableView = nil;
     _timetableSettingsTitle = nil;
-    _timeTableVC = nil;
-    _menuOverviewVC = nil;
     _titleNavigationBar = nil;
     _titleNavigationItem = nil;
     _titleNavigationLabel = nil;
@@ -172,11 +153,11 @@
     
     if ([_localType compare: @"empty" ] != NSOrderedSame)
     {
-        [[NSNotificationCenter defaultCenter] postNotificationName:@"SearchType" object:_localType];
-        [[NSNotificationCenter defaultCenter] postNotificationName:@"SearchText" object:_localAcronym];
+        [[NSNotificationCenter defaultCenter] postNotificationName:SettingsVCSearchType object:_localType];
+        [[NSNotificationCenter defaultCenter] postNotificationName:SettingsVCSearchText object:_localAcronym];
         
         NSUserDefaults *_acronymUserDefaults = [NSUserDefaults standardUserDefaults];
-        [_acronymUserDefaults setObject:_localAcronym forKey:@"TimeTableAcronym"];
+        [_acronymUserDefaults setObject:_localAcronym forKey:TimeTableAcronym];
         [_acronymUserDefaults synchronize];
     }
     
@@ -203,7 +184,7 @@
     {
         if ([[_newAcronym stringByTrimmingCharactersInSet:alphabecticalAndNumberSet] isEqualToString: _newAcronym])
         {
-            _localType = @"Student";
+            _localType = TimeTableTypeStudent;
         }
     }
     else
@@ -213,7 +194,7 @@
             
             if ([[_newAcronym stringByTrimmingCharactersInSet:alphabecticalSet] isEqualToString: _newAcronym])
             {
-                _localType = @"Dozent";
+                _localType = TimeTableTypeDozent;
             }
         }
     }

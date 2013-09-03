@@ -26,6 +26,7 @@
 - (id) init;
 
 - (NSDate *) parseDate:(NSString *)dateString;
+- (NSDate *) parseTime:(NSString *)dateString;
 - (NSDate *) parseDateFromXMLString:(NSString *)dateString;
 
 @end

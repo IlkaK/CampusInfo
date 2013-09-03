@@ -19,6 +19,8 @@
 @synthesize _generalDictionary;
 @synthesize _url;
 
+@synthesize _threadDone;
+
 
 -(id) init:(NSMutableArray *) newGastronomicFacilities
 {
@@ -42,6 +44,8 @@
     _asyncTimeTableRequest._timeTableAsynchRequestDelegate = self;
     
     _dateFormatter  = [[DateFormation alloc] init];
+    
+    _threadDone = NO;
     return self;
 }
 
@@ -63,7 +67,7 @@
         //NSLog(@"dataDownloadDidFinish for GastronomyFacilityArrayDto: %@", _receivedString);
         
         NSError *_error;
-        _gastronomicFacilities = [[NSMutableArray alloc] init];
+        //_gastronomicFacilities = [[NSMutableArray alloc] init];
         
         //if (_generalDictionary == nil)
         //{
@@ -98,7 +102,7 @@
                     {
                         _gastronomicArray = [_generalDictionary objectForKey:generalKey];
                     
-                        //NSLog(@"count of _gastronomicArray: %i", [_gastronomicArray count]);
+                        //NSLog(@"vorher count of _gastronomicArray: %i", [_gastronomicArray count]);
                         
                         for (_gastronomicArrayI = 0; _gastronomicArrayI < [_gastronomicArray count]; _gastronomicArrayI++)
                         {
@@ -117,7 +121,7 @@
 
 -(void)threadDone:(NSNotification*)arg
 {
-    //NSLog(@"Thread exiting");
+    _threadDone = YES;
 }
 
 
@@ -160,6 +164,7 @@
 
 -(void) getData
 {
+    _threadDone = NO;
     //self._generalDictionary = nil;
     self._generalDictionary = [self getDictionaryFromUrl];
     

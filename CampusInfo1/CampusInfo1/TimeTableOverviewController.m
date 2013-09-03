@@ -17,6 +17,7 @@
 #import "RoomDto.h"
 #import "PersonDto.h"
 #import "ScheduleEventRealizationDto.h"
+#import "UIConstantStrings.h"
 
 
 @implementation TimeTableOverviewController
@@ -397,7 +398,7 @@
         self._ownStoredAcronymType           = [self getAcronymType:_ownStoredAcronymString];
         
         NSUserDefaults *_acronymUserDefaults = [NSUserDefaults standardUserDefaults];
-        [_acronymUserDefaults setObject:_ownStoredAcronymString forKey:@"TimeTableAcronym"];
+        [_acronymUserDefaults setObject:_ownStoredAcronymString forKey:TimeTableAcronym];
         [_acronymUserDefaults synchronize];
        
 
@@ -468,6 +469,7 @@
 
     [super viewDidLoad];
     
+    // general initializer
     _translator     = [[LanguageTranslation alloc] init];
     _dateFormatter  = [[DateFormation alloc] init];
     _zhawColor      = [[ColorSelection alloc] init];
@@ -480,24 +482,18 @@
     // clear border colour between table cells
     _timeTable.separatorColor = _zhawColor._zhawLightGrey;
     
+    
     // title
-     
     [_acronymLabel setBackgroundColor:_zhawColor._zhawOriginalBlue];
     [_acronymLabel setTextColor:_zhawColor._zhawWhite];
     
-    UIButton *backButton = [UIButton buttonWithType:101];
-    UIView *backButtonView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, backButton.frame.size.width, backButton.frame.size.height)];
+    UIBarButtonItem *backButtonItem = [[UIBarButtonItem alloc] initWithTitle:LeftArrowSymbol style:UIBarButtonItemStylePlain target:self action:@selector(moveBackToMenuOverview:)];
+    [backButtonItem setTintColor:_zhawColor._zhawOriginalBlue];
     
-    [backButton addTarget:self action:@selector(moveBackToMenuOverview:) forControlEvents:UIControlEventTouchUpInside];
-    [backButton setTitle:@"zurück" forState:UIControlStateNormal];
-    [backButtonView addSubview:backButton];
-    
-    // set buttonview as custom view for bar button item
-    UIBarButtonItem *backButtonItem = [[UIBarButtonItem alloc] initWithCustomView:backButtonView];
     [_titleNavigationItem setLeftBarButtonItem :backButtonItem animated :true];
     
     [_titleNavigationLabel setTextColor:_zhawColor._zhawWhite];
-    _titleNavigationLabel.text = @"Stundenplan";
+    _titleNavigationLabel.text = TimeTableOverVCTitle;
     _titleNavigationItem.title = @"";
     
     CGRect imageRect = CGRectMake(0, 0, _titleNavigationBar.frame.size.width, _titleNavigationBar.frame.size.height);
@@ -511,26 +507,37 @@
     [_titleNavigationLabel setBackgroundColor:_zhawColor._zhawOriginalBlue];
     
     
-    //----- Navigation Bar ----
+    // segmented controls below the title
+    [_timeTableSegmentedControl setTintColor:_zhawColor._zhawOriginalBlue];
+    [self.view bringSubviewToFront:_timeTableSegmentedControl];
+    //[self.view setBackgroundColor:_zhawColor._zhawLighterBlue];
+    
+    // set activity indicator
+    _waitForLoadingActivityIndicator.hidesWhenStopped = YES;
+    _waitForLoadingActivityIndicator.hidden = YES;
+    [_waitForLoadingActivityIndicator setBackgroundColor:_zhawColor._zhawOriginalBlue];
+    [self.view bringSubviewToFront:_waitForLoadingActivityIndicator];
+    
+    
+    //----- Navigation Bar for date ----
     // set current day
     [self setTitleToActualDate];
     
     // set day navigator
-    UIImage *_leftButtonImage  = [UIImage imageNamed:@"arrowLeft_small.png"];
-    UIImage *_rightButtonImage = [UIImage imageNamed:@"arrowRight_small.png"];
-    
-    UIBarButtonItem *_leftButton  = [[UIBarButtonItem alloc] initWithImage: _leftButtonImage
-                                                                              style:UIBarButtonItemStylePlain
-                                                                            target:self
-                                                                            action:@selector(dayBefore:)];
-    UIBarButtonItem *_rightButton = [[UIBarButtonItem alloc] initWithImage: _rightButtonImage
+    UIBarButtonItem *_rightButton = [[UIBarButtonItem alloc] initWithTitle:RightArrowSymbol
                                                                      style:UIBarButtonItemStylePlain
                                                                     target:self
                                                                     action:@selector(dayAfter:)];
+    UIBarButtonItem *_leftButton = [[UIBarButtonItem alloc] initWithTitle:LeftArrowSymbol
+                                                                    style:UIBarButtonItemStylePlain
+                                                                   target:self
+                                                                   action:@selector(dayBefore:)];
+    [_rightButton setTintColor:_zhawColor._zhawOriginalBlue];
+    [_leftButton  setTintColor:_zhawColor._zhawOriginalBlue];
     [_dayNavigator setLeftBarButtonItem :_leftButton animated :true];
     [_dayNavigator setRightBarButtonItem:_rightButton animated:true];
     
-     [_dateButton useAlertStyle];
+    [_dateButton useAlertStyle];
 
     // ----- DETAIL PAGE -----
     if (_detailsVC == nil)
@@ -567,11 +574,11 @@
     //----- SET ACRONYM WHEN COMING FROM SEARCH TAB -----
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(handleSearchType:)
-                                                 name:@"SearchType"
+                                                 name:SettingsVCSearchType
                                                object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(handleSearchText:)
-                                                 name:@"SearchText"
+                                                 name:SettingsVCSearchText
                                                object:nil];
 
     
@@ -579,6 +586,10 @@
     [_noConnectionButton useAlertStyle];
     _noConnectionButton.hidden = YES;
     _noConnectionLabel.hidden = YES;
+     [self.view bringSubviewToFront:_noConnectionButton];
+     [self.view bringSubviewToFront:_noConnectionLabel];
+     
+     
     //[_noConnectionButton setBackgroundColor:_zhawColor._zhawOriginalBlue];
     //[_noConnectionButton setTintColor:_zhawColor._zhawOriginalBlue];
     
@@ -591,16 +602,7 @@
     [_leftSwipe setDirection:(UISwipeGestureRecognizerDirectionLeft)];
     [[self view] addGestureRecognizer:_leftSwipe];
     
-    // set default values for spinner/activity indicator
-    _waitForLoadingActivityIndicator.hidesWhenStopped = YES;
-    _waitForLoadingActivityIndicator.hidden = YES;
-    [_waitForLoadingActivityIndicator setBackgroundColor:_zhawColor._zhawOriginalBlue];
-    [self.view bringSubviewToFront:_waitForLoadingActivityIndicator];
     
-    [self.view setBackgroundColor:_zhawColor._zhawLighterBlue];
-    
-
-    [_timeTableSegmentedControl setTintColor:_zhawColor._zhawOriginalBlue];
     
 }
 
@@ -677,7 +679,7 @@
                 if (self._ownStoredAcronymString == nil || [_ownStoredAcronymString length] == 0)
                 {
                     NSUserDefaults *_acronymUserDefaults = [NSUserDefaults standardUserDefaults];
-                    self._ownStoredAcronymString         = [_acronymUserDefaults stringForKey:@"TimeTableAcronym"];
+                    self._ownStoredAcronymString         = [_acronymUserDefaults stringForKey:TimeTableAcronym];
                     self._ownStoredAcronymType           = [self getAcronymType:_ownStoredAcronymString];
                 }
                 self._actualShownAcronymString       = self._ownStoredAcronymString;
@@ -756,7 +758,7 @@
     [self becomeFirstResponder];
     
     NSUserDefaults *_acronymUserDefaults = [NSUserDefaults standardUserDefaults];
-    self._ownStoredAcronymString         = [_acronymUserDefaults stringForKey:@"TimeTableAcronym"];
+    self._ownStoredAcronymString         = [_acronymUserDefaults stringForKey:TimeTableAcronym];
     self._ownStoredAcronymType           = [self getAcronymType:_ownStoredAcronymString];
     
     // go to acronym page to enforce setting an acronym
@@ -811,7 +813,7 @@
             }
             
             NSUserDefaults *_acronymUserDefaults = [NSUserDefaults standardUserDefaults];
-            [_acronymUserDefaults setObject:_actualShownAcronymString forKey:@"TimeTableAcronym"];
+            [_acronymUserDefaults setObject:_actualShownAcronymString forKey:TimeTableAcronym];
             [_acronymUserDefaults synchronize];
         }
         // NSLog(@"ok button is pushed: %@ %@", _textField.text, _acronymString);
@@ -900,11 +902,12 @@
     _waitForLoadingActivityIndicator = nil;
 
     _timeTableSegmentedControl = nil;
+
+    _dateButton = nil;
     
     _titleNavigationBar = nil;
     _titleNavigationItem = nil;
     _titleNavigationLabel = nil;
-    _dateButton = nil;
     _fourSlotsFourRoomsTableCell = nil;
     _nineSlotsThreeRoomsTableCell = nil;
     _sevenSlotsEightRoomsTableCell = nil;

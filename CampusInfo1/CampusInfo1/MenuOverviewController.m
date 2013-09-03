@@ -8,6 +8,7 @@
 
 #import "MenuOverviewController.h"
 #import "ColorSelection.h"
+#import "UIConstantStrings.h"
 
 @interface MenuOverviewController ()
 
@@ -219,7 +220,7 @@
         UIButton *_timeTableTitleButton  = (UIButton *) [_cell viewWithTag:2];
         _timeTableTitleButton.enabled = true;
         [_timeTableTitleButton addTarget:self action:@selector(moveToTimeTable:event:) forControlEvents:UIControlEventTouchUpInside];
-        NSMutableAttributedString *_timeTableTitleString = [[NSMutableAttributedString alloc] initWithString:@"Stundenplan"];
+        NSMutableAttributedString *_timeTableTitleString = [[NSMutableAttributedString alloc] initWithString:TimeTableOverVCTitle];
         [_timeTableTitleString addAttribute:NSForegroundColorAttributeName value:_fontColor range:NSMakeRange(0, [_timeTableTitleString length])];
         [_timeTableTitleButton setAttributedTitle:_timeTableTitleString forState:UIControlStateNormal];
         
@@ -230,7 +231,7 @@
         UIButton *_mensaTitleButton  = (UIButton *) [_cell viewWithTag:4];
         _mensaTitleButton.enabled = true;
         [_mensaTitleButton addTarget:self action:@selector(moveToMensa:event:) forControlEvents:UIControlEventTouchUpInside];
-        NSMutableAttributedString *_mensaTitleString = [[NSMutableAttributedString alloc] initWithString:@"Mensa"];
+        NSMutableAttributedString *_mensaTitleString = [[NSMutableAttributedString alloc] initWithString:MensaVCTitle];
         [_mensaTitleString addAttribute:NSForegroundColorAttributeName value:_fontColor range:NSMakeRange(0, [_mensaTitleString length])];
         [_mensaTitleButton setAttributedTitle:_mensaTitleString forState:UIControlStateNormal];
         
@@ -241,7 +242,7 @@
         UIButton *_oevTitleButton  = (UIButton *) [_cell viewWithTag:6];
         _oevTitleButton.enabled = true;
         [_oevTitleButton addTarget:self action:@selector(moveToOev:event:) forControlEvents:UIControlEventTouchUpInside];
-        NSMutableAttributedString *_oevTitleString = [[NSMutableAttributedString alloc] initWithString:@"ÖV"];
+        NSMutableAttributedString *_oevTitleString = [[NSMutableAttributedString alloc] initWithString:PublicTransportVCTitle];
         [_oevTitleString addAttribute:NSForegroundColorAttributeName value:_fontColor range:NSMakeRange(0, [_oevTitleString length])];
         [_oevTitleButton setAttributedTitle:_oevTitleString forState:UIControlStateNormal];
         
@@ -268,31 +269,31 @@
         UIButton *_contactsTitleButton  = (UIButton *) [_cell viewWithTag:2];
         _contactsTitleButton.enabled = true;
         [_contactsTitleButton addTarget:self action:@selector(moveToContacts:event:) forControlEvents:UIControlEventTouchUpInside];
-        NSMutableAttributedString *_contactsTitleString = [[NSMutableAttributedString alloc] initWithString:@"Kontakte"];
+        NSMutableAttributedString *_contactsTitleString = [[NSMutableAttributedString alloc] initWithString:ContactsOverVCTitle];
         [_contactsTitleString addAttribute:NSForegroundColorAttributeName value:_fontColor range:NSMakeRange(0, [_contactsTitleString length])];
         [_contactsTitleButton setAttributedTitle:_contactsTitleString forState:UIControlStateNormal];
 
-        // news
-        UIButton *_newsIconButton  = (UIButton *) [_cell viewWithTag:3];
-        _newsIconButton.enabled = true;
-        [_newsIconButton addTarget:self action:@selector(moveToNews:event:) forControlEvents:UIControlEventTouchUpInside];
-        UIButton *_newsTitleButton  = (UIButton *) [_cell viewWithTag:4];
-        _newsTitleButton.enabled = true;
-        [_newsTitleButton addTarget:self action:@selector(moveToNews:event:) forControlEvents:UIControlEventTouchUpInside];
-        NSMutableAttributedString *_newsTitleString = [[NSMutableAttributedString alloc] initWithString:@"News"];
-        [_newsTitleString addAttribute:NSForegroundColorAttributeName value:_fontColor range:NSMakeRange(0, [_newsTitleString length])];
-        [_newsTitleButton setAttributedTitle:_newsTitleString forState:UIControlStateNormal];
+        // card
+        UIButton *_cardIconButton  = (UIButton *) [_cell viewWithTag:3];
+        _cardIconButton.enabled = true;
+        [_cardIconButton addTarget:self action:@selector(moveToMaps:event:) forControlEvents:UIControlEventTouchUpInside];
+        UIButton *_cardTitleButton  = (UIButton *) [_cell viewWithTag:4];
+        _cardTitleButton.enabled = true;
+        [_cardTitleButton addTarget:self action:@selector(moveToMaps:event:) forControlEvents:UIControlEventTouchUpInside];
+        NSMutableAttributedString *_cardTitleString = [[NSMutableAttributedString alloc] initWithString:MapsVCTitle];
+        [_cardTitleString addAttribute:NSForegroundColorAttributeName value:_fontColor range:NSMakeRange(0, [_cardTitleString length])];
+        [_cardTitleButton setAttributedTitle:_cardTitleString forState:UIControlStateNormal];
         
-        // events
-        UIButton *_eventsIconButton  = (UIButton *) [_cell viewWithTag:5];
-        _eventsIconButton.enabled = true;
-        [_eventsIconButton addTarget:self action:@selector(moveToEvents:event:) forControlEvents:UIControlEventTouchUpInside];
-        UIButton *_eventsTitleButton  = (UIButton *) [_cell viewWithTag:6];
-        _eventsTitleButton.enabled = true;
-        [_eventsTitleButton addTarget:self action:@selector(moveToEvents:event:) forControlEvents:UIControlEventTouchUpInside];
-        NSMutableAttributedString *_eventsTitleString = [[NSMutableAttributedString alloc] initWithString:@"Events"];
-        [_eventsTitleString addAttribute:NSForegroundColorAttributeName value:_fontColor range:NSMakeRange(0, [_eventsTitleString length])];
-        [_eventsTitleButton setAttributedTitle:_eventsTitleString forState:UIControlStateNormal];
+        // social Media
+        UIButton *_socialMediaIconButton  = (UIButton *) [_cell viewWithTag:5];
+        _socialMediaIconButton.enabled = true;
+        [_socialMediaIconButton addTarget:self action:@selector(moveToSocialMedia:event:) forControlEvents:UIControlEventTouchUpInside];
+        UIButton *_socialMediaTitleButton  = (UIButton *) [_cell viewWithTag:6];
+        _socialMediaTitleButton.enabled = true;
+        [_socialMediaTitleButton addTarget:self action:@selector(moveToSocialMedia:event:) forControlEvents:UIControlEventTouchUpInside];
+        NSMutableAttributedString *_socialMediaTitleString = [[NSMutableAttributedString alloc] initWithString:SocialMediaVCTitle];
+        [_socialMediaTitleString addAttribute:NSForegroundColorAttributeName value:_fontColor range:NSMakeRange(0, [_socialMediaTitleString length])];
+        [_socialMediaTitleButton setAttributedTitle:_socialMediaTitleString forState:UIControlStateNormal];
         
         _cell.contentView.backgroundColor = _cellBackgroundColor;
         _cell.backgroundColor = _cell.contentView.backgroundColor;
@@ -310,38 +311,38 @@
             self._menuNewsTableCell = nil;
         }
         
-        // social Media
-        UIButton *_socialMediaIconButton  = (UIButton *) [_cell viewWithTag:1];
-        _socialMediaIconButton.enabled = true;
-        [_socialMediaIconButton addTarget:self action:@selector(moveToSocialMedia:event:) forControlEvents:UIControlEventTouchUpInside];
-        UIButton *_socialMediaTitleButton  = (UIButton *) [_cell viewWithTag:2];
-        _socialMediaTitleButton.enabled = true;
-        [_socialMediaTitleButton addTarget:self action:@selector(moveToSocialMedia:event:) forControlEvents:UIControlEventTouchUpInside];
-        NSMutableAttributedString *_socialMediaTitleString = [[NSMutableAttributedString alloc] initWithString:@"Social Media"];
-        [_socialMediaTitleString addAttribute:NSForegroundColorAttributeName value:_fontColor range:NSMakeRange(0, [_socialMediaTitleString length])];
-        [_socialMediaTitleButton setAttributedTitle:_socialMediaTitleString forState:UIControlStateNormal];
-        
         // settings
-        UIButton *_settingsIconButton  = (UIButton *) [_cell viewWithTag:3];
+        UIButton *_settingsIconButton  = (UIButton *) [_cell viewWithTag:1];
         _settingsIconButton.enabled = true;
         [_settingsIconButton addTarget:self action:@selector(moveToSettings:event:) forControlEvents:UIControlEventTouchUpInside];
-        UIButton *_settingsTitleButton  = (UIButton *) [_cell viewWithTag:4];
+        UIButton *_settingsTitleButton  = (UIButton *) [_cell viewWithTag:2];
         _settingsTitleButton.enabled = true;
         [_settingsTitleButton addTarget:self action:@selector(moveToSettings:event:) forControlEvents:UIControlEventTouchUpInside];
-        NSMutableAttributedString *_settingsTitleString = [[NSMutableAttributedString alloc] initWithString:@"Einstellungen"];
+        NSMutableAttributedString *_settingsTitleString = [[NSMutableAttributedString alloc] initWithString:SettingsVCTitle];
         [_settingsTitleString addAttribute:NSForegroundColorAttributeName value:_fontColor range:NSMakeRange(0, [_settingsTitleString length])];
         [_settingsTitleButton setAttributedTitle:_settingsTitleString forState:UIControlStateNormal];
         
-        // card
-        UIButton *_cardIconButton  = (UIButton *) [_cell viewWithTag:5];
-        _cardIconButton.enabled = true;
-        [_cardIconButton addTarget:self action:@selector(moveToMaps:event:) forControlEvents:UIControlEventTouchUpInside];
-        UIButton *_cardTitleButton  = (UIButton *) [_cell viewWithTag:6];
-        _cardTitleButton.enabled = true;
-        [_cardTitleButton addTarget:self action:@selector(moveToMaps:event:) forControlEvents:UIControlEventTouchUpInside];
-        NSMutableAttributedString *_cardTitleString = [[NSMutableAttributedString alloc] initWithString:@"Standorte"];
-        [_cardTitleString addAttribute:NSForegroundColorAttributeName value:_fontColor range:NSMakeRange(0, [_cardTitleString length])];
-        [_cardTitleButton setAttributedTitle:_cardTitleString forState:UIControlStateNormal];
+        // news
+        UIButton *_newsIconButton  = (UIButton *) [_cell viewWithTag:3];
+        _newsIconButton.enabled = true;
+        [_newsIconButton addTarget:self action:@selector(moveToNews:event:) forControlEvents:UIControlEventTouchUpInside];
+        UIButton *_newsTitleButton  = (UIButton *) [_cell viewWithTag:4];
+        _newsTitleButton.enabled = true;
+        [_newsTitleButton addTarget:self action:@selector(moveToNews:event:) forControlEvents:UIControlEventTouchUpInside];
+        NSMutableAttributedString *_newsTitleString = [[NSMutableAttributedString alloc] initWithString:NewsVCSmallTitle];
+        [_newsTitleString addAttribute:NSForegroundColorAttributeName value:_fontColor range:NSMakeRange(0, [_newsTitleString length])];
+        [_newsTitleButton setAttributedTitle:_newsTitleString forState:UIControlStateNormal];
+        
+        // events
+        UIButton *_eventsIconButton  = (UIButton *) [_cell viewWithTag:5];
+        _eventsIconButton.enabled = true;
+        [_eventsIconButton addTarget:self action:@selector(moveToEvents:event:) forControlEvents:UIControlEventTouchUpInside];
+        UIButton *_eventsTitleButton  = (UIButton *) [_cell viewWithTag:6];
+        _eventsTitleButton.enabled = true;
+        [_eventsTitleButton addTarget:self action:@selector(moveToEvents:event:) forControlEvents:UIControlEventTouchUpInside];
+        NSMutableAttributedString *_eventsTitleString = [[NSMutableAttributedString alloc] initWithString:EventsVCSmallTitle];
+        [_eventsTitleString addAttribute:NSForegroundColorAttributeName value:_fontColor range:NSMakeRange(0, [_eventsTitleString length])];
+        [_eventsTitleButton setAttributedTitle:_eventsTitleString forState:UIControlStateNormal];
         
         _cell.contentView.backgroundColor = _cellBackgroundColor;
         _cell.backgroundColor = _cell.contentView.backgroundColor;

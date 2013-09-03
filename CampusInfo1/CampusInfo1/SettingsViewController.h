@@ -11,11 +11,6 @@
 #import <LanguageTranslation.h>
 #import <StudentsDto.h>
 #import <LecturersDto.h>
-#import <TimeTableOverviewController.h>
-#import <MenuOverviewController.h>
-
-@class TimeTableOverviewController;
-@class MenuOverviewController;
 
 @protocol SettingsViewDelegate <NSObject>
 
@@ -31,9 +26,6 @@
     Autocomplete                            *_autocomplete;
     StudentsDto                             *_students;
     LecturersDto                            *_lecturers;
-    
-    IBOutlet TimeTableOverviewController    *_timeTableVC;
-    IBOutlet MenuOverviewController         *_menuOverviewVC;
     
     IBOutlet UINavigationBar                *_titleNavigationBar;
     IBOutlet UINavigationItem               *_titleNavigationItem;
@@ -53,9 +45,6 @@
 @property (nonatomic, retain) IBOutlet UINavigationBar              *_titleNavigationBar;
 @property (nonatomic, retain) IBOutlet UINavigationItem             *_titleNavigationItem;
 @property (nonatomic, retain) IBOutlet UILabel                      *_titleNavigationLabel;
-
-@property (nonatomic, retain) IBOutlet TimeTableOverviewController  *_timeTableVC;
-@property (nonatomic, retain) IBOutlet MenuOverviewController       *_menuOverviewVC;
 
 - (IBAction)acronymTextFieldChanged:(id)sender;
 - (IBAction)moveBackToMenuOverview:(id)sender;

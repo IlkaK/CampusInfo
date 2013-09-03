@@ -10,6 +10,7 @@
 #import "TimeTableAsyncRequest.h"
 #import "DBCachingForAutocomplete.h"
 #import "ColorSelection.h"
+#import "UIConstantStrings.h"
 
 @implementation SearchViewController
 
@@ -23,7 +24,6 @@
 @synthesize _autocomplete;
 
 @synthesize _searchSegmentedControl;
-@synthesize _backgroundImageView;
 
 @synthesize _students;
 @synthesize _lecturers;
@@ -40,12 +40,13 @@
 {
     [super viewDidLoad];
     
+    // general initialization
     ColorSelection *_zhawColor = [[ColorSelection alloc]init];
     
     self._searchTypeArray = [[NSArray alloc] initWithObjects:
-                         @"Kurs", @"Dozent", @"Student",
-                         @"Raum", @"Klasse", nil];
-    _searchType = @"Dozent";
+                         TimeTableTypeKurs, TimeTableTypeDozent, TimeTableTypeStudent,
+                         TimeTableTypeRaum, TimeTableTypeKlasse, nil];
+    _searchType = TimeTableTypeDozent;
     
     // set picker view
     //self._chooseSearchType.frame = CGRectMake(20.0, 134.0, 140.0, 162.0);
@@ -62,19 +63,15 @@
     _autocomplete = [[Autocomplete alloc] initWithArray:_lecturers._lecturerArray];
 	_searchTextField.autocorrectionType = UITextAutocorrectionTypeNo;
     
-    UIButton *backButton = [UIButton buttonWithType:101];
-    UIView *backButtonView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, backButton.frame.size.width, backButton.frame.size.height)];
     
-    [backButton addTarget:self action:@selector(moveBackToTimeTable:) forControlEvents:UIControlEventTouchUpInside];
-    [backButton setTitle:@"zurück" forState:UIControlStateNormal];
-    [backButtonView addSubview:backButton];
+    // set title
+    UIBarButtonItem *backButtonItem = [[UIBarButtonItem alloc] initWithTitle:LeftArrowSymbol style:UIBarButtonItemStylePlain target:self action:@selector(moveBackToTimeTable:)];
     
-    // set buttonview as custom view for bar button item
-    UIBarButtonItem *backButtonItem = [[UIBarButtonItem alloc] initWithCustomView:backButtonView];
+    [backButtonItem setTintColor:_zhawColor._zhawOriginalBlue];
     [_titleNavigationItem setLeftBarButtonItem :backButtonItem animated :true];
     
     [_titleNavigationLabel setTextColor:_zhawColor._zhawWhite];
-    _titleNavigationLabel.text = @"Stundenplan Suche";
+    _titleNavigationLabel.text = SearchVCTitle;
     _titleNavigationItem.title = @"";
     
     CGRect imageRect = CGRectMake(0, 0, _titleNavigationBar.frame.size.width, _titleNavigationBar.frame.size.height);
@@ -87,35 +84,31 @@
     
     [_titleNavigationLabel setBackgroundColor:_zhawColor._zhawOriginalBlue];
     
-    //[self.view setBackgroundColor:_zhawColor._zhawLighterBlue];
     
+    // set segmented control
     [_searchSegmentedControl setTintColor:_zhawColor._zhawOriginalBlue];
     [self.view bringSubviewToFront:_searchSegmentedControl];
-    
-    //[_acronymAutocompleteTableView setBackgroundColor:_zhawColor._zhawLighterBlue];
-    
-    [_backgroundImageView setBackgroundColor:_zhawColor._zhawLighterBlue];
 }
 
 -(void)loadDataWithSearchType
 {
-    if ([_searchType isEqualToString:@"Kurs"])
+    if ([_searchType isEqualToString:TimeTableTypeKurs])
     {
         [_courses getData];
     }
-    if ([_searchType isEqualToString:@"Dozent"])
+    if ([_searchType isEqualToString:TimeTableTypeDozent])
     {
         [_lecturers getData];
     }
-    if ([_searchType isEqualToString:@"Student"])
+    if ([_searchType isEqualToString:TimeTableTypeStudent])
     {
         [_students getData];
     }
-    if ([_searchType isEqualToString:@"Raum"])
+    if ([_searchType isEqualToString:TimeTableTypeRaum])
     {
         [_rooms getData];
     }
-    if ([_searchType isEqualToString:@"Klasse"])
+    if ([_searchType isEqualToString:TimeTableTypeKlasse])
     {
         [_classes getData];
     }
@@ -124,23 +117,23 @@
 
 -(void) setTableWithSearchType
 {
-    if ([_searchType isEqualToString:@"Kurs"])
+    if ([_searchType isEqualToString:TimeTableTypeKurs])
     {
         _autocomplete._candidates = _courses._courseArray;
     }
-    if ([_searchType isEqualToString:@"Dozent"])
+    if ([_searchType isEqualToString:TimeTableTypeDozent])
     {
         _autocomplete._candidates = _lecturers._lecturerArray;
     }
-    if ([_searchType isEqualToString:@"Student"])
+    if ([_searchType isEqualToString:TimeTableTypeStudent])
     {
         _autocomplete._candidates = _students._studentArray;
     }
-    if ([_searchType isEqualToString:@"Raum"])
+    if ([_searchType isEqualToString:TimeTableTypeRaum])
     {
         _autocomplete._candidates = _rooms._roomArray;
     }
-    if ([_searchType isEqualToString:@"Klasse"])
+    if ([_searchType isEqualToString:TimeTableTypeKlasse])
     {
         _autocomplete._candidates = _classes._classArray;
     }
@@ -188,7 +181,6 @@
     _titleNavigationBar = nil;
     _titleNavigationItem = nil;
     _titleNavigationLabel = nil;
-    _backgroundImageView = nil;
     [super viewDidUnload];
 }
 
@@ -259,10 +251,10 @@
         if (_searchTextField.text == nil || [_searchTextField.text length] == 0)
         {
             UIAlertView *_acronymAlertView = [[UIAlertView alloc]
-                                              initWithTitle:@"Suche"
-                                              message:@"Bitte ein Kürzel eingeben."
+                                              initWithTitle:SearchVCTitle
+                                              message:SearchVCHint
                                               delegate:self
-                                              cancelButtonTitle:@"OK"
+                                              cancelButtonTitle:AlertViewOk
                                               otherButtonTitles:nil];
             
             [_acronymAlertView show];
@@ -273,8 +265,8 @@
             NSString *_stringWithoutSpaces = [_searchTextField.text stringByTrimmingCharactersInSet:
                                               [NSCharacterSet whitespaceAndNewlineCharacterSet]];
             
-            [[NSNotificationCenter defaultCenter] postNotificationName:@"SearchType" object:_searchType];
-            [[NSNotificationCenter defaultCenter] postNotificationName:@"SearchText" object:_stringWithoutSpaces];
+            [[NSNotificationCenter defaultCenter] postNotificationName:SettingsVCSearchType object:_searchType];
+            [[NSNotificationCenter defaultCenter] postNotificationName:SettingsVCSearchText object:_stringWithoutSpaces];
             
             //self.tabBarController.selectedIndex = 0;
             [self dismissModalViewControllerAnimated:YES];
@@ -291,10 +283,10 @@
     if (_searchTextField.text == nil || [_searchTextField.text length] == 0)
     {
         UIAlertView *_acronymAlertView = [[UIAlertView alloc]
-                                          initWithTitle:@"Suche"
-                                          message:@"Bitte ein Kürzel eingeben."
+                                          initWithTitle:SearchVCTitle
+                                          message:SearchVCHint
                                           delegate:self
-                                          cancelButtonTitle:@"OK"
+                                          cancelButtonTitle:AlertViewOk
                                           otherButtonTitles:nil];
         
         [_acronymAlertView show];
@@ -305,8 +297,8 @@
         NSString *_stringWithoutSpaces = [_searchTextField.text stringByTrimmingCharactersInSet:
                                           [NSCharacterSet whitespaceAndNewlineCharacterSet]];
         
-        [[NSNotificationCenter defaultCenter] postNotificationName:@"SearchType" object:_searchType];
-        [[NSNotificationCenter defaultCenter] postNotificationName:@"SearchText" object:_stringWithoutSpaces];
+        [[NSNotificationCenter defaultCenter] postNotificationName:SettingsVCSearchType object:_searchType];
+        [[NSNotificationCenter defaultCenter] postNotificationName:SettingsVCSearchText object:_stringWithoutSpaces];
         
         //self.tabBarController.selectedIndex = 0;
         [self dismissModalViewControllerAnimated:YES];

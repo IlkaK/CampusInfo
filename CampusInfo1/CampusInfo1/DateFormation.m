@@ -61,6 +61,21 @@
     return _localDate;
 }
 
+- (NSDate *) parseTime:(NSString *)dateString
+{
+    NSDate   *_localTime;
+    NSString *_localString = [dateString substringFromIndex:11];
+    //NSLog(@"1 _localString: %@",_localString);
+    
+    _localString = [_localString substringToIndex:5];
+    //NSLog(@"2 _localString: %@",_localString);
+    _localTime   = [[self _timeFormatter] dateFromString:_localString];
+    
+    //NSLog(@"_localTime: %@", [[self _timeFormatter] stringFromDate:_localTime]);
+    return _localTime;
+}
+
+
 -(NSDate *) parseDateFromXMLString:(NSString *)dateString
 {
     NSDate   *_localDate;

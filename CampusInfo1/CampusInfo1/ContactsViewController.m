@@ -8,6 +8,7 @@
 
 #import "ContactsViewController.h"
 #import "ColorSelection.h"
+#import "UIConstantStrings.h"
 
 @interface ContactsViewController ()
 
@@ -44,21 +45,18 @@
 {
     [super viewDidLoad];
     
+    // general initialization
     ColorSelection *_zhawColor = [[ColorSelection alloc]init];
+
     
-    UIButton *backButton = [UIButton buttonWithType:101];
-    UIView *backButtonView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, backButton.frame.size.width, backButton.frame.size.height)];
+    // title
+    UIBarButtonItem *backButtonItem = [[UIBarButtonItem alloc] initWithTitle:LeftArrowSymbol style:UIBarButtonItemStylePlain target:self action:@selector(moveBackToContactsOverview:)];
     
-    [backButton addTarget:self action:@selector(moveBackToContactsOverview:) forControlEvents:UIControlEventTouchUpInside];
-    [backButton setTitle:@"zurück" forState:UIControlStateNormal];
-    [backButtonView addSubview:backButton];
-    
-    // set buttonview as custom view for bar button item
-    UIBarButtonItem *backButtonItem = [[UIBarButtonItem alloc] initWithCustomView:backButtonView];
+    [backButtonItem setTintColor:_zhawColor._zhawOriginalBlue];
     [_titleNavigationItem setLeftBarButtonItem :backButtonItem animated :true];
     
     [_titleNavigationLabel setTextColor:_zhawColor._zhawWhite];
-    _titleNavigationLabel.text = @"Sektretariate";
+    _titleNavigationLabel.text = ContactsVCTitle;
     _titleNavigationItem.title = @"";
     
     CGRect imageRect = CGRectMake(0, 0, _titleNavigationBar.frame.size.width, _titleNavigationBar.frame.size.height);
@@ -70,7 +68,6 @@
     [_titleNavigationBar setBackgroundImage:aImage forBarMetrics:UIBarMetricsDefault];
     
     [_titleNavigationLabel setBackgroundColor:_zhawColor._zhawOriginalBlue];
-    
 }
 
 - (void)didReceiveMemoryWarning
@@ -131,32 +128,33 @@
     
     if(_cellSection == 0 && _cellRow == 10)
     {
-        _email = @"info-sg.engineering@zhaw.ch";
+        _email = ContactsVCRealEmailEngineering;
     }
     if(_cellSection == 0 && _cellRow == 11)
     {
-        _email = @"info-sg.zh.engineering@zhaw.ch";
+        _email = ContactsVCRealEmailZurichEngineering;
     }
     
     if(_cellSection == 1 && _cellRow == 1)
     {
-        _email = @"jennifer.hohl@zhaw.ch";
+        _email = ContactsVCRealEmailMaster;
     }
     
-    if(_cellSection == 2 && _cellRow == 1)
+    if(_cellSection == 2 && _cellRow == 3)
     {
-        _email = @"weiterbildung.engineering@zhaw.ch";
+        _email = ContactsVCRealEmailContinuedEducation;
     }
     
-    NSString *_messageForCalling = [NSString stringWithFormat:@"Sende Email an %@?"
+    NSString *_messageForCalling = [NSString stringWithFormat:@"%@ %@?"
+                                    , ContactsVCMessageSendEmail
                                     , _email];
     
     UIAlertView *_acronymAlertView = [[UIAlertView alloc]
-                                      initWithTitle:@"Weitere Dienste"
+                                      initWithTitle:ContactsVCTitle
                                       message:_messageForCalling
                                       delegate:self
-                                      cancelButtonTitle:@"OK"
-                                      otherButtonTitles:@"Cancel", nil];
+                                      cancelButtonTitle:AlertViewOk
+                                      otherButtonTitles:AlertViewCancel, nil];
     _currentEmail       = _email;
     _currentPhoneNumber = nil;
     [_acronymAlertView show];
@@ -176,56 +174,109 @@
     NSString        *_callWhom;
     NSString        *_callNumber;
     
-    if(   (_cellSection == 0 && _cellRow == 0)
-       || (_cellSection == 0 && _cellRow == 9)
-       )
+    // Aviatik
+    if   (_cellSection == 0 && _cellRow == 0)
     {
-        _callWhom = @"Gianna Scherrer";
-        _callNumber = @"0041589347560";
+        _callWhom = ContactsVCResponsibleAviatik;
+        _callNumber = ContactsVCRealPhoneAviatik;
     }
-    if(   (_cellSection == 0 && _cellRow == 1)
-       || (_cellSection == 0 && _cellRow == 7)
-       || (_cellSection == 0 && _cellRow == 8)
-       )
+    
+    // electrical engineering
+    if(_cellSection == 0 && _cellRow == 1)
     {
-        _callWhom = @"Eliane Roth";
-        _callNumber = @"0041589347366";
+        _callWhom = ContactsVCResponsibleElectricalEngineering;
+        _callNumber = ContactsVCRealPhoneElectricalEngineering;
     }
-    if(   (_cellSection == 0 && _cellRow == 2)
-       || (_cellSection == 0 && _cellRow == 3)
-       || (_cellSection == 1 && _cellRow == 0)
-       )
+    
+    // enviornment engineering
+    if  (_cellSection == 0 && _cellRow == 2)
     {
-        _callWhom = @"Jennifer Hohl";
-        _callNumber = @"0041589347563";
+        _callWhom = ContactsVCResponsibleEnvironmentEngineering;
+        _callNumber = ContactsVCRealPhoneEnvironmentEngineering;
     }
+    
+    // computer science winterthur
+    if(_cellSection == 0 && _cellRow == 3)
+    {
+        _callWhom = ContactsVCResponsibleComputerScienceWinterthur;
+        _callNumber = ContactsVCRealPhoneComputerScienceWinterthur;
+    }
+    
+    // computer science zurich
     if(_cellSection == 0 && _cellRow == 4)
     {
-        _callWhom = @"Zita Fejér";
-        _callNumber = @"0041589348242";
+        _callWhom = ContactsVCResponsibleComputerScienceZurich;
+        _callNumber = ContactsVCRealPhoneComputerScienceZurich;
     }
-    if(   (_cellSection == 0 && _cellRow == 5)
-       || (_cellSection == 0 && _cellRow == 6)
-       )
+    
+    // mechanical engineering
+    if  (_cellSection == 0 && _cellRow == 5)
     {
-        _callWhom = @"Béatrice Schaffner";
-        _callNumber = @"0041589347414";
+        _callWhom = ContactsVCResponsibleMechanicalEngineering;
+        _callNumber = ContactsVCRealPhoneMechanicalEngineering;
     }
+    
+    // chemical engineering
+    if(_cellSection == 0 && _cellRow == 6)
+    {
+        _callWhom = ContactsVCResponsibleChemicalEngineering;
+        _callNumber = ContactsVCRealPhoneChemicalEngineering;
+    }
+    
+    // system engineering
+    if(_cellSection == 0 && _cellRow == 7)
+    {
+        _callWhom = ContactsVCResponsibleSystemEngineering;
+        _callNumber = ContactsVCRealPhoneSystemEngineering;
+    }
+    
+    // traffice engineering
+    if   (_cellSection == 0 && _cellRow == 8)
+    {
+        _callWhom = ContactsVCResponsibleTrafficEngineering;
+        _callNumber = ContactsVCRealPhoneTrafficEngineering;
+    }
+    
+    // Business Engineering
+    if(_cellSection == 0 && _cellRow == 9)
+    {
+        _callWhom = ContactsVCResponsibleBusinessEngineering;
+        _callNumber = ContactsVCRealPhoneBusinessEngineering;
+    }
+    
+    // master
+    if(_cellSection == 1 && _cellRow == 0)
+    {
+        _callWhom = ContactsVCResponsibleMaster;
+        _callNumber = ContactsVCRealPhoneMaster;
+    }
+    
+    // continued education
     if(_cellSection == 2 && _cellRow == 0)
     {
-        _callWhom = @"Christine Rhiel";
-        _callNumber = @"0041589347428";
+        _callWhom = ContactsVCResponsible0ContinuedEducation;
+        _callNumber = ContactsVCRealPhone0ContinuedEducation;
+    }
+    if(_cellSection == 2 && _cellRow == 1)
+    {
+        _callWhom = ContactsVCResponsible1ContinuedEducation;
+        _callNumber = ContactsVCRealPhone1ContinuedEducation;
+    }
+    if(_cellSection == 2 && _cellRow == 2)
+    {
+        _callWhom = ContactsVCResponsible2ContinuedEducation;
+        _callNumber = ContactsVCRealPhone2ContinuedEducation;
     }
     
-    NSString *_messageForCalling = [NSString stringWithFormat:@"%@ anrufen (%@)?"
-                                    , _callWhom, _callNumber];
+    NSString *_messageForCalling = [NSString stringWithFormat:@"%@ %@ (%@)?"
+                                    , _callWhom, ContactsVCMessageCall, _callNumber];
     
     UIAlertView *_acronymAlertView = [[UIAlertView alloc]
-                                      initWithTitle:@"Weitere Dienste"
+                                      initWithTitle:ContactsVCTitle
                                       message:_messageForCalling
                                       delegate:self
-                                      cancelButtonTitle:@"OK"
-                                      otherButtonTitles:@"Cancel", nil];
+                                      cancelButtonTitle:AlertViewOk
+                                      otherButtonTitles:AlertViewCancel, nil];
     _currentEmail       = nil;
     _currentPhoneNumber = _callNumber;
     [_acronymAlertView show];
@@ -240,13 +291,13 @@
     switch (section)
     {
         case 0:
-            _sectionName = @"Bachelorsekretariat";
+            _sectionName = ContactsVCTitleBachelorSecretary;
             break;
         case 1:
-            _sectionName = @"Mastersekretariat";
+            _sectionName = ContactsVCTitleMasterSecretary;
             break;
         default:
-            _sectionName = @"Weiterbildungssekretariat";
+            _sectionName = ContactsVCTitleContinuedEducationSecretary;
             break;
     }
     return _sectionName;
@@ -270,7 +321,7 @@
             _numberRows = 2;
             break;
         default:
-            _numberRows = 2;
+            _numberRows = 4;
             break;
     }
     return _numberRows;
@@ -295,7 +346,7 @@
 
     if (   (_cellSelection == 0 && _cellRow <= 9)
         || (_cellSelection == 1 && _cellRow == 0)
-        || (_cellSelection == 2 && _cellRow == 0)
+        || (_cellSelection == 2 && _cellRow <= 2)
         )
     {
         _cellIdentifier  = @"ContactsPhoneTableCell";
@@ -314,76 +365,88 @@
         
         if(_cellSelection == 0 && _cellRow == 0)
         {
-            _labelTitle.text = @"Aviatik";
-            _labelPerson.text = @"Gianna Scherrer";
-            _numberButtonTitle = @"Tel. +41 58 934 75 60";
+            _labelTitle.text = ContactsVCTitleAviatik;
+            _labelPerson.text = ContactsVCResponsibleAviatik;
+            _numberButtonTitle = ContactsVCDisplayPhoneAviatik;
         }
         if(_cellSelection == 0 && _cellRow == 1)
         {
-            _labelTitle.text = @"Elektrotechnik";
-            _labelPerson.text = @"Eliane Roth";
-            _numberButtonTitle = @"Tel. +41 58 934 73 66";
+            _labelTitle.text = ContactsVCTitleElectricalEngineering;
+            _labelPerson.text = ContactsVCResponsibleElectricalEngineering;
+            _numberButtonTitle = ContactsVCDisplayPhoneElectricalEngineering;
         }
         if(_cellSelection == 0 && _cellRow == 2)
         {
-            _labelTitle.text = @"Energie- und Umwelttechnik";
-            _labelPerson.text = @"Jennifer Hohl";
-            _numberButtonTitle = @"Tel. +41 58 934 75 63";
+            _labelTitle.text = ContactsVCTitleEnvironmentEngineering;
+            _labelPerson.text = ContactsVCResponsibleEnvironmentEngineering;
+            _numberButtonTitle = ContactsVCDisplayPhoneEnvironmentEngineering;
         }
         if(_cellSelection == 0 && _cellRow == 3)
         {
-            _labelTitle.text = @"Informatik Standort Winterthur";
-            _labelPerson.text = @"Jennifer Hohl";
-            _numberButtonTitle = @"Tel. +41 58 934 75 63";
+            _labelTitle.text = ContactsVCTitleComputerScienceWinterthur;
+            _labelPerson.text = ContactsVCResponsibleComputerScienceWinterthur;
+            _numberButtonTitle = ContactsVCDisplayPhoneComputerScienceWinterthur;
         }
         if(_cellSelection == 0 && _cellRow == 4)
         {
-            _labelTitle.text = @"Informatik Standort Zürich";
-            _labelPerson.text = @"Zita Fejér";
-            _numberButtonTitle = @"Tel. +41 58 934 82 42";
+            _labelTitle.text = ContactsVCTitleComputerScienceZurich;
+            _labelPerson.text = ContactsVCResponsibleComputerScienceZurich;
+            _numberButtonTitle = ContactsVCDisplayPhoneComputerScienceZurich;
         }
         if(_cellSelection == 0 && _cellRow == 5)
         {
-            _labelTitle.text = @"Allgemeine Maschinentechnik";
-            _labelPerson.text = @"Béatrice Schaffner";
-            _numberButtonTitle = @"Tel. +41 58 934 74 14";
+            _labelTitle.text = ContactsVCTitleMechanicalEngineering;
+            _labelPerson.text = ContactsVCResponsibleMechanicalEngineering;
+            _numberButtonTitle = ContactsVCDisplayPhoneMechanicalEngineering;
         }
         if(_cellSelection == 0 && _cellRow == 6)
         {
-            _labelTitle.text = @"Material- und Verfahrenstechnik";
-            _labelPerson.text = @"Béatrice Schaffner";
-            _numberButtonTitle = @"Tel. +41 58 934 74 14";
+            _labelTitle.text = ContactsVCTitleChemicalEngineering;
+            _labelPerson.text = ContactsVCResponsibleChemicalEngineering;
+            _numberButtonTitle = ContactsVCDisplayPhoneChemicalEngineering;
         }
         if(_cellSelection == 0 && _cellRow == 7)
         {
-            _labelTitle.text = @"Systemtechnik";
-            _labelPerson.text = @"Eliane Roth";
-            _numberButtonTitle = @"Tel. +41 58 934 73 66";
+            _labelTitle.text = ContactsVCTitleSystemEngineering;
+            _labelPerson.text = ContactsVCResponsibleSystemEngineering;
+            _numberButtonTitle = ContactsVCDisplayPhoneSystemEngineering;
         }
         if(_cellSelection == 0 && _cellRow == 8)
         {
-            _labelTitle.text = @"Verkehrssysteme";
-            _labelPerson.text = @"Eliane Roth";
-            _numberButtonTitle = @"Tel. +41 58 934 73 66";
+            _labelTitle.text = ContactsVCTitleTrafficEngineering;
+            _labelPerson.text = ContactsVCResponsibleTrafficEngineering;
+            _numberButtonTitle = ContactsVCDisplayPhoneTrafficEngineering;
         }
         if(_cellSelection == 0 && _cellRow == 9)
         {
-            _labelTitle.text = @"Wirtschaftsingenieurwesen";
-            _labelPerson.text = @"Gianna Scherrer";
-            _numberButtonTitle = @"Tel. +41 58 934 75 60";
+            _labelTitle.text = ContactsVCTitleBusinessEngineering;
+            _labelPerson.text = ContactsVCResponsibleBusinessEngineering;
+            _numberButtonTitle = ContactsVCDisplayPhoneBusinessEngineering;
         }
         
         if(_cellSelection == 1 && _cellRow == 0)
         {
-            _labelTitle.text = @"Master of Science in Engineering";
-            _labelPerson.text = @"Jennifer Hohl";
-            _numberButtonTitle = @"Tel. +41 58 934 75 63";
+            _labelTitle.text = ContactsVCTitleMaster;
+            _labelPerson.text = ContactsVCResponsibleMaster;
+            _numberButtonTitle = ContactsVCDisplayPhoneMaster;
         }
         if(_cellSelection == 2 && _cellRow == 0)
         {
-            _labelTitle.text = @"Weiterbildung (MAS, CAS, DAS und WBK)";
-            _labelPerson.text = @"Christine Rhiel";
-            _numberButtonTitle = @"Tel. +41 58 934 74 28";
+            _labelTitle.text = ContactsVCTitleContinuedEducation;
+            _labelPerson.text = ContactsVCResponsible0ContinuedEducation;
+            _numberButtonTitle = ContactsVCDisplayPhone0ContinuedEducation;
+        }
+        if(_cellSelection == 2 && _cellRow == 1)
+        {
+            _labelTitle.text = ContactsVCTitleContinuedEducation;
+            _labelPerson.text = ContactsVCResponsible1ContinuedEducation;
+            _numberButtonTitle = ContactsVCDisplayPhone1ContinuedEducation;
+        }
+        if(_cellSelection == 2 && _cellRow == 2)
+        {
+            _labelTitle.text = ContactsVCTitleContinuedEducation;
+            _labelPerson.text = ContactsVCResponsible2ContinuedEducation;
+            _numberButtonTitle = ContactsVCDisplayPhone2ContinuedEducation;
         }
         
         _numberButton.enabled = true;
@@ -400,7 +463,7 @@
     if(     (_cellSelection == 0 && _cellRow == 10)
         ||  (_cellSelection == 0 && _cellRow == 11)
         ||  (_cellSelection == 1 && _cellRow == 1)
-        ||  (_cellSelection == 2 && _cellRow == 1)
+        ||  (_cellSelection == 2 && _cellRow == 3)
        )
     {
         _cellIdentifier  = @"ContactsPlaceTableCell";
@@ -417,23 +480,26 @@
 
         if(_cellSelection == 0 && _cellRow == 10)
         {
-            _labelTitle.text    = @"Standort Winterthur";
-            _emailButtonTitle   = @"info-sg.engineering(at)zhaw.ch";
+            _labelTitle.text    = ContactsVCSectionTitleEngineering;
+            _emailButtonTitle   = ContactsVCDisplayEmailEngineering;
         }
+        
         if(_cellSelection == 0 && _cellRow == 11)
         {
-            _labelTitle.text    = @"Standort Zürich";
-            _emailButtonTitle   = @"info-sg.zh.engineering(at)zhaw.ch";
+            _labelTitle.text    = ContactsVCSectionTitleZurichEngineering;
+            _emailButtonTitle   = ContactsVCDisplayEmailZurichEngineering;
         }
+        
         if(_cellSelection == 1 && _cellRow == 1)
         {
-            _labelTitle.text    = @"Masterstudiengang";
-            _emailButtonTitle   = @"jennifer.hohl(at)zhaw.ch";
+            _labelTitle.text    = ContactsVCSectionTitleMaster;
+            _emailButtonTitle   = ContactsVCDisplayEmailMaster;
         }
-        if(_cellSelection == 2 && _cellRow == 1)
+        
+        if(_cellSelection == 2 && _cellRow == 3)
         {
-            _labelTitle.text    = @"Weiterbildung";
-            _emailButtonTitle   = @"weiterbildung.engineering(at)zhaw.ch";
+            _labelTitle.text    = ContactsVCSectionTitleContinuedEducation;
+            _emailButtonTitle   = ContactsVCDisplayEmailContinuedEducation;
         }
             
         _emailButton.enabled = true;
