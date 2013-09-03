@@ -32,6 +32,9 @@
 @synthesize _connectionArray;
 @synthesize _dateFormatter;
 
+@synthesize _startStation;
+@synthesize _stopStation;
+@synthesize _changedOneStation;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -46,10 +49,12 @@
     self.tabBarController.selectedIndex = 0;
 }
 
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     
+    // general initialization
     ColorSelection *_zhawColor = [[ColorSelection alloc]init];
     _connectionArray = [[ConnectionArrayDto alloc]init:nil];
     _dateFormatter = [[DateFormation alloc] init];
@@ -84,7 +89,11 @@
 		_publicStopVC = [[PublicStopViewController alloc] init];
 	}
     _publicStopVC.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
-
+    
+    _startStation   = _fromButton.titleLabel.text;
+    _stopStation    = _toButton.titleLabel.text;
+    _changedOneStation = NO;
+    //NSLog(@"viewDidLoad -> _startStation: %@ _stopStation: %@", _startStation, _stopStation);
 }
 
 
@@ -106,8 +115,23 @@
         }
         
     }
+    
+    if (!(    [_fromButton.titleLabel.text isEqualToString:_startStation]
+        &&  [_toButton.titleLabel.text isEqualToString:_stopStation]
+        ))
+    {
+        _changedOneStation = YES;
+        _startStation   = _fromButton.titleLabel.text;
+        _stopStation    = _toButton.titleLabel.text;
+    }
+    else
+    {
+        _changedOneStation = NO;
+    }
+    
     [self getConnectionArray];
 }
+
 
 - (void) getConnectionArray
 {
@@ -119,9 +143,11 @@
     //[_waitForChangeActivityIndicator stopAnimating];
     //_waitForChangeActivityIndicator.hidden = YES;
     
-    if ([_connectionArray._connections count] == 0)
+    if ([_connectionArray._connections count] == 0
+        || _changedOneStation)
     {
-        [_connectionArray getData];
+        [_connectionArray getData: _startStation
+                  withStopStation:_stopStation];
         
         //_noConnectionButton.hidden = NO;
         //_noConnectionLabel.hidden = NO;
@@ -179,6 +205,7 @@
 
 - (IBAction)startConnectionSearch:(id)sender
 {
+    NSLog(@"startConnectionSearch -> _startStation: %@ _stopStation: %@", _startStation, _stopStation);
     [self getConnectionArray];
 }
 
@@ -192,8 +219,8 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    NSLog(@"numberOfRowsInSection connection count: %i", [_connectionArray._connections count]);
-    return [_connectionArray._connections count] + 1;
+    //NSLog(@"numberOfRowsInSection connection count: %i", [_connectionArray._connections count]);
+    return [_connectionArray._connections count]; 
 }
 
 
@@ -219,25 +246,8 @@
     UILabel          *_stopDateLabel        = (UILabel  *)[_cell viewWithTag:8];
     UILabel          *_stopTimeLabel        = (UILabel  *)[_cell viewWithTag:9];
 
+    //NSLog(@" cellForRowAtIndexPath - connection count: %i _cellRow: %i", [_connectionArray._connections count], _cellRow);
     
-    NSLog(@" cellForRowAtIndexPath - connection count: %i _cellRow: %i", [_connectionArray._connections count], _cellRow);
-    
-    // title row
-    if (_cellRow == 0)
-    {
-        _startLabel.text            = @"Bahnhof, Haltestelle";
-        _startDateLabel.text        = @"Datum";
-        _startTimeLabel.text        = @"Zeit";
-        _durationLabel.text         = @"Dauer";
-        _transfersLabel.text        = @"U.";
-        _transportationLabel.text   = @"Reise mit";
-        _stopLabel.text             = @"";
-        _stopDateLabel.text         = @"";
-        _stopTimeLabel.text         = @"";
-    }
-    else
-    {
-        _cellRow = _cellRow-1;
         if (    [_connectionArray._connections lastObject] != nil
             &&  [_connectionArray._connections count] > _cellRow)
         {
@@ -271,7 +281,6 @@
             _stopDateLabel.text   = [[_dateFormatter _dayFormatter] stringFromDate:_localConnection._to._arrivalDate];
             _stopTimeLabel.text   = [NSString stringWithFormat:@"an %@", [[_dateFormatter _timeFormatter] stringFromDate:_localConnection._to._arrivalTime]];
         }
-    }
         
     return _cell;
 }

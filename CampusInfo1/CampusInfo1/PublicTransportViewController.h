@@ -34,6 +34,10 @@
     ConnectionArrayDto                  *_connectionArray;
     
     DateFormation                       *_dateFormatter;
+    
+    NSString                            *_startStation;
+    NSString                            *_stopStation;
+    BOOL                                _changedOneStation;
 }
 
 
@@ -53,6 +57,11 @@
 @property (nonatomic, retain) ConnectionArrayDto                    *_connectionArray;
 
 @property (nonatomic, retain)          DateFormation                *_dateFormatter;
+
+@property (nonatomic, retain)          NSString                     *_startStation;
+@property (nonatomic, retain)          NSString                     *_stopStation;
+
+@property (nonatomic, assign) BOOL                                  _changedOneStation;
 
 - (IBAction)moveToFromStopController:(id)sender;
 - (IBAction)moveToToStopController:(id)sender;

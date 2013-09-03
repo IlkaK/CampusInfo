@@ -104,7 +104,7 @@
             
             if ([connectionKey isEqualToString:@"duration"])
             {
-                NSLog(@"ConnectionDto _localDuration: %@", [connectionDictionary objectForKey:connectionKey]);
+                //NSLog(@"ConnectionDto _localDuration: %@", [connectionDictionary objectForKey:connectionKey]);
                 
                 //00d01:26:00
                 

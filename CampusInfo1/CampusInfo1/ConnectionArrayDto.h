@@ -12,6 +12,8 @@
 @interface ConnectionArrayDto : NSObject<TimeTableAsyncRequestDelegate>
 {
     NSMutableArray              *_connections;
+    NSString                    *_startStation;
+    NSString                    *_stopStation;
     
     NSDictionary                *_generalDictionary;
     TimeTableAsyncRequest       *_asyncTimeTableRequest;
@@ -30,9 +32,13 @@
 @property (nonatomic, assign) int                               _connectionTrials;
 @property (nonatomic, retain) NSURL                             *_url;
 
+@property (nonatomic, retain) NSString                          *_startStation;
+@property (nonatomic, retain) NSString                          *_stopStation;
+
 -(id)   init : (NSMutableArray *) newConnections;
 
--(void) getData;
+-(void) getData: (NSString *)newStartStation
+withStopStation: (NSString *)newStopStation;
 
 
 @end
