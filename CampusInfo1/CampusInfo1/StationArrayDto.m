@@ -55,9 +55,9 @@
     
     if (self._dataFromUrl != nil)
     {
-        //NSString *_receivedString = [[NSString alloc] initWithData:self._dataFromUrl encoding:NSASCIIStringEncoding];
-        //_receivedString = [_receivedString substringToIndex:5000];
-        //NSLog(@"dataDownloadDidFinish for StationArrayDto: %@", _receivedString);
+        NSString *_receivedString = [[NSString alloc] initWithData:self._dataFromUrl encoding:NSASCIIStringEncoding];
+        ///_receivedString = [_receivedString substringToIndex:5000];
+        NSLog(@"dataDownloadDidFinish for StationArrayDto: %@", _receivedString);
         
         NSError *_error;
         _stations = [[NSMutableArray alloc] init];
@@ -95,7 +95,7 @@
                     {
                         _stationArray = [_generalDictionary objectForKey:generalKey];
                         
-                        //NSLog(@"count of _stationArray: %i", [_stationArray count]);
+                        NSLog(@"count of _stationArray: %i", [_stationArray count]);
                         
                         StationDto *_localStation = [[StationDto alloc]init:nil withScore:nil withName:nil withDistance:nil withCoordinate:nil];
                         

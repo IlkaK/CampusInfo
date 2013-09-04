@@ -26,9 +26,7 @@
 @synthesize _titleNavigationLabel;
 
 @synthesize _publicStopTableView;
-
-@synthesize _noConnectionButton;
-@synthesize _noConnectionLabel;
+@synthesize _actualizeButton;
 
 @synthesize _publicStopTextField;
 @synthesize _publicStopTextFieldString;
@@ -49,13 +47,27 @@
     [self getStationArray:_publicStopTextFieldString];
 }
 
+- (IBAction)actualizeSuggestions:(id)sender
+{
+    NSLog(@"_publicStopTextFieldString: %@", _publicStopTextFieldString);
+    //_stationArray = nil;
+    [self getStationArray:_publicStopTextFieldString];
+    [_publicStopTableView reloadData];
+}
+
 - (IBAction)publicStopTextFieldChanged:(id)sender
 {
     _publicStopTextFieldString = ((UITextField*)sender).text;
     
     [self getStationArray:_publicStopTextFieldString];
     _publicStopTableView.hidden = NO;
+    [_publicStopTableView reloadData];
+}
 
+
+- (BOOL)textFieldShouldReturn:(UITextField *)textField {
+    [textField resignFirstResponder];
+    return NO;
 }
 
 
@@ -87,11 +99,12 @@
     
     self._stationArray = [[StationArrayDto alloc] init:nil];
     
-    _noConnectionButton.hidden = YES;
-    _noConnectionLabel.hidden = YES;
-    [_noConnectionButton useAlertStyle];
+    [_actualizeButton useAlertStyle];
     
     _actualStation = nil;
+    
+    self._publicStopTextField.delegate = self;
+ 	_publicStopTextField.autocorrectionType = UITextAutocorrectionTypeNo;
 }
 
 
@@ -112,17 +125,7 @@
     //[_waitForChangeActivityIndicator stopAnimating];
     //_waitForChangeActivityIndicator.hidden = YES;
     
-    if ([_stationArray._stations count] == 0)
-    {
-        _noConnectionButton.hidden = NO;
-        _noConnectionLabel.hidden = NO;
-    }
-    else
-    {
-        _noConnectionButton.hidden = YES;
-        _noConnectionLabel.hidden = YES;
-        [_publicStopTableView reloadData];
-    }
+    [_publicStopTableView reloadData];
 }
 
 
@@ -144,9 +147,8 @@
     _titleNavigationItem = nil;
     _titleNavigationLabel = nil;
     _publicStopTableView = nil;
-    _noConnectionLabel = nil;
-    _noConnectionButton = nil;
     _publicStopTextField = nil;
+    _actualizeButton = nil;
     [super viewDidUnload];
 }
 

@@ -11,7 +11,7 @@
 #import <StationDto.h>
 #import <GradientButton.h>
 
-@interface PublicStopViewController : UIViewController 
+@interface PublicStopViewController : UIViewController<UITextFieldDelegate>
 {
     StationArrayDto                     *_stationArray;
     StationDto                          *_actualStation;
@@ -22,9 +22,7 @@
     IBOutlet UILabel                    *_titleNavigationLabel;
     
     IBOutlet UITableView                *_publicStopTableView;
-    
-    IBOutlet UILabel                    *_noConnectionLabel;
-    IBOutlet GradientButton             *_noConnectionButton;
+    IBOutlet GradientButton             *_actualizeButton;
     
     IBOutlet UITextField                *_publicStopTextField;
     NSString                            *_publicStopTextFieldString;
@@ -39,15 +37,13 @@
 @property (nonatomic, retain) IBOutlet UILabel                      *_titleNavigationLabel;
 
 @property (nonatomic, retain) IBOutlet UITableView                  *_publicStopTableView;
-
-@property (nonatomic, retain) IBOutlet UILabel                      *_noConnectionLabel;
-@property (nonatomic, retain) IBOutlet GradientButton               *_noConnectionButton;
+@property (nonatomic, retain) IBOutlet GradientButton               *_actualizeButton;
 
 @property (nonatomic, retain) IBOutlet UITextField                  *_publicStopTextField;
 @property (nonatomic, retain) NSString                              *_publicStopTextFieldString;
 
 
-- (IBAction)tryConnectionAgain:(id)sender;
+- (IBAction)actualizeSuggestions:(id)sender;
 - (IBAction)publicStopTextFieldChanged:(id)sender;
 
 @end

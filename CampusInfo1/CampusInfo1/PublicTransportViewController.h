@@ -55,6 +55,8 @@
     IBOutlet UIButton                   *_chooseNewStopButton;
     
     IBOutlet GradientButton             *_searchButton;
+    
+    IBOutlet UIActivityIndicatorView    *_waitForChangeActivityIndicator;
 }
 
 
@@ -95,7 +97,7 @@
 
 @property (nonatomic, retain) IBOutlet GradientButton               *_searchButton;
 
-
+@property (nonatomic, retain) IBOutlet UIActivityIndicatorView      *_waitForChangeActivityIndicator;
 
 - (IBAction)startConnectionSearch:(id)sender;
 

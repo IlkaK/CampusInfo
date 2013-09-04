@@ -51,7 +51,7 @@
 
 @synthesize _searchButton;
 
-
+@synthesize _waitForChangeActivityIndicator;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -155,10 +155,16 @@
     
     NSMutableAttributedString *_titleString = [[NSMutableAttributedString alloc] initWithString:@"neu..."];
     [_titleString addAttribute:NSUnderlineStyleAttributeName value:[NSNumber numberWithInteger:NSUnderlineStyleSingle] range:NSMakeRange(0, [_titleString length])];
-    [_titleString addAttribute:NSForegroundColorAttributeName value:_zhawColor._zhawDarkGrey range:NSMakeRange(0, [_titleString length])];
+    //[_titleString addAttribute:NSForegroundColorAttributeName value:_zhawColor._zhawDarkGrey range:NSMakeRange(0, [_titleString length])];
     
     [_chooseNewStartButton  setAttributedTitle:_titleString forState:UIControlStateNormal];
     [_chooseNewStopButton   setAttributedTitle:_titleString forState:UIControlStateNormal];
+
+    // set default values for spinner/activity indicator
+    _waitForChangeActivityIndicator.hidesWhenStopped = YES;
+    _waitForChangeActivityIndicator.hidden = YES;
+    [_waitForChangeActivityIndicator setBackgroundColor:_zhawColor._zhawOriginalBlue];
+    [self.view bringSubviewToFront:_waitForChangeActivityIndicator];
 }
 
 
@@ -192,20 +198,25 @@
     [self getConnectionArray];
 }
 
+- (void) threadWaitForChangeActivityIndicator:(id)data
+{
+    _waitForChangeActivityIndicator.hidden = NO;
+    [_waitForChangeActivityIndicator startAnimating];
+}
 
 - (void) getConnectionArray
 {
     
-    //[NSThread detachNewThreadSelector:@selector(threadWaitForChangeActivityIndicator:) toTarget:self withObject:nil];
-    //[_waitForChangeActivityIndicator stopAnimating];
-    //_waitForChangeActivityIndicator.hidden = YES;
-    
     if ([_connectionArray._connections count] == 0
         || _changedStartStation || _changedStopStation)
     {
-        [_connectionArray getData: _startStation
+        if ([_startStation length] > 0 && [_stopStation length] > 0)
+        {
+            [NSThread detachNewThreadSelector:@selector(threadWaitForChangeActivityIndicator:) toTarget:self withObject:nil];
+            
+            [_connectionArray getData: _startStation
                   withStopStation:_stopStation];
-        
+        }
         //_noConnectionButton.hidden = NO;
         //_noConnectionLabel.hidden = NO;
     //}
@@ -217,6 +228,9 @@
     }
     
     [_publicTransportTableView reloadData];
+    
+    [_waitForChangeActivityIndicator stopAnimating];
+    _waitForChangeActivityIndicator.hidden = YES;
 }
 
 
@@ -246,6 +260,7 @@
     _lastStop1Button = nil;
     _lastStop2Button = nil;
     _chooseNewStopButton = nil;
+    _waitForChangeActivityIndicator = nil;
     [super viewDidUnload];
 }
 
@@ -315,6 +330,8 @@
     _publicStopVC._actualStationType = @"from";
     _publicStopVC._actualStation = nil;
     _publicStopVC._publicStopTextFieldString = @"";
+    _publicStopVC._stationArray = nil;
+    _publicStopVC._publicStopTextField.text = @"";
     [self presentModalViewController:_publicStopVC animated:YES];
 }
 
@@ -386,6 +403,8 @@
     _publicStopVC._actualStationType = @"to";
     _publicStopVC._actualStation = nil;
     _publicStopVC._publicStopTextFieldString = @"";
+    _publicStopVC._stationArray = nil;
+    _publicStopVC._publicStopTextField.text = @"";
     [self presentModalViewController:_publicStopVC animated:YES];
 }
 
