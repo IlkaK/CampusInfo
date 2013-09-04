@@ -16,12 +16,9 @@
 
 @implementation MenuOverviewController
 @synthesize _menuTableView;
-@synthesize _menuTimeTableCell;
-@synthesize _menuMensaTableCell;
-@synthesize _menuNewsTableCell;
+@synthesize _menuOverviewTableCell;
 
-@synthesize _cellBackgroundColor;
-@synthesize _fontColor;
+@synthesize _backgroundColor;
 
 @synthesize _contactsVC;
 @synthesize _settingsVC;
@@ -47,14 +44,15 @@
     
     ColorSelection *_zhawColor = [[ColorSelection alloc]init];
     
-    _cellBackgroundColor = _zhawColor._zhawWhite;
-    _fontColor           = _zhawColor._zhawDarkGrey;
+    _backgroundColor = _zhawColor._zhawOriginalBlue;
     
-    _menuTableView.separatorColor = _cellBackgroundColor;
+    
+    _menuTableView.separatorColor = _backgroundColor;
     _menuTableView.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
     _menuTableView.scrollEnabled = NO;
     
-    [self.view setBackgroundColor:_cellBackgroundColor];
+    [self.view setBackgroundColor:_backgroundColor];
+    [_menuTableView setBackgroundColor:_backgroundColor];
     
     if (_contactsVC == nil)
     {
@@ -106,11 +104,7 @@
 }
 
 - (void)viewDidUnload {
-    _menuTableView = nil;
-    _menuTimeTableCell = nil;
-    _menuMensaTableCell = nil;
-    _menuNewsTableCell = nil;
-    
+    _menuTableView = nil;    
     _contactsVC = nil;
     _settingsVC = nil;
     _newsVC = nil;
@@ -119,6 +113,7 @@
     _mapsVC = nil;
     _socialMediaVC = nil;
     
+    _menuOverviewTableCell = nil;
     [super viewDidUnload];
 }
 
@@ -201,150 +196,107 @@
     NSUInteger        _cellSelection = indexPath.section;
     NSString         *_cellIdentifier;
     UITableViewCell  *_cell = nil;
+
+    _cellIdentifier  = @"MenuOverviewTableCell";
+    _cell            = [tableView dequeueReusableCellWithIdentifier:_cellIdentifier];
+    if (_cell == nil)
+    {
+        [[NSBundle mainBundle] loadNibNamed:@"MenuOverviewTableCell" owner:self options:nil];
+        _cell = _menuOverviewTableCell;
+        self._menuOverviewTableCell = nil;
+    }
+    
     
     if (_cellSelection == 0)
     {
-        _cellIdentifier  = @"MenuTimeTableCell";
-        _cell            = [tableView dequeueReusableCellWithIdentifier:_cellIdentifier];
-        if (_cell == nil)
-        {
-            [[NSBundle mainBundle] loadNibNamed:@"MenuTimeTableCell" owner:self options:nil];
-            _cell = _menuTimeTableCell;
-            self._menuTimeTableCell = nil;
-        }
-        
         // time table
         UIButton *_timeTableIconButton  = (UIButton *) [_cell viewWithTag:1];
         _timeTableIconButton.enabled = true;
         [_timeTableIconButton addTarget:self action:@selector(moveToTimeTable:event:) forControlEvents:UIControlEventTouchUpInside];
-        UIButton *_timeTableTitleButton  = (UIButton *) [_cell viewWithTag:2];
-        _timeTableTitleButton.enabled = true;
-        [_timeTableTitleButton addTarget:self action:@selector(moveToTimeTable:event:) forControlEvents:UIControlEventTouchUpInside];
-        NSMutableAttributedString *_timeTableTitleString = [[NSMutableAttributedString alloc] initWithString:TimeTableOverVCTitle];
-        [_timeTableTitleString addAttribute:NSForegroundColorAttributeName value:_fontColor range:NSMakeRange(0, [_timeTableTitleString length])];
-        [_timeTableTitleButton setAttributedTitle:_timeTableTitleString forState:UIControlStateNormal];
+        [_timeTableIconButton setImage:[UIImage imageNamed:@"timetable1_weiss.png"] forState:UIControlStateNormal];
+        [_timeTableIconButton setImage:[UIImage imageNamed:@"timetable1_hellblau.png"] forState:UIControlStateSelected];
+        [_timeTableIconButton setImage:[UIImage imageNamed:@"timetable1_hellblau.png"] forState:UIControlStateHighlighted];
         
         // mensa
-        UIButton *_mensaIconButton  = (UIButton *) [_cell viewWithTag:3];
+        UIButton *_mensaIconButton  = (UIButton *) [_cell viewWithTag:2];
         _mensaIconButton.enabled = true;
         [_mensaIconButton addTarget:self action:@selector(moveToMensa:event:) forControlEvents:UIControlEventTouchUpInside];
-        UIButton *_mensaTitleButton  = (UIButton *) [_cell viewWithTag:4];
-        _mensaTitleButton.enabled = true;
-        [_mensaTitleButton addTarget:self action:@selector(moveToMensa:event:) forControlEvents:UIControlEventTouchUpInside];
-        NSMutableAttributedString *_mensaTitleString = [[NSMutableAttributedString alloc] initWithString:MensaVCTitle];
-        [_mensaTitleString addAttribute:NSForegroundColorAttributeName value:_fontColor range:NSMakeRange(0, [_mensaTitleString length])];
-        [_mensaTitleButton setAttributedTitle:_mensaTitleString forState:UIControlStateNormal];
+        [_mensaIconButton setImage:[UIImage imageNamed:@"mensa1_weiss.png"] forState:UIControlStateNormal];
+        [_mensaIconButton setImage:[UIImage imageNamed:@"mensa1_hellblau.png"] forState:UIControlStateSelected];
+        [_mensaIconButton setImage:[UIImage imageNamed:@"mensa1_hellblau.png"] forState:UIControlStateHighlighted];
         
         //OeV
-        UIButton *_oevIconButton  = (UIButton *) [_cell viewWithTag:5];
+        UIButton *_oevIconButton  = (UIButton *) [_cell viewWithTag:3];
         _oevIconButton.enabled = true;
         [_oevIconButton addTarget:self action:@selector(moveToOev:event:) forControlEvents:UIControlEventTouchUpInside];
-        UIButton *_oevTitleButton  = (UIButton *) [_cell viewWithTag:6];
-        _oevTitleButton.enabled = true;
-        [_oevTitleButton addTarget:self action:@selector(moveToOev:event:) forControlEvents:UIControlEventTouchUpInside];
-        NSMutableAttributedString *_oevTitleString = [[NSMutableAttributedString alloc] initWithString:PublicTransportVCTitle];
-        [_oevTitleString addAttribute:NSForegroundColorAttributeName value:_fontColor range:NSMakeRange(0, [_oevTitleString length])];
-        [_oevTitleButton setAttributedTitle:_oevTitleString forState:UIControlStateNormal];
+        [_oevIconButton setImage:[UIImage imageNamed:@"public_transportation1_weiss.png"] forState:UIControlStateNormal];
+        [_oevIconButton setImage:[UIImage imageNamed:@"public_transportation1_hellblau.png"] forState:UIControlStateSelected];
+        [_oevIconButton setImage:[UIImage imageNamed:@"public_transportation1_hellblau.png"] forState:UIControlStateHighlighted];
         
-        _cell.contentView.backgroundColor = _cellBackgroundColor;
+        _cell.contentView.backgroundColor = _backgroundColor;
         _cell.backgroundColor = _cell.contentView.backgroundColor;
         _cell.selectionStyle = UITableViewCellSelectionStyleNone;
     }
     
     if (_cellSelection == 1)
     {
-        _cellIdentifier  = @"MenuMensaTableCell";
-        _cell            = [tableView dequeueReusableCellWithIdentifier:_cellIdentifier];
-        if (_cell == nil)
-        {
-            [[NSBundle mainBundle] loadNibNamed:@"MenuMensaTableCell" owner:self options:nil];
-            _cell = _menuMensaTableCell;
-            self._menuMensaTableCell = nil;
-        }
-        
+
         // contact
         UIButton *_contactsIconButton  = (UIButton *) [_cell viewWithTag:1];
         _contactsIconButton.enabled = true;
         [_contactsIconButton addTarget:self action:@selector(moveToContacts:event:) forControlEvents:UIControlEventTouchUpInside];
-        UIButton *_contactsTitleButton  = (UIButton *) [_cell viewWithTag:2];
-        _contactsTitleButton.enabled = true;
-        [_contactsTitleButton addTarget:self action:@selector(moveToContacts:event:) forControlEvents:UIControlEventTouchUpInside];
-        NSMutableAttributedString *_contactsTitleString = [[NSMutableAttributedString alloc] initWithString:ContactsOverVCTitle];
-        [_contactsTitleString addAttribute:NSForegroundColorAttributeName value:_fontColor range:NSMakeRange(0, [_contactsTitleString length])];
-        [_contactsTitleButton setAttributedTitle:_contactsTitleString forState:UIControlStateNormal];
+        [_contactsIconButton setImage:[UIImage imageNamed:@"contacts1_weiss.png"] forState:UIControlStateNormal];
+        [_contactsIconButton setImage:[UIImage imageNamed:@"contacts1_hellblau.png"] forState:UIControlStateSelected];
+        [_contactsIconButton setImage:[UIImage imageNamed:@"contacts1_hellblau.png"] forState:UIControlStateHighlighted];
 
         // card
-        UIButton *_cardIconButton  = (UIButton *) [_cell viewWithTag:3];
+        UIButton *_cardIconButton  = (UIButton *) [_cell viewWithTag:2];
         _cardIconButton.enabled = true;
         [_cardIconButton addTarget:self action:@selector(moveToMaps:event:) forControlEvents:UIControlEventTouchUpInside];
-        UIButton *_cardTitleButton  = (UIButton *) [_cell viewWithTag:4];
-        _cardTitleButton.enabled = true;
-        [_cardTitleButton addTarget:self action:@selector(moveToMaps:event:) forControlEvents:UIControlEventTouchUpInside];
-        NSMutableAttributedString *_cardTitleString = [[NSMutableAttributedString alloc] initWithString:MapsVCTitle];
-        [_cardTitleString addAttribute:NSForegroundColorAttributeName value:_fontColor range:NSMakeRange(0, [_cardTitleString length])];
-        [_cardTitleButton setAttributedTitle:_cardTitleString forState:UIControlStateNormal];
-        
+        [_cardIconButton setImage:[UIImage imageNamed:@"maps1_weiss.png"] forState:UIControlStateNormal];
+        [_cardIconButton setImage:[UIImage imageNamed:@"maps1_hellblau.png"] forState:UIControlStateSelected];
+        [_cardIconButton setImage:[UIImage imageNamed:@"maps1_hellblau.png"] forState:UIControlStateHighlighted];
+
         // social Media
-        UIButton *_socialMediaIconButton  = (UIButton *) [_cell viewWithTag:5];
+        UIButton *_socialMediaIconButton  = (UIButton *) [_cell viewWithTag:3];
         _socialMediaIconButton.enabled = true;
         [_socialMediaIconButton addTarget:self action:@selector(moveToSocialMedia:event:) forControlEvents:UIControlEventTouchUpInside];
-        UIButton *_socialMediaTitleButton  = (UIButton *) [_cell viewWithTag:6];
-        _socialMediaTitleButton.enabled = true;
-        [_socialMediaTitleButton addTarget:self action:@selector(moveToSocialMedia:event:) forControlEvents:UIControlEventTouchUpInside];
-        NSMutableAttributedString *_socialMediaTitleString = [[NSMutableAttributedString alloc] initWithString:SocialMediaVCTitle];
-        [_socialMediaTitleString addAttribute:NSForegroundColorAttributeName value:_fontColor range:NSMakeRange(0, [_socialMediaTitleString length])];
-        [_socialMediaTitleButton setAttributedTitle:_socialMediaTitleString forState:UIControlStateNormal];
+        [_socialMediaIconButton setImage:[UIImage imageNamed:@"social_media1_weiss.png"] forState:UIControlStateNormal];
+        [_socialMediaIconButton setImage:[UIImage imageNamed:@"social_media1_hellblau.png"] forState:UIControlStateSelected];
+        [_socialMediaIconButton setImage:[UIImage imageNamed:@"social_media1_hellblau.png"] forState:UIControlStateHighlighted];
         
-        _cell.contentView.backgroundColor = _cellBackgroundColor;
+        _cell.contentView.backgroundColor = _backgroundColor;
         _cell.backgroundColor = _cell.contentView.backgroundColor;
         _cell.selectionStyle = UITableViewCellSelectionStyleNone;
     }
     
     if (_cellSelection == 2)
     {
-        _cellIdentifier  = @"MenuNewsTableCell";
-        _cell            = [tableView dequeueReusableCellWithIdentifier:_cellIdentifier];
-        if (_cell == nil)
-        {
-            [[NSBundle mainBundle] loadNibNamed:@"MenuNewsTableCell" owner:self options:nil];
-            _cell = _menuNewsTableCell;
-            self._menuNewsTableCell = nil;
-        }
-        
         // settings
         UIButton *_settingsIconButton  = (UIButton *) [_cell viewWithTag:1];
         _settingsIconButton.enabled = true;
         [_settingsIconButton addTarget:self action:@selector(moveToSettings:event:) forControlEvents:UIControlEventTouchUpInside];
-        UIButton *_settingsTitleButton  = (UIButton *) [_cell viewWithTag:2];
-        _settingsTitleButton.enabled = true;
-        [_settingsTitleButton addTarget:self action:@selector(moveToSettings:event:) forControlEvents:UIControlEventTouchUpInside];
-        NSMutableAttributedString *_settingsTitleString = [[NSMutableAttributedString alloc] initWithString:SettingsVCTitle];
-        [_settingsTitleString addAttribute:NSForegroundColorAttributeName value:_fontColor range:NSMakeRange(0, [_settingsTitleString length])];
-        [_settingsTitleButton setAttributedTitle:_settingsTitleString forState:UIControlStateNormal];
+        [_settingsIconButton setImage:[UIImage imageNamed:@"settings1_weiss.png"] forState:UIControlStateNormal];
+        [_settingsIconButton setImage:[UIImage imageNamed:@"settings1_hellblau.png"] forState:UIControlStateSelected];
+        [_settingsIconButton setImage:[UIImage imageNamed:@"settings1_hellblau.png"] forState:UIControlStateHighlighted];
         
         // news
-        UIButton *_newsIconButton  = (UIButton *) [_cell viewWithTag:3];
+        UIButton *_newsIconButton  = (UIButton *) [_cell viewWithTag:2];
         _newsIconButton.enabled = true;
         [_newsIconButton addTarget:self action:@selector(moveToNews:event:) forControlEvents:UIControlEventTouchUpInside];
-        UIButton *_newsTitleButton  = (UIButton *) [_cell viewWithTag:4];
-        _newsTitleButton.enabled = true;
-        [_newsTitleButton addTarget:self action:@selector(moveToNews:event:) forControlEvents:UIControlEventTouchUpInside];
-        NSMutableAttributedString *_newsTitleString = [[NSMutableAttributedString alloc] initWithString:NewsVCSmallTitle];
-        [_newsTitleString addAttribute:NSForegroundColorAttributeName value:_fontColor range:NSMakeRange(0, [_newsTitleString length])];
-        [_newsTitleButton setAttributedTitle:_newsTitleString forState:UIControlStateNormal];
+        [_newsIconButton setImage:[UIImage imageNamed:@"news1_weiss.png"] forState:UIControlStateNormal];
+        [_newsIconButton setImage:[UIImage imageNamed:@"news1_hellblau.png"] forState:UIControlStateSelected];
+        [_newsIconButton setImage:[UIImage imageNamed:@"news1_hellblau.png"] forState:UIControlStateHighlighted];
         
         // events
-        UIButton *_eventsIconButton  = (UIButton *) [_cell viewWithTag:5];
+        UIButton *_eventsIconButton  = (UIButton *) [_cell viewWithTag:3];
         _eventsIconButton.enabled = true;
         [_eventsIconButton addTarget:self action:@selector(moveToEvents:event:) forControlEvents:UIControlEventTouchUpInside];
-        UIButton *_eventsTitleButton  = (UIButton *) [_cell viewWithTag:6];
-        _eventsTitleButton.enabled = true;
-        [_eventsTitleButton addTarget:self action:@selector(moveToEvents:event:) forControlEvents:UIControlEventTouchUpInside];
-        NSMutableAttributedString *_eventsTitleString = [[NSMutableAttributedString alloc] initWithString:EventsVCSmallTitle];
-        [_eventsTitleString addAttribute:NSForegroundColorAttributeName value:_fontColor range:NSMakeRange(0, [_eventsTitleString length])];
-        [_eventsTitleButton setAttributedTitle:_eventsTitleString forState:UIControlStateNormal];
+        [_eventsIconButton setImage:[UIImage imageNamed:@"events1_weiss.png"] forState:UIControlStateNormal];
+        [_eventsIconButton setImage:[UIImage imageNamed:@"events1_hellblau.png"] forState:UIControlStateSelected];
+        [_eventsIconButton setImage:[UIImage imageNamed:@"events1_hellblau.png"] forState:UIControlStateHighlighted];
         
-        _cell.contentView.backgroundColor = _cellBackgroundColor;
+        _cell.contentView.backgroundColor = _backgroundColor;
         _cell.backgroundColor = _cell.contentView.backgroundColor;
         _cell.selectionStyle = UITableViewCellSelectionStyleNone;
     }

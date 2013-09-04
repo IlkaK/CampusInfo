@@ -23,6 +23,24 @@
 		270ACE1D174EA09D00F72E2A /* TwoSlotsThreeRoomsTableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 270ACE1C174EA09D00F72E2A /* TwoSlotsThreeRoomsTableCell.xib */; };
 		271CB2BE17AD196A005CC185 /* EmergencyDetailTableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 271CB2BD17AD196A005CC185 /* EmergencyDetailTableCell.xib */; };
 		271CB2C217AD26F3005CC185 /* EmergencyInformTableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 271CB2C117AD26F2005CC185 /* EmergencyInformTableCell.xib */; };
+		27222D5217D78FC300279075 /* contacts1_hellblau.png in Resources */ = {isa = PBXBuildFile; fileRef = 27222D5117D78FC300279075 /* contacts1_hellblau.png */; };
+		27222D5417D78FD300279075 /* contacts1_weiss.png in Resources */ = {isa = PBXBuildFile; fileRef = 27222D5317D78FD300279075 /* contacts1_weiss.png */; };
+		27222D5917D7958D00279075 /* events1_hellblau.png in Resources */ = {isa = PBXBuildFile; fileRef = 27222D5517D7958D00279075 /* events1_hellblau.png */; };
+		27222D5A17D7958D00279075 /* events1_weiss.png in Resources */ = {isa = PBXBuildFile; fileRef = 27222D5617D7958D00279075 /* events1_weiss.png */; };
+		27222D5B17D7958D00279075 /* mensa1_hellblau.png in Resources */ = {isa = PBXBuildFile; fileRef = 27222D5717D7958D00279075 /* mensa1_hellblau.png */; };
+		27222D5C17D7958D00279075 /* mensa1_weiss.png in Resources */ = {isa = PBXBuildFile; fileRef = 27222D5817D7958D00279075 /* mensa1_weiss.png */; };
+		27222D6917D79A5100279075 /* maps1_hellblau.png in Resources */ = {isa = PBXBuildFile; fileRef = 27222D5D17D79A5100279075 /* maps1_hellblau.png */; };
+		27222D6A17D79A5100279075 /* maps1_weiss.png in Resources */ = {isa = PBXBuildFile; fileRef = 27222D5E17D79A5100279075 /* maps1_weiss.png */; };
+		27222D6B17D79A5100279075 /* news1_hellblau.png in Resources */ = {isa = PBXBuildFile; fileRef = 27222D5F17D79A5100279075 /* news1_hellblau.png */; };
+		27222D6C17D79A5100279075 /* news1_weiss.png in Resources */ = {isa = PBXBuildFile; fileRef = 27222D6017D79A5100279075 /* news1_weiss.png */; };
+		27222D6D17D79A5100279075 /* public_transportation1_hellblau.png in Resources */ = {isa = PBXBuildFile; fileRef = 27222D6117D79A5100279075 /* public_transportation1_hellblau.png */; };
+		27222D6E17D79A5100279075 /* public_transportation1_weiss.png in Resources */ = {isa = PBXBuildFile; fileRef = 27222D6217D79A5100279075 /* public_transportation1_weiss.png */; };
+		27222D6F17D79A5100279075 /* settings1_hellblau.png in Resources */ = {isa = PBXBuildFile; fileRef = 27222D6317D79A5100279075 /* settings1_hellblau.png */; };
+		27222D7017D79A5100279075 /* settings1_weiss.png in Resources */ = {isa = PBXBuildFile; fileRef = 27222D6417D79A5100279075 /* settings1_weiss.png */; };
+		27222D7117D79A5100279075 /* social_media1_hellblau.png in Resources */ = {isa = PBXBuildFile; fileRef = 27222D6517D79A5100279075 /* social_media1_hellblau.png */; };
+		27222D7217D79A5100279075 /* social_media1_weiss.png in Resources */ = {isa = PBXBuildFile; fileRef = 27222D6617D79A5100279075 /* social_media1_weiss.png */; };
+		27222D7317D79A5100279075 /* timetable1_hellblau.png in Resources */ = {isa = PBXBuildFile; fileRef = 27222D6717D79A5100279075 /* timetable1_hellblau.png */; };
+		27222D7417D79A5100279075 /* timetable1_weiss.png in Resources */ = {isa = PBXBuildFile; fileRef = 27222D6817D79A5100279075 /* timetable1_weiss.png */; };
 		2724546817B7EBE4005F979C /* ContactsOverViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2724546617B7EBE4005F979C /* ContactsOverViewController.m */; };
 		2724546917B7EBE4005F979C /* ContactsOverViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2724546717B7EBE4005F979C /* ContactsOverViewController.xib */; };
 		274AE0CD17B528340031E912 /* zhaw_logo.png in Resources */ = {isa = PBXBuildFile; fileRef = 274AE0CC17B528340031E912 /* zhaw_logo.png */; };
@@ -31,8 +49,6 @@
 		275ACAD1173D4AD20091B266 /* TwoSlotSixRoomsTableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 275ACAD0173D4AD20091B266 /* TwoSlotSixRoomsTableCell.xib */; };
 		2763A9E8174E62B10051255C /* ErrorMessageCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2763A9E7174E62B10051255C /* ErrorMessageCell.xib */; };
 		27650DEF156D749E004B0FA2 /* FourSlotsOneRoomTableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 27650DEE156D749E004B0FA2 /* FourSlotsOneRoomTableCell.xib */; };
-		276754EF17BBFCE10052B55C /* events1.png in Resources */ = {isa = PBXBuildFile; fileRef = 276754EE17BBFCE10052B55C /* events1.png */; };
-		276754F117BBFEB40052B55C /* timetable.png in Resources */ = {isa = PBXBuildFile; fileRef = 276754F017BBFEB40052B55C /* timetable.png */; };
 		276754F317BC02850052B55C /* contacts1_for_tab.png in Resources */ = {isa = PBXBuildFile; fileRef = 276754F217BC02850052B55C /* contacts1_for_tab.png */; };
 		276754F517BC048D0052B55C /* public_transportation1_for_tab.png in Resources */ = {isa = PBXBuildFile; fileRef = 276754F417BC048D0052B55C /* public_transportation1_for_tab.png */; };
 		276754F717BC05610052B55C /* home1_for_tab.png in Resources */ = {isa = PBXBuildFile; fileRef = 276754F617BC05600052B55C /* home1_for_tab.png */; };
@@ -58,7 +74,6 @@
 		27C217D1154D47A700BA423D /* DetailTableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 27C217D0154D47A700BA423D /* DetailTableCell.xib */; };
 		27CCE305154414190057D9F8 /* TimeTableDetailController.m in Sources */ = {isa = PBXBuildFile; fileRef = 27CCE303154414180057D9F8 /* TimeTableDetailController.m */; };
 		27CCE306154414190057D9F8 /* TimeTableDetailController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 27CCE304154414180057D9F8 /* TimeTableDetailController.xib */; };
-		27CFFAC117B2D02A009C66A8 /* MenuNewsTableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 27CFFAC017B2D02A009C66A8 /* MenuNewsTableCell.xib */; };
 		27E0AA9C1550420C00D83EC1 /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 27E0AA9B1550420C00D83EC1 /* Icon.png */; };
 		27E8229E155D214A006EA12D /* ScheduleEventRealizationDto.m in Sources */ = {isa = PBXBuildFile; fileRef = 27E8229D155D214A006EA12D /* ScheduleEventRealizationDto.m */; };
 		27FBF7281551A83600C09ED9 /* StartpageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 27FBF7261551A83600C09ED9 /* StartpageViewController.m */; };
@@ -83,11 +98,6 @@
 		A3A551461525EB8B00BCAF3D /* SlotDto.m in Sources */ = {isa = PBXBuildFile; fileRef = A3A551451525EB8B00BCAF3D /* SlotDto.m */; };
 		A3A8654C1520A0C90074FFE5 /* TimeTableOverviewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A3A8654A1520A0C90074FFE5 /* TimeTableOverviewController.m */; };
 		A3A8654D1520A0C90074FFE5 /* TimeTableOverviewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A3A8654B1520A0C90074FFE5 /* TimeTableOverviewController.xib */; };
-		E101908A17BB6FA700242A87 /* contacts1.png in Resources */ = {isa = PBXBuildFile; fileRef = E101908717BB6FA700242A87 /* contacts1.png */; };
-		E101908B17BB6FA700242A87 /* news1.png in Resources */ = {isa = PBXBuildFile; fileRef = E101908817BB6FA700242A87 /* news1.png */; };
-		E101908C17BB6FA700242A87 /* settings1.png in Resources */ = {isa = PBXBuildFile; fileRef = E101908917BB6FA700242A87 /* settings1.png */; };
-		E101908F17BB703B00242A87 /* mensa1.png in Resources */ = {isa = PBXBuildFile; fileRef = E101908D17BB703B00242A87 /* mensa1.png */; };
-		E101909017BB703B00242A87 /* public_transportation1.png in Resources */ = {isa = PBXBuildFile; fileRef = E101908E17BB703B00242A87 /* public_transportation1.png */; };
 		E101909417BBAE9D00242A87 /* NewsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E101909217BBAE9D00242A87 /* NewsViewController.m */; };
 		E101909517BBAE9D00242A87 /* NewsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E101909317BBAE9D00242A87 /* NewsViewController.xib */; };
 		E10190A217BBE3E300242A87 /* EventsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E10190A017BBE3E300242A87 /* EventsViewController.m */; };
@@ -145,8 +155,7 @@
 		E13AA95D17B269580061E0ED /* ClassesDto.m in Sources */ = {isa = PBXBuildFile; fileRef = E13AA95C17B269580061E0ED /* ClassesDto.m */; };
 		E13AA96517B285600061E0ED /* MenuOverviewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E13AA96317B285600061E0ED /* MenuOverviewController.m */; };
 		E13AA96617B285600061E0ED /* MenuOverviewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E13AA96417B285600061E0ED /* MenuOverviewController.xib */; };
-		E13AA96817B286D40061E0ED /* MenuTimeTableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E13AA96717B286D40061E0ED /* MenuTimeTableCell.xib */; };
-		E13AA96A17B28E400061E0ED /* MenuMensaTableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E13AA96917B28E400061E0ED /* MenuMensaTableCell.xib */; };
+		E13AA96A17B28E400061E0ED /* MenuOverviewTableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E13AA96917B28E400061E0ED /* MenuOverviewTableCell.xib */; };
 		E13D3B5B17412F0500F534DB /* ChooseDateViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E13D3B5917412F0500F534DB /* ChooseDateViewController.m */; };
 		E13D3B5C17412F0500F534DB /* ChooseDateViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E13D3B5A17412F0500F534DB /* ChooseDateViewController.xib */; };
 		E153641F17997C0E00F18559 /* catering.png in Resources */ = {isa = PBXBuildFile; fileRef = E153641717997C0E00F18559 /* catering.png */; };
@@ -168,7 +177,6 @@
 		E15AA5AF17C23167007E9F00 /* TechnikumViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E15AA5AD17C23167007E9F00 /* TechnikumViewController.xib */; };
 		E15AA5B517C23197007E9F00 /* ZurichViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E15AA5B317C23197007E9F00 /* ZurichViewController.m */; };
 		E15AA5B617C23197007E9F00 /* ZurichViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E15AA5B417C23197007E9F00 /* ZurichViewController.xib */; };
-		E15AA5B817C23BF8007E9F00 /* maps1.png in Resources */ = {isa = PBXBuildFile; fileRef = E15AA5B717C23BF8007E9F00 /* maps1.png */; };
 		E15AA5BE17C24D38007E9F00 /* EventsTableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E15AA5BD17C24D38007E9F00 /* EventsTableCell.xib */; };
 		E16C642517ABDC0100BEDBB3 /* ContactsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E16C642317ABDC0100BEDBB3 /* ContactsViewController.m */; };
 		E16C642617ABDC0100BEDBB3 /* ContactsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E16C642417ABDC0100BEDBB3 /* ContactsViewController.xib */; };
@@ -236,6 +244,24 @@
 		270ACE1C174EA09D00F72E2A /* TwoSlotsThreeRoomsTableCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TwoSlotsThreeRoomsTableCell.xib; sourceTree = "<group>"; };
 		271CB2BD17AD196A005CC185 /* EmergencyDetailTableCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EmergencyDetailTableCell.xib; sourceTree = "<group>"; };
 		271CB2C117AD26F2005CC185 /* EmergencyInformTableCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EmergencyInformTableCell.xib; sourceTree = "<group>"; };
+		27222D5117D78FC300279075 /* contacts1_hellblau.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = contacts1_hellblau.png; path = CampusInfo1/resources/menu_overview_icons/contacts1_hellblau.png; sourceTree = "<group>"; };
+		27222D5317D78FD300279075 /* contacts1_weiss.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = contacts1_weiss.png; path = CampusInfo1/resources/menu_overview_icons/contacts1_weiss.png; sourceTree = "<group>"; };
+		27222D5517D7958D00279075 /* events1_hellblau.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = events1_hellblau.png; path = CampusInfo1/resources/menu_overview_icons/events1_hellblau.png; sourceTree = "<group>"; };
+		27222D5617D7958D00279075 /* events1_weiss.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = events1_weiss.png; path = CampusInfo1/resources/menu_overview_icons/events1_weiss.png; sourceTree = "<group>"; };
+		27222D5717D7958D00279075 /* mensa1_hellblau.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = mensa1_hellblau.png; path = CampusInfo1/resources/menu_overview_icons/mensa1_hellblau.png; sourceTree = "<group>"; };
+		27222D5817D7958D00279075 /* mensa1_weiss.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = mensa1_weiss.png; path = CampusInfo1/resources/menu_overview_icons/mensa1_weiss.png; sourceTree = "<group>"; };
+		27222D5D17D79A5100279075 /* maps1_hellblau.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = maps1_hellblau.png; path = CampusInfo1/resources/menu_overview_icons/maps1_hellblau.png; sourceTree = "<group>"; };
+		27222D5E17D79A5100279075 /* maps1_weiss.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = maps1_weiss.png; path = CampusInfo1/resources/menu_overview_icons/maps1_weiss.png; sourceTree = "<group>"; };
+		27222D5F17D79A5100279075 /* news1_hellblau.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = news1_hellblau.png; path = CampusInfo1/resources/menu_overview_icons/news1_hellblau.png; sourceTree = "<group>"; };
+		27222D6017D79A5100279075 /* news1_weiss.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = news1_weiss.png; path = CampusInfo1/resources/menu_overview_icons/news1_weiss.png; sourceTree = "<group>"; };
+		27222D6117D79A5100279075 /* public_transportation1_hellblau.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = public_transportation1_hellblau.png; path = CampusInfo1/resources/menu_overview_icons/public_transportation1_hellblau.png; sourceTree = "<group>"; };
+		27222D6217D79A5100279075 /* public_transportation1_weiss.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = public_transportation1_weiss.png; path = CampusInfo1/resources/menu_overview_icons/public_transportation1_weiss.png; sourceTree = "<group>"; };
+		27222D6317D79A5100279075 /* settings1_hellblau.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = settings1_hellblau.png; path = CampusInfo1/resources/menu_overview_icons/settings1_hellblau.png; sourceTree = "<group>"; };
+		27222D6417D79A5100279075 /* settings1_weiss.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = settings1_weiss.png; path = CampusInfo1/resources/menu_overview_icons/settings1_weiss.png; sourceTree = "<group>"; };
+		27222D6517D79A5100279075 /* social_media1_hellblau.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = social_media1_hellblau.png; path = CampusInfo1/resources/menu_overview_icons/social_media1_hellblau.png; sourceTree = "<group>"; };
+		27222D6617D79A5100279075 /* social_media1_weiss.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = social_media1_weiss.png; path = CampusInfo1/resources/menu_overview_icons/social_media1_weiss.png; sourceTree = "<group>"; };
+		27222D6717D79A5100279075 /* timetable1_hellblau.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = timetable1_hellblau.png; path = CampusInfo1/resources/menu_overview_icons/timetable1_hellblau.png; sourceTree = "<group>"; };
+		27222D6817D79A5100279075 /* timetable1_weiss.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = timetable1_weiss.png; path = CampusInfo1/resources/menu_overview_icons/timetable1_weiss.png; sourceTree = "<group>"; };
 		2724546517B7EBE4005F979C /* ContactsOverViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContactsOverViewController.h; sourceTree = "<group>"; };
 		2724546617B7EBE4005F979C /* ContactsOverViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContactsOverViewController.m; sourceTree = "<group>"; };
 		2724546717B7EBE4005F979C /* ContactsOverViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ContactsOverViewController.xib; sourceTree = "<group>"; };
@@ -245,8 +271,6 @@
 		275ACAD0173D4AD20091B266 /* TwoSlotSixRoomsTableCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TwoSlotSixRoomsTableCell.xib; sourceTree = "<group>"; };
 		2763A9E7174E62B10051255C /* ErrorMessageCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ErrorMessageCell.xib; sourceTree = "<group>"; };
 		27650DEE156D749E004B0FA2 /* FourSlotsOneRoomTableCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FourSlotsOneRoomTableCell.xib; sourceTree = "<group>"; };
-		276754EE17BBFCE10052B55C /* events1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = events1.png; path = CampusInfo1/resources/icons/events1.png; sourceTree = "<group>"; };
-		276754F017BBFEB40052B55C /* timetable.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = timetable.png; path = CampusInfo1/resources/icons/timetable.png; sourceTree = "<group>"; };
 		276754F217BC02850052B55C /* contacts1_for_tab.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = contacts1_for_tab.png; path = CampusInfo1/resources/icons/contacts1_for_tab.png; sourceTree = "<group>"; };
 		276754F417BC048D0052B55C /* public_transportation1_for_tab.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = public_transportation1_for_tab.png; path = CampusInfo1/resources/icons/public_transportation1_for_tab.png; sourceTree = "<group>"; };
 		276754F617BC05600052B55C /* home1_for_tab.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = home1_for_tab.png; path = CampusInfo1/resources/icons/home1_for_tab.png; sourceTree = "<group>"; };
@@ -277,7 +301,6 @@
 		27CCE302154414180057D9F8 /* TimeTableDetailController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TimeTableDetailController.h; sourceTree = "<group>"; };
 		27CCE303154414180057D9F8 /* TimeTableDetailController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TimeTableDetailController.m; sourceTree = "<group>"; };
 		27CCE304154414180057D9F8 /* TimeTableDetailController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TimeTableDetailController.xib; sourceTree = "<group>"; };
-		27CFFAC017B2D02A009C66A8 /* MenuNewsTableCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MenuNewsTableCell.xib; sourceTree = "<group>"; };
 		27E0AA9B1550420C00D83EC1 /* Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Icon.png; path = CampusInfo1/resources/Icon.png; sourceTree = "<group>"; };
 		27E8229C155D214A006EA12D /* ScheduleEventRealizationDto.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ScheduleEventRealizationDto.h; sourceTree = "<group>"; };
 		27E8229D155D214A006EA12D /* ScheduleEventRealizationDto.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ScheduleEventRealizationDto.m; sourceTree = "<group>"; };
@@ -316,11 +339,6 @@
 		A3A865491520A0C90074FFE5 /* TimeTableOverviewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TimeTableOverviewController.h; sourceTree = "<group>"; };
 		A3A8654A1520A0C90074FFE5 /* TimeTableOverviewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TimeTableOverviewController.m; sourceTree = "<group>"; };
 		A3A8654B1520A0C90074FFE5 /* TimeTableOverviewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TimeTableOverviewController.xib; sourceTree = "<group>"; };
-		E101908717BB6FA700242A87 /* contacts1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = contacts1.png; path = CampusInfo1/resources/icons/contacts1.png; sourceTree = "<group>"; };
-		E101908817BB6FA700242A87 /* news1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = news1.png; path = CampusInfo1/resources/icons/news1.png; sourceTree = "<group>"; };
-		E101908917BB6FA700242A87 /* settings1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = settings1.png; path = CampusInfo1/resources/icons/settings1.png; sourceTree = "<group>"; };
-		E101908D17BB703B00242A87 /* mensa1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = mensa1.png; path = CampusInfo1/resources/icons/mensa1.png; sourceTree = "<group>"; };
-		E101908E17BB703B00242A87 /* public_transportation1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = public_transportation1.png; path = CampusInfo1/resources/icons/public_transportation1.png; sourceTree = "<group>"; };
 		E101909117BBAE9D00242A87 /* NewsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewsViewController.h; sourceTree = "<group>"; };
 		E101909217BBAE9D00242A87 /* NewsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewsViewController.m; sourceTree = "<group>"; };
 		E101909317BBAE9D00242A87 /* NewsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NewsViewController.xib; sourceTree = "<group>"; };
@@ -390,8 +408,7 @@
 		E13AA96217B285600061E0ED /* MenuOverviewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MenuOverviewController.h; sourceTree = "<group>"; };
 		E13AA96317B285600061E0ED /* MenuOverviewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MenuOverviewController.m; sourceTree = "<group>"; };
 		E13AA96417B285600061E0ED /* MenuOverviewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MenuOverviewController.xib; sourceTree = "<group>"; };
-		E13AA96717B286D40061E0ED /* MenuTimeTableCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MenuTimeTableCell.xib; sourceTree = "<group>"; };
-		E13AA96917B28E400061E0ED /* MenuMensaTableCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MenuMensaTableCell.xib; sourceTree = "<group>"; };
+		E13AA96917B28E400061E0ED /* MenuOverviewTableCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MenuOverviewTableCell.xib; sourceTree = "<group>"; };
 		E13D3B5817412F0500F534DB /* ChooseDateViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChooseDateViewController.h; sourceTree = "<group>"; };
 		E13D3B5917412F0500F534DB /* ChooseDateViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChooseDateViewController.m; sourceTree = "<group>"; };
 		E13D3B5A17412F0500F534DB /* ChooseDateViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ChooseDateViewController.xib; sourceTree = "<group>"; };
@@ -422,7 +439,6 @@
 		E15AA5B217C23197007E9F00 /* ZurichViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZurichViewController.h; sourceTree = "<group>"; };
 		E15AA5B317C23197007E9F00 /* ZurichViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZurichViewController.m; sourceTree = "<group>"; };
 		E15AA5B417C23197007E9F00 /* ZurichViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ZurichViewController.xib; sourceTree = "<group>"; };
-		E15AA5B717C23BF8007E9F00 /* maps1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = maps1.png; path = CampusInfo1/resources/icons/maps1.png; sourceTree = "<group>"; };
 		E15AA5BD17C24D38007E9F00 /* EventsTableCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EventsTableCell.xib; sourceTree = "<group>"; };
 		E16C642217ABDC0100BEDBB3 /* ContactsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContactsViewController.h; sourceTree = "<group>"; };
 		E16C642317ABDC0100BEDBB3 /* ContactsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContactsViewController.m; sourceTree = "<group>"; };
@@ -546,6 +562,31 @@
 				270A753817CCCE5C00DEAA94 /* 044_actual_lesson.png */,
 			);
 			name = actual_lesson;
+			sourceTree = "<group>";
+		};
+		27222D5017D784B100279075 /* menu_overview_icons */ = {
+			isa = PBXGroup;
+			children = (
+				27222D5D17D79A5100279075 /* maps1_hellblau.png */,
+				27222D5E17D79A5100279075 /* maps1_weiss.png */,
+				27222D5F17D79A5100279075 /* news1_hellblau.png */,
+				27222D6017D79A5100279075 /* news1_weiss.png */,
+				27222D6117D79A5100279075 /* public_transportation1_hellblau.png */,
+				27222D6217D79A5100279075 /* public_transportation1_weiss.png */,
+				27222D6317D79A5100279075 /* settings1_hellblau.png */,
+				27222D6417D79A5100279075 /* settings1_weiss.png */,
+				27222D6517D79A5100279075 /* social_media1_hellblau.png */,
+				27222D6617D79A5100279075 /* social_media1_weiss.png */,
+				27222D6717D79A5100279075 /* timetable1_hellblau.png */,
+				27222D6817D79A5100279075 /* timetable1_weiss.png */,
+				27222D5517D7958D00279075 /* events1_hellblau.png */,
+				27222D5617D7958D00279075 /* events1_weiss.png */,
+				27222D5717D7958D00279075 /* mensa1_hellblau.png */,
+				27222D5817D7958D00279075 /* mensa1_weiss.png */,
+				27222D5317D78FD300279075 /* contacts1_weiss.png */,
+				27222D5117D78FC300279075 /* contacts1_hellblau.png */,
+			);
+			name = menu_overview_icons;
 			sourceTree = "<group>";
 		};
 		2724546417B7EBB7005F979C /* Contacts */ = {
@@ -717,6 +758,7 @@
 		A35A344E152082F600181E3F /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				27222D5017D784B100279075 /* menu_overview_icons */,
 				E1A6AAD317CF366400CC0EDD /* maps */,
 				270A753717CCCE1100DEAA94 /* actual_lesson */,
 				A35A34501520830700181E3F /* Icon */,
@@ -727,17 +769,9 @@
 		A35A34501520830700181E3F /* Icon */ = {
 			isa = PBXGroup;
 			children = (
-				E15AA5B717C23BF8007E9F00 /* maps1.png */,
 				276754F617BC05600052B55C /* home1_for_tab.png */,
 				276754F417BC048D0052B55C /* public_transportation1_for_tab.png */,
 				276754F217BC02850052B55C /* contacts1_for_tab.png */,
-				276754F017BBFEB40052B55C /* timetable.png */,
-				276754EE17BBFCE10052B55C /* events1.png */,
-				E101908D17BB703B00242A87 /* mensa1.png */,
-				E101908E17BB703B00242A87 /* public_transportation1.png */,
-				E101908717BB6FA700242A87 /* contacts1.png */,
-				E101908817BB6FA700242A87 /* news1.png */,
-				E101908917BB6FA700242A87 /* settings1.png */,
 				274AE0CC17B528340031E912 /* zhaw_logo.png */,
 				E1ACAF4B17B3836C00F2630B /* ZHAW-App-Banner.png */,
 				E10D601317AFAF4100036690 /* facebook.png */,
@@ -952,9 +986,7 @@
 				E13AA96217B285600061E0ED /* MenuOverviewController.h */,
 				E13AA96317B285600061E0ED /* MenuOverviewController.m */,
 				E13AA96417B285600061E0ED /* MenuOverviewController.xib */,
-				E13AA96717B286D40061E0ED /* MenuTimeTableCell.xib */,
-				E13AA96917B28E400061E0ED /* MenuMensaTableCell.xib */,
-				27CFFAC017B2D02A009C66A8 /* MenuNewsTableCell.xib */,
+				E13AA96917B28E400061E0ED /* MenuOverviewTableCell.xib */,
 			);
 			name = MenuOverview;
 			sourceTree = "<group>";
@@ -1193,22 +1225,13 @@
 				E10D601C17AFAF4100036690 /* youtube.png in Resources */,
 				E10D601F17AFDA4500036690 /* Icon@2x.png in Resources */,
 				E13AA96617B285600061E0ED /* MenuOverviewController.xib in Resources */,
-				E13AA96817B286D40061E0ED /* MenuTimeTableCell.xib in Resources */,
-				E13AA96A17B28E400061E0ED /* MenuMensaTableCell.xib in Resources */,
-				27CFFAC117B2D02A009C66A8 /* MenuNewsTableCell.xib in Resources */,
+				E13AA96A17B28E400061E0ED /* MenuOverviewTableCell.xib in Resources */,
 				E1ACAF4C17B3836C00F2630B /* ZHAW-App-Banner.png in Resources */,
 				274AE0CD17B528340031E912 /* zhaw_logo.png in Resources */,
 				2724546917B7EBE4005F979C /* ContactsOverViewController.xib in Resources */,
-				E101908A17BB6FA700242A87 /* contacts1.png in Resources */,
-				E101908B17BB6FA700242A87 /* news1.png in Resources */,
-				E101908C17BB6FA700242A87 /* settings1.png in Resources */,
-				E101908F17BB703B00242A87 /* mensa1.png in Resources */,
-				E101909017BB703B00242A87 /* public_transportation1.png in Resources */,
 				E101909517BBAE9D00242A87 /* NewsViewController.xib in Resources */,
 				E10190A317BBE3E300242A87 /* EventsViewController.xib in Resources */,
 				E10190A917BBE5A700242A87 /* PublicTransportViewController.xib in Resources */,
-				276754EF17BBFCE10052B55C /* events1.png in Resources */,
-				276754F117BBFEB40052B55C /* timetable.png in Resources */,
 				276754F317BC02850052B55C /* contacts1_for_tab.png in Resources */,
 				276754F517BC048D0052B55C /* public_transportation1_for_tab.png in Resources */,
 				276754F717BC05610052B55C /* home1_for_tab.png in Resources */,
@@ -1217,7 +1240,6 @@
 				E15AA5AA17C23155007E9F00 /* MapsViewController.xib in Resources */,
 				E15AA5AF17C23167007E9F00 /* TechnikumViewController.xib in Resources */,
 				E15AA5B617C23197007E9F00 /* ZurichViewController.xib in Resources */,
-				E15AA5B817C23BF8007E9F00 /* maps1.png in Resources */,
 				E15AA5BE17C24D38007E9F00 /* EventsTableCell.xib in Resources */,
 				E1D35BDA17C385BC00CCDB1D /* Icon.png in Resources */,
 				E1D35BDC17C385C900CCDB1D /* Icon@2x.png in Resources */,
@@ -1235,6 +1257,24 @@
 				E1A6AAD817CF367800CC0EDD /* Toessfeld.pdf in Resources */,
 				E1A6AAD917CF367800CC0EDD /* Zuerich.pdf in Resources */,
 				E1DC175817D0D35D00DB51F6 /* ToessfeldViewController.xib in Resources */,
+				27222D5217D78FC300279075 /* contacts1_hellblau.png in Resources */,
+				27222D5417D78FD300279075 /* contacts1_weiss.png in Resources */,
+				27222D5917D7958D00279075 /* events1_hellblau.png in Resources */,
+				27222D5A17D7958D00279075 /* events1_weiss.png in Resources */,
+				27222D5B17D7958D00279075 /* mensa1_hellblau.png in Resources */,
+				27222D5C17D7958D00279075 /* mensa1_weiss.png in Resources */,
+				27222D6917D79A5100279075 /* maps1_hellblau.png in Resources */,
+				27222D6A17D79A5100279075 /* maps1_weiss.png in Resources */,
+				27222D6B17D79A5100279075 /* news1_hellblau.png in Resources */,
+				27222D6C17D79A5100279075 /* news1_weiss.png in Resources */,
+				27222D6D17D79A5100279075 /* public_transportation1_hellblau.png in Resources */,
+				27222D6E17D79A5100279075 /* public_transportation1_weiss.png in Resources */,
+				27222D6F17D79A5100279075 /* settings1_hellblau.png in Resources */,
+				27222D7017D79A5100279075 /* settings1_weiss.png in Resources */,
+				27222D7117D79A5100279075 /* social_media1_hellblau.png in Resources */,
+				27222D7217D79A5100279075 /* social_media1_weiss.png in Resources */,
+				27222D7317D79A5100279075 /* timetable1_hellblau.png in Resources */,
+				27222D7417D79A5100279075 /* timetable1_weiss.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
