@@ -52,7 +52,10 @@
 - (IBAction)publicStopTextFieldChanged:(id)sender
 {
     _publicStopTextFieldString = ((UITextField*)sender).text;
+    
     [self getStationArray:_publicStopTextFieldString];
+    _publicStopTableView.hidden = NO;
+
 }
 
 
@@ -127,9 +130,12 @@
 {
     [super viewWillAppear:animated];
     _actualStation = nil;
-    _publicStopTextField.text = _publicStopTextFieldString;
     
-    [self getStationArray:_publicStopTextFieldString];
+    
+    _publicStopTableView.hidden = YES;
+
+    
+    
 }
 
 - (void)viewDidUnload

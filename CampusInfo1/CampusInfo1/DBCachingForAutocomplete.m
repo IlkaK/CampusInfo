@@ -131,7 +131,7 @@
     
     if (sqlite3_open([_timeTableDBPath UTF8String], &_timeTableNamesDB) == SQLITE_OK)
     {
-        NSString *_insertSQL = [NSString stringWithFormat:@"INSERT INTO %@ (name, shortname) VALUES (\"%@\")",tableName, stringToStore];
+        NSString *_insertSQL = [NSString stringWithFormat:@"INSERT INTO %@ (name) VALUES (\"%@\")",tableName, stringToStore];
             
         sqlite3_prepare_v2(_timeTableNamesDB, [_insertSQL UTF8String],-1, &_statement, nil);
             

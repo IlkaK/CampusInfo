@@ -20,10 +20,6 @@
 @synthesize _publicTransportNavigationItem;
 @synthesize _publicTransportNavigationLabel;
 
-@synthesize _fromButton;
-@synthesize _searchButton;
-@synthesize _toButton;
-
 @synthesize _pubilcTransportOverviewTableCell;
 @synthesize _publicTransportTableView;
 
@@ -34,15 +30,28 @@
 
 @synthesize _startStation;
 @synthesize _stopStation;
-@synthesize _changedOneStation;
+@synthesize _changedStartStation;
+@synthesize _changedStopStation;
 
 @synthesize _dbCachingForAutocomplete;
 @synthesize _storedStartStationArray;
 @synthesize _storedStopStationArray;
 
+@synthesize _startLabel;
+@synthesize _changeStartButtonIsActivated;
 @synthesize _lastStart1Button;
 @synthesize _lastStart2Button;
-@synthesize _lastStart3Button;
+@synthesize _chooseNewStartButton;
+
+@synthesize _stopLabel;
+@synthesize _changeStopButtonIsActivated;
+@synthesize _lastStop1Button;
+@synthesize _lastStop2Button;
+@synthesize _chooseNewStopButton;
+
+@synthesize _searchButton;
+
+
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -68,6 +77,11 @@
     _dateFormatter = [[DateFormation alloc] init];
     _dbCachingForAutocomplete = [[DBCachingForAutocomplete alloc]init];
     
+    _changeStartButtonIsActivated = NO;
+    _changeStopButtonIsActivated = NO;
+    _changedStartStation = NO;
+    _changedStopStation = NO;
+    
     // title
     UIBarButtonItem *backButtonItem = [[UIBarButtonItem alloc] initWithTitle:LeftArrowSymbol style:UIBarButtonItemStylePlain target:self action:@selector(moveBackToMenuOverview:)];
     
@@ -89,8 +103,6 @@
     
     [_publicTransportNavigationLabel setBackgroundColor:_zhawColor._zhawOriginalBlue];
     
-    [_fromButton useAlertStyle];
-    [_toButton useAlertStyle];
     [_searchButton useAlertStyle];
     
     if (_publicStopVC == nil)
@@ -99,27 +111,54 @@
 	}
     _publicStopVC.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
     
-    _startStation   = _fromButton.titleLabel.text;
-    _stopStation    = _toButton.titleLabel.text;
-    _changedOneStation = NO;
-    
     _storedStartStationArray = [_dbCachingForAutocomplete getStartStations];
     _storedStopStationArray  = [_dbCachingForAutocomplete getStopStations];
-    //NSLog(@"viewDidLoad -> _startStation: %@ _stopStation: %@", _startStation, _stopStation);
+    NSLog(@"viewDidLoad -> _storedStartStationArray count: %i", [_storedStartStationArray count]);
+    NSLog(@"viewDidLoad -> _storedStopStationArray  count: %i", [_storedStopStationArray count]);
+    
+    if([_storedStartStationArray count] >= 1)
+    {
+        [_lastStart1Button setTitle:[_storedStartStationArray objectAtIndex:0] forState:UIControlStateNormal];
+        
+        if([_storedStartStationArray count] >= 2)
+        {
+            [_lastStart2Button setTitle:[_storedStartStationArray objectAtIndex:1] forState:UIControlStateNormal];
+        }
+    }
+    if([_storedStopStationArray count] >= 1)
+    {
+        [_lastStop1Button setTitle:[_storedStopStationArray objectAtIndex:0] forState:UIControlStateNormal];
+        
+        if([_storedStopStationArray count] >= 2)
+        {
+            [_lastStop1Button setTitle:[_storedStopStationArray objectAtIndex:1] forState:UIControlStateNormal];
+        }
+    }
     
     
     // set start/stop buttons with last results
     [self.view bringSubviewToFront:_lastStart1Button];
     [self.view bringSubviewToFront:_lastStart2Button];
-    [self.view bringSubviewToFront:_lastStart3Button];
-    _lastStart1Button.hidden = YES;
-    _lastStart2Button.hidden = YES;
-    _lastStart3Button.hidden = YES;
-    _lastStart1Button.titleLabel.text = @"";
-    _lastStart2Button.titleLabel.text = @"";
-    _lastStart3Button.titleLabel.text = @"";
+    [self.view bringSubviewToFront:_chooseNewStartButton];
+
+    [self.view bringSubviewToFront:_lastStop1Button];
+    [self.view bringSubviewToFront:_lastStop2Button];
+    [self.view bringSubviewToFront:_chooseNewStopButton];
     
+    _lastStart1Button.hidden        = YES;
+    _lastStart2Button.hidden        = YES;
+    _chooseNewStartButton.hidden    = YES;
+
+    _lastStop1Button.hidden        = YES;
+    _lastStop2Button.hidden        = YES;
+    _chooseNewStopButton.hidden    = YES;
     
+    NSMutableAttributedString *_titleString = [[NSMutableAttributedString alloc] initWithString:@"neu..."];
+    [_titleString addAttribute:NSUnderlineStyleAttributeName value:[NSNumber numberWithInteger:NSUnderlineStyleSingle] range:NSMakeRange(0, [_titleString length])];
+    [_titleString addAttribute:NSForegroundColorAttributeName value:_zhawColor._zhawDarkGrey range:NSMakeRange(0, [_titleString length])];
+    
+    [_chooseNewStartButton  setAttributedTitle:_titleString forState:UIControlStateNormal];
+    [_chooseNewStopButton   setAttributedTitle:_titleString forState:UIControlStateNormal];
 }
 
 
@@ -127,62 +166,29 @@
 {
     [super viewWillAppear:animated];
     
-    if(_publicStopVC._actualStation != nil)
+    // TODO set start or stop label and _changedStart/StopStation when coming back from publicStopVC
+    
+    if(_publicStopVC._actualStation._name != nil
+       && (_changedStopStation || _changedStartStation ))
     {
         NSString *_stationName =  _publicStopVC._actualStation._name;
         //NSLog(@"actual Station: %@",_stationName);
-        if ([_publicStopVC._actualStationType isEqualToString:@"to"])
+        if ([_publicStopVC._actualStationType isEqualToString:@"from"])
         {
-            [_toButton setTitle:_stationName forState:UIControlStateNormal];
+            _startLabel.text = _stationName;
+            _startStation = _stationName;
+            //_changedStartStation = NO;
+            [_dbCachingForAutocomplete addStartStation:_startStation];
         }
         else
         {
-            [_fromButton setTitle:_stationName forState:UIControlStateNormal];
-        }
-        
-    }
-    
-    if (  [_fromButton.titleLabel.text isEqualToString:_startStation]
-        &&  [_toButton.titleLabel.text isEqualToString:_stopStation]
-        )
-    {
-        _changedOneStation = NO;
-    }
-    else
-    {
-        _changedOneStation = YES;
-        
-        if (![_fromButton.titleLabel.text isEqualToString:_startStation])
-        {
-            _startStation   = _fromButton.titleLabel.text;
-            [_dbCachingForAutocomplete addStartStation:_startStation];
-            
-            if([_lastStart1Button.titleLabel.text isEqualToString:@""])
-            {
-                _lastStart1Button.titleLabel.text = _startStation;
-            }
-            else
-            {
-                if([_lastStart2Button.titleLabel.text isEqualToString:@""])
-                {
-                    _lastStart2Button.titleLabel.text = _startStation;
-                }
-                else
-                {
-                    if([_lastStart3Button.titleLabel.text isEqualToString:@""])
-                    {
-                        _lastStart3Button.titleLabel.text = _startStation;
-                    }
-                }
-            }
-            
-        }
-        if (![_toButton.titleLabel.text isEqualToString:_stopStation])
-        {
-            _stopStation   = _toButton.titleLabel.text;
+            _stopLabel.text = _stationName;
+            _stopStation = _stationName;
+            //_changedStopStation = NO;
             [_dbCachingForAutocomplete addStopStation:_stopStation];
         }
     }
+    
     [self getConnectionArray];
 }
 
@@ -191,14 +197,11 @@
 {
     
     //[NSThread detachNewThreadSelector:@selector(threadWaitForChangeActivityIndicator:) toTarget:self withObject:nil];
-    
-
-    
     //[_waitForChangeActivityIndicator stopAnimating];
     //_waitForChangeActivityIndicator.hidden = YES;
     
     if ([_connectionArray._connections count] == 0
-        || _changedOneStation)
+        || _changedStartStation || _changedStopStation)
     {
         [_connectionArray getData: _startStation
                   withStopStation:_stopStation];
@@ -212,6 +215,7 @@
         //_noConnectionLabel.hidden = YES;
 
     }
+    
     [_publicTransportTableView reloadData];
 }
 
@@ -229,48 +233,189 @@
     _publicTransportNavigationBar = nil;
     _publicTransportNavigationItem = nil;
     _publicTransportNavigationLabel = nil;
-    _fromButton = nil;
-    _toButton = nil;
     _searchButton = nil;
     _pubilcTransportOverviewTableCell = nil;
     _publicStopVC = nil;
     _publicTransportTableView = nil;
     _lastStart1Button = nil;
     _lastStart2Button = nil;
-    _lastStart3Button = nil;
+    _startLabel = nil;
+    _lastStart2Button = nil;
+    _chooseNewStartButton = nil;
+    _stopLabel = nil;
+    _lastStop1Button = nil;
+    _lastStop2Button = nil;
+    _chooseNewStopButton = nil;
     [super viewDidUnload];
 }
 
 
-- (IBAction)moveToFromStopController:(id)sender
+- (IBAction)changeStart:(id)sender
 {
-    _publicStopVC._actualStationType = @"from";
+    if (_changeStartButtonIsActivated)
+    {
+        _lastStart1Button.hidden        = YES;
+        _lastStart2Button.hidden        = YES;
+        _chooseNewStartButton.hidden    = YES;
+        _changeStartButtonIsActivated   = NO;
+    }
+    else
+    {
+        _changeStartButtonIsActivated   = YES;
+        _lastStart1Button.hidden        = NO;
+        _lastStart2Button.hidden        = NO;
+        _chooseNewStartButton.hidden    = NO;
+        
+        _lastStop1Button.hidden        = YES;
+        _lastStop2Button.hidden        = YES;
+        _chooseNewStopButton.hidden    = YES;
+        _changeStopButtonIsActivated   = NO;
+        
+        [_chooseNewStartButton setTitle:@"neu..." forState:UIControlStateNormal];
+    }
+}
 
-    //NSLog(@"to button title: %@", _fromButton.titleLabel.text);
-    _publicStopVC._publicStopTextFieldString = _fromButton.titleLabel.text;
+- (IBAction)changeStartToLast1:(id)sender
+{
+    _lastStart1Button.hidden        = YES;
+    _lastStart2Button.hidden        = YES;
+    _chooseNewStartButton.hidden    = YES;
+    
+    _changeStartButtonIsActivated   = NO;
+    _changedStartStation = YES;
+    
+    _startStation = _lastStart1Button.titleLabel.text;
+    _startLabel.text = _startStation;
+    [self getConnectionArray];
+}
+
+- (IBAction)changeStartToLast2:(id)sender
+{
+    _lastStart1Button.hidden        = YES;
+    _lastStart2Button.hidden        = YES;
+    _chooseNewStartButton.hidden    = YES;
+    
+    _changeStartButtonIsActivated   = NO;
+    _changedStartStation = YES;
+
+    _startStation = _lastStart2Button.titleLabel.text;
+    _startLabel.text = _startStation;
+    [self getConnectionArray];
+}
+
+
+- (IBAction)chooseNewStart:(id)sender
+{
+    _changedStartStation            = YES;
+    _changeStartButtonIsActivated   = NO;
+    _lastStart1Button.hidden        = YES;
+    _lastStart2Button.hidden        = YES;
+    _chooseNewStartButton.hidden    = YES;
+    
+    _publicStopVC._actualStationType = @"from";
+    _publicStopVC._actualStation = nil;
+    _publicStopVC._publicStopTextFieldString = @"";
     [self presentModalViewController:_publicStopVC animated:YES];
 }
 
-- (IBAction)moveToToStopController:(id)sender
+
+
+- (IBAction)changeStop:(id)sender
 {
-    _publicStopVC._actualStationType = @"to";
+    if (_changeStopButtonIsActivated)
+    {
+        _lastStop1Button.hidden        = YES;
+        _lastStop2Button.hidden        = YES;
+        _chooseNewStopButton.hidden    = YES;
+        _changeStopButtonIsActivated   = NO;
+    }
+    else
+    {
+        _changeStopButtonIsActivated   = YES;
+        _lastStop1Button.hidden        = NO;
+        _lastStop2Button.hidden        = NO;
+        _chooseNewStopButton.hidden    = NO;
+        
+        _changeStartButtonIsActivated   = NO;
+        _lastStart1Button.hidden        = YES;
+        _lastStart2Button.hidden        = YES;
+        _chooseNewStartButton.hidden    = YES;
+        
+        [_chooseNewStopButton setTitle:@"neu..." forState:UIControlStateNormal];
+    }
+}
+
+- (IBAction)changeStopToLast1:(id)sender
+{
+    _lastStop1Button.hidden        = YES;
+    _lastStop2Button.hidden        = YES;
+    _chooseNewStopButton.hidden    = YES;
+
+    _changedStopStation = YES;
+    _changeStopButtonIsActivated  = NO;
     
-    //NSLog(@"to button title: %@", _toButton.titleLabel.text);
-    _publicStopVC._publicStopTextFieldString = _toButton.titleLabel.text;
+    _stopStation = _lastStop1Button.titleLabel.text;
+    _stopLabel.text = _stopStation;
+    
+    [self getConnectionArray];
+}
+
+- (IBAction)changeStopToLast2:(id)sender
+{
+    _lastStop1Button.hidden        = YES;
+    _lastStop2Button.hidden        = YES;
+    _chooseNewStopButton.hidden    = YES;
+    
+    _changeStopButtonIsActivated   = NO;
+    _changedStopStation = YES;
+    
+    _stopStation = _lastStop2Button.titleLabel.text;
+    _stopLabel.text = _stopStation;
+    
+    [self getConnectionArray];
+}
+
+- (IBAction)chooseNewStop:(id)sender
+{
+    _changedStopStation = YES;
+    _lastStop1Button.hidden        = YES;
+    _lastStop2Button.hidden        = YES;
+    _chooseNewStopButton.hidden    = YES;
+    _changeStopButtonIsActivated   = NO;
+    
+    _publicStopVC._actualStationType = @"to";
+    _publicStopVC._actualStation = nil;
+    _publicStopVC._publicStopTextFieldString = @"";
     [self presentModalViewController:_publicStopVC animated:YES];
 }
 
 - (IBAction)startConnectionSearch:(id)sender
 {
-    NSLog(@"startConnectionSearch -> _startStation: %@ _stopStation: %@", _startStation, _stopStation);
-    [self getConnectionArray];
+    if ([_startStation length] == 0 || [_stopStation length] == 0)
+    {
+        UIAlertView *_acronymAlertView = [[UIAlertView alloc]
+                                          initWithTitle:PublicTransportVCTitle
+                                          message:@"Bitte Start und Ziel eingeben."
+                                          delegate:self
+                                          cancelButtonTitle:AlertViewOk
+                                          otherButtonTitles:nil];
+        
+        [_acronymAlertView show];
+    }
+    else
+    {
+        NSLog(@"startConnectionSearch -> _startStation: %@ _stopStation: %@", _startStation, _stopStation);
+        [self getConnectionArray];
+    }
 }
 
-- (IBAction)startTextFieldChanged:(id)sender
-{
-    _lastStart1Button.hidden = NO;
-    _lastStart2Button.hidden = NO;
-    _lastStart3Button.hidden = NO;
+
+
+// needed for textfield delegate
+-(BOOL) textFieldShouldReturn:(UITextField *)textField
+{    
+    [textField resignFirstResponder];
+    return YES;
 }
 
 
@@ -300,13 +445,13 @@
         self._pubilcTransportOverviewTableCell = nil;
     }
     
-    UILabel          *_startLabel           = (UILabel  *)[_cell viewWithTag:1];
+    UILabel          *_startDestinationLabel = (UILabel  *)[_cell viewWithTag:1];
     UILabel          *_startDateLabel       = (UILabel  *)[_cell viewWithTag:2];
     UILabel          *_startTimeLabel       = (UILabel  *)[_cell viewWithTag:3];
     UILabel          *_durationLabel        = (UILabel  *)[_cell viewWithTag:4];
     UILabel          *_transfersLabel       = (UILabel  *)[_cell viewWithTag:5];
     UILabel          *_transportationLabel  = (UILabel  *)[_cell viewWithTag:6];
-    UILabel          *_stopLabel            = (UILabel  *)[_cell viewWithTag:7];
+    UILabel          *_stopDestinationLabel = (UILabel  *)[_cell viewWithTag:7];
     UILabel          *_stopDateLabel        = (UILabel  *)[_cell viewWithTag:8];
     UILabel          *_stopTimeLabel        = (UILabel  *)[_cell viewWithTag:9];
 
@@ -317,7 +462,7 @@
         {
             ConnectionDto *_localConnection = [_connectionArray._connections objectAtIndex:_cellRow];
             
-            _startLabel.text        = _localConnection._from._station._name;
+            _startDestinationLabel.text        = _localConnection._from._station._name;
             _startDateLabel.text    = [[_dateFormatter _dayFormatter] stringFromDate:_localConnection._from._departureDate];
             _startTimeLabel.text    = [NSString stringWithFormat:@"ab %@", [[_dateFormatter _timeFormatter] stringFromDate:_localConnection._from._departureTime]];
             
@@ -341,7 +486,7 @@
             }
             _transportationLabel.text = _productsString;
             
-            _stopLabel.text       = _localConnection._to._station._name;
+            _stopDestinationLabel.text       = _localConnection._to._station._name;
             _stopDateLabel.text   = [[_dateFormatter _dayFormatter] stringFromDate:_localConnection._to._arrivalDate];
             _stopTimeLabel.text   = [NSString stringWithFormat:@"an %@", [[_dateFormatter _timeFormatter] stringFromDate:_localConnection._to._arrivalTime]];
         }
@@ -361,6 +506,7 @@
     //NSUInteger    _cellSelection = indexPath.section;
     
 }
+
 
 
 @end
