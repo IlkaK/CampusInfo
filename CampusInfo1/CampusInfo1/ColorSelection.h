@@ -17,6 +17,7 @@
     UIColor *_zhawLightGrey;
     UIColor *_zhawRed;
     UIColor *_zhawDarkGrey;
+    UIColor *_zhawDarkerBlue;
 }
 
 @property (nonatomic, retain) UIColor *_zhawOriginalBlue;
@@ -26,5 +27,7 @@
 @property (nonatomic, retain) UIColor *_zhawRed;
 @property (nonatomic, retain) UIColor *_zhawLightestBlue;
 @property (nonatomic, retain) UIColor *_zhawDarkGrey;
+@property (nonatomic, retain) UIColor *_zhawDarkerBlue;
+
 
 @end

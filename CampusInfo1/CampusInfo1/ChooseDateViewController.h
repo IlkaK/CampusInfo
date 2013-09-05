@@ -21,8 +21,9 @@
     id                                  _chooseDateViewDelegate;
     
     IBOutlet UISegmentedControl         *_chooseDateSegmentedControl;
+    IBOutlet UINavigationBar            *_segmentedControlNavigationBAr;
     IBOutlet UIActivityIndicatorView    *_waitForChangeActivityIndicator;
-    
+
     IBOutlet UINavigationBar            *_titleNavigationBar;
     IBOutlet UINavigationItem           *_titleNavigationItem;
     IBOutlet UILabel                    *_titleNavigationLabel;
@@ -40,7 +41,7 @@
 
 @property (nonatomic, retain) IBOutlet UIActivityIndicatorView  *_waitForChangeActivityIndicator;
 @property (nonatomic, retain) IBOutlet UISegmentedControl       *_chooseDateSegmentedControl;
-
+@property (nonatomic, retain) IBOutlet UINavigationBar          *_segmentedControlNavigationBAr;
 
 - (IBAction)setPickerToToday:(id)sender;
 - (IBAction)cancelDateChoice:(id)sender;

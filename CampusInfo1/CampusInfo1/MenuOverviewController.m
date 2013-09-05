@@ -46,9 +46,12 @@
     
     _backgroundColor = _zhawColor._zhawOriginalBlue;
     
-    
-    _menuTableView.separatorColor = _backgroundColor;
+
+    [_menuTableView setSeparatorColor:_zhawColor._zhawWhite];
     _menuTableView.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
+    
+    //_menuTableView.separatorColor = _backgroundColor;
+    //_menuTableView.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
     _menuTableView.scrollEnabled = NO;
     
     [self.view setBackgroundColor:_backgroundColor];

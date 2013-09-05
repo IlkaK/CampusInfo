@@ -17,6 +17,7 @@
 @synthesize _zhawRed;
 @synthesize _zhawLightestBlue;
 @synthesize _zhawDarkGrey;
+@synthesize _zhawDarkerBlue;
 
 -(id) init
 {
@@ -27,6 +28,8 @@
         self._zhawOriginalBlue  = [UIColor colorWithRed:0.0/255.0 green:100.0/255.0 blue:166.0/255.0 alpha:1.0];
         self._zhawLighterBlue  = [UIColor colorWithRed:91.0/255.0 green:137.0/255.0 blue:199.0/255.0 alpha:1.0];
         self._zhawLightestBlue =  [UIColor colorWithRed:204.0/255.0 green:225.0/255.0 blue:252.0/255.0 alpha:1.0];
+        self._zhawDarkerBlue   = [UIColor colorWithRed:0.0/255.0 green:67.0/255.0 blue:103.0/255.0 alpha:1.0];
+
         
         // white
         self._zhawWhite         = [UIColor whiteColor];

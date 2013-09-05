@@ -23,6 +23,7 @@
 
 @synthesize _waitForChangeActivityIndicator;
 @synthesize _chooseDateSegmentedControl;
+@synthesize _segmentedControlNavigationBAr;
 
 @synthesize _titleNavigationLabel;
 @synthesize _titleNavigationItem;
@@ -151,6 +152,7 @@
     // segmented controls
     [_chooseDateSegmentedControl setTintColor:_zhawColor._zhawOriginalBlue];
     [self.view bringSubviewToFront:_chooseDateSegmentedControl];
+    [_segmentedControlNavigationBAr setTintColor:_zhawColor._zhawDarkerBlue];
     
     // set date picker
     if (_actualDate == nil)
@@ -178,6 +180,7 @@
     _titleNavigationBar = nil;
     _titleNavigationItem = nil;
     _titleNavigationLabel = nil;
+    _segmentedControlNavigationBAr = nil;
     [super viewDidUnload];
 }
 

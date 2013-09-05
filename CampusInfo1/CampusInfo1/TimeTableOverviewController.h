@@ -49,12 +49,14 @@ UIViewController
     NSString                            *_actualShownAcronymType;
     int                                 _actualShownAcronymTrials;
     
-    // setting the navigation bar
+    // setting the date navigation bar
     IBOutlet UINavigationItem           *_dayNavigator;
+    IBOutlet UINavigationBar            *_dayNavigationBar;
     
     IBOutlet GradientButton             *_dateButton;
     
     IBOutlet UISegmentedControl         *_timeTableSegmentedControl;
+    IBOutlet UINavigationBar            *_segmentedControlNavigationBar;
     
     
     // choose dates for navigator
@@ -139,6 +141,7 @@ UIViewController
 
 @property (nonatomic, retain) IBOutlet UITableView               *_timeTable;
 
+@property (nonatomic, retain) IBOutlet UINavigationBar           *_dayNavigationBar;
 @property (nonatomic, retain) IBOutlet UINavigationItem          *_dayNavigator;
 @property (nonatomic, retain) IBOutlet GradientButton            *_dateButton;
 
@@ -148,6 +151,7 @@ UIViewController
 @property (nonatomic, retain) IBOutlet UINavigationBar           *_titleNavigationBar;
 
 @property (nonatomic, retain) IBOutlet UISegmentedControl        *_timeTableSegmentedControl;
+@property (nonatomic, retain) IBOutlet UINavigationBar           *_segmentedControlNavigationBar;
 
 @property (nonatomic, retain) IBOutlet UITableViewCell           *_oneSlotOneRoomTableCell;
 @property (nonatomic, retain) IBOutlet UITableViewCell           *_oneSlotTwoRoomsTableCell;

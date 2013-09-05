@@ -26,6 +26,8 @@
 @synthesize _actualDate;
 @synthesize _schedule;
 @synthesize _actualDayDto;
+
+@synthesize _dayNavigationBar;
 @synthesize _dayNavigator;
 @synthesize _dateButton;
 
@@ -35,6 +37,7 @@
 @synthesize _settingsVC;
 
 @synthesize _timeTableSegmentedControl;
+@synthesize _segmentedControlNavigationBar;
 
 @synthesize _ownStoredAcronymString;
 @synthesize _ownStoredAcronymType;
@@ -484,7 +487,7 @@
     
     
     // title
-    [_acronymLabel setBackgroundColor:_zhawColor._zhawOriginalBlue];
+    //[_acronymLabel setBackgroundColor:_zhawColor._zhawOriginalBlue];
     [_acronymLabel setTextColor:_zhawColor._zhawWhite];
     
     UIBarButtonItem *backButtonItem = [[UIBarButtonItem alloc] initWithTitle:LeftArrowSymbol style:UIBarButtonItemStylePlain target:self action:@selector(moveBackToMenuOverview:)];
@@ -496,6 +499,7 @@
     _titleNavigationLabel.text = TimeTableOverVCTitle;
     _titleNavigationItem.title = @"";
     
+    /*
     CGRect imageRect = CGRectMake(0, 0, _titleNavigationBar.frame.size.width, _titleNavigationBar.frame.size.height);
     UIGraphicsBeginImageContext(imageRect.size);
     [_zhawColor._zhawOriginalBlue set];
@@ -503,14 +507,16 @@
     UIImage *aImage = UIGraphicsGetImageFromCurrentImageContext();
     UIGraphicsEndImageContext();
     [_titleNavigationBar setBackgroundImage:aImage forBarMetrics:UIBarMetricsDefault];
+    */
+    [_titleNavigationBar setTintColor:_zhawColor._zhawDarkerBlue];
     
-    [_titleNavigationLabel setBackgroundColor:_zhawColor._zhawOriginalBlue];
+    //[_titleNavigationLabel setBackgroundColor:_zhawColor._zhawOriginalBlue];
     
     
     // segmented controls below the title
     [_timeTableSegmentedControl setTintColor:_zhawColor._zhawOriginalBlue];
     [self.view bringSubviewToFront:_timeTableSegmentedControl];
-    //[self.view setBackgroundColor:_zhawColor._zhawLighterBlue];
+    [_segmentedControlNavigationBar setTintColor:_zhawColor._zhawDarkerBlue];
     
     // set activity indicator
     _waitForLoadingActivityIndicator.hidesWhenStopped = YES;
@@ -536,6 +542,8 @@
     [_leftButton  setTintColor:_zhawColor._zhawOriginalBlue];
     [_dayNavigator setLeftBarButtonItem :_leftButton animated :true];
     [_dayNavigator setRightBarButtonItem:_rightButton animated:true];
+    [_dayNavigationBar setTintColor:_zhawColor._zhawDarkerBlue];
+    
     
     [_dateButton useAlertStyle];
 
@@ -911,6 +919,8 @@
     _fourSlotsFourRoomsTableCell = nil;
     _nineSlotsThreeRoomsTableCell = nil;
     _sevenSlotsEightRoomsTableCell = nil;
+    _dayNavigationBar = nil;
+    _segmentedControlNavigationBar = nil;
     [super viewDidUnload];
 }
 
