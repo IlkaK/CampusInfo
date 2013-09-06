@@ -489,6 +489,7 @@
     // title
     //[_acronymLabel setBackgroundColor:_zhawColor._zhawOriginalBlue];
     [_acronymLabel setTextColor:_zhawColor._zhawWhite];
+    [_acronymLabel setTextAlignment:UITextAlignmentCenter];
     
     UIBarButtonItem *backButtonItem = [[UIBarButtonItem alloc] initWithTitle:LeftArrowSymbol style:UIBarButtonItemStylePlain target:self action:@selector(moveBackToMenuOverview:)];
     [backButtonItem setTintColor:_zhawColor._zhawOriginalBlue];
@@ -499,19 +500,8 @@
     _titleNavigationLabel.text = TimeTableOverVCTitle;
     _titleNavigationItem.title = @"";
     
-    /*
-    CGRect imageRect = CGRectMake(0, 0, _titleNavigationBar.frame.size.width, _titleNavigationBar.frame.size.height);
-    UIGraphicsBeginImageContext(imageRect.size);
-    [_zhawColor._zhawOriginalBlue set];
-    UIRectFill(imageRect);
-    UIImage *aImage = UIGraphicsGetImageFromCurrentImageContext();
-    UIGraphicsEndImageContext();
-    [_titleNavigationBar setBackgroundImage:aImage forBarMetrics:UIBarMetricsDefault];
-    */
     [_titleNavigationBar setTintColor:_zhawColor._zhawDarkerBlue];
-    
-    //[_titleNavigationLabel setBackgroundColor:_zhawColor._zhawOriginalBlue];
-    
+    [_titleNavigationLabel setTextAlignment:UITextAlignmentCenter];
     
     // segmented controls below the title
     [_timeTableSegmentedControl setTintColor:_zhawColor._zhawOriginalBlue];
@@ -609,9 +599,6 @@
     _leftSwipe = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(dayAfter:)];
     [_leftSwipe setDirection:(UISwipeGestureRecognizerDirectionLeft)];
     [[self view] addGestureRecognizer:_leftSwipe];
-    
-    
-    
 }
 
 

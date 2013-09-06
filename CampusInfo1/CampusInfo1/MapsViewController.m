@@ -17,8 +17,6 @@
 @implementation MapsViewController
 
 @synthesize _technikumVC;
-@synthesize _zurichVC;
-@synthesize _toessfeldVC;
 
 @synthesize _menuTableView;
 
@@ -50,36 +48,16 @@
     _titleNavigationLabel.text = MapsVCTitle;
     _titleNavigationItem.title = @"";
     
-    CGRect imageRect = CGRectMake(0, 0, _titleNavigationBar.frame.size.width, _titleNavigationBar.frame.size.height);
-    UIGraphicsBeginImageContext(imageRect.size);
-    [_zhawColor._zhawOriginalBlue set];
-    UIRectFill(imageRect);
-    UIImage *aImage = UIGraphicsGetImageFromCurrentImageContext();
-    UIGraphicsEndImageContext();
-    [_titleNavigationBar setBackgroundImage:aImage forBarMetrics:UIBarMetricsDefault];
-    
-    [_titleNavigationLabel setBackgroundColor:_zhawColor._zhawOriginalBlue];
+    [_titleNavigationBar setTintColor:_zhawColor._zhawDarkerBlue];
+    [_titleNavigationLabel setTextAlignment:UITextAlignmentCenter];
 
     
     // view controller
-    if (_zurichVC == nil)
-    {
-		_zurichVC = [[ZurichViewController alloc] init];
-	}
-    _zurichVC.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
-    
     if (_technikumVC == nil)
     {
 		_technikumVC = [[TechnikumViewController alloc] init];
 	}
     _technikumVC.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
-    
-    if (_toessfeldVC == nil)
-    {
-		_toessfeldVC = [[ToessfeldViewController alloc] init];
-	}
-    _toessfeldVC.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
-    
 }
 
 - (void)didReceiveMemoryWarning
@@ -93,21 +71,10 @@
    [self dismissModalViewControllerAnimated:YES];
 }
 
-- (IBAction)moveToZurichMap:(id)sender
-{
-    [self presentModalViewController:_zurichVC animated:YES];
-}
-
-- (IBAction)moveToTechnikumMap:(id)sender
-{
-    [self presentModalViewController:_technikumVC animated:YES];
-}
 
 - (void)viewDidUnload
 {
     _technikumVC = nil;
-    _zurichVC = nil;
-    _toessfeldVC = nil;
     
     _menuTableView = nil;
     
@@ -117,6 +84,7 @@
     
     [super viewDidUnload];
 }
+
 
 //---------- Handling of menu table -----
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
@@ -134,18 +102,30 @@
 // Override to support row selection in the table view.
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    NSUInteger        _cellSelection = indexPath.section;
+    NSUInteger        _cellSelection = indexPath.section;    
+    
     if (_cellSelection == 0)
     {
+        _technikumVC._description   = TechnikumVCTitle;
+        _technikumVC._fileName      = TechnikumVCFileName;
+        _technikumVC._fileFormat    = TechnikumVCFileFormat;
         [self presentModalViewController:_technikumVC animated:YES];
     }
+    
     if (_cellSelection == 1)
     {
-        [self presentModalViewController:_zurichVC animated:YES];
+        _technikumVC._description   = ZurichVCTitle;
+        _technikumVC._fileName      = ZurichVCFileName;
+        _technikumVC._fileFormat    = ZurichVCFileFormat;
+        [self presentModalViewController:_technikumVC animated:YES];
     }
+    
     if (_cellSelection == 2)
     {
-        [self presentModalViewController:_toessfeldVC animated:YES];
+        _technikumVC._description   = ToessfeldVCTitle;
+        _technikumVC._fileName      = ToessfeldVCFileName;
+        _technikumVC._fileFormat    = ToessfeldVCFileFormat;
+        [self presentModalViewController:_technikumVC animated:YES];
     }
 }
 

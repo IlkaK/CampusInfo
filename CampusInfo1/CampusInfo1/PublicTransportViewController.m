@@ -93,15 +93,9 @@
     _publicTransportNavigationLabel.text = PublicTransportVCTitle;
     _publicTransportNavigationItem.title = @"";
     
-    CGRect imageRect = CGRectMake(0, 0, _publicTransportNavigationBar.frame.size.width, _publicTransportNavigationBar.frame.size.height);
-    UIGraphicsBeginImageContext(imageRect.size);
-    [_zhawColor._zhawOriginalBlue set];
-    UIRectFill(imageRect);
-    UIImage *aImage = UIGraphicsGetImageFromCurrentImageContext();
-    UIGraphicsEndImageContext();
-    [_publicTransportNavigationBar setBackgroundImage:aImage forBarMetrics:UIBarMetricsDefault];
+    [_publicTransportNavigationLabel setTextAlignment:UITextAlignmentCenter];
     
-    [_publicTransportNavigationLabel setBackgroundColor:_zhawColor._zhawOriginalBlue];
+    [_publicTransportNavigationBar setTintColor:_zhawColor._zhawDarkerBlue];
     
     [_searchButton useAlertStyle];
     

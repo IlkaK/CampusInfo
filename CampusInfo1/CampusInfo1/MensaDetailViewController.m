@@ -27,6 +27,8 @@
 
 @synthesize _dateButton;
 @synthesize _dayNavigationItem;
+@synthesize _dateNavigationBar;
+
 @synthesize _dateFormatter;
 
 @synthesize _chooseDateVC;
@@ -73,22 +75,15 @@
     [_titleNavigationItem setLeftBarButtonItem :backButtonItem animated :true];
     
     [_titleNavigationLabel setTextColor:_zhawColor._zhawWhite];
+    [_titleNavigationLabel setTextAlignment:UITextAlignmentCenter];
     _titleNavigationLabel.text = MensaVCTitle;
     _titleNavigationItem.title = @"";
     
-    CGRect imageRect = CGRectMake(0, 0, _titleNavigationBar.frame.size.width, _titleNavigationBar.frame.size.height);
-    UIGraphicsBeginImageContext(imageRect.size);
-    [_zhawColor._zhawOriginalBlue set];
-    UIRectFill(imageRect);
-    UIImage *aImage = UIGraphicsGetImageFromCurrentImageContext();
-    UIGraphicsEndImageContext();
-    [_titleNavigationBar setBackgroundImage:aImage forBarMetrics:UIBarMetricsDefault];
-    [_titleNavigationLabel setBackgroundColor:_zhawColor._zhawOriginalBlue];
+    [_titleNavigationBar setTintColor:_zhawColor._zhawDarkerBlue];
     
     _gastronomyLabel.text = [NSString stringWithFormat:@"%@",_actualGastronomy._name];
-    [_gastronomyLabel setBackgroundColor:_zhawColor._zhawOriginalBlue];
     [_gastronomyLabel setTextColor:_zhawColor._zhawWhite];
-    
+    [_gastronomyLabel setTextAlignment:UITextAlignmentCenter];
     
     //----- Navigation Bar ----
     // set current day
@@ -109,6 +104,7 @@
     [_dayNavigationItem setRightBarButtonItem:_rightButton animated:true];
     
     [_dateButton useAlertStyle];
+    [_dateNavigationBar setTintColor:_zhawColor._zhawDarkerBlue];
     
     
     // ------ CHOOSE DATE FREELY ----
@@ -308,6 +304,7 @@
     _dateButton = nil;
     _noConnectionLabel = nil;
     _noConnectionButton = nil;
+    _dateNavigationBar = nil;
     [super viewDidUnload];
 }
 

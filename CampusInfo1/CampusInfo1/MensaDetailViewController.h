@@ -19,19 +19,24 @@
 @interface MensaDetailViewController : UIViewController <ChooseDateViewDelegate, UITableViewDataSource, UITableViewDelegate>
 {
     GastronomicFacilityDto              *_actualGastronomy;
-
-    IBOutlet UINavigationItem           *_dayNavigationItem;
-    IBOutlet GradientButton             *_dateButton;
     DateFormation                       *_dateFormatter;
+    MenuPlanArrayDto                    *_menuPlans;
+    MenuDto                             *_actualMenu;
+
+    IBOutlet UINavigationBar            *_titleNavigationBar;
+    IBOutlet UINavigationItem           *_titleNavigationItem;
+    IBOutlet UILabel                    *_titleNavigationLabel;
+    IBOutlet UILabel                    *_gastronomyLabel;
+    
+    IBOutlet UINavigationItem           *_dayNavigationItem;
+    IBOutlet UINavigationBar            *_dateNavigationBar;
+    IBOutlet GradientButton             *_dateButton;
+    
 
     IBOutlet ChooseDateViewController   *_chooseDateVC;
     IBOutlet UITableView                *_detailTable;
     IBOutlet UITableViewCell            *_detailTableCell;
 
-    
-    MenuPlanArrayDto                    *_menuPlans;
-    MenuDto                             *_actualMenu;
-    
     NSDate                              *_actualDate;
     int                                 _actualCalendarWeek;
     
@@ -39,11 +44,6 @@
     IBOutlet UISwipeGestureRecognizer   *_leftSwipe;
     
     IBOutlet UIActivityIndicatorView    *_waitForChangeActivityIndicator;
-    
-    IBOutlet UINavigationBar            *_titleNavigationBar;
-    IBOutlet UINavigationItem           *_titleNavigationItem;
-    IBOutlet UILabel                    *_titleNavigationLabel;
-    IBOutlet UILabel                    *_gastronomyLabel;
     
     ColorSelection                      *_zhawColor;
     
@@ -55,6 +55,7 @@
 
 @property (nonatomic, retain) IBOutlet UINavigationItem                 *_dayNavigationItem;
 @property (nonatomic, retain) IBOutlet GradientButton                   *_dateButton;
+@property (nonatomic, retain) IBOutlet UINavigationBar                  *_dateNavigationBar;
 
 @property (nonatomic, retain) DateFormation                             *_dateFormatter;
 

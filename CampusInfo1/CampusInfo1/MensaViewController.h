@@ -34,7 +34,9 @@
     
     IBOutlet UIActivityIndicatorView    *_waitForChangeActivityIndicator;
     
+    IBOutlet UINavigationBar            *_dateNavigationBar;
     IBOutlet UILabel                    *_dateLabel;
+    
     IBOutlet UILabel                    *_noConnectionLabel;
     IBOutlet GradientButton             *_noConnectionButton;
 
@@ -58,6 +60,8 @@
 @property (nonatomic, retain) LanguageTranslation                   *_translator;
 
 @property (nonatomic, retain) IBOutlet UILabel                      *_dateLabel;
+@property (nonatomic, retain) IBOutlet UINavigationBar              *_dateNavigationBar;
+
 @property (nonatomic, retain) IBOutlet UILabel                      *_noConnectionLabel;
 @property (nonatomic, retain) IBOutlet GradientButton               *_noConnectionButton;
 

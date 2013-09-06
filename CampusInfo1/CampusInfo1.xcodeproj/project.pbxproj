@@ -165,8 +165,6 @@
 		E15AA5AA17C23155007E9F00 /* MapsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E15AA5A817C23155007E9F00 /* MapsViewController.xib */; };
 		E15AA5AE17C23167007E9F00 /* TechnikumViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E15AA5AC17C23167007E9F00 /* TechnikumViewController.m */; };
 		E15AA5AF17C23167007E9F00 /* TechnikumViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E15AA5AD17C23167007E9F00 /* TechnikumViewController.xib */; };
-		E15AA5B517C23197007E9F00 /* ZurichViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E15AA5B317C23197007E9F00 /* ZurichViewController.m */; };
-		E15AA5B617C23197007E9F00 /* ZurichViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E15AA5B417C23197007E9F00 /* ZurichViewController.xib */; };
 		E15AA5BE17C24D38007E9F00 /* EventsTableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E15AA5BD17C24D38007E9F00 /* EventsTableCell.xib */; };
 		E16C642517ABDC0100BEDBB3 /* ContactsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E16C642317ABDC0100BEDBB3 /* ContactsViewController.m */; };
 		E16C642617ABDC0100BEDBB3 /* ContactsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E16C642417ABDC0100BEDBB3 /* ContactsViewController.xib */; };
@@ -207,8 +205,6 @@
 		E1DA967C1740E41C00CA206F /* SettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E1DA967A1740E41C00CA206F /* SettingsViewController.m */; };
 		E1DA967D1740E41C00CA206F /* SettingsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E1DA967B1740E41C00CA206F /* SettingsViewController.xib */; };
 		E1DC175317D09D5D00DB51F6 /* UIConstantStrings.m in Sources */ = {isa = PBXBuildFile; fileRef = E1DC175217D09D5D00DB51F6 /* UIConstantStrings.m */; };
-		E1DC175717D0D35D00DB51F6 /* ToessfeldViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E1DC175517D0D35C00DB51F6 /* ToessfeldViewController.m */; };
-		E1DC175817D0D35D00DB51F6 /* ToessfeldViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E1DC175617D0D35C00DB51F6 /* ToessfeldViewController.xib */; };
 		E1EC0FD317D4A8BC00AB4898 /* JourneyDto.m in Sources */ = {isa = PBXBuildFile; fileRef = E1EC0FD217D4A8BC00AB4898 /* JourneyDto.m */; };
 		E1EC0FD617D4B98300AB4898 /* SectionDto.m in Sources */ = {isa = PBXBuildFile; fileRef = E1EC0FD517D4B98300AB4898 /* SectionDto.m */; };
 		E1EC0FD917D4C03C00AB4898 /* ConnectionDto.m in Sources */ = {isa = PBXBuildFile; fileRef = E1EC0FD817D4C03C00AB4898 /* ConnectionDto.m */; };
@@ -421,9 +417,6 @@
 		E15AA5AB17C23167007E9F00 /* TechnikumViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TechnikumViewController.h; sourceTree = "<group>"; };
 		E15AA5AC17C23167007E9F00 /* TechnikumViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TechnikumViewController.m; sourceTree = "<group>"; };
 		E15AA5AD17C23167007E9F00 /* TechnikumViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TechnikumViewController.xib; sourceTree = "<group>"; };
-		E15AA5B217C23197007E9F00 /* ZurichViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZurichViewController.h; sourceTree = "<group>"; };
-		E15AA5B317C23197007E9F00 /* ZurichViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZurichViewController.m; sourceTree = "<group>"; };
-		E15AA5B417C23197007E9F00 /* ZurichViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ZurichViewController.xib; sourceTree = "<group>"; };
 		E15AA5BD17C24D38007E9F00 /* EventsTableCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EventsTableCell.xib; sourceTree = "<group>"; };
 		E16C642217ABDC0100BEDBB3 /* ContactsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContactsViewController.h; sourceTree = "<group>"; };
 		E16C642317ABDC0100BEDBB3 /* ContactsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContactsViewController.m; sourceTree = "<group>"; };
@@ -480,9 +473,6 @@
 		E1DA967B1740E41C00CA206F /* SettingsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SettingsViewController.xib; sourceTree = "<group>"; };
 		E1DC175117D09D5C00DB51F6 /* UIConstantStrings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIConstantStrings.h; sourceTree = "<group>"; };
 		E1DC175217D09D5D00DB51F6 /* UIConstantStrings.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIConstantStrings.m; sourceTree = "<group>"; };
-		E1DC175417D0D35C00DB51F6 /* ToessfeldViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ToessfeldViewController.h; sourceTree = "<group>"; };
-		E1DC175517D0D35C00DB51F6 /* ToessfeldViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ToessfeldViewController.m; sourceTree = "<group>"; };
-		E1DC175617D0D35C00DB51F6 /* ToessfeldViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ToessfeldViewController.xib; sourceTree = "<group>"; };
 		E1EC0FD117D4A8BC00AB4898 /* JourneyDto.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JourneyDto.h; sourceTree = "<group>"; };
 		E1EC0FD217D4A8BC00AB4898 /* JourneyDto.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JourneyDto.m; sourceTree = "<group>"; };
 		E1EC0FD417D4B98300AB4898 /* SectionDto.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SectionDto.h; sourceTree = "<group>"; };
@@ -1000,12 +990,6 @@
 				E15AA5AB17C23167007E9F00 /* TechnikumViewController.h */,
 				E15AA5AC17C23167007E9F00 /* TechnikumViewController.m */,
 				E15AA5AD17C23167007E9F00 /* TechnikumViewController.xib */,
-				E15AA5B217C23197007E9F00 /* ZurichViewController.h */,
-				E15AA5B317C23197007E9F00 /* ZurichViewController.m */,
-				E15AA5B417C23197007E9F00 /* ZurichViewController.xib */,
-				E1DC175417D0D35C00DB51F6 /* ToessfeldViewController.h */,
-				E1DC175517D0D35C00DB51F6 /* ToessfeldViewController.m */,
-				E1DC175617D0D35C00DB51F6 /* ToessfeldViewController.xib */,
 			);
 			name = Maps;
 			sourceTree = "<group>";
@@ -1222,7 +1206,6 @@
 				E198FD5417BE240400D5BE9B /* NewsDetailViewController.xib in Resources */,
 				E15AA5AA17C23155007E9F00 /* MapsViewController.xib in Resources */,
 				E15AA5AF17C23167007E9F00 /* TechnikumViewController.xib in Resources */,
-				E15AA5B617C23197007E9F00 /* ZurichViewController.xib in Resources */,
 				E15AA5BE17C24D38007E9F00 /* EventsTableCell.xib in Resources */,
 				E1D35BDA17C385BC00CCDB1D /* Icon.png in Resources */,
 				E1D35BDC17C385C900CCDB1D /* Icon@2x.png in Resources */,
@@ -1239,7 +1222,6 @@
 				E1A6AAD717CF367800CC0EDD /* Technikumstrasse.pdf in Resources */,
 				E1A6AAD817CF367800CC0EDD /* Toessfeld.pdf in Resources */,
 				E1A6AAD917CF367800CC0EDD /* Zuerich.pdf in Resources */,
-				E1DC175817D0D35D00DB51F6 /* ToessfeldViewController.xib in Resources */,
 				27222D5217D78FC300279075 /* contacts1_hellblau.png in Resources */,
 				27222D5417D78FD300279075 /* contacts1_weiss.png in Resources */,
 				27222D5917D7958D00279075 /* events1_hellblau.png in Resources */,
@@ -1353,7 +1335,6 @@
 				E198FD5317BE240400D5BE9B /* NewsDetailViewController.m in Sources */,
 				E15AA5A917C23155007E9F00 /* MapsViewController.m in Sources */,
 				E15AA5AE17C23167007E9F00 /* TechnikumViewController.m in Sources */,
-				E15AA5B517C23197007E9F00 /* ZurichViewController.m in Sources */,
 				E1D35BD717C3593300CCDB1D /* MenuPlanArrayDto.m in Sources */,
 				E1252E5517CB423400E61732 /* SocialMediaViewController.m in Sources */,
 				E1252E5917CB4BB100E61732 /* ColorSelection.m in Sources */,
@@ -1364,7 +1345,6 @@
 				E1C23D6F17CE421C00C58E10 /* StationDto.m in Sources */,
 				E1C23D7217CE427500C58E10 /* CoordinateDto.m in Sources */,
 				E1DC175317D09D5D00DB51F6 /* UIConstantStrings.m in Sources */,
-				E1DC175717D0D35D00DB51F6 /* ToessfeldViewController.m in Sources */,
 				27042E7817D24C8E008057B4 /* PrognosisDto.m in Sources */,
 				27042E7B17D25041008057B4 /* FromOrToDto.m in Sources */,
 				27042E7E17D27836008057B4 /* ServiceDto.m in Sources */,

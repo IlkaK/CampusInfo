@@ -8,12 +8,8 @@
 
 #import <UIKit/UIKit.h>
 #import <TechnikumViewController.h>
-#import <ZurichViewController.h>
-#import <ToessfeldViewController.h>
 
 @class TechnikumViewController;
-@class ZurichViewController;
-@class ToessfeldViewController;
 
 @interface MapsViewController : UIViewController<UITableViewDelegate>
 {
@@ -22,8 +18,6 @@
     IBOutlet UILabel                    *_titleNavigationLabel;
 
     IBOutlet TechnikumViewController    *_technikumVC;
-    IBOutlet ZurichViewController       *_zurichVC;
-    IBOutlet ToessfeldViewController    *_toessfeldVC;
     
     IBOutlet UITableView                *_menuTableView;
 }
@@ -36,8 +30,6 @@
 @property (nonatomic, retain) IBOutlet UILabel                      *_titleNavigationLabel;
 
 @property (nonatomic, retain) IBOutlet TechnikumViewController      *_technikumVC;
-@property (nonatomic, retain) IBOutlet ZurichViewController         *_zurichVC;
-@property (nonatomic, retain) IBOutlet ToessfeldViewController      *_toessfeldVC;
 
 
 @end

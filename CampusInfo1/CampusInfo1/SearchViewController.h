@@ -30,6 +30,7 @@
     IBOutlet UITableView            *_acronymAutocompleteTableView;
     
     IBOutlet UISegmentedControl     *_searchSegmentedControl;
+    IBOutlet UINavigationBar        *_segmentedControlNavigationBar;
     
     NSMutableArray                  *_suggestions;
     Autocomplete                    *_autocomplete;
@@ -50,6 +51,7 @@
 @property (nonatomic, retain) IBOutlet UITableView                  *_acronymAutocompleteTableView;
 
 @property (nonatomic, retain) IBOutlet UISegmentedControl           *_searchSegmentedControl;
+@property (nonatomic, retain) IBOutlet UINavigationBar              *_segmentedControlNavigationBar;
 
 @property (nonatomic, retain) NSString                              *_searchType;
 @property (strong, nonatomic) NSArray                               *_searchTypeArray;

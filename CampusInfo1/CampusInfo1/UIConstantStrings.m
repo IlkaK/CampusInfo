@@ -156,38 +156,38 @@ NSString * const EmergencyVCSectionTitleInform          = @"2. Informieren > imm
 
 
 NSString * const EmergencyVCDisplayTitlePolice          = @"Polizei";
-NSString * const EmergencyVCDisplayPhonePolice          = @"(0)117";
+NSString * const EmergencyVCDisplayPhonePolice          = @"117";
 NSString * const EmergencyVCDisplayTextPolice           = @"Die Polizei";
 NSString * const EmergencyVCRealPhonePolice             = @"117";
 
 NSString * const EmergencyVCDisplayTitleFire          = @"Feuerwehr";
-NSString * const EmergencyVCDisplayPhoneFire          = @"(0)118";
+NSString * const EmergencyVCDisplayPhoneFire          = @"118";
 NSString * const EmergencyVCDisplayTextFire           = @"Die Feuerwehr";
 NSString * const EmergencyVCRealPhoneFire             = @"118";
 
 NSString * const EmergencyVCDisplayTitleSanitary      = @"Sanität";
-NSString * const EmergencyVCDisplayPhoneSanitary      = @"(0)144";
+NSString * const EmergencyVCDisplayPhoneSanitary      = @"144";
 NSString * const EmergencyVCDisplayTextSanitary       = @"Die Sanität";
 NSString * const EmergencyVCRealPhoneSanitary         = @"144";
 
 NSString * const EmergencyVCDisplayTitleToxCentre     = @"Tox-Zentrum";
-NSString * const EmergencyVCDisplayPhoneToxCentre     = @"(0)145";
+NSString * const EmergencyVCDisplayPhoneToxCentre     = @"145";
 NSString * const EmergencyVCDisplayTextToxCentre      = @"Das Tox-Zentrum";
 NSString * const EmergencyVCRealPhoneToxCentre        = @"145";
 
 NSString * const EmergencyVCDisplayTitleRega          = @"REGA";
-NSString * const EmergencyVCDisplayPhoneRega          = @"(0)1414";
+NSString * const EmergencyVCDisplayPhoneRega          = @"1414";
 NSString * const EmergencyVCDisplayTextRega           = @"Die REGA";
 NSString * const EmergencyVCRealPhoneRega             = @"1414";
 
 NSString * const EmergencyVCDisplayTitleZHAWEmergency = @"ZHAW-Notfallnummer";
-NSString * const EmergencyVCDisplayPhoneZHAWEmergency = @"(0)058 9347070";
+NSString * const EmergencyVCDisplayPhoneZHAWEmergency = @"+41 58 934 70 70";
 NSString * const EmergencyVCDisplayTextZHAWEmergency  = @"Die ZHAW-Notfallnummer";
 NSString * const EmergencyVCRealPhoneZHAWEmergency    = @"0589347070";
 NSString * const EmergencyVCDisplayZHAWEmergencyAvailability = @"(365 Tage/24 Stunden)";
 
 NSString * const ServiceDeskVCRealPhone         = @"0041589346677";
-NSString * const ServiceDeskVCDisplayPhone      = @"(0)058 934 66 77";
+NSString * const ServiceDeskVCDisplayPhone      = @"+41 58 934 66 77";
 NSString * const ServiceDeskVCRealEmail         = @"servicedesk@zhaw.ch";
 NSString * const ServiceDeskVCDisplayEmail      = @"servicedesk(at)zhaw.ch";
 NSString * const ServiceDeskVCDescriptionEmail  = @"Email:";

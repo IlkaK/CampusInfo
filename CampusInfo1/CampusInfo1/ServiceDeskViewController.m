@@ -48,15 +48,9 @@
     _titleNavigationLabel.text = ServiceDeskVCTitle;
     _titleNavigationItem.title = @"";
     
-    CGRect imageRect = CGRectMake(0, 0, _titleNavigationBar.frame.size.width, _titleNavigationBar.frame.size.height);
-    UIGraphicsBeginImageContext(imageRect.size);
-    [_zhawColors._zhawOriginalBlue set];
-    UIRectFill(imageRect);
-    UIImage *aImage = UIGraphicsGetImageFromCurrentImageContext();
-    UIGraphicsEndImageContext();
-    [_titleNavigationBar setBackgroundImage:aImage forBarMetrics:UIBarMetricsDefault];
+    [_titleNavigationLabel setTextAlignment:UITextAlignmentCenter];
     
-    [_titleNavigationLabel setBackgroundColor:_zhawColors._zhawOriginalBlue];
+    [_titleNavigationBar setTintColor:_zhawColors._zhawDarkerBlue];
 }
 
 - (void)didReceiveMemoryWarning

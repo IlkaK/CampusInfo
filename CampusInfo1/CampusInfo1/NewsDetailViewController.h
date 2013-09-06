@@ -16,6 +16,10 @@
     IBOutlet UINavigationBar    *_titleNavigationBar;
     IBOutlet UINavigationItem   *_titleNavigationItem;
     IBOutlet UILabel            *_titleNavigationLabel;
+    
+    
+    IBOutlet UINavigationBar    *_descriptionNavigationBar;
+    IBOutlet UINavigationItem   *_descriptionNavigationItem;
     IBOutlet UILabel            *_descriptionTitleLabel;    
     
     IBOutlet UILabel            *_dateLabel;
@@ -29,8 +33,10 @@
 @property (nonatomic, retain) UINavigationBar                       *_titleNavigationBar;
 @property (nonatomic, retain) UINavigationItem                      *_titleNavigationItem;
 @property (nonatomic, retain) UILabel                               *_titleNavigationLabel;
-@property (nonatomic, retain) UILabel                               *_descriptionTitleLabel;
 
+@property (nonatomic, retain) UINavigationBar                       *_descriptionNavigationBar;
+@property (nonatomic, retain) UINavigationItem                      *_descriptionNavigationItem;
+@property (nonatomic, retain) UILabel                               *_descriptionTitleLabel;
 
 @property (nonatomic, retain) UILabel                               *_dateLabel;
 @property (nonatomic, retain) UIButton                              *_linkButton;

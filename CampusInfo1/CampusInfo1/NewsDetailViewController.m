@@ -23,7 +23,10 @@
 
 @synthesize _dateFormatter;
 
+@synthesize _descriptionNavigationBar;
+@synthesize _descriptionNavigationItem;
 @synthesize _descriptionTitleLabel;
+
 @synthesize _titleNavigationLabel;
 @synthesize _titleNavigationBar;
 @synthesize _titleNavigationItem;
@@ -54,20 +57,17 @@
     _titleNavigationLabel.text = NewsDetailVCTitle;
     _titleNavigationItem.title = @"";
     
-    CGRect imageRect = CGRectMake(0, 0, _titleNavigationBar.frame.size.width, _titleNavigationBar.frame.size.height);
-    UIGraphicsBeginImageContext(imageRect.size);
-    [_zhawColor._zhawOriginalBlue set];
-    UIRectFill(imageRect);
-    UIImage *aImage = UIGraphicsGetImageFromCurrentImageContext();
-    UIGraphicsEndImageContext();
-    [_titleNavigationBar setBackgroundImage:aImage forBarMetrics:UIBarMetricsDefault];
-    [_titleNavigationLabel setBackgroundColor:_zhawColor._zhawOriginalBlue];
-    
+    [_titleNavigationBar setTintColor:_zhawColor._zhawDarkerBlue];
+    [_titleNavigationLabel setTextAlignment:UITextAlignmentCenter];
+
     
     // setting description and date labels
-    [_descriptionTitleLabel setBackgroundColor:_zhawColor._zhawOriginalBlue];
     [_descriptionTitleLabel setTextColor:_zhawColor._zhawWhite];
-    [_dateLabel             setTextColor:_zhawColor._zhawLightGrey];
+    [_descriptionTitleLabel setTextAlignment:UITextAlignmentCenter];
+    [_descriptionNavigationBar setTintColor:_zhawColor._zhawDarkerBlue];    
+    _descriptionNavigationItem.title = @"";
+    
+    [_dateLabel setTextColor:_zhawColor._zhawLightGrey];
     
 }
 
@@ -84,6 +84,8 @@
     _titleNavigationBar = nil;
     _titleNavigationItem = nil;
     _titleNavigationLabel = nil;
+    _descriptionNavigationBar = nil;
+    _descriptionNavigationItem = nil;
     [super viewDidUnload];
 }
 

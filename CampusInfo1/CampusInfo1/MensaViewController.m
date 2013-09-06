@@ -29,6 +29,8 @@
 @synthesize _mensaDetailVC;
 
 @synthesize _dateLabel;
+@synthesize _dateNavigationBar;
+
 @synthesize _noConnectionLabel;
 @synthesize _noConnectionButton;
 
@@ -84,15 +86,11 @@
     _titleNavigationLabel.text = MensaVCTitle;
     _titleNavigationItem.title = @"";
     
-    CGRect imageRect = CGRectMake(0, 0, _titleNavigationBar.frame.size.width, _titleNavigationBar.frame.size.height);
-    UIGraphicsBeginImageContext(imageRect.size);
-    [_zhawColor._zhawOriginalBlue set];
-    UIRectFill(imageRect);
-    UIImage *aImage = UIGraphicsGetImageFromCurrentImageContext();
-    UIGraphicsEndImageContext();
-    [_titleNavigationBar setBackgroundImage:aImage forBarMetrics:UIBarMetricsDefault];
+    [_titleNavigationLabel setTextAlignment:UITextAlignmentCenter];
+    [_titleNavigationBar setTintColor:_zhawColor._zhawDarkerBlue];
     
-    [_titleNavigationLabel setBackgroundColor:_zhawColor._zhawOriginalBlue];
+    [_dateNavigationBar setTintColor:_zhawColor._zhawDarkerBlue];
+    [_dateLabel setTextColor:_zhawColor._zhawWhite];
     
     // set default values for spinner/activity indicator
     _waitForChangeActivityIndicator.hidesWhenStopped = YES;
@@ -103,9 +101,6 @@
     [self.view bringSubviewToFront:_noConnectionButton];
     [self.view bringSubviewToFront:_noConnectionLabel];
     [self.view bringSubviewToFront:_dateLabel];
-    
-    //[_noConnectionLabel setTextColor:_zhawColor._zhawWhite];
-    [_dateLabel setTextColor:_zhawColor._zhawWhite];
     
     _noConnectionButton.hidden = YES;
     _noConnectionLabel.hidden = YES;
@@ -131,6 +126,7 @@
     _waitForChangeActivityIndicator = nil;
     _noConnectionLabel = nil;
     _noConnectionButton = nil;
+    _dateNavigationBar = nil;
     [super viewDidUnload];
 }
 

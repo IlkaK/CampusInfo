@@ -62,16 +62,8 @@
     _titleNavigationLabel.text = SettingsVCTitle;
     _titleNavigationItem.title = @"";
     
-    CGRect imageRect = CGRectMake(0, 0, _titleNavigationBar.frame.size.width, _titleNavigationBar.frame.size.height);
-    UIGraphicsBeginImageContext(imageRect.size);
-    [_zhawColor._zhawOriginalBlue set];
-    UIRectFill(imageRect);
-    UIImage *aImage = UIGraphicsGetImageFromCurrentImageContext();
-    UIGraphicsEndImageContext();
-    [_titleNavigationBar setBackgroundImage:aImage forBarMetrics:UIBarMetricsDefault];
-    
-    [_titleNavigationLabel setBackgroundColor:_zhawColor._zhawOriginalBlue];
-
+    [_titleNavigationBar setTintColor:_zhawColor._zhawDarkerBlue];
+    [_titleNavigationLabel setTextAlignment:UITextAlignmentCenter];
     
     // user defaults and acronym text field
     NSUserDefaults *_acronymUserDefaults = [NSUserDefaults standardUserDefaults];

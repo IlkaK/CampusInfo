@@ -126,15 +126,9 @@
     _titleNavigationLabel.text = EmergencyVCTitle;
     _titleNavigationItem.title = @"";
     
-    CGRect imageRect = CGRectMake(0, 0, _titleNavigationBar.frame.size.width, _titleNavigationBar.frame.size.height);
-    UIGraphicsBeginImageContext(imageRect.size);
-    [_zhawColor._zhawOriginalBlue set];
-    UIRectFill(imageRect);
-    UIImage *aImage = UIGraphicsGetImageFromCurrentImageContext();
-    UIGraphicsEndImageContext();
-    [_titleNavigationBar setBackgroundImage:aImage forBarMetrics:UIBarMetricsDefault];
+    [_titleNavigationLabel setTextAlignment:UITextAlignmentCenter];
     
-    [_titleNavigationLabel setBackgroundColor:_zhawColor._zhawOriginalBlue];
+    [_titleNavigationBar setTintColor:_zhawColor._zhawDarkerBlue];
 }
 
 - (void)didReceiveMemoryWarning

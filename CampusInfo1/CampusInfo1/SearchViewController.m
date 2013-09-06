@@ -23,6 +23,7 @@
 @synthesize _autocomplete;
 
 @synthesize _searchSegmentedControl;
+@synthesize _segmentedControlNavigationBar;
 
 @synthesize _students;
 @synthesize _lecturers;
@@ -62,7 +63,6 @@
     _autocomplete = [[Autocomplete alloc] initWithArray:_lecturers._lecturerArray];
 	_searchTextField.autocorrectionType = UITextAutocorrectionTypeNo;
     
-    
     // set title
     UIBarButtonItem *backButtonItem = [[UIBarButtonItem alloc] initWithTitle:LeftArrowSymbol style:UIBarButtonItemStylePlain target:self action:@selector(moveBackToTimeTable:)];
     
@@ -72,21 +72,16 @@
     [_titleNavigationLabel setTextColor:_zhawColor._zhawWhite];
     _titleNavigationLabel.text = SearchVCTitle;
     _titleNavigationItem.title = @"";
+    [_titleNavigationLabel setTextAlignment:UITextAlignmentCenter];
     
-    CGRect imageRect = CGRectMake(0, 0, _titleNavigationBar.frame.size.width, _titleNavigationBar.frame.size.height);
-    UIGraphicsBeginImageContext(imageRect.size);
-    [_zhawColor._zhawOriginalBlue set];
-    UIRectFill(imageRect);
-    UIImage *aImage = UIGraphicsGetImageFromCurrentImageContext();
-    UIGraphicsEndImageContext();
-    [_titleNavigationBar setBackgroundImage:aImage forBarMetrics:UIBarMetricsDefault];
-    
-    [_titleNavigationLabel setBackgroundColor:_zhawColor._zhawOriginalBlue];
-    
+    [_titleNavigationBar setTintColor:_zhawColor._zhawDarkerBlue];
+
     
     // set segmented control
     [_searchSegmentedControl setTintColor:_zhawColor._zhawOriginalBlue];
     [self.view bringSubviewToFront:_searchSegmentedControl];
+    
+    [_segmentedControlNavigationBar setTintColor:_zhawColor._zhawDarkerBlue];
 }
 
 -(void)loadDataWithSearchType
@@ -180,6 +175,7 @@
     _titleNavigationBar = nil;
     _titleNavigationItem = nil;
     _titleNavigationLabel = nil;
+    _segmentedControlNavigationBar = nil;
     [super viewDidUnload];
 }
 
