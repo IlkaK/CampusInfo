@@ -755,6 +755,7 @@
     NSUserDefaults *_acronymUserDefaults = [NSUserDefaults standardUserDefaults];
     self._ownStoredAcronymString         = [_acronymUserDefaults stringForKey:TimeTableAcronym];
     self._ownStoredAcronymType           = [self getAcronymType:_ownStoredAcronymString];
+    [self._timeTableSegmentedControl setTitle:_ownStoredAcronymString forSegmentAtIndex:0];
     
     // go to acronym page to enforce setting an acronym
     if (self._ownStoredAcronymString == nil && self._searchText == nil)

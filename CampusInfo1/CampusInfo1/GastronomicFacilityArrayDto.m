@@ -20,6 +20,7 @@
 @synthesize _url;
 
 @synthesize _threadDone;
+@synthesize _noConnection;
 
 
 -(id) init:(NSMutableArray *) newGastronomicFacilities
@@ -46,6 +47,7 @@
     _dateFormatter  = [[DateFormation alloc] init];
     
     _threadDone = NO;
+    _noConnection = YES;
     return self;
 }
 
@@ -93,7 +95,7 @@
             }
             else
             {
-                //NSLog(@"vorher gastronomies count: %i", [_gastronomicFacilities count]);
+                NSLog(@"vorher gastronomies count: %i", [_gastronomicFacilities count]);
                 if ([_gastronomicFacilities count] == 0)
                 {
                     //self._errorMessage = nil;
@@ -111,7 +113,7 @@
                         }
                     }
                 }
-                //NSLog(@"nacher gastronomies count: %i", [_gastronomicFacilities count]);
+                NSLog(@"nacher gastronomies count: %i", [_gastronomicFacilities count]);
 
             }
         }
@@ -171,6 +173,11 @@
     if (self._generalDictionary == nil)
     {
         NSLog(@"GastronomicFacilityArrayDto: no connection");
+        _noConnection = YES;
+    }
+    else
+    {
+        _noConnection = NO;
     }
 }
 

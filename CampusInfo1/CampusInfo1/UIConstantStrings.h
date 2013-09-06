@@ -33,11 +33,21 @@ extern NSString * const ToessfeldVCFileName  ;
 extern NSString * const ToessfeldVCFileFormat;
 
 // strings for settings
-extern NSString * const TimeTableTypeStudent;
-extern NSString * const TimeTableTypeDozent;
-extern NSString * const TimeTableTypeKurs   ;
-extern NSString * const TimeTableTypeRaum   ;
-extern NSString * const TimeTableTypeKlasse  ;
+extern NSString * const TimeTableTypeStudent     ;
+extern NSString * const TimeTableTypeDozent      ;
+extern NSString * const TimeTableTypeDozentPlural;
+extern NSString * const TimeTableTypeKurs        ;
+extern NSString * const TimeTableTypeRaum        ;
+extern NSString * const TimeTableTypeKlasse      ;
+extern NSString * const TimeTableTypeKlassePlural;
+
+extern NSString * const TimeTableTypeStudentEnglish ;
+extern NSString * const TimeTableTypeLecturerEnglishPlural;
+extern NSString * const TimeTableTypeCourseEnglishPlural;
+extern NSString * const TimeTableTypeRoomEnglishPlural  ;
+extern NSString * const TimeTableTypeClassEnglishPlural;
+
+extern NSString * const TimeTableDescription;
 
 extern NSString * const SettingsVCTitle;
 extern NSString * const SettingsVCSearchType;
@@ -214,8 +224,7 @@ extern NSString * const TimeTableOverVCTitle;
 
 // mensa
 extern NSString * const MensaVCTitle;
-
-
+extern NSString * const MensaClosed;
 
 @end
 

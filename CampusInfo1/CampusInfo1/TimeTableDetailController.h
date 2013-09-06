@@ -28,12 +28,6 @@
     IBOutlet UITableViewCell            *_detailTableCell;
     IBOutlet UITableViewCell            *_detailTableCellWithButton;
     
-    // titel labels
-    IBOutlet UILabel                    *_timeLabel;
-    IBOutlet UILabel                    *_timeTableDescriptionLabel;
-    IBOutlet UIButton                   *_backButton;
-    IBOutlet UILabel                    *_backLabel;
-    
     NSString                            *_timeString;
     NSString                            *_dayAndAcronymString;
 
@@ -42,7 +36,11 @@
     IBOutlet UINavigationBar            *_titleNavigationBar;
     IBOutlet UINavigationItem           *_titleNavigationItem;
     IBOutlet UILabel                    *_titleNavigationLabel;
+    IBOutlet UILabel                    *_timeTableDescriptionLabel;
 
+    IBOutlet UINavigationBar            *_timeNavigationBar;
+    IBOutlet UINavigationItem           *_timeNavigationItem;
+    IBOutlet UILabel                    *_timeLabel;
 }
 
 @property (nonatomic, retain) id<TimeTableDetailViewDelegate>   _timeTableDetailViewDelegate;
@@ -54,10 +52,13 @@
 @property (nonatomic, retain) NSString                          *_timeString;
 @property (nonatomic, retain) NSString                          *_dayAndAcronymString;
 
-@property (nonatomic, retain) IBOutlet UILabel                  *_titleLabel;
-@property (nonatomic, retain) IBOutlet UILabel                  *_timeTableDescriptionLabel;
 @property (nonatomic, retain) IBOutlet UINavigationBar          *_titleNavigationBar;
 @property (nonatomic, retain) IBOutlet UINavigationItem         *_titleNavigationItem;
+@property (nonatomic, retain) IBOutlet UILabel                  *_titleNavigationLabel;
+@property (nonatomic, retain) IBOutlet UILabel                  *_timeTableDescriptionLabel;
+
+@property (nonatomic, retain) IBOutlet UINavigationBar          *_timeNavigationBar;
+@property (nonatomic, retain) IBOutlet UINavigationItem         *_timeNavigationItem;
 @property (nonatomic, retain) IBOutlet UILabel                  *_timeLabel;
 
 

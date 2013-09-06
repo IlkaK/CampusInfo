@@ -35,6 +35,7 @@
 @synthesize _titleNavigationItem;
 @synthesize _titleNavigationLabel;
 
+@synthesize _waitForChangeActivityIndicator;
 
 - (void)viewDidLoad
 {
@@ -82,6 +83,12 @@
     [self.view bringSubviewToFront:_searchSegmentedControl];
     
     [_segmentedControlNavigationBar setTintColor:_zhawColor._zhawDarkerBlue];
+    
+    // set activity indicator
+    _waitForChangeActivityIndicator.hidesWhenStopped = YES;
+    _waitForChangeActivityIndicator.hidden = YES;
+    [_waitForChangeActivityIndicator setBackgroundColor:_zhawColor._zhawOriginalBlue];
+    [self.view bringSubviewToFront:_waitForChangeActivityIndicator];
 }
 
 -(void)loadDataWithSearchType
@@ -145,6 +152,12 @@
 }
 
 
+- (void) threadWaitForChangeActivityIndicator:(id)data
+{
+    _waitForChangeActivityIndicator.hidden = NO;
+    [_waitForChangeActivityIndicator startAnimating];
+}
+
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
     [textField resignFirstResponder];
@@ -176,6 +189,7 @@
     _titleNavigationItem = nil;
     _titleNavigationLabel = nil;
     _segmentedControlNavigationBar = nil;
+    _waitForChangeActivityIndicator = nil;
     [super viewDidUnload];
 }
 
@@ -215,8 +229,28 @@
 
 - (void)moveBackToTimeTable:(id)sender
 {
-    [self dismissModalViewControllerAnimated:YES];
+    if (_searchTextField.text == nil || [_searchTextField.text length] == 0)
+    {
+        [self dismissModalViewControllerAnimated:YES];
+    }
+    else
+    {
+        [NSThread detachNewThreadSelector:@selector(threadWaitForChangeActivityIndicator:) toTarget:self withObject:nil];
+        
+        // trim space in front of and after the string
+        NSString *_stringWithoutSpaces = [_searchTextField.text stringByTrimmingCharactersInSet:
+                                          [NSCharacterSet whitespaceAndNewlineCharacterSet]];
+        
+        [[NSNotificationCenter defaultCenter] postNotificationName:SettingsVCSearchType object:_searchType];
+        [[NSNotificationCenter defaultCenter] postNotificationName:SettingsVCSearchText object:_stringWithoutSpaces];
+        
+        [_waitForChangeActivityIndicator stopAnimating];
+        _waitForChangeActivityIndicator.hidden = YES;
+        
+        [self dismissModalViewControllerAnimated:YES];
+    }
 }
+
 
 - (IBAction)searchTextFieldChanged:(id)sender
 {
@@ -256,6 +290,8 @@
         }
         else
         {
+            [NSThread detachNewThreadSelector:@selector(threadWaitForChangeActivityIndicator:) toTarget:self withObject:nil];
+            
             // trim space in front of and after the string
             NSString *_stringWithoutSpaces = [_searchTextField.text stringByTrimmingCharactersInSet:
                                               [NSCharacterSet whitespaceAndNewlineCharacterSet]];
@@ -263,48 +299,15 @@
             [[NSNotificationCenter defaultCenter] postNotificationName:SettingsVCSearchType object:_searchType];
             [[NSNotificationCenter defaultCenter] postNotificationName:SettingsVCSearchText object:_stringWithoutSpaces];
             
-            //self.tabBarController.selectedIndex = 0;
+            [_waitForChangeActivityIndicator stopAnimating];
+            _waitForChangeActivityIndicator.hidden = YES;
+            
             [self dismissModalViewControllerAnimated:YES];
         }
         [_searchSegmentedControl setSelectedSegmentIndex:UISegmentedControlNoSegment];
 
     }
     
-}
-
-// handling the search button
-- (IBAction)startSearch:(id)sender
-{
-    if (_searchTextField.text == nil || [_searchTextField.text length] == 0)
-    {
-        UIAlertView *_acronymAlertView = [[UIAlertView alloc]
-                                          initWithTitle:SearchVCTitle
-                                          message:SearchVCHint
-                                          delegate:self
-                                          cancelButtonTitle:AlertViewOk
-                                          otherButtonTitles:nil];
-        
-        [_acronymAlertView show];
-    }
-    else
-    {
-        // trim space in front of and after the string
-        NSString *_stringWithoutSpaces = [_searchTextField.text stringByTrimmingCharactersInSet:
-                                          [NSCharacterSet whitespaceAndNewlineCharacterSet]];
-        
-        [[NSNotificationCenter defaultCenter] postNotificationName:SettingsVCSearchType object:_searchType];
-        [[NSNotificationCenter defaultCenter] postNotificationName:SettingsVCSearchText object:_stringWithoutSpaces];
-        
-        //self.tabBarController.selectedIndex = 0;
-        [self dismissModalViewControllerAnimated:YES];
-    }
-    
-}
-
-// handling the cancel button
-- (IBAction)cancelSearch:(id)sender
-{
-    [self dismissModalViewControllerAnimated:YES];
 }
 
 

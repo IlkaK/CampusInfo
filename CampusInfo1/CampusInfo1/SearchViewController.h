@@ -44,6 +44,8 @@
     IBOutlet UINavigationBar        *_titleNavigationBar;
     IBOutlet UINavigationItem       *_titleNavigationItem;
     IBOutlet UILabel                *_titleNavigationLabel;
+    
+    IBOutlet UIActivityIndicatorView *_waitForChangeActivityIndicator;
 }
 
 @property (nonatomic, retain) IBOutlet UITextField                  *_searchTextField;
@@ -69,6 +71,7 @@
 @property (nonatomic, retain) IBOutlet UINavigationItem             *_titleNavigationItem;
 @property (nonatomic, retain) IBOutlet UILabel                      *_titleNavigationLabel;
 
+@property (nonatomic, retain) IBOutlet UIActivityIndicatorView      *_waitForChangeActivityIndicator;
 
 - (IBAction)searchTextFieldChanged:(id)sender;
 

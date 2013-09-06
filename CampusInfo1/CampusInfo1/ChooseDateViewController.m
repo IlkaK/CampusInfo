@@ -52,7 +52,17 @@
 
 - (void)moveBackToTimeTable:(id)sender
 {
-    [self dismissModalViewControllerAnimated:YES];
+    if([self._chooseDateViewDelegate respondsToSelector:@selector(setActualDate:)])
+    {
+        [NSThread detachNewThreadSelector:@selector(threadWaitForChangeActivityIndicator:) toTarget:self withObject:nil];
+        
+        [self._chooseDateViewDelegate setActualDate:_datePicker.date];
+        
+        [_waitForChangeActivityIndicator stopAnimating];
+        _waitForChangeActivityIndicator.hidden = YES;
+        
+        [self dismissModalViewControllerAnimated:YES];
+    }
 }
 
 

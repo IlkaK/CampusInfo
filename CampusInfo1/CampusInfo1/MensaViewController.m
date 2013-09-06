@@ -69,14 +69,6 @@
     
     _dateLabel.text = _dateString;
     
-    
-    // ----- DETAIL PAGE -----
-    if (_mensaDetailVC == nil)
-    {
-		_mensaDetailVC = [[MensaDetailViewController alloc] init];
-	}
-    _mensaDetailVC.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
-    
     UIBarButtonItem *backButtonItem = [[UIBarButtonItem alloc] initWithTitle:LeftArrowSymbol style:UIBarButtonItemStylePlain target:self action:@selector(moveBackToMenuOverview:)];
     [backButtonItem setTintColor:_zhawColor._zhawOriginalBlue];
     
@@ -105,6 +97,13 @@
     _noConnectionButton.hidden = YES;
     _noConnectionLabel.hidden = YES;
     [_noConnectionButton useAlertStyle];
+    
+    // ----- DETAIL PAGE -----
+    if (_mensaDetailVC == nil)
+    {
+		_mensaDetailVC = [[MensaDetailViewController alloc] init];
+	}
+    _mensaDetailVC.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
 }
 
 
@@ -162,7 +161,8 @@
     [_waitForChangeActivityIndicator stopAnimating];
     _waitForChangeActivityIndicator.hidden = YES;
     
-    if ([_gastronomyFacilityArray._gastronomicFacilities count] == 0)
+    //if ([_gastronomyFacilityArray._gastronomicFacilities count] == 0)
+    if(_gastronomyFacilityArray._noConnection)
     {
         _noConnectionButton.hidden = NO;
         _noConnectionLabel.hidden = NO;
@@ -182,20 +182,31 @@
 - (IBAction)tryConnectionAgain:(id)sender
 {
     [self getGastronomyFacilityArray];
+    [_mensaOverviewTable reloadData];
 }
 
 
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    if ([_gastronomyFacilityArray._gastronomicFacilities count] == 0)
+    
+    if (_gastronomyFacilityArray._noConnection)
     {
         [self getGastronomyFacilityArray];
     }
-    if (_tableRows < [_gastronomyFacilityArray._gastronomicFacilities count])
-    {
-        [_mensaOverviewTable reloadData];
-    }
+    
+    [_mensaOverviewTable reloadData];
+    
+    //if ([_gastronomyFacilityArray._gastronomicFacilities count] == 0)
+    //{
+    //    [self getGastronomyFacilityArray];
+    //    [_mensaOverviewTable reloadData];
+    //}
+    
+    //if (_tableRows < [_gastronomyFacilityArray._gastronomicFacilities count])
+    //{
+    //    [_mensaOverviewTable reloadData];
+    //}
 }
 
 
@@ -209,6 +220,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
+    //NSLog(@"set numberOfRowsInSection");
     if ([_gastronomyFacilityArray._gastronomicFacilities  lastObject] == nil)
     {
         return 0;
@@ -298,7 +310,8 @@
             
                 _fromHolidayString = [[_dateFormatter _englishDayFormatter] stringFromDate:_oneHoliday._startsAt];
                 _toHolidayString = [[_dateFormatter _englishDayFormatter] stringFromDate:_oneHoliday._endsAt];
-                //NSLog(@"_actualDayString %@ with from %@ and to %@", _actualDayString, _fromHolidayString, _toHolidayString);
+                
+                //NSLog(@"holiday? _actualDayString %@ with from %@ and to %@", _actualDayString, _fromHolidayString, _toHolidayString);
             
                 // _fromString is later in time than _fromLocalScheduleEvent
                 // and _fromString is earlier in time than _toLocalScheduleEvent
@@ -315,16 +328,22 @@
             
             }
         }
+        
         if (_isHoliday)
         {
-            _openingTime = @"geschlossen";
+            _openingTime = MensaClosed;
         }
         else
         {
             //NSLog(@"serviceTimePeriod count: %i", [_oneGastronomy._serviceTimePeriods count]);
             
-            if([ _oneGastronomy._serviceTimePeriods lastObject] != nil)
+            if([ _oneGastronomy._serviceTimePeriods lastObject] == nil)
             {
+                _openingTime = MensaClosed;
+            }
+            else
+            {
+                //NSLog(@"serviceTimePeriod last object is not nil");
                 for (serviceTimePeriodArrayI=0; serviceTimePeriodArrayI < [_oneGastronomy._serviceTimePeriods count]; serviceTimePeriodArrayI++)
                 {
                     _oneServiceTimePeriod = [_oneGastronomy._serviceTimePeriods objectAtIndex:serviceTimePeriodArrayI];
@@ -348,7 +367,7 @@
                             {
                                 if (_oneWeekdayForOpeningTimePlan._fromTime == nil && _oneWeekdayForOpeningTimePlan._toTime == nil)
                                 {
-                                    _openingTime = @"geschlossen";
+                                    _openingTime = MensaClosed;
                                 }
                                 else
                                 {
@@ -422,5 +441,14 @@
     
 }
 
-
+-(void)scrollViewDidScroll:(UIScrollView *)scrollView
+{
+    //NSLog(@"scrolling table");
+    if (_tableRows < [_gastronomyFacilityArray._gastronomicFacilities count])
+    {
+        [_mensaOverviewTable reloadData];
+    }
+    
+}
+    
 @end

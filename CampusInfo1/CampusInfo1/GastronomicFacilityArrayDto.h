@@ -24,6 +24,8 @@
     NSURL                       *_url;
     
     BOOL                        _threadDone;
+    
+    BOOL                        _noConnection;
 }
 
 @property (nonatomic, retain) NSMutableArray                    *_gastronomicFacilities;
@@ -37,7 +39,7 @@
 @property (nonatomic, retain) NSURL                             *_url;
 
 @property (nonatomic, assign) BOOL                              _threadDone;
-
+@property (nonatomic, assign) BOOL                              _noConnection;
 
 -(id)   init : (NSMutableArray *) newGastronomicFacilities;
 

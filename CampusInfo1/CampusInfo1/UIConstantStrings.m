@@ -34,12 +34,22 @@ NSString * const ToessfeldVCFileName   = @"Toessfeld";
 NSString * const ToessfeldVCFileFormat = @"pdf";
 
 
-// strings for settings
-NSString * const TimeTableTypeStudent = @"Student";
-NSString * const TimeTableTypeDozent  = @"Dozent";
-NSString * const TimeTableTypeKurs    = @"Kurs";
-NSString * const TimeTableTypeRaum    = @"Raum";
-NSString * const TimeTableTypeKlasse  = @"Klasse";
+// strings for settings/ time table details
+NSString * const TimeTableTypeStudent       = @"Student";
+NSString * const TimeTableTypeDozent        = @"Dozent";
+NSString * const TimeTableTypeDozentPlural  = @"Dozenten";
+NSString * const TimeTableTypeKurs          = @"Kurs";
+NSString * const TimeTableTypeRaum          = @"Raum";
+NSString * const TimeTableTypeKlasse        = @"Klasse";
+NSString * const TimeTableTypeKlassePlural  = @"Klassen:";
+
+NSString * const TimeTableTypeStudentEnglish            = @"Student";
+NSString * const TimeTableTypeLecturerEnglishPlural     = @"lecturers";
+NSString * const TimeTableTypeCourseEnglishPlural       = @"courses";
+NSString * const TimeTableTypeRoomEnglishPlural         = @"rooms";
+NSString * const TimeTableTypeClassEnglishPlural        = @"classes";
+
+NSString * const TimeTableDescription = @"Beschreibung";
 
 
 NSString * const SettingsVCTitle      = @"Einstellungen";
@@ -215,6 +225,6 @@ NSString * const TimeTableOverVCTitle = @"Stundenplan";
 
 // mensa
 NSString * const MensaVCTitle = @"Mensa";
-
+NSString * const MensaClosed  = @"geschlossen";
 
 @end
