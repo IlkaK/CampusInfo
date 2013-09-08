@@ -15,6 +15,8 @@
     NSString                    *_description;
     NSString                    *_content;
     NSString                    *_category;
+    NSString                    *_startdateString;
+    NSString                    *_starttimeString;
     NSDate                      *_pubDate;
 }
 
@@ -23,13 +25,17 @@
 @property (nonatomic, retain) NSString                    *_description;
 @property (nonatomic, retain) NSString                    *_content;
 @property (nonatomic, retain) NSString                    *_category;
+@property (nonatomic, retain) NSString                    *_startdateString;
+@property (nonatomic, retain) NSString                    *_starttimeString;
 @property (nonatomic, retain) NSDate                      *_pubDate;
 
--(id) init : (NSString *) newTitle
-           : (NSString *) newLink
-           : (NSString *) newDescription
-           : (NSString *) newContent
-           : (NSString *) newCategory
-           : (NSDate   *) newPubDate;
+-(id)             init : (NSString *) newTitle
+               withLink: (NSString *) newLink
+        withDescription: (NSString *) newDescription
+            withContent: (NSString *) newContent
+           withCategory: (NSString *) newCategory
+    withStartdateString: (NSString *) newStartdateString
+    withStarttimeString: (NSString *) newStarttimeString
+            withPubDate: (NSDate   *) newPubDate;
 
 @end

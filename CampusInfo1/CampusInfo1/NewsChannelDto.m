@@ -86,7 +86,14 @@
     {
         _startItem = YES;
         //NSLog(@"-- start parsing item");
-        _newsItem = [[NewsItemDto alloc]init:[NSString stringWithFormat:@""] :[NSString stringWithFormat:@""] :[NSString stringWithFormat:@""] :[NSString stringWithFormat:@""] :[NSString stringWithFormat:@""] :nil];
+        _newsItem = [[NewsItemDto alloc]init:[NSString stringWithFormat:@""]
+    withLink:[NSString stringWithFormat:@""]
+    withDescription:[NSString stringWithFormat:@""]
+    withContent:[NSString stringWithFormat:@""]
+    withCategory:[NSString stringWithFormat:@""]
+    withStartdateString:[NSString stringWithFormat:@""]
+    withStarttimeString:[NSString stringWithFormat:@""]
+                                 withPubDate:nil];
     }
 }
 
@@ -198,13 +205,23 @@
                 //NSLog(@"-- item category: %@", _actualValue);
                 _newsItem._category = [NSString stringWithFormat:@"%@%@",_newsItem._category, _actualValue];
             }
-            // pubDate returns weird string for events, so only works for news
+            
             if ([_actualStartElement isEqualToString:@"pubDate"] && [_dataType isEqualToString:@"NEWS"])
             {
                 //NSLog(@"-- item pubDate: %@", _actualValue);
                 _newsItem._pubDate = [_dateFormatter parseDateFromXMLString:_actualValue];
             }
             
+            if ([_actualStartElement isEqualToString:@"startdate"] && [_dataType isEqualToString:@"EVENTS"])
+            {
+                _newsItem._startdateString = [NSString stringWithFormat:@"%@%@",_newsItem._startdateString, _actualValue];
+            }
+            
+            if ([_actualStartElement isEqualToString:@"starttime"] && [_dataType isEqualToString:@"EVENTS"])
+            {
+                _newsItem._starttimeString = [NSString stringWithFormat:@"%@%@",_newsItem._starttimeString, _actualValue];
+                
+            }
         }
     }
 }
@@ -240,6 +257,8 @@
     {
         _startItem = NO;
        [_newsItemArray addObject:_newsItem];
+        //NSLog(@"-> item startdate: %@ title: %@", _newsItem._startdateString, _newsItem._title);
+        
         //NSLog(@"- finished parsing item: %@ --- %@ --- %@ --- %@ --- %@ --- %@", _newsItem._title, _newsItem._link, _newsItem._description, _newsItem._content, _newsItem._category,[[_dateFormatter _englishTimeAndDayFormatter] stringFromDate:_newsItem._pubDate]);
 
     }
@@ -306,7 +325,7 @@
         _urlString = [NSString stringWithFormat:@"https://srv-lab-t-874.zhaw.ch/v1/feeds/soe-news/feed"];
     }
         
-    //NSLog(@"urlString NewsChannelDto: %@", _urlString);
+    NSLog(@"urlString NewsChannelDto: %@", _urlString);
     
     NSURL *_url = [NSURL URLWithString:_urlString];
     [_asyncTimeTableRequest downloadData:_url];

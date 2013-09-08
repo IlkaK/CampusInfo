@@ -15,13 +15,17 @@
 @synthesize _category;
 @synthesize _content;
 @synthesize _pubDate;
+@synthesize _startdateString;
+@synthesize _starttimeString;
 
--(id) init : (NSString *) newTitle
-           : (NSString *) newLink
-           : (NSString *) newDescription
-           : (NSString *) newContent
-           : (NSString *) newCategory
-           : (NSDate   *) newPubDate
+-(id)           init : (NSString *) newTitle
+             withLink: (NSString *) newLink
+      withDescription: (NSString *) newDescription
+          withContent: (NSString *) newContent
+         withCategory: (NSString *) newCategory
+  withStartdateString: (NSString *) newStartdateString
+  withStarttimeString: (NSString *) newStarttimeString
+          withPubDate: (NSDate   *) newPubDate
 {
     self = [super init];
     if (self)
@@ -32,6 +36,8 @@
         self._content         = newContent;
         self._category        = newCategory;
         self._pubDate         = newPubDate;
+        self._starttimeString = newStarttimeString;
+        self._startdateString = newStartdateString;
     }
     return self;
 }

@@ -88,6 +88,7 @@
 
 - (IBAction)tryConnectionAgain:(id)sender
 {
+    //_newsChannel = [[NewsChannelDto alloc]init];
     [_newsChannel getEventData];
     [_eventsTable reloadData];
 }
@@ -112,17 +113,22 @@
     //NSLog(@"events view controller: viewWillAppear: %i", [_newsChannel._newsItemArray count]);
     
     
-    if (_actualTrials < 20)
-    {
-        _actualTrials++;
-        [_newsChannel getEventData];
-        [_eventsTable reloadData];
-        if ( [_newsChannel._newsItemArray count] == 0)
-        {
-            self._noConnectionButton.hidden = NO;
-            self._noConnectionLabel.hidden = NO;
-        }
-    }
+    //if (_actualTrials < 20)
+    //{
+        //_actualTrials++;
+
+        //if ( [_newsChannel._newsItemArray count] == 0)
+        //{
+            [_newsChannel getEventData];
+            [_eventsTable reloadData];
+            
+            if ( [_newsChannel._newsItemArray count] == 0)
+            {
+                self._noConnectionButton.hidden = NO;
+                self._noConnectionLabel.hidden = NO;
+            }
+        //}
+    //}
 }
 
 
@@ -177,6 +183,8 @@
     
     UILabel     *_oneTitleLabel         = (UILabel *) [_cell viewWithTag:1];
     UIWebView   *_descriptionWebView    = (UIWebView *) [_cell viewWithTag:2];
+    UILabel     *_dateLabel             = (UILabel *) [_cell viewWithTag:3];
+    
     _descriptionWebView.scrollView.scrollEnabled = NO;
     _descriptionWebView.scrollView.bounces = NO;
     _descriptionWebView.dataDetectorTypes = UIDataDetectorTypeNone;
@@ -194,7 +202,24 @@
             _oneTitleLabel.text     = _newsItem._title;
             [_oneTitleLabel setTextColor:_zhawColor._zhawOriginalBlue];
             
-            [_descriptionWebView loadHTMLString:_newsItem._description baseURL:nil];
+            if([_newsItem._startdateString length] > 0)
+            {
+                _dateLabel.text = [NSString stringWithFormat:@"%@, %@",_newsItem._startdateString, _newsItem._starttimeString];
+                [_dateLabel     setTextColor:_zhawColor._zhawLightGrey];
+            }
+            
+            NSString *_descr = [NSString stringWithFormat:@"<html> \n"
+                                           "<head> \n"
+                                           "<style type=\"text/css\"> \n"
+                                           "body {font-family: \"%@\";font-size: 13;}\n"
+                                           "</style> \n"
+                                           "</head> \n"
+                                           "<body>%@</body> \n"
+                                           "</html>", @"helvetica", _newsItem._description];
+            
+            [_descriptionWebView loadHTMLString:_descr baseURL:nil];
+            
+            //[myRichTextView loadHTMLString:myString baseURL:[NSURL URLWithString:myBaseURL]];
             //[_descriptionWebView loadHTMLString:_newsItem._content baseURL:nil];
             
             
@@ -206,7 +231,7 @@
 // set cell hight
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return 200;
+    return 179;
 }
 
 // Override to support row selection in the table view.

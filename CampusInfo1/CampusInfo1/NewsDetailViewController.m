@@ -106,7 +106,17 @@
         _dateLabel.text             =  [NSString stringWithFormat:@"%@"
                                          ,[[_dateFormatter _dayFormatter] stringFromDate:_newsItem._pubDate]];
         
-        [_contentWebView loadHTMLString:_newsItem._content baseURL:nil];
+        NSString *_descr = [NSString stringWithFormat:@"<html> \n"
+                            "<head> \n"
+                            "<style type=\"text/css\"> \n"
+                            "body {font-family: \"%@\";font-size: 13;}\n"
+                            "</style> \n"
+                            "</head> \n"
+                            "<body>%@</body> \n"
+                            "</html>", @"helvetica", _newsItem._content];
+        
+        
+        [_contentWebView loadHTMLString:_descr baseURL:nil];
         
         NSMutableAttributedString *_linkButtonString = [[NSMutableAttributedString alloc] initWithString:_newsItem._link];
         [_linkButtonString addAttribute:NSUnderlineStyleAttributeName value:[NSNumber numberWithInteger:NSUnderlineStyleSingle] range:NSMakeRange(0, [_linkButtonString length])];
