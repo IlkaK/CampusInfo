@@ -19,6 +19,7 @@
 @synthesize _menuOverviewTableCell;
 
 @synthesize _backgroundColor;
+@synthesize _zhawColor;
 
 @synthesize _contactsVC;
 @synthesize _settingsVC;
@@ -42,16 +43,11 @@
 		_menuTableView = [[UITableView alloc] init];
 	}
     
-    ColorSelection *_zhawColor = [[ColorSelection alloc]init];
-    
+    _zhawColor = [[ColorSelection alloc]init];
     _backgroundColor = _zhawColor._zhawOriginalBlue;
     
-
-    [_menuTableView setSeparatorColor:_zhawColor._zhawWhite];
+    [_menuTableView setSeparatorColor:[UIColor clearColor]];
     _menuTableView.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
-    
-    //_menuTableView.separatorColor = _backgroundColor;
-    //_menuTableView.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
     _menuTableView.scrollEnabled = NO;
     
     [self.view setBackgroundColor:_backgroundColor];
@@ -209,6 +205,10 @@
         self._menuOverviewTableCell = nil;
     }
     
+    // put a line above each cell
+    UIImageView *line = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 320, 1)];
+    line.backgroundColor = _zhawColor._zhawWhite;
+    [_cell addSubview:line];    
     
     if (_cellSelection == 0)
     {

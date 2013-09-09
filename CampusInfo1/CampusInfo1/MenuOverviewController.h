@@ -14,6 +14,7 @@
 #import <PublicTransportViewController.h>
 #import <MapsViewController.h>
 #import <SocialMediaViewController.h>
+#import <ColorSelection.h>
 
 @class ContactsViewController;
 @class SettingsViewController;
@@ -30,6 +31,7 @@
     IBOutlet UITableViewCell                *_menuOverviewTableCell;
     
     UIColor                                 *_backgroundColor;
+    ColorSelection                          *_zhawColor;
     
     IBOutlet ContactsViewController         *_contactsVC;
     IBOutlet SettingsViewController         *_settingsVC;
@@ -38,14 +40,14 @@
     IBOutlet EventsViewController           *_eventsVC;
     IBOutlet MapsViewController             *_mapsVC;
     IBOutlet SocialMediaViewController      *_socialMediaVC;
-    
-    
+
 }
 
 @property (nonatomic, retain) IBOutlet UITableView                          *_menuTableView;
 @property (nonatomic, retain) IBOutlet UITableViewCell                      *_menuOverviewTableCell;
 
 @property (nonatomic, retain) UIColor                                       *_backgroundColor;
+@property (nonatomic, retain) ColorSelection                                *_zhawColor;
 
 @property (nonatomic, retain) IBOutlet ContactsViewController               *_contactsVC;
 @property (nonatomic, retain) IBOutlet SettingsViewController               *_settingsVC;
