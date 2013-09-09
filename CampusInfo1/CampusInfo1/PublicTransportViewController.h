@@ -39,13 +39,6 @@
     DBCachingForAutocomplete            *_dbCachingForAutocomplete;
     NSMutableArray                      *_storedStartStationArray;
     NSMutableArray                      *_storedStopStationArray;
-    NSString                            *_showStart1;
-    NSString                            *_showStart2;
-    NSString                            *_showStart3;
-    NSString                            *_showStop1;
-    NSString                            *_showStop2;
-    NSString                            *_showStop3;
-
     
     // search part
     IBOutlet UILabel                    *_startLabel;
@@ -61,6 +54,7 @@
     IBOutlet UIButton                   *_chooseNewStopButton;
     
     IBOutlet GradientButton             *_searchButton;
+    IBOutlet GradientButton             *_changeDirectionButton;
     
     IBOutlet UIActivityIndicatorView    *_waitForChangeActivityIndicator;
 }
@@ -102,18 +96,15 @@
 @property (nonatomic, retain) IBOutlet UIButton                     *_chooseNewStopButton;
 
 @property (nonatomic, retain) IBOutlet GradientButton               *_searchButton;
+@property (nonatomic, retain) IBOutlet GradientButton               *_changeDirectionButton;
 
 @property (nonatomic, retain) IBOutlet UIActivityIndicatorView      *_waitForChangeActivityIndicator;
 
 
-@property (nonatomic, retain)NSString                            *_showStart1;
-@property (nonatomic, retain)NSString                            *_showStart2;
-@property (nonatomic, retain)NSString                            *_showStart3;
-@property (nonatomic, retain)NSString                            *_showStop1;
-@property (nonatomic, retain)NSString                            *_showStop2;
-@property (nonatomic, retain)NSString                            *_showStop3;
-
 - (IBAction)startConnectionSearch:(id)sender;
+
+// switch start and stop
+- (IBAction)changeDirection:(id)sender;
 
 // detail button next to start label
 - (IBAction)changeStart:(id)sender;
