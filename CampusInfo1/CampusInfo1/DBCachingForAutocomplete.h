@@ -37,9 +37,10 @@
 
 -(void) addStartStation:(NSString *)startStation;
 -(NSMutableArray *) getStartStations;
+-(void) deleteStartStation;
 
 -(void) addStopStation:(NSString *)stopStation;
 -(NSMutableArray *) getStopStations;
-
+-(void) deleteStopStation;
 
 @end

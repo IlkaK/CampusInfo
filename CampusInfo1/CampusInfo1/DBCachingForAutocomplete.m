@@ -123,6 +123,27 @@
 }
 
 
+
+-(void) deleteFromTable:(NSString *)tableName
+{
+    sqlite3_stmt    *_statement;
+    sqlite3         *_timeTableNamesDB;
+    
+    if (sqlite3_open([_timeTableDBPath UTF8String], &_timeTableNamesDB) == SQLITE_OK)
+    {
+        NSString *_deleteSQL = [NSString stringWithFormat:@"DELETE FROM %@", tableName];
+        
+        // delete first
+        sqlite3_prepare_v2(_timeTableNamesDB, [_deleteSQL UTF8String], -1, &_statement, NULL);
+        if (sqlite3_step(_statement) != SQLITE_DONE)
+        {
+            NSLog(@"Failed to delete %@ with statement: %d",tableName, sqlite3_step(_statement));
+        }
+        sqlite3_finalize(_statement);
+        sqlite3_close(_timeTableNamesDB);
+    }
+}
+
 -(void) addToTable:(NSString *)tableName
         withString:(NSString *)stringToStore
 {
@@ -244,6 +265,11 @@
     [self addToTable:@"START_STATIONS" withString:startStation];
 }
 
+-(void) deleteStartStation
+{
+    [self deleteFromTable:@"START_STATIONS"];
+}
+
 
 -(NSMutableArray *)getStopStations
 {
@@ -255,5 +281,9 @@
     [self addToTable:@"STOP_STATIONS" withString:stopStation];
 }
 
+-(void) deleteStopStation
+{
+    [self deleteFromTable:@"STOP_STATIONS"];
+}
 
 @end

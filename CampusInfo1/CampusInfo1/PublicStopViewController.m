@@ -18,8 +18,9 @@
 @implementation PublicStopViewController
 
 @synthesize _stationArray;
-@synthesize _actualStation;
+//@synthesize _actualStation;
 @synthesize _actualStationType;
+@synthesize _actualStationName;
 
 @synthesize _titleNavigationBar;
 @synthesize _titleNavigationItem;
@@ -38,7 +39,8 @@
 }
 
 - (void)moveBackToPublicTransport:(id)sender
-{
+{    
+    _actualStationName = _publicStopTextField.text;
     [self dismissModalViewControllerAnimated:YES];
 }
 
@@ -95,7 +97,7 @@
     
     [_actualizeButton useAlertStyle];
     
-    _actualStation = nil;
+    _actualStationName = @"";
     
     self._publicStopTextField.delegate = self;
  	_publicStopTextField.autocorrectionType = UITextAutocorrectionTypeNo;
@@ -126,7 +128,7 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    _actualStation = nil;
+    _actualStationName = @"";
     
     
     _publicStopTableView.hidden = YES;
@@ -169,7 +171,7 @@
         &&  [_stationArray._stations count] > _cellRow)
     {
         StationDto *_localStation = [_stationArray._stations objectAtIndex:_cellRow];
-        _actualStation = _localStation;
+        _actualStationName = _localStation._name;
         [self dismissModalViewControllerAnimated:YES];
     }
 }

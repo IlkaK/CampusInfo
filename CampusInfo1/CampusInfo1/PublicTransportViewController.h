@@ -39,7 +39,13 @@
     DBCachingForAutocomplete            *_dbCachingForAutocomplete;
     NSMutableArray                      *_storedStartStationArray;
     NSMutableArray                      *_storedStopStationArray;
-    
+    NSString                            *_showStart1;
+    NSString                            *_showStart2;
+    NSString                            *_showStart3;
+    NSString                            *_showStop1;
+    NSString                            *_showStop2;
+    NSString                            *_showStop3;
+
     
     // search part
     IBOutlet UILabel                    *_startLabel;
@@ -98,6 +104,14 @@
 @property (nonatomic, retain) IBOutlet GradientButton               *_searchButton;
 
 @property (nonatomic, retain) IBOutlet UIActivityIndicatorView      *_waitForChangeActivityIndicator;
+
+
+@property (nonatomic, retain)NSString                            *_showStart1;
+@property (nonatomic, retain)NSString                            *_showStart2;
+@property (nonatomic, retain)NSString                            *_showStart3;
+@property (nonatomic, retain)NSString                            *_showStop1;
+@property (nonatomic, retain)NSString                            *_showStop2;
+@property (nonatomic, retain)NSString                            *_showStop3;
 
 - (IBAction)startConnectionSearch:(id)sender;
 

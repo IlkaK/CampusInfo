@@ -53,6 +53,8 @@
 
 @synthesize _waitForChangeActivityIndicator;
 
+@synthesize _showStart1;
+
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -105,29 +107,8 @@
 	}
     _publicStopVC.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
     
-    _storedStartStationArray = [_dbCachingForAutocomplete getStartStations];
-    _storedStopStationArray  = [_dbCachingForAutocomplete getStopStations];
-    NSLog(@"viewDidLoad -> _storedStartStationArray count: %i", [_storedStartStationArray count]);
-    NSLog(@"viewDidLoad -> _storedStopStationArray  count: %i", [_storedStopStationArray count]);
+    [self actualizeStartStationArray];
     
-    if([_storedStartStationArray count] >= 1)
-    {
-        [_lastStart1Button setTitle:[_storedStartStationArray objectAtIndex:0] forState:UIControlStateNormal];
-        
-        if([_storedStartStationArray count] >= 2)
-        {
-            [_lastStart2Button setTitle:[_storedStartStationArray objectAtIndex:1] forState:UIControlStateNormal];
-        }
-    }
-    if([_storedStopStationArray count] >= 1)
-    {
-        [_lastStop1Button setTitle:[_storedStopStationArray objectAtIndex:0] forState:UIControlStateNormal];
-        
-        if([_storedStopStationArray count] >= 2)
-        {
-            [_lastStop1Button setTitle:[_storedStopStationArray objectAtIndex:1] forState:UIControlStateNormal];
-        }
-    }
     
     
     // set start/stop buttons with last results
@@ -162,30 +143,104 @@
 }
 
 
+- (void)actualizeStartStationArray
+{
+    _storedStartStationArray = [_dbCachingForAutocomplete getStartStations];
+    if([_storedStartStationArray count] >= 3)
+    {
+        _startLabel.text = [_storedStartStationArray objectAtIndex:2];
+        _startStation = [_storedStartStationArray objectAtIndex:2];
+        [_lastStart1Button setTitle:[_storedStartStationArray objectAtIndex:1] forState:UIControlStateNormal];
+        [_lastStart2Button setTitle:[_storedStartStationArray objectAtIndex:0] forState:UIControlStateNormal];
+    }
+    else
+    {        
+        if([_storedStartStationArray count] == 2)
+        {
+            _startLabel.text = [_storedStartStationArray objectAtIndex:1];
+            _startStation = [_storedStartStationArray objectAtIndex:1];
+            [_lastStart1Button setTitle:[_storedStartStationArray objectAtIndex:0] forState:UIControlStateNormal];
+            [_lastStart2Button setTitle:@"" forState:UIControlStateNormal];
+        }
+        else
+        {
+            if([_storedStartStationArray count] == 1)
+            {
+                _startLabel.text = [_storedStartStationArray objectAtIndex:0];
+                _startStation = [_storedStartStationArray objectAtIndex:0];
+            }
+        }
+    }
+}
+
+
+- (void)actualizeStopStationArray
+{
+    _storedStopStationArray  = [_dbCachingForAutocomplete getStopStations];
+
+    if([_storedStopStationArray count] >= 1)
+    {
+        _stopLabel.text = [_storedStopStationArray objectAtIndex:0];
+        _stopStation = [_storedStopStationArray objectAtIndex:0];
+    
+        if([_storedStopStationArray count] >= 2)
+        {
+            [_lastStop1Button setTitle:[_storedStopStationArray objectAtIndex:1] forState:UIControlStateNormal];
+        
+            if([_storedStopStationArray count] >= 3)
+            {
+                [_lastStop2Button setTitle:[_storedStopStationArray objectAtIndex:2] forState:UIControlStateNormal];
+            }
+        }
+    }
+}
+
+
+
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
     
     // TODO set start or stop label and _changedStart/StopStation when coming back from publicStopVC
     
-    if(_publicStopVC._actualStation._name != nil
-       && (_changedStopStation || _changedStartStation ))
+    if(
+            ([_publicStopVC._actualStationName length] > 0)
+         && (_changedStopStation || _changedStartStation )
+       )
     {
-        NSString *_stationName =  _publicStopVC._actualStation._name;
+        NSString *_stationName =  _publicStopVC._actualStationName;
         //NSLog(@"actual Station: %@",_stationName);
         if ([_publicStopVC._actualStationType isEqualToString:@"from"])
         {
-            _startLabel.text = _stationName;
+            //_startLabel.text = _stationName;
             _startStation = _stationName;
-            //_changedStartStation = NO;
+            
+            if ([_storedStartStationArray count] >= 3)
+            {
+                [_dbCachingForAutocomplete deleteStartStation];
+                [_dbCachingForAutocomplete addStartStation:_lastStart1Button.titleLabel.text];
+                [_dbCachingForAutocomplete addStartStation:_lastStart2Button.titleLabel.text];
+            }
             [_dbCachingForAutocomplete addStartStation:_startStation];
+            
+            [self actualizeStartStationArray];
+            
+            
         }
         else
         {
-            _stopLabel.text = _stationName;
+            //_stopLabel.text = _stationName;
             _stopStation = _stationName;
-            //_changedStopStation = NO;
+            
+            if ([_storedStopStationArray count] >= 3)
+            {
+                [_dbCachingForAutocomplete deleteStopStation];
+                [_dbCachingForAutocomplete addStopStation:_lastStop1Button.titleLabel.text];
+                [_dbCachingForAutocomplete addStopStation:_lastStop2Button.titleLabel.text];
+            }
             [_dbCachingForAutocomplete addStopStation:_stopStation];
+            
+            [self actualizeStopStationArray];
         }
     }
     
@@ -293,8 +348,33 @@
     _changeStartButtonIsActivated   = NO;
     _changedStartStation = YES;
     
-    _startStation = _lastStart1Button.titleLabel.text;
-    _startLabel.text = _startStation;
+    if ([_storedStartStationArray count] >= 3)
+    {
+        [_dbCachingForAutocomplete deleteStartStation];
+        [_dbCachingForAutocomplete addStartStation:_startLabel.text];
+        [_dbCachingForAutocomplete addStartStation:_lastStart2Button.titleLabel.text];
+        [_dbCachingForAutocomplete addStartStation:_lastStart1Button.titleLabel.text];
+    }
+    else
+    {
+        if ([_storedStartStationArray count] == 2)
+        {
+            [_dbCachingForAutocomplete deleteStartStation];
+            [_dbCachingForAutocomplete addStartStation:_startLabel.text];
+            [_dbCachingForAutocomplete addStartStation:_lastStart1Button.titleLabel.text];
+        }        
+    }
+    
+    [self actualizeStartStationArray];
+    
+    
+    
+    //NSLog(@"old _startLabel.text: %@ new _startLabel.text: %@", _startStation, _lastStart1Button.titleLabel.text);
+    
+    //_startLabel.text = _lastStart1Button.titleLabel.text;
+    //_lastStart1Button.titleLabel.text = _startStation;
+    //_startStation = _lastStart1Button.titleLabel.text;
+
     [self getConnectionArray];
 }
 
@@ -307,8 +387,10 @@
     _changeStartButtonIsActivated   = NO;
     _changedStartStation = YES;
 
+    _startLabel.text = _lastStart2Button.titleLabel.text;
+    _lastStart2Button.titleLabel.text = _startStation;
     _startStation = _lastStart2Button.titleLabel.text;
-    _startLabel.text = _startStation;
+    
     [self getConnectionArray];
 }
 
@@ -322,7 +404,7 @@
     _chooseNewStartButton.hidden    = YES;
     
     _publicStopVC._actualStationType = @"from";
-    _publicStopVC._actualStation = nil;
+    _publicStopVC._actualStationName = @"";
     _publicStopVC._publicStopTextFieldString = @"";
     _publicStopVC._stationArray = nil;
     _publicStopVC._publicStopTextField.text = @"";
@@ -395,7 +477,7 @@
     _changeStopButtonIsActivated   = NO;
     
     _publicStopVC._actualStationType = @"to";
-    _publicStopVC._actualStation = nil;
+    _publicStopVC._actualStationName = @"";
     _publicStopVC._publicStopTextFieldString = @"";
     _publicStopVC._stationArray = nil;
     _publicStopVC._publicStopTextField.text = @"";

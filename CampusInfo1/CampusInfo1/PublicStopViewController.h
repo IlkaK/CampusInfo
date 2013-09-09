@@ -14,8 +14,9 @@
 @interface PublicStopViewController : UIViewController<UITextFieldDelegate>
 {
     StationArrayDto                     *_stationArray;
-    StationDto                          *_actualStation;
-    NSString                            *_actualStationType;
+    NSString                            *_acutalStationName;
+    //StationDto                          *_actualStation;
+    NSString                            *_actualStationName;
     
     IBOutlet UINavigationBar            *_titleNavigationBar;
     IBOutlet UINavigationItem           *_titleNavigationItem;
@@ -29,8 +30,9 @@
 }
 
 @property (nonatomic, retain) StationArrayDto                       *_stationArray;
-@property (nonatomic, retain) StationDto                            *_actualStation;
+//@property (nonatomic, retain) StationDto                            *_actualStation;
 @property (nonatomic, retain) NSString                              *_actualStationType;
+@property (nonatomic, retain) NSString                              *_actualStationName;
 
 @property (nonatomic, retain) IBOutlet UINavigationBar              *_titleNavigationBar;
 @property (nonatomic, retain) IBOutlet UINavigationItem             *_titleNavigationItem;
