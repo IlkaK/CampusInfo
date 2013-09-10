@@ -132,7 +132,7 @@
 						<int key="IBUIContentMode">7</int>
 						<bool key="IBUIUserInteractionEnabled">NO</bool>
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
-						<string key="IBUIText">Start</string>
+						<string key="IBUIText"/>
 						<reference key="IBUITextColor" ref="634075291"/>
 						<nil key="IBUIHighlightedColor"/>
 						<int key="IBUIBaselineAdjustment">0</int>
@@ -278,7 +278,7 @@
 						<int key="IBUIContentMode">7</int>
 						<bool key="IBUIUserInteractionEnabled">NO</bool>
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
-						<string key="IBUIText">Ziel</string>
+						<string key="IBUIText"/>
 						<reference key="IBUITextColor" ref="634075291"/>
 						<nil key="IBUIHighlightedColor"/>
 						<int key="IBUIBaselineAdjustment">0</int>
@@ -584,7 +584,6 @@
 						<string key="NSFrame">{{141, 256}, {37, 37}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
 						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
 						<bool key="IBUIOpaque">NO</bool>
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
@@ -3313,7 +3312,6 @@
 					<dictionary class="NSMutableDictionary" key="actions">
 						<string key="actualizeSuggestions:">id</string>
 						<string key="publicStopTextFieldChanged:">id</string>
-						<string key="tryConnectionAgain:">id</string>
 					</dictionary>
 					<dictionary class="NSMutableDictionary" key="actionInfosByName">
 						<object class="IBActionInfo" key="actualizeSuggestions:">
@@ -3322,10 +3320,6 @@
 						</object>
 						<object class="IBActionInfo" key="publicStopTextFieldChanged:">
 							<string key="name">publicStopTextFieldChanged:</string>
-							<string key="candidateClassName">id</string>
-						</object>
-						<object class="IBActionInfo" key="tryConnectionAgain:">
-							<string key="name">tryConnectionAgain:</string>
 							<string key="candidateClassName">id</string>
 						</object>
 					</dictionary>

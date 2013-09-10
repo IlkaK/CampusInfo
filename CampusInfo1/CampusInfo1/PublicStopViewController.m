@@ -18,7 +18,6 @@
 @implementation PublicStopViewController
 
 @synthesize _stationArray;
-//@synthesize _actualStation;
 @synthesize _actualStationType;
 @synthesize _actualStationName;
 
@@ -27,7 +26,6 @@
 @synthesize _titleNavigationLabel;
 
 @synthesize _publicStopTableView;
-@synthesize _actualizeButton;
 
 @synthesize _publicStopTextField;
 @synthesize _publicStopTextFieldString;
@@ -47,14 +45,6 @@
 - (IBAction)tryConnectionAgain:(id)sender
 {
     [self getStationArray:_publicStopTextFieldString];
-}
-
-- (IBAction)actualizeSuggestions:(id)sender
-{
-    NSLog(@"_publicStopTextFieldString: %@", _publicStopTextFieldString);
-    //_stationArray = nil;
-    [self getStationArray:_publicStopTextFieldString];
-    [_publicStopTableView reloadData];
 }
 
 - (IBAction)publicStopTextFieldChanged:(id)sender
@@ -94,8 +84,6 @@
     [_titleNavigationBar setTintColor:_zhawColors._zhawDarkerBlue];
     
     self._stationArray = [[StationArrayDto alloc] init:nil];
-    
-    [_actualizeButton useAlertStyle];
     
     _actualStationName = @"";
     
@@ -144,7 +132,6 @@
     _titleNavigationLabel = nil;
     _publicStopTableView = nil;
     _publicStopTextField = nil;
-    _actualizeButton = nil;
     [super viewDidUnload];
 }
 
