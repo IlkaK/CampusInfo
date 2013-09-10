@@ -72,7 +72,7 @@
 						<string key="IBUITitle">Home</string>
 						<object class="NSCustomResource" key="IBUIImage">
 							<string key="NSClassName">NSImage</string>
-							<string key="NSResourceName">home1_for_tab.png</string>
+							<string key="NSResourceName">NavigationBarHome.png</string>
 						</object>
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 					</object>
@@ -112,7 +112,7 @@
 							<string key="IBUITitle">Stundenplan</string>
 							<object class="NSCustomResource" key="IBUIImage">
 								<string key="NSClassName">NSImage</string>
-								<string key="NSResourceName">schedule.png</string>
+								<string key="NSResourceName">NavigationBarStundenplan.png</string>
 							</object>
 							<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 						</object>
@@ -131,7 +131,7 @@
 							<string key="IBUITitle">Mensa</string>
 							<object class="NSCustomResource" key="IBUIImage">
 								<string key="NSClassName">NSImage</string>
-								<string key="NSResourceName">catering.png</string>
+								<string key="NSResourceName">NavigationBarMensa.png</string>
 							</object>
 							<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 						</object>
@@ -150,7 +150,7 @@
 							<string key="IBUITitle">ÖV</string>
 							<object class="NSCustomResource" key="IBUIImage">
 								<string key="NSClassName">NSImage</string>
-								<string key="NSResourceName">public_transportation1_for_tab.png</string>
+								<string key="NSResourceName">NavigationBarFahrplan.png</string>
 							</object>
 							<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 						</object>
@@ -169,7 +169,7 @@
 							<string key="IBUITitle">Kontakte</string>
 							<object class="NSCustomResource" key="IBUIImage">
 								<string key="NSClassName">NSImage</string>
-								<string key="NSResourceName">contacts1_for_tab.png</string>
+								<string key="NSResourceName">NavigationBarKontakte.png</string>
 							</object>
 							<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 						</object>
@@ -467,11 +467,11 @@
 			<bool key="EncodedWithXMLCoder">YES</bool>
 			<object class="NSArray" key="dict.sortedKeys">
 				<bool key="EncodedWithXMLCoder">YES</bool>
-				<string>catering.png</string>
-				<string>contacts1_for_tab.png</string>
-				<string>home1_for_tab.png</string>
-				<string>public_transportation1_for_tab.png</string>
-				<string>schedule.png</string>
+				<string>NavigationBarFahrplan.png</string>
+				<string>NavigationBarHome.png</string>
+				<string>NavigationBarKontakte.png</string>
+				<string>NavigationBarMensa.png</string>
+				<string>NavigationBarStundenplan.png</string>
 			</object>
 			<object class="NSArray" key="dict.values">
 				<bool key="EncodedWithXMLCoder">YES</bool>
