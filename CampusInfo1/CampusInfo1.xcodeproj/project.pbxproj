@@ -196,8 +196,6 @@
 		E15AA5AE17C23167007E9F00 /* TechnikumViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E15AA5AC17C23167007E9F00 /* TechnikumViewController.m */; };
 		E15AA5AF17C23167007E9F00 /* TechnikumViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E15AA5AD17C23167007E9F00 /* TechnikumViewController.xib */; };
 		E15AA5BE17C24D38007E9F00 /* EventsTableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E15AA5BD17C24D38007E9F00 /* EventsTableCell.xib */; };
-		E15C940917E7006500F82EE4 /* StationDBDto.m in Sources */ = {isa = PBXBuildFile; fileRef = E15C940817E7006500F82EE4 /* StationDBDto.m */; };
-		E15C940C17E7012900F82EE4 /* StationDBArrayDto.m in Sources */ = {isa = PBXBuildFile; fileRef = E15C940B17E7012900F82EE4 /* StationDBArrayDto.m */; };
 		E15C940E17E708B800F82EE4 /* stations.sql in Resources */ = {isa = PBXBuildFile; fileRef = E15C940D17E708B800F82EE4 /* stations.sql */; };
 		E16C642517ABDC0100BEDBB3 /* ContactsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E16C642317ABDC0100BEDBB3 /* ContactsViewController.m */; };
 		E16C642617ABDC0100BEDBB3 /* ContactsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E16C642417ABDC0100BEDBB3 /* ContactsViewController.xib */; };
@@ -227,6 +225,7 @@
 		E1C23D6F17CE421C00C58E10 /* StationDto.m in Sources */ = {isa = PBXBuildFile; fileRef = E1C23D6E17CE421C00C58E10 /* StationDto.m */; };
 		E1C23D7217CE427500C58E10 /* CoordinateDto.m in Sources */ = {isa = PBXBuildFile; fileRef = E1C23D7117CE427500C58E10 /* CoordinateDto.m */; };
 		E1C9B22A1743894F00BD3DAE /* TwoSlotsFourRoomsTableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E1C9B2291743894F00BD3DAE /* TwoSlotsFourRoomsTableCell.xib */; };
+		E1CF302517E73D2900398830 /* CharTranslation.m in Sources */ = {isa = PBXBuildFile; fileRef = E1CF302417E73D2900398830 /* CharTranslation.m */; };
 		E1D35BD717C3593300CCDB1D /* MenuPlanArrayDto.m in Sources */ = {isa = PBXBuildFile; fileRef = E1D35BD617C3593300CCDB1D /* MenuPlanArrayDto.m */; };
 		E1D35BDA17C385BC00CCDB1D /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = E1D35BD817C3858700CCDB1D /* Icon.png */; };
 		E1D35BDC17C385C900CCDB1D /* Icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E1D35BDB17C385C900CCDB1D /* Icon@2x.png */; };
@@ -478,10 +477,6 @@
 		E15AA5AC17C23167007E9F00 /* TechnikumViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TechnikumViewController.m; sourceTree = "<group>"; };
 		E15AA5AD17C23167007E9F00 /* TechnikumViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TechnikumViewController.xib; sourceTree = "<group>"; };
 		E15AA5BD17C24D38007E9F00 /* EventsTableCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EventsTableCell.xib; sourceTree = "<group>"; };
-		E15C940717E7006500F82EE4 /* StationDBDto.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StationDBDto.h; sourceTree = "<group>"; };
-		E15C940817E7006500F82EE4 /* StationDBDto.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StationDBDto.m; sourceTree = "<group>"; };
-		E15C940A17E7012900F82EE4 /* StationDBArrayDto.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StationDBArrayDto.h; sourceTree = "<group>"; };
-		E15C940B17E7012900F82EE4 /* StationDBArrayDto.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StationDBArrayDto.m; sourceTree = "<group>"; };
 		E15C940D17E708B800F82EE4 /* stations.sql */ = {isa = PBXFileReference; lastKnownFileType = file; path = stations.sql; sourceTree = "<group>"; };
 		E16C642217ABDC0100BEDBB3 /* ContactsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContactsViewController.h; sourceTree = "<group>"; };
 		E16C642317ABDC0100BEDBB3 /* ContactsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContactsViewController.m; sourceTree = "<group>"; };
@@ -522,6 +517,8 @@
 		E1C23D7017CE427500C58E10 /* CoordinateDto.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CoordinateDto.h; sourceTree = "<group>"; };
 		E1C23D7117CE427500C58E10 /* CoordinateDto.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CoordinateDto.m; sourceTree = "<group>"; };
 		E1C9B2291743894F00BD3DAE /* TwoSlotsFourRoomsTableCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TwoSlotsFourRoomsTableCell.xib; sourceTree = "<group>"; };
+		E1CF302317E73D2900398830 /* CharTranslation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CharTranslation.h; sourceTree = "<group>"; };
+		E1CF302417E73D2900398830 /* CharTranslation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CharTranslation.m; sourceTree = "<group>"; };
 		E1D35BD517C3593300CCDB1D /* MenuPlanArrayDto.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MenuPlanArrayDto.h; sourceTree = "<group>"; };
 		E1D35BD617C3593300CCDB1D /* MenuPlanArrayDto.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MenuPlanArrayDto.m; sourceTree = "<group>"; };
 		E1D35BD817C3858700CCDB1D /* Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon.png; sourceTree = "<group>"; };
@@ -823,7 +820,6 @@
 				E13AA95E17B284DF0061E0ED /* MenuOverview */,
 				E1252E5117CB41E900E61732 /* SocialMedia */,
 				E15AA5A517C23111007E9F00 /* Maps */,
-				E15C940617E7001600F82EE4 /* PublicTransportDBDto */,
 				E1C23D6917CE323300C58E10 /* PublicTransportDto */,
 				27042E7517D24C3C008057B4 /* PublicTransportConnectionDto */,
 				E10190A417BBE58B00242A87 /* PublicTransport */,
@@ -1101,17 +1097,6 @@
 			name = Maps;
 			sourceTree = "<group>";
 		};
-		E15C940617E7001600F82EE4 /* PublicTransportDBDto */ = {
-			isa = PBXGroup;
-			children = (
-				E15C940717E7006500F82EE4 /* StationDBDto.h */,
-				E15C940817E7006500F82EE4 /* StationDBDto.m */,
-				E15C940A17E7012900F82EE4 /* StationDBArrayDto.h */,
-				E15C940B17E7012900F82EE4 /* StationDBArrayDto.m */,
-			);
-			name = PublicTransportDBDto;
-			sourceTree = "<group>";
-		};
 		E17842CF178308720059EA3C /* Settings */ = {
 			isa = PBXGroup;
 			children = (
@@ -1154,6 +1139,8 @@
 				E1252E5817CB4BB100E61732 /* ColorSelection.m */,
 				E1DC175117D09D5C00DB51F6 /* UIConstantStrings.h */,
 				E1DC175217D09D5D00DB51F6 /* UIConstantStrings.m */,
+				E1CF302317E73D2900398830 /* CharTranslation.h */,
+				E1CF302417E73D2900398830 /* CharTranslation.m */,
 			);
 			name = Helper;
 			sourceTree = "<group>";
@@ -1498,8 +1485,7 @@
 				E1EC0FD617D4B98300AB4898 /* SectionDto.m in Sources */,
 				E1EC0FD917D4C03C00AB4898 /* ConnectionDto.m in Sources */,
 				E1EC0FDF17D4C70600AB4898 /* ConnectionArrayDto.m in Sources */,
-				E15C940917E7006500F82EE4 /* StationDBDto.m in Sources */,
-				E15C940C17E7012900F82EE4 /* StationDBArrayDto.m in Sources */,
+				E1CF302517E73D2900398830 /* CharTranslation.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

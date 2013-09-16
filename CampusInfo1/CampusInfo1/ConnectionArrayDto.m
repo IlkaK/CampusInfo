@@ -8,6 +8,8 @@
 
 #import "ConnectionArrayDto.h"
 #import "ConnectionDto.h"
+#import "CharTranslation.h"
+#import "DateFormation.h"
 
 @implementation ConnectionArrayDto
 
@@ -21,6 +23,9 @@
 @synthesize _dataFromUrl;
 @synthesize _generalDictionary;
 @synthesize _url;
+
+@synthesize _connectionStopStation;
+@synthesize _connectionStartStation;
 
 
 -(id) init          :(NSMutableArray *) newConnections
@@ -44,42 +49,7 @@
 }
 
 
--(NSString *)replaceSpecialChars:(NSString *)inputString
-{
-    NSString *_replacedString = inputString;
-    
-     _replacedString = [_replacedString stringByReplacingOccurrencesOfString:@"%" withString:@"%25"];
-     _replacedString = [_replacedString stringByReplacingOccurrencesOfString:@" " withString:@"%20"];
-     _replacedString = [_replacedString stringByReplacingOccurrencesOfString:@"(" withString:@"%28"];
-     _replacedString = [_replacedString stringByReplacingOccurrencesOfString:@")" withString:@"%29"];
-     
-     _replacedString = [_replacedString stringByReplacingOccurrencesOfString:@"*" withString:@"%2A"];
-     _replacedString = [_replacedString stringByReplacingOccurrencesOfString:@"+" withString:@"%2B"];
-     _replacedString = [_replacedString stringByReplacingOccurrencesOfString:@"," withString:@"%2C"];
-     _replacedString = [_replacedString stringByReplacingOccurrencesOfString:@"-" withString:@"%2D"];
-     _replacedString = [_replacedString stringByReplacingOccurrencesOfString:@"." withString:@"%2E"];
-     _replacedString = [_replacedString stringByReplacingOccurrencesOfString:@"/" withString:@"%2F"];
-     
-     _replacedString = [_replacedString stringByReplacingOccurrencesOfString:@":" withString:@"%3A"];
-     _replacedString = [_replacedString stringByReplacingOccurrencesOfString:@";" withString:@"%3B"];
-     _replacedString = [_replacedString stringByReplacingOccurrencesOfString:@"<" withString:@"%3C"];
-     _replacedString = [_replacedString stringByReplacingOccurrencesOfString:@"=" withString:@"%3D"];
-     _replacedString = [_replacedString stringByReplacingOccurrencesOfString:@">" withString:@"%3E"];
-     _replacedString = [_replacedString stringByReplacingOccurrencesOfString:@"?" withString:@"%3F"];
-     
-     _replacedString = [_replacedString stringByReplacingOccurrencesOfString:@"\\" withString:@"%5C"];
-     
-     _replacedString = [_replacedString stringByReplacingOccurrencesOfString:@"ä" withString:@"&auml;"];
-     _replacedString = [_replacedString stringByReplacingOccurrencesOfString:@"Ä" withString:@"&Auml;"];
-     _replacedString = [_replacedString stringByReplacingOccurrencesOfString:@"ö" withString:@"&ouml;"];
-     _replacedString = [_replacedString stringByReplacingOccurrencesOfString:@"Ö" withString:@"&Ouml;"];
-     _replacedString = [_replacedString stringByReplacingOccurrencesOfString:@"ü" withString:@"&uuml;"];
-     _replacedString = [_replacedString stringByReplacingOccurrencesOfString:@"Ü" withString:@"&Uuml;"];
-     _replacedString = [_replacedString stringByReplacingOccurrencesOfString:@"ß" withString:@"&szlig;"];
-    
-    
-    return _replacedString;
-}
+
 
 
 
@@ -100,7 +70,7 @@
         //NSLog(@"dataDownloadDidFinish for StationArrayDto: %@", _receivedString);
         
         NSError *_error;
-        _connections = [[NSMutableArray alloc] init];
+        
         
         _generalDictionary = [NSJSONSerialization
                               JSONObjectWithData:_dataFromUrl
@@ -109,6 +79,7 @@
         
         NSArray     *_connectionArray;
         int         _connectionArrayI;
+        DateFormation *_dateFormatter = [[DateFormation alloc] init];
         
         for (id generalKey in _generalDictionary)
         {
@@ -132,11 +103,57 @@
                         //NSLog(@"count of _connectionArray: %i", [_connectionArray count]);
                         
                         ConnectionDto *_localConnection = [[ConnectionDto alloc]init:nil withTo:nil withDuration:nil withTransfers:nil withService:nil withProducts:nil withCapacity1st:nil withCapacity2nd:nil withSections:nil];
+                        ConnectionDto *_localFormerConnection = [[ConnectionDto alloc]init:nil withTo:nil withDuration:nil withTransfers:nil withService:nil withProducts:nil withCapacity1st:nil withCapacity2nd:nil withSections:nil];
+
                         
                         for (_connectionArrayI = 0; _connectionArrayI < [_connectionArray count]; _connectionArrayI++)
                         {
+
                             _localConnection = [_localConnection getConnection:[_connectionArray objectAtIndex:_connectionArrayI]];
-                            [_connections addObject:_localConnection];
+                            if ([_connections count] > 0)
+                            {
+                                _localFormerConnection = _connections.lastObject;
+                                if (
+                                    [_localConnection._from._station._name isEqualToString:_localFormerConnection._from._station._name]
+                                    &&
+                                    [_localConnection._to._station._name isEqualToString:_localFormerConnection._to._station._name]
+                                    &&
+                                    [[[_dateFormatter _dayFormatter] stringFromDate:_localConnection._from._departureDate] isEqualToString:[[_dateFormatter _dayFormatter] stringFromDate:_localFormerConnection._from._departureDate]
+                                     ]
+                                    &&
+                                     [[[_dateFormatter _dayFormatter] stringFromDate:_localConnection._from._departureDate] isEqualToString:[[_dateFormatter _dayFormatter] stringFromDate:_localFormerConnection._from._departureDate]
+                                      ]
+                                    &&
+                                      [[[_dateFormatter _timeFormatter] stringFromDate:_localConnection._from._departureTime]
+                                       isEqualToString:[[_dateFormatter _timeFormatter] stringFromDate:_localFormerConnection._from._departureTime]
+                                       ]
+                                    &&
+                                      [[[_dateFormatter _dayFormatter] stringFromDate:_localConnection._to._arrivalDate] isEqualToString:[[_dateFormatter _dayFormatter] stringFromDate:_localFormerConnection._to._arrivalDate]
+                                       ]
+                                    &&
+                                       [[[_dateFormatter _timeFormatter] stringFromDate:_localConnection._to._arrivalTime]
+                                        isEqualToString:[[_dateFormatter _timeFormatter] stringFromDate:_localFormerConnection._to._arrivalTime]
+                                        ]
+                                    )
+                                {
+                                    NSLog(@"same connection don't add again");
+                                    
+                                }
+                                else
+                                {
+                                     [_connections addObject:_localConnection];      
+                                }
+                                       
+                            }
+                            else
+                            {
+                                [_connections addObject:_localConnection];
+                            }
+                            if(_connectionArrayI == 0)
+                            {
+                                _connectionStartStation = _localConnection._from._station._name;
+                                _connectionStopStation  = _localConnection._to._station._name;
+                            }
                         }
                     }
                 }
@@ -155,10 +172,9 @@
 
 -(void) downloadData
 {
-    _startStation = [self replaceSpecialChars:_startStation];
-    _stopStation = [self replaceSpecialChars:_stopStation];
-    
-    NSString *_urlString = [NSString stringWithFormat:@"https://srv-lab-t-874.zhaw.ch/transport/web/api.php/v1/connections?from=%@&to=%@", _startStation, _stopStation];
+    CharTranslation *_charTranslation = [CharTranslation alloc];
+
+    NSString *_urlString = [NSString stringWithFormat:@"https://srv-lab-t-874.zhaw.ch/transport/web/api.php/v1/connections?from=%@&to=%@", [_charTranslation replaceSpecialChars:_startStation], [_charTranslation replaceSpecialChars:_stopStation]];
 
     NSLog(@"url ConnectionArrayDto: %@", _urlString);
     
@@ -199,9 +215,14 @@
 
 -(void) getData:(NSString *)newStartStation
 withStopStation:(NSString *)newStopStation
+withNewStations:(BOOL)newStations
 {
     _startStation = newStartStation;
     _stopStation  = newStopStation;
+    if (newStations)
+    {
+        [_connections removeAllObjects];
+    }
     self._generalDictionary = [self getDictionaryFromUrl];
     
     if (self._generalDictionary == nil)

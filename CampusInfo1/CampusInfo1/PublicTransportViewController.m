@@ -10,6 +10,7 @@
 #import "ColorSelection.h"
 #import "UIConstantStrings.h"
 #import "ConnectionDto.h"
+#import "CharTranslation.h"
 
 @interface PublicTransportViewController ()
 @end
@@ -137,12 +138,14 @@
     
     [_chooseNewStartButton  setAttributedTitle:_titleString forState:UIControlStateNormal];
     [_chooseNewStopButton   setAttributedTitle:_titleString forState:UIControlStateNormal];
-
-    // set default values for spinner/activity indicator
+    
+    // set activity indicator
     _waitForChangeActivityIndicator.hidesWhenStopped = YES;
     _waitForChangeActivityIndicator.hidden = YES;
-    [_waitForChangeActivityIndicator setBackgroundColor:_zhawColor._zhawOriginalBlue];
+    [_waitForChangeActivityIndicator setColor:_zhawColor._zhawOriginalBlue];
+    //[_waitForChangeActivityIndicator setBackgroundColor:_zhawColor._zhawOriginalBlue];
     [self.view bringSubviewToFront:_waitForChangeActivityIndicator];
+    
 }
 
 
@@ -227,6 +230,36 @@ withStringForButton2:(NSString *)stringForButton2
 }
 
 
+// check if new start is already in cache
+- (BOOL)newStartAlreadyInArray:(NSString *)newStart
+{
+    int     _startArrayI;
+    BOOL    _inStartArray = NO;
+    for (_startArrayI = 0; _startArrayI < [_storedStartStationArray count]; _startArrayI++)
+    {
+        if ([newStart isEqualToString:[_storedStartStationArray objectAtIndex:_startArrayI]])
+        {
+            _inStartArray = YES;
+        }
+    }
+    return _inStartArray;
+}
+
+// check if new stop is already in cache
+- (BOOL)newStopAlreadyInArray:(NSString *)newStart
+{
+    int     _stopArrayI;
+    BOOL    _inStopArray = NO;
+    for (_stopArrayI = 0; _stopArrayI < [_storedStopStationArray count]; _stopArrayI++)
+    {
+        if ([newStart isEqualToString:[_storedStopStationArray objectAtIndex:_stopArrayI]])
+        {
+            _inStopArray = YES;
+        }
+    }
+    return _inStopArray;
+}
+
 
 - (void)viewWillAppear:(BOOL)animated
 {
@@ -241,29 +274,35 @@ withStringForButton2:(NSString *)stringForButton2
 
         if ([_publicStopVC._actualStationType isEqualToString:@"from"])
         {
-            if ([_storedStartStationArray count] >= 3)
+            if ([self newStartAlreadyInArray:_stationName] == NO)
             {
-                [_dbCachingForAutocomplete deleteStartStation];
-                [_dbCachingForAutocomplete addStartStation:_lastStart1Button.titleLabel.text];
-                [_dbCachingForAutocomplete addStartStation:_startLabel.text];
+                if ([_storedStartStationArray count] >= 3)
+                {
+                    [_dbCachingForAutocomplete deleteStartStation];
+                    [_dbCachingForAutocomplete addStartStation:_lastStart1Button.titleLabel.text];
+                    [_dbCachingForAutocomplete addStartStation:_startLabel.text];
+                }
+                [_dbCachingForAutocomplete addStartStation:_stationName];
+                [self actualizeStartStationArray];
             }
-            [_dbCachingForAutocomplete addStartStation:_stationName];
-            [self actualizeStartStationArray];
         }
         else
         {
-            if ([_storedStopStationArray count] >= 3)
+            if ([self newStopAlreadyInArray:_stationName] == NO)
             {
-                [_dbCachingForAutocomplete deleteStopStation];
-                [_dbCachingForAutocomplete addStopStation:_lastStop1Button.titleLabel.text];
-                [_dbCachingForAutocomplete addStopStation:_stopLabel.text];
+                if ([_storedStopStationArray count] >= 3)
+                {
+                    [_dbCachingForAutocomplete deleteStopStation];
+                    [_dbCachingForAutocomplete addStopStation:_lastStop1Button.titleLabel.text];
+                    [_dbCachingForAutocomplete addStopStation:_stopLabel.text];
+                }
+                [_dbCachingForAutocomplete addStopStation:_stationName];
+                [self actualizeStopStationArray];
             }
-            [_dbCachingForAutocomplete addStopStation:_stationName];
-            [self actualizeStopStationArray];
         }
     }
     
-    [self getConnectionArray];
+    //[self getConnectionArray];
 }
 
 
@@ -280,28 +319,70 @@ withStringForButton2:(NSString *)stringForButton2
     //if ([_connectionArray._connections count] == 0
     //    || _changedStartStation || _changedStopStation)
     //{
-        if (
-               [_startLabel.text length] > 0
-            && [_stopLabel.text length] > 0
-            && ![_startLabel.text isEqualToString:@"Start"]
-            && ![_stopLabel.text isEqualToString:@"Ziel"]
+    ConnectionDto *_localConnection = [[ConnectionDto alloc]init:nil withTo:nil withDuration:nil withTransfers:nil withService:nil withProducts:nil withCapacity1st:nil withCapacity2nd:nil withSections:nil];
+    BOOL noValues = NO;
+    
+    
+    if (    [_connectionArray._connections lastObject] != nil
+        &&  [_connectionArray._connections count] > 0)
+    {
+        _localConnection = [_connectionArray._connections objectAtIndex:0];
+    }
+    else
+    {
+        noValues = YES;
+    }
+    
+    CharTranslation *_charTranslation = [CharTranslation alloc];
+    BOOL newStart = NO;
+    BOOL newStop = NO;
+
+    //NSLog(@"_localConnection._from._station._name: %@ ", [_charTranslation replaceSpecialChars:_localConnection._from._station._name]);
+    //NSLog(@"_localConnection._to._station._name: %@ ", [_charTranslation replaceSpecialChars:_localConnection._to._station._name]);
+    //NSLog(@"_connectionArray._startStation: %@ ", [_charTranslation replaceSpecialChars:_connectionArray._startStation]);
+    //NSLog(@"_connectionArray._stopStation: %@ ", [_charTranslation replaceSpecialChars:_connectionArray._stopStation]);
+    //NSLog(@"_startLabel.text: %@ ", [_charTranslation replaceSpecialChars:_startLabel.text]);
+    //NSLog(@"_stopLabel: %@ ", [_charTranslation replaceSpecialChars:_stopLabel.text]);
+    
+    
+    if (   [_startLabel.text length] > 0
+        && [_stopLabel.text length] > 0
+        && ![_startLabel.text isEqualToString:@"Start"]
+        && ![_stopLabel.text isEqualToString:@"Ziel"]
+        )
+    {
+        if
+             ([[_charTranslation replaceSpecialChars:_connectionArray._startStation] isEqualToString:[_charTranslation replaceSpecialChars:_startLabel.text]]
             )
         {
-            [NSThread detachNewThreadSelector:@selector(threadWaitForChangeActivityIndicator:) toTarget:self withObject:nil];
-            
-            [_connectionArray getData: _startLabel.text
-                  withStopStation:_stopLabel.text];
+            newStart = NO;
         }
-        //_noConnectionButton.hidden = NO;
-        //_noConnectionLabel.hidden = NO;
-    //}
-    //else
-    //{
-        //_noConnectionButton.hidden = YES;
-        //_noConnectionLabel.hidden = YES;
+        else
+        {
+            newStart = YES;
+        }
+        
+        if  (  [[_charTranslation replaceSpecialChars:_connectionArray._stopStation] isEqualToString:[_charTranslation replaceSpecialChars:_stopLabel.text]]
+            )
+        {
+            newStop = NO;
+        }
+        else
+        {
+            newStop = YES;
+        }
+        
+        if (newStart || newStop || noValues)
+        {
+            [NSThread detachNewThreadSelector:@selector(threadWaitForChangeActivityIndicator:) toTarget:self withObject:nil];
+        
+            [_connectionArray getData: _startLabel.text
+                      withStopStation:_stopLabel.text
+                      withNewStations:newStart || newStop];
+            
+        }
+    }
 
-    //}
-    
     [_publicTransportTableView reloadData];
     
     [_waitForChangeActivityIndicator stopAnimating];
@@ -579,24 +660,83 @@ withStringForButton2:(NSString *)stringForButton2
     NSString *_newStart = _stopLabel.text;
     NSString *_newStop  = _startLabel.text;
     
-    if ([_storedStartStationArray count] >= 3)
+    BOOL _newStartEqualsStart1 = NO;
+    BOOL _newStartEqualsStart2 = NO;
+    BOOL _newStartEqualsStartLabel = NO;
+    
+    BOOL _newStopEqualsStop1 = NO;
+    BOOL _newStopEqualsStop2 = NO;
+    BOOL _newStopEqualsStopLabel = NO;
+    
+    
+    if([_newStart isEqualToString:_lastStart1Button.titleLabel.text])
     {
-        [_dbCachingForAutocomplete deleteStartStation];
+        _newStartEqualsStart1 = YES;
+    }
+    if([_newStart isEqualToString:_lastStart2Button.titleLabel.text])
+    {
+        _newStartEqualsStart2 = YES;
+    }
+    if([_newStart isEqualToString:_startLabel.text])
+    {
+        _newStartEqualsStartLabel = YES;
+    }
+
+    [_dbCachingForAutocomplete deleteStartStation];
+        
+    if (_newStartEqualsStartLabel == YES || _newStartEqualsStart1 == YES)
+    {
+        [_dbCachingForAutocomplete addStartStation:_lastStart2Button.titleLabel.text];
+    }
+        
+    if (_newStartEqualsStart1 == NO)
+    {
         [_dbCachingForAutocomplete addStartStation:_lastStart1Button.titleLabel.text];
+    }
+        
+    if (_newStartEqualsStartLabel == NO)
+    {
         [_dbCachingForAutocomplete addStartStation:_startLabel.text];
     }
+    
     [_dbCachingForAutocomplete addStartStation:_newStart];
     [self actualizeStartStationArray];
-    
 
-    if ([_storedStopStationArray count] >= 3)
+    
+    if([_newStop isEqualToString:_lastStop1Button.titleLabel.text])
     {
-            [_dbCachingForAutocomplete deleteStopStation];
+        _newStopEqualsStop1 = YES;
+    }
+    if([_newStop isEqualToString:_lastStop2Button.titleLabel.text])
+    {
+        _newStopEqualsStop2 = YES;
+    }
+    if([_newStop isEqualToString:_stopLabel.text])
+    {
+        _newStopEqualsStopLabel = YES;
+    }
+
+
+    [_dbCachingForAutocomplete deleteStopStation];
+    
+    if (_newStopEqualsStopLabel == YES || _newStopEqualsStop1 == YES)
+    {
+        [_dbCachingForAutocomplete addStopStation:_lastStop2Button.titleLabel.text];
+    }
+
+    if (_newStopEqualsStop1 == NO)
+    {
             [_dbCachingForAutocomplete addStopStation:_lastStop1Button.titleLabel.text];
+    }
+    
+    if (_newStopEqualsStopLabel == NO)
+    {
             [_dbCachingForAutocomplete addStopStation:_stopLabel.text];
     }
+    
     [_dbCachingForAutocomplete addStopStation:_newStop];
     [self actualizeStopStationArray];
+    
 }
 
 
@@ -618,7 +758,7 @@ withStringForButton2:(NSString *)stringForButton2
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    //NSLog(@"numberOfRowsInSection connection count: %i", [_connectionArray._connections count]);
+    NSLog(@"numberOfRowsInSection connection count: %i", [_connectionArray._connections count]);
     return [_connectionArray._connections count]; 
 }
 

@@ -14,6 +14,8 @@
     NSMutableArray              *_connections;
     NSString                    *_startStation;
     NSString                    *_stopStation;
+    NSString                    *_connectionStartStation;
+    NSString                    *_connectionStopStation;
     
     NSDictionary                *_generalDictionary;
     TimeTableAsyncRequest       *_asyncTimeTableRequest;
@@ -34,11 +36,14 @@
 
 @property (nonatomic, retain) NSString                          *_startStation;
 @property (nonatomic, retain) NSString                          *_stopStation;
+@property (nonatomic, retain) NSString                          *_connectionStartStation;
+@property (nonatomic, retain) NSString                          *_connectionStopStation;
 
 -(id)   init : (NSMutableArray *) newConnections;
 
 -(void) getData: (NSString *)newStartStation
-withStopStation: (NSString *)newStopStation;
+withStopStation: (NSString *)newStopStation
+withNewStations: (BOOL)newStations;
 
 
 @end
