@@ -18,6 +18,8 @@
 #import "ScheduleEventDto.h"
 #import "ScheduleEventRealizationDto.h"
 #import "ScheduleCourseDto.h"
+#import "CharTranslation.h"
+#import "URLConstantStrings.h"
 
 @implementation ScheduleDto
 
@@ -121,6 +123,7 @@
 
         NSString *_scheduleDateString = [[_dateFormatter _englishDayFormatter] stringFromDate:_scheduleDate];
         NSString *_translatedAcronym  = _acronym;
+        CharTranslation *_charTranslation = [CharTranslation alloc];
         
         if ([self._type isEqualToString:@"rooms"])
         {
@@ -128,28 +131,9 @@
             //NSLog(@"_translatedAcronym: %@", _translatedAcronym);
         } 
         
-        _translatedAcronym = [_translatedAcronym stringByReplacingOccurrencesOfString:@"%" withString:@"%25"];
-        _translatedAcronym = [_translatedAcronym stringByReplacingOccurrencesOfString:@" " withString:@"%20"];
-        _translatedAcronym = [_translatedAcronym stringByReplacingOccurrencesOfString:@"(" withString:@"%28"];
-        _translatedAcronym = [_translatedAcronym stringByReplacingOccurrencesOfString:@")" withString:@"%29"];
-
-        _translatedAcronym = [_translatedAcronym stringByReplacingOccurrencesOfString:@"*" withString:@"%2A"];
-        _translatedAcronym = [_translatedAcronym stringByReplacingOccurrencesOfString:@"+" withString:@"%2B"];
-        _translatedAcronym = [_translatedAcronym stringByReplacingOccurrencesOfString:@"," withString:@"%2C"];
-        _translatedAcronym = [_translatedAcronym stringByReplacingOccurrencesOfString:@"-" withString:@"%2D"];
-        _translatedAcronym = [_translatedAcronym stringByReplacingOccurrencesOfString:@"." withString:@"%2E"];
-        _translatedAcronym = [_translatedAcronym stringByReplacingOccurrencesOfString:@"/" withString:@"%2F"];
+        _translatedAcronym = [_charTranslation replaceSpecialChars:_translatedAcronym];
         
-        _translatedAcronym = [_translatedAcronym stringByReplacingOccurrencesOfString:@":" withString:@"%3A"];
-        _translatedAcronym = [_translatedAcronym stringByReplacingOccurrencesOfString:@";" withString:@"%3B"];
-        _translatedAcronym = [_translatedAcronym stringByReplacingOccurrencesOfString:@"<" withString:@"%3C"];
-        _translatedAcronym = [_translatedAcronym stringByReplacingOccurrencesOfString:@"=" withString:@"%3D"];
-        _translatedAcronym = [_translatedAcronym stringByReplacingOccurrencesOfString:@">" withString:@"%3E"];
-        _translatedAcronym = [_translatedAcronym stringByReplacingOccurrencesOfString:@"?" withString:@"%3F"];
-
-        _translatedAcronym = [_translatedAcronym stringByReplacingOccurrencesOfString:@"\\" withString:@"%5C"];
-        
-        NSString *_urlString = [NSString stringWithFormat:@"https://srv-lab-t-874.zhaw.ch/v1/schedules/%@/%@?startingAt=%@&days=7"
+        NSString *_urlString = [NSString stringWithFormat:URLTimeTable
                                 , _type
                                 , _translatedAcronym
                                 , _scheduleDateString];

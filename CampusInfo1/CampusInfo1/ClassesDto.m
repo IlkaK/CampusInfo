@@ -7,6 +7,7 @@
 //
 
 #import "ClassesDto.h"
+#import "URLConstantStrings.h"
 
 @implementation ClassesDto
 @synthesize _dbCachingForAutocomplete;
@@ -96,9 +97,9 @@
 
 -(void) downloadData
 {
-    NSString *_urlString = [NSString stringWithFormat:@"https://srv-lab-t-874.zhaw.ch/v1/schedules/classes/"];
+    NSString *_urlString = URLClasses;
     
-    NSLog(@"urlString ClassesDto: %@", _urlString);
+    //NSLog(@"urlString ClassesDto: %@", _urlString);
     
     NSURL *_url = [NSURL URLWithString:_urlString];
     [_asyncTimeTableRequest downloadData:_url];

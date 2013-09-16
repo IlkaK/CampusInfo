@@ -7,6 +7,7 @@
 //
 
 #import "NewsChannelDto.h"
+#import "URLConstantStrings.h"
 
 @implementation NewsChannelDto
 @synthesize _errorMessage;
@@ -318,14 +319,14 @@
     
     if ([_dataType isEqualToString:@"EVENTS"])
     {
-        _urlString = [NSString stringWithFormat:@"https://srv-lab-t-874.zhaw.ch/v1/feeds/soe-events/feed"];
+        _urlString = URLEventsFeed;
     }
     else
     {
-        _urlString = [NSString stringWithFormat:@"https://srv-lab-t-874.zhaw.ch/v1/feeds/soe-news/feed"];
+        _urlString = URLNewsFeed;
     }
         
-    NSLog(@"urlString NewsChannelDto: %@", _urlString);
+    //NSLog(@"urlString NewsChannelDto: %@", _urlString);
     
     NSURL *_url = [NSURL URLWithString:_urlString];
     [_asyncTimeTableRequest downloadData:_url];

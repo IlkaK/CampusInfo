@@ -7,6 +7,7 @@
 //
 
 #import "LecturersDto.h"
+#import "URLConstantStrings.h"
 
 @implementation LecturersDto
 @synthesize _dbCachingForAutocomplete;
@@ -115,7 +116,7 @@
 
 -(void) downloadData
 {
-    NSString *_urlString = [NSString stringWithFormat:@"https://srv-lab-t-874.zhaw.ch/v1/schedules/lecturers/"];
+    NSString *_urlString = URLLecturers;
                                                         
     NSLog(@"urlString Lecturers: %@", _urlString);
     

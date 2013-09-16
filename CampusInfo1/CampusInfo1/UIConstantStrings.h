@@ -42,6 +42,7 @@ extern NSString * const TimeTableTypeKlasse      ;
 extern NSString * const TimeTableTypeKlassePlural;
 
 extern NSString * const TimeTableTypeStudentEnglish ;
+extern NSString * const TimeTableTypeStudentEnglishPlural;
 extern NSString * const TimeTableTypeLecturerEnglishPlural;
 extern NSString * const TimeTableTypeCourseEnglishPlural;
 extern NSString * const TimeTableTypeRoomEnglishPlural  ;
@@ -225,6 +226,9 @@ extern NSString * const TimeTableOverVCTitle;
 // mensa
 extern NSString * const MensaVCTitle;
 extern NSString * const MensaClosed;
+
+// choose date
+extern NSString * const ChooseDateVCTitle;
 
 @end
 

@@ -7,6 +7,7 @@
 //
 
 #import "CoursesDto.h"
+#import "URLConstantStrings.h"
 
 @implementation CoursesDto
 
@@ -110,9 +111,9 @@
 
 -(void) downloadData
 {
-    NSString *_urlString = [NSString stringWithFormat:@"https://srv-lab-t-874.zhaw.ch/v1/schedules/courses/"];
+    NSString *_urlString = URLCourses;
     
-    NSLog(@"urlString CoursesDto: %@", _urlString);
+    //NSLog(@"urlString CoursesDto: %@", _urlString);
     
     NSURL *_url = [NSURL URLWithString:_urlString];
     [_asyncTimeTableRequest downloadData:_url];

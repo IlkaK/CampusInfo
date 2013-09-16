@@ -10,6 +10,7 @@
 #import "ConnectionDto.h"
 #import "CharTranslation.h"
 #import "DateFormation.h"
+#import "URLConstantStrings.h"
 
 @implementation ConnectionArrayDto
 
@@ -47,9 +48,6 @@
     _asyncTimeTableRequest._timeTableAsynchRequestDelegate = self;
     return self;
 }
-
-
-
 
 
 
@@ -174,7 +172,7 @@
 {
     CharTranslation *_charTranslation = [CharTranslation alloc];
 
-    NSString *_urlString = [NSString stringWithFormat:@"https://srv-lab-t-874.zhaw.ch/transport/web/api.php/v1/connections?from=%@&to=%@", [_charTranslation replaceSpecialChars:_startStation], [_charTranslation replaceSpecialChars:_stopStation]];
+    NSString *_urlString = [NSString stringWithFormat:URLTransportConnections, [_charTranslation replaceSpecialChars:_startStation], [_charTranslation replaceSpecialChars:_stopStation]];
 
     NSLog(@"url ConnectionArrayDto: %@", _urlString);
     

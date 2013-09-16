@@ -7,6 +7,7 @@
 //
 
 #import "StudentsDto.h"
+#import "URLConstantStrings.h"
 
 @implementation StudentsDto
 @synthesize _dbCachingForAutocomplete;
@@ -81,7 +82,7 @@
                     //NSLog(@"students: %@",_student);
                     [_studentArray addObject:_student];
                 }
-                NSLog(@"dataDownloadDidFinish studentArray count: %i", [_studentArray count]);
+                //NSLog(@"dataDownloadDidFinish studentArray count: %i", [_studentArray count]);
                 
                 if([_studentArrayFromDB count] != [_studentArray count])
                 {
@@ -101,9 +102,9 @@
 
 -(void) downloadData
 {
-    NSString *_urlString = [NSString stringWithFormat:@"https://srv-lab-t-874.zhaw.ch/v1/schedules/students/"];
+    NSString *_urlString = URLStudents;
                                                         
-    NSLog(@"urlString StudentsDto: %@", _urlString);
+    //NSLog(@"urlString StudentsDto: %@", _urlString);
     
     NSURL *_url = [NSURL URLWithString:_urlString];
     [_asyncTimeTableRequest downloadData:_url];

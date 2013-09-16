@@ -43,7 +43,8 @@ NSString * const TimeTableTypeRaum          = @"Raum";
 NSString * const TimeTableTypeKlasse        = @"Klasse";
 NSString * const TimeTableTypeKlassePlural  = @"Klassen:";
 
-NSString * const TimeTableTypeStudentEnglish            = @"Student";
+NSString * const TimeTableTypeStudentEnglish            = @"student";
+NSString * const TimeTableTypeStudentEnglishPlural      = @"students";
 NSString * const TimeTableTypeLecturerEnglishPlural     = @"lecturers";
 NSString * const TimeTableTypeCourseEnglishPlural       = @"courses";
 NSString * const TimeTableTypeRoomEnglishPlural         = @"rooms";
@@ -226,5 +227,8 @@ NSString * const TimeTableOverVCTitle = @"Stundenplan";
 // mensa
 NSString * const MensaVCTitle = @"Mensa";
 NSString * const MensaClosed  = @"geschlossen";
+
+// choose date
+NSString * const ChooseDateVCTitle = @"Datum wählen";
 
 @end

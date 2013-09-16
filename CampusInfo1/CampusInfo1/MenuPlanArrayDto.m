@@ -8,6 +8,7 @@
 
 #import "MenuPlanArrayDto.h"
 #import "MenuPlanDto.h"
+#import "URLConstantStrings.h"
 
 @implementation MenuPlanArrayDto
 @synthesize _dateFormatter;
@@ -105,7 +106,7 @@
 
 -(void) downloadData
 {
-    NSString *_urlString = [NSString stringWithFormat:@"https://srv-lab-t-874.zhaw.ch//v1/catering/menuplans/years/%i/weeks/%i/",_actualYear, _actualCalendarWeek];
+    NSString *_urlString = [NSString stringWithFormat:URLMenuPlanArray,_actualYear, _actualCalendarWeek];
     
     NSLog(@"urlString: %@", _urlString);
     

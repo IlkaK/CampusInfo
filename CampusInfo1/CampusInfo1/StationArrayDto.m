@@ -8,6 +8,8 @@
 
 #import "StationArrayDto.h"
 #import <StationDto.h>
+#import "CharTranslation.h"
+#import "URLConstantStrings.h"
 
 @implementation StationArrayDto
 
@@ -55,9 +57,9 @@
     
     if (self._dataFromUrl != nil)
     {
-        NSString *_receivedString = [[NSString alloc] initWithData:self._dataFromUrl encoding:NSASCIIStringEncoding];
+        //NSString *_receivedString = [[NSString alloc] initWithData:self._dataFromUrl encoding:NSASCIIStringEncoding];
         ///_receivedString = [_receivedString substringToIndex:5000];
-        NSLog(@"dataDownloadDidFinish for StationArrayDto: %@", _receivedString);
+        //NSLog(@"dataDownloadDidFinish for StationArrayDto: %@", _receivedString);
         
         NSError *_error;
         _stations = [[NSMutableArray alloc] init];
@@ -95,7 +97,7 @@
                     {
                         _stationArray = [_generalDictionary objectForKey:generalKey];
                         
-                        NSLog(@"count of _stationArray: %i", [_stationArray count]);
+                        //NSLog(@"count of _stationArray: %i", [_stationArray count]);
                         
                         StationDto *_localStation = [[StationDto alloc]init:nil withScore:nil withName:nil withDistance:nil withCoordinate:nil];
                         
@@ -122,40 +124,12 @@
 
 -(void) downloadData
 {
+    CharTranslation *_charTranslation = [CharTranslation alloc];
+    _actualStation = [_charTranslation replaceSpecialChars:_actualStation];
     
-    _actualStation = [_actualStation stringByReplacingOccurrencesOfString:@"%" withString:@"%25"];
-    _actualStation = [_actualStation stringByReplacingOccurrencesOfString:@" " withString:@"%20"];
-    _actualStation = [_actualStation stringByReplacingOccurrencesOfString:@"(" withString:@"%28"];
-    _actualStation = [_actualStation stringByReplacingOccurrencesOfString:@")" withString:@"%29"];
+    NSString *_urlString = [NSString stringWithFormat:URLStations, _actualStation];
     
-    _actualStation = [_actualStation stringByReplacingOccurrencesOfString:@"*" withString:@"%2A"];
-    _actualStation = [_actualStation stringByReplacingOccurrencesOfString:@"+" withString:@"%2B"];
-    _actualStation = [_actualStation stringByReplacingOccurrencesOfString:@"," withString:@"%2C"];
-    _actualStation = [_actualStation stringByReplacingOccurrencesOfString:@"-" withString:@"%2D"];
-    _actualStation = [_actualStation stringByReplacingOccurrencesOfString:@"." withString:@"%2E"];
-    _actualStation = [_actualStation stringByReplacingOccurrencesOfString:@"/" withString:@"%2F"];
-    
-    _actualStation = [_actualStation stringByReplacingOccurrencesOfString:@":" withString:@"%3A"];
-    _actualStation = [_actualStation stringByReplacingOccurrencesOfString:@";" withString:@"%3B"];
-    _actualStation = [_actualStation stringByReplacingOccurrencesOfString:@"<" withString:@"%3C"];
-    _actualStation = [_actualStation stringByReplacingOccurrencesOfString:@"=" withString:@"%3D"];
-    _actualStation = [_actualStation stringByReplacingOccurrencesOfString:@">" withString:@"%3E"];
-    _actualStation = [_actualStation stringByReplacingOccurrencesOfString:@"?" withString:@"%3F"];
-    
-    _actualStation = [_actualStation stringByReplacingOccurrencesOfString:@"\\" withString:@"%5C"];
-
-    _actualStation = [_actualStation stringByReplacingOccurrencesOfString:@"ä" withString:@"&auml;"];		
-    _actualStation = [_actualStation stringByReplacingOccurrencesOfString:@"Ä" withString:@"&Auml;"];		
-    _actualStation = [_actualStation stringByReplacingOccurrencesOfString:@"ö" withString:@"&ouml;"];		
-    _actualStation = [_actualStation stringByReplacingOccurrencesOfString:@"Ö" withString:@"&Ouml;"];		
-    _actualStation = [_actualStation stringByReplacingOccurrencesOfString:@"ü" withString:@"&uuml;"];	
-    _actualStation = [_actualStation stringByReplacingOccurrencesOfString:@"Ü" withString:@"&Uuml;"];		
-    _actualStation = [_actualStation stringByReplacingOccurrencesOfString:@"ß" withString:@"&szlig;"];		
-    
-    
-    NSString *_urlString = [NSString stringWithFormat:@"https://srv-lab-t-874.zhaw.ch/transport/web/api.php/v1/locations?query=%@", _actualStation];
-    
-    NSLog(@"url StationArrayDto: %@", _urlString);
+    //NSLog(@"url StationArrayDto: %@", _urlString);
     
     _url = [NSURL URLWithString:_urlString];
     [_asyncTimeTableRequest downloadData:_url];

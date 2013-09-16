@@ -7,6 +7,7 @@
 //
 
 #import "GastronomicFacilityArrayDto.h"
+#import "URLConstantStrings.h"
 
 @implementation GastronomicFacilityArrayDto
 @synthesize _dateFormatter;
@@ -38,7 +39,7 @@
         }
     }
     
-    NSString *_urlString = [NSString stringWithFormat:@"https://srv-lab-t-874.zhaw.ch/v1/catering/facilities"];
+    NSString *_urlString = URLGastroArray;
     
     _url = [NSURL URLWithString:_urlString];
     _asyncTimeTableRequest = [[TimeTableAsyncRequest alloc] init];

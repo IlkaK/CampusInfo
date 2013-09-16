@@ -139,7 +139,7 @@
     [_titleNavigationItem setLeftBarButtonItem :backButtonItem animated :true];
     
     [_titleNavigationLabel setTextColor:_zhawColor._zhawWhite];
-    _titleNavigationLabel.text = @"Datum wählen";
+    _titleNavigationLabel.text = ChooseDateVCTitle;
     _titleNavigationItem.title = @"";
     
     [_titleNavigationBar setTintColor:_zhawColor._zhawDarkerBlue];

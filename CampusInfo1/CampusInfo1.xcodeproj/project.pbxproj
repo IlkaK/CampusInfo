@@ -226,6 +226,7 @@
 		E1C23D7217CE427500C58E10 /* CoordinateDto.m in Sources */ = {isa = PBXBuildFile; fileRef = E1C23D7117CE427500C58E10 /* CoordinateDto.m */; };
 		E1C9B22A1743894F00BD3DAE /* TwoSlotsFourRoomsTableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E1C9B2291743894F00BD3DAE /* TwoSlotsFourRoomsTableCell.xib */; };
 		E1CF302517E73D2900398830 /* CharTranslation.m in Sources */ = {isa = PBXBuildFile; fileRef = E1CF302417E73D2900398830 /* CharTranslation.m */; };
+		E1CF302817E75C5300398830 /* URLConstantStrings.m in Sources */ = {isa = PBXBuildFile; fileRef = E1CF302717E75C5300398830 /* URLConstantStrings.m */; };
 		E1D35BD717C3593300CCDB1D /* MenuPlanArrayDto.m in Sources */ = {isa = PBXBuildFile; fileRef = E1D35BD617C3593300CCDB1D /* MenuPlanArrayDto.m */; };
 		E1D35BDA17C385BC00CCDB1D /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = E1D35BD817C3858700CCDB1D /* Icon.png */; };
 		E1D35BDC17C385C900CCDB1D /* Icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E1D35BDB17C385C900CCDB1D /* Icon@2x.png */; };
@@ -519,6 +520,8 @@
 		E1C9B2291743894F00BD3DAE /* TwoSlotsFourRoomsTableCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TwoSlotsFourRoomsTableCell.xib; sourceTree = "<group>"; };
 		E1CF302317E73D2900398830 /* CharTranslation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CharTranslation.h; sourceTree = "<group>"; };
 		E1CF302417E73D2900398830 /* CharTranslation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CharTranslation.m; sourceTree = "<group>"; };
+		E1CF302617E75C5300398830 /* URLConstantStrings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = URLConstantStrings.h; sourceTree = "<group>"; };
+		E1CF302717E75C5300398830 /* URLConstantStrings.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = URLConstantStrings.m; sourceTree = "<group>"; };
 		E1D35BD517C3593300CCDB1D /* MenuPlanArrayDto.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MenuPlanArrayDto.h; sourceTree = "<group>"; };
 		E1D35BD617C3593300CCDB1D /* MenuPlanArrayDto.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MenuPlanArrayDto.m; sourceTree = "<group>"; };
 		E1D35BD817C3858700CCDB1D /* Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon.png; sourceTree = "<group>"; };
@@ -1141,6 +1144,8 @@
 				E1DC175217D09D5D00DB51F6 /* UIConstantStrings.m */,
 				E1CF302317E73D2900398830 /* CharTranslation.h */,
 				E1CF302417E73D2900398830 /* CharTranslation.m */,
+				E1CF302617E75C5300398830 /* URLConstantStrings.h */,
+				E1CF302717E75C5300398830 /* URLConstantStrings.m */,
 			);
 			name = Helper;
 			sourceTree = "<group>";
@@ -1486,6 +1491,7 @@
 				E1EC0FD917D4C03C00AB4898 /* ConnectionDto.m in Sources */,
 				E1EC0FDF17D4C70600AB4898 /* ConnectionArrayDto.m in Sources */,
 				E1CF302517E73D2900398830 /* CharTranslation.m in Sources */,
+				E1CF302817E75C5300398830 /* URLConstantStrings.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

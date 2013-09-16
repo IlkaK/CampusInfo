@@ -7,6 +7,7 @@
 //
 
 #import "LanguageTranslation.h"
+#import "UIConstantStrings.h"
 
 @implementation LanguageTranslation
 
@@ -14,25 +15,25 @@
 {
     NSString *_localTranslation;
     
-    if ([acronymType isEqualToString:@"classes"])
+    if ([acronymType isEqualToString:TimeTableTypeClassEnglishPlural])
     {
-        _localTranslation = @"Klasse";
+        _localTranslation = TimeTableTypeKlasse;
     }
-    if ([acronymType isEqualToString:@"students"])
+    if ([acronymType isEqualToString:TimeTableTypeStudentEnglishPlural])
     {
-        _localTranslation = @"Student";
+        _localTranslation = TimeTableTypeStudent;
     }
-    if ([acronymType isEqualToString:@"rooms"])
+    if ([acronymType isEqualToString:TimeTableTypeRoomEnglishPlural])
     {
-        _localTranslation = @"Raum";
+        _localTranslation = TimeTableTypeRaum;
     }
-    if ([acronymType isEqualToString:@"lecturers"])
+    if ([acronymType isEqualToString:TimeTableTypeLecturerEnglishPlural])
     {
-        _localTranslation = @"Dozent";
+        _localTranslation = TimeTableTypeDozent;
     }
-    if ([acronymType isEqualToString:@"courses"])
+    if ([acronymType isEqualToString:TimeTableTypeCourseEnglishPlural])
     {
-        _localTranslation = @"Kurs";
+        _localTranslation = TimeTableTypeKurs;
     }
     return _localTranslation;
 }
@@ -41,25 +42,25 @@
 {
     NSString *_localTranslation;
     
-    if ([acronymType isEqualToString:@"Klasse"])
+    if ([acronymType isEqualToString:TimeTableTypeKlasse])
     {
-        _localTranslation = @"classes";
+        _localTranslation = TimeTableTypeClassEnglishPlural;
     }
-    if ([acronymType isEqualToString:@"Student"])
+    if ([acronymType isEqualToString:TimeTableTypeStudent])
     {
-        _localTranslation = @"students";
+        _localTranslation = TimeTableTypeStudentEnglish;
     }
-    if ([acronymType isEqualToString:@"Raum"])
+    if ([acronymType isEqualToString:TimeTableTypeRaum])
     {
-        _localTranslation = @"rooms";
+        _localTranslation = TimeTableTypeRoomEnglishPlural;
     }
-    if ([acronymType isEqualToString:@"Dozent"])
+    if ([acronymType isEqualToString:TimeTableTypeDozent])
     {
-        _localTranslation = @"lecturers";
+        _localTranslation = TimeTableTypeLecturerEnglishPlural;
     }
-    if ([acronymType isEqualToString:@"Kurs"])
+    if ([acronymType isEqualToString:TimeTableTypeKurs])
     {
-        _localTranslation = @"courses";
+        _localTranslation = TimeTableTypeCourseEnglishPlural;
     }
     return _localTranslation;
 }
