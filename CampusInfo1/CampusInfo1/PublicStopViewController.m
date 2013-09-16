@@ -30,6 +30,10 @@
 @synthesize _publicStopTextField;
 @synthesize _publicStopTextFieldString;
 
+@synthesize _dbCachingForAutocomplete;
+@synthesize _autocomplete;
+@synthesize _suggestions;
+
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -42,16 +46,10 @@
     [self dismissModalViewControllerAnimated:YES];
 }
 
-- (IBAction)tryConnectionAgain:(id)sender
-{
-    [self getStationArray:_publicStopTextFieldString];
-}
-
 - (IBAction)publicStopTextFieldChanged:(id)sender
 {
+    _suggestions = [[NSMutableArray alloc] initWithArray:[_autocomplete GetSuggestions:((UITextField*)sender).text]];
     _publicStopTextFieldString = ((UITextField*)sender).text;
-    
-    [self getStationArray:_publicStopTextFieldString];
     _publicStopTableView.hidden = NO;
     [_publicStopTableView reloadData];
 }
@@ -67,7 +65,16 @@
 {
     [super viewDidLoad];
     
+    // general initialization
     ColorSelection *_zhawColors = [[ColorSelection alloc]init];
+    
+    // handling of autocompletion while using station db
+    _dbCachingForAutocomplete = [[DBCachingForAutocomplete alloc]init];
+    
+    NSMutableArray *_stationDBArray = [_dbCachingForAutocomplete getDBStations];
+    //NSLog(@"count db station array: %i", [_stationDBArray count]);
+    _autocomplete = [[Autocomplete alloc] initWithArray:_stationDBArray];
+
     
     // title
     UIBarButtonItem *backButtonItem = [[UIBarButtonItem alloc] initWithTitle:LeftArrowSymbol style:UIBarButtonItemStylePlain target:self action:@selector(moveBackToPublicTransport:)];
@@ -89,6 +96,7 @@
     
     self._publicStopTextField.delegate = self;
  	_publicStopTextField.autocorrectionType = UITextAutocorrectionTypeNo;
+    
 }
 
 
@@ -99,30 +107,12 @@
 }
 
 
-- (void) getStationArray:(NSString *)proposalStation
-{
-    
-    //[NSThread detachNewThreadSelector:@selector(threadWaitForChangeActivityIndicator:) toTarget:self withObject:nil];
-    
-    [_stationArray getData:proposalStation];
-    
-    //[_waitForChangeActivityIndicator stopAnimating];
-    //_waitForChangeActivityIndicator.hidden = YES;
-    
-    [_publicStopTableView reloadData];
-}
-
-
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
     _actualStationName = @"";
-    
-    
     _publicStopTableView.hidden = YES;
 
-    
-    
 }
 
 - (void)viewDidUnload
@@ -145,29 +135,24 @@
 // Customize the number of rows in the table view.
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return [_stationArray._stations count];
+    return [_suggestions count];
 }
 
 
 // Override to support row selection in the table view.
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    NSUInteger        _cellRow = indexPath.row;
+    _publicStopTextField.text = [_suggestions objectAtIndex:indexPath.row];
+    _publicStopTableView.hidden = YES;
+    _actualStationName = _publicStopTextField.text;
+    [self dismissModalViewControllerAnimated:YES];
     
-    if (    [_stationArray._stations lastObject] != nil
-        &&  [_stationArray._stations count] > _cellRow)
-    {
-        StationDto *_localStation = [_stationArray._stations objectAtIndex:_cellRow];
-        _actualStationName = _localStation._name;
-        [self dismissModalViewControllerAnimated:YES];
-    }
 }
 
 
 // Customize the appearance of table view cells.
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    
-    NSUInteger        _cellSelection = indexPath.row; //indexPath.section;
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
     static NSString *CellIdentifier = @"Cell";
     
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
@@ -175,14 +160,7 @@
 	{
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
     }
-    
-    if (    [_stationArray._stations lastObject] != nil
-        &&  [_stationArray._stations count] > _cellSelection)
-    {
-        StationDto *_localStation = [_stationArray._stations objectAtIndex:_cellSelection];
-        cell.textLabel.text = _localStation._name;
-    }
-        
+    cell.textLabel.text = [_suggestions objectAtIndex:indexPath.row];
     return cell;
 }
 

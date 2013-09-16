@@ -11,6 +11,7 @@
 @implementation DBCachingForAutocomplete
 
 @synthesize _timeTableDBPath;
+@synthesize _connectionDBPath;
 
 
 -(void) createTableWithName:(NSString *)tableName
@@ -63,7 +64,7 @@
                                      @"timetablenames.db"]];
 
     sqlite3         *_timeTableNamesDB;
-
+    
     if (sqlite3_open([_timeTableDBPath UTF8String], &_timeTableNamesDB) == SQLITE_OK)
     {
         [self createTableWithName:@"LECTURER"   withDB:_timeTableNamesDB];
@@ -77,8 +78,26 @@
     }
     else
     {
-        NSLog(@"Failed to open/create database");
+        NSLog(@"Failed to open/create time table database");
     }
+    
+    
+    // for stations / public transportation autocomplete
+    _connectionDBPath = [[NSBundle mainBundle]pathForResource:@"stations" ofType:@"sql"];
+    //NSLog(@"_connectionDBPath = %@", _connectionDBPath);
+    
+    sqlite3         *_stationsDB;
+    
+    if (sqlite3_open([_connectionDBPath UTF8String], &_stationsDB) == SQLITE_OK)
+    {
+        //NSLog(@"could open stations db");
+        sqlite3_close(_stationsDB);
+    }
+    else
+    {
+        NSLog(@"Failed to open/create stations database");
+    }
+
     return self;
 }
 
@@ -284,6 +303,49 @@
 -(void) deleteStopStation
 {
     [self deleteFromTable:@"STOP_STATIONS"];
+}
+
+-(NSMutableArray *)getDBStations
+{
+    NSMutableArray  *_nameArray = [[NSMutableArray alloc] init];
+    sqlite3         *_stationsDB;
+        
+    if(sqlite3_open([_connectionDBPath UTF8String], &_stationsDB) == SQLITE_OK)
+    {
+        //NSLog(@"sqlite3 open");
+        NSString    *_sqlStmtString = [NSString stringWithFormat:@"select name from stations;"];
+        const char  *_sqlStmtChar   = [_sqlStmtString UTF8String];
+            
+        sqlite3_stmt    *_compiledStatement;
+        NSString        *_namesFromTable;
+            
+        if(sqlite3_prepare_v2(_stationsDB, _sqlStmtChar, -1, &_compiledStatement, NULL) == SQLITE_OK)
+        {
+            //NSLog(@"stmt could be compiled");
+            
+            // Loop through the results and add them to the feeds array
+            while(sqlite3_step(_compiledStatement) == SQLITE_ROW)
+            {
+                //NSLog(@"_compiledStatement: %s", sqlite3_column_text(_compiledStatement, 0));
+                _namesFromTable = [NSString stringWithUTF8String:(char *)sqlite3_column_text(_compiledStatement, 0)];
+                //NSLog(@"_namesFromTable: %@", _namesFromTable);
+                [_nameArray addObject:_namesFromTable];
+            }
+        }
+        else
+        {
+            NSLog(@"stmt could not be compiled %d", sqlite3_prepare_v2(_stationsDB, _sqlStmtChar, -1, &_compiledStatement, NULL));
+        }
+        // Release the compiled statement from memory
+        sqlite3_finalize(_compiledStatement);
+        sqlite3_close(_stationsDB);
+    }
+    else
+    {
+        NSLog(@"could not open ");
+    }
+    //NSLog(@"_nameArray count: %i", [_nameArray count]);
+    return _nameArray;
 }
 
 @end

@@ -196,6 +196,9 @@
 		E15AA5AE17C23167007E9F00 /* TechnikumViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E15AA5AC17C23167007E9F00 /* TechnikumViewController.m */; };
 		E15AA5AF17C23167007E9F00 /* TechnikumViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E15AA5AD17C23167007E9F00 /* TechnikumViewController.xib */; };
 		E15AA5BE17C24D38007E9F00 /* EventsTableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E15AA5BD17C24D38007E9F00 /* EventsTableCell.xib */; };
+		E15C940917E7006500F82EE4 /* StationDBDto.m in Sources */ = {isa = PBXBuildFile; fileRef = E15C940817E7006500F82EE4 /* StationDBDto.m */; };
+		E15C940C17E7012900F82EE4 /* StationDBArrayDto.m in Sources */ = {isa = PBXBuildFile; fileRef = E15C940B17E7012900F82EE4 /* StationDBArrayDto.m */; };
+		E15C940E17E708B800F82EE4 /* stations.sql in Resources */ = {isa = PBXBuildFile; fileRef = E15C940D17E708B800F82EE4 /* stations.sql */; };
 		E16C642517ABDC0100BEDBB3 /* ContactsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E16C642317ABDC0100BEDBB3 /* ContactsViewController.m */; };
 		E16C642617ABDC0100BEDBB3 /* ContactsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E16C642417ABDC0100BEDBB3 /* ContactsViewController.xib */; };
 		E16C642A17ABDC4600BEDBB3 /* EmergencyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E16C642817ABDC4600BEDBB3 /* EmergencyViewController.m */; };
@@ -475,6 +478,11 @@
 		E15AA5AC17C23167007E9F00 /* TechnikumViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TechnikumViewController.m; sourceTree = "<group>"; };
 		E15AA5AD17C23167007E9F00 /* TechnikumViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TechnikumViewController.xib; sourceTree = "<group>"; };
 		E15AA5BD17C24D38007E9F00 /* EventsTableCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EventsTableCell.xib; sourceTree = "<group>"; };
+		E15C940717E7006500F82EE4 /* StationDBDto.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StationDBDto.h; sourceTree = "<group>"; };
+		E15C940817E7006500F82EE4 /* StationDBDto.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StationDBDto.m; sourceTree = "<group>"; };
+		E15C940A17E7012900F82EE4 /* StationDBArrayDto.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StationDBArrayDto.h; sourceTree = "<group>"; };
+		E15C940B17E7012900F82EE4 /* StationDBArrayDto.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StationDBArrayDto.m; sourceTree = "<group>"; };
+		E15C940D17E708B800F82EE4 /* stations.sql */ = {isa = PBXFileReference; lastKnownFileType = file; path = stations.sql; sourceTree = "<group>"; };
 		E16C642217ABDC0100BEDBB3 /* ContactsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContactsViewController.h; sourceTree = "<group>"; };
 		E16C642317ABDC0100BEDBB3 /* ContactsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContactsViewController.m; sourceTree = "<group>"; };
 		E16C642417ABDC0100BEDBB3 /* ContactsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ContactsViewController.xib; sourceTree = "<group>"; };
@@ -774,6 +782,7 @@
 		A35A34091520814700181E3F = {
 			isa = PBXGroup;
 			children = (
+				E15C940D17E708B800F82EE4 /* stations.sql */,
 				279F0A2C17DF227F006A599D /* Default-568h@2x.png */,
 				279F0A2A17DF2255006A599D /* Default@2x.png */,
 				279F0A2517DF2207006A599D /* Default.png */,
@@ -814,6 +823,7 @@
 				E13AA95E17B284DF0061E0ED /* MenuOverview */,
 				E1252E5117CB41E900E61732 /* SocialMedia */,
 				E15AA5A517C23111007E9F00 /* Maps */,
+				E15C940617E7001600F82EE4 /* PublicTransportDBDto */,
 				E1C23D6917CE323300C58E10 /* PublicTransportDto */,
 				27042E7517D24C3C008057B4 /* PublicTransportConnectionDto */,
 				E10190A417BBE58B00242A87 /* PublicTransport */,
@@ -1089,6 +1099,17 @@
 				E15AA5AD17C23167007E9F00 /* TechnikumViewController.xib */,
 			);
 			name = Maps;
+			sourceTree = "<group>";
+		};
+		E15C940617E7001600F82EE4 /* PublicTransportDBDto */ = {
+			isa = PBXGroup;
+			children = (
+				E15C940717E7006500F82EE4 /* StationDBDto.h */,
+				E15C940817E7006500F82EE4 /* StationDBDto.m */,
+				E15C940A17E7012900F82EE4 /* StationDBArrayDto.h */,
+				E15C940B17E7012900F82EE4 /* StationDBArrayDto.m */,
+			);
+			name = PublicTransportDBDto;
 			sourceTree = "<group>";
 		};
 		E17842CF178308720059EA3C /* Settings */ = {
@@ -1369,6 +1390,7 @@
 				279F0A2817DF2207006A599D /* Default.png in Resources */,
 				279F0A2B17DF2255006A599D /* Default@2x.png in Resources */,
 				279F0A2D17DF227F006A599D /* Default-568h@2x.png in Resources */,
+				E15C940E17E708B800F82EE4 /* stations.sql in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1476,6 +1498,8 @@
 				E1EC0FD617D4B98300AB4898 /* SectionDto.m in Sources */,
 				E1EC0FD917D4C03C00AB4898 /* ConnectionDto.m in Sources */,
 				E1EC0FDF17D4C70600AB4898 /* ConnectionArrayDto.m in Sources */,
+				E15C940917E7006500F82EE4 /* StationDBDto.m in Sources */,
+				E15C940C17E7012900F82EE4 /* StationDBArrayDto.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

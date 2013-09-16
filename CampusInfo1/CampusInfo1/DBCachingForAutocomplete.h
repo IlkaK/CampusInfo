@@ -14,9 +14,11 @@
 {
     // DB handling
     NSString        *_timeTableDBPath;
+    NSString        *_connectionDBPath;
 }
 
 @property (nonatomic, retain) NSString *_timeTableDBPath;
+@property (nonatomic, retain) NSString *_connectionDBPath;
 
 -(id) init;
 
@@ -42,5 +44,7 @@
 -(void) addStopStation:(NSString *)stopStation;
 -(NSMutableArray *) getStopStations;
 -(void) deleteStopStation;
+
+-(NSMutableArray *)getDBStations;
 
 @end

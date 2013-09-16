@@ -10,6 +10,8 @@
 #import <StationArrayDto.h>
 #import <StationDto.h>
 #import <GradientButton.h>
+#import <DBCachingForAutocomplete.h>
+#import <Autocomplete.h>
 
 @interface PublicStopViewController : UIViewController<UITextFieldDelegate>
 {
@@ -25,6 +27,10 @@
     
     IBOutlet UITextField                *_publicStopTextField;
     NSString                            *_publicStopTextFieldString;
+    
+    DBCachingForAutocomplete            *_dbCachingForAutocomplete;
+    NSMutableArray                      *_suggestions;
+    Autocomplete                        *_autocomplete;
 }
 
 @property (nonatomic, retain) StationArrayDto                       *_stationArray;
@@ -40,6 +46,9 @@
 @property (nonatomic, retain) IBOutlet UITextField                  *_publicStopTextField;
 @property (nonatomic, retain) NSString                              *_publicStopTextFieldString;
 
+@property (nonatomic, retain) DBCachingForAutocomplete              *_dbCachingForAutocomplete;
+@property (strong, nonatomic) NSMutableArray                        *_suggestions;
+@property (strong, nonatomic) Autocomplete                          *_autocomplete;
 
 - (IBAction)publicStopTextFieldChanged:(id)sender;
 
