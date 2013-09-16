@@ -65,7 +65,7 @@
     
     for (id gastronomicKey in gastronomicDictionary)
     {
-        //NSLog(@"_gastronomicFacilitiesDictionary key: %@", gastronomicFacilitiesKey);
+        //NSLog(@"GastronomicFacilityDto gastronomicKey: %@", gastronomicKey);
 
         if ([gastronomicKey isEqualToString:@"id"])
         {
@@ -114,10 +114,19 @@
         
             if([_serviceTimePeriodDictionaryArray lastObject] != nil)
             {
+                NSDictionary *_serviceTimeDictionary; 
                 for (_serviceTimePeriodArrayI = 0; _serviceTimePeriodArrayI < [_serviceTimePeriodDictionaryArray count]; _serviceTimePeriodArrayI++)
                 {
-                    _localServiceTimePeriod = [_localServiceTimePeriod getServiceTimePeriod:[_serviceTimePeriodDictionaryArray objectAtIndex:_serviceTimePeriodArrayI]];
+                    //NSLog(@"serviceTimePeriodArray start: %i", _serviceTimePeriodArrayI);
+                    _serviceTimeDictionary = [_serviceTimePeriodDictionaryArray objectAtIndex:_serviceTimePeriodArrayI];
+                    //NSLog(@"serviceTimePeriodArray store dictionary: %i", _serviceTimePeriodArrayI);
+                    
+                    _localServiceTimePeriod = [_localServiceTimePeriod getServiceTimePeriod:_serviceTimeDictionary];
+                    //NSLog(@"serviceTimePeriodArray get service: %i", _serviceTimePeriodArrayI);
+
                     [_localServiceTimePeriods addObject:_localServiceTimePeriod];
+                    //NSLog(@"serviceTimePeriodArray added object: %i", _serviceTimePeriodArrayI);
+
                 }
             }
         }

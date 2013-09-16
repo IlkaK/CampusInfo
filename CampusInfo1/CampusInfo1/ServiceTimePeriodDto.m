@@ -71,7 +71,10 @@
         if ([serviceTimePeriodKey isEqualToString:@"lunchTimePlan"])
         {
             //NSLog(@"---- start lunchTimePlan -----");
-            _localLunchTimePlan = [_localLunchTimePlan getLunchTimePlan:[serviceTimePeriodDictionary objectForKey:serviceTimePeriodKey]];
+            if ( [serviceTimePeriodDictionary objectForKey:serviceTimePeriodKey] != [ NSNull null ] )
+            {
+                _localLunchTimePlan = [_localLunchTimePlan getLunchTimePlan:[serviceTimePeriodDictionary objectForKey:serviceTimePeriodKey]];
+            }
             //NSLog(@"---- end lunchTimePlan -----");
         }
         if ([serviceTimePeriodKey isEqualToString:@"openingTimePlan"])

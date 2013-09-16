@@ -53,7 +53,7 @@
 						<string key="NSFrameSize">{320, 44}</string>
 						<reference key="NSSuperview" ref="191373211"/>
 						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView"/>
+						<reference key="NSNextKeyView" ref="135915738"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 						<object class="NSArray" key="IBUIItems">
@@ -266,7 +266,7 @@
 					<object class="IBUILabel" id="735699937">
 						<reference key="NSNextResponder" ref="191373211"/>
 						<int key="NSvFlags">292</int>
-						<string key="NSFrame">{{134, 155}, {90, 21}}</string>
+						<string key="NSFrame">{{134, 142}, {90, 21}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
 						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="232779756"/>
@@ -277,7 +277,10 @@
 						<bool key="IBUIUserInteractionEnabled">NO</bool>
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 						<string key="IBUIText">keine Verbindung</string>
-						<reference key="IBUITextColor" ref="770361227"/>
+						<object class="NSColor" key="IBUITextColor">
+							<int key="NSColorSpace">1</int>
+							<bytes key="NSRGB">MCAwIDAAA</bytes>
+						</object>
 						<nil key="IBUIHighlightedColor"/>
 						<int key="IBUIBaselineAdjustment">0</int>
 						<object class="IBUIFontDescription" key="IBUIFontDescription">
@@ -294,7 +297,7 @@
 					<object class="IBUIButton" id="232779756">
 						<reference key="NSNextResponder" ref="191373211"/>
 						<int key="NSvFlags">292</int>
-						<string key="NSFrame">{{224, 155}, {95, 22}}</string>
+						<string key="NSFrame">{{224, 142}, {95, 22}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
 						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="734904921"/>
@@ -320,6 +323,7 @@
 						<string key="NSFrame">{{140, 255}, {37, 37}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
 						<reference key="NSWindow"/>
+						<reference key="NSNextKeyView"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
 						<bool key="IBUIOpaque">NO</bool>
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
@@ -1094,6 +1098,7 @@
 							<string>_titleNavigationBar</string>
 							<string>_titleNavigationItem</string>
 							<string>_titleNavigationLabel</string>
+							<string>_waitForChangeActivityIndicator</string>
 						</object>
 						<object class="NSArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
@@ -1105,6 +1110,7 @@
 							<string>UINavigationBar</string>
 							<string>UINavigationItem</string>
 							<string>UILabel</string>
+							<string>UIActivityIndicatorView</string>
 						</object>
 					</object>
 					<object class="NSMutableDictionary" key="toOneOutletInfosByName">
@@ -1119,6 +1125,7 @@
 							<string>_titleNavigationBar</string>
 							<string>_titleNavigationItem</string>
 							<string>_titleNavigationLabel</string>
+							<string>_waitForChangeActivityIndicator</string>
 						</object>
 						<object class="NSArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
@@ -1153,6 +1160,10 @@
 							<object class="IBToOneOutletInfo">
 								<string key="name">_titleNavigationLabel</string>
 								<string key="candidateClassName">UILabel</string>
+							</object>
+							<object class="IBToOneOutletInfo">
+								<string key="name">_waitForChangeActivityIndicator</string>
+								<string key="candidateClassName">UIActivityIndicatorView</string>
 							</object>
 						</object>
 					</object>
@@ -1279,14 +1290,13 @@
 						<bool key="EncodedWithXMLCoder">YES</bool>
 						<object class="NSArray" key="dict.sortedKeys">
 							<bool key="EncodedWithXMLCoder">YES</bool>
-							<string>_backButton</string>
-							<string>_backLabel</string>
 							<string>_detailTable</string>
 							<string>_detailTableCell</string>
 							<string>_detailTableCellWithButton</string>
 							<string>_timeLabel</string>
+							<string>_timeNavigationBar</string>
+							<string>_timeNavigationItem</string>
 							<string>_timeTableDescriptionLabel</string>
-							<string>_titleLabel</string>
 							<string>_titleNavigationBar</string>
 							<string>_titleNavigationItem</string>
 							<string>_titleNavigationLabel</string>
@@ -1294,13 +1304,12 @@
 						</object>
 						<object class="NSArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
-							<string>UIButton</string>
-							<string>UILabel</string>
 							<string>UITableView</string>
 							<string>UITableViewCell</string>
 							<string>UITableViewCell</string>
 							<string>UILabel</string>
-							<string>UILabel</string>
+							<string>UINavigationBar</string>
+							<string>UINavigationItem</string>
 							<string>UILabel</string>
 							<string>UINavigationBar</string>
 							<string>UINavigationItem</string>
@@ -1312,14 +1321,13 @@
 						<bool key="EncodedWithXMLCoder">YES</bool>
 						<object class="NSArray" key="dict.sortedKeys">
 							<bool key="EncodedWithXMLCoder">YES</bool>
-							<string>_backButton</string>
-							<string>_backLabel</string>
 							<string>_detailTable</string>
 							<string>_detailTableCell</string>
 							<string>_detailTableCellWithButton</string>
 							<string>_timeLabel</string>
+							<string>_timeNavigationBar</string>
+							<string>_timeNavigationItem</string>
 							<string>_timeTableDescriptionLabel</string>
-							<string>_titleLabel</string>
 							<string>_titleNavigationBar</string>
 							<string>_titleNavigationItem</string>
 							<string>_titleNavigationLabel</string>
@@ -1327,14 +1335,6 @@
 						</object>
 						<object class="NSArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
-							<object class="IBToOneOutletInfo">
-								<string key="name">_backButton</string>
-								<string key="candidateClassName">UIButton</string>
-							</object>
-							<object class="IBToOneOutletInfo">
-								<string key="name">_backLabel</string>
-								<string key="candidateClassName">UILabel</string>
-							</object>
 							<object class="IBToOneOutletInfo">
 								<string key="name">_detailTable</string>
 								<string key="candidateClassName">UITableView</string>
@@ -1352,11 +1352,15 @@
 								<string key="candidateClassName">UILabel</string>
 							</object>
 							<object class="IBToOneOutletInfo">
-								<string key="name">_timeTableDescriptionLabel</string>
-								<string key="candidateClassName">UILabel</string>
+								<string key="name">_timeNavigationBar</string>
+								<string key="candidateClassName">UINavigationBar</string>
 							</object>
 							<object class="IBToOneOutletInfo">
-								<string key="name">_titleLabel</string>
+								<string key="name">_timeNavigationItem</string>
+								<string key="candidateClassName">UINavigationItem</string>
+							</object>
+							<object class="IBToOneOutletInfo">
+								<string key="name">_timeTableDescriptionLabel</string>
 								<string key="candidateClassName">UILabel</string>
 							</object>
 							<object class="IBToOneOutletInfo">

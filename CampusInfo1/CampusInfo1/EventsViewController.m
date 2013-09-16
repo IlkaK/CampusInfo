@@ -202,11 +202,18 @@
             _oneTitleLabel.text     = _newsItem._title;
             [_oneTitleLabel setTextColor:_zhawColor._zhawOriginalBlue];
             
-            if([_newsItem._startdateString length] > 0)
+            if([_newsItem._startdateString length] > 0 && [_newsItem._starttimeString length] > 0)
             {
                 _dateLabel.text = [NSString stringWithFormat:@"%@, %@",_newsItem._startdateString, _newsItem._starttimeString];
-                [_dateLabel     setTextColor:_zhawColor._zhawLightGrey];
             }
+            else
+            {
+                if([_newsItem._startdateString length] > 0)
+                {
+                    _dateLabel.text = [NSString stringWithFormat:@"%@",_newsItem._startdateString];
+                }
+            }
+            [_dateLabel     setTextColor:_zhawColor._zhawLightGrey];
             
             NSString *_descr = [NSString stringWithFormat:@"<html> \n"
                                            "<head> \n"

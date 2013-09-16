@@ -27,13 +27,17 @@
 
 - (LunchTimePlanDto *)getLunchTimePlan:(NSDictionary *)lunchTimePlanDictionary
 {
+    //NSLog(@"start getLunchTimePlan");
     NSString         *_localPlanType = nil;
-    NSMutableArray   *_localWeekdayArray = [[NSMutableArray alloc]init];;
+    NSMutableArray   *_localWeekdayArray = [[NSMutableArray alloc]init];
     WeekdayDto       *_localWeekday = [[WeekdayDto alloc]init:nil withFromTime:nil withToTime:nil withTimeplanType:nil];
     LunchTimePlanDto *_localLunchTimePlanDto = [[LunchTimePlanDto alloc]init:nil withPlanType:nil];
     
+    
     for (id lunchTimePlanKey in lunchTimePlanDictionary)
     {
+        //NSLog(@"lunchTimePlanKey: %@", lunchTimePlanKey);
+        
         if ([lunchTimePlanKey isEqualToString:@"type"])
         {
             _localPlanType = [lunchTimePlanDictionary objectForKey:lunchTimePlanKey];

@@ -79,7 +79,7 @@
                               options:kNilOptions
                               error:&_error];
         
-        NSArray  *_gastronomicArray;
+        NSArray *_gastronomicArray = [[NSArray alloc] init];
         int _gastronomicArrayI;
         
         GastronomicFacilityDto *_localGastronomicFacilty = [[GastronomicFacilityDto alloc]init:nil withGastroId:nil withLocation:nil withName:nil withServiceTimePeriods:nil withType:nil withVersion:nil];
@@ -95,7 +95,7 @@
             }
             else
             {
-                NSLog(@"vorher gastronomies count: %i", [_gastronomicFacilities count]);
+                //NSLog(@"vorher gastronomies count: %i", [_gastronomicFacilities count]);
                 if ([_gastronomicFacilities count] == 0)
                 {
                     //self._errorMessage = nil;
@@ -103,18 +103,22 @@
                     if ([generalKey isEqualToString:@"gastronomicFacilities"])
                     {
                         _gastronomicArray = [_generalDictionary objectForKey:generalKey];
+                        //NSLog(@"vorher _gastronomicArray count: %i", [_gastronomicArray count]);
+                        NSDictionary *_gastronomicFacilityDictionary; 
                     
-                        //NSLog(@"vorher count of _gastronomicArray: %i", [_gastronomicArray count]);
-                        
                         for (_gastronomicArrayI = 0; _gastronomicArrayI < [_gastronomicArray count]; _gastronomicArrayI++)
                         {
-                            _localGastronomicFacilty = [_localGastronomicFacilty getGastronomicFacility:[_gastronomicArray objectAtIndex:_gastronomicArrayI]];
+                            //NSLog(@"start gastronomic facility: %i", _gastronomicArrayI);
+                            _gastronomicFacilityDictionary = [_gastronomicArray objectAtIndex:_gastronomicArrayI];
+                            //NSLog(@"getting gastronomicFacilityDictionary: %i", _gastronomicArrayI);
+                            _localGastronomicFacilty = [_localGastronomicFacilty getGastronomicFacility:_gastronomicFacilityDictionary];
+                            //NSLog(@"found new gastronomic facility: %i", _gastronomicArrayI);
                             [_gastronomicFacilities addObject:_localGastronomicFacilty];
+                            //NSLog(@"added new gastronomic facility: %i", _gastronomicArrayI);
                         }
                     }
                 }
-                NSLog(@"nacher gastronomies count: %i", [_gastronomicFacilities count]);
-
+                //NSLog(@"nacher gastronomies count: %i", [_gastronomicFacilities count]);
             }
         }
     }
