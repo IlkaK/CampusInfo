@@ -84,6 +84,7 @@
         int _gastronomicArrayI;
         
         GastronomicFacilityDto *_localGastronomicFacilty = [[GastronomicFacilityDto alloc]init:nil withGastroId:nil withLocation:nil withName:nil withServiceTimePeriods:nil withType:nil withVersion:nil];
+        GastronomicFacilityDto *_localFormerGastronomy = [[GastronomicFacilityDto alloc]init:nil withGastroId:nil withLocation:nil withName:nil withServiceTimePeriods:nil withType:nil withVersion:nil];
         
         for (id generalKey in _generalDictionary)
         {
@@ -113,9 +114,26 @@
                             _gastronomicFacilityDictionary = [_gastronomicArray objectAtIndex:_gastronomicArrayI];
                             //NSLog(@"getting gastronomicFacilityDictionary: %i", _gastronomicArrayI);
                             _localGastronomicFacilty = [_localGastronomicFacilty getGastronomicFacility:_gastronomicFacilityDictionary];
-                            //NSLog(@"found new gastronomic facility: %i", _gastronomicArrayI);
-                            [_gastronomicFacilities addObject:_localGastronomicFacilty];
-                            //NSLog(@"added new gastronomic facility: %i", _gastronomicArrayI);
+                            
+                            if ([_gastronomicFacilities count] > 0)
+                            {
+                                _localFormerGastronomy = _gastronomicFacilities.lastObject;
+                                if(_localFormerGastronomy._gastroId == _localGastronomicFacilty._gastroId)
+                                {
+                                    NSLog(@"same connection don't add again");
+                                    
+                                }
+                                else
+                                {
+                                    [_gastronomicFacilities addObject:_localGastronomicFacilty];
+                                }
+                            }
+                            else
+                            {
+                                //NSLog(@"found new gastronomic facility: %i", _gastronomicArrayI);
+                                [_gastronomicFacilities addObject:_localGastronomicFacilty];
+                                //NSLog(@"added new gastronomic facility: %i", _gastronomicArrayI);
+                            }
                         }
                     }
                 }

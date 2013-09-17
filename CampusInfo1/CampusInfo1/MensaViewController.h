@@ -69,5 +69,6 @@
 @property (nonatomic, assign) int                                       _tableRows;
 
 - (IBAction)tryConnectionAgain:(id)sender;
+- (void) getGastronomyFacilityArray;
 
 @end

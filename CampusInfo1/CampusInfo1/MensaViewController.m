@@ -87,7 +87,6 @@
     // set default values for spinner/activity indicator
     _waitForChangeActivityIndicator.hidesWhenStopped = YES;
     _waitForChangeActivityIndicator.hidden = YES;
-    //[_waitForChangeActivityIndicator setBackgroundColor:_zhawColor._zhawOriginalBlue];
     [_waitForChangeActivityIndicator setColor:_zhawColor._zhawOriginalBlue];
     [self.view bringSubviewToFront:_waitForChangeActivityIndicator];
     
@@ -151,11 +150,13 @@
     
     //NSLog(@"gastronomy faciliities count: %i",[_gastronomyFacilityArray._gastronomicFacilities count]);
     
-    //while (_actualTrials < 20 && [_gastronomyFacilityArray._gastronomicFacilities count] == 0)
+    //while (//_actualTrials < 3 &&
+    //       (_gastronomyFacilityArray._noConnection || [_gastronomyFacilityArray._gastronomicFacilities count] == 0)
+    //    )
     //{
         //NSLog(@"viewWillAppear Loop: %i", _actualTrials);
         [_gastronomyFacilityArray getData];
-        //_actualTrials++;
+     //   _actualTrials++;
     //}
 
     
@@ -163,7 +164,7 @@
     _waitForChangeActivityIndicator.hidden = YES;
     
     //if ([_gastronomyFacilityArray._gastronomicFacilities count] == 0)
-    if(_gastronomyFacilityArray._noConnection)
+    if(_gastronomyFacilityArray._noConnection || [_gastronomyFacilityArray._gastronomicFacilities count] == 0)
     {
         _noConnectionButton.hidden = NO;
         _noConnectionLabel.hidden = NO;

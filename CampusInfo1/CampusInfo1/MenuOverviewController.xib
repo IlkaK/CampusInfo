@@ -60,7 +60,6 @@
 						<string key="NSFrame">{{10, 84}, {300, 400}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
 						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
 						<object class="NSColor" key="IBUIBackgroundColor">
 							<int key="NSColorSpace">3</int>
@@ -954,27 +953,18 @@
 				<object class="IBPartialClassDescription">
 					<string key="className">PublicStopViewController</string>
 					<string key="superclassName">UIViewController</string>
-					<dictionary class="NSMutableDictionary" key="actions">
-						<string key="actualizeSuggestions:">id</string>
-						<string key="publicStopTextFieldChanged:">id</string>
-						<string key="tryConnectionAgain:">id</string>
-					</dictionary>
-					<dictionary class="NSMutableDictionary" key="actionInfosByName">
-						<object class="IBActionInfo" key="actualizeSuggestions:">
-							<string key="name">actualizeSuggestions:</string>
-							<string key="candidateClassName">id</string>
-						</object>
-						<object class="IBActionInfo" key="publicStopTextFieldChanged:">
+					<object class="NSMutableDictionary" key="actions">
+						<string key="NS.key.0">publicStopTextFieldChanged:</string>
+						<string key="NS.object.0">id</string>
+					</object>
+					<object class="NSMutableDictionary" key="actionInfosByName">
+						<string key="NS.key.0">publicStopTextFieldChanged:</string>
+						<object class="IBActionInfo" key="NS.object.0">
 							<string key="name">publicStopTextFieldChanged:</string>
 							<string key="candidateClassName">id</string>
 						</object>
-						<object class="IBActionInfo" key="tryConnectionAgain:">
-							<string key="name">tryConnectionAgain:</string>
-							<string key="candidateClassName">id</string>
-						</object>
-					</dictionary>
+					</object>
 					<dictionary class="NSMutableDictionary" key="outlets">
-						<string key="_actualizeButton">GradientButton</string>
 						<string key="_publicStopTableView">UITableView</string>
 						<string key="_publicStopTextField">UITextField</string>
 						<string key="_titleNavigationBar">UINavigationBar</string>
@@ -982,10 +972,6 @@
 						<string key="_titleNavigationLabel">UILabel</string>
 					</dictionary>
 					<dictionary class="NSMutableDictionary" key="toOneOutletInfosByName">
-						<object class="IBToOneOutletInfo" key="_actualizeButton">
-							<string key="name">_actualizeButton</string>
-							<string key="candidateClassName">GradientButton</string>
-						</object>
 						<object class="IBToOneOutletInfo" key="_publicStopTableView">
 							<string key="name">_publicStopTableView</string>
 							<string key="candidateClassName">UITableView</string>

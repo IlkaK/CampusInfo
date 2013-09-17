@@ -758,7 +758,7 @@ withStringForButton2:(NSString *)stringForButton2
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    NSLog(@"numberOfRowsInSection connection count: %i", [_connectionArray._connections count]);
+    //NSLog(@"numberOfRowsInSection connection count: %i", [_connectionArray._connections count]);
     return [_connectionArray._connections count]; 
 }
 
