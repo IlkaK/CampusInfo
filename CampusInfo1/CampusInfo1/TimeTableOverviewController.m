@@ -107,10 +107,10 @@
 
 @synthesize _zhawColor;
 
+
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {   
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self) { }
     return self;
 }
 
@@ -145,7 +145,6 @@
     self._schedule                 = nil;
     self._schedule                 = [[ScheduleDto alloc] initWithAcronym:newAcronym:newAcronymType:_actualDate];
     self._actualDayDto             = [self getDayDto];
-
     
     //NSLog(@"2 showScheduleDetails acronym: %@", self._actualShownAcronymString);
     _detailsVC._dayAndAcronymString = [NSString stringWithFormat:@"von %@ (%@)"
@@ -371,7 +370,7 @@
     {
         if ([[_newAcronym stringByTrimmingCharactersInSet:alphabecticalAndNumberSet] isEqualToString: _newAcronym])
         {
-            _localType = @"students";
+            _localType = TimeTableTypeStudentEnglishPlural;
         }      
     }    
     else 
@@ -380,7 +379,7 @@
       {
           if ([[_newAcronym stringByTrimmingCharactersInSet:alphabecticalSet] isEqualToString: _newAcronym])
           {
-             _localType = @"lecturers";
+             _localType = TimeTableTypeLecturerEnglishPlural;
           }      
       }
     }
@@ -585,13 +584,10 @@
     [_noConnectionButton useAlertStyle];
     _noConnectionButton.hidden = YES;
     _noConnectionLabel.hidden = YES;
+    [_noConnectionLabel setTextColor:_zhawColor._zhawFontGrey];
      [self.view bringSubviewToFront:_noConnectionButton];
      [self.view bringSubviewToFront:_noConnectionLabel];
      
-     
-    //[_noConnectionButton setBackgroundColor:_zhawColor._zhawOriginalBlue];
-    //[_noConnectionButton setTintColor:_zhawColor._zhawOriginalBlue];
-    
     // initialize swipe gestures
     _rightSwipe = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(dayBefore:)];
     [_rightSwipe setDirection:(UISwipeGestureRecognizerDirectionRight)];
@@ -940,6 +936,7 @@
     if (_indexPath.section < [_actualDayDto._events count])
     {
         _detailsVC._scheduleEvent = [_actualDayDto._events objectAtIndex:_indexPath.section];
+        //NSLog(@"overview how many lecturers: %i", [_detailsVC._scheduleEvent._scheduleEventRealizations count]);
         
         //NSLog(@"schedule event name %@", _detailsVC._scheduleEvent._name);
         //NSLog(@"showScheduleDetails date   : %@",[[self dayFormatter] stringFromDate:_actualDate]);
@@ -1021,47 +1018,6 @@
                         withAcronymType:@"courses"
                         withAcronymText:[NSString stringWithFormat:@"von %@ (Kurs)",_courseString]];
     }
-}
-
-
-- (void) changeToRoomSchedule1:(id)sender event:(id)event
-{
-    [self changeToRoomSchedule:sender withEvent:event withRealizationIndex:0];
-}
-
-- (void) changeToRoomSchedule2:(id)sender event:(id)event
-{
-    [self changeToRoomSchedule:sender withEvent:event withRealizationIndex:1];
-}
-
-- (void) changeToRoomSchedule3:(id)sender event:(id)event
-{
-    [self changeToRoomSchedule:sender withEvent:event withRealizationIndex:2];
-}
-
-- (void) changeToRoomSchedule4:(id)sender event:(id)event
-{
-    [self changeToRoomSchedule:sender withEvent:event withRealizationIndex:3];
-}
-
-- (void) changeToRoomSchedule5:(id)sender event:(id)event
-{
-    [self changeToRoomSchedule:sender withEvent:event withRealizationIndex:4];
-}
-
-- (void) changeToRoomSchedule6:(id)sender event:(id)event
-{
-    [self changeToRoomSchedule:sender withEvent:event withRealizationIndex:5];
-}
-
-- (void) changeToRoomSchedule7:(id)sender event:(id)event
-{
-    [self changeToRoomSchedule:sender withEvent:event withRealizationIndex:6];
-}
-
-- (void) changeToRoomSchedule8:(id)sender event:(id)event
-{
-    [self changeToRoomSchedule:sender withEvent:event withRealizationIndex:7];
 }
 
 
@@ -1559,6 +1515,7 @@
     NSMutableAttributedString *_titleString = [[NSMutableAttributedString alloc] initWithString:title];
     
     [_titleString addAttribute:NSUnderlineStyleAttributeName value:[NSNumber numberWithInteger:NSUnderlineStyleSingle] range:NSMakeRange(0, [_titleString length])];
+    [_titleString addAttribute:NSForegroundColorAttributeName value:_zhawColor._zhawFontGrey range:NSMakeRange(0, [_titleString length])];
     
     [_lectureButton setAttributedTitle:_titleString forState:UIControlStateNormal];
     
@@ -1570,6 +1527,51 @@
     }
     
 }
+
+- (void) changeToRoomSchedule1:(id)sender event:(id)event
+{
+    [self changeToRoomSchedule:sender withEvent:event withRealizationIndex:0];
+}
+
+- (void) changeToRoomSchedule2:(id)sender event:(id)event
+{
+    [self changeToRoomSchedule:sender withEvent:event withRealizationIndex:1];
+}
+
+- (void) changeToRoomSchedule3:(id)sender event:(id)event
+{
+    [self changeToRoomSchedule:sender withEvent:event withRealizationIndex:2];
+}
+
+- (void) changeToRoomSchedule4:(id)sender event:(id)event
+{
+    [self changeToRoomSchedule:sender withEvent:event withRealizationIndex:3];
+}
+
+- (void) changeToRoomSchedule5:(id)sender event:(id)event
+{
+    [self changeToRoomSchedule:sender withEvent:event withRealizationIndex:4];
+}
+
+- (void) changeToRoomSchedule6:(id)sender event:(id)event
+{
+    [self changeToRoomSchedule:sender withEvent:event withRealizationIndex:5];
+}
+
+- (void) changeToRoomSchedule7:(id)sender event:(id)event
+{
+    [self changeToRoomSchedule:sender withEvent:event withRealizationIndex:6];
+}
+
+- (void) changeToRoomSchedule8:(id)sender event:(id)event
+{
+    [self changeToRoomSchedule:sender withEvent:event withRealizationIndex:7];
+}
+
+
+
+
+
 
 
 - (void) setRoomButtonWithCell:(UITableViewCell *)cell
@@ -1587,6 +1589,8 @@
     
         NSMutableAttributedString *_titleString = [[NSMutableAttributedString alloc] initWithString:title];
         [_titleString addAttribute:NSUnderlineStyleAttributeName value:[NSNumber numberWithInteger:NSUnderlineStyleSingle] range:NSMakeRange(0, [_titleString length])];
+        [_titleString addAttribute:NSForegroundColorAttributeName value:_zhawColor._zhawFontGrey range:NSMakeRange(0, [_titleString length])];
+        
         [_roomButton    setAttributedTitle:_titleString forState:UIControlStateNormal];
     
         if (selector == 1)
@@ -1629,7 +1633,7 @@
               withTag            :(int)       indexTag
 {
     UIButton  *_detailButton  = (UIButton *)[cell viewWithTag:indexTag];  // with arrow image, leading to detail page
-    
+    [_detailButton setTitleColor:_zhawColor._zhawFontGrey forState:UIControlStateNormal];
     _detailButton.enabled   = TRUE;
     _detailButton.hidden    = NO;
     
@@ -1644,6 +1648,8 @@
              withEndTime        :(NSDate *)  endTime
 {
     UILabel          *_labelDate     = (UILabel  *)[cell viewWithTag:indexTag];
+    [_labelDate setTextColor:_zhawColor._zhawFontGrey];
+    
     NSString *_startTimeString = [[_dateFormatter _timeFormatter] stringFromDate:startTime];
     NSString *_endTimeString   = [[_dateFormatter _timeFormatter] stringFromDate:endTime];
     
@@ -1662,6 +1668,7 @@
 
     UIButton         *_actualLessonButton   = (UIButton *)[cell viewWithTag:indexTag];
     _actualLessonButton.hidden = YES;
+    [_actualLessonButton setTitleColor:_zhawColor._zhawFontGrey forState:UIControlStateNormal];
     
     NSString *_startTimeString = [[_dateFormatter _timeFormatter] stringFromDate:startTime];
     NSString *_endTimeString   = [[_dateFormatter _timeFormatter] stringFromDate:endTime];
@@ -1707,6 +1714,9 @@
 
     UILabel          *_messageLabel     = (UILabel  *)[_cell viewWithTag:1];
     
+    // set font color
+    [_messageLabel setTextColor:_zhawColor._zhawFontGrey];
+    
     if (actualSelection == 0)
     {
         _messageLabel.text = [_translator getGermanErrorMessageTranslation:errorMessage];
@@ -1747,6 +1757,11 @@
     
     // initialize values for buttons and labels
     [_lectureButton setTitle:@"" forState:UIControlStateNormal];
+    
+    // set font color
+    [_labelDate setTextColor:_zhawColor._zhawFontGrey];
+    [_lectureButton setTitleColor:_zhawColor._zhawFontGrey forState:UIControlStateNormal];
+    [_actualLessonButton setTitleColor:_zhawColor._zhawFontGrey forState:UIControlStateNormal];
     
     if (actualScheduleEvent == nil)
     {

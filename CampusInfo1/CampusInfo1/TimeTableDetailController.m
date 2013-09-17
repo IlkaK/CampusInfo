@@ -40,6 +40,8 @@
 @synthesize _timeNavigationBar;
 @synthesize _timeNavigationItem;
 
+@synthesize _zhawColors;
+
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -66,29 +68,29 @@
     [super viewDidLoad];
     
     // general initialization
-    ColorSelection *_zhawColor = [[ColorSelection alloc]init];
+    _zhawColors = [[ColorSelection alloc]init];
 
     // set title
     UIBarButtonItem *backButtonItem = [[UIBarButtonItem alloc] initWithTitle:LeftArrowSymbol style:UIBarButtonItemStylePlain target:self action:@selector(moveBackToTimeTable:)];
     
-    [backButtonItem setTintColor:_zhawColor._zhawOriginalBlue];
+    [backButtonItem setTintColor:_zhawColors._zhawOriginalBlue];
     [_titleNavigationItem setLeftBarButtonItem :backButtonItem animated :true];
     _titleNavigationItem.title = @"";
-    [_titleNavigationBar setTintColor:_zhawColor._zhawDarkerBlue];
+    [_titleNavigationBar setTintColor:_zhawColors._zhawDarkerBlue];
     
-    [_titleNavigationLabel setTextColor:_zhawColor._zhawWhite];
+    [_titleNavigationLabel setTextColor:_zhawColors._zhawWhite];
     _titleNavigationLabel.text = TimeTableOverVCTitle;
     [_titleNavigationLabel setTextAlignment:UITextAlignmentCenter];
     
-    [_timeTableDescriptionLabel setTextColor:_zhawColor._zhawWhite];
+    [_timeTableDescriptionLabel setTextColor:_zhawColors._zhawWhite];
     [_timeTableDescriptionLabel setText:_dayAndAcronymString];
     [_timeTableDescriptionLabel setTextAlignment:UITextAlignmentCenter];
     
     
     [_timeNavigationItem setTitle:@""];
-    [_timeNavigationBar setTintColor:_zhawColor._zhawDarkerBlue];
+    [_timeNavigationBar setTintColor:_zhawColors._zhawDarkerBlue];
     
-    [_timeLabel setTextColor:_zhawColor._zhawWhite];
+    [_timeLabel setTextColor:_zhawColors._zhawWhite];
     [_timeLabel setText:_timeString];
     [_timeLabel setTextAlignment:UITextAlignmentCenter];
     
@@ -96,8 +98,7 @@
     // set default values for spinner/activity indicator
     _waitForChangeActivityIndicator.hidesWhenStopped = YES;
     _waitForChangeActivityIndicator.hidden = YES;
-    [_waitForChangeActivityIndicator setColor:_zhawColor._zhawOriginalBlue];
-    //[_waitForChangeActivityIndicator setBackgroundColor:_zhawColor._zhawOriginalBlue];
+    [_waitForChangeActivityIndicator setColor:_zhawColors._zhawOriginalBlue];
     [self.view bringSubviewToFront:_waitForChangeActivityIndicator];
     
     // set table controller
@@ -163,7 +164,7 @@
     [_acronymArray     addObject:[NSString stringWithFormat:@"%@", scheduleEvent._name]];
     [_typeButtonArray  addObject:[NSString stringWithFormat:@"%@", TimeTableTypeCourseEnglishPlural]];
     
-    [_descriptionArray addObject:[NSString stringWithFormat:@"%@", TimeTableDescription]];
+    [_descriptionArray addObject:[NSString stringWithFormat:@"%@:", TimeTableDescription]];
     [_detailArray      addObject:[NSString stringWithFormat:@"%@", scheduleEvent._description]];
     [_acronymArray     addObject:[NSString stringWithFormat:@"%@", scheduleEvent._name]];
     [_typeButtonArray  addObject:[NSString stringWithFormat:@"NONE"]];
@@ -186,13 +187,15 @@
       
     
     // put all lecturers of the given event
-    for (realizationI = 0; realizationI < scheduleEvent._scheduleEventRealizations.count; realizationI++) 
+    for (realizationI = 0; realizationI < [scheduleEvent._scheduleEventRealizations count]; realizationI++)
     {
         ScheduleEventRealizationDto *_realization = nil;
         _realization = [_scheduleEvent._scheduleEventRealizations objectAtIndex:realizationI];
         NSMutableArray *_lecturerArray             = [[NSMutableArray alloc]init];
         _lecturerArray = _realization._lecturers;
 
+        //NSLog(@"details _lecturerArray count: %i", [_lecturerArray count]);
+        
         int lecturerI;
         for (lecturerI = 0; lecturerI < _lecturerArray.count; lecturerI++)
         {    
@@ -202,7 +205,7 @@
             {
                 if (lecturerI == 0)
                 {
-                    [_descriptionArray addObject:[NSString stringWithFormat:@"%@", TimeTableTypeDozentPlural]];
+                    [_descriptionArray addObject:[NSString stringWithFormat:@"%@:", TimeTableTypeDozentPlural]];
                    
                 }
                 else
@@ -345,7 +348,10 @@
 
         UILabel         *_labelDescription = (UILabel *) [_cell viewWithTag:1];
         UILabel         *_labelValue       = (UILabel *) [_cell viewWithTag:2];
-        UIButton        *_detailButton     = (UIButton *)[_cell viewWithTag:3]; 
+        UIButton        *_detailButton     = (UIButton *)[_cell viewWithTag:3];
+        
+        [_labelDescription setTextColor:_zhawColors._zhawFontGrey];
+        [_labelValue setTextColor:_zhawColors._zhawFontGrey];
     
         _labelDescription.text  = [_descriptionArray objectAtIndex:indexPath.section];
         _labelValue.text        = [_detailArray      objectAtIndex:indexPath.section];;
@@ -371,13 +377,16 @@
         
         UILabel         *_labelDescription = (UILabel *)  [_cell viewWithTag:1];
         UIButton        *_valueButton      = (UIButton *) [_cell viewWithTag:2];
-        UIButton        *_detailButton     = (UIButton *) [_cell viewWithTag:3]; 
+        UIButton        *_detailButton     = (UIButton *) [_cell viewWithTag:3];
+        
+        [_labelDescription setTextColor:_zhawColors._zhawFontGrey];
         
         _labelDescription.text  = [_descriptionArray objectAtIndex:indexPath.section];
 
         NSMutableAttributedString *_titleValueButton = [[NSMutableAttributedString alloc] initWithString:[_detailArray objectAtIndex:indexPath.section]];
         
         [_titleValueButton addAttribute:NSUnderlineStyleAttributeName value:[NSNumber numberWithInteger:NSUnderlineStyleSingle] range:NSMakeRange(0, [_titleValueButton length])];
+        [_titleValueButton addAttribute:NSForegroundColorAttributeName value:_zhawColors._zhawFontGrey range:NSMakeRange(0, [_titleValueButton length])];        
         
         [_valueButton setAttributedTitle:_titleValueButton forState:UIControlStateNormal];
         [_valueButton addTarget:self action:@selector(changeToSchedule:event:) forControlEvents:UIControlEventTouchUpInside];

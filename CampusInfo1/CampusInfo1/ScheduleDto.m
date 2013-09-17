@@ -20,6 +20,7 @@
 #import "ScheduleCourseDto.h"
 #import "CharTranslation.h"
 #import "URLConstantStrings.h"
+#import "UIConstantStrings.h"
 
 @implementation ScheduleDto
 
@@ -181,7 +182,7 @@
     
     //NSLog(@"getDictionaryFromUrl %@",[NSThread callStackSymbols]);
     
-    //NSString *someString = [NSString stringWithFormat:@"%@", _dataFromUrl]; 
+    //NSString *someString = [NSString stringWithFormat:@"%@", _dataFromUrl];
     //NSLog(@"getDictionaryFromUrl data from url %@", someString);
     
     //NSString *someString = [[NSString alloc] initWithData:_dataFromUrl encoding:NSUTF8StringEncoding];
@@ -214,27 +215,27 @@
     
     if ([insertType isEqualToString: @"Student"]) 
     {
-        _scheduleType   = @"student";
+        _scheduleType   = TimeTableTypeStudentEnglish;
     }                     
     
     if ([insertType isEqualToString: @"Lecturer"]) 
     {
-        _scheduleType   = @"lecturer";
+        _scheduleType   = TimeTableTypeLecturerEnglish;
     }                     
     
     if ([insertType isEqualToString: @"Course"]) 
     {
-        _scheduleType   = @"course";
+        _scheduleType   = TimeTableTypeCourseEnglish;
     }                     
     
     if ([insertType isEqualToString: @"Class"]) 
     {
-        _scheduleType   = @"class";
+        _scheduleType   = TimeTableTypeClassEnglish;
     }                     
     
     if ([insertType isEqualToString: @"Room"]) 
     {
-        _scheduleType   = @"room";                        
+        _scheduleType   = TimeTableTypeRoomEnglish;                        
     }        
     //NSLog(@"schedule type %@", _scheduleType);
 
@@ -246,35 +247,35 @@
 -(void)setTypeDetailsWithDictionary:(NSDictionary *)dictionary withKey:(id)key
 {
     // get student information
-    if ([key isEqualToString:@"student"]) 
+    if ([key isEqualToString:TimeTableTypeStudentEnglish]) 
     {
         self._student = [[PersonDto alloc] init:nil :nil :nil :nil :nil];
         self._student = [self._student getPersonWithDictionary:dictionary withKey:key];
     } 
     
     // get lecturer information
-    if ([key isEqualToString:@"lecturer"])
+    if ([key isEqualToString:TimeTableTypeLecturerEnglish])
     {
         self._lecturer = [[PersonDto alloc] init:nil :nil :nil :nil :nil];
         self._lecturer = [self._lecturer getPersonWithDictionary:dictionary withKey:key];
     }  
     
     // get course information            
-    if ([key isEqualToString:@"course"]) 
+    if ([key isEqualToString:TimeTableTypeCourseEnglish]) 
     {
         self._scheduleCourse = [[ScheduleCourseDto alloc] init:nil :nil];
         self._scheduleCourse = [_scheduleCourse getScheduleCourseWithDictionary:dictionary withKey:key];
     }  
     
     // get class information
-    if ([key isEqualToString:@"class"]) 
+    if ([key isEqualToString:TimeTableTypeClassEnglish]) 
     {
         self._schoolClass  = [[SchoolClassDto alloc] init:nil];
         self._schoolClass  = [self._schoolClass getClassWithDictionary:dictionary withKey:key];
     }  
     
     // get room information
-    if ([key isEqualToString:@"room"]) 
+    if ([key isEqualToString:TimeTableTypeRoomEnglish]) 
     {
         self._room = [[RoomDto alloc] init:nil];
         self._room = [self._room getRoomWithDictionary:dictionary withScheduleKey:key];
@@ -291,7 +292,7 @@
 
     _dateFormatter  = [[DateFormation alloc] init];
     
-    NSLog(@"_acronymString %@ _acronymType %@", newAcronymString, newAcronymType);
+    //NSLog(@"_acronymString %@ _acronymType %@", newAcronymString, newAcronymType);
     
     if (self) 
     {           
@@ -330,7 +331,7 @@
     
     if (_scheduleDictionary == nil)
     {
-        NSLog(@"no connection");
+        NSLog(@"scheduleDto no connection");
         self._connectionEstablished      = @"NO";
     }
     else 

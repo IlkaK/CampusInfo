@@ -44,9 +44,13 @@ extern NSString * const TimeTableTypeKlassePlural;
 extern NSString * const TimeTableTypeStudentEnglish ;
 extern NSString * const TimeTableTypeStudentEnglishPlural;
 extern NSString * const TimeTableTypeLecturerEnglishPlural;
+extern NSString * const TimeTableTypeLecturerEnglish;
 extern NSString * const TimeTableTypeCourseEnglishPlural;
+extern NSString * const TimeTableTypeCourseEnglish;
+extern NSString * const TimeTableTypeRoomEnglish;
 extern NSString * const TimeTableTypeRoomEnglishPlural  ;
 extern NSString * const TimeTableTypeClassEnglishPlural;
+extern NSString * const TimeTableTypeClassEnglish;
 
 extern NSString * const TimeTableDescription;
 

@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <ColorSelection.h>
 
 @class ScheduleDto;
 @class ScheduleEventDto;
@@ -41,6 +42,8 @@
     IBOutlet UINavigationBar            *_timeNavigationBar;
     IBOutlet UINavigationItem           *_timeNavigationItem;
     IBOutlet UILabel                    *_timeLabel;
+    
+    ColorSelection                      *_zhawColors;
 }
 
 @property (nonatomic, retain) id<TimeTableDetailViewDelegate>   _timeTableDetailViewDelegate;
@@ -61,6 +64,7 @@
 @property (nonatomic, retain) IBOutlet UINavigationItem         *_timeNavigationItem;
 @property (nonatomic, retain) IBOutlet UILabel                  *_timeLabel;
 
+@property (nonatomic, retain) ColorSelection                    *_zhawColors;
 
 @property (nonatomic, retain) IBOutlet UIActivityIndicatorView  *_waitForChangeActivityIndicator;
 

@@ -46,9 +46,13 @@ NSString * const TimeTableTypeKlassePlural  = @"Klassen:";
 NSString * const TimeTableTypeStudentEnglish            = @"student";
 NSString * const TimeTableTypeStudentEnglishPlural      = @"students";
 NSString * const TimeTableTypeLecturerEnglishPlural     = @"lecturers";
+NSString * const TimeTableTypeLecturerEnglish           = @"lecturer";
 NSString * const TimeTableTypeCourseEnglishPlural       = @"courses";
+NSString * const TimeTableTypeCourseEnglish             = @"course";
+NSString * const TimeTableTypeRoomEnglish               = @"room";
 NSString * const TimeTableTypeRoomEnglishPlural         = @"rooms";
 NSString * const TimeTableTypeClassEnglishPlural        = @"classes";
+NSString * const TimeTableTypeClassEnglish              = @"class";
 
 NSString * const TimeTableDescription = @"Beschreibung";
 
