@@ -42,7 +42,7 @@
     NSString        *_localName;
     NSString        *_localDistance;
     CoordinateDto   *_localCoordinate   = [[CoordinateDto alloc]init:nil withX:0 withY:0];
-    StationDto      *_localStation      = [[StationDto alloc]init:nil withScore:nil withName:nil withDistance:nil withCoordinate:nil];
+    StationDto      *_localStation      = [[StationDto alloc]init:nil withScore:0 withName:nil withDistance:nil withCoordinate:nil];
     
     for (id stationKey in stationDictionary)
     {

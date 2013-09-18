@@ -58,12 +58,12 @@
     _titleNavigationItem.title = @"";
     
     [_titleNavigationBar setTintColor:_zhawColor._zhawDarkerBlue];
-    [_titleNavigationLabel setTextAlignment:UITextAlignmentCenter];
+    [_titleNavigationLabel setTextAlignment:NSTextAlignmentCenter];
 
     
     // setting description and date labels
     [_descriptionTitleLabel setTextColor:_zhawColor._zhawWhite];
-    [_descriptionTitleLabel setTextAlignment:UITextAlignmentCenter];
+    [_descriptionTitleLabel setTextAlignment:NSTextAlignmentCenter];
     [_descriptionNavigationBar setTintColor:_zhawColor._zhawDarkerBlue];    
     _descriptionNavigationItem.title = @"";
     

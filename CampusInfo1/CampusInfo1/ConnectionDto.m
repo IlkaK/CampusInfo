@@ -49,7 +49,7 @@
 
 - (ConnectionDto *)getConnection:(NSDictionary *)connectionDictionary
 {
-    ConnectionDto *_localConnection = [[ConnectionDto alloc]init:nil withTo:nil withDuration:nil withTransfers:nil withService:nil withProducts:nil withCapacity1st:nil withCapacity2nd:nil withSections:nil];
+    ConnectionDto *_localConnection = [[ConnectionDto alloc]init:nil withTo:nil withDuration:nil withTransfers:0 withService:nil withProducts:nil withCapacity1st:0 withCapacity2nd:0 withSections:nil];
     
     FromOrToDto     *_localFrom = [[FromOrToDto alloc]init:nil
                                               withLocation:nil

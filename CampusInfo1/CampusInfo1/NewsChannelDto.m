@@ -81,7 +81,7 @@
     {
         _startImage = YES;
         //NSLog(@"-- start parsing image");
-        _newsImage = [[NewsImageDto alloc]init:nil :nil :nil :nil :nil :nil];
+        _newsImage = [[NewsImageDto alloc]init:nil :nil :nil :nil :0 :0];
     }
     if ([_actualStartElement isEqualToString:@"item"])
     {

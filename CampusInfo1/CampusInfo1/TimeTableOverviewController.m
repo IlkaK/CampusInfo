@@ -488,7 +488,7 @@
     // title
     //[_acronymLabel setBackgroundColor:_zhawColor._zhawOriginalBlue];
     [_acronymLabel setTextColor:_zhawColor._zhawWhite];
-    [_acronymLabel setTextAlignment:UITextAlignmentCenter];
+    [_acronymLabel setTextAlignment:NSTextAlignmentCenter];
     
     UIBarButtonItem *backButtonItem = [[UIBarButtonItem alloc] initWithTitle:LeftArrowSymbol style:UIBarButtonItemStylePlain target:self action:@selector(moveBackToMenuOverview:)];
     [backButtonItem setTintColor:_zhawColor._zhawOriginalBlue];
@@ -500,7 +500,7 @@
     _titleNavigationItem.title = @"";
     
     [_titleNavigationBar setTintColor:_zhawColor._zhawDarkerBlue];
-    [_titleNavigationLabel setTextAlignment:UITextAlignmentCenter];
+    [_titleNavigationLabel setTextAlignment:NSTextAlignmentCenter];
     
     // segmented controls below the title
     [_timeTableSegmentedControl setTintColor:_zhawColor._zhawOriginalBlue];

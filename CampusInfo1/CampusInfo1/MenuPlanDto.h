@@ -7,7 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
-#import <CalendarWeekDto.h>
+#import "CalendarWeekDto.h"
 
 
 @interface MenuPlanDto : NSObject

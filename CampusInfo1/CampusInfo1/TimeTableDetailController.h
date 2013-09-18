@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-#import <ColorSelection.h>
+#import "ColorSelection.h"
 
 @class ScheduleDto;
 @class ScheduleEventDto;

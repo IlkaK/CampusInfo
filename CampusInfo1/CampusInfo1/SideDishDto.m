@@ -30,7 +30,7 @@
 
 - (SideDishDto *)getSideDish:(NSDictionary *)sideDishDictionary
 {
-    SideDishDto *_localSideDish = [[SideDishDto alloc]init:nil withName:nil withVersion:nil];
+    SideDishDto *_localSideDish = [[SideDishDto alloc]init:0 withName:nil withVersion:nil];
     int         _localSideDishId;
     NSString    *_localSideDishName;
     NSString    *_localSideDishVersion;

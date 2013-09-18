@@ -7,11 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
-#import <Autocomplete.h>
-#import <LanguageTranslation.h>
-#import <StudentsDto.h>
-#import <LecturersDto.h>
-#import <ColorSelection.h>
+#import "Autocomplete.h"
+#import "LanguageTranslation.h"
+#import "StudentsDto.h"
+#import "LecturersDto.h"
+#import "ColorSelection.h"
 
 @protocol SettingsViewDelegate <NSObject>
 

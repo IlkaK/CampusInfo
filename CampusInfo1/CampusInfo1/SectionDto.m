@@ -35,7 +35,7 @@
 - (SectionDto *)getSection:(NSDictionary *)sectionDictionary
 {
     SectionDto *_localSection = [[SectionDto alloc]init:nil withWalk:nil withDeparture:nil withArrival:nil];
-    JourneyDto      *_localJourney = [[JourneyDto alloc]init:nil withCategory:nil withCategoryCode:nil withJourneyNumber:nil withOperator:nil withTo:nil withPassList:nil withCapacity1st:nil withCapacity2nd:nil];
+    JourneyDto      *_localJourney = [[JourneyDto alloc]init:nil withCategory:nil withCategoryCode:0 withJourneyNumber:0 withOperator:nil withTo:nil withPassList:nil withCapacity1st:0 withCapacity2nd:0];
     NSString        *_localWalk;
     
     FromOrToDto     *_localDeparture = [[FromOrToDto alloc]init:nil

@@ -7,11 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
-#import <NewsChannelDto.h>
-#import <NewsDetailViewController.h>
-#import <DateFormation.h>
-#import <ColorSelection.h>
-#import <GradientButton.h>
+#import "NewsChannelDto.h"
+#import "NewsDetailViewController.h"
+#import "DateFormation.h"
+#import "ColorSelection.h"
+#import "GradientButton.h"
 
 @class NewsDetailViewController;
 

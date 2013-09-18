@@ -7,17 +7,17 @@
 //
 
 #import <UIKit/UIKit.h>
-#import <Autocomplete.h>
-#import <TimeTableAsyncRequest.h>
-#import <DBCachingForAutocomplete.h>
+#import "Autocomplete.h"
+#import "TimeTableAsyncRequest.h"
+#import "DBCachingForAutocomplete.h"
 
-#import <StudentsDto.h>
-#import <LecturersDto.h>
-#import <CoursesDto.h>
-#import <RoomsDto.h>
-#import <ClassesDto.h>
+#import "StudentsDto.h"
+#import "LecturersDto.h"
+#import "CoursesDto.h"
+#import "RoomsDto.h"
+#import "ClassesDto.h"
 
-#import <ColorSelection.h>
+#import "ColorSelection.h"
 
 
 @interface SearchViewController : UIViewController<UIPickerViewDelegate,UIPickerViewDataSource,UITextFieldDelegate>

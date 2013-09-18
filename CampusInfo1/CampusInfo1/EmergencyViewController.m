@@ -51,7 +51,7 @@
     _titleNavigationLabel.text = EmergencyVCTitle;
     _titleNavigationItem.title = @"";
     
-    [_titleNavigationLabel setTextAlignment:UITextAlignmentCenter];
+    [_titleNavigationLabel setTextAlignment:NSTextAlignmentCenter];
     [_titleNavigationBar setTintColor:_zhawColor._zhawDarkerBlue];
 }
 
@@ -174,7 +174,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    NSInteger *_numberRows;
+    NSInteger _numberRows;
     switch (section)
     {
         case 0:

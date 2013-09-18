@@ -7,7 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
-#import <FromOrToDto.h>
+#import "FromOrToDto.h"
 
 @interface JourneyDto : NSObject
 {

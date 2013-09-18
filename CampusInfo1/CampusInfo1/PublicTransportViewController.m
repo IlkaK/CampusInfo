@@ -107,7 +107,7 @@
     _publicTransportNavigationLabel.text = PublicTransportVCTitle;
     _publicTransportNavigationItem.title = @"";
     
-    [_publicTransportNavigationLabel setTextAlignment:UITextAlignmentCenter];
+    [_publicTransportNavigationLabel setTextAlignment:NSTextAlignmentCenter];
     
     [_publicTransportNavigationBar setTintColor:_zhawColor._zhawDarkerBlue];
     
@@ -345,7 +345,7 @@ withStringForButton2:(NSString *)stringForButton2
     //if ([_connectionArray._connections count] == 0
     //    || _changedStartStation || _changedStopStation)
     //{
-    ConnectionDto *_localConnection = [[ConnectionDto alloc]init:nil withTo:nil withDuration:nil withTransfers:nil withService:nil withProducts:nil withCapacity1st:nil withCapacity2nd:nil withSections:nil];
+    ConnectionDto *_localConnection = [[ConnectionDto alloc]init:nil withTo:nil withDuration:nil withTransfers:nil withService:nil withProducts:nil withCapacity1st:0 withCapacity2nd:0 withSections:nil];
     BOOL noValues = NO;
     
     

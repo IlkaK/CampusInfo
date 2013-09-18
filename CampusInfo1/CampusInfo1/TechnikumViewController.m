@@ -59,7 +59,7 @@
     _titleNavigationItem.title = @"";
     
     [_titleNavigationBar setTintColor:_zhawColor._zhawDarkerBlue];
-    [_titleNavigationLabel setTextAlignment:UITextAlignmentCenter];
+    [_titleNavigationLabel setTextAlignment:NSTextAlignmentCenter];
     
     
     [_descriptionLabel setTextColor:_zhawColor._zhawWhite];
@@ -67,7 +67,7 @@
     _descriptionNavigationItem.title = @"";
     
     [_descriptionNavigationBar setTintColor:_zhawColor._zhawDarkerBlue];
-    [_descriptionLabel setTextAlignment:UITextAlignmentCenter];
+    [_descriptionLabel setTextAlignment:NSTextAlignmentCenter];
     _descriptionLabel.text = _description;
     
     // web view

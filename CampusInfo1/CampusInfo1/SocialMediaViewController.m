@@ -48,7 +48,7 @@
     _titleNavigationItem.title = @"";
     
     [_titleNavigationBar setTintColor:_zhawColor._zhawDarkerBlue];
-    [_titleNavigationLabel setTextAlignment:UITextAlignmentCenter];
+    [_titleNavigationLabel setTextAlignment:NSTextAlignmentCenter];
 }
 
 - (void)moveBackToMenuOverview:(id)sender

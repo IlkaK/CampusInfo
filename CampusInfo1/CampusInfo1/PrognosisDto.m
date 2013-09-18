@@ -43,7 +43,7 @@
     int               _localCapacity1st;
     int               _localCapacity2nd;
 
-    PrognosisDto *_localPrognosis = [[PrognosisDto alloc]init:nil withArrival:nil withDeparture:nil withCapacity1st:nil withCapacity2nd:nil];
+    PrognosisDto *_localPrognosis = [[PrognosisDto alloc]init:nil withArrival:nil withDeparture:nil withCapacity1st:0 withCapacity2nd:0];
     
     for (id prognosisKey in prognosisDictionary)
     {

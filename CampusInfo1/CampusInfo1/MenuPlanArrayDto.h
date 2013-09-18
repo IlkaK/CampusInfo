@@ -7,8 +7,8 @@
 //
 
 #import <Foundation/Foundation.h>
-#import <MenuDto.h>
-#import <TimeTableAsyncRequest.h>
+#import "MenuDto.h"
+#import "TimeTableAsyncRequest.h"
 
 @interface MenuPlanArrayDto : NSObject<TimeTableAsyncRequestDelegate>
 {

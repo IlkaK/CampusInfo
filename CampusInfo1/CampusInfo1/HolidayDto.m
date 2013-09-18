@@ -43,7 +43,7 @@
     NSDate *_localStartsAt;
     NSDate *_localEndsAt;
     
-    HolidayDto *_localHoliday = [[HolidayDto alloc]init:nil withName:nil withVersion:nil withStartsAt:nil withEndsAt:nil];
+    HolidayDto *_localHoliday = [[HolidayDto alloc]init:0 withName:nil withVersion:nil withStartsAt:nil withEndsAt:nil];
     
     for (id holidayKey in holidayDictionary)
     {

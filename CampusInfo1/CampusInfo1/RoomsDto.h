@@ -7,8 +7,8 @@
 //
 
 #import <Foundation/Foundation.h>
-#import <TimeTableAsyncRequest.h>
-#import <DBCachingForAutocomplete.h>
+#import "TimeTableAsyncRequest.h"
+#import "DBCachingForAutocomplete.h"
 
 @interface RoomsDto : NSObject<TimeTableAsyncRequestDelegate>
 {

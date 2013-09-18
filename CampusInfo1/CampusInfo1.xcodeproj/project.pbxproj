@@ -158,19 +158,6 @@
 		E12AD04B17B0E9E4009A9B1B /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A35A341A1520814800181E3F /* Foundation.framework */; };
 		E12AD05117B0E9E4009A9B1B /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = E12AD04F17B0E9E4009A9B1B /* InfoPlist.strings */; };
 		E12AD05417B0E9E4009A9B1B /* CampusInfoLogicTests.m in Sources */ = {isa = PBXBuildFile; fileRef = E12AD05317B0E9E4009A9B1B /* CampusInfoLogicTests.m */; };
-		E12AD05B17B0EBEA009A9B1B /* ScheduleDtoTest.m in Sources */ = {isa = PBXBuildFile; fileRef = E12AD05A17B0EBEA009A9B1B /* ScheduleDtoTest.m */; };
-		E12AD05F17B0FCB3009A9B1B /* DateFormation.m in Sources */ = {isa = PBXBuildFile; fileRef = E1D7EFF6178DA03D00100293 /* DateFormation.m */; };
-		E12AD06017B0FCDD009A9B1B /* SchoolClassDto.m in Sources */ = {isa = PBXBuildFile; fileRef = A3A551391525DDB700BCAF3D /* SchoolClassDto.m */; };
-		E12AD06117B0FCDD009A9B1B /* RoomDto.m in Sources */ = {isa = PBXBuildFile; fileRef = A3A5513C1525E29F00BCAF3D /* RoomDto.m */; };
-		E12AD06217B0FCDD009A9B1B /* PersonDto.m in Sources */ = {isa = PBXBuildFile; fileRef = A3A5513F1525E33900BCAF3D /* PersonDto.m */; };
-		E12AD06317B0FCDD009A9B1B /* SlotDto.m in Sources */ = {isa = PBXBuildFile; fileRef = A3A551451525EB8B00BCAF3D /* SlotDto.m */; };
-		E12AD06417B0FCDD009A9B1B /* DayDto.m in Sources */ = {isa = PBXBuildFile; fileRef = A3811C5015274C7A00A43735 /* DayDto.m */; };
-		E12AD06517B0FCDD009A9B1B /* ScheduleDto.m in Sources */ = {isa = PBXBuildFile; fileRef = A3811C5415274F4400A43735 /* ScheduleDto.m */; };
-		E12AD06617B0FCDD009A9B1B /* DepartmentDto.m in Sources */ = {isa = PBXBuildFile; fileRef = 2779DA5415544A6600923A54 /* DepartmentDto.m */; };
-		E12AD06717B0FCDD009A9B1B /* ScheduleEventDto.m in Sources */ = {isa = PBXBuildFile; fileRef = 27795DFF1558498300D0F350 /* ScheduleEventDto.m */; };
-		E12AD06817B0FCDD009A9B1B /* ScheduleEventRealizationDto.m in Sources */ = {isa = PBXBuildFile; fileRef = 27E8229D155D214A006EA12D /* ScheduleEventRealizationDto.m */; };
-		E12AD06917B0FCDD009A9B1B /* ScheduleCourseDto.m in Sources */ = {isa = PBXBuildFile; fileRef = 277EDF78155D60DC002BCE1F /* ScheduleCourseDto.m */; };
-		E12AD06A17B0FCFD009A9B1B /* TimeTableAsyncRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 27B66926153AE0D8004D3ABC /* TimeTableAsyncRequest.m */; };
 		E12B400117968AA1000555AE /* MensaViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E12B3FFF17968AA1000555AE /* MensaViewController.m */; };
 		E12B400217968AA1000555AE /* MensaViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E12B400017968AA1000555AE /* MensaViewController.xib */; };
 		E12B400417968F7E000555AE /* MensaOverviewTableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E12B400317968F7E000555AE /* MensaOverviewTableCell.xib */; };
@@ -225,6 +212,58 @@
 		E1C23D6F17CE421C00C58E10 /* StationDto.m in Sources */ = {isa = PBXBuildFile; fileRef = E1C23D6E17CE421C00C58E10 /* StationDto.m */; };
 		E1C23D7217CE427500C58E10 /* CoordinateDto.m in Sources */ = {isa = PBXBuildFile; fileRef = E1C23D7117CE427500C58E10 /* CoordinateDto.m */; };
 		E1C9B22A1743894F00BD3DAE /* TwoSlotsFourRoomsTableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E1C9B2291743894F00BD3DAE /* TwoSlotsFourRoomsTableCell.xib */; };
+		E1CA079417E9CD4D00D38462 /* StationArrayDto.m in Sources */ = {isa = PBXBuildFile; fileRef = E1C23D6B17CE33BA00C58E10 /* StationArrayDto.m */; };
+		E1CA079617E9CD4D00D38462 /* StationDto.m in Sources */ = {isa = PBXBuildFile; fileRef = E1C23D6E17CE421C00C58E10 /* StationDto.m */; };
+		E1CA079817E9CD4D00D38462 /* CoordinateDto.m in Sources */ = {isa = PBXBuildFile; fileRef = E1C23D7117CE427500C58E10 /* CoordinateDto.m */; };
+		E1CA079A17E9CD4D00D38462 /* PrognosisDto.m in Sources */ = {isa = PBXBuildFile; fileRef = 27042E7717D24C8E008057B4 /* PrognosisDto.m */; };
+		E1CA079C17E9CD4D00D38462 /* FromOrToDto.m in Sources */ = {isa = PBXBuildFile; fileRef = 27042E7A17D25041008057B4 /* FromOrToDto.m */; };
+		E1CA079E17E9CD4D00D38462 /* ServiceDto.m in Sources */ = {isa = PBXBuildFile; fileRef = 27042E7D17D27836008057B4 /* ServiceDto.m */; };
+		E1CA07A017E9CD4D00D38462 /* JourneyDto.m in Sources */ = {isa = PBXBuildFile; fileRef = E1EC0FD217D4A8BC00AB4898 /* JourneyDto.m */; };
+		E1CA07A217E9CD4D00D38462 /* SectionDto.m in Sources */ = {isa = PBXBuildFile; fileRef = E1EC0FD517D4B98300AB4898 /* SectionDto.m */; };
+		E1CA07A417E9CD4D00D38462 /* ConnectionDto.m in Sources */ = {isa = PBXBuildFile; fileRef = E1EC0FD817D4C03C00AB4898 /* ConnectionDto.m */; };
+		E1CA07A617E9CD4D00D38462 /* ConnectionArrayDto.m in Sources */ = {isa = PBXBuildFile; fileRef = E1EC0FDE17D4C70500AB4898 /* ConnectionArrayDto.m */; };
+		E1CA07AC17E9CD4D00D38462 /* NewsChannelDto.m in Sources */ = {isa = PBXBuildFile; fileRef = E1F32A5017BCE4C4000D69F3 /* NewsChannelDto.m */; };
+		E1CA07AE17E9CD4D00D38462 /* NewsImageDto.m in Sources */ = {isa = PBXBuildFile; fileRef = E1F32A5317BCE4DB000D69F3 /* NewsImageDto.m */; };
+		E1CA07B017E9CD4D00D38462 /* NewsItemDto.m in Sources */ = {isa = PBXBuildFile; fileRef = E1F32A5617BCE4F9000D69F3 /* NewsItemDto.m */; };
+		E1CA07C017E9CD4D00D38462 /* StudentsDto.m in Sources */ = {isa = PBXBuildFile; fileRef = E13AA95017B2416B0061E0ED /* StudentsDto.m */; };
+		E1CA07C217E9CD4D00D38462 /* LecturersDto.m in Sources */ = {isa = PBXBuildFile; fileRef = E13AA95317B248620061E0ED /* LecturersDto.m */; };
+		E1CA07C417E9CD4D00D38462 /* CoursesDto.m in Sources */ = {isa = PBXBuildFile; fileRef = E13AA95617B269330061E0ED /* CoursesDto.m */; };
+		E1CA07C617E9CD4D00D38462 /* RoomsDto.m in Sources */ = {isa = PBXBuildFile; fileRef = E13AA95917B269480061E0ED /* RoomsDto.m */; };
+		E1CA07C817E9CD4D00D38462 /* ClassesDto.m in Sources */ = {isa = PBXBuildFile; fileRef = E13AA95C17B269580061E0ED /* ClassesDto.m */; };
+		E1CA07CA17E9CD4D00D38462 /* SideDishDto.m in Sources */ = {isa = PBXBuildFile; fileRef = E155A997179E777800726C39 /* SideDishDto.m */; };
+		E1CA07CC17E9CD4D00D38462 /* DishDto.m in Sources */ = {isa = PBXBuildFile; fileRef = E155A99A179E789400726C39 /* DishDto.m */; };
+		E1CA07CE17E9CD4D00D38462 /* MenuPlanDto.m in Sources */ = {isa = PBXBuildFile; fileRef = E155A99D179E82A700726C39 /* MenuPlanDto.m */; };
+		E1CA07D017E9CD4D00D38462 /* CalendarWeekDto.m in Sources */ = {isa = PBXBuildFile; fileRef = E155A9A0179E82C900726C39 /* CalendarWeekDto.m */; };
+		E1CA07D217E9CD4D00D38462 /* MenuDto.m in Sources */ = {isa = PBXBuildFile; fileRef = E155A9A3179E85FD00726C39 /* MenuDto.m */; };
+		E1CA07D417E9CD4D00D38462 /* MenuPlanArrayDto.m in Sources */ = {isa = PBXBuildFile; fileRef = E1D35BD617C3593300CCDB1D /* MenuPlanArrayDto.m */; };
+		E1CA07D617E9CD4D00D38462 /* WeekdayDto.m in Sources */ = {isa = PBXBuildFile; fileRef = E12B40071796B786000555AE /* WeekdayDto.m */; };
+		E1CA07D817E9CD4D00D38462 /* GastronomicFacilityDto.m in Sources */ = {isa = PBXBuildFile; fileRef = E12B400A1796D25C000555AE /* GastronomicFacilityDto.m */; };
+		E1CA07DA17E9CD4D00D38462 /* ServiceTimePeriodDto.m in Sources */ = {isa = PBXBuildFile; fileRef = E10B72F41797DB3E005D9D32 /* ServiceTimePeriodDto.m */; };
+		E1CA07DC17E9CD4D00D38462 /* LunchTimePlanDto.m in Sources */ = {isa = PBXBuildFile; fileRef = E10B72F71797DD5E005D9D32 /* LunchTimePlanDto.m */; };
+		E1CA07DE17E9CD4D00D38462 /* OpeningTimePlanDto.m in Sources */ = {isa = PBXBuildFile; fileRef = E10B72FA1797DE42005D9D32 /* OpeningTimePlanDto.m */; };
+		E1CA07E017E9CD4D00D38462 /* LocationDto.m in Sources */ = {isa = PBXBuildFile; fileRef = E10B72FD1797DE73005D9D32 /* LocationDto.m */; };
+		E1CA07E217E9CD4D00D38462 /* HolidayDto.m in Sources */ = {isa = PBXBuildFile; fileRef = E10B73001797DFAF005D9D32 /* HolidayDto.m */; };
+		E1CA07E417E9CD4D00D38462 /* GastronomicFacilityArrayDto.m in Sources */ = {isa = PBXBuildFile; fileRef = E1C23D6017CDDA1E00C58E10 /* GastronomicFacilityArrayDto.m */; };
+		E1CA07EC17E9CD4D00D38462 /* Autocomplete.m in Sources */ = {isa = PBXBuildFile; fileRef = E1BC14C1175F8D4900FE2854 /* Autocomplete.m */; };
+		E1CA07EE17E9CD7700D38462 /* DBCachingForAutocomplete.m in Sources */ = {isa = PBXBuildFile; fileRef = E17842D1178309160059EA3C /* DBCachingForAutocomplete.m */; };
+		E1CA07F417E9CD7700D38462 /* LanguageTranslation.m in Sources */ = {isa = PBXBuildFile; fileRef = E104C048178C397C0020EEB4 /* LanguageTranslation.m */; };
+		E1CA07F617E9CD7700D38462 /* DateFormation.m in Sources */ = {isa = PBXBuildFile; fileRef = E1D7EFF6178DA03D00100293 /* DateFormation.m */; };
+		E1CA07F817E9CD7700D38462 /* ColorSelection.m in Sources */ = {isa = PBXBuildFile; fileRef = E1252E5817CB4BB100E61732 /* ColorSelection.m */; };
+		E1CA07FA17E9CD7700D38462 /* UIConstantStrings.m in Sources */ = {isa = PBXBuildFile; fileRef = E1DC175217D09D5D00DB51F6 /* UIConstantStrings.m */; };
+		E1CA07FC17E9CD7700D38462 /* CharTranslation.m in Sources */ = {isa = PBXBuildFile; fileRef = E1CF302417E73D2900398830 /* CharTranslation.m */; };
+		E1CA07FE17E9CD9900D38462 /* URLConstantStrings.m in Sources */ = {isa = PBXBuildFile; fileRef = E1CF302717E75C5300398830 /* URLConstantStrings.m */; };
+		E1CA080217E9CD9900D38462 /* SchoolClassDto.m in Sources */ = {isa = PBXBuildFile; fileRef = A3A551391525DDB700BCAF3D /* SchoolClassDto.m */; };
+		E1CA080417E9CD9900D38462 /* RoomDto.m in Sources */ = {isa = PBXBuildFile; fileRef = A3A5513C1525E29F00BCAF3D /* RoomDto.m */; };
+		E1CA080617E9CD9900D38462 /* PersonDto.m in Sources */ = {isa = PBXBuildFile; fileRef = A3A5513F1525E33900BCAF3D /* PersonDto.m */; };
+		E1CA080817E9CD9900D38462 /* SlotDto.m in Sources */ = {isa = PBXBuildFile; fileRef = A3A551451525EB8B00BCAF3D /* SlotDto.m */; };
+		E1CA080A17E9CD9900D38462 /* DayDto.m in Sources */ = {isa = PBXBuildFile; fileRef = A3811C5015274C7A00A43735 /* DayDto.m */; };
+		E1CA080C17E9CD9900D38462 /* ScheduleDto.m in Sources */ = {isa = PBXBuildFile; fileRef = A3811C5415274F4400A43735 /* ScheduleDto.m */; };
+		E1CA080E17E9CD9900D38462 /* DepartmentDto.m in Sources */ = {isa = PBXBuildFile; fileRef = 2779DA5415544A6600923A54 /* DepartmentDto.m */; };
+		E1CA081017E9CD9900D38462 /* ScheduleEventDto.m in Sources */ = {isa = PBXBuildFile; fileRef = 27795DFF1558498300D0F350 /* ScheduleEventDto.m */; };
+		E1CA081217E9CD9900D38462 /* ScheduleEventRealizationDto.m in Sources */ = {isa = PBXBuildFile; fileRef = 27E8229D155D214A006EA12D /* ScheduleEventRealizationDto.m */; };
+		E1CA081417E9CD9900D38462 /* ScheduleCourseDto.m in Sources */ = {isa = PBXBuildFile; fileRef = 277EDF78155D60DC002BCE1F /* ScheduleCourseDto.m */; };
+		E1CA086717E9D53C00D38462 /* TimeTableAsyncRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 27B66926153AE0D8004D3ABC /* TimeTableAsyncRequest.m */; };
+		E1CA086817E9D5C200D38462 /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = E195FF35178188A30065DF05 /* libsqlite3.dylib */; };
 		E1CF302517E73D2900398830 /* CharTranslation.m in Sources */ = {isa = PBXBuildFile; fileRef = E1CF302417E73D2900398830 /* CharTranslation.m */; };
 		E1CF302817E75C5300398830 /* URLConstantStrings.m in Sources */ = {isa = PBXBuildFile; fileRef = E1CF302717E75C5300398830 /* URLConstantStrings.m */; };
 		E1D35BD717C3593300CCDB1D /* MenuPlanArrayDto.m in Sources */ = {isa = PBXBuildFile; fileRef = E1D35BD617C3593300CCDB1D /* MenuPlanArrayDto.m */; };
@@ -568,6 +607,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E1CA086817E9D5C200D38462 /* libsqlite3.dylib in Frameworks */,
 				E12AD04917B0E9E4009A9B1B /* SenTestingKit.framework in Frameworks */,
 				E12AD04A17B0E9E4009A9B1B /* UIKit.framework in Frameworks */,
 				E12AD04B17B0E9E4009A9B1B /* Foundation.framework in Frameworks */,
@@ -1499,20 +1539,58 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E12AD06A17B0FCFD009A9B1B /* TimeTableAsyncRequest.m in Sources */,
-				E12AD06017B0FCDD009A9B1B /* SchoolClassDto.m in Sources */,
-				E12AD06117B0FCDD009A9B1B /* RoomDto.m in Sources */,
-				E12AD06217B0FCDD009A9B1B /* PersonDto.m in Sources */,
-				E12AD06317B0FCDD009A9B1B /* SlotDto.m in Sources */,
-				E12AD06417B0FCDD009A9B1B /* DayDto.m in Sources */,
-				E12AD06517B0FCDD009A9B1B /* ScheduleDto.m in Sources */,
-				E12AD06617B0FCDD009A9B1B /* DepartmentDto.m in Sources */,
-				E12AD06717B0FCDD009A9B1B /* ScheduleEventDto.m in Sources */,
-				E12AD06817B0FCDD009A9B1B /* ScheduleEventRealizationDto.m in Sources */,
-				E12AD06917B0FCDD009A9B1B /* ScheduleCourseDto.m in Sources */,
-				E12AD05F17B0FCB3009A9B1B /* DateFormation.m in Sources */,
+				E1CA086717E9D53C00D38462 /* TimeTableAsyncRequest.m in Sources */,
+				E1CA07FE17E9CD9900D38462 /* URLConstantStrings.m in Sources */,
+				E1CA080217E9CD9900D38462 /* SchoolClassDto.m in Sources */,
+				E1CA080417E9CD9900D38462 /* RoomDto.m in Sources */,
+				E1CA080617E9CD9900D38462 /* PersonDto.m in Sources */,
+				E1CA080817E9CD9900D38462 /* SlotDto.m in Sources */,
+				E1CA080A17E9CD9900D38462 /* DayDto.m in Sources */,
+				E1CA080C17E9CD9900D38462 /* ScheduleDto.m in Sources */,
+				E1CA080E17E9CD9900D38462 /* DepartmentDto.m in Sources */,
+				E1CA081017E9CD9900D38462 /* ScheduleEventDto.m in Sources */,
+				E1CA081217E9CD9900D38462 /* ScheduleEventRealizationDto.m in Sources */,
+				E1CA081417E9CD9900D38462 /* ScheduleCourseDto.m in Sources */,
+				E1CA07EE17E9CD7700D38462 /* DBCachingForAutocomplete.m in Sources */,
+				E1CA07F417E9CD7700D38462 /* LanguageTranslation.m in Sources */,
+				E1CA07F617E9CD7700D38462 /* DateFormation.m in Sources */,
+				E1CA07F817E9CD7700D38462 /* ColorSelection.m in Sources */,
+				E1CA07FA17E9CD7700D38462 /* UIConstantStrings.m in Sources */,
+				E1CA07FC17E9CD7700D38462 /* CharTranslation.m in Sources */,
+				E1CA079417E9CD4D00D38462 /* StationArrayDto.m in Sources */,
+				E1CA079617E9CD4D00D38462 /* StationDto.m in Sources */,
+				E1CA079817E9CD4D00D38462 /* CoordinateDto.m in Sources */,
+				E1CA079A17E9CD4D00D38462 /* PrognosisDto.m in Sources */,
+				E1CA079C17E9CD4D00D38462 /* FromOrToDto.m in Sources */,
+				E1CA079E17E9CD4D00D38462 /* ServiceDto.m in Sources */,
+				E1CA07A017E9CD4D00D38462 /* JourneyDto.m in Sources */,
+				E1CA07A217E9CD4D00D38462 /* SectionDto.m in Sources */,
+				E1CA07A417E9CD4D00D38462 /* ConnectionDto.m in Sources */,
+				E1CA07A617E9CD4D00D38462 /* ConnectionArrayDto.m in Sources */,
+				E1CA07AC17E9CD4D00D38462 /* NewsChannelDto.m in Sources */,
+				E1CA07AE17E9CD4D00D38462 /* NewsImageDto.m in Sources */,
+				E1CA07B017E9CD4D00D38462 /* NewsItemDto.m in Sources */,
+				E1CA07C017E9CD4D00D38462 /* StudentsDto.m in Sources */,
+				E1CA07C217E9CD4D00D38462 /* LecturersDto.m in Sources */,
+				E1CA07C417E9CD4D00D38462 /* CoursesDto.m in Sources */,
+				E1CA07C617E9CD4D00D38462 /* RoomsDto.m in Sources */,
+				E1CA07C817E9CD4D00D38462 /* ClassesDto.m in Sources */,
+				E1CA07CA17E9CD4D00D38462 /* SideDishDto.m in Sources */,
+				E1CA07CC17E9CD4D00D38462 /* DishDto.m in Sources */,
+				E1CA07CE17E9CD4D00D38462 /* MenuPlanDto.m in Sources */,
+				E1CA07D017E9CD4D00D38462 /* CalendarWeekDto.m in Sources */,
+				E1CA07D217E9CD4D00D38462 /* MenuDto.m in Sources */,
+				E1CA07D417E9CD4D00D38462 /* MenuPlanArrayDto.m in Sources */,
+				E1CA07D617E9CD4D00D38462 /* WeekdayDto.m in Sources */,
+				E1CA07D817E9CD4D00D38462 /* GastronomicFacilityDto.m in Sources */,
+				E1CA07DA17E9CD4D00D38462 /* ServiceTimePeriodDto.m in Sources */,
+				E1CA07DC17E9CD4D00D38462 /* LunchTimePlanDto.m in Sources */,
+				E1CA07DE17E9CD4D00D38462 /* OpeningTimePlanDto.m in Sources */,
+				E1CA07E017E9CD4D00D38462 /* LocationDto.m in Sources */,
+				E1CA07E217E9CD4D00D38462 /* HolidayDto.m in Sources */,
+				E1CA07E417E9CD4D00D38462 /* GastronomicFacilityArrayDto.m in Sources */,
+				E1CA07EC17E9CD4D00D38462 /* Autocomplete.m in Sources */,
 				E12AD05417B0E9E4009A9B1B /* CampusInfoLogicTests.m in Sources */,
-				E12AD05B17B0EBEA009A9B1B /* ScheduleDtoTest.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

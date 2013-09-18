@@ -40,20 +40,20 @@
 
 - (MenuPlanDto *)getMenuPlan:(NSDictionary *)menuPlanDictionary
 {
-    MenuPlanDto *_localMenuPlan = [[MenuPlanDto alloc]init:nil withVersion:nil withCalendarWeek:nil withGastronomyFacilityIds:nil withMenus:nil];
+    MenuPlanDto *_localMenuPlan = [[MenuPlanDto alloc]init:0 withVersion:nil withCalendarWeek:nil withGastronomyFacilityIds:nil withMenus:nil];
     
     int             _localMenuPlanId;
     NSString        *_localMenuPlanVersion;
     NSMutableArray *_localGastronomyFacilities;
     //int _gastronomyFacilityIdI;
     
-    CalendarWeekDto *_localCalendarWeek = [[CalendarWeekDto alloc]init:nil withYear:nil];
+    CalendarWeekDto *_localCalendarWeek = [[CalendarWeekDto alloc]init:0 withYear:0];
     
     NSMutableArray *_localMenus = [[NSMutableArray alloc] init];
     NSMutableArray *_menuArray;
     int             _menuArrayI;
     
-    MenuDto *_localMenu = [[MenuDto alloc]init:nil withDishes:nil withOfferedOn:nil withVersion:nil];
+    MenuDto *_localMenu = [[MenuDto alloc]init:0 withDishes:0 withOfferedOn:nil withVersion:nil];
 
     for (id menuPlanKey in menuPlanDictionary)
     {

@@ -7,14 +7,14 @@
 //
 
 #import <UIKit/UIKit.h>
-#import <ContactsViewController.h>
-#import <SettingsViewController.h>
-#import <NewsViewController.h>
-#import <EventsViewController.h>
-#import <PublicTransportViewController.h>
-#import <MapsViewController.h>
-#import <SocialMediaViewController.h>
-#import <ColorSelection.h>
+#import "ContactsViewController.h"
+#import "SettingsViewController.h"
+#import "NewsViewController.h"
+#import "EventsViewController.h"
+#import "PublicTransportViewController.h"
+#import "MapsViewController.h"
+#import "SocialMediaViewController.h"
+#import "ColorSelection.h"
 
 @class ContactsViewController;
 @class SettingsViewController;

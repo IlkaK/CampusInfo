@@ -52,10 +52,10 @@
 
 - (FromOrToDto *)getFromOrTo:(NSDictionary *)fromOrToDictionary
 {
-    StationDto        *_localStation = [[StationDto alloc]init:nil withScore:nil withName:nil withDistance:nil withCoordinate:nil];
-    StationDto        *_localLocation = [[StationDto alloc]init:nil withScore:nil withName:nil withDistance:nil withCoordinate:nil];
+    StationDto        *_localStation = [[StationDto alloc]init:nil withScore:0 withName:nil withDistance:nil withCoordinate:nil];
+    StationDto        *_localLocation = [[StationDto alloc]init:nil withScore:0 withName:nil withDistance:nil withCoordinate:nil];
 
-    PrognosisDto      *_localPrognosis = [[PrognosisDto alloc]init:nil withArrival:nil withDeparture:nil withCapacity1st:nil withCapacity2nd:nil];
+    PrognosisDto      *_localPrognosis = [[PrognosisDto alloc]init:nil withArrival:nil withDeparture:nil withCapacity1st:0 withCapacity2nd:0];
     
     NSString          *_localDelay;
     NSDate            *_localArrivalDate;

@@ -53,7 +53,7 @@
     _titleNavigationLabel.text = ContactsOverVCTitle;
     _titleNavigationItem.title = @"";
     
-    [_titleNavigationLabel setTextAlignment:UITextAlignmentCenter];
+    [_titleNavigationLabel setTextAlignment:NSTextAlignmentCenter];
     [_titleNavigationBar setTintColor:_zhawColor._zhawDarkerBlue];
     
     

@@ -7,10 +7,10 @@
 //
 
 #import <Foundation/Foundation.h>
-#import <TimeTableAsyncRequest.h>
-#import <DateFormation.h>
-#import <NewsImageDto.h>
-#import <NewsItemDto.h>
+#import "TimeTableAsyncRequest.h"
+#import "DateFormation.h"
+#import "NewsImageDto.h"
+#import "NewsItemDto.h"
 
 @interface NewsChannelDto  : NSObject<TimeTableAsyncRequestDelegate, NSXMLParserDelegate>
 {

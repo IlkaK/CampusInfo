@@ -27,7 +27,7 @@
 
 - (CalendarWeekDto *)getCalendarWeek:(NSDictionary *)calendarWeekDictionary
 {
-    CalendarWeekDto *_localCalendarWeek = [[CalendarWeekDto alloc]init:nil withYear:nil];
+    CalendarWeekDto *_localCalendarWeek = [[CalendarWeekDto alloc]init:0 withYear:0];
     int _localCalendarWeekWeek;
     int _localCalendarWeekYear;
     

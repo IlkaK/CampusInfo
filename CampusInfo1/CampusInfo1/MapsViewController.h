@@ -7,8 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
-#import <TechnikumViewController.h>
-#import <ColorSelection.h>
+#import "TechnikumViewController.h"
+#import "ColorSelection.h"
 
 @class TechnikumViewController;
 

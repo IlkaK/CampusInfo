@@ -83,8 +83,8 @@
         NSArray *_gastronomicArray = [[NSArray alloc] init];
         int _gastronomicArrayI;
         
-        GastronomicFacilityDto *_localGastronomicFacilty = [[GastronomicFacilityDto alloc]init:nil withGastroId:nil withLocation:nil withName:nil withServiceTimePeriods:nil withType:nil withVersion:nil];
-        GastronomicFacilityDto *_localFormerGastronomy = [[GastronomicFacilityDto alloc]init:nil withGastroId:nil withLocation:nil withName:nil withServiceTimePeriods:nil withType:nil withVersion:nil];
+        GastronomicFacilityDto *_localGastronomicFacilty = [[GastronomicFacilityDto alloc]init:nil withGastroId:0 withLocation:nil withName:nil withServiceTimePeriods:nil withType:nil withVersion:nil];
+        GastronomicFacilityDto *_localFormerGastronomy = [[GastronomicFacilityDto alloc]init:nil withGastroId:0 withLocation:nil withName:nil withServiceTimePeriods:nil withType:nil withVersion:nil];
         
         for (id generalKey in _generalDictionary)
         {

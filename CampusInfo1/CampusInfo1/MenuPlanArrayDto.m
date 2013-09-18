@@ -65,7 +65,7 @@
         
         NSArray         *_menuPlanArray;
         int             _menuPlanArrayI;
-        MenuPlanDto     *_localMenuPlan = [[MenuPlanDto alloc]init:nil withVersion:nil withCalendarWeek:nil withGastronomyFacilityIds:nil withMenus:nil];
+        MenuPlanDto     *_localMenuPlan = [[MenuPlanDto alloc]init:0 withVersion:nil withCalendarWeek:nil withGastronomyFacilityIds:nil withMenus:nil];
         
         for (id generalKey in _generalDictionary)
         {
@@ -148,7 +148,7 @@
     _actualCalendarWeek = calendarWeek;
     _actualYear = year;
     
-    MenuDto *_thisMenu = [[MenuDto alloc]init:nil withDishes:nil withOfferedOn:nil withVersion:nil];
+    MenuDto *_thisMenu = [[MenuDto alloc]init:0 withDishes:nil withOfferedOn:nil withVersion:nil];
     
     if (_menuPlans != nil)
     {
@@ -171,8 +171,8 @@
 {
     int             _menuPlansI;
     MenuPlanDto     *_oneMenuPlan;
-    MenuDto         *_oneMenu    = [[MenuDto alloc]init:nil withDishes:nil withOfferedOn:nil withVersion:nil];
-    MenuDto         *_actualMenu = [[MenuDto alloc]init:nil withDishes:nil withOfferedOn:nil withVersion:nil];
+    MenuDto         *_oneMenu    = [[MenuDto alloc]init:0 withDishes:nil withOfferedOn:nil withVersion:nil];
+    MenuDto         *_actualMenu = [[MenuDto alloc]init:0 withDishes:nil withOfferedOn:nil withVersion:nil];
     int             _gastronomyFacilityIdsI;
     int             _localGastronomyFacilityId;
     int             _menuI;

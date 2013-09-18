@@ -53,13 +53,13 @@
 {
     JourneyDto *_localJourney = [[JourneyDto alloc]init:nil
                                            withCategory:nil
-                                       withCategoryCode:nil
+                                       withCategoryCode:0
                                       withJourneyNumber:nil
                                            withOperator:nil
                                                  withTo:nil
                                            withPassList:nil
-                                        withCapacity1st:nil
-                                        withCapacity2nd:nil];
+                                        withCapacity1st:0
+                                        withCapacity2nd:0];
     NSString        *_localName;
     NSString        *_localCategory;
     int             _localCategoryCode;

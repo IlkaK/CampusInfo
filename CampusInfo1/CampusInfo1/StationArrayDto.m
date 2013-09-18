@@ -7,7 +7,7 @@
 //
 
 #import "StationArrayDto.h"
-#import <StationDto.h>
+#import "StationDto.h"
 #import "CharTranslation.h"
 #import "URLConstantStrings.h"
 
@@ -99,7 +99,7 @@
                         
                         //NSLog(@"count of _stationArray: %i", [_stationArray count]);
                         
-                        StationDto *_localStation = [[StationDto alloc]init:nil withScore:nil withName:nil withDistance:nil withCoordinate:nil];
+                        StationDto *_localStation = [[StationDto alloc]init:nil withScore:0 withName:nil withDistance:0 withCoordinate:nil];
                         
                         for (_stationArrayI = 0; _stationArrayI < [_stationArray count]; _stationArrayI++)
                         {

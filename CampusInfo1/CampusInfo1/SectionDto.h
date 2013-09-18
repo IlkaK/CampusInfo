@@ -7,8 +7,8 @@
 //
 
 #import <Foundation/Foundation.h>
-#import <JourneyDto.h>
-#import <FromOrToDto.h>
+#import "JourneyDto.h"
+#import "FromOrToDto.h"
 
 @interface SectionDto : NSObject
 {

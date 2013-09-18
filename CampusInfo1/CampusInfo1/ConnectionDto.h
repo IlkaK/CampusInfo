@@ -7,8 +7,8 @@
 //
 
 #import <Foundation/Foundation.h>
-#import <FromOrToDto.h>
-#import <ServiceDto.h>
+#import "FromOrToDto.h"
+#import "ServiceDto.h"
 
 
 @interface ConnectionDto : NSObject

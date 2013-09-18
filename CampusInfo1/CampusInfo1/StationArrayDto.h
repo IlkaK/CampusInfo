@@ -7,7 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
-#import <TimeTableAsyncRequest.h>
+#import "TimeTableAsyncRequest.h"
 
 
 @interface StationArrayDto : NSObject<TimeTableAsyncRequestDelegate>

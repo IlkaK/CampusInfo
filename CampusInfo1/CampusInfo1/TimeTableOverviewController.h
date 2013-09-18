@@ -7,15 +7,15 @@
 //
 
 #import <UIKit/UIKit.h>
-#import <TimeTableAsyncRequest.h>
-#import <TimeTableDetailController.h>
-#import <ChooseDateViewController.h>
-#import <LanguageTranslation.h>
-#import <DateFormation.h>
-#import <SearchViewController.h>
-#import <SettingsViewController.h>
-#import <ColorSelection.h>
-#import <GradientButton.h>
+#import "TimeTableAsyncRequest.h"
+#import "TimeTableDetailController.h"
+#import "ChooseDateViewController.h"
+#import "LanguageTranslation.h"
+#import "DateFormation.h"
+#import "SearchViewController.h"
+#import "SettingsViewController.h"
+#import "ColorSelection.h"
+#import "GradientButton.h"
 
 @class ScheduleDto;
 @class DayDto;

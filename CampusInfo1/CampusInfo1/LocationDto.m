@@ -34,7 +34,7 @@
     NSString *_localVersion;
     NSString *_localName;
     
-    LocationDto *_localLocation = [[LocationDto alloc]init:nil withName:nil withVersion:nil];
+    LocationDto *_localLocation = [[LocationDto alloc]init:0 withName:nil withVersion:nil];
     
     for (id locationKey in locationDictionary)
     {

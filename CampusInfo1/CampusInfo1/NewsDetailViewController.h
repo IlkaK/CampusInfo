@@ -7,8 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
-#import <NewsItemDto.h>
-#import <DateFormation.h>
+#import "NewsItemDto.h"
+#import "DateFormation.h"
 
 @interface NewsDetailViewController : UIViewController
 {

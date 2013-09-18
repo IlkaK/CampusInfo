@@ -47,7 +47,7 @@
 
 - (DishDto *)getDish:(NSDictionary *)dishDictionary
 {
-    DishDto *_localDish = [[DishDto alloc]init:nil withExternalPrice:0 withInternalPrice:0 withPriceForPartners:0 withLabel:nil withName:nil withVersion:nil withSideDishes:nil];
+    DishDto *_localDish = [[DishDto alloc]init:0 withExternalPrice:0 withInternalPrice:0 withPriceForPartners:0 withLabel:nil withName:nil withVersion:nil withSideDishes:nil];
     
     int             _localDishId;
     double          _localExternalPrice;
@@ -60,7 +60,7 @@
     
     NSMutableArray  *_sideDishArray;
     int             _sideDishArrayI;
-    SideDishDto     *_localSideDish = [[SideDishDto alloc]init:nil withName:nil withVersion:nil];
+    SideDishDto     *_localSideDish = [[SideDishDto alloc]init:0 withName:nil withVersion:nil];
 
     for (id dishKey in dishDictionary)
     {

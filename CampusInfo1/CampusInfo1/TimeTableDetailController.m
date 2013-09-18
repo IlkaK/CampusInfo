@@ -80,11 +80,11 @@
     
     [_titleNavigationLabel setTextColor:_zhawColors._zhawWhite];
     _titleNavigationLabel.text = TimeTableOverVCTitle;
-    [_titleNavigationLabel setTextAlignment:UITextAlignmentCenter];
+    [_titleNavigationLabel setTextAlignment:NSTextAlignmentCenter];
     
     [_timeTableDescriptionLabel setTextColor:_zhawColors._zhawWhite];
     [_timeTableDescriptionLabel setText:_dayAndAcronymString];
-    [_timeTableDescriptionLabel setTextAlignment:UITextAlignmentCenter];
+    [_timeTableDescriptionLabel setTextAlignment:NSTextAlignmentCenter];
     
     
     [_timeNavigationItem setTitle:@""];
@@ -92,7 +92,7 @@
     
     [_timeLabel setTextColor:_zhawColors._zhawWhite];
     [_timeLabel setText:_timeString];
-    [_timeLabel setTextAlignment:UITextAlignmentCenter];
+    [_timeLabel setTextAlignment:NSTextAlignmentCenter];
     
 
     // set default values for spinner/activity indicator

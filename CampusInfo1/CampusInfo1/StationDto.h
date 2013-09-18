@@ -7,7 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
-#import <CoordinateDto.h>
+#import "CoordinateDto.h"
 
 @end
 

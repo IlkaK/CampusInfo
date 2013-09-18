@@ -41,7 +41,7 @@
 
 - (ServiceTimePeriodDto *)getServiceTimePeriod:(NSDictionary *)serviceTimePeriodDictionary
 {
-    ServiceTimePeriodDto *_localServiceTimePeriod = [[ServiceTimePeriodDto alloc] init:nil withEndsOn:nil withServiceTimePeriodId:nil withLunchTimePlan:nil withOpeningTimePlan:nil];
+    ServiceTimePeriodDto *_localServiceTimePeriod = [[ServiceTimePeriodDto alloc] init:nil withEndsOn:nil withServiceTimePeriodId:0 withLunchTimePlan:nil withOpeningTimePlan:nil];
     
     int _localServiceTimePeriodId;
     NSDate *_localStartsOn;

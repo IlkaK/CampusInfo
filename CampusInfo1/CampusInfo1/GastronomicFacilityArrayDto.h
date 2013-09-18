@@ -7,9 +7,9 @@
 //
 
 #import <Foundation/Foundation.h>
-#import <TimeTableAsyncRequest.h>
-#import <GastronomicFacilityDto.h>
-#import <DateFormation.h>
+#import "TimeTableAsyncRequest.h"
+#import "GastronomicFacilityDto.h"
+#import "DateFormation.h"
 
 @interface GastronomicFacilityArrayDto : NSObject<TimeTableAsyncRequestDelegate>
 {

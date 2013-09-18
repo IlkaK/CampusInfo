@@ -7,7 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
-#import <DateFormation.h>
+#import "DateFormation.h"
 
 @interface WeekdayDto : NSObject
 {    

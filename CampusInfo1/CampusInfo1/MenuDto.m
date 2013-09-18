@@ -36,12 +36,12 @@
 
 - (MenuDto *)getMenuWeek:(NSDictionary *)menuDictionary
 {
-    MenuDto         *_localMenu = [[MenuDto alloc]init:nil withDishes:nil withOfferedOn:nil withVersion:nil];
+    MenuDto         *_localMenu = [[MenuDto alloc]init:0 withDishes:nil withOfferedOn:nil withVersion:nil];
     int             _localMenuId;
     NSMutableArray  *_localDishes = [[NSMutableArray alloc] init];
     NSDate          *_localOfferedOn;
     NSString        *_localMenuVersion;
-    DishDto *_localDish = [[DishDto alloc]init:nil withExternalPrice:0 withInternalPrice:0 withPriceForPartners:0 withLabel:nil withName:nil withVersion:nil withSideDishes:nil];
+    DishDto *_localDish = [[DishDto alloc]init:0 withExternalPrice:0 withInternalPrice:0 withPriceForPartners:0 withLabel:nil withName:nil withVersion:nil withSideDishes:nil];
     NSMutableArray  *_dishesArray;
     int             _dishesArrayI;
     

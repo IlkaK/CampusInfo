@@ -57,11 +57,11 @@
     int _holidayArrayI;
     int _serviceTimePeriodArrayI;
     
-    LocationDto *_localLocation = [[LocationDto alloc] init:nil withName:nil withVersion:nil];
-    HolidayDto *_localHoliday = [[HolidayDto alloc] init:nil withName:nil withVersion:nil withStartsAt:nil withEndsAt:nil];
-    ServiceTimePeriodDto *_localServiceTimePeriod = [[ServiceTimePeriodDto alloc] init:nil withEndsOn:nil withServiceTimePeriodId:nil withLunchTimePlan:nil withOpeningTimePlan:nil];
+    LocationDto *_localLocation = [[LocationDto alloc] init:0 withName:nil withVersion:nil];
+    HolidayDto *_localHoliday = [[HolidayDto alloc] init:0 withName:nil withVersion:nil withStartsAt:nil withEndsAt:nil];
+    ServiceTimePeriodDto *_localServiceTimePeriod = [[ServiceTimePeriodDto alloc] init:nil withEndsOn:nil withServiceTimePeriodId:0 withLunchTimePlan:nil withOpeningTimePlan:nil];
     
-    GastronomicFacilityDto *_localGastronomicFacilty = [[GastronomicFacilityDto alloc]init:nil withGastroId:nil withLocation:nil withName:nil withServiceTimePeriods:nil withType:nil withVersion:nil];
+    GastronomicFacilityDto *_localGastronomicFacilty = [[GastronomicFacilityDto alloc]init:nil withGastroId:0 withLocation:nil withName:nil withServiceTimePeriods:nil withType:nil withVersion:nil];
     
     for (id gastronomicKey in gastronomicDictionary)
     {
