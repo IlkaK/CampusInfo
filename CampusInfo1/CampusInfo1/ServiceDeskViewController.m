@@ -25,6 +25,8 @@
 
 @synthesize _serviceDeskTableCell;
 
+@synthesize _zhawColors;
+
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -36,7 +38,7 @@
     [super viewDidLoad];
     
     // general initialization
-    ColorSelection *_zhawColors = [[ColorSelection alloc]init];
+    _zhawColors = [[ColorSelection alloc]init];
     
     // title
     UIBarButtonItem *backButtonItem = [[UIBarButtonItem alloc] initWithTitle:LeftArrowSymbol style:UIBarButtonItemStylePlain target:self action:@selector(moveBackToContactsOverview:)];
@@ -49,7 +51,6 @@
     _titleNavigationItem.title = @"";
     
     [_titleNavigationLabel setTextAlignment:UITextAlignmentCenter];
-    
     [_titleNavigationBar setTintColor:_zhawColors._zhawDarkerBlue];
 }
 
@@ -172,6 +173,8 @@
     UIButton        *_actionButton   = (UIButton *) [_cell viewWithTag:2];
     NSString        *_buttonNumberTitle;
     
+    [_labelTitle setTextColor:_zhawColors._zhawFontGrey];
+    
     if (_cellRow == 0)
     {
         _labelTitle.text    = ServiceDeskVCDescriptionEmail;
@@ -188,6 +191,8 @@
     _actionButton.enabled = true;
     NSMutableAttributedString *_titleString = [[NSMutableAttributedString alloc] initWithString:_buttonNumberTitle];
     [_titleString addAttribute:NSUnderlineStyleAttributeName value:[NSNumber numberWithInteger:NSUnderlineStyleSingle] range:NSMakeRange(0, [_titleString length])];
+    [_titleString addAttribute:NSForegroundColorAttributeName value:_zhawColors._zhawFontGrey range:NSMakeRange(0, [_titleString length])];
+    
     [_actionButton setAttributedTitle:_titleString forState:UIControlStateNormal];
     
     return _cell;

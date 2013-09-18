@@ -25,11 +25,34 @@
 @synthesize _titleNavigationItem;
 @synthesize _titleNavigationLabel;
 
+@synthesize _zhawColor;
+
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     return self;
+}
+
+
+- (void)viewDidLoad
+{
+    [super viewDidLoad];
+
+    _zhawColor = [[ColorSelection alloc]init];
+    _emergencyCallNumber = @"";
+    
+    UIBarButtonItem *backButtonItem = [[UIBarButtonItem alloc] initWithTitle:LeftArrowSymbol style:UIBarButtonItemStylePlain target:self action:@selector(moveBackToContactsOverview:)];
+    
+    [backButtonItem setTintColor:_zhawColor._zhawOriginalBlue];
+    [_titleNavigationItem setLeftBarButtonItem :backButtonItem animated :true];
+    
+    [_titleNavigationLabel setTextColor:_zhawColor._zhawWhite];
+    _titleNavigationLabel.text = EmergencyVCTitle;
+    _titleNavigationItem.title = @"";
+    
+    [_titleNavigationLabel setTextAlignment:UITextAlignmentCenter];
+    [_titleNavigationBar setTintColor:_zhawColor._zhawDarkerBlue];
 }
 
 
@@ -96,7 +119,7 @@
     }
     
     NSString *_messageForCalling = [NSString stringWithFormat:@"%@ %@ (%@)?"
-                                   , _callWhom, ContactsVCMessageCall, _callNumber];
+                                    , _callWhom, ContactsVCMessageCall, _callNumber];
     
     UIAlertView *_acronymAlertView = [[UIAlertView alloc]
                                       initWithTitle:ContactsVCTitle
@@ -106,30 +129,9 @@
                                       otherButtonTitles:AlertViewCancel, nil];
     _emergencyCallNumber = _callNumber;
     [_acronymAlertView show];
-// [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"tel://1456987452"]];
+    // [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"tel://1456987452"]];
 }
 
-
-- (void)viewDidLoad
-{
-    [super viewDidLoad];
-
-    ColorSelection *_zhawColor = [[ColorSelection alloc]init];
-    _emergencyCallNumber = @"";
-    
-    UIBarButtonItem *backButtonItem = [[UIBarButtonItem alloc] initWithTitle:LeftArrowSymbol style:UIBarButtonItemStylePlain target:self action:@selector(moveBackToContactsOverview:)];
-    
-    [backButtonItem setTintColor:_zhawColor._zhawOriginalBlue];
-    [_titleNavigationItem setLeftBarButtonItem :backButtonItem animated :true];
-    
-    [_titleNavigationLabel setTextColor:_zhawColor._zhawWhite];
-    _titleNavigationLabel.text = EmergencyVCTitle;
-    _titleNavigationItem.title = @"";
-    
-    [_titleNavigationLabel setTextAlignment:UITextAlignmentCenter];
-    
-    [_titleNavigationBar setTintColor:_zhawColor._zhawDarkerBlue];
-}
 
 - (void)didReceiveMemoryWarning
 {
@@ -225,9 +227,11 @@
             self._emergencyInformTableCell = nil;
         }
         UILabel         *_labelDescription      = (UILabel *) [_cell viewWithTag:1];
+        [_labelDescription setTextColor:_zhawColor._zhawFontGrey];        
         _labelDescription.text = EmergencyVCDisplayTitleZHAWEmergency;
 
         UILabel         *_labelAvailability     = (UILabel *) [_cell viewWithTag:2];
+        [_labelAvailability setTextColor:_zhawColor._zhawFontGrey];
         _labelAvailability.text = EmergencyVCDisplayZHAWEmergencyAvailability;
         
         _buttonNumber          = (UIButton *) [_cell viewWithTag:3];
@@ -245,6 +249,7 @@
         }
         
         UILabel         *_labelDescription      = (UILabel *) [_cell viewWithTag:1];
+        [_labelDescription setTextColor:_zhawColor._zhawFontGrey];        
         _buttonNumber          = (UIButton *) [_cell viewWithTag:2];
         
         if (_cellRow == 0)
@@ -280,7 +285,8 @@
     NSMutableAttributedString *_titleString = [[NSMutableAttributedString alloc] initWithString:_buttonNumberTitle];
         
     [_titleString addAttribute:NSUnderlineStyleAttributeName value:[NSNumber numberWithInteger:NSUnderlineStyleSingle] range:NSMakeRange(0, [_titleString length])];
-        
+    [_titleString addAttribute:NSForegroundColorAttributeName value:_zhawColor._zhawFontGrey range:NSMakeRange(0, [_titleString length])];
+    
     [_buttonNumber setAttributedTitle:_titleString forState:UIControlStateNormal];
     return _cell;
 }

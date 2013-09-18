@@ -34,6 +34,8 @@
 @synthesize _autocomplete;
 @synthesize _suggestions;
 
+@synthesize _zhawColors;
+
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -66,7 +68,7 @@
     [super viewDidLoad];
     
     // general initialization
-    ColorSelection *_zhawColors = [[ColorSelection alloc]init];
+    _zhawColors = [[ColorSelection alloc]init];
     
     // handling of autocompletion while using station db
     _dbCachingForAutocomplete = [[DBCachingForAutocomplete alloc]init];
@@ -96,7 +98,7 @@
     
     self._publicStopTextField.delegate = self;
  	_publicStopTextField.autocorrectionType = UITextAutocorrectionTypeNo;
-    
+    [_publicStopTextField setTextColor:_zhawColors._zhawFontGrey];
 }
 
 
@@ -161,6 +163,7 @@
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
     }
     cell.textLabel.text = [_suggestions objectAtIndex:indexPath.row];
+    [cell.textLabel setTextColor:_zhawColors._zhawFontGrey];
     return cell;
 }
 

@@ -7,7 +7,6 @@
 //
 
 #import "SettingsViewController.h"
-#import "ColorSelection.h"
 #import "UIConstantStrings.h"
 
 @interface SettingsViewController ()
@@ -19,6 +18,8 @@
 @synthesize _acronymTextField;
 
 @synthesize _timetableSettingsTitle;
+@synthesize _timetableSettingsDescriptionLabel;
+
 @synthesize _acronymAutocompleteTableView;
 @synthesize _autocomplete;
 @synthesize _suggestions;
@@ -29,6 +30,8 @@
 @synthesize _titleNavigationLabel;
 @synthesize _titleNavigationItem;
 @synthesize _titleNavigationBar;
+
+@synthesize _zhawColor;
 
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -42,16 +45,11 @@
     [super viewDidLoad];
     
     // general initializations
-    ColorSelection *_zhawColor = [[ColorSelection alloc]init];
+    _zhawColor = [[ColorSelection alloc]init];
 
     _students = [[StudentsDto alloc]init];
     _lecturers = [[LecturersDto alloc]init];
 
-    self._acronymTextField.delegate = self;    
-    _autocomplete = [[Autocomplete alloc] initWithArray:_students._studentArray];
-	_acronymTextField.autocorrectionType = UITextAutocorrectionTypeNo;
-
-    
     // title
     UIBarButtonItem *backButtonItem = [[UIBarButtonItem alloc] initWithTitle:LeftArrowSymbol style:UIBarButtonItemStylePlain target:self action:@selector(moveBackToMenuOverview:)];
     
@@ -65,11 +63,20 @@
     [_titleNavigationBar setTintColor:_zhawColor._zhawDarkerBlue];
     [_titleNavigationLabel setTextAlignment:UITextAlignmentCenter];
     
+    // set timetable title and description label
+    [_timetableSettingsTitle setTextColor:_zhawColor._zhawFontGrey];
+    [_timetableSettingsDescriptionLabel setTextColor:_zhawColor._zhawFontGrey];
+    
+    // set text field
+    self._acronymTextField.delegate = self;    
+    _autocomplete = [[Autocomplete alloc] initWithArray:_students._studentArray];
+	_acronymTextField.autocorrectionType = UITextAutocorrectionTypeNo;
+    [_acronymTextField setTextColor:_zhawColor._zhawFontGrey];
+    
     // user defaults and acronym text field
     NSUserDefaults *_acronymUserDefaults = [NSUserDefaults standardUserDefaults];
     _acronymTextField.text                = [_acronymUserDefaults stringForKey:TimeTableAcronym];
-    [self._acronymAutocompleteTableView setSeparatorStyle:UITableViewCellSeparatorStyleNone];        
-        
+    [self._acronymAutocompleteTableView setSeparatorStyle:UITableViewCellSeparatorStyleNone];
 }
 
 
@@ -135,6 +142,7 @@
     _titleNavigationBar = nil;
     _titleNavigationItem = nil;
     _titleNavigationLabel = nil;
+    _timetableSettingsDescriptionLabel = nil;
     [super viewDidUnload];
 }
 
@@ -241,8 +249,8 @@
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
     }
 	
-    UIFont *_cellFont = [ UIFont boldSystemFontOfSize: 18.0 ];
-    cell.textLabel.font  = _cellFont;
+    [cell.textLabel setFont:[ UIFont boldSystemFontOfSize: 18.0 ]];
+    [cell.textLabel setTextColor:_zhawColor._zhawFontGrey];
     
 	// Configure the cell.
 	cell.textLabel.text = [_suggestions objectAtIndex:indexPath.row];

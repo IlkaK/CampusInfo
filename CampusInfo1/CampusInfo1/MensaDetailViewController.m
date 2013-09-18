@@ -63,8 +63,8 @@
     [super viewDidLoad];
     
     // general initializer
-    _zhawColor = [[ColorSelection alloc]init];
-    _dateFormatter  = [[DateFormation alloc] init];
+    _zhawColor          = [[ColorSelection alloc]init];
+    _dateFormatter      = [[DateFormation alloc] init];
     self._menuPlans     = [[MenuPlanArrayDto alloc] init:nil];
     self._actualMenu    = [[MenuDto alloc] init:nil withDishes:nil withOfferedOn:nil withVersion:nil];
     self._actualCalendarWeek = 0;
@@ -350,15 +350,7 @@
 
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    //if ([_actualMenu._dishes  lastObject] == nil)
-    //{
-        // VERY IMPORTANT, OTHERWISE, NO NEW DATA
-       // [self viewWillAppear:YES];
-    //}
-    
-    
-    
+{    
     //NSLog(@"start cellForRowAtIndexPath");
     NSUInteger        _cellSelection = indexPath.section;
     static NSString *_cellIdentifier  = @"MensaDetailTableCell";
@@ -384,6 +376,17 @@
     UILabel         *_labelWriteInternalPrice   = (UILabel *) [_cell viewWithTag:7];
     UILabel         *_labelWritePartnerPrice    = (UILabel *) [_cell viewWithTag:8];
     UILabel         *_labelWriteExternalPrice   = (UILabel *) [_cell viewWithTag:9];
+    
+    [_labelTitle            setTextColor:_zhawColor._zhawFontGrey];
+    [_labelMaincourse       setTextColor:_zhawColor._zhawFontGrey];
+    [_labelSidedishes       setTextColor:_zhawColor._zhawFontGrey];
+    [_labelPriceInternal    setTextColor:_zhawColor._zhawFontGrey];
+    [_labelPricePartner     setTextColor:_zhawColor._zhawFontGrey];
+    [_labelPriceExternal    setTextColor:_zhawColor._zhawFontGrey];
+    
+    [_labelWriteInternalPrice   setTextColor:_zhawColor._zhawFontGrey];
+    [_labelWritePartnerPrice    setTextColor:_zhawColor._zhawFontGrey];
+    [_labelWriteExternalPrice   setTextColor:_zhawColor._zhawFontGrey];
     
     if ([_actualMenu._dishes  lastObject] == nil
     || [_actualMenu._dishes count] <= _cellSelection)

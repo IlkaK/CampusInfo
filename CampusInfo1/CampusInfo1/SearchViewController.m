@@ -37,23 +37,19 @@
 
 @synthesize _waitForChangeActivityIndicator;
 
+@synthesize _zhawColor;
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     
     // general initialization
-    ColorSelection *_zhawColor = [[ColorSelection alloc]init];
+    _zhawColor = [[ColorSelection alloc]init];
     
     self._searchTypeArray = [[NSArray alloc] initWithObjects:
                          TimeTableTypeKurs, TimeTableTypeDozent, TimeTableTypeStudent,
                          TimeTableTypeRaum, TimeTableTypeKlasse, nil];
     _searchType = TimeTableTypeDozent;
-    
-    // set picker view
-    //self._chooseSearchType.frame = CGRectMake(20.0, 134.0, 140.0, 162.0);
-    [_chooseSearchType selectRow:1 inComponent:0 animated:NO];
-    
-    self._searchTextField.delegate = self;
     
     _students   = [[StudentsDto alloc]init];
     _lecturers  = [[LecturersDto alloc]init];
@@ -61,8 +57,6 @@
     _classes    = [[ClassesDto alloc]init];
     _rooms      = [[RoomsDto alloc]init];
     
-    _autocomplete = [[Autocomplete alloc] initWithArray:_lecturers._lecturerArray];
-	_searchTextField.autocorrectionType = UITextAutocorrectionTypeNo;
     
     // set title
     UIBarButtonItem *backButtonItem = [[UIBarButtonItem alloc] initWithTitle:LeftArrowSymbol style:UIBarButtonItemStylePlain target:self action:@selector(moveBackToTimeTable:)];
@@ -76,14 +70,25 @@
     [_titleNavigationLabel setTextAlignment:UITextAlignmentCenter];
     
     [_titleNavigationBar setTintColor:_zhawColor._zhawDarkerBlue];
-
+    
     
     // set segmented control
     [_searchSegmentedControl setTintColor:_zhawColor._zhawOriginalBlue];
     [self.view bringSubviewToFront:_searchSegmentedControl];
-    
     [_segmentedControlNavigationBar setTintColor:_zhawColor._zhawDarkerBlue];
     
+    
+    // set picker view
+    [_chooseSearchType selectRow:1 inComponent:0 animated:NO];
+    
+    // set text field
+    self._searchTextField.delegate = self;
+    _searchTextField.autocorrectionType = UITextAutocorrectionTypeNo;
+    [_searchTextField setTextColor:_zhawColor._zhawFontGrey];
+    
+    _autocomplete = [[Autocomplete alloc] initWithArray:_lecturers._lecturerArray];
+	
+
     // set activity indicator
     _waitForChangeActivityIndicator.hidesWhenStopped = YES;
     _waitForChangeActivityIndicator.hidden = YES;
@@ -347,9 +352,9 @@
 	{
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
     }
-	
-    UIFont *_cellFont = [ UIFont boldSystemFontOfSize: 18.0 ];
-    cell.textLabel.font  = _cellFont;
+    
+    [cell.textLabel setTextColor:_zhawColor._zhawFontGrey];
+    [cell.textLabel setFont:[ UIFont boldSystemFontOfSize: 18.0 ]];
     
 	// Configure the cell.
 	cell.textLabel.text = [_suggestions objectAtIndex:indexPath.row];

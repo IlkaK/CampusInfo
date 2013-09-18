@@ -28,6 +28,7 @@
 
 @synthesize _connectionArray;
 @synthesize _dateFormatter;
+@synthesize _zhawColor;
 
 @synthesize _startStation;
 @synthesize _stopStation;
@@ -55,6 +56,15 @@
 
 @synthesize _waitForChangeActivityIndicator;
 
+@synthesize _dateTitleLabel;
+@synthesize _destinationTitleLabel;
+@synthesize _durationTitleLabel;
+@synthesize _fromLabel;
+@synthesize _timeTitleLabel;
+@synthesize _toLabel;
+@synthesize _transfersTitleLabel;
+@synthesize _transportationTitleLabel;
+
 
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -76,10 +86,10 @@
     [super viewDidLoad];
     
     // general initialization
-    ColorSelection *_zhawColor = [[ColorSelection alloc]init];
-    _connectionArray = [[ConnectionArrayDto alloc]init:nil];
-    _dateFormatter = [[DateFormation alloc] init];
-    _dbCachingForAutocomplete = [[DBCachingForAutocomplete alloc]init];
+    _zhawColor                  = [[ColorSelection alloc]init];
+    _connectionArray            = [[ConnectionArrayDto alloc]init:nil];
+    _dateFormatter              = [[DateFormation alloc] init];
+    _dbCachingForAutocomplete   = [[DBCachingForAutocomplete alloc]init];
     
     _changeStartButtonIsActivated = NO;
     _changeStopButtonIsActivated = NO;
@@ -117,27 +127,41 @@
     [self.view bringSubviewToFront:_lastStart1Button];
     [self.view bringSubviewToFront:_lastStart2Button];
     [self.view bringSubviewToFront:_chooseNewStartButton];
-
-    [self.view bringSubviewToFront:_lastStop1Button];
-    [self.view bringSubviewToFront:_lastStop2Button];
-    [self.view bringSubviewToFront:_chooseNewStopButton];
-    
+    [_lastStart1Button setTitleColor:_zhawColor._zhawFontGrey forState:UIControlStateNormal];
+    [_lastStart2Button setTitleColor:_zhawColor._zhawFontGrey forState:UIControlStateNormal];
+    [_chooseNewStartButton setTitleColor:_zhawColor._zhawFontGrey forState:UIControlStateNormal];
     _lastStart1Button.hidden        = YES;
     _lastStart2Button.hidden        = YES;
     _chooseNewStartButton.hidden    = YES;
-
+    
+    [self.view bringSubviewToFront:_lastStop1Button];
+    [self.view bringSubviewToFront:_lastStop2Button];
+    [self.view bringSubviewToFront:_chooseNewStopButton];
+    [_lastStop1Button setTitleColor:_zhawColor._zhawFontGrey forState:UIControlStateNormal];
+    [_lastStop2Button setTitleColor:_zhawColor._zhawFontGrey forState:UIControlStateNormal];
+    [_chooseNewStopButton setTitleColor:_zhawColor._zhawFontGrey forState:UIControlStateNormal];
     _lastStop1Button.hidden        = YES;
     _lastStop2Button.hidden        = YES;
     _chooseNewStopButton.hidden    = YES;
-    
+        
     _changeDirectionButton.hidden  = NO;
     
     NSMutableAttributedString *_titleString = [[NSMutableAttributedString alloc] initWithString:@"neu..."];
     [_titleString addAttribute:NSUnderlineStyleAttributeName value:[NSNumber numberWithInteger:NSUnderlineStyleSingle] range:NSMakeRange(0, [_titleString length])];
-    //[_titleString addAttribute:NSForegroundColorAttributeName value:_zhawColor._zhawDarkGrey range:NSMakeRange(0, [_titleString length])];
+    [_titleString addAttribute:NSForegroundColorAttributeName value:_zhawColor._zhawFontGrey range:NSMakeRange(0, [_titleString length])];
     
     [_chooseNewStartButton  setAttributedTitle:_titleString forState:UIControlStateNormal];
     [_chooseNewStopButton   setAttributedTitle:_titleString forState:UIControlStateNormal];
+    
+    // set font color for labels
+    [_dateTitleLabel setTextColor:_zhawColor._zhawFontGrey];
+    [_destinationTitleLabel setTextColor:_zhawColor._zhawFontGrey];
+    [_durationTitleLabel setTextColor:_zhawColor._zhawFontGrey];
+    [_fromLabel setTextColor:_zhawColor._zhawFontGrey];
+    [_timeTitleLabel setTextColor:_zhawColor._zhawFontGrey];
+    [_toLabel setTextColor:_zhawColor._zhawFontGrey];
+    [_transfersTitleLabel setTextColor:_zhawColor._zhawFontGrey];
+    [_transportationTitleLabel setTextColor:_zhawColor._zhawFontGrey];    
     
     // set activity indicator
     _waitForChangeActivityIndicator.hidesWhenStopped = YES;
@@ -419,6 +443,14 @@ withStringForButton2:(NSString *)stringForButton2
     _waitForChangeActivityIndicator = nil;
     _changeDirectionButton = nil;
     _changeDirectionButton = nil;
+    _fromLabel = nil;
+    _toLabel = nil;
+    _destinationTitleLabel = nil;
+    _dateTitleLabel = nil;
+    _timeTitleLabel = nil;
+    _durationTitleLabel = nil;
+    _transfersTitleLabel = nil;
+    _transportationTitleLabel = nil;
     [super viewDidUnload];
 }
 
@@ -785,11 +817,21 @@ withStringForButton2:(NSString *)stringForButton2
     UILabel          *_stopDateLabel        = (UILabel  *)[_cell viewWithTag:8];
     UILabel          *_stopTimeLabel        = (UILabel  *)[_cell viewWithTag:9];
 
+    [_startDestinationLabel     setTextColor:_zhawColor._zhawFontGrey];
+    [_startDateLabel            setTextColor:_zhawColor._zhawFontGrey];
+    [_startTimeLabel            setTextColor:_zhawColor._zhawFontGrey];
+    [_durationLabel             setTextColor:_zhawColor._zhawFontGrey];
+    [_transfersLabel            setTextColor:_zhawColor._zhawFontGrey];
+    [_transportationLabel       setTextColor:_zhawColor._zhawFontGrey];
+    [_stopDestinationLabel      setTextColor:_zhawColor._zhawFontGrey];
+    [_stopDateLabel             setTextColor:_zhawColor._zhawFontGrey];
+    [_stopTimeLabel             setTextColor:_zhawColor._zhawFontGrey];
+    
     //NSLog(@" cellForRowAtIndexPath - connection count: %i _cellRow: %i", [_connectionArray._connections count], _cellRow);
     
-        if (    [_connectionArray._connections lastObject] != nil
+    if (    [_connectionArray._connections lastObject] != nil
             &&  [_connectionArray._connections count] > _cellRow)
-        {
+    {
             ConnectionDto *_localConnection = [_connectionArray._connections objectAtIndex:_cellRow];
             
             _startDestinationLabel.text        = _localConnection._from._station._name;
@@ -819,7 +861,7 @@ withStringForButton2:(NSString *)stringForButton2
             _stopDestinationLabel.text       = _localConnection._to._station._name;
             _stopDateLabel.text   = [[_dateFormatter _dayFormatter] stringFromDate:_localConnection._to._arrivalDate];
             _stopTimeLabel.text   = [NSString stringWithFormat:@"an %@", [[_dateFormatter _timeFormatter] stringFromDate:_localConnection._to._arrivalTime]];
-        }
+    }
         
     return _cell;
 }

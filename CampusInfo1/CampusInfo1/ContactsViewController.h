@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <ColorSelection.h>
 
 @interface ContactsViewController : UIViewController<UITableViewDelegate>
 {
@@ -21,6 +22,8 @@
     IBOutlet UINavigationBar    *_titleNavigationBar;
     IBOutlet UINavigationItem   *_titleNavigationItem;
     IBOutlet UILabel            *_titleNavigationLabel;
+
+    ColorSelection              *_zhawColor;
 }
 
 @property (nonatomic, retain) IBOutlet UITableView          *_contactsTable;
@@ -33,5 +36,7 @@
 @property (nonatomic, retain) IBOutlet UINavigationBar      *_titleNavigationBar;
 @property (nonatomic, retain) IBOutlet UINavigationItem     *_titleNavigationItem;
 @property (nonatomic, retain) IBOutlet UILabel              *_titleNavigationLabel;
+
+@property (nonatomic, retain) ColorSelection                *_zhawColor;
 
 @end

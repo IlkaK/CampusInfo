@@ -10,6 +10,7 @@
 #import <ContactsViewController.h>
 #import <EmergencyViewController.h>
 #import <ServiceDeskViewController.h>
+#import <ColorSelection.h>
 
 @interface ContactsOverViewController : UIViewController<UITableViewDelegate>
 {
@@ -23,6 +24,8 @@
     IBOutlet UINavigationBar            *_titleNavigationBar;
     IBOutlet UINavigationItem           *_titleNavigationItem;
     IBOutlet UILabel                    *_titleNavigationLabel;
+
+    ColorSelection                      *_zhawColor;
 }
 
 @property (nonatomic, retain) IBOutlet UINavigationBar              *_titleNavigationBar;
@@ -35,5 +38,7 @@
 
 @property (nonatomic, retain) IBOutlet UITableView                  *_menuTableView;
 @property (nonatomic, retain) IBOutlet UITableViewCell              *_menuTableCell;
+
+@property (nonatomic, retain) ColorSelection                        *_zhawColor;
 
 @end

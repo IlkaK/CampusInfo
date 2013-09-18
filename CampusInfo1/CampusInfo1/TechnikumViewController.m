@@ -30,6 +30,8 @@
 @synthesize _fileFormat;
 @synthesize _fileName;
 
+@synthesize _zhawColor;
+
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -43,7 +45,7 @@
     [super viewDidLoad];
     
     // initialization
-    ColorSelection *_zhawColor = [[ColorSelection alloc]init];
+    _zhawColor = [[ColorSelection alloc]init];
     
     
     // title

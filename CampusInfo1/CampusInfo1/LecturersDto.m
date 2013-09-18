@@ -96,7 +96,7 @@
                         }
                     }
                 }
-                NSLog(@"dataDownloadDidFinish _lecturerArray count: %i", [_lecturerArray count]);
+                //NSLog(@"dataDownloadDidFinish _lecturerArray count: %i", [_lecturerArray count]);
                 
                 if([_lecturerArrayFromDB count] != [_lecturerArray count])
                 {
@@ -118,7 +118,7 @@
 {
     NSString *_urlString = URLLecturers;
                                                         
-    NSLog(@"urlString Lecturers: %@", _urlString);
+    //NSLog(@"urlString Lecturers: %@", _urlString);
     
     NSURL *_url = [NSURL URLWithString:_urlString];
     [_asyncTimeTableRequest downloadData:_url];

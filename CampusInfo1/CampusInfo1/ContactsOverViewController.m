@@ -27,6 +27,8 @@
 @synthesize _titleNavigationItem;
 @synthesize _titleNavigationLabel;
 
+@synthesize _zhawColor;
+
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -39,8 +41,7 @@
     [super viewDidLoad];
     
     // general initialization
-    ColorSelection *_zhawColor = [[ColorSelection alloc]init];
-    
+    _zhawColor = [[ColorSelection alloc]init];
     
     // title
     UIBarButtonItem *backButtonItem = [[UIBarButtonItem alloc] initWithTitle:LeftArrowSymbol style:UIBarButtonItemStylePlain target:self action:@selector(moveBackToMenuOverview:)];
@@ -53,7 +54,6 @@
     _titleNavigationItem.title = @"";
     
     [_titleNavigationLabel setTextAlignment:UITextAlignmentCenter];
-    
     [_titleNavigationBar setTintColor:_zhawColor._zhawDarkerBlue];
     
     
@@ -154,6 +154,8 @@
 	{
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
     }
+    
+    [cell.textLabel setTextColor:_zhawColor._zhawFontGrey];
     
     if (_cellSelection == 0)
     {

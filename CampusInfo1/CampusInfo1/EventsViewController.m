@@ -43,9 +43,9 @@
     [super viewDidLoad];
     
     // general initialization
-    _newsChannel = [[NewsChannelDto alloc]init];
-    _dateFormatter = [[DateFormation alloc] init];
-    _zhawColor = [[ColorSelection alloc]init];
+    _newsChannel    = [[NewsChannelDto alloc]init];
+    _dateFormatter  = [[DateFormation alloc] init];
+    _zhawColor      = [[ColorSelection alloc]init];
     self._actualTrials = 1;
     
 
@@ -158,18 +158,10 @@
 
 // Customize the appearance of table view cells.
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    //NSLog(@"events view controller: cellForRowAtIndexPath");
-    //if ([_newsChannel._newsItemArray count] == 0)
-	//{
-    // VERY IMPORTANT, OTHERWISE, NO NEW DATA
-    // [self viewWillAppear:YES];
-    //}
-    
+{    
     NSUInteger        _cellSelection = indexPath.section;
     NSString         *_cellIdentifier;
     UITableViewCell  *_cell = nil;
-    
     
     _cellIdentifier  = @"EventsTableCell";
     _cell            = [tableView dequeueReusableCellWithIdentifier:_cellIdentifier];
@@ -188,6 +180,7 @@
     _descriptionWebView.scrollView.scrollEnabled = NO;
     _descriptionWebView.scrollView.bounces = NO;
     _descriptionWebView.dataDetectorTypes = UIDataDetectorTypeNone;
+    [_dateLabel     setTextColor:_zhawColor._zhawLightGrey];
     
     if([_newsChannel._newsItemArray count] > 0)
     {
@@ -213,7 +206,6 @@
                     _dateLabel.text = [NSString stringWithFormat:@"%@",_newsItem._startdateString];
                 }
             }
-            [_dateLabel     setTextColor:_zhawColor._zhawLightGrey];
             
             NSString *_descr = [NSString stringWithFormat:@"<html> \n"
                                            "<head> \n"
@@ -224,12 +216,7 @@
                                            "<body>%@</body> \n"
                                            "</html>", @"helvetica", _newsItem._description];
             
-            [_descriptionWebView loadHTMLString:_descr baseURL:nil];
-            
-            //[myRichTextView loadHTMLString:myString baseURL:[NSURL URLWithString:myBaseURL]];
-            //[_descriptionWebView loadHTMLString:_newsItem._content baseURL:nil];
-            
-            
+            [_descriptionWebView loadHTMLString:_descr baseURL:nil];            
         }
     }
     return _cell;

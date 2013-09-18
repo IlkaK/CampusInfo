@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import <TechnikumViewController.h>
+#import <ColorSelection.h>
 
 @class TechnikumViewController;
 
@@ -20,6 +21,8 @@
     IBOutlet TechnikumViewController    *_technikumVC;
     
     IBOutlet UITableView                *_menuTableView;
+    
+    ColorSelection                      *_zhawColor;
 }
 
 
@@ -30,6 +33,8 @@
 @property (nonatomic, retain) IBOutlet UILabel                      *_titleNavigationLabel;
 
 @property (nonatomic, retain) IBOutlet TechnikumViewController      *_technikumVC;
+
+@property (nonatomic, retain) IBOutlet ColorSelection               *_zhawColor;
 
 
 @end

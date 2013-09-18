@@ -13,6 +13,7 @@
 #import <GastronomicFacilityDto.h>
 #import <GastronomicFacilityArrayDto.h>
 #import <GradientButton.h>
+#import <ColorSelection.h>
 
 @interface MensaViewController : UIViewController<UITableViewDelegate>
 {
@@ -25,6 +26,7 @@
     NSDate                              *_actualDate;
     DateFormation                       *_dateFormatter;
     LanguageTranslation                 *_translator;
+    ColorSelection                      *_zhawColor;
     
     IBOutlet MensaDetailViewController  *_mensaDetailVC;
 
@@ -58,6 +60,7 @@
 @property (nonatomic, retain) NSDate                                *_actualDate;
 @property (nonatomic, retain) DateFormation                         *_dateFormatter;
 @property (nonatomic, retain) LanguageTranslation                   *_translator;
+@property (nonatomic, retain) ColorSelection                        *_zhawColor;
 
 @property (nonatomic, retain) IBOutlet UILabel                      *_dateLabel;
 @property (nonatomic, retain) IBOutlet UINavigationBar              *_dateNavigationBar;

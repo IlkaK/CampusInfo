@@ -12,6 +12,7 @@
 #import <GradientButton.h>
 #import <DBCachingForAutocomplete.h>
 #import <Autocomplete.h>
+#import <ColorSelection.h>
 
 @interface PublicStopViewController : UIViewController<UITextFieldDelegate>
 {
@@ -31,6 +32,8 @@
     DBCachingForAutocomplete            *_dbCachingForAutocomplete;
     NSMutableArray                      *_suggestions;
     Autocomplete                        *_autocomplete;
+    
+    ColorSelection                      *_zhawColors;
 }
 
 @property (nonatomic, retain) StationArrayDto                       *_stationArray;
@@ -49,6 +52,8 @@
 @property (nonatomic, retain) DBCachingForAutocomplete              *_dbCachingForAutocomplete;
 @property (strong, nonatomic) NSMutableArray                        *_suggestions;
 @property (strong, nonatomic) Autocomplete                          *_autocomplete;
+
+@property (strong, nonatomic) ColorSelection                        *_zhawColors;
 
 - (IBAction)publicStopTextFieldChanged:(id)sender;
 

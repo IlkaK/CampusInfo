@@ -8,6 +8,7 @@
 
 #import "SocialMediaViewController.h"
 #import "UIConstantStrings.h"
+#import "URLConstantStrings.h"
 
 @interface SocialMediaViewController ()
 
@@ -19,6 +20,8 @@
 @synthesize _titleNavigationLabel;
 
 @synthesize _socialMediaTableCell;
+
+@synthesize _zhawColor;
 
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -32,9 +35,8 @@
     [super viewDidLoad];
    
     // general intialization
-    ColorSelection *_zhawColor = [[ColorSelection alloc]init];
+    _zhawColor = [[ColorSelection alloc]init];
 
-    
     // title
     UIBarButtonItem *backButtonItem = [[UIBarButtonItem alloc] initWithTitle:LeftArrowSymbol style:UIBarButtonItemStylePlain target:self action:@selector(moveBackToMenuOverview:)];
     
@@ -110,67 +112,77 @@
     // facebook
     if (_cellSelection == 0)
     {
-        _socialMediaButtonTitle   = @"   Facebook";
+        _socialMediaButtonTitle   = [NSString stringWithFormat:@"   %@",SocialMediaFacebook];
         [_socialMediaButton addTarget:self action:@selector(openURLFacebook  :event:) forControlEvents:UIControlEventTouchUpInside];
         
         NSMutableAttributedString *_titleString = [[NSMutableAttributedString alloc] initWithString:_socialMediaButtonTitle];
         [_titleString addAttribute:NSUnderlineStyleAttributeName value:[NSNumber numberWithInteger:NSUnderlineStyleSingle] range:NSMakeRange(0, [_titleString length])];
+        [_titleString addAttribute:NSForegroundColorAttributeName value:_zhawColor._zhawFontGrey range:NSMakeRange(0, [_titleString length])];
+        
         [_socialMediaButton setAttributedTitle:_titleString forState:UIControlStateNormal];
         
-        _socialMediaButtonImage = [UIImage imageNamed:@"facebook.png"];
+        _socialMediaButtonImage = [UIImage imageNamed:SocialMediaFacebookPNG];
         [_socialMediaButton setImage:_socialMediaButtonImage forState:UIControlStateNormal];
     }
     
     // youtube
     if (_cellSelection == 1)
     {
-        _socialMediaButtonTitle   = @"   Youtube";
+        _socialMediaButtonTitle   = [NSString stringWithFormat:@"   %@",SocialMediaYoutube];
         [_socialMediaButton addTarget:self action:@selector(openURLYoutube  :event:) forControlEvents:UIControlEventTouchUpInside];
         
         NSMutableAttributedString *_titleString = [[NSMutableAttributedString alloc] initWithString:_socialMediaButtonTitle];
         [_titleString addAttribute:NSUnderlineStyleAttributeName value:[NSNumber numberWithInteger:NSUnderlineStyleSingle] range:NSMakeRange(0, [_titleString length])];
+        [_titleString addAttribute:NSForegroundColorAttributeName value:_zhawColor._zhawFontGrey range:NSMakeRange(0, [_titleString length])];
+
         [_socialMediaButton setAttributedTitle:_titleString forState:UIControlStateNormal];
         
-        _socialMediaButtonImage = [UIImage imageNamed:@"youtube.png"];
+        _socialMediaButtonImage = [UIImage imageNamed:SocialMediaYoutubePNG];
         [_socialMediaButton setImage:_socialMediaButtonImage forState:UIControlStateNormal];
     }
 
     if (_cellSelection == 2)
     {
-        _socialMediaButtonTitle   = @"   Twitter";
+        _socialMediaButtonTitle   = [NSString stringWithFormat:@"   %@",SocialMediaTwitter];
         [_socialMediaButton addTarget:self action:@selector(openURLTwitter  :event:) forControlEvents:UIControlEventTouchUpInside];
         
         NSMutableAttributedString *_titleString = [[NSMutableAttributedString alloc] initWithString:_socialMediaButtonTitle];
         [_titleString addAttribute:NSUnderlineStyleAttributeName value:[NSNumber numberWithInteger:NSUnderlineStyleSingle] range:NSMakeRange(0, [_titleString length])];
+        [_titleString addAttribute:NSForegroundColorAttributeName value:_zhawColor._zhawFontGrey range:NSMakeRange(0, [_titleString length])];
+        
         [_socialMediaButton setAttributedTitle:_titleString forState:UIControlStateNormal];
         
-        _socialMediaButtonImage = [UIImage imageNamed:@"twitter.png"];
+        _socialMediaButtonImage = [UIImage imageNamed:SocialMediaTwitterPNG];
         [_socialMediaButton setImage:_socialMediaButtonImage forState:UIControlStateNormal];
     }
 
     if (_cellSelection == 3)
     {
-        _socialMediaButtonTitle   = @"   Issuu";
+        _socialMediaButtonTitle   = [NSString stringWithFormat:@"   %@",SocialMediaIssuu];
         [_socialMediaButton addTarget:self action:@selector(openURLIssuu  :event:) forControlEvents:UIControlEventTouchUpInside];
         
         NSMutableAttributedString *_titleString = [[NSMutableAttributedString alloc] initWithString:_socialMediaButtonTitle];
         [_titleString addAttribute:NSUnderlineStyleAttributeName value:[NSNumber numberWithInteger:NSUnderlineStyleSingle] range:NSMakeRange(0, [_titleString length])];
+        [_titleString addAttribute:NSForegroundColorAttributeName value:_zhawColor._zhawFontGrey range:NSMakeRange(0, [_titleString length])];
+        
         [_socialMediaButton setAttributedTitle:_titleString forState:UIControlStateNormal];
         
-        _socialMediaButtonImage = [UIImage imageNamed:@"issuu.png"];
+        _socialMediaButtonImage = [UIImage imageNamed:SocialMediaIssuuPNG];
         [_socialMediaButton setImage:_socialMediaButtonImage forState:UIControlStateNormal];
     }
 
     if (_cellSelection == 4)
     {
-        _socialMediaButtonTitle   = @"   Xing";
+        _socialMediaButtonTitle   = [NSString stringWithFormat:@"   %@",SocialMediaXing];
         [_socialMediaButton addTarget:self action:@selector(openURLXing  :event:) forControlEvents:UIControlEventTouchUpInside];
         
         NSMutableAttributedString *_titleString = [[NSMutableAttributedString alloc] initWithString:_socialMediaButtonTitle];
         [_titleString addAttribute:NSUnderlineStyleAttributeName value:[NSNumber numberWithInteger:NSUnderlineStyleSingle] range:NSMakeRange(0, [_titleString length])];
+        [_titleString addAttribute:NSForegroundColorAttributeName value:_zhawColor._zhawFontGrey range:NSMakeRange(0, [_titleString length])];
+        
         [_socialMediaButton setAttributedTitle:_titleString forState:UIControlStateNormal];
         
-        _socialMediaButtonImage = [UIImage imageNamed:@"xing.png"];
+        _socialMediaButtonImage = [UIImage imageNamed:SocialMediaXingPNG];
         [_socialMediaButton setImage:_socialMediaButtonImage forState:UIControlStateNormal];
     }
     
@@ -179,42 +191,42 @@
 
 -(void) openURLFacebook:(id)sender event:(id)event
 {
-    if ([[UIApplication sharedApplication] canOpenURL:[NSURL URLWithString:@"fb://profile/108051929285833"]])
+    if ([[UIApplication sharedApplication] canOpenURL:[NSURL URLWithString:URLFacebookApp]])
     {
-        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"fb://profile/108051929285833"]];
+        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:URLFacebookApp]];
     }
     else
     {
-        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"https://www.facebook.com/engineering.zhaw"]];
+        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:URLFacebookWeb]];
     }
 }
 
 -(void) openURLYoutube:(id)sender event:(id)event
 {
-    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"http://www.youtube.com/engineeringzhaw"]];
+    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:URLYoutubeWeb]];
 }
 
 -(void) openURLTwitter:(id)sender event:(id)event
 {
-    if ([[UIApplication sharedApplication] canOpenURL:[NSURL URLWithString:@"twitter://user?screen_name=engineeringzhaw"]])
+    if ([[UIApplication sharedApplication] canOpenURL:[NSURL URLWithString:URLTwitterApp]])
     {
-        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"twitter://user?screen_name=engineeringzhaw"]];
+        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:URLTwitterApp]];
     }
     else
     {
-        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"https://twitter.com/engineeringzhaw"]];
+        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:URLTwitterWeb]];
     }
     
 }
 
 -(void) openURLIssuu:(id)sender event:(id)event
 {
-    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"http://issuu.com/engineeringzhaw"]];
+    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:URLIssuuWeb]];
 }
 
 -(void) openURLXing:(id)sender event:(id)event
 {
-    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"https://www.xing.com/companies/zhawschoolofengineering"]];
+    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:URLXingWeb]];
 }
 
 

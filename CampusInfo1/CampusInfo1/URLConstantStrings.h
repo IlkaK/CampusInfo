@@ -27,4 +27,12 @@ extern NSString * const URLEventsFeed;
 extern NSString * const URLTransportConnections;
 extern NSString * const URLStations;
 
+extern NSString * const URLFacebookApp;
+extern NSString * const URLFacebookWeb;
+extern NSString * const URLYoutubeWeb;
+extern NSString * const URLTwitterApp;
+extern NSString * const URLTwitterWeb;
+extern NSString * const URLIssuuWeb;
+extern NSString * const URLXingWeb;
+
 @end

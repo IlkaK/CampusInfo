@@ -18,11 +18,14 @@
     
     IBOutlet UITableViewCell        *_socialMediaTableCell;
     
+    ColorSelection                  *_zhawColor;
 }
 
 @property (nonatomic, retain) IBOutlet UINavigationBar              *_titleNavigationBar;
 @property (nonatomic, retain) IBOutlet UINavigationItem             *_titleNavigationItem;
 @property (nonatomic, retain) IBOutlet UILabel                      *_titleNavigationLabel;
 @property (nonatomic, retain) IBOutlet UITableViewCell              *_socialMediaTableCell;
+
+@property (nonatomic, retain) ColorSelection                        *_zhawColor;
 
 @end

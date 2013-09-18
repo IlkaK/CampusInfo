@@ -58,4 +58,17 @@ NSString * const URLTransportConnections = @"https://api.apps.engineering.zhaw.c
 //NSString * const URLStations = @"https://srv-lab-t-874.zhaw.ch/transport/web/api.php/v1/locations?query=%@";
 NSString * const URLStations = @"https://api.apps.engineering.zhaw.ch/transport/web/api.php/v1/locations?query=%@";
 
+// used in socialMediaViewController
+NSString * const URLFacebookApp = @"fb://profile/108051929285833";
+NSString * const URLFacebookWeb = @"https://www.facebook.com/engineering.zhaw";
+
+NSString * const URLYoutubeWeb = @"http://www.youtube.com/engineeringzhaw";
+
+NSString * const URLTwitterApp = @"twitter://user?screen_name=engineeringzhaw";
+NSString * const URLTwitterWeb = @"https://twitter.com/engineeringzhaw";
+
+NSString * const URLIssuuWeb = @"http://issuu.com/engineeringzhaw";
+
+NSString * const URLXingWeb = @"https://www.xing.com/companies/zhawschoolofengineering";
+
 @end

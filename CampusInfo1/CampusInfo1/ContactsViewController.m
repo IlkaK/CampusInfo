@@ -28,6 +28,8 @@
 @synthesize _titleNavigationItem;
 @synthesize _titleNavigationBar;
 
+@synthesize _zhawColor;
+
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -46,9 +48,8 @@
     [super viewDidLoad];
     
     // general initialization
-    ColorSelection *_zhawColor = [[ColorSelection alloc]init];
+    _zhawColor = [[ColorSelection alloc]init];
 
-    
     // title
     UIBarButtonItem *backButtonItem = [[UIBarButtonItem alloc] initWithTitle:LeftArrowSymbol style:UIBarButtonItemStylePlain target:self action:@selector(moveBackToContactsOverview:)];
     
@@ -60,7 +61,6 @@
     _titleNavigationItem.title = @"";
     
     [_titleNavigationLabel setTextAlignment:UITextAlignmentCenter];
-    
     [_titleNavigationBar setTintColor:_zhawColor._zhawDarkerBlue];
 }
 
@@ -357,6 +357,9 @@
         UIButton        *_numberButton   = (UIButton *)[_cell viewWithTag:3];
         NSString        *_numberButtonTitle;
         
+        [_labelTitle setTextColor:_zhawColor._zhawFontGrey];
+        [_labelPerson setTextColor:_zhawColor._zhawFontGrey];
+
         if(_cellSelection == 0 && _cellRow == 0)
         {
             _labelTitle.text = ContactsVCTitleAviatik;
@@ -449,6 +452,7 @@
         NSMutableAttributedString *_titleString = [[NSMutableAttributedString alloc] initWithString:_numberButtonTitle];
         
         [_titleString addAttribute:NSUnderlineStyleAttributeName value:[NSNumber numberWithInteger:NSUnderlineStyleSingle] range:NSMakeRange(0, [_titleString length])];
+        [_titleString addAttribute:NSForegroundColorAttributeName value:_zhawColor._zhawFontGrey range:NSMakeRange(0, [_titleString length])];
         
         [_numberButton setAttributedTitle:_titleString forState:UIControlStateNormal];
     }
@@ -471,6 +475,8 @@
         UILabel         *_labelTitle     = (UILabel *) [_cell viewWithTag:1];
         UIButton        *_emailButton    = (UIButton *)[_cell viewWithTag:2];
         NSString        *_emailButtonTitle;
+        
+        [_labelTitle setTextColor:_zhawColor._zhawFontGrey];
 
         if(_cellSelection == 0 && _cellRow == 10)
         {
@@ -502,7 +508,8 @@
         NSMutableAttributedString *_titleString = [[NSMutableAttributedString alloc] initWithString:_emailButtonTitle];
             
         [_titleString addAttribute:NSUnderlineStyleAttributeName value:[NSNumber numberWithInteger:NSUnderlineStyleSingle] range:NSMakeRange(0, [_titleString length])];
-            
+        [_titleString addAttribute:NSForegroundColorAttributeName value:_zhawColor._zhawFontGrey range:NSMakeRange(0, [_titleString length])];
+        
         [_emailButton setAttributedTitle:_titleString forState:UIControlStateNormal];
     }
     

@@ -68,7 +68,7 @@
     _noConnectionButton.hidden = YES;
     _noConnectionLabel.hidden = YES;
     [_noConnectionButton useAlertStyle];
-    
+    [_noConnectionLabel setTextColor:_zhawColor._zhawFontGrey];
     
     // ----- DETAIL PAGE -----
     if (_newsDetailVC == nil)
@@ -224,13 +224,6 @@
 // Customize the appearance of table view cells.
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    //NSLog(@"news view controller: cellForRowAtIndexPath");
-    //if ([_newsChannel._newsItemArray count] == 0)
-	//{
-            // VERY IMPORTANT, OTHERWISE, NO NEW DATA
-           // [self viewWillAppear:YES];
-    //}
-    
     NSUInteger        _cellSelection = indexPath.section;
     NSString         *_cellIdentifier;
     UITableViewCell  *_cell = nil;
@@ -252,6 +245,9 @@
     UIButton *_detailButton     = (UIButton *)[_cell viewWithTag:4];
     _detailButton.hidden        = YES;
     
+    [_oneTitleLabel     setTextColor:_zhawColor._zhawOriginalBlue];
+    [_dateLabel         setTextColor:_zhawColor._zhawLightGrey];
+    [_descriptionLabel  setTextColor:_zhawColor._zhawFontGrey];
     
     if([_newsChannel._newsItemArray count] > 0)
     {
@@ -271,8 +267,7 @@
                                        ,[[_dateFormatter _dayFormatter] stringFromDate:_newsItem._pubDate]];
             _descriptionLabel.text  = _newsItem._description;
     
-            [_oneTitleLabel setTextColor:_zhawColor._zhawOriginalBlue];
-            [_dateLabel     setTextColor:_zhawColor._zhawLightGrey];
+
         
             [_detailButton addTarget:self action:@selector(showNewsDetails  :event:) forControlEvents:UIControlEventTouchUpInside];
             _detailButton.hidden    = NO;

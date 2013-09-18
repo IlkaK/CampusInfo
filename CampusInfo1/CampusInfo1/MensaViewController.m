@@ -42,6 +42,8 @@
 
 @synthesize _tableRows;
 
+@synthesize _zhawColor;
+
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -54,7 +56,7 @@
     [super viewDidLoad];
     _dateFormatter  = [[DateFormation alloc] init];
     _translator     = [[LanguageTranslation alloc] init];
-    ColorSelection *_zhawColor = [[ColorSelection alloc]init];
+    _zhawColor      = [[ColorSelection alloc]init];
     
     _tableRows = 0;
     
@@ -253,6 +255,10 @@
     UILabel          *_mensaLabel           = (UILabel  *)[_cell viewWithTag:1];
     UILabel          *_openingTimesLabel    = (UILabel  *)[_cell viewWithTag:2];
     UILabel          *_lunchTimesLabel      = (UILabel  *)[_cell viewWithTag:3];
+    
+    [_mensaLabel        setTextColor:_zhawColor._zhawFontGrey];
+    [_openingTimesLabel setTextColor:_zhawColor._zhawFontGrey];
+    [_lunchTimesLabel   setTextColor:_zhawColor._zhawFontGrey];
     
     _mensaLabel.text = [NSString stringWithFormat:@"%@ (%@)", gastronomyName
                         ,[_translator getGermanGastronomyTypeTranslation:gastronomyType]

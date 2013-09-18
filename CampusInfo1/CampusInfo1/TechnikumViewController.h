@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <ColorSelection.h>
 
 @interface TechnikumViewController : UIViewController
 {
@@ -24,6 +25,8 @@
     NSString                    *_description;
     NSString                    *_fileName;
     NSString                    *_fileFormat;
+    
+    ColorSelection              *_zhawColor;
 }
 
 
@@ -40,4 +43,7 @@
 @property (nonatomic, retain) NSString                                  *_description;
 @property (nonatomic, retain) NSString                                  *_fileName;
 @property (nonatomic, retain) NSString                                  *_fileFormat;
+
+@property (nonatomic, retain) ColorSelection                            *_zhawColor;
+
 @end

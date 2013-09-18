@@ -212,6 +212,16 @@ extern NSString * const AlertViewCancel ;
 
 // social media
 extern NSString * const SocialMediaVCTitle;
+extern NSString * const SocialMediaFacebook       ;
+extern NSString * const SocialMediaFacebookPNG    ;
+extern NSString * const SocialMediaYoutube        ;
+extern NSString * const SocialMediaYoutubePNG     ;
+extern NSString * const SocialMediaTwitter        ;
+extern NSString * const SocialMediaTwitterPNG     ;
+extern NSString * const SocialMediaIssuu          ;
+extern NSString * const SocialMediaIssuuPNG       ;
+extern NSString * const SocialMediaXing           ;
+extern NSString * const SocialMediaXingPNG        ;
 
 // news and events
 extern NSString * const NewsVCTitle;

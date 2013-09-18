@@ -213,7 +213,18 @@ NSString * const AlertViewOk         = @"OK";
 NSString * const AlertViewCancel     = @"Cancel";
 
 // social media
-NSString * const SocialMediaVCTitle = @"Social Media";
+NSString * const SocialMediaVCTitle         = @"Social Media";
+NSString * const SocialMediaFacebook        = @"Facebook";
+NSString * const SocialMediaFacebookPNG     = @"facebook.png";
+NSString * const SocialMediaYoutube         = @"Youtube";
+NSString * const SocialMediaYoutubePNG      = @"youtube.png";
+NSString * const SocialMediaTwitter         = @"Twitter";
+NSString * const SocialMediaTwitterPNG      = @"twitter.png";
+NSString * const SocialMediaIssuu           = @"Issuu";
+NSString * const SocialMediaIssuuPNG        = @"issuu.png";
+NSString * const SocialMediaXing            = @"Xing";
+NSString * const SocialMediaXingPNG         = @"xing.png";
+
 
 // news and events
 NSString * const NewsVCTitle        = @"News - School of Engineering";

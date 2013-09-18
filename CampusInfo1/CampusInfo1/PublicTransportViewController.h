@@ -12,6 +12,7 @@
 #import <ConnectionArrayDto.h>
 #import <DateFormation.h>
 #import <DBCachingForAutocomplete.h>
+#import <ColorSelection.h>
 
 
 @class PublicStopViewController;
@@ -28,8 +29,8 @@
     IBOutlet PublicStopViewController   *_publicStopVC;
     
     ConnectionArrayDto                  *_connectionArray;
-    
     DateFormation                       *_dateFormatter;
+    ColorSelection                      *_zhawColor;
     
     NSString                            *_startStation;
     NSString                            *_stopStation;
@@ -57,6 +58,15 @@
     IBOutlet GradientButton             *_changeDirectionButton;
     
     IBOutlet UIActivityIndicatorView    *_waitForChangeActivityIndicator;
+    
+    IBOutlet UILabel                    *_fromLabel;
+    IBOutlet UILabel                    *_toLabel;
+    IBOutlet UILabel                    *_destinationTitleLabel;
+    IBOutlet UILabel                    *_dateTitleLabel;
+    IBOutlet UILabel                    *_timeTitleLabel;
+    IBOutlet UILabel                    *_durationTitleLabel;
+    IBOutlet UILabel                    *_transfersTitleLabel;
+    IBOutlet UILabel                    *_transportationTitleLabel;
 }
 
 
@@ -71,8 +81,8 @@
 @property (nonatomic, retain) IBOutlet PublicStopViewController     *_publicStopVC;
 
 @property (nonatomic, retain) ConnectionArrayDto                    *_connectionArray;
-
 @property (nonatomic, retain) DateFormation                         *_dateFormatter;
+@property (nonatomic, retain) ColorSelection                        *_zhawColor;
 
 @property (nonatomic, retain) NSString                              *_startStation;
 @property (nonatomic, retain) NSString                              *_stopStation;
@@ -100,6 +110,14 @@
 
 @property (nonatomic, retain) IBOutlet UIActivityIndicatorView      *_waitForChangeActivityIndicator;
 
+@property (nonatomic, retain) IBOutlet IBOutlet UILabel             *_fromLabel;
+@property (nonatomic, retain) IBOutlet IBOutlet UILabel             *_toLabel;
+@property (nonatomic, retain) IBOutlet IBOutlet UILabel             *_destinationTitleLabel;
+@property (nonatomic, retain) IBOutlet IBOutlet UILabel             *_dateTitleLabel;
+@property (nonatomic, retain) IBOutlet IBOutlet UILabel             *_timeTitleLabel;
+@property (nonatomic, retain) IBOutlet IBOutlet UILabel             *_durationTitleLabel;
+@property (nonatomic, retain) IBOutlet IBOutlet UILabel             *_transfersTitleLabel;
+@property (nonatomic, retain) IBOutlet IBOutlet UILabel             *_transportationTitleLabel;
 
 - (IBAction)startConnectionSearch:(id)sender;
 

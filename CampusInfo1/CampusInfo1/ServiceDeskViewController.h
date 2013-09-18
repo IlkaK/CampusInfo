@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <ColorSelection.h>
 
 @interface ServiceDeskViewController : UIViewController<UITableViewDelegate>
 {
@@ -18,6 +19,8 @@
 
     NSString                        *_currentEmail;
     NSString                        *_currentPhoneNumber;
+    
+    ColorSelection                  *_zhawColors;
 }
 
 @property (nonatomic, retain) IBOutlet UINavigationBar              *_titleNavigationBar;
@@ -28,5 +31,7 @@
 
 @property (nonatomic, retain) NSString                              *_currentEmail;
 @property (nonatomic, retain) NSString                              *_currentPhoneNumber;
+
+@property (nonatomic, retain) ColorSelection                        *_zhawColors;
 
 @end

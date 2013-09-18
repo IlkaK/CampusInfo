@@ -17,6 +17,8 @@
 #import <RoomsDto.h>
 #import <ClassesDto.h>
 
+#import <ColorSelection.h>
+
 
 @interface SearchViewController : UIViewController<UIPickerViewDelegate,UIPickerViewDataSource,UITextFieldDelegate>
 {
@@ -46,6 +48,8 @@
     IBOutlet UILabel                *_titleNavigationLabel;
     
     IBOutlet UIActivityIndicatorView *_waitForChangeActivityIndicator;
+    
+    ColorSelection                   *_zhawColor;
 }
 
 @property (nonatomic, retain) IBOutlet UITextField                  *_searchTextField;
@@ -72,6 +76,8 @@
 @property (nonatomic, retain) IBOutlet UILabel                      *_titleNavigationLabel;
 
 @property (nonatomic, retain) IBOutlet UIActivityIndicatorView      *_waitForChangeActivityIndicator;
+
+@property (strong, nonatomic) ColorSelection                        *_zhawColor;
 
 - (IBAction)searchTextFieldChanged:(id)sender;
 
