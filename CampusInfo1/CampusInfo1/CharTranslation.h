@@ -11,6 +11,8 @@
 @interface CharTranslation : NSObject
 
 
--(NSString *)replaceSpecialChars:(NSString *)inputString;
+-(NSString *)replaceSpecialCharsHTML:(NSString *)inputString;
+-(NSString *)replaceSpecialCharsUTF8:(NSString *)inputString;
+
 
 @end

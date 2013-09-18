@@ -171,8 +171,10 @@
 -(void) downloadData
 {
     CharTranslation *_charTranslation = [CharTranslation alloc];
+    NSString *_newStopStation = [_charTranslation replaceSpecialCharsUTF8:_stopStation];
+    NSString *_newStartStation = [_charTranslation replaceSpecialCharsUTF8:_startStation];
 
-    NSString *_urlString = [NSString stringWithFormat:URLTransportConnections, [_charTranslation replaceSpecialChars:_startStation], [_charTranslation replaceSpecialChars:_stopStation]];
+    NSString *_urlString = [NSString stringWithFormat:URLTransportConnections, _newStartStation, _newStopStation];
 
     NSLog(@"url ConnectionArrayDto: %@", _urlString);
     

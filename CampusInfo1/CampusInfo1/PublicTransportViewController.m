@@ -186,6 +186,7 @@ withStringForButton2:(NSString *)stringForButton2
  withStringForButton1:(NSString *)stringForButton1
  withStringForButton2:(NSString *)stringForButton2
 {
+    //NSLog(@"setStopFields -> stringForLabel: %@", stringForLabel);
     _stopLabel.text = stringForLabel;
     [_lastStop1Button setTitle:stringForButton1 forState:UIControlStateNormal];
     [_lastStop2Button setTitle:stringForButton2 forState:UIControlStateNormal];
@@ -289,6 +290,7 @@ withStringForButton2:(NSString *)stringForButton2
 {
     [super viewWillAppear:animated];
     
+    
     if(
             ([_publicStopVC._actualStationName length] > 0)
          && (_changedStopStation || _changedStartStation )
@@ -375,25 +377,43 @@ withStringForButton2:(NSString *)stringForButton2
         && ![_stopLabel.text isEqualToString:@"Ziel"]
         )
     {
-        if
-             ([[_charTranslation replaceSpecialChars:_connectionArray._startStation] isEqualToString:[_charTranslation replaceSpecialChars:_startLabel.text]]
-            )
-        {
-            newStart = NO;
-        }
-        else
+        NSLog(@"getConnectionArray -> _startLabel.text: %@", _startLabel.text);
+        NSLog(@"getConnectionArray -> _startStation: %@", _connectionArray._startStation);
+        
+        if ([_connectionArray._startStation length] == 0)
         {
             newStart = YES;
         }
-        
-        if  (  [[_charTranslation replaceSpecialChars:_connectionArray._stopStation] isEqualToString:[_charTranslation replaceSpecialChars:_stopLabel.text]]
-            )
+        else
         {
-            newStop = NO;
+            if
+                ([[_charTranslation replaceSpecialCharsUTF8:_connectionArray._startStation] isEqualToString:[_charTranslation replaceSpecialCharsUTF8:_startLabel.text]]
+                 )
+            {
+                newStart = NO;
+            }
+            else
+            {
+                newStart = YES;
+            }
+        }
+        
+        if ([_connectionArray._stopStation length] == 0)
+        {
+            newStart = YES;
         }
         else
         {
-            newStop = YES;
+        
+            if  (  [[_charTranslation replaceSpecialCharsUTF8:_connectionArray._stopStation] isEqualToString:[_charTranslation replaceSpecialCharsUTF8:_stopLabel.text]]
+            )
+            {
+                newStop = NO;
+            }
+            else
+            {
+                newStop = YES;
+            }
         }
         
         if (newStart || newStop || noValues)
@@ -667,6 +687,7 @@ withStringForButton2:(NSString *)stringForButton2
     if (
            [_startLabel.text length] == 0
         || [_stopLabel.text length] == 0
+        
         || [_startLabel.text isEqualToString:@"Start"]
         || [_stopLabel.text isEqualToString:@"Ziel"]
         )
@@ -682,7 +703,7 @@ withStringForButton2:(NSString *)stringForButton2
     }
     else
     {
-        //NSLog(@"startConnectionSearch -> _startStation: %@ _stopStation: %@", _startStation, _stopStation);
+        NSLog(@"startConnectionSearch -> _startStation: %@ _stopStation: %@", _startStation, _stopStation);
         [self getConnectionArray];
     }
 }

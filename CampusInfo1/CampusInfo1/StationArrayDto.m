@@ -125,7 +125,7 @@
 -(void) downloadData
 {
     CharTranslation *_charTranslation = [CharTranslation alloc];
-    _actualStation = [_charTranslation replaceSpecialChars:_actualStation];
+    _actualStation = [_charTranslation replaceSpecialCharsUTF8:_actualStation];
     
     NSString *_urlString = [NSString stringWithFormat:URLStations, _actualStation];
     

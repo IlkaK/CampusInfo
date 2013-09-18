@@ -132,7 +132,7 @@
             //NSLog(@"_translatedAcronym: %@", _translatedAcronym);
         } 
         
-        _translatedAcronym = [_charTranslation replaceSpecialChars:_translatedAcronym];
+        _translatedAcronym = [_charTranslation replaceSpecialCharsUTF8:_translatedAcronym];
         
         NSString *_urlString = [NSString stringWithFormat:URLTimeTable
                                 , _type
