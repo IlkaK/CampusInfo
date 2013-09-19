@@ -19,7 +19,7 @@
     TimeTableAsyncRequest       *_asyncTimeTableRequest;
     NSData                      *_dataFromUrl;
     NSString                    *_errorMessage;
-    int                         _connectionTrials;
+    int                         _connectionTrials;  
     
     // actual data read from XML parser
     NSString                    *_actualValue;
@@ -82,6 +82,7 @@
 
 @property(nonatomic, assign) id<NSXMLParserDelegate> delegate;
 
+- (id)initWithDataType:(NSString *)newDataType;
 -(void) getNewsData;
 -(void) getEventData;
 

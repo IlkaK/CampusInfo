@@ -43,7 +43,7 @@
 
 @synthesize _dataType;
 
-- (id)init
+- (id)initWithDataType:(NSString *)newDataType
 {
     self._connectionTrials = 1;
     _generalDictionary = nil;
@@ -54,9 +54,22 @@
     _dateFormatter = [[DateFormation alloc] init]; 
     _newsItemArray = [[NSMutableArray alloc] init];
     
-    self._dataType = @"NEWS";
+    self._dataType = newDataType;
+    
+    if (self)
+    {
+        if ([_dataType isEqualToString:@"NEWS"])
+        {
+            [self getNewsData ];
+        }
+        else
+        {
+            [self getEventData ];
+        }
+    }
     return self;
 }
+
 
 
 // handling XML parser stuff
@@ -86,14 +99,14 @@
     if ([_actualStartElement isEqualToString:@"item"])
     {
         _startItem = YES;
-        //NSLog(@"-- start parsing item");
+        
         _newsItem = [[NewsItemDto alloc]init:[NSString stringWithFormat:@""]
-    withLink:[NSString stringWithFormat:@""]
-    withDescription:[NSString stringWithFormat:@""]
-    withContent:[NSString stringWithFormat:@""]
-    withCategory:[NSString stringWithFormat:@""]
-    withStartdateString:[NSString stringWithFormat:@""]
-    withStarttimeString:[NSString stringWithFormat:@""]
+                                    withLink:[NSString stringWithFormat:@""]
+                             withDescription:[NSString stringWithFormat:@""]
+                                 withContent:[NSString stringWithFormat:@""]
+                                withCategory:[NSString stringWithFormat:@""]
+                         withStartdateString:[NSString stringWithFormat:@""]
+                         withStarttimeString:[NSString stringWithFormat:@""]
                                  withPubDate:nil];
     }
 }
@@ -183,8 +196,8 @@
         {
             if ([_actualStartElement isEqualToString:@"title"])
             {
-                //NSLog(@"-- item title: %@", _actualValue);
                 _newsItem._title = [NSString stringWithFormat:@"%@%@",_newsItem._title, _actualValue];
+                //NSLog(@"_newsItem._title: %@", _newsItem._title);
             }
             if ([_actualStartElement isEqualToString:@"link"])
             {
@@ -337,7 +350,8 @@
 {
     _asyncTimeTableRequest = [[TimeTableAsyncRequest alloc] init];
     _asyncTimeTableRequest._timeTableAsynchRequestDelegate = self;
-    [self performSelectorInBackground:@selector(downloadData) withObject:nil];
+    [self performSelectorOnMainThread:@selector(downloadData) withObject:nil waitUntilDone:YES];
+    //[self performSelectorInBackground:@selector(downloadData) withObject:nil];
     
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(threadDone:)
@@ -369,24 +383,13 @@
 {
     self._generalDictionary = [self getDictionaryFromUrl];
     self._dataType = @"NEWS";
-    
-    if (self._generalDictionary == nil)
-    {
-        NSLog(@"NewsChannelDto: no connection");
-        
-    }
 }
 
 -(void) getEventData
 {
     self._generalDictionary = [self getDictionaryFromUrl];
     self._dataType = @"EVENTS";
-    
-    if (self._generalDictionary == nil)
-    {
-        NSLog(@"NewsChannelDto: no connection");
-        
-    }
+     
 }
 
 

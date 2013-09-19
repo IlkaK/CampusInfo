@@ -36,6 +36,8 @@
     IBOutlet UINavigationItem           *_titleNavigationItem;
     IBOutlet UILabel                    *_titleNavigationLabel;
     
+    IBOutlet UIActivityIndicatorView    *_waitForLoadingActivityIndicator;
+    
 }
 
 @property (strong, nonatomic) NewsChannelDto                        *_newsChannel;
@@ -55,6 +57,8 @@
 @property (nonatomic, assign) int                                   _actualTrials;
 @property (nonatomic, retain) IBOutlet GradientButton               *_noConnectionButton;
 @property (nonatomic, retain) IBOutlet UILabel                      *_noConnectionLabel;
+
+@property (nonatomic, retain) IBOutlet UIActivityIndicatorView      *_waitForLoadingActivityIndicator;
 
 - (IBAction)tryConnectionAgain:(id)sender;
 

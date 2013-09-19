@@ -20,14 +20,14 @@
     
     IBOutlet UINavigationBar    *_descriptionNavigationBar;
     IBOutlet UINavigationItem   *_descriptionNavigationItem;
-    IBOutlet UILabel            *_descriptionTitleLabel;    
+    IBOutlet UILabel            *_descriptionTitleLabel;
     
     IBOutlet UILabel            *_dateLabel;
     IBOutlet UIButton           *_linkButton;
     IBOutlet UIWebView          *_contentWebView;
     
     DateFormation               *_dateFormatter;
-    NewsItemDto                 *_newsItem;
+    NewsItemDto                 *_newsItem;    
 }
 
 @property (nonatomic, retain) UINavigationBar                       *_titleNavigationBar;

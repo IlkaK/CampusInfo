@@ -32,6 +32,7 @@
 @synthesize _titleNavigationLabel;
 @synthesize _titleNavigationItem;
 
+@synthesize _waitForLoadingActivityIndicator;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -70,16 +71,18 @@
     [_noConnectionButton useAlertStyle];
     [_noConnectionLabel setTextColor:_zhawColor._zhawFontGrey];
     
+    // set activity indicator
+    _waitForLoadingActivityIndicator.hidesWhenStopped = YES;
+    _waitForLoadingActivityIndicator.hidden = YES;
+    [_waitForLoadingActivityIndicator setColor:_zhawColor._zhawOriginalBlue];
+    [self.view bringSubviewToFront:_waitForLoadingActivityIndicator];
+    
     // ----- DETAIL PAGE -----
     if (_newsDetailVC == nil)
     {
 		_newsDetailVC = [[NewsDetailViewController alloc] init];
 	}
     _newsDetailVC.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
-
-    
-    // reload table
-    [_newsTable reloadData];
 }
 
 - (void)didReceiveMemoryWarning
@@ -131,8 +134,8 @@
 
 - (IBAction)tryConnectionAgain:(id)sender
 {
-    [_newsChannel getNewsData];
-    [_newsTable reloadData];
+    [self startLoading];
+    [self doneLoading];
 }
 
 - (void)moveBackToMenuOverview:(id)sender
@@ -150,7 +153,35 @@
     _titleNavigationBar = nil;
     _titleNavigationItem = nil;
     _titleNavigationLabel = nil;
+    _waitForLoadingActivityIndicator = nil;
     [super viewDidUnload];
+}
+
+- (void) threadWaitForLoadingActivityIndicator:(id)data
+{
+    _waitForLoadingActivityIndicator.hidden = NO;
+    [_waitForLoadingActivityIndicator startAnimating];
+}
+
+-(void)startLoading
+{
+    self._noConnectionButton.hidden = YES;
+    self._noConnectionLabel.hidden = YES;
+    [NSThread detachNewThreadSelector:@selector(threadWaitForLoadingActivityIndicator:) toTarget:self withObject:nil];
+}
+
+-(void)doneLoading
+{
+    self._newsChannel = [_newsChannel initWithDataType:@"NEWS"];
+    [_newsTable reloadData];
+    [_waitForLoadingActivityIndicator stopAnimating];
+    _waitForLoadingActivityIndicator.hidden = YES;
+    
+    if ( [_newsChannel._newsItemArray count] == 0 )
+    {
+        _noConnectionButton.hidden = NO;
+        _noConnectionLabel.hidden = NO;
+    }
 }
 
 
@@ -158,22 +189,14 @@
 {
 
     [super viewWillAppear:animated];
-    
-    //NSLog(@"news view controller: viewWillAppear: %i", [_newsChannel._newsItemArray count]);
-    
-
-        if (_actualTrials < 20)
-        {
-            _actualTrials++;
-            [_newsChannel getNewsData];
-            [_newsTable reloadData];
-            if ( [_newsChannel._newsItemArray count] == 0)
-            {
-                self._noConnectionButton.hidden = NO;
-                self._noConnectionLabel.hidden = NO;
-            }
-        }
+    [self startLoading];
 }
+
+-(void)viewDidAppear:(BOOL)animated
+{
+    [self doneLoading];
+}
+
 
 -(void) showNewsDetails:(id)sender event:(id)event
 {
@@ -194,21 +217,10 @@
 }
 
 
-//---------- Handling of table for suggestions -----
+//---------- Handling of table  -----
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    if ([_newsChannel._newsItemArray count] > 0)
-	{
-        self._noConnectionButton.hidden = YES;
-        self._noConnectionLabel.hidden = YES;
-        //NSLog(@"news item array count: %i", [_newsChannel._newsItemArray count]);
-        
-
-        
-        
-		return [_newsChannel._newsItemArray count];
-	}
-	return 1;
+    return [_newsChannel._newsItemArray count];
 }
 
 

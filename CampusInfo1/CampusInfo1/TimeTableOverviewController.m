@@ -511,7 +511,6 @@
     _waitForLoadingActivityIndicator.hidesWhenStopped = YES;
     _waitForLoadingActivityIndicator.hidden = YES;
     [_waitForLoadingActivityIndicator setColor:_zhawColor._zhawOriginalBlue];
-    //[_waitForLoadingActivityIndicator setBackgroundColor:_zhawColor._zhawOriginalBlue];
     [self.view bringSubviewToFront:_waitForLoadingActivityIndicator];
     
     

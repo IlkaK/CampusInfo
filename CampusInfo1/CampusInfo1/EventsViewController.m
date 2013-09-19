@@ -31,6 +31,8 @@
 @synthesize _titleNavigationItem;
 @synthesize _titleNavigationLabel;
 
+@synthesize _waitForLoadingActivityIndicator;
+
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -46,9 +48,10 @@
     _newsChannel    = [[NewsChannelDto alloc]init];
     _dateFormatter  = [[DateFormation alloc] init];
     _zhawColor      = [[ColorSelection alloc]init];
+    self._newsChannel = [NewsChannelDto alloc];
     self._actualTrials = 1;
     
-
+    
     // title
     UIBarButtonItem *backButtonItem = [[UIBarButtonItem alloc] initWithTitle:LeftArrowSymbol style:UIBarButtonItemStylePlain target:self action:@selector(moveBackToMenuOverview:)];
     
@@ -67,12 +70,15 @@
     _noConnectionButton.hidden = YES;
     _noConnectionLabel.hidden = YES;
     [_noConnectionButton useAlertStyle];
+    [_noConnectionLabel setTextColor:_zhawColor._zhawFontGrey];
     
-    
-    // event table reload
-    [_eventsTable reloadData];
-    
+    // set activity indicator
+    _waitForLoadingActivityIndicator.hidesWhenStopped = YES;
+    _waitForLoadingActivityIndicator.hidden = YES;
+    [_waitForLoadingActivityIndicator setColor:_zhawColor._zhawOriginalBlue];
+    [self.view bringSubviewToFront:_waitForLoadingActivityIndicator];
 }
+
 
 
 - (void)didReceiveMemoryWarning
@@ -88,9 +94,8 @@
 
 - (IBAction)tryConnectionAgain:(id)sender
 {
-    //_newsChannel = [[NewsChannelDto alloc]init];
-    [_newsChannel getEventData];
-    [_eventsTable reloadData];
+    [self startLoading];
+    [self doneLoading];
 }
 
 - (void)viewDidUnload {
@@ -102,48 +107,55 @@
     _titleNavigationBar = nil;
     _titleNavigationItem = nil;
     _titleNavigationLabel = nil;
+    _waitForLoadingActivityIndicator = nil;
     [super viewDidUnload];
 }
 
-- (void)viewWillAppear:(BOOL)animated
+- (void) threadWaitForLoadingActivityIndicator:(id)data
 {
-    
-    [super viewWillAppear:animated];
-    
-    //NSLog(@"events view controller: viewWillAppear: %i", [_newsChannel._newsItemArray count]);
-    
-    
-    //if (_actualTrials < 20)
-    //{
-        //_actualTrials++;
+    _waitForLoadingActivityIndicator.hidden = NO;
+    [_waitForLoadingActivityIndicator startAnimating];
+}
 
-        //if ( [_newsChannel._newsItemArray count] == 0)
-        //{
-            [_newsChannel getEventData];
-            [_eventsTable reloadData];
-            
-            if ( [_newsChannel._newsItemArray count] == 0)
-            {
-                self._noConnectionButton.hidden = NO;
-                self._noConnectionLabel.hidden = NO;
-            }
-        //}
-    //}
+-(void)startLoading
+{
+    self._noConnectionButton.hidden = YES;
+    self._noConnectionLabel.hidden = YES;
+    [NSThread detachNewThreadSelector:@selector(threadWaitForLoadingActivityIndicator:) toTarget:self withObject:nil];
+}
+
+-(void)doneLoading
+{
+    self._newsChannel = [_newsChannel initWithDataType:@"EVENTS"];
+    [_eventsTable reloadData];
+    [_waitForLoadingActivityIndicator stopAnimating];
+    _waitForLoadingActivityIndicator.hidden = YES;
+    
+    if ( [_newsChannel._newsItemArray count] == 0 )
+    {
+        _noConnectionButton.hidden = NO;
+        _noConnectionLabel.hidden = NO;
+    }
 }
 
 
-//---------- Handling of table for suggestions -----
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    [self startLoading];
+}
+
+
+-(void)viewDidAppear:(BOOL)animated
+{
+    [self doneLoading];
+}
+
+
+//---------- Handling of table  -----
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    if ([_newsChannel._newsItemArray count] > 0)
-	{
-        self._noConnectionButton.hidden = YES;
-        self._noConnectionLabel.hidden = YES;
-        //NSLog(@"events item array count: %i", [_newsChannel._newsItemArray count]);
-        
-		return [_newsChannel._newsItemArray count];
-	}
-	return 1;
+    return [_newsChannel._newsItemArray count];
 }
 
 
@@ -152,13 +164,13 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     return 1;
-    
 }
 
 
 // Customize the appearance of table view cells.
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
-{    
+{
+    
     NSUInteger        _cellSelection = indexPath.section;
     NSString         *_cellIdentifier;
     UITableViewCell  *_cell = nil;
@@ -172,7 +184,7 @@
         _cell = _eventsTableCell;
         self._eventsTableCell = nil;
     }
-    
+     
     UILabel     *_oneTitleLabel         = (UILabel *) [_cell viewWithTag:1];
     UIWebView   *_descriptionWebView    = (UIWebView *) [_cell viewWithTag:2];
     UILabel     *_dateLabel             = (UILabel *) [_cell viewWithTag:3];
@@ -219,6 +231,7 @@
             [_descriptionWebView loadHTMLString:_descr baseURL:nil];            
         }
     }
+    //}
     return _cell;
 }
 
