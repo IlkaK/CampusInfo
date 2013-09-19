@@ -138,6 +138,7 @@
                                 , _type
                                 , _translatedAcronym
                                 , _scheduleDateString];
+        //NSLog(@"call stack zum url string %@",[NSThread callStackSymbols]);
         
         NSLog(@"_urlString %@",_urlString ); 
         
@@ -180,13 +181,16 @@
     NSError      *_error = nil;
     NSDictionary *_scheduleDictionary;
     
-    //NSLog(@"getDictionaryFromUrl %@",[NSThread callStackSymbols]);
     
     //NSString *someString = [NSString stringWithFormat:@"%@", _dataFromUrl];
-    //NSLog(@"getDictionaryFromUrl data from url %@", someString);
+    //NSLog(@"%@", someString);
     
     //NSString *someString = [[NSString alloc] initWithData:_dataFromUrl encoding:NSUTF8StringEncoding];
-    //NSLog(@"getDictionaryFromUrl %@", someString);
+    //if ([someString length] > 100)
+    //{
+    //    someString = [someString substringToIndex:100];
+    //}
+    //NSLog(@"%@", someString);
     
     if (_dataFromUrl == nil) 
     {

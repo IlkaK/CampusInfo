@@ -209,7 +209,7 @@
         {
             //NSLog(@"load schedule for %@ -7",_newDateString);
             NSDateComponents *_components         = [[NSDateComponents alloc] init];
-            [_components setDay:-7];
+            [_components setDay:-6];
             NSCalendar       *_gregorian          = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
             NSDate           *_newDateForSchedule = [_gregorian dateByAddingComponents:_components toDate:newDate options:0];
             self._schedule = [[ScheduleDto alloc] initWithAcronym:_actualShownAcronymString:_actualShownAcronymType:_newDateForSchedule];
