@@ -167,7 +167,6 @@
     _waitForChangeActivityIndicator.hidesWhenStopped = YES;
     _waitForChangeActivityIndicator.hidden = YES;
     [_waitForChangeActivityIndicator setColor:_zhawColor._zhawOriginalBlue];
-    //[_waitForChangeActivityIndicator setBackgroundColor:_zhawColor._zhawOriginalBlue];
     [self.view bringSubviewToFront:_waitForChangeActivityIndicator];
     
 }
@@ -377,8 +376,8 @@ withStringForButton2:(NSString *)stringForButton2
         && ![_stopLabel.text isEqualToString:@"Ziel"]
         )
     {
-        NSLog(@"getConnectionArray -> _startLabel.text: %@", _startLabel.text);
-        NSLog(@"getConnectionArray -> _startStation: %@", _connectionArray._startStation);
+        //NSLog(@"getConnectionArray -> _startLabel.text: %@", _startLabel.text);
+        //NSLog(@"getConnectionArray -> _startStation: %@", _connectionArray._startStation);
         
         if ([_connectionArray._startStation length] == 0)
         {

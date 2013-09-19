@@ -119,7 +119,8 @@
 {
     _asyncTimeTableRequest = [[TimeTableAsyncRequest alloc] init];
     _asyncTimeTableRequest._timeTableAsynchRequestDelegate = self;
-    [self performSelectorInBackground:@selector(downloadData) withObject:nil];
+    //[self performSelectorInBackground:@selector(downloadData) withObject:nil];
+    [self performSelectorOnMainThread:@selector(downloadData) withObject:nil waitUntilDone:YES];
     
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(threadDone:)

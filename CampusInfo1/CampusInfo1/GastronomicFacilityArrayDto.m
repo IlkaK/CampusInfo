@@ -159,7 +159,8 @@
 
 - (NSDictionary *) getDictionaryFromUrl
 {
-    [self performSelectorInBackground:@selector(downloadData) withObject:nil];
+    //[self performSelectorInBackground:@selector(downloadData) withObject:nil];
+    [self performSelectorOnMainThread:@selector(downloadData) withObject:nil waitUntilDone:YES];
     
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(threadDone:)

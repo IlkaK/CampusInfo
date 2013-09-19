@@ -138,7 +138,6 @@
     _waitForChangeActivityIndicator.hidesWhenStopped = YES;
     _waitForChangeActivityIndicator.hidden = YES;
     [_waitForChangeActivityIndicator setColor:_zhawColor._zhawOriginalBlue];
-    //[_waitForChangeActivityIndicator setBackgroundColor:_zhawColor._zhawOriginalBlue];
     [self.view bringSubviewToFront:_waitForChangeActivityIndicator];
     
     
@@ -149,6 +148,7 @@
     _noConnectionButton.hidden = YES;
     _noConnectionLabel.hidden = YES;
     [_noConnectionButton useAlertStyle];
+    [_noConnectionLabel setTextColor:_zhawColor._zhawFontGrey];
 }
 
 - (void) threadWaitForChangeActivityIndicator:(id)data
@@ -157,6 +157,14 @@
     [_waitForChangeActivityIndicator startAnimating];
     //NSLog(@"start animating again");
 }
+
+-(void)startLoading
+{
+    self._noConnectionButton.hidden = YES;
+    self._noConnectionLabel.hidden = YES;
+    [NSThread detachNewThreadSelector:@selector(threadWaitForChangeActivityIndicator:) toTarget:self withObject:nil];
+}
+
 
 - (void)setActualDate:(NSDate *)newDate
 {
@@ -173,39 +181,24 @@
     int _newYear = [components year];
     
     
-    [NSThread detachNewThreadSelector:@selector(threadWaitForChangeActivityIndicator:) toTarget:self withObject:nil];
     
-    //while (_actualTrials < 20 && [_actualMenu._dishes count] == 0)
-    //{
-        [_menuPlans getData:_newWeekNumber
+    [_menuPlans getData:_newWeekNumber
                    withYear:_newYear
              withActualDate:_actualDate
                withGastroId:_actualGastronomy._gastroId
-         ];
+    ];
     
-        self._actualMenu = [_menuPlans getActualMenu:_actualDate withGastroId:_actualGastronomy._gastroId];
-        //_actualTrials++;
-        
-        //NSLog(@"setActualDate => _actualDate: %@ - _actualGastronomy._gastroId: %i - actual Menu dishes count: %i",[[_dateFormatter _dayFormatter]     stringFromDate:_actualDate], _actualGastronomy._gastroId, [_actualMenu._dishes count]);
-    //}
+    self._actualMenu = [_menuPlans getActualMenu:_actualDate withGastroId:_actualGastronomy._gastroId];
+    [_detailTable reloadData];
     
-    if ([_menuPlans._menuPlans count] == 0)
+    [_waitForChangeActivityIndicator stopAnimating];
+    _waitForChangeActivityIndicator.hidden = YES;
+    
+    if ( [_menuPlans._menuPlans count] == 0 )
     {
         _noConnectionButton.hidden = NO;
         _noConnectionLabel.hidden = NO;
     }
-    else
-    {
-        _noConnectionButton.hidden = YES;
-        _noConnectionLabel.hidden = YES;
-
-    }
-    
-
-    //NSLog(@"stop animating!!!");
-    [_waitForChangeActivityIndicator stopAnimating];
-    _waitForChangeActivityIndicator.hidden = YES;
-        [_detailTable reloadData];
 }
 
 
@@ -220,15 +213,16 @@
     NSCalendar *_gregorian = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
     NSDate     *_newDate   = [_gregorian dateByAddingComponents:_components toDate:self._actualDate options:0];
     
+    [self startLoading];
     [self setActualDate:_newDate];
-    //[self viewWillAppear:YES];
 }
+
 
 - (void) dayAfter:(id)sender
 {
     NSDate *_newDate = [self._actualDate dateByAddingTimeInterval:(1*24*60*60)];
-    [self setActualDate:_newDate];
-    //[self viewWillAppear:YES];
+   [self startLoading];
+   [self setActualDate:_newDate];
 }
 
 - (void) setTitleToActualDate
@@ -275,6 +269,7 @@
 
 - (IBAction)tryConnectionAgain:(id)sender
 {
+    [self startLoading];
     [self setActualDate:_actualDate];
 }
 
@@ -314,11 +309,16 @@
 {
     //NSLog(@"viewWillAppear");
     [super viewWillAppear:animated];
+    [self startLoading];
+
+}
+
+-(void)viewDidAppear:(BOOL)animated
+{
     [self setActualDate:_actualDate];
-    [_detailTable reloadData];
     _gastronomyLabel.text = [NSString stringWithFormat:@"%@",_actualGastronomy._name];
 }
- 
+
 
 // table and table cell handling
 
@@ -448,10 +448,6 @@
         _labelWriteExternalPrice.text = @"externer Preis";
 
     }
-    
-    //NSLog(@"stop animating!!!");
-    [_waitForChangeActivityIndicator stopAnimating];
-    _waitForChangeActivityIndicator.hidden = YES;
     
     return _cell;
 }

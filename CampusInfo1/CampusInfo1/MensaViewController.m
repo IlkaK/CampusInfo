@@ -99,6 +99,7 @@
     _noConnectionButton.hidden = YES;
     _noConnectionLabel.hidden = YES;
     [_noConnectionButton useAlertStyle];
+    [_noConnectionLabel setTextColor:_zhawColor._zhawFontGrey];
     
     // ----- DETAIL PAGE -----
     if (_mensaDetailVC == nil)
@@ -144,49 +145,32 @@
     [_waitForChangeActivityIndicator startAnimating];
 }
 
-- (void) getGastronomyFacilityArray
-{
-    //int _actualTrials = 0;
-    
-    [NSThread detachNewThreadSelector:@selector(threadWaitForChangeActivityIndicator:) toTarget:self withObject:nil];
-    
-    //NSLog(@"gastronomy faciliities count: %i",[_gastronomyFacilityArray._gastronomicFacilities count]);
-    
-    //while (//_actualTrials < 3 &&
-    //       (_gastronomyFacilityArray._noConnection || [_gastronomyFacilityArray._gastronomicFacilities count] == 0)
-    //    )
-    //{
-        //NSLog(@"viewWillAppear Loop: %i", _actualTrials);
-        [_gastronomyFacilityArray getData];
-     //   _actualTrials++;
-    //}
 
-    
+-(void)startLoading
+{
+    self._noConnectionButton.hidden = YES;
+    self._noConnectionLabel.hidden = YES;
+    [NSThread detachNewThreadSelector:@selector(threadWaitForChangeActivityIndicator:) toTarget:self withObject:nil];
+}
+
+-(void)doneLoading
+{
+    [_gastronomyFacilityArray getData];
+    [_mensaOverviewTable reloadData];
     [_waitForChangeActivityIndicator stopAnimating];
     _waitForChangeActivityIndicator.hidden = YES;
     
-    //if ([_gastronomyFacilityArray._gastronomicFacilities count] == 0)
-    if(_gastronomyFacilityArray._noConnection || [_gastronomyFacilityArray._gastronomicFacilities count] == 0)
+    if ( [_gastronomyFacilityArray._gastronomicFacilities count] == 0 )
     {
         _noConnectionButton.hidden = NO;
         _noConnectionLabel.hidden = NO;
     }
-    else
-    {
-        //if (_gastronomyFacilityArray._threadDone == YES)
-        //{
-            _noConnectionButton.hidden = YES;
-            _noConnectionLabel.hidden = YES;
-            [_mensaOverviewTable reloadData];
-        //}
-    }
-
 }
 
 - (IBAction)tryConnectionAgain:(id)sender
 {
-    [self getGastronomyFacilityArray];
-    [_mensaOverviewTable reloadData];
+    [self startLoading];
+    [self doneLoading];
 }
 
 
@@ -194,28 +178,17 @@
 {
     [super viewWillAppear:animated];
     
-    if (_gastronomyFacilityArray._noConnection)
-    {
-        [self getGastronomyFacilityArray];
-    }
-    
-    [_mensaOverviewTable reloadData];
-    
-    //if ([_gastronomyFacilityArray._gastronomicFacilities count] == 0)
-    //{
-    //    [self getGastronomyFacilityArray];
-    //    [_mensaOverviewTable reloadData];
-    //}
-    
-    //if (_tableRows < [_gastronomyFacilityArray._gastronomicFacilities count])
-    //{
-    //    [_mensaOverviewTable reloadData];
-    //}
+    [super viewWillAppear:animated];
+    [self startLoading];
+}
+
+-(void)viewDidAppear:(BOOL)animated
+{
+    [self doneLoading];
 }
 
 
-
-
+//---------- Handling of table  -----
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
     return 1;
@@ -224,18 +197,9 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    //NSLog(@"set numberOfRowsInSection");
-    if ([_gastronomyFacilityArray._gastronomicFacilities  lastObject] == nil)
-    {
-        return 0;
-    }
-    else
-    {
-        _tableRows = [_gastronomyFacilityArray._gastronomicFacilities count];
-        return [_gastronomyFacilityArray._gastronomicFacilities count];
-    }
-
+    return [_gastronomyFacilityArray._gastronomicFacilities count];
 }
+
 
 - (UITableViewCell *)showGastronomy:(UITableView *)actualTableView
                  withGastronomyName:(NSString *)gastronomyName
