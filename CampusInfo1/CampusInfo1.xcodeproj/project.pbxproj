@@ -111,6 +111,8 @@
 		27C217D1154D47A700BA423D /* DetailTableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 27C217D0154D47A700BA423D /* DetailTableCell.xib */; };
 		27CCE305154414190057D9F8 /* TimeTableDetailController.m in Sources */ = {isa = PBXBuildFile; fileRef = 27CCE303154414180057D9F8 /* TimeTableDetailController.m */; };
 		27CCE306154414190057D9F8 /* TimeTableDetailController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 27CCE304154414180057D9F8 /* TimeTableDetailController.xib */; };
+		27CFC06717EC9B78003DA448 /* TimeTableDtoTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 27CFC06617EC9B78003DA448 /* TimeTableDtoTest.m */; };
+		27CFC06A17EC9C68003DA448 /* TimeTableDtoTestConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = 27CFC06917EC9C68003DA448 /* TimeTableDtoTestConstants.m */; };
 		27E8229E155D214A006EA12D /* ScheduleEventRealizationDto.m in Sources */ = {isa = PBXBuildFile; fileRef = 27E8229D155D214A006EA12D /* ScheduleEventRealizationDto.m */; };
 		27FBF7281551A83600C09ED9 /* StartpageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 27FBF7261551A83600C09ED9 /* StartpageViewController.m */; };
 		27FBF7291551A83600C09ED9 /* StartpageViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 27FBF7271551A83600C09ED9 /* StartpageViewController.xib */; };
@@ -157,7 +159,6 @@
 		E12AD04A17B0E9E4009A9B1B /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A35A34181520814800181E3F /* UIKit.framework */; };
 		E12AD04B17B0E9E4009A9B1B /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A35A341A1520814800181E3F /* Foundation.framework */; };
 		E12AD05117B0E9E4009A9B1B /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = E12AD04F17B0E9E4009A9B1B /* InfoPlist.strings */; };
-		E12AD05417B0E9E4009A9B1B /* CampusInfoLogicTests.m in Sources */ = {isa = PBXBuildFile; fileRef = E12AD05317B0E9E4009A9B1B /* CampusInfoLogicTests.m */; };
 		E12B400117968AA1000555AE /* MensaViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E12B3FFF17968AA1000555AE /* MensaViewController.m */; };
 		E12B400217968AA1000555AE /* MensaViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E12B400017968AA1000555AE /* MensaViewController.xib */; };
 		E12B400417968F7E000555AE /* MensaOverviewTableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E12B400317968F7E000555AE /* MensaOverviewTableCell.xib */; };
@@ -398,6 +399,10 @@
 		27CCE302154414180057D9F8 /* TimeTableDetailController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TimeTableDetailController.h; sourceTree = "<group>"; };
 		27CCE303154414180057D9F8 /* TimeTableDetailController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TimeTableDetailController.m; sourceTree = "<group>"; };
 		27CCE304154414180057D9F8 /* TimeTableDetailController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TimeTableDetailController.xib; sourceTree = "<group>"; };
+		27CFC06517EC9B78003DA448 /* TimeTableDtoTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TimeTableDtoTest.h; sourceTree = "<group>"; };
+		27CFC06617EC9B78003DA448 /* TimeTableDtoTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TimeTableDtoTest.m; sourceTree = "<group>"; };
+		27CFC06817EC9C68003DA448 /* TimeTableDtoTestConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TimeTableDtoTestConstants.h; sourceTree = "<group>"; };
+		27CFC06917EC9C68003DA448 /* TimeTableDtoTestConstants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TimeTableDtoTestConstants.m; sourceTree = "<group>"; };
 		27E8229C155D214A006EA12D /* ScheduleEventRealizationDto.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ScheduleEventRealizationDto.h; sourceTree = "<group>"; };
 		27E8229D155D214A006EA12D /* ScheduleEventRealizationDto.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ScheduleEventRealizationDto.m; sourceTree = "<group>"; };
 		27FBF7251551A83600C09ED9 /* StartpageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StartpageViewController.h; sourceTree = "<group>"; };
@@ -470,11 +475,7 @@
 		E12AD04817B0E9E4009A9B1B /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
 		E12AD04E17B0E9E4009A9B1B /* CampusInfoLogicTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "CampusInfoLogicTests-Info.plist"; sourceTree = "<group>"; };
 		E12AD05017B0E9E4009A9B1B /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		E12AD05217B0E9E4009A9B1B /* CampusInfoLogicTests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CampusInfoLogicTests.h; sourceTree = "<group>"; };
-		E12AD05317B0E9E4009A9B1B /* CampusInfoLogicTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CampusInfoLogicTests.m; sourceTree = "<group>"; };
 		E12AD05517B0E9E4009A9B1B /* CampusInfoLogicTests-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "CampusInfoLogicTests-Prefix.pch"; sourceTree = "<group>"; };
-		E12AD05917B0EBEA009A9B1B /* ScheduleDtoTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ScheduleDtoTest.h; sourceTree = "<group>"; };
-		E12AD05A17B0EBEA009A9B1B /* ScheduleDtoTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ScheduleDtoTest.m; sourceTree = "<group>"; };
 		E12B3FFE17968AA1000555AE /* MensaViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MensaViewController.h; sourceTree = "<group>"; };
 		E12B3FFF17968AA1000555AE /* MensaViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MensaViewController.m; sourceTree = "<group>"; };
 		E12B400017968AA1000555AE /* MensaViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MensaViewController.xib; sourceTree = "<group>"; };
@@ -819,6 +820,17 @@
 			name = DetailTableCells;
 			sourceTree = "<group>";
 		};
+		27CFC06417EC9B39003DA448 /* TimeTable */ = {
+			isa = PBXGroup;
+			children = (
+				27CFC06517EC9B78003DA448 /* TimeTableDtoTest.h */,
+				27CFC06617EC9B78003DA448 /* TimeTableDtoTest.m */,
+				27CFC06817EC9C68003DA448 /* TimeTableDtoTestConstants.h */,
+				27CFC06917EC9C68003DA448 /* TimeTableDtoTestConstants.m */,
+			);
+			name = TimeTable;
+			sourceTree = "<group>";
+		};
 		A35A34091520814700181E3F = {
 			isa = PBXGroup;
 			children = (
@@ -1024,11 +1036,8 @@
 		E12AD04C17B0E9E4009A9B1B /* CampusInfoLogicTests */ = {
 			isa = PBXGroup;
 			children = (
-				E12AD05217B0E9E4009A9B1B /* CampusInfoLogicTests.h */,
-				E12AD05317B0E9E4009A9B1B /* CampusInfoLogicTests.m */,
+				27CFC06417EC9B39003DA448 /* TimeTable */,
 				E12AD04D17B0E9E4009A9B1B /* Supporting Files */,
-				E12AD05917B0EBEA009A9B1B /* ScheduleDtoTest.h */,
-				E12AD05A17B0EBEA009A9B1B /* ScheduleDtoTest.m */,
 			);
 			path = CampusInfoLogicTests;
 			sourceTree = "<group>";
@@ -1590,7 +1599,8 @@
 				E1CA07E217E9CD4D00D38462 /* HolidayDto.m in Sources */,
 				E1CA07E417E9CD4D00D38462 /* GastronomicFacilityArrayDto.m in Sources */,
 				E1CA07EC17E9CD4D00D38462 /* Autocomplete.m in Sources */,
-				E12AD05417B0E9E4009A9B1B /* CampusInfoLogicTests.m in Sources */,
+				27CFC06717EC9B78003DA448 /* TimeTableDtoTest.m in Sources */,
+				27CFC06A17EC9C68003DA448 /* TimeTableDtoTestConstants.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
