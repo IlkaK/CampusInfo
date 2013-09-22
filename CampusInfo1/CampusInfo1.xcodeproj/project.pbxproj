@@ -12,10 +12,9 @@
 		2700DD2A1699EC2C002906D0 /* OneSlotSevenRoomsTableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2700DD291699EC2C002906D0 /* OneSlotSevenRoomsTableCell.xib */; };
 		2700DD2D1699F2C4002906D0 /* ThreeSlotsTwoRoomsTableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2700DD2C1699F2C4002906D0 /* ThreeSlotsTwoRoomsTableCell.xib */; };
 		2700DD2F1699F854002906D0 /* ThreeSlotsThreeRoomsTableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2700DD2E1699F854002906D0 /* ThreeSlotsThreeRoomsTableCell.xib */; };
-		27029DEE17EEEC63007F092A /* MensaDtoTestConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = 27029DED17EEEC63007F092A /* MensaDtoTestConstants.m */; };
 		27029DF117EEEDFE007F092A /* MensaMenuDtoTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 27029DF017EEEDFE007F092A /* MensaMenuDtoTest.m */; };
 		27029DF517EF2101007F092A /* PublicTransportConnectionDtoTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 27029DF417EF2101007F092A /* PublicTransportConnectionDtoTest.m */; };
-		27029DF817EF2189007F092A /* PublicTransportDtoTestConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = 27029DF717EF2189007F092A /* PublicTransportDtoTestConstants.m */; };
+		27029DFB17EF4693007F092A /* TestConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = 27029DFA17EF4693007F092A /* TestConstants.m */; };
 		27042E7817D24C8E008057B4 /* PrognosisDto.m in Sources */ = {isa = PBXBuildFile; fileRef = 27042E7717D24C8E008057B4 /* PrognosisDto.m */; };
 		27042E7B17D25041008057B4 /* FromOrToDto.m in Sources */ = {isa = PBXBuildFile; fileRef = 27042E7A17D25041008057B4 /* FromOrToDto.m */; };
 		27042E7E17D27836008057B4 /* ServiceDto.m in Sources */ = {isa = PBXBuildFile; fileRef = 27042E7D17D27836008057B4 /* ServiceDto.m */; };
@@ -117,7 +116,6 @@
 		27CCE305154414190057D9F8 /* TimeTableDetailController.m in Sources */ = {isa = PBXBuildFile; fileRef = 27CCE303154414180057D9F8 /* TimeTableDetailController.m */; };
 		27CCE306154414190057D9F8 /* TimeTableDetailController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 27CCE304154414180057D9F8 /* TimeTableDetailController.xib */; };
 		27CFC06717EC9B78003DA448 /* TimeTableDtoTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 27CFC06617EC9B78003DA448 /* TimeTableDtoTest.m */; };
-		27CFC06A17EC9C68003DA448 /* TimeTableDtoTestConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = 27CFC06917EC9C68003DA448 /* TimeTableDtoTestConstants.m */; };
 		27E8229E155D214A006EA12D /* ScheduleEventRealizationDto.m in Sources */ = {isa = PBXBuildFile; fileRef = 27E8229D155D214A006EA12D /* ScheduleEventRealizationDto.m */; };
 		27FBF7281551A83600C09ED9 /* StartpageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 27FBF7261551A83600C09ED9 /* StartpageViewController.m */; };
 		27FBF7291551A83600C09ED9 /* StartpageViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 27FBF7271551A83600C09ED9 /* StartpageViewController.xib */; };
@@ -296,14 +294,12 @@
 		2700DD291699EC2C002906D0 /* OneSlotSevenRoomsTableCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OneSlotSevenRoomsTableCell.xib; sourceTree = "<group>"; };
 		2700DD2C1699F2C4002906D0 /* ThreeSlotsTwoRoomsTableCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ThreeSlotsTwoRoomsTableCell.xib; sourceTree = "<group>"; };
 		2700DD2E1699F854002906D0 /* ThreeSlotsThreeRoomsTableCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ThreeSlotsThreeRoomsTableCell.xib; sourceTree = "<group>"; };
-		27029DEC17EEEC63007F092A /* MensaDtoTestConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MensaDtoTestConstants.h; sourceTree = "<group>"; };
-		27029DED17EEEC63007F092A /* MensaDtoTestConstants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MensaDtoTestConstants.m; sourceTree = "<group>"; };
 		27029DEF17EEEDFE007F092A /* MensaMenuDtoTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MensaMenuDtoTest.h; sourceTree = "<group>"; };
 		27029DF017EEEDFE007F092A /* MensaMenuDtoTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MensaMenuDtoTest.m; sourceTree = "<group>"; };
 		27029DF317EF2101007F092A /* PublicTransportConnectionDtoTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PublicTransportConnectionDtoTest.h; sourceTree = "<group>"; };
 		27029DF417EF2101007F092A /* PublicTransportConnectionDtoTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PublicTransportConnectionDtoTest.m; sourceTree = "<group>"; };
-		27029DF617EF2189007F092A /* PublicTransportDtoTestConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PublicTransportDtoTestConstants.h; sourceTree = "<group>"; };
-		27029DF717EF2189007F092A /* PublicTransportDtoTestConstants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PublicTransportDtoTestConstants.m; sourceTree = "<group>"; };
+		27029DF917EF4693007F092A /* TestConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestConstants.h; sourceTree = "<group>"; };
+		27029DFA17EF4693007F092A /* TestConstants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestConstants.m; sourceTree = "<group>"; };
 		27042E7617D24C8E008057B4 /* PrognosisDto.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PrognosisDto.h; sourceTree = "<group>"; };
 		27042E7717D24C8E008057B4 /* PrognosisDto.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PrognosisDto.m; sourceTree = "<group>"; };
 		27042E7917D25040008057B4 /* FromOrToDto.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FromOrToDto.h; sourceTree = "<group>"; };
@@ -416,8 +412,6 @@
 		27CCE304154414180057D9F8 /* TimeTableDetailController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TimeTableDetailController.xib; sourceTree = "<group>"; };
 		27CFC06517EC9B78003DA448 /* TimeTableDtoTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TimeTableDtoTest.h; sourceTree = "<group>"; };
 		27CFC06617EC9B78003DA448 /* TimeTableDtoTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TimeTableDtoTest.m; sourceTree = "<group>"; };
-		27CFC06817EC9C68003DA448 /* TimeTableDtoTestConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TimeTableDtoTestConstants.h; sourceTree = "<group>"; };
-		27CFC06917EC9C68003DA448 /* TimeTableDtoTestConstants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TimeTableDtoTestConstants.m; sourceTree = "<group>"; };
 		27E8229C155D214A006EA12D /* ScheduleEventRealizationDto.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ScheduleEventRealizationDto.h; sourceTree = "<group>"; };
 		27E8229D155D214A006EA12D /* ScheduleEventRealizationDto.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ScheduleEventRealizationDto.m; sourceTree = "<group>"; };
 		27FBF7251551A83600C09ED9 /* StartpageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StartpageViewController.h; sourceTree = "<group>"; };
@@ -638,8 +632,6 @@
 			children = (
 				27029DF317EF2101007F092A /* PublicTransportConnectionDtoTest.h */,
 				27029DF417EF2101007F092A /* PublicTransportConnectionDtoTest.m */,
-				27029DF617EF2189007F092A /* PublicTransportDtoTestConstants.h */,
-				27029DF717EF2189007F092A /* PublicTransportDtoTestConstants.m */,
 			);
 			name = PublicTransport;
 			sourceTree = "<group>";
@@ -805,8 +797,6 @@
 			children = (
 				27B5144217EDF76700E3E7E2 /* MensaOverviewDtoTest.h */,
 				27B5144317EDF76700E3E7E2 /* MensaOverviewDtoTest.m */,
-				27029DEC17EEEC63007F092A /* MensaDtoTestConstants.h */,
-				27029DED17EEEC63007F092A /* MensaDtoTestConstants.m */,
 				27029DEF17EEEDFE007F092A /* MensaMenuDtoTest.h */,
 				27029DF017EEEDFE007F092A /* MensaMenuDtoTest.m */,
 			);
@@ -864,8 +854,6 @@
 			children = (
 				27CFC06517EC9B78003DA448 /* TimeTableDtoTest.h */,
 				27CFC06617EC9B78003DA448 /* TimeTableDtoTest.m */,
-				27CFC06817EC9C68003DA448 /* TimeTableDtoTestConstants.h */,
-				27CFC06917EC9C68003DA448 /* TimeTableDtoTestConstants.m */,
 			);
 			name = TimeTable;
 			sourceTree = "<group>";
@@ -1079,6 +1067,8 @@
 				27B5144117EDF72B00E3E7E2 /* Mensa */,
 				27CFC06417EC9B39003DA448 /* TimeTable */,
 				E12AD04D17B0E9E4009A9B1B /* Supporting Files */,
+				27029DF917EF4693007F092A /* TestConstants.h */,
+				27029DFA17EF4693007F092A /* TestConstants.m */,
 			);
 			path = CampusInfoLogicTests;
 			sourceTree = "<group>";
@@ -1641,12 +1631,10 @@
 				E1CA07E417E9CD4D00D38462 /* GastronomicFacilityArrayDto.m in Sources */,
 				E1CA07EC17E9CD4D00D38462 /* Autocomplete.m in Sources */,
 				27CFC06717EC9B78003DA448 /* TimeTableDtoTest.m in Sources */,
-				27CFC06A17EC9C68003DA448 /* TimeTableDtoTestConstants.m in Sources */,
 				27B5144417EDF76700E3E7E2 /* MensaOverviewDtoTest.m in Sources */,
-				27029DEE17EEEC63007F092A /* MensaDtoTestConstants.m in Sources */,
 				27029DF117EEEDFE007F092A /* MensaMenuDtoTest.m in Sources */,
 				27029DF517EF2101007F092A /* PublicTransportConnectionDtoTest.m in Sources */,
-				27029DF817EF2189007F092A /* PublicTransportDtoTestConstants.m in Sources */,
+				27029DFB17EF4693007F092A /* TestConstants.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

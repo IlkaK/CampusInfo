@@ -1,14 +1,118 @@
 //
-//  TimeTableDtoTestConstants.m
+//  TestConstants.m
 //  CampusInfo1
 //
-//  Created by Ilka Kokemor on 20.09.13.
+//  Created by Ilka Kokemor on 22.09.13.
 //
 //
 
-#import "TimeTableDtoTestConstants.h"
+#import "TestConstants.h"
 
-@implementation TimeTableDtoTestConstants
+@implementation TestConstants
+
+NSString * const platform1 = @"12a";
+NSString * const platform2 = @"16";
+NSString * const platform3 = @"51";
+NSString * const platform4 = @"42";
+
+NSString * const coordinateType1 = @"latitude";
+NSString * const coordinateType2 = @"longitude";
+
+double const coordinateX1 = 40.5;
+double const coordinateY1 = 4.5;
+double const coordinateX2 = 12.5;
+double const coordinateY2 = 1.3;
+double const coordinateX3 = 103.2;
+double const coordinateY3 = 3.3;
+double const coordinateX4 = 13.5;
+double const coordinateY4 = 140.5;
+
+NSString * const stationId1 = @"01";
+NSString * const stationId2 = @"02";
+NSString * const stationId3 = @"03";
+NSString * const stationId4 = @"04";
+
+int const stationScore1 = 1000;
+int const stationScore2 = 2000;
+int const stationScore3 = 3000;
+int const stationScore4 = 4000;
+
+NSString * const stationName1 = @"Basel";
+NSString * const stationName2 = @"Bern";
+NSString * const stationName3 = @"Zürich";
+NSString * const stationName4 = @"Genf";
+
+NSString * const stationDistance1 = @"10 km";
+NSString * const stationDistance2 = @"20 km";
+NSString * const stationDistance3 = @"15 km";
+NSString * const stationDistance4 = @"10 m";
+
+
+NSString * const delay1 = @"20 min";
+NSString * const delay2 = @"5 min";
+
+NSString * const serviceYes = @"yes";
+NSString * const serviceNo = @"no";
+
+NSString * const journeyName1 = @"Journey Name1";
+NSString * const journeyCategory1 = @"Journey Category1";
+int        const journeyCategoryCode1 = 21;
+NSString * const journeyNumber1 = @"123456";
+NSString * const journeyOperator1 = @"Journey Operator 1";
+
+NSString * const duration1 = @"1 hour, 1 minute";
+NSString * const duration2 = @"90 minutes";
+
+int const id1 = 1;
+int const id2 = 2;
+int const id3 = 3;
+int const id4 = 4;
+int const id5 = 5;
+
+NSString * const version10 = @"1.0";
+NSString * const version11 = @"1.1";
+NSString * const version12 = @"1.2";
+NSString * const version20 = @"2.0";
+NSString * const version21 = @"2.1";
+
+NSString * const locationName1 = @"Technikumstrasse";
+NSString * const locationName2 = @"Zürich";
+NSString * const holidayName1 = @"Sommerferien";
+NSString * const holidayName2 = @"Herbstferien";
+NSString * const gastronomicFacilityName1 = @"Cafeteria A";
+NSString * const gastronomicFacilityName2 = @"Mensa B";
+NSString * const gastronomicFacilityType1 = @"Cafeteria";
+NSString * const gastronomicFacilityType2 = @"Mensa";
+
+NSString * const planType1 = @"plantype1";
+NSString * const planType2 = @"plantype2";
+
+NSString * const sideDishName1 = @"Gemüse";
+NSString * const sideDishName2 = @"Kartoffeln";
+NSString * const sideDishName3 = @"Hörnli";
+NSString * const sideDishName4 = @"Pommes";
+
+double const price1 = 5.50;
+double const price2 = 1.99;
+double const price3 = 2;
+double const price4 = 3.40;
+double const price5 = 2.22;
+double const price6 = 9.99;
+
+NSString * const dishName1 = @"Lasagne";
+NSString * const dishName2 = @"Wiener Schnitzel";
+
+NSString * const dishLabel1 = @"Dish Label A";
+NSString * const dishLabel2 = @"Dish Label B";
+
+int const week1 = 20;
+int const week2 = 21;
+int const week3 = 22;
+int const week4 = 23;
+
+int const year1 = 2012;
+int const year2 = 2013;
+int const year3 = 2014;
 
 NSString * const day1           		= @"2013-08-13";
 NSString * const day2           		= @"2013-08-14";

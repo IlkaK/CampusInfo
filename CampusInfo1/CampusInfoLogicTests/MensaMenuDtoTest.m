@@ -16,8 +16,7 @@
 #import "MenuDto.h"
 #import "MenuPlanArrayDto.h"
 
-#import "MensaDtoTestConstants.h"
-#import "TimeTableDtoTestConstants.h"
+#import "TestConstants.h"
 
 @implementation MensaMenuDtoTest
 

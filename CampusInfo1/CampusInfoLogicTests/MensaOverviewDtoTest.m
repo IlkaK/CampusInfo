@@ -8,8 +8,6 @@
 
 #import "MensaOverviewDtoTest.h"
 #import "DateFormation.h"
-#import "TimeTableDtoTestConstants.h"
-#import "UIConstantStrings.h"
 #import "GastronomicFacilityArrayDto.h"
 #import "HolidayDto.h"
 #import "LocationDto.h"
@@ -18,7 +16,9 @@
 #import "ServiceTimePeriodDto.h"
 #import "GastronomicFacilityDto.h"
 #import "WeekdayDto.h"
-#import "MensaDtoTestConstants.h"
+
+#import "UIConstantStrings.h"
+#import "TestConstants.h"
 
 
 @implementation MensaOverviewDtoTest

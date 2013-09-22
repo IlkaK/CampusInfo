@@ -232,9 +232,28 @@ NSString * const NewsVCSmallTitle   = @"News";
 NSString * const NewsDetailVCTitle  = @"News";
 NSString * const EventsVCTitle      = @"Events - School of Engineering";
 NSString * const EventsVCSmallTitle = @"Events";
+NSString * const NewsWebViewHtml    = @"<html> \n"
+"<head> \n"
+"<style type=\"text/css\"> \n"
+"body {font-family: \"%@\";font-size: 13;}\n"
+"</style> \n"
+"</head> \n"
+"<body>%@</body> \n"
+"</html>";
+NSString * const NewsWebViewFont   = @"helvetica";
+
 
 // public transportation
-NSString * const PublicTransportVCTitle = @"Fahrplan";
+NSString * const PublicTransportVCTitle         = @"Fahrplan";
+NSString * const PublicTransportVCHint          = @"Bitte Start und Ziel eingeben.";
+NSString * const PublicTransportVCStart         = @"Start";
+NSString * const PublicTransportVCGoal          = @"Ziel";
+NSString * const PublicTransportVCNew           = @"neu...";
+NSString * const PublicTransportVCFromGerman    = @"ab";
+NSString * const PublicTransportVCFromEnglish   = @"from";
+NSString * const PublicTransportVCToGerman      = @"an";
+NSString * const PublicTransportVCToEnglish     = @"to";
+
 
 // time table
 NSString * const TimeTableOverVCTitle = @"Stundenplan";
@@ -262,7 +281,25 @@ NSString * const SaturdayGerman  = @"Samstag";
 NSString * const SundayEnglish = @"sunday";
 NSString * const SundayGerman  = @"Sonntag";
 
-
+// menu overview png
+NSString * const AppIconTimeTable                   = @"AppIconsSchriftStundenplan.png";
+NSString * const AppIconTimeTableFeedback           = @"AppIconsSchriftStundenplanFeedback.png";
+NSString * const AppIconMensa                       = @"AppIconsSchriftMensa.png";
+NSString * const AppIconMensaFeedback               = @"AppIconsSchriftMensaFeedback.png";
+NSString * const AppIconPublicTransport             = @"AppIconsSchriftFahrplan.png";
+NSString * const AppIconPublicTransportFeedback     = @"AppIconsSchriftFahrplanFeedback.png";
+NSString * const AppIconContacts                    = @"AppIconsSchriftKontakte.png";
+NSString * const AppIconContactsFeedback            = @"AppIconsSchriftKontakteFeedback.png";
+NSString * const AppIconMaps                        = @"AppIconsSchriftStandorte.png";
+NSString * const AppIconMapsFeedback                = @"AppIconsSchriftStandorteFeedback.png";
+NSString * const AppIconSocialMedia                 = @"AppIconsSchriftSocialMedia.png";
+NSString * const AppIconSocialMediaFeedback         = @"AppIconsSchriftSocialMediaFeedback.png";
+NSString * const AppIconSettings                    = @"AppIconsSchriftEinstellungen.png";
+NSString * const AppIconSettingsFeedback            = @"AppIconsEinstellungenFeedback.png";
+NSString * const AppIconNews                        = @"AppIconsSchriftNews.png";
+NSString * const AppIconNewsFeedback                = @"AppIconsSchriftNewsFeedback.png";
+NSString * const AppIconEvents                      = @"AppIconsSchriftEvents.png";
+NSString * const AppIconEventsFeedback              = @"AppIconsSchriftEventsFeedback.png";
 
 
 @end

@@ -17,7 +17,8 @@
 #import "PersonDto.h"
 #import "DepartmentDto.h"
 #import "SchoolClassDto.h"
-#import "TimeTableDtoTestConstants.h"
+
+#import "TestConstants.h"
 #import "UIConstantStrings.h"
 
 

@@ -16,9 +16,7 @@
 #import "ConnectionDto.h"
 #import "ConnectionArrayDto.h"
 
-#import "PublicTransportDtoTestConstants.h"
-#import "MensaDtoTestConstants.h"
-#import "TimeTableDtoTestConstants.h"
+#import "TestConstants.h"
 #import "DateFormation.h"
 
 

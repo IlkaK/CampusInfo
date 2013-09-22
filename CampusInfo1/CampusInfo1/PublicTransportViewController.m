@@ -146,7 +146,7 @@
         
     _changeDirectionButton.hidden  = NO;
     
-    NSMutableAttributedString *_titleString = [[NSMutableAttributedString alloc] initWithString:@"neu..."];
+    NSMutableAttributedString *_titleString = [[NSMutableAttributedString alloc] initWithString:@"%@", PublicTransportVCNew];
     [_titleString addAttribute:NSUnderlineStyleAttributeName value:[NSNumber numberWithInteger:NSUnderlineStyleSingle] range:NSMakeRange(0, [_titleString length])];
     [_titleString addAttribute:NSForegroundColorAttributeName value:_zhawColor._zhawFontGrey range:NSMakeRange(0, [_titleString length])];
     
@@ -297,7 +297,7 @@ withStringForButton2:(NSString *)stringForButton2
     {
         NSString *_stationName =  _publicStopVC._actualStationName;
 
-        if ([_publicStopVC._actualStationType isEqualToString:@"from"])
+        if ([_publicStopVC._actualStationType isEqualToString:PublicTransportVCFromEnglish])
         {
             if ([self newStartAlreadyInArray:_stationName] == NO)
             {
@@ -372,8 +372,8 @@ withStringForButton2:(NSString *)stringForButton2
     
     if (   [_startLabel.text length] > 0
         && [_stopLabel.text length] > 0
-        && ![_startLabel.text isEqualToString:@"Start"]
-        && ![_stopLabel.text isEqualToString:@"Ziel"]
+        && ![_startLabel.text isEqualToString:PublicTransportVCStart]
+        && ![_stopLabel.text isEqualToString:PublicTransportVCGoal]
         )
     {
         //NSLog(@"getConnectionArray -> _startLabel.text: %@", _startLabel.text);
@@ -498,7 +498,7 @@ withStringForButton2:(NSString *)stringForButton2
         
         _changeDirectionButton.hidden  = YES;
         
-        [_chooseNewStartButton setTitle:@"neu..." forState:UIControlStateNormal];
+        [_chooseNewStartButton setTitle:PublicTransportVCNew forState:UIControlStateNormal];
     }
 }
 
@@ -568,7 +568,7 @@ withStringForButton2:(NSString *)stringForButton2
     _chooseNewStartButton.hidden    = YES;
     _changeDirectionButton.hidden   = NO;
     
-    _publicStopVC._actualStationType = @"from";
+    _publicStopVC._actualStationType = PublicTransportVCFromEnglish;
     _publicStopVC._actualStationName = @"";
     _publicStopVC._publicStopTextFieldString = @"";
     _publicStopVC._stationArray = nil;
@@ -601,7 +601,7 @@ withStringForButton2:(NSString *)stringForButton2
         _lastStart2Button.hidden        = YES;
         _chooseNewStartButton.hidden    = YES;
         
-        [_chooseNewStopButton setTitle:@"neu..." forState:UIControlStateNormal];
+        [_chooseNewStopButton setTitle:PublicTransportVCNew forState:UIControlStateNormal];
     }
 }
 
@@ -673,7 +673,7 @@ withStringForButton2:(NSString *)stringForButton2
     _changeStopButtonIsActivated   = NO;
     _changeDirectionButton.hidden   = NO;
     
-    _publicStopVC._actualStationType = @"to";
+    _publicStopVC._actualStationType = PublicTransportVCToEnglish;
     _publicStopVC._actualStationName = @"";
     _publicStopVC._publicStopTextFieldString = @"";
     _publicStopVC._stationArray = nil;
@@ -687,13 +687,13 @@ withStringForButton2:(NSString *)stringForButton2
            [_startLabel.text length] == 0
         || [_stopLabel.text length] == 0
         
-        || [_startLabel.text isEqualToString:@"Start"]
-        || [_stopLabel.text isEqualToString:@"Ziel"]
+        || [_startLabel.text isEqualToString:PublicTransportVCStart]
+        || [_stopLabel.text isEqualToString:PublicTransportVCGoal]
         )
     {
         UIAlertView *_acronymAlertView = [[UIAlertView alloc]
                                           initWithTitle:PublicTransportVCTitle
-                                          message:@"Bitte Start und Ziel eingeben."
+                                          message:PublicTransportVCHint
                                           delegate:self
                                           cancelButtonTitle:AlertViewOk
                                           otherButtonTitles:nil];
@@ -702,7 +702,7 @@ withStringForButton2:(NSString *)stringForButton2
     }
     else
     {
-        NSLog(@"startConnectionSearch -> _startStation: %@ _stopStation: %@", _startStation, _stopStation);
+        //NSLog(@"startConnectionSearch -> _startStation: %@ _stopStation: %@", _startStation, _stopStation);
         [self getConnectionArray];
     }
 }
@@ -856,7 +856,7 @@ withStringForButton2:(NSString *)stringForButton2
             
             _startDestinationLabel.text        = _localConnection._from._station._name;
             _startDateLabel.text    = [[_dateFormatter _dayFormatter] stringFromDate:_localConnection._from._departureDate];
-            _startTimeLabel.text    = [NSString stringWithFormat:@"ab %@", [[_dateFormatter _timeFormatter] stringFromDate:_localConnection._from._departureTime]];
+            _startTimeLabel.text    = [NSString stringWithFormat:@"%@ %@",PublicTransportVCFromGerman, [[_dateFormatter _timeFormatter] stringFromDate:_localConnection._from._departureTime]];
             
             _durationLabel.text     = _localConnection._duration;
             _transfersLabel.text    = [NSString stringWithFormat:@"%i",_localConnection._transfers];
@@ -880,7 +880,7 @@ withStringForButton2:(NSString *)stringForButton2
             
             _stopDestinationLabel.text       = _localConnection._to._station._name;
             _stopDateLabel.text   = [[_dateFormatter _dayFormatter] stringFromDate:_localConnection._to._arrivalDate];
-            _stopTimeLabel.text   = [NSString stringWithFormat:@"an %@", [[_dateFormatter _timeFormatter] stringFromDate:_localConnection._to._arrivalTime]];
+            _stopTimeLabel.text   = [NSString stringWithFormat:@"%@ %@",PublicTransportVCToGerman, [[_dateFormatter _timeFormatter] stringFromDate:_localConnection._to._arrivalTime]];
     }
         
     return _cell;

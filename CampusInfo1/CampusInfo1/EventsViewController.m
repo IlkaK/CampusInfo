@@ -219,14 +219,7 @@
                 }
             }
             
-            NSString *_descr = [NSString stringWithFormat:@"<html> \n"
-                                           "<head> \n"
-                                           "<style type=\"text/css\"> \n"
-                                           "body {font-family: \"%@\";font-size: 13;}\n"
-                                           "</style> \n"
-                                           "</head> \n"
-                                           "<body>%@</body> \n"
-                                           "</html>", @"helvetica", _newsItem._description];
+            NSString *_descr = [NSString stringWithFormat:NewsWebViewHtml, NewsWebViewFont, _newsItem._description];
             
             [_descriptionWebView loadHTMLString:_descr baseURL:nil];            
         }

@@ -1,14 +1,118 @@
 //
-//  TimeTableDtoTestConstants.h
+//  TestConstants.h
 //  CampusInfo1
 //
-//  Created by Ilka Kokemor on 20.09.13.
+//  Created by Ilka Kokemor on 22.09.13.
 //
 //
 
 #import <Foundation/Foundation.h>
 
-@interface TimeTableDtoTestConstants : NSObject
+@interface TestConstants : NSObject
+
+extern NSString * const platform1;
+extern NSString * const platform2;
+extern NSString * const platform3;
+extern NSString * const platform4;
+
+extern NSString * const coordinateType1;
+extern NSString * const coordinateType2;
+
+extern double const coordinateX1;
+extern double const coordinateY1;
+extern double const coordinateX2;
+extern double const coordinateY2;
+extern double const coordinateX3;
+extern double const coordinateY3;
+extern double const coordinateX4;
+extern double const coordinateY4;
+
+extern NSString * const stationId1;
+extern NSString * const stationId2;
+extern NSString * const stationId3;
+extern NSString * const stationId4;
+
+extern int const stationScore1;
+extern int const stationScore2;
+extern int const stationScore3;
+extern int const stationScore4;
+
+extern NSString * const stationName1;
+extern NSString * const stationName2;
+extern NSString * const stationName3;
+extern NSString * const stationName4;
+
+extern NSString * const stationDistance1;
+extern NSString * const stationDistance2;
+extern NSString * const stationDistance3;
+extern NSString * const stationDistance4;
+
+extern NSString * const delay1;
+extern NSString * const delay2;
+
+extern NSString * const serviceYes;
+extern NSString * const serviceNo;
+
+extern NSString * const journeyName1;
+extern NSString * const journeyCategory1;
+extern int        const journeyCategoryCode1;
+extern NSString * const journeyNumber1;
+extern NSString * const journeyOperator1;
+
+extern NSString * const duration1;
+extern NSString * const duration2;
+
+extern int const id1;
+extern int const id2;
+extern int const id3;
+extern int const id4;
+extern int const id5;
+
+extern NSString * const version10;
+extern NSString * const version11;
+extern NSString * const version12;
+extern NSString * const version20;
+extern NSString * const version21;
+
+extern NSString * const locationName1;
+extern NSString * const locationName2;
+extern NSString * const holidayName1;
+extern NSString * const holidayName2;
+extern NSString * const gastronomicFacilityName1;
+extern NSString * const gastronomicFacilityName2;
+
+extern NSString * const gastronomicFacilityType1;
+extern NSString * const gastronomicFacilityType2;
+
+extern NSString * const planType1;
+extern NSString * const planType2;
+
+extern NSString * const sideDishName1;
+extern NSString * const sideDishName2;
+extern NSString * const sideDishName3;
+extern NSString * const sideDishName4;
+
+extern double const price1;
+extern double const price2;
+extern double const price3;
+extern double const price4;
+extern double const price5;
+extern double const price6;
+
+extern NSString * const dishName1;
+extern NSString * const dishName2;
+
+extern NSString * const dishLabel1;
+extern NSString * const dishLabel2;
+
+extern int const week1;
+extern int const week2;
+extern int const week3;
+extern int const week4;
+
+extern int const year1;
+extern int const year2;
+extern int const year3;
 
 extern NSString * const day1           			;
 extern NSString * const day2           			;
@@ -104,5 +208,6 @@ extern NSString * const className6          ;
 
 extern NSString * const departementName1;
 extern NSString * const departementName2;
+
 
 @end

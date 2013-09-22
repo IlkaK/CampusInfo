@@ -216,25 +216,25 @@
         UIButton *_timeTableIconButton  = (UIButton *) [_cell viewWithTag:1];
         _timeTableIconButton.enabled = true;
         [_timeTableIconButton addTarget:self action:@selector(moveToTimeTable:event:) forControlEvents:UIControlEventTouchUpInside];
-        [_timeTableIconButton setImage:[UIImage imageNamed:@"AppIconsSchriftStundenplan.png"] forState:UIControlStateNormal];
-        [_timeTableIconButton setImage:[UIImage imageNamed:@"AppIconsSchriftStundenplanFeedback.png"] forState:UIControlStateSelected];
-        [_timeTableIconButton setImage:[UIImage imageNamed:@"AppIconsSchriftStundenplanFeedback.png"] forState:UIControlStateHighlighted];
+        [_timeTableIconButton setImage:[UIImage imageNamed:AppIconTimeTable] forState:UIControlStateNormal];
+        [_timeTableIconButton setImage:[UIImage imageNamed:AppIconTimeTableFeedback] forState:UIControlStateSelected];
+        [_timeTableIconButton setImage:[UIImage imageNamed:AppIconTimeTableFeedback] forState:UIControlStateHighlighted];
         
         // mensa
         UIButton *_mensaIconButton  = (UIButton *) [_cell viewWithTag:2];
         _mensaIconButton.enabled = true;
         [_mensaIconButton addTarget:self action:@selector(moveToMensa:event:) forControlEvents:UIControlEventTouchUpInside];
-        [_mensaIconButton setImage:[UIImage imageNamed:@"AppIconsSchriftMensa.png"] forState:UIControlStateNormal];
-        [_mensaIconButton setImage:[UIImage imageNamed:@"AppIconsSchriftMensaFeedback.png"] forState:UIControlStateSelected];
-        [_mensaIconButton setImage:[UIImage imageNamed:@"AppIconsSchriftMensaFeedback.png"] forState:UIControlStateHighlighted];
+        [_mensaIconButton setImage:[UIImage imageNamed:AppIconMensa] forState:UIControlStateNormal];
+        [_mensaIconButton setImage:[UIImage imageNamed:AppIconMensaFeedback] forState:UIControlStateSelected];
+        [_mensaIconButton setImage:[UIImage imageNamed:AppIconMensaFeedback] forState:UIControlStateHighlighted];
         
         //OeV
         UIButton *_oevIconButton  = (UIButton *) [_cell viewWithTag:3];
         _oevIconButton.enabled = true;
         [_oevIconButton addTarget:self action:@selector(moveToOev:event:) forControlEvents:UIControlEventTouchUpInside];
-        [_oevIconButton setImage:[UIImage imageNamed:@"AppIconsSchriftFahrplan.png"] forState:UIControlStateNormal];
-        [_oevIconButton setImage:[UIImage imageNamed:@"AppIconsSchriftFahrplanFeedback.png"] forState:UIControlStateSelected];
-        [_oevIconButton setImage:[UIImage imageNamed:@"AppIconsSchriftFahrplanFeedback.png"] forState:UIControlStateHighlighted];
+        [_oevIconButton setImage:[UIImage imageNamed:AppIconPublicTransport] forState:UIControlStateNormal];
+        [_oevIconButton setImage:[UIImage imageNamed:AppIconPublicTransportFeedback] forState:UIControlStateSelected];
+        [_oevIconButton setImage:[UIImage imageNamed:AppIconPublicTransportFeedback] forState:UIControlStateHighlighted];
         
         _cell.contentView.backgroundColor = _backgroundColor;
         _cell.backgroundColor = _cell.contentView.backgroundColor;
@@ -248,25 +248,25 @@
         UIButton *_contactsIconButton  = (UIButton *) [_cell viewWithTag:1];
         _contactsIconButton.enabled = true;
         [_contactsIconButton addTarget:self action:@selector(moveToContacts:event:) forControlEvents:UIControlEventTouchUpInside];
-        [_contactsIconButton setImage:[UIImage imageNamed:@"AppIconsSchriftKontakte.png"] forState:UIControlStateNormal];
-        [_contactsIconButton setImage:[UIImage imageNamed:@"AppIconsSchriftKontakteFeedback.png"] forState:UIControlStateSelected];
-        [_contactsIconButton setImage:[UIImage imageNamed:@"AppIconsSchriftKontakteFeedback.png"] forState:UIControlStateHighlighted];
+        [_contactsIconButton setImage:[UIImage imageNamed:AppIconContacts] forState:UIControlStateNormal];
+        [_contactsIconButton setImage:[UIImage imageNamed:AppIconContactsFeedback] forState:UIControlStateSelected];
+        [_contactsIconButton setImage:[UIImage imageNamed:AppIconContactsFeedback] forState:UIControlStateHighlighted];
 
         // card
         UIButton *_cardIconButton  = (UIButton *) [_cell viewWithTag:2];
         _cardIconButton.enabled = true;
         [_cardIconButton addTarget:self action:@selector(moveToMaps:event:) forControlEvents:UIControlEventTouchUpInside];
-        [_cardIconButton setImage:[UIImage imageNamed:@"AppIconsSchriftStandorte.png"] forState:UIControlStateNormal];
-        [_cardIconButton setImage:[UIImage imageNamed:@"AppIconsSchriftStandorteFeedback.png"] forState:UIControlStateSelected];
-        [_cardIconButton setImage:[UIImage imageNamed:@"AppIconsSchriftStandorteFeedback.png"] forState:UIControlStateHighlighted];
+        [_cardIconButton setImage:[UIImage imageNamed:AppIconMaps] forState:UIControlStateNormal];
+        [_cardIconButton setImage:[UIImage imageNamed:AppIconMapsFeedback] forState:UIControlStateSelected];
+        [_cardIconButton setImage:[UIImage imageNamed:AppIconMapsFeedback] forState:UIControlStateHighlighted];
 
         // social Media
         UIButton *_socialMediaIconButton  = (UIButton *) [_cell viewWithTag:3];
         _socialMediaIconButton.enabled = true;
         [_socialMediaIconButton addTarget:self action:@selector(moveToSocialMedia:event:) forControlEvents:UIControlEventTouchUpInside];
-        [_socialMediaIconButton setImage:[UIImage imageNamed:@"AppIconsSchriftSocialMedia.png"] forState:UIControlStateNormal];
-        [_socialMediaIconButton setImage:[UIImage imageNamed:@"AppIconsSchriftSocialMediaFeedback.png"] forState:UIControlStateSelected];
-        [_socialMediaIconButton setImage:[UIImage imageNamed:@"AppIconsSchriftSocialMediaFeedback.png"] forState:UIControlStateHighlighted];
+        [_socialMediaIconButton setImage:[UIImage imageNamed:AppIconSocialMedia] forState:UIControlStateNormal];
+        [_socialMediaIconButton setImage:[UIImage imageNamed:AppIconSocialMediaFeedback] forState:UIControlStateSelected];
+        [_socialMediaIconButton setImage:[UIImage imageNamed:AppIconSocialMediaFeedback] forState:UIControlStateHighlighted];
         
         _cell.contentView.backgroundColor = _backgroundColor;
         _cell.backgroundColor = _cell.contentView.backgroundColor;
@@ -279,25 +279,25 @@
         UIButton *_settingsIconButton  = (UIButton *) [_cell viewWithTag:1];
         _settingsIconButton.enabled = true;
         [_settingsIconButton addTarget:self action:@selector(moveToSettings:event:) forControlEvents:UIControlEventTouchUpInside];
-        [_settingsIconButton setImage:[UIImage imageNamed:@"AppIconsSchriftEinstellungen.png"] forState:UIControlStateNormal];
-        [_settingsIconButton setImage:[UIImage imageNamed:@"AppIconsEinstellungenFeedback.png"] forState:UIControlStateSelected];
-        [_settingsIconButton setImage:[UIImage imageNamed:@"AppIconsEinstellungenFeedback.png"] forState:UIControlStateHighlighted];
+        [_settingsIconButton setImage:[UIImage imageNamed:AppIconSettings] forState:UIControlStateNormal];
+        [_settingsIconButton setImage:[UIImage imageNamed:AppIconSettingsFeedback] forState:UIControlStateSelected];
+        [_settingsIconButton setImage:[UIImage imageNamed:AppIconSettingsFeedback] forState:UIControlStateHighlighted];
         
         // news
         UIButton *_newsIconButton  = (UIButton *) [_cell viewWithTag:2];
         _newsIconButton.enabled = true;
         [_newsIconButton addTarget:self action:@selector(moveToNews:event:) forControlEvents:UIControlEventTouchUpInside];
-        [_newsIconButton setImage:[UIImage imageNamed:@"AppIconsSchriftNews.png"] forState:UIControlStateNormal];
-        [_newsIconButton setImage:[UIImage imageNamed:@"AppIconsSchriftNewsFeedback.png"] forState:UIControlStateSelected];
-        [_newsIconButton setImage:[UIImage imageNamed:@"AppIconsSchriftNewsFeedback.png"] forState:UIControlStateHighlighted];
+        [_newsIconButton setImage:[UIImage imageNamed:AppIconNews] forState:UIControlStateNormal];
+        [_newsIconButton setImage:[UIImage imageNamed:AppIconNewsFeedback] forState:UIControlStateSelected];
+        [_newsIconButton setImage:[UIImage imageNamed:AppIconNewsFeedback] forState:UIControlStateHighlighted];
         
         // events
         UIButton *_eventsIconButton  = (UIButton *) [_cell viewWithTag:3];
         _eventsIconButton.enabled = true;
         [_eventsIconButton addTarget:self action:@selector(moveToEvents:event:) forControlEvents:UIControlEventTouchUpInside];
-        [_eventsIconButton setImage:[UIImage imageNamed:@"AppIconsSchriftEvents.png"] forState:UIControlStateNormal];
-        [_eventsIconButton setImage:[UIImage imageNamed:@"AppIconsSchriftEventsFeedback.png"] forState:UIControlStateSelected];
-        [_eventsIconButton setImage:[UIImage imageNamed:@"AppIconsSchriftEventsFeedback.png"] forState:UIControlStateHighlighted];
+        [_eventsIconButton setImage:[UIImage imageNamed:AppIconEvents] forState:UIControlStateNormal];
+        [_eventsIconButton setImage:[UIImage imageNamed:AppIconEventsFeedback] forState:UIControlStateSelected];
+        [_eventsIconButton setImage:[UIImage imageNamed:AppIconEventsFeedback] forState:UIControlStateHighlighted];
         
         _cell.contentView.backgroundColor = _backgroundColor;
         _cell.backgroundColor = _cell.contentView.backgroundColor;

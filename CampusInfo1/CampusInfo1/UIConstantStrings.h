@@ -229,10 +229,19 @@ extern NSString * const NewsVCSmallTitle;
 extern NSString * const NewsDetailVCTitle;
 extern NSString * const EventsVCTitle;
 extern NSString * const EventsVCSmallTitle;
-
+extern NSString * const NewsWebViewHtml;
+extern NSString * const NewsWebViewFont;
 
 // public transportation
 extern NSString * const PublicTransportVCTitle;
+extern NSString * const PublicTransportVCHint;
+extern NSString * const PublicTransportVCStart;
+extern NSString * const PublicTransportVCGoal;
+extern NSString * const PublicTransportVCNew        ;
+extern NSString * const PublicTransportVCFromGerman ;
+extern NSString * const PublicTransportVCFromEnglish;
+extern NSString * const PublicTransportVCToGerman   ;
+extern NSString * const PublicTransportVCToEnglish  ;
 
 // time table
 extern NSString * const TimeTableOverVCTitle;
@@ -260,6 +269,28 @@ extern NSString * const SaturdayEnglish ;
 extern NSString * const SaturdayGerman  ;
 extern NSString * const SundayEnglish ;
 extern NSString * const SundayGerman  ;
+
+// menu overview png
+extern NSString * const AppIconTimeTable;
+extern NSString * const AppIconTimeTableFeedback;
+extern NSString * const AppIconMensa;
+extern NSString * const AppIconMensaFeedback;
+extern NSString * const AppIconPublicTransport;
+extern NSString * const AppIconPublicTransportFeedback;
+extern NSString * const AppIconContacts;
+extern NSString * const AppIconContactsFeedback;
+extern NSString * const AppIconMaps;
+extern NSString * const AppIconMapsFeedback;
+extern NSString * const AppIconSocialMedia;
+extern NSString * const AppIconSocialMediaFeedback;
+extern NSString * const AppIconSettings;
+extern NSString * const AppIconSettingsFeedback;
+extern NSString * const AppIconNews;
+extern NSString * const AppIconNewsFeedback;
+extern NSString * const AppIconEvents;
+extern NSString * const AppIconEventsFeedback;
+
+
 
 @end
 
