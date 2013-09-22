@@ -110,33 +110,33 @@
 {
     NSString *_localTranslation;
     
-    if ([englishWeekday isEqualToString:@"monday"])
+    if ([englishWeekday isEqualToString:MondayEnglish])
     {
-        _localTranslation = @"Montag";
+        _localTranslation = MondayGerman;
     }
-    if ([englishWeekday isEqualToString:@"tuesday"])
+    if ([englishWeekday isEqualToString:TuesdayEnglish])
     {
-        _localTranslation = @"Dienstag";
+        _localTranslation = TuesdayGerman;
     }
-    if ([englishWeekday isEqualToString:@"wednesday"])
+    if ([englishWeekday isEqualToString:WednesdayEnglish])
     {
-        _localTranslation = @"Mittwoch";
+        _localTranslation = WednesdayGerman;
     }
-    if ([englishWeekday isEqualToString:@"thursday"])
+    if ([englishWeekday isEqualToString:ThursdayEnglish])
     {
-        _localTranslation = @"Donnerstag";
+        _localTranslation = ThursdayGerman;
     }
-    if ([englishWeekday isEqualToString:@"friday"])
+    if ([englishWeekday isEqualToString:FridayEnglish])
     {
-        _localTranslation = @"Freitag";
+        _localTranslation = FridayGerman;
     }
-    if ([englishWeekday isEqualToString:@"saturday"])
+    if ([englishWeekday isEqualToString:SaturdayEnglish])
     {
-        _localTranslation = @"Samstag";
+        _localTranslation = SaturdayGerman;
     }
-    if ([englishWeekday isEqualToString:@"sunday"])
+    if ([englishWeekday isEqualToString:SundayEnglish])
     {
-        _localTranslation = @"Sonntag";
+        _localTranslation = SundayGerman;
     }
     return _localTranslation;
     

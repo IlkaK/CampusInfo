@@ -12,6 +12,10 @@
 
 NSString * const day1           		= @"2013-08-13";
 NSString * const day2           		= @"2013-08-14";
+NSString * const day3           		= @"2013-08-15";
+NSString * const day4           		= @"2013-09-01";
+NSString * const day5           		= @"2013-09-02";
+NSString * const day6           		= @"2013-12-12";
 
 NSString * const startTime1             = @"08:00";
 NSString * const endTime1               = @"08:45";

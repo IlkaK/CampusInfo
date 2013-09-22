@@ -244,6 +244,23 @@ extern NSString * const MensaClosed;
 // choose date
 extern NSString * const ChooseDateVCTitle;
 
+
+// language translation
+extern NSString * const MondayEnglish ;
+extern NSString * const MondayGerman  ;
+extern NSString * const TuesdayEnglish;
+extern NSString * const TuesdayGerman  ;
+extern NSString * const WednesdayEnglish ;
+extern NSString * const WednesdayGerman  ;
+extern NSString * const ThursdayEnglish ;
+extern NSString * const ThursdayGerman  ;
+extern NSString * const FridayEnglish ;
+extern NSString * const FridayGerman  ;
+extern NSString * const SaturdayEnglish ;
+extern NSString * const SaturdayGerman  ;
+extern NSString * const SundayEnglish ;
+extern NSString * const SundayGerman  ;
+
 @end
 
 

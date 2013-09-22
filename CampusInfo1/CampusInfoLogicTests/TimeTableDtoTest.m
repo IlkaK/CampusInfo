@@ -454,7 +454,7 @@
     return _day;
 }
 
-- (void) testWithExampleData
+- (void) testTimeTable
 {
     DateFormation *_dateFormater = [[DateFormation alloc]init];
     

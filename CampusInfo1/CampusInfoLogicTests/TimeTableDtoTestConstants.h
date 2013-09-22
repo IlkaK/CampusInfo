@@ -12,6 +12,11 @@
 
 extern NSString * const day1           			;
 extern NSString * const day2           			;
+extern NSString * const day3           			;
+extern NSString * const day4           			;
+extern NSString * const day5           			;
+extern NSString * const day6           			;
+
 
 extern NSString * const startTime1            ;
 extern NSString * const endTime1              ;

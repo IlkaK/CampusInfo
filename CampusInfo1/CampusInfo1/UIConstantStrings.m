@@ -246,4 +246,23 @@ NSString * const MensaClosed  = @"geschlossen";
 // choose date
 NSString * const ChooseDateVCTitle = @"Datum wählen";
 
+// language translation
+NSString * const MondayEnglish = @"monday";
+NSString * const MondayGerman  = @"Montag";
+NSString * const TuesdayEnglish = @"tuesday";
+NSString * const TuesdayGerman  = @"Dienstag";
+NSString * const WednesdayEnglish = @"wednesday";
+NSString * const WednesdayGerman  = @"Mittwoch";
+NSString * const ThursdayEnglish = @"thursday";
+NSString * const ThursdayGerman  = @"Donnerstag";
+NSString * const FridayEnglish = @"friday";
+NSString * const FridayGerman  = @"Freitag";
+NSString * const SaturdayEnglish = @"saturday";
+NSString * const SaturdayGerman  = @"Samstag";
+NSString * const SundayEnglish = @"sunday";
+NSString * const SundayGerman  = @"Sonntag";
+
+
+
+
 @end
