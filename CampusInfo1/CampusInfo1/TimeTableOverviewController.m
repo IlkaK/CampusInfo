@@ -491,7 +491,7 @@
     [_acronymLabel setTextAlignment:NSTextAlignmentCenter];
     
     UIBarButtonItem *backButtonItem = [[UIBarButtonItem alloc] initWithTitle:LeftArrowSymbol style:UIBarButtonItemStylePlain target:self action:@selector(moveBackToMenuOverview:)];
-    [backButtonItem setTintColor:_zhawColor._zhawOriginalBlue];
+    [backButtonItem setTintColor:_zhawColor._zhawWhite];
     
     [_titleNavigationItem setLeftBarButtonItem :backButtonItem animated :true];
     
@@ -499,13 +499,13 @@
     _titleNavigationLabel.text = TimeTableOverVCTitle;
     _titleNavigationItem.title = @"";
     
-    [_titleNavigationBar setTintColor:_zhawColor._zhawDarkerBlue];
+    [_titleNavigationBar setBarTintColor:_zhawColor._zhawDarkerBlue];
     [_titleNavigationLabel setTextAlignment:NSTextAlignmentCenter];
     
     // segmented controls below the title
     [_timeTableSegmentedControl setTintColor:_zhawColor._zhawOriginalBlue];
     [self.view bringSubviewToFront:_timeTableSegmentedControl];
-    [_segmentedControlNavigationBar setTintColor:_zhawColor._zhawDarkerBlue];
+    [_segmentedControlNavigationBar setBarTintColor:_zhawColor._zhawDarkerBlue];
     
     // set activity indicator
     _waitForLoadingActivityIndicator.hidesWhenStopped = YES;
