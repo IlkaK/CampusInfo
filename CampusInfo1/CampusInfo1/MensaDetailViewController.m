@@ -47,10 +47,6 @@
 
 @synthesize _zhawColor;
 
-@synthesize _noConnectionLabel;
-@synthesize _noConnectionButton;
-
-
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -139,16 +135,6 @@
     _waitForChangeActivityIndicator.hidden = YES;
     [_waitForChangeActivityIndicator setColor:_zhawColor._zhawOriginalBlue];
     [self.view bringSubviewToFront:_waitForChangeActivityIndicator];
-    
-    
-    // no connection button/label
-    [self.view bringSubviewToFront:_noConnectionButton];
-    [self.view bringSubviewToFront:_noConnectionLabel];
-    
-    _noConnectionButton.hidden = YES;
-    _noConnectionLabel.hidden = YES;
-    [_noConnectionButton useAlertStyle];
-    [_noConnectionLabel setTextColor:_zhawColor._zhawFontGrey];
 }
 
 - (void) threadWaitForChangeActivityIndicator:(id)data
@@ -160,8 +146,6 @@
 
 -(void)startLoading
 {
-    self._noConnectionButton.hidden = YES;
-    self._noConnectionLabel.hidden = YES;
     [NSThread detachNewThreadSelector:@selector(threadWaitForChangeActivityIndicator:) toTarget:self withObject:nil];
 }
 
@@ -193,12 +177,6 @@
     
     [_waitForChangeActivityIndicator stopAnimating];
     _waitForChangeActivityIndicator.hidden = YES;
-    
-    if ( [_menuPlans._menuPlans count] == 0 )
-    {
-        _noConnectionButton.hidden = NO;
-        _noConnectionLabel.hidden = NO;
-    }
 }
 
 
@@ -298,8 +276,6 @@
     _titleNavigationItem = nil;
     _titleNavigationLabel = nil;
     _dateButton = nil;
-    _noConnectionLabel = nil;
-    _noConnectionButton = nil;
     _dateNavigationBar = nil;
     [super viewDidUnload];
 }

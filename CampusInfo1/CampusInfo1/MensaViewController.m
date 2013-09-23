@@ -177,8 +177,7 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    
-    [super viewWillAppear:animated];
+    self._actualDate = [NSDate date];
     [self startLoading];
 }
 
