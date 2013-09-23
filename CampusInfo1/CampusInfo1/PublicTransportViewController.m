@@ -146,7 +146,7 @@
         
     _changeDirectionButton.hidden  = NO;
     
-    NSMutableAttributedString *_titleString = [[NSMutableAttributedString alloc] initWithString:@"%@", PublicTransportVCNew];
+    NSMutableAttributedString *_titleString = [[NSMutableAttributedString alloc] initWithString:PublicTransportVCNew];
     [_titleString addAttribute:NSUnderlineStyleAttributeName value:[NSNumber numberWithInteger:NSUnderlineStyleSingle] range:NSMakeRange(0, [_titleString length])];
     [_titleString addAttribute:NSForegroundColorAttributeName value:_zhawColor._zhawFontGrey range:NSMakeRange(0, [_titleString length])];
     
