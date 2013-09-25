@@ -16,8 +16,8 @@
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "A35A34131520814700181E3F"
                BuildableName = "Engineering.app"
-               BlueprintName = "CampusInfo1"
-               ReferencedContainer = "container:CampusInfo1.xcodeproj">
+               BlueprintName = "Engineering"
+               ReferencedContainer = "container:Engineering.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -34,14 +34,14 @@
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "A35A34131520814700181E3F"
             BuildableName = "Engineering.app"
-            BlueprintName = "CampusInfo1"
-            ReferencedContainer = "container:CampusInfo1.xcodeproj">
+            BlueprintName = "Engineering"
+            ReferencedContainer = "container:Engineering.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
    </TestAction>
    <LaunchAction
-      selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.GDB"
-      selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.GDB"
+      selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
+      selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
       launchStyle = "0"
       useCustomWorkingDirectory = "NO"
       buildConfiguration = "Debug"
@@ -53,16 +53,11 @@
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "A35A34131520814700181E3F"
             BuildableName = "Engineering.app"
-            BlueprintName = "CampusInfo1"
-            ReferencedContainer = "container:CampusInfo1.xcodeproj">
+            BlueprintName = "Engineering"
+            ReferencedContainer = "container:Engineering.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
       <AdditionalOptions>
-         <AdditionalOption
-            key = "NSZombieEnabled"
-            value = "YES"
-            isEnabled = "YES">
-         </AdditionalOption>
       </AdditionalOptions>
    </LaunchAction>
    <ProfileAction
@@ -76,8 +71,8 @@
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "A35A34131520814700181E3F"
             BuildableName = "Engineering.app"
-            BlueprintName = "CampusInfo1"
-            ReferencedContainer = "container:CampusInfo1.xcodeproj">
+            BlueprintName = "Engineering"
+            ReferencedContainer = "container:Engineering.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>

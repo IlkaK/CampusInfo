@@ -158,6 +158,8 @@
 		E1252E5F17CB72AD00E61732 /* ServiceDeskViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E1252E5D17CB72AD00E61732 /* ServiceDeskViewController.m */; };
 		E1252E6017CB72AD00E61732 /* ServiceDeskViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E1252E5E17CB72AD00E61732 /* ServiceDeskViewController.xib */; };
 		E1252E6217CB7E5800E61732 /* ServiceDeskTableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E1252E6117CB7E5800E61732 /* ServiceDeskTableCell.xib */; };
+		E1292CDB17F1A2E600F6C3C5 /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = E1292CD917F1A2E600F6C3C5 /* Icon.png */; };
+		E1292CDC17F1A2E600F6C3C5 /* Icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E1292CDA17F1A2E600F6C3C5 /* Icon@2x.png */; };
 		E12AD04917B0E9E4009A9B1B /* SenTestingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E12AD04817B0E9E4009A9B1B /* SenTestingKit.framework */; };
 		E12AD04A17B0E9E4009A9B1B /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A35A34181520814800181E3F /* UIKit.framework */; };
 		E12AD04B17B0E9E4009A9B1B /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A35A341A1520814800181E3F /* Foundation.framework */; };
@@ -271,8 +273,6 @@
 		E1CF302517E73D2900398830 /* CharTranslation.m in Sources */ = {isa = PBXBuildFile; fileRef = E1CF302417E73D2900398830 /* CharTranslation.m */; };
 		E1CF302817E75C5300398830 /* URLConstantStrings.m in Sources */ = {isa = PBXBuildFile; fileRef = E1CF302717E75C5300398830 /* URLConstantStrings.m */; };
 		E1D35BD717C3593300CCDB1D /* MenuPlanArrayDto.m in Sources */ = {isa = PBXBuildFile; fileRef = E1D35BD617C3593300CCDB1D /* MenuPlanArrayDto.m */; };
-		E1D35BDA17C385BC00CCDB1D /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = E1D35BD817C3858700CCDB1D /* Icon.png */; };
-		E1D35BDC17C385C900CCDB1D /* Icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E1D35BDB17C385C900CCDB1D /* Icon@2x.png */; };
 		E1D48A5B1757856400BB1652 /* GradientButton.m in Sources */ = {isa = PBXBuildFile; fileRef = E1D48A5A1757856400BB1652 /* GradientButton.m */; };
 		E1D7EFF7178DA03D00100293 /* DateFormation.m in Sources */ = {isa = PBXBuildFile; fileRef = E1D7EFF6178DA03D00100293 /* DateFormation.m */; };
 		E1DA967C1740E41C00CA206F /* SettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E1DA967A1740E41C00CA206F /* SettingsViewController.m */; };
@@ -421,9 +421,9 @@
 		A35A34181520814800181E3F /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		A35A341A1520814800181E3F /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		A35A341C1520814800181E3F /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
-		A35A34201520814800181E3F /* CampusInfo1-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "CampusInfo1-Info.plist"; sourceTree = "<group>"; };
+		A35A34201520814800181E3F /* Engineering-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Engineering-Info.plist"; sourceTree = "<group>"; };
 		A35A34221520814800181E3F /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		A35A34241520814800181E3F /* CampusInfo1-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "CampusInfo1-Prefix.pch"; sourceTree = "<group>"; };
+		A35A34241520814800181E3F /* Engineering-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Engineering-Prefix.pch"; sourceTree = "<group>"; };
 		A35A34251520814800181E3F /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		A35A34271520814800181E3F /* CampusInfo1AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CampusInfo1AppDelegate.h; sourceTree = "<group>"; };
 		A35A34281520814800181E3F /* CampusInfo1AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CampusInfo1AppDelegate.m; sourceTree = "<group>"; };
@@ -480,6 +480,8 @@
 		E1252E5D17CB72AD00E61732 /* ServiceDeskViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ServiceDeskViewController.m; sourceTree = "<group>"; };
 		E1252E5E17CB72AD00E61732 /* ServiceDeskViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ServiceDeskViewController.xib; sourceTree = "<group>"; };
 		E1252E6117CB7E5800E61732 /* ServiceDeskTableCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ServiceDeskTableCell.xib; sourceTree = "<group>"; };
+		E1292CD917F1A2E600F6C3C5 /* Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon.png; sourceTree = "<group>"; };
+		E1292CDA17F1A2E600F6C3C5 /* Icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon@2x.png"; sourceTree = "<group>"; };
 		E12AD04717B0E9E4009A9B1B /* CampusInfoLogicTests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CampusInfoLogicTests.octest; sourceTree = BUILT_PRODUCTS_DIR; };
 		E12AD04817B0E9E4009A9B1B /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
 		E12AD04E17B0E9E4009A9B1B /* CampusInfoLogicTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "CampusInfoLogicTests-Info.plist"; sourceTree = "<group>"; };
@@ -573,8 +575,6 @@
 		E1CF302717E75C5300398830 /* URLConstantStrings.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = URLConstantStrings.m; sourceTree = "<group>"; };
 		E1D35BD517C3593300CCDB1D /* MenuPlanArrayDto.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MenuPlanArrayDto.h; sourceTree = "<group>"; };
 		E1D35BD617C3593300CCDB1D /* MenuPlanArrayDto.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MenuPlanArrayDto.m; sourceTree = "<group>"; };
-		E1D35BD817C3858700CCDB1D /* Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon.png; sourceTree = "<group>"; };
-		E1D35BDB17C385C900CCDB1D /* Icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon@2x.png"; sourceTree = "<group>"; };
 		E1D48A591757856400BB1652 /* GradientButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GradientButton.h; sourceTree = "<group>"; };
 		E1D48A5A1757856400BB1652 /* GradientButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GradientButton.m; sourceTree = "<group>"; };
 		E1D7EFF5178DA03D00100293 /* DateFormation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DateFormation.h; sourceTree = "<group>"; };
@@ -861,12 +861,12 @@
 		A35A34091520814700181E3F = {
 			isa = PBXGroup;
 			children = (
+				E1292CD917F1A2E600F6C3C5 /* Icon.png */,
+				E1292CDA17F1A2E600F6C3C5 /* Icon@2x.png */,
 				E15C940D17E708B800F82EE4 /* stations.sql */,
 				279F0A2C17DF227F006A599D /* Default-568h@2x.png */,
 				279F0A2A17DF2255006A599D /* Default@2x.png */,
 				279F0A2517DF2207006A599D /* Default.png */,
-				E1D35BDB17C385C900CCDB1D /* Icon@2x.png */,
-				E1D35BD817C3858700CCDB1D /* Icon.png */,
 				E195FF35178188A30065DF05 /* libsqlite3.dylib */,
 				A35A344E152082F600181E3F /* Resources */,
 				A35A341E1520814800181E3F /* CampusInfo1 */,
@@ -930,9 +930,9 @@
 		A35A341F1520814800181E3F /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				A35A34201520814800181E3F /* CampusInfo1-Info.plist */,
+				A35A34201520814800181E3F /* Engineering-Info.plist */,
 				A35A34211520814800181E3F /* InfoPlist.strings */,
-				A35A34241520814800181E3F /* CampusInfo1-Prefix.pch */,
+				A35A34241520814800181E3F /* Engineering-Prefix.pch */,
 				A35A34251520814800181E3F /* main.m */,
 			);
 			name = "Supporting Files";
@@ -1258,9 +1258,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		A35A34131520814700181E3F /* CampusInfo1 */ = {
+		A35A34131520814700181E3F /* Engineering */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = A35A343B1520814800181E3F /* Build configuration list for PBXNativeTarget "CampusInfo1" */;
+			buildConfigurationList = A35A343B1520814800181E3F /* Build configuration list for PBXNativeTarget "Engineering" */;
 			buildPhases = (
 				A35A34101520814700181E3F /* Sources */,
 				A35A34111520814700181E3F /* Frameworks */,
@@ -1270,7 +1270,7 @@
 			);
 			dependencies = (
 			);
-			name = CampusInfo1;
+			name = Engineering;
 			productName = CampusInfo1;
 			productReference = A35A34141520814800181E3F /* Engineering.app */;
 			productType = "com.apple.product-type.application";
@@ -1301,7 +1301,7 @@
 			attributes = {
 				LastUpgradeCheck = 0460;
 			};
-			buildConfigurationList = A35A340E1520814700181E3F /* Build configuration list for PBXProject "CampusInfo1" */;
+			buildConfigurationList = A35A340E1520814700181E3F /* Build configuration list for PBXProject "Engineering" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -1313,7 +1313,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				A35A34131520814700181E3F /* CampusInfo1 */,
+				A35A34131520814700181E3F /* Engineering */,
 				E12AD04617B0E9E4009A9B1B /* CampusInfoLogicTests */,
 			);
 		};
@@ -1382,8 +1382,6 @@
 				E15AA5AA17C23155007E9F00 /* MapsViewController.xib in Resources */,
 				E15AA5AF17C23167007E9F00 /* TechnikumViewController.xib in Resources */,
 				E15AA5BE17C24D38007E9F00 /* EventsTableCell.xib in Resources */,
-				E1D35BDA17C385BC00CCDB1D /* Icon.png in Resources */,
-				E1D35BDC17C385C900CCDB1D /* Icon@2x.png in Resources */,
 				E1252E5617CB423400E61732 /* SocialMediaViewController.xib in Resources */,
 				E1252E5B17CB4D7800E61732 /* SocialMediaTableCell.xib in Resources */,
 				E1252E6017CB72AD00E61732 /* ServiceDeskViewController.xib in Resources */,
@@ -1463,6 +1461,8 @@
 				279F0A2B17DF2255006A599D /* Default@2x.png in Resources */,
 				279F0A2D17DF227F006A599D /* Default-568h@2x.png in Resources */,
 				E15C940E17E708B800F82EE4 /* stations.sql in Resources */,
+				E1292CDB17F1A2E600F6C3C5 /* Icon.png in Resources */,
+				E1292CDC17F1A2E600F6C3C5 /* Icon@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1720,7 +1720,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				COPY_PHASE_STRIP = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1728,10 +1728,10 @@
 				);
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "CampusInfo1/CampusInfo1-Prefix.pch";
+				GCC_PREFIX_HEADER = "CampusInfo1/Engineering-Prefix.pch";
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				HEADER_SEARCH_PATHS = "\"$(SOURCE_ROOT)\"";
-				INFOPLIST_FILE = "CampusInfo1/CampusInfo1-Info.plist";
+				INFOPLIST_FILE = "CampusInfo1/Engineering-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1753,17 +1753,17 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				COPY_PHASE_STRIP = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)\"",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "CampusInfo1/CampusInfo1-Prefix.pch";
+				GCC_PREFIX_HEADER = "CampusInfo1/Engineering-Prefix.pch";
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				HEADER_SEARCH_PATHS = "\"$(SOURCE_ROOT)\"";
-				INFOPLIST_FILE = "CampusInfo1/CampusInfo1-Info.plist";
+				INFOPLIST_FILE = "CampusInfo1/Engineering-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1793,6 +1793,7 @@
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Distribution: School of Engineering ZHAW (PQ9M73T7N8)";
 				COPY_PHASE_STRIP = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"\"$(SDKROOT)/Developer/Library/Frameworks\"",
@@ -1811,6 +1812,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				WRAPPER_EXTENSION = octest;
 			};
 			name = Debug;
@@ -1826,6 +1828,7 @@
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Distribution: School of Engineering ZHAW (PQ9M73T7N8)";
 				COPY_PHASE_STRIP = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"\"$(SDKROOT)/Developer/Library/Frameworks\"",
@@ -1838,6 +1841,7 @@
 				INFOPLIST_FILE = "CampusInfoLogicTests/CampusInfoLogicTests-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				VALIDATE_PRODUCT = YES;
 				WRAPPER_EXTENSION = octest;
 			};
@@ -1846,7 +1850,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		A35A340E1520814700181E3F /* Build configuration list for PBXProject "CampusInfo1" */ = {
+		A35A340E1520814700181E3F /* Build configuration list for PBXProject "Engineering" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				A35A34391520814800181E3F /* Debug */,
@@ -1855,7 +1859,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Debug;
 		};
-		A35A343B1520814800181E3F /* Build configuration list for PBXNativeTarget "CampusInfo1" */ = {
+		A35A343B1520814800181E3F /* Build configuration list for PBXNativeTarget "Engineering" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				A35A343C1520814800181E3F /* Debug */,

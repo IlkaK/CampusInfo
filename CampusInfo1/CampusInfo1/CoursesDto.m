@@ -160,7 +160,7 @@
     
     if (self._generalDictionary == nil)
     {
-        NSLog(@"CoursesDto: no connection");
+        //NSLog(@"CoursesDto: no connection");
         
         [_courseArray removeAllObjects];
         

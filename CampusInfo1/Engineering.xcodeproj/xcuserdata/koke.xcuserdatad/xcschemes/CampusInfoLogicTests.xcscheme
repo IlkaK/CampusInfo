@@ -19,7 +19,7 @@
                BlueprintIdentifier = "E12AD04617B0E9E4009A9B1B"
                BuildableName = "CampusInfoLogicTests.octest"
                BlueprintName = "CampusInfoLogicTests"
-               ReferencedContainer = "container:CampusInfo1.xcodeproj">
+               ReferencedContainer = "container:Engineering.xcodeproj">
             </BuildableReference>
          </TestableReference>
       </Testables>

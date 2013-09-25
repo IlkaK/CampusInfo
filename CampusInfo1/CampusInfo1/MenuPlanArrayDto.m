@@ -108,7 +108,7 @@
 {
     NSString *_urlString = [NSString stringWithFormat:URLMenuPlanArray,_actualYear, _actualCalendarWeek];
     
-    NSLog(@"urlString: %@", _urlString);
+    //NSLog(@"urlString: %@", _urlString);
     
     NSURL *_url = [NSURL URLWithString:_urlString];
     [_asyncTimeTableRequest downloadData:_url];
@@ -160,10 +160,10 @@
     {
         self._generalDictionary = [self getDictionaryFromUrl];
     
-        if (self._generalDictionary == nil)
-        {
-            NSLog(@"MenuPlanArrayDto: no connection");
-        }
+        //if (self._generalDictionary == nil)
+        //{
+        //    NSLog(@"MenuPlanArrayDto: no connection");
+        //}
     }
 }
 

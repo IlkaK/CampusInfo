@@ -120,7 +120,7 @@
                                 _localFormerGastronomy = _gastronomicFacilities.lastObject;
                                 if(_localFormerGastronomy._gastroId == _localGastronomicFacilty._gastroId)
                                 {
-                                    NSLog(@"same connection don't add again");
+                                //    NSLog(@"same connection don't add again");
                                     
                                 }
                                 else
@@ -196,7 +196,7 @@
     
     if (self._generalDictionary == nil)
     {
-        NSLog(@"GastronomicFacilityArrayDto: no connection");
+        //NSLog(@"GastronomicFacilityArrayDto: no connection");
         _noConnection = YES;
     }
     else

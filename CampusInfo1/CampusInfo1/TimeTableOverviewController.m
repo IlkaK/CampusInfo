@@ -383,11 +383,11 @@
           }      
       }
     }
-    if ([_localType  compare: @"empty" ] == NSOrderedSame)
-    {
-      NSLog(@"Nur Kürzel von Studenten und Dozenten sind möglich. %@ kann nicht identifiziert werden.", _newAcronym);
+    //if ([_localType  compare: @"empty" ] == NSOrderedSame)
+    //{
+      //NSLog(@"Nur Kürzel von Studenten und Dozenten sind möglich. %@ kann nicht identifiziert werden.", _newAcronym);
       //[self popUpAcronymView:@"Nur Kürzel von Studenten und Dozenten sind möglich."];
-    }
+    //}
     return _localType;
 }
 
