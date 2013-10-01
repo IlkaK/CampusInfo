@@ -148,7 +148,7 @@
     if (self._generalDictionary == nil)
     {
         NSLog(@"RoomsDto: no connection");
-        
+        //
         [_roomArray removeAllObjects];
         
         _roomArray           = [_dbCachingForAutocomplete getRooms];

@@ -134,7 +134,7 @@
                                         ]
                                     )
                                 {
-                                    NSLog(@"same connection don't add again");
+                                   // NSLog(@"same connection don't add again");
                                     
                                 }
                                 else
@@ -176,7 +176,7 @@
 
     NSString *_urlString = [NSString stringWithFormat:URLTransportConnections, _newStartStation, _newStopStation];
 
-    NSLog(@"url ConnectionArrayDto: %@", _urlString);
+    //NSLog(@"url ConnectionArrayDto: %@", _urlString);
     
     _url = [NSURL URLWithString:_urlString];
     [_asyncTimeTableRequest downloadData:_url];
@@ -226,10 +226,10 @@ withNewStations:(BOOL)newStations
     }
     self._generalDictionary = [self getDictionaryFromUrl];
     
-    if (self._generalDictionary == nil)
-    {
-        NSLog(@"ConnectionArrayDto: no connection");
-    }
+    //if (self._generalDictionary == nil)
+    //{
+    //    NSLog(@"ConnectionArrayDto: no connection");
+    //}
 }
 
 

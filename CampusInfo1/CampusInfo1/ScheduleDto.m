@@ -140,7 +140,7 @@
                                 , _scheduleDateString];
         //NSLog(@"call stack zum url string %@",[NSThread callStackSymbols]);
         
-        NSLog(@"_urlString %@",_urlString ); 
+        //NSLog(@"_urlString %@",_urlString );
         
         //_translatedAcronym = @"TE%20319";
         // NSString *_urlString = [NSString stringWithFormat:@"https://srv-lab-t-874.zhaw.ch/v1/schedules/rooms/%@?startingAt=%@&days=7"
@@ -335,7 +335,7 @@
     
     if (_scheduleDictionary == nil)
     {
-        NSLog(@"scheduleDto no connection");
+        //NSLog(@"scheduleDto no connection");
         self._connectionEstablished      = @"NO";
     }
     else 
