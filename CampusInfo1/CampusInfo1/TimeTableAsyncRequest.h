@@ -20,7 +20,7 @@
 }
 
 @property (nonatomic,retain) id<TimeTableAsyncRequestDelegate> _timeTableAsynchRequestDelegate;
-@property (nonatomic, assign) NSMutableData                   *_receivedData;
+@property (nonatomic, retain) NSMutableData                   *_receivedData;
 
 -(void) downloadData:(NSURL*) url ;
 

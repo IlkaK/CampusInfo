@@ -21,6 +21,7 @@
 : (NSString *) newName
 : (NSString *) newDescription;
 
+- (ScheduleCourseDto *) getScheduleCourseWithDictionary:(NSDictionary *)dictionary withKey:(id) key;
 
 
 @end

@@ -7,23 +7,26 @@
 //
 
 #import <Foundation/Foundation.h>
-
+#import "DateFormation.h"
 
 @interface DayDto : NSObject 
 {
     NSDate         *_date;
     NSMutableArray *_events;
     NSMutableArray *_slots;
+    DateFormation  *_dateFormatter;
 }
 
 @property (nonatomic, retain) NSDate         *_date;
 @property (nonatomic, retain) NSMutableArray *_events;
 @property (nonatomic, retain) NSMutableArray *_slots;
+@property (nonatomic, retain) DateFormation  *_dateFormatter;
 
 
 -(id) init : (NSDate         *) newDate
            : (NSMutableArray *) newEvents
            : (NSMutableArray *) newSlots;
            
+- (DayDto *) getDay:(NSDictionary *)dayDictionary;
 
 @end

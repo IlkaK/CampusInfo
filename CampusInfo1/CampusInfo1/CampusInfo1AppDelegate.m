@@ -25,10 +25,25 @@
     // Add the tab bar controller's current view as a subview of the window
     //NSLog(@"Start Application");
     
+    // sleep to test launch screen
+    //[NSThread sleepForTimeInterval:10.0];
+    
     // those two lines are needed for shaking 
     application.applicationSupportsShakeToEdit = YES;
      [self.window setRootViewController:self.tabBarController];
-    //[self.window addSubview:self.tabBarController.view];
+
+    
+    //NSUserDefaults *_acronymUserDefaults = [NSUserDefaults standardUserDefaults];
+    //NSString *_ownStoredAcronymString    = [_acronymUserDefaults stringForKey:@"TimeTableAcronym"];
+    
+    //if (_ownStoredAcronymString == nil)
+    //    [self.tabBarController setSelectedIndex: 1]; // set search view
+    //else
+    //    [self.tabBarController setSelectedIndex: 0]; // set timetable view
+    
+    // always start with menu overview
+    [self.tabBarController setSelectedIndex: 0];
+    
     [self.window makeKeyAndVisible];
     
     return YES;
@@ -73,12 +88,14 @@
      */
 }
 
-- (void)dealloc
+/*
+- (void)tabBarController:(UITabBarController *)tabBarController
+ didSelectViewController:(UIViewController *)viewController
 {
-    [_window release];
-    [_tabBarController release];
-    [super dealloc];
+    NSLog(@"controller class: %@", NSStringFromClass([viewController class]));
+    NSLog(@"controller title: %@", viewController.title);
 }
+ */
 
 /*
 // Optional UITabBarControllerDelegate method.

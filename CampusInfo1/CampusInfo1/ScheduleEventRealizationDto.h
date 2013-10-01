@@ -26,5 +26,6 @@
            : (NSMutableArray *) newLecturers
            : (NSMutableArray *) newSchoolClass;
 
+- (ScheduleEventRealizationDto *) getEventRealization:(NSDictionary *)realizationDictionary;
 
 @end

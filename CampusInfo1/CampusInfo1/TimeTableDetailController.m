@@ -13,120 +13,134 @@
 #import "PersonDto.h"
 #import "ScheduleEventDto.h"
 #import "ScheduleDto.h"
-
-
+#import "ColorSelection.h"
+#import "UIConstantStrings.h"
 
 
 @implementation TimeTableDetailController
 
 @synthesize _timeTableDetailViewDelegate;
+
 @synthesize _scheduleEvent;
 @synthesize _detailTable;
 @synthesize _detailTableCell;
-@synthesize _timeLabel;
+
 @synthesize _timeString;
 @synthesize _dayAndAcronymString;
-@synthesize _titleNavigationItem;
 @synthesize _detailTableCellWithButton;
+
+@synthesize _waitForChangeActivityIndicator;
+
+@synthesize _titleNavigationItem;
+@synthesize _titleNavigationBar;
+@synthesize _titleNavigationLabel;
+@synthesize _timeTableDescriptionLabel;
+
+@synthesize _timeLabel;
+@synthesize _timeNavigationBar;
+@synthesize _timeNavigationItem;
+
+@synthesize _zhawColors;
 
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self) {
-        // Custom initialization
-    }
     return self;
 }
 
 
-- (void)dealloc
+
+- (void)moveBackToTimeTable:(id)sender
 {
-    [_timeTableDetailViewDelegate release];
-    [_detailTable                 release];
-    [_detailTableCell             release];
-    [_timeLabel                   release];
-    [_scheduleEvent               release];
-    [_timeString                  release];
-    [_dayAndAcronymString         release];
-    [_titleNavigationItem         release];
-    [_detailTableCellWithButton   release];
-    [super dealloc];
+        [self dismissModalViewControllerAnimated:YES];
 }
 
 
-- (void) backToTimeTableOverview:(id)sender 
-{    
-    [self dismissModalViewControllerAnimated:YES];
+-(void)setNavigationTitle:(NSString *)titleString
+{
+    _timeTableDescriptionLabel.text = [NSString stringWithFormat:@"%@", titleString];
 }
 
 
 - (void)viewDidLoad
 {
-    //NSLog(@"TimeTableDetail _allocation._name %@", _allocation._name);
+    [super viewDidLoad];
+    
+    // general initialization
+    _zhawColors = [[ColorSelection alloc]init];
 
+    // set title
+    UIBarButtonItem *backButtonItem = [[UIBarButtonItem alloc] initWithTitle:LeftArrowSymbol style:UIBarButtonItemStylePlain target:self action:@selector(moveBackToTimeTable:)];
+    
+    [backButtonItem setTintColor:_zhawColors._zhawOriginalBlue];
+    [_titleNavigationItem setLeftBarButtonItem :backButtonItem animated :true];
+    _titleNavigationItem.title = @"";
+    [_titleNavigationBar setTintColor:_zhawColors._zhawDarkerBlue];
+    
+    [_titleNavigationLabel setTextColor:_zhawColors._zhawWhite];
+    _titleNavigationLabel.text = TimeTableOverVCTitle;
+    [_titleNavigationLabel setTextAlignment:NSTextAlignmentCenter];
+    
+    [_timeTableDescriptionLabel setTextColor:_zhawColors._zhawWhite];
+    [_timeTableDescriptionLabel setText:_dayAndAcronymString];
+    [_timeTableDescriptionLabel setTextAlignment:NSTextAlignmentCenter];
+    
+    
+    [_timeNavigationItem setTitle:@""];
+    [_timeNavigationBar setTintColor:_zhawColors._zhawDarkerBlue];
+    
+    [_timeLabel setTextColor:_zhawColors._zhawWhite];
+    [_timeLabel setText:_timeString];
+    [_timeLabel setTextAlignment:NSTextAlignmentCenter];
+    
+
+    // set default values for spinner/activity indicator
+    _waitForChangeActivityIndicator.hidesWhenStopped = YES;
+    _waitForChangeActivityIndicator.hidden = YES;
+    [_waitForChangeActivityIndicator setColor:_zhawColors._zhawOriginalBlue];
+    [self.view bringSubviewToFront:_waitForChangeActivityIndicator];
+    
     // set table controller
     if (_detailTable == nil) {
 		_detailTable = [[UITableView alloc] init];
 	}
-    _detailTable.separatorColor = [UIColor clearColor];    
+    _detailTable.separatorColor = [UIColor clearColor];
     _detailTable.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
-    
-    _timeLabel.text          = _timeString;
-    //_dayAndAcronymLabel.text = _dayAndAcronymString;
+    [_detailTable reloadData];
 
-    //_titleNavigationItem.title = _dayAndAcronymString; 
-
-    UILabel *label = [[UILabel alloc] init];
-	label.font     = [UIFont fontWithName:@"Helvetica" size: 15.0];
-	label.text     = _dayAndAcronymString;
-	[label setBackgroundColor:[UIColor clearColor]];
-	[label setTextColor:[UIColor whiteColor]];
-	[label sizeToFit];
-	[_titleNavigationItem setTitleView:label];
-	[label release];
-    
-    UIImage         *_leftButtonImage = [UIImage imageNamed:@"arrowLeft_small.png"];
-    UIBarButtonItem *_leftButton      = [[UIBarButtonItem alloc] initWithImage: _leftButtonImage
-                                                                    style:UIBarButtonItemStylePlain 
-                                                                    target:self 
-                                                                    action:@selector(backToTimeTableOverview:)];  
-    
-    [_titleNavigationItem setLeftBarButtonItem :_leftButton animated :true];    
-    [_leftButton  release];
-    
-    [_detailTable reloadData];    
-    [super viewDidLoad];
 }
 
 
 - (void)viewDidUnload
-{
-    [_detailTable               release];
-    [_detailTableCell           release];
-    [_timeLabel                 release];
-    [_timeString                release];
-    [_dayAndAcronymString       release];
-    [_titleNavigationItem       release];
-    [_detailTableCellWithButton release];
-    
+{    
     _detailTable                = nil;
     _detailTableCell            = nil;
     _timeLabel                  = nil;
     _timeString                 = nil;
     _dayAndAcronymString        = nil;
-    _titleNavigationItem        = nil;
     _detailTableCellWithButton  = nil;
-    
+    _timeTableDescriptionLabel = nil;
+    _waitForChangeActivityIndicator = nil;
+    _titleNavigationBar = nil;
+    _titleNavigationItem = nil;
+    _titleNavigationLabel = nil;
+    _timeNavigationBar = nil;
+    _timeNavigationItem = nil;
     [super viewDidUnload];
-    // Release any retained subviews of the main view.
-    // e.g. self.myOutlet = nil;
 }
 
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
+}
+
+
+- (void) threadWaitForChangeActivityIndicator:(id)data
+{
+    _waitForChangeActivityIndicator.hidden = NO;
+    [_waitForChangeActivityIndicator startAnimating];
 }
 
 
@@ -145,12 +159,12 @@
     
     //NSString  *_string1 = [NSString stringWithFormat:@"Veranstaltung: %@", _allocation._name];
     
-    [_descriptionArray addObject:[NSString stringWithFormat:@"Veranstaltung:"]];
+    [_descriptionArray addObject:[NSString stringWithFormat:@"%@:",TimeTableTypeKurs]];
     [_detailArray      addObject:[NSString stringWithFormat:@"%@", scheduleEvent._name]];
     [_acronymArray     addObject:[NSString stringWithFormat:@"%@", scheduleEvent._name]];
-    [_typeButtonArray  addObject:[NSString stringWithFormat:@"courses"]];
+    [_typeButtonArray  addObject:[NSString stringWithFormat:@"%@", TimeTableTypeCourseEnglishPlural]];
     
-    [_descriptionArray addObject:[NSString stringWithFormat:@"Beschreibung:"]];
+    [_descriptionArray addObject:[NSString stringWithFormat:@"%@:", TimeTableDescription]];
     [_detailArray      addObject:[NSString stringWithFormat:@"%@", scheduleEvent._description]];
     [_acronymArray     addObject:[NSString stringWithFormat:@"%@", scheduleEvent._name]];
     [_typeButtonArray  addObject:[NSString stringWithFormat:@"NONE"]];
@@ -164,22 +178,24 @@
         _realization = [_scheduleEvent._scheduleEventRealizations objectAtIndex:realizationI];
         if (_realization._room != nil)
         {   
-            [_descriptionArray addObject:[NSString stringWithFormat:@"Raum:"]];
+            [_descriptionArray addObject:[NSString stringWithFormat:@"%@:", TimeTableTypeRaum]];
             [_detailArray      addObject:[NSString stringWithFormat:@"%@", _realization._room._name]];
             [_acronymArray     addObject:[NSString stringWithFormat:@"%@", _realization._room._name]];
-            [_typeButtonArray  addObject:[NSString stringWithFormat:@"rooms"]];
+            [_typeButtonArray  addObject:[NSString stringWithFormat:@"%@", TimeTableTypeRoomEnglishPlural]];
         }    
     }
       
     
     // put all lecturers of the given event
-    for (realizationI = 0; realizationI < scheduleEvent._scheduleEventRealizations.count; realizationI++) 
+    for (realizationI = 0; realizationI < [scheduleEvent._scheduleEventRealizations count]; realizationI++)
     {
         ScheduleEventRealizationDto *_realization = nil;
         _realization = [_scheduleEvent._scheduleEventRealizations objectAtIndex:realizationI];
         NSMutableArray *_lecturerArray             = [[NSMutableArray alloc]init];
         _lecturerArray = _realization._lecturers;
 
+        //NSLog(@"details _lecturerArray count: %i", [_lecturerArray count]);
+        
         int lecturerI;
         for (lecturerI = 0; lecturerI < _lecturerArray.count; lecturerI++)
         {    
@@ -189,7 +205,7 @@
             {
                 if (lecturerI == 0)
                 {
-                    [_descriptionArray addObject:[NSString stringWithFormat:@"Dozenten:"]];
+                    [_descriptionArray addObject:[NSString stringWithFormat:@"%@:", TimeTableTypeDozentPlural]];
                    
                 }
                 else
@@ -201,7 +217,7 @@
                                               ,_localLecturer._lastName
                                               ,_localLecturer._shortName]];
                 [_acronymArray     addObject:[NSString stringWithFormat:@"%@", _localLecturer._shortName]];
-                [_typeButtonArray  addObject:[NSString stringWithFormat:@"lecturers"]];
+                [_typeButtonArray  addObject:[NSString stringWithFormat:@"%@", TimeTableTypeLecturerEnglishPlural]];
             }    
         }
     }
@@ -224,7 +240,7 @@
             {
                 if (classI == 0)
                 {
-                    [_descriptionArray addObject:[NSString stringWithFormat:@"Klassen:"]];
+                    [_descriptionArray addObject:[NSString stringWithFormat:@"%@", TimeTableTypeKlassePlural]];
                 }
                 else
                 {
@@ -232,7 +248,7 @@
                 }
                 [_detailArray     addObject:[NSString stringWithFormat:@"%@", _localClass._name]];
                 [_acronymArray    addObject:[NSString stringWithFormat:@"%@", _localClass._name]];
-                [_typeButtonArray addObject:[NSString stringWithFormat:@"classes"]];
+                [_typeButtonArray addObject:[NSString stringWithFormat:@"%@", TimeTableTypeClassEnglishPlural]];
             }    
         }
     }
@@ -272,6 +288,8 @@
 -(void) changeToSchedule:(id)sender event:(id)event
 {
     
+    [NSThread detachNewThreadSelector:@selector(threadWaitForChangeActivityIndicator:) toTarget:self withObject:nil];
+    
     NSMutableArray *_bothArrays       = [self splitScheduleToArray:_scheduleEvent];
     //NSMutableArray *_descriptionArray = [_bothArrays objectAtIndex:0];
     //NSMutableArray *_detailArray      = [_bothArrays objectAtIndex:1];
@@ -292,6 +310,9 @@
     //{
     [self._timeTableDetailViewDelegate setNewAcronym:_newAcronymString withAcronymType:_newAcronymType];
     //}
+    [_waitForChangeActivityIndicator stopAnimating];
+    _waitForChangeActivityIndicator.hidden = YES;
+    
     [self dismissModalViewControllerAnimated:YES];
     
 
@@ -327,7 +348,10 @@
 
         UILabel         *_labelDescription = (UILabel *) [_cell viewWithTag:1];
         UILabel         *_labelValue       = (UILabel *) [_cell viewWithTag:2];
-        UIButton        *_detailButton     = (UIButton *)[_cell viewWithTag:3]; 
+        UIButton        *_detailButton     = (UIButton *)[_cell viewWithTag:3];
+        
+        [_labelDescription setTextColor:_zhawColors._zhawFontGrey];
+        [_labelValue setTextColor:_zhawColors._zhawFontGrey];
     
         _labelDescription.text  = [_descriptionArray objectAtIndex:indexPath.section];
         _labelValue.text        = [_detailArray      objectAtIndex:indexPath.section];;
@@ -353,11 +377,18 @@
         
         UILabel         *_labelDescription = (UILabel *)  [_cell viewWithTag:1];
         UIButton        *_valueButton      = (UIButton *) [_cell viewWithTag:2];
-        UIButton        *_detailButton     = (UIButton *) [_cell viewWithTag:3]; 
+        UIButton        *_detailButton     = (UIButton *) [_cell viewWithTag:3];
+        
+        [_labelDescription setTextColor:_zhawColors._zhawFontGrey];
         
         _labelDescription.text  = [_descriptionArray objectAtIndex:indexPath.section];
 
-        [_valueButton setTitle:[_detailArray objectAtIndex:indexPath.section] forState:UIControlStateNormal];
+        NSMutableAttributedString *_titleValueButton = [[NSMutableAttributedString alloc] initWithString:[_detailArray objectAtIndex:indexPath.section]];
+        
+        [_titleValueButton addAttribute:NSUnderlineStyleAttributeName value:[NSNumber numberWithInteger:NSUnderlineStyleSingle] range:NSMakeRange(0, [_titleValueButton length])];
+        [_titleValueButton addAttribute:NSForegroundColorAttributeName value:_zhawColors._zhawFontGrey range:NSMakeRange(0, [_titleValueButton length])];        
+        
+        [_valueButton setAttributedTitle:_titleValueButton forState:UIControlStateNormal];
         [_valueButton addTarget:self action:@selector(changeToSchedule:event:) forControlEvents:UIControlEventTouchUpInside];
         
         _detailButton.enabled   = FALSE;

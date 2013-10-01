@@ -26,11 +26,32 @@
 }
 
 
--(void) dealloc {
-    self._name        = nil; 
-    self._description = nil;
-    [super dealloc];
+- (ScheduleCourseDto *) getScheduleCourseWithDictionary:(NSDictionary *)dictionary withKey:(id) key
+{
+    ScheduleCourseDto *_localCourse       = nil;
+    NSString          *_courseName        = nil;
+    NSString          *_courseDescription = nil;
+    NSDictionary      *_courseDictionary  = [dictionary objectForKey:key];
+    
+    if (_courseDictionary != (id)[NSNull null])
+    {
+        for (id courseKey in _courseDictionary)
+        {
+            if ([courseKey isEqualToString:@"name"])
+            {
+                _courseName        = [_courseDictionary objectForKey:courseKey];
+            }
+            if ([courseKey isEqualToString:@"description"])
+            {
+                _courseDescription = [_courseDictionary objectForKey:courseKey];
+            }
+            
+        }
+        _localCourse    = [[ScheduleCourseDto alloc]init:_courseName:_courseDescription];
+    }
+    return _localCourse;
 }
+
 
 
 @end

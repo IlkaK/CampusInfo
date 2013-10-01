@@ -17,7 +17,6 @@
 // called by schedule.downloadData via schedule.init
 -(void) downloadData:(NSURL*) url 
 {  
-    NSAutoreleasePool * pool     = [[NSAutoreleasePool alloc] init];  
    // NSLog(@" download data with url %@", [url absoluteString]);
     
 
@@ -39,23 +38,21 @@
     
     
     //[_request setValue:userAgent forHTTPHeaderField:@"ZHAWCampusInfoForIPhone"];
+    
+    //NSLog(@"_request all http header fields: %@", [_request allHTTPHeaderFields]);
+    //NSLog(@"_request value for http header field: %@",[_request valueForHTTPHeaderField:field]);
+    
     NSURLConnection   *_connection=[[NSURLConnection alloc] initWithRequest:_request delegate:self];
     
     if (_connection) 
     {
-        self._receivedData        = [[NSMutableData data] retain];  
-        //NSString *_receivedString = [[NSString alloc] initWithData:_receivedData encoding:NSASCIIStringEncoding];
-        //NSLog(@"2 DO downloadData %@", _receivedString);
-        
-        //NSString *someString = [NSString stringWithFormat:@"%@", _receivedData]; 
-        //NSLog(@"2 downloadData data from url %@", someString);
-    
-    } else 
+        self._receivedData        = [NSMutableData data];
+    }
+    else
     {
-        NSLog(@"Did not download data");
+        NSLog(@"NO CONNECTION IN ASYNC REQUEST");
     }  
     CFRunLoopRun(); // Avoid thread exiting
-    [pool release];
 } 
 
 
@@ -80,13 +77,25 @@
     //NSLog(@"3 didReceiveData %@", receivedString);
     
     [_receivedData appendData:data];
+    
+    //if (self._receivedData != nil)
+    //{
+    //    NSString *_receivedString = [[NSString alloc] initWithData:_receivedData encoding:NSASCIIStringEncoding];
+    //    NSLog(@"didReceiveData %@", _receivedString);
+    //}
+    //else
+    //{
+    //    NSLog(@"didReceiveData NO DATA");
+    //}
+    
     [_timeTableAsynchRequestDelegate dataDownloadDidFinish:_receivedData];
 }
 
 
 - (void)connectionDidFinishLoading:(NSURLConnection *)connection
 {
-    self._receivedData = [[NSMutableData data] retain];  
+    self._receivedData = [NSMutableData data];
+    
     NSString *receivedString = nil;
     receivedString = [[NSString alloc] initWithData:_receivedData encoding:NSASCIIStringEncoding];
     //NSLog(@"connectionDidFinishLoading %@", receivedString);
@@ -99,18 +108,12 @@
     }
     CFRunLoopStop(CFRunLoopGetCurrent());
     
-    [connection release];
-    [_receivedData release];
 }
 
 
 
 - (void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error
 {
-    // release the connection, and the data object
-    // receivedData is declared as a method instance elsewhere
-    [connection release];
-    [_receivedData release];
 
     /*
     // inform the user
