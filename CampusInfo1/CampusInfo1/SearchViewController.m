@@ -1,10 +1,36 @@
-//
-//  SearchViewController.m
-//  CampusInfo1
-//
-//  Created by Ilka Kokemor on 3/26/12.
-//  Copyright 2012 __MyCompanyName__. All rights reserved.
-//
+/*
+ SearchViewController.m
+ ZHAW Engineering CampusInfo
+ */
+
+/*!
+ * @header SearchViewController.m
+ * @author Ilka Kokemor
+ * @copyright 2013 ZHAW
+ * @discussion
+ * <ul>
+ * <li> Responsibilities:
+ *   <ul>
+ *      <li> Control of SearchView.xib, which shows the search view for the time table </li>
+ *      <li> Triggering and handling search for acronym of students, lecturers, courses, rooms, classes </li>
+ *  </ul>
+ * </li>
+ *
+ * <li> Receiving data:
+ *   <ul>
+ *      <li> This class is called from TimeTableOverviewController, which does not send any data to SearchViewController. </li>
+ *   </ul>
+ * </li>
+ *
+ * <li> Sending data (when the back button is hit):
+ *   <ul>
+ *      <li> the searched acronym and acronym type are stored in NSNotificationCenter </li>
+ *      <li> the delegate is passed back to TimeTableOverviewController, which then can access the NSNotificationCenter to get the data. </li>
+ *   </ul>
+ * </li>
+ *
+ * </ul>
+ */
 
 #import "SearchViewController.h"
 #import "TimeTableAsyncRequest.h"
@@ -39,6 +65,13 @@
 
 @synthesize _zhawColor;
 
+
+/*!
+ * @function viewDidLoad
+ * The function is included, since class inherits from UIViewController.
+ * Is called first time, the view is started for initialization.
+ * Is only called once, after initialization, never again.
+ */
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -93,10 +126,13 @@
     _waitForChangeActivityIndicator.hidesWhenStopped = YES;
     _waitForChangeActivityIndicator.hidden = YES;
     [_waitForChangeActivityIndicator setColor:_zhawColor._zhawOriginalBlue];
-    //[_waitForChangeActivityIndicator setBackgroundColor:_zhawColor._zhawOriginalBlue];
     [self.view bringSubviewToFront:_waitForChangeActivityIndicator];
 }
 
+/*!
+ * @function loadDataWithSearchType
+ * Gets the data of the according class for the given type.
+ */
 -(void)loadDataWithSearchType
 {
     if ([_searchType isEqualToString:TimeTableTypeKurs])
@@ -121,7 +157,10 @@
     }
 }
 
-
+/*!
+ * @function setTableWithSearchType
+ * Sets the autocomplete candate list with the data of the given type.
+ */
 -(void) setTableWithSearchType
 {
     if ([_searchType isEqualToString:TimeTableTypeKurs])
@@ -146,6 +185,11 @@
     }
 }
 
+/*!
+ * @function viewWillAppear
+ * The function is included, since class inherits from UIViewController. 
+ * It is called every time the view is called again.
+ */
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
@@ -157,34 +201,50 @@
     [_acronymAutocompleteTableView reloadData];
 }
 
-
+/*!
+ * @function threadWaitForChangeActivityIndicator
+ * Thread is called to start the activity indicator while waiting for data to be downloaded.
+ */
 - (void) threadWaitForChangeActivityIndicator:(id)data
 {
     _waitForChangeActivityIndicator.hidden = NO;
     [_waitForChangeActivityIndicator startAnimating];
 }
 
-
-- (BOOL)textFieldShouldReturn:(UITextField *)textField {
+/*!
+ * @function textFieldShouldReturn
+ * The function is included, since the class delegates its textFields on its own. (UITextFieldDelegate)
+ */
+- (BOOL)textFieldShouldReturn:(UITextField *)textField
+{
     [textField resignFirstResponder];
     return NO;
 }
 
-
-
+/*!
+ * @function shouldAutorotateToInterfaceOrientation
+ * Supports autorotation.
+ */
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
     // Return YES for supported orientations
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
 }
 
-
+/*!
+ * @function didReceiveMemoryWarning
+ * The function is included per default.
+ */
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
 }
 
-
+/*!
+ @function viewDidUnload
+ * The function is included, since class inherits from UIViewController.
+ * It is called while the view is unloaded.
+ */
 - (void)viewDidUnload
 {
     _searchTextField = nil;
@@ -200,25 +260,40 @@
 }
 
 
-
-// methods for Picker for types
+/*!
+ * @function numberOfComponentsInPickerView
+ * The function is included, since the class delegates its pickerViews on its own. (UIPickerViewDelegate,UIPickerViewDataSource)
+ */
 - (NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView
 {
   // course, room, class, lecturer, student
     return 1;
 }
 
+/*!
+ * @function pickerView:numberOfRowsInComponent
+ * The function is included, since the class delegates its pickerViews on its own. (UIPickerViewDelegate,UIPickerViewDataSource)
+ */
 - (NSInteger)pickerView: (UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component
 {
     // course, room, class, lecturer, student
     return [_searchTypeArray count];
 }
 
+/*!
+ * @function pickerView:titleForRow
+ * The function is included, since the class delegates its pickerViews on its own. (UIPickerViewDelegate,UIPickerViewDataSource)
+ */
 - (NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component
 {
     return [self._searchTypeArray objectAtIndex:row];
 }
 
+/*!
+ * @function pickerView:didSelectRow
+ * The function is included, since the class delegates its pickerViews on its own. (UIPickerViewDelegate,UIPickerViewDataSource)
+ * Updates the suggestions and the autocomplete table, if the value of the picker changed.
+ */
 -(void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row
       inComponent:(NSInteger)component
 {
@@ -233,6 +308,10 @@
 	[_acronymAutocompleteTableView reloadData];
 }
 
+/*!
+ * @function moveBackToTimeTable
+ * If delegate is given back to TimeTableOverviewController the new type and acronym are set, while activity indicator is running until this is done.
+ */
 - (void)moveBackToTimeTable:(id)sender
 {
     if (_searchTextField.text == nil || [_searchTextField.text length] == 0)
@@ -257,7 +336,10 @@
     }
 }
 
-
+/*!
+ @function searchTextFieldChanged
+ Triggered, when the text in _searchTextField is changed by the user. Then the table for suggestions needs to be updated accordingly.
+ */
 - (IBAction)searchTextFieldChanged:(id)sender
 {
     _suggestions = [[NSMutableArray alloc] initWithArray:[_autocomplete GetSuggestions:((UITextField*)sender).text]];
@@ -270,6 +352,10 @@
     
 }
 
+/*!
+ @function moveToSearchSegmentedControl
+ Controls the segmented control buttons to cancel or confirm the searched acronym.
+ */
 - (IBAction)moveToSearchSegmentedControl:(id)sender
 {
     // cancel
@@ -318,13 +404,19 @@
 
 
 //---------- Handling of table for suggestions -----
-
+/*!
+ * @function numberOfSectionsInTableView
+ * The function defines the number of sections in _acronymAutocompleteTableView.
+ */
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
     return 1;
 }
 
-// Customize the number of rows in the table view.
+/*!
+ * @function numberOfRowsInSection
+ * The function defines the number of rows in _acronymAutocompleteTableView.
+ */
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
 	if (_suggestions)
@@ -341,8 +433,10 @@
 	return 0;
 }
 
-
-// Customize the appearance of table view cells.
+/*!
+ * @function cellForRowAtIndexPath
+ * The function is for customizing the table view cells of _acronymAutocompleteTableView.
+ */
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
     static NSString *CellIdentifier = @"Cell";
@@ -362,13 +456,19 @@
     return cell;
 }
 
-// set cell hight
+/*!
+ * @function heightForRowAtIndexPath
+ * The function defines the cells height of _acronymAutocompleteTableView.
+ */
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     return 25;
 }
 
-// Override to support row selection in the table view.
+/*!
+ * @function didSelectRowAtIndexPath
+ * The function supports row selection of _acronymAutocompleteTableView.
+ */
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
 	_searchTextField.text = [_suggestions objectAtIndex:indexPath.row];

@@ -1,10 +1,42 @@
-//
-//  TimeTableOverviewController.m
-//  CampusInfo1
-//
-//  Created by Ilka Kokemor on 3/26/12.
-//  Copyright 2012 __MyCompanyName__. All rights reserved.
-//
+/*
+ TimeTableOverviewController.m
+ ZHAW Engineering CampusInfo
+ */
+
+/*!
+ * @header TimeTableOverviewController.m
+ * @author Ilka Kokemor
+ * @copyright 2013 ZHAW
+ * @discussion
+ * <ul>
+ * <li> Responsibilities:
+ *   <ul>
+ *      <li> Control of TimeTableOverviewController.xib, which shows an overview of the time table of a selected student, lecturer, class, room or lecture </li>
+ *      <li> Getting and handling time table data  </li>
+ *      <li> Tiggers loading another time table, if lecture or room, shown in the time table, is clicked </li>
+ *      <li> Switch to showing details in TimeTableDetailController is possible via link on table cells. </li>
+ *      <li> Switch to search other time tables is possible (SearchViewController), via search button of segmented control bar. </li>
+ *      <li> If no acronym is stored in settings, settings view (@link SettingsViewController.h @/link) is called via acronym button of segmented control bar. </li>
+ *      <li> Date of shown time table can be changed or it can be moved to today (also a button in segmented control bar). </li>
+ *  </ul>
+ * </li>
+ *
+ * <li> Receiving data:
+ *   <ul>
+ *      <li> TimeTableOverviewController is called directly from MenuOverviewController or via main tab bar controller. Therefore it triggers all needed data on its own. </li>
+ *      <li> Via call of ScheduleDto, data is get from server, which then is used to display the time tables. </li>
+ *   </ul>
+ * </li>
+ *
+ * <li> Sending data:
+ *   <ul>
+ *      <li> It sends the gained schedule data to TimeTableDetailController to show its details. </li>
+ *      <li> It does not send any data back to MenuOverviewController or to SearchViewController. </li>
+ *   </ul>
+ * </li>
+ *
+ * </ul>
+ */
 
 #import "TimeTableOverviewController.h"
 #import "ChooseDateViewController.h"
@@ -107,7 +139,10 @@
 
 @synthesize _zhawColor;
 
-
+/*!
+ * @function initWithNibName
+ * Initializiation of class.
+ */
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {   
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -115,7 +150,10 @@
 }
 
 
-
+/*!
+ * @function setNewScheduleWithAcronym
+ * Sets title and strings to new acronym data, also loads new ScheduleDto for it.
+ */
 -(void) setNewScheduleWithAcronym:(NSString *)newAcronym
                 withAcronymType  :(NSString *)newAcronymType
                 withAcronymText  :(NSString *)newAcronymText
@@ -156,7 +194,10 @@
 }
 
 
-
+/*!
+ * @function setNewScheduleWithDate
+ * Sets new date in time table, if no schedule for that exists, loads a new one.
+ */
 -(void) setNewScheduleWithDate:(NSDate *)newDate
 {
     _actualShownAcronymTrials   = 1;
@@ -243,18 +284,32 @@
     }
 }
 
-
+/*!
+ @function tryConnectionAgain
+ Triggered by clicking the _noConnectionButton, another trial to connect to server is started.
+ @param sender
+ */
 - (IBAction)tryConnectionAgain:(id)sender
 {
     [self setNewScheduleWithDate:_actualDate];
 }
 
+/*!
+ @function moveBackToMenuOverview
+ When back button is triggered, delegate is returned to MenuOverviewController.
+ @param sender
+ */
 - (void)moveBackToMenuOverview:(id)sender
 {
     [self dismissModalViewControllerAnimated:YES];
     self.tabBarController.selectedIndex = 0;
 }
 
+/*!
+ @function moveToTimeTableSegmentedControlFeature
+ Controls the segmented control buttons to switch to own acronym (or settings view), to today or search view.
+ @param sender
+ */
 - (IBAction)moveToTimeTableSegmentedControlFeature:(id)sender
 {
     // acronym
@@ -291,6 +346,11 @@
     
 }
 
+/*!
+ @function moveToChooseDateView
+ Switches to ChooseDateViewController, so a different date can be chosen.
+ @param sender
+ */
 - (IBAction)moveToChooseDateView:(id)sender
 {
     _chooseDateVC._actualDate = self._actualDate;
@@ -298,6 +358,10 @@
 }
 
 
+/*!
+ * @function didReceiveMemoryWarning
+ * The function is included per default.
+ */
 - (void)didReceiveMemoryWarning
 {
     // Releases the view if it doesn't have a superview.
@@ -305,6 +369,10 @@
     // Release any cached data, images, etc that aren't in use.
 }
 
+/*!
+ * @function setDateInNavigatorWithActualDate
+ * Sets new date in navigation title.
+ */
 - (void) setDateInNavigatorWithActualDate:(NSDate *)showDate
 {
     NSString *_dateString = [NSString stringWithFormat:@"%@, %@"
@@ -315,7 +383,10 @@
 }
 
 
-
+/*!
+ * @function setActualDate
+ * Sets given date as overall actual date.
+ */
 - (void)setActualDate:(NSDate *)newDate
 {
     NSString *_actualDayString    = [[_dateFormatter _dayFormatter] stringFromDate:_actualDate];
@@ -334,7 +405,10 @@
     }
 }
 
-
+/*!
+ * @function dayBefore
+ * Switches to yesterday according to actual date.
+ */
 - (void) dayBefore:(id)sender 
 {
     int daysToAdd = -1;  
@@ -349,14 +423,20 @@
     [self setActualDate:_newDate];
 }
 
-
+/*!
+ * @function dayAfter
+ * Switches to tomorrow according to actual date.
+ */
 - (void) dayAfter:(id)sender
 {
     NSDate *_newDate = [self._actualDate dateByAddingTimeInterval:(1*24*60*60)];
     [self setActualDate:_newDate];
 }
 
-
+/*!
+ * @function getAcronymType
+ * Checks if acronym is of a students or lecturer and sets the acronym type accordingly.
+ */
 - (NSString *)getAcronymType:(NSString *)_newAcronym
 {
     // student : 8 digits, only letters and numbers
@@ -383,15 +463,13 @@
           }      
       }
     }
-    //if ([_localType  compare: @"empty" ] == NSOrderedSame)
-    //{
-      //NSLog(@"Nur Kürzel von Studenten und Dozenten sind möglich. %@ kann nicht identifiziert werden.", _newAcronym);
-      //[self popUpAcronymView:@"Nur Kürzel von Studenten und Dozenten sind möglich."];
-    //}
     return _localType;
 }
 
-
+/*!
+ * @function setAcronymLabel
+ * Sets the given acronym in all according labels and views.
+ */
 - (void)setAcronymLabel:(NSString *)newAcronym
 {
     if (_ownStoredAcronymString == nil || [_ownStoredAcronymString  compare: newAcronym ] != NSOrderedSame)
@@ -418,7 +496,6 @@
             [self._timeTableSegmentedControl setTitle:@"Kürzel" forSegmentAtIndex:0];
         }
         
-        // SET NEW ACRONYM WITH ACTUAL DATE
         [self setNewScheduleWithAcronym:_ownStoredAcronymString
          withAcronymType:_ownStoredAcronymType
          withAcronymText:[NSString stringWithFormat:@"von %@ (%@)"
@@ -431,15 +508,17 @@
     }    
 }
 
-
+/*!
+ * @function setTitleToActualDate
+ * Sets _actualDate to today
+ */
 - (void) setTitleToActualDate 
 {
     NSDateFormatter* df_local = [[NSDateFormatter alloc] init];
     [df_local setTimeZone:[NSTimeZone timeZoneWithName:@"CEST"]];
     [df_local setDateFormat:@"yyyy.MM.dd G 'at' HH:mm:ss zzz"];    
 
-    //----- Navigation Bar ----
-    // set current day
+
     self._actualDate = [NSDate date];
     //self._actualDate    = [[_dateFormatter _dayFormatter] dateFromString:@"07.10.2013"];
     
@@ -449,12 +528,13 @@
 }
 
 
-
+/*!
+ * @function setNewAcronym
+ * Sets the given acronym and type.
+ */
 -(void) setNewAcronym:(NSString *)newAcronym withAcronymType:(NSString *)newAcronymType
 {
     //NSLog(@"setNewAcronym");
-    // SET NEW ACRONYM WITH ACTUAL DATE
-    
     [self setNewScheduleWithAcronym:newAcronym
                     withAcronymType:newAcronymType
                     withAcronymText:[NSString stringWithFormat:@"von %@ (%@)"
@@ -465,10 +545,14 @@
 }
 
 
-
+/*!
+ * @function viewDidLoad
+ * The function is included, since class inherits from UIViewController.
+ * Is called first time, the view is started for initialization.
+ * Is only called once, after initialization, never again.
+ */
 - (void)viewDidLoad
 {
-
     [super viewDidLoad];
     
     // general initializer
@@ -597,24 +681,34 @@
     [[self view] addGestureRecognizer:_leftSwipe];
 }
 
-
+/*!
+ * @function openChooseDateView
+ * Sets the date on ChooseDateViewController and switch there.
+ */
 -(void) openChooseDateView
 {
      _chooseDateVC._actualDate = self._actualDate;
     [self presentModalViewController:_chooseDateVC animated:YES];
 }
 
-
-- (void)handleSearchType:(id)object {
-    //NSLog(@"%@ found something object?",object);
+/*!
+ * @function handleSearchType
+ * Gets the search type from object
+ */
+- (void)handleSearchType:(id)object
+{
     NSString *txt = [object object]; // gets string from within notification object
     //NSLog(@"%@ found something text?",txt);
     self._searchType = txt;
 }
 
+/*!
+ * @function handleSearchText
+ * Gets the search acronym from object and sets it as new acronym
+ */
 
-- (void)handleSearchText:(id)object {
-    //NSLog(@"%@ found something object?",object);
+- (void)handleSearchText:(id)object
+{
     NSString *txt = [object object]; // gets string from within notification object
     //NSLog(@"%@ found something text?",txt);
     self._searchText = txt;
@@ -625,6 +719,10 @@
      ];
 }
 
+/*!
+ * @function threadWaitForLoadingActivityIndicator
+ * Thread is called to start the activity indicator while waiting for data to be downloaded.
+ */
 - (void) threadWaitForLoadingActivityIndicator:(id)data
 {
     _waitForLoadingActivityIndicator.hidden = NO;
@@ -632,7 +730,11 @@
 }
 
 
-// IMPORTANT, OTHERWISE DATA WILL NOT BE UPDATED, WHEN APP IS STARTED FIRST TIME
+/*!
+ * @function viewWillAppear
+ * The function is included, since class inherits from UIViewController.
+ * It is called every time the view is called again.
+ */
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];    
@@ -741,7 +843,12 @@
 
 
 
-// also needed for shaking
+/*!
+ * @function viewDidAppear
+ * The function is included, since class inherits from UIViewController.
+ * It is called before viewWillAppear is called.
+ * It is needed to respond to the shaking gesture.
+ */
 -(void)viewDidAppear:(BOOL)animated
 {
     
@@ -773,14 +880,23 @@
     }
 }
 
-// also needed for shaking
+/*!
+ * @function viewWillDisappear
+ * The function is included, since class inherits from UIViewController.
+ * It is called when the view disappears again.
+ * It is needed to respond to the shaking gesture.
+ */
 - (void)viewWillDisappear:(BOOL)animated 
 {
     [self resignFirstResponder];
     [super viewWillDisappear:animated];
 }
 
-// gets values from acronym alert view
+
+/*!
+ * @function clickedButtonAtIndex
+ * It gets values from acronym alert view and sets the acronym accordingly.
+ */
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
     NSString *buttonTitle=[alertView buttonTitleAtIndex:buttonIndex];
     if([buttonTitle isEqualToString:@"OK"])
@@ -813,16 +929,19 @@
 }
 
 
-
-// needed for shaking
--(BOOL)canBecomeFirstResponder {
+/*!
+ * @function canBecomeFirstResponder
+ * The function is needed to respond to the shaking gesture.
+ */
+-(BOOL)canBecomeFirstResponder
+{
     return YES;
 }
 
-
-
-
-//this one is also needed for shaking
+/*!
+ * @function motionEnded
+ * The function is needed to respond to the shaking gesture.
+ */
 - (void)motionEnded:(UIEventSubtype)motion withEvent:(UIEvent *)event
 {
     if (motion == UIEventSubtypeMotionShake)
@@ -835,7 +954,11 @@
     }
 }
 
-
+/*!
+ @function viewDidUnload
+ * The function is included, since class inherits from UIViewController.
+ * It is called while the view is unloaded.
+ */
 - (void)viewDidUnload
 {
     _oneSlotOneRoomTableCell    = nil;
@@ -908,23 +1031,22 @@
     [super viewDidUnload];
 }
 
-
+/*!
+ * @function shouldAutorotateToInterfaceOrientation
+ * Supports autorotation.
+ */
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
-    // Return YES for supported orientations
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
 }
 
 
 
-
-// ------- MANAGE SCHEDULE DETAIL PAGE ----
--(void) setScheduleDetail:(ScheduleDto *)newSchedule 
-{
-   // NSLog(@"setScheduleDetail");
-}
-
-
+/*!
+ * @function showScheduleDetails
+ * Sets all data for TimeTableDetailController and sends delegate there.
+ * It is called, since the detail button on a table cell is clicked.
+ */
 -(void) showScheduleDetails:(id)sender event:(id)event
 {
     NSSet       *_touches              = [event    allTouches];
@@ -958,8 +1080,6 @@
         _detailsVC._timeLabel.text      = _detailsVC._timeString;
         
         [_detailsVC._detailTable reloadData];
-        
-        
         [_detailsVC setNavigationTitle:_detailsVC._dayAndAcronymString];
         
         [self presentModalViewController:_detailsVC animated:YES];
@@ -967,8 +1087,10 @@
 }
 
 
-
-
+/*!
+ * @function changeToRoomSchedule
+ * Loads time table of clicked room.
+ */
 -(void) changeToRoomSchedule:(id)sender withEvent:(id)event withRealizationIndex:(int)realizationIndex
 {
     NSSet       *_touches              = [event    allTouches];
@@ -995,8 +1117,10 @@
     }
 }
 
-
-
+/*!
+ * @function changeToCourseSchedule
+ * Loads time table of clicked course.
+ */
 -(void) changeToCourseSchedule:(id)sender event:(id)event
 {
     NSSet            *_touches              = [event    allTouches];
@@ -1021,11 +1145,12 @@
 
 
 
-// --------------------------------
-
-
 
 // ------- MANAGE TABLE CELLS ----
+/*!
+ * @function numberOfSectionsInTableView
+ * The function defines the number of sections in _acronymAutocompleteTableView.
+ */
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
     if (self._schedule._errorMessage != nil)
@@ -1038,16 +1163,19 @@
     }
 }
 
-
+/*!
+ * @function numberOfRowsInSection
+ * The function defines the number of rows in _acronymAutocompleteTableView.
+ */
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    //NSLog(@"in numberOfRowsInSection");
-    //#warning Incomplete method implementation.
-    // Return the number of rows in the section.
-    return 1; //[_schedule._days count]; //first 1 // [_timeTableSlotArray count];
+    return 1; 
 }
  
-
+/*!
+ * @function getCurrentScheduleEventArrayWithDay
+ * Loops over dayDto to get the corresponding data fitting to given times.
+ */
 - (NSMutableArray *)getCurrentScheduleEventArrayWithDay       :(DayDto *)        currentDay
                                     withFromTimeString        :(NSString *)      fromTimeString
                                     withToTimeString          :(NSString *)      toTimeString
@@ -1208,7 +1336,10 @@
 }
 
 
-
+/*!
+ * @function addToSortedScheduleEventArray
+ * Adds found array with courses to already given course array.
+ */
 - (NSMutableArray *)addToSortedScheduleEventArray:(NSMutableArray *)spottedScheduleEventArray
                       withScheduleEventArrayToAdd:(NSMutableArray *)formerSheduleEventArray
                                withDatesToDisplay:(NSString *)datesToDisplay
@@ -1244,7 +1375,11 @@
 
 
 
-
+/*!
+ * @function getSortedScheduleEvent
+ * Sort schedule event according to time.
+ * Handle holidays especially.
+ */
 - (NSMutableArray *)getSortedScheduleEvent:(DayDto *)currentDay
 {
     ScheduleEventDto    *_oneScheduleEvent          = [[ScheduleEventDto alloc] init:nil :nil :nil :nil :nil :nil :nil];
@@ -1430,7 +1565,10 @@
 }
 
 
-
+/*!
+ * @function getDayDto
+ * Get dayDto data from _schedule according to actual day.
+ */
 - (DayDto *)getDayDto
 {
     DayDto         *_oneDay   = nil;
@@ -1465,14 +1603,16 @@
 }
 
 
-
+/*!
+ * @function isActualDayAndTime
+ * Return yes, if actual day and time is within given time span. 
+ */
 - (BOOL) isActualDayAndTime:(NSDate *)actualDate
               withStartTimeString:(NSString *)startTimeString
                 withEndTimeString:(NSString *)endTimeString
 {
 
     NSDate *_today = [NSDate date];
-    
     //NSDate *_today   = [[_dateFormatter _dayFormatter] dateFromString:@"07.10.2013"];
  
     NSString *_actualDayString    = [[_dateFormatter _dayFormatter] stringFromDate:_actualDate];
@@ -1497,12 +1637,15 @@
           return YES;
         }
     }
-   // return YES;
     return NO;
 }
 
 
-
+/*!
+ * @function setLectureButtonWithCell
+ * Set lecture information in table cells.
+ * This is always a button and it is switched to course time table, if it is clicked.
+ */
 - (void) setLectureButtonWithCell:(UITableViewCell *)cell
         withTag            :(int)       indexTag
         withTitle          :(NSString *)title
@@ -1527,52 +1670,77 @@
     
 }
 
+/*!
+ * @function changeToRoomSchedule1
+ * Change to time table or room 1, if it is clicked.
+ */
 - (void) changeToRoomSchedule1:(id)sender event:(id)event
 {
     [self changeToRoomSchedule:sender withEvent:event withRealizationIndex:0];
 }
-
+/*!
+ * @function changeToRoomSchedule2
+ * Change to time table or room 2, if it is clicked.
+ */
 - (void) changeToRoomSchedule2:(id)sender event:(id)event
 {
     [self changeToRoomSchedule:sender withEvent:event withRealizationIndex:1];
 }
-
+/*!
+ * @function changeToRoomSchedule3
+ * Change to time table or room 3, if it is clicked.
+ */
 - (void) changeToRoomSchedule3:(id)sender event:(id)event
 {
     [self changeToRoomSchedule:sender withEvent:event withRealizationIndex:2];
 }
-
+/*!
+ * @function changeToRoomSchedule4
+ * Change to time table or room 4, if it is clicked.
+ */
 - (void) changeToRoomSchedule4:(id)sender event:(id)event
 {
     [self changeToRoomSchedule:sender withEvent:event withRealizationIndex:3];
 }
-
+/*!
+ * @function changeToRoomSchedule5
+ * Change to time table or room 5, if it is clicked.
+ */
 - (void) changeToRoomSchedule5:(id)sender event:(id)event
 {
     [self changeToRoomSchedule:sender withEvent:event withRealizationIndex:4];
 }
-
+/*!
+ * @function changeToRoomSchedule6
+ * Change to time table or room 6, if it is clicked.
+ */
 - (void) changeToRoomSchedule6:(id)sender event:(id)event
 {
     [self changeToRoomSchedule:sender withEvent:event withRealizationIndex:5];
 }
-
+/*!
+ * @function changeToRoomSchedule7
+ * Change to time table or room 7, if it is clicked.
+ */
 - (void) changeToRoomSchedule7:(id)sender event:(id)event
 {
     [self changeToRoomSchedule:sender withEvent:event withRealizationIndex:6];
 }
-
+/*!
+ * @function changeToRoomSchedule8
+ * Change to time table or room 8, if it is clicked.
+ */
 - (void) changeToRoomSchedule8:(id)sender event:(id)event
 {
     [self changeToRoomSchedule:sender withEvent:event withRealizationIndex:7];
 }
 
 
-
-
-
-
-
+/*!
+ * @function setRoomButtonWithCell
+ * Set room information in table cells.
+ * This is always a button and it is switched to room time table, if it is clicked.
+ */
 - (void) setRoomButtonWithCell:(UITableViewCell *)cell
               withTag            :(int)       indexTag
               withTitle          :(NSString *)title
@@ -1627,7 +1795,11 @@
     }
 }
 
-
+/*!
+ * @function setDetailButtonWithCell
+ * Sets detail button.
+ * If it is clicked, it is switched to TimeTableDetailController to show the detail information of the given lecture.
+ */
 - (void) setDetailButtonWithCell:(UITableViewCell *)cell
               withTag            :(int)       indexTag
 {
@@ -1640,7 +1812,10 @@
 }
 
 
-
+/*!
+ * @function setDateLabelWithCell
+ * Sets according time spans in table cell.
+ */
 - (void) setDateLabelWithCell:(UITableViewCell *)cell
              withTag            :(int)       indexTag
              withStartTime      :(NSDate *)  startTime
@@ -1658,7 +1833,11 @@
                        ];
 }
 
-
+/*!
+ * @function setActualLectureButtonWithCell
+ * Sets lecture information in table cells.
+ * This is always a button and it is switched to course time table, if it is clicked.
+ */
 - (void)setActualLectureButtonWithCell:(UITableViewCell *)cell
                    withTag            :(int)       indexTag
                    withStartTime      :(NSDate *)  startTime
@@ -1680,7 +1859,10 @@
     }
 }
 
-
+/*!
+ * @function setBackgroundColorOfCell
+ * Sets background color of cell, when there is a lecture it needs to be blue.
+ */
 - (void) setBackgroundColorOfCell:(UITableViewCell *)cell
                     withIsLecture:(BOOL)isLecture
 {
@@ -1696,7 +1878,10 @@
     }
 }
 
-
+/*!
+ * @function cellErrorMessage
+ * Handles _errorMessageCell, whic is used, when no lecture is displayed but an error message.
+ */
 - (UITableViewCell *)cellErrorMessage
     :(UITableView      *)actualTableView
     :(NSUInteger        )actualSelection
@@ -1730,7 +1915,10 @@
     return _cell;
 }
 
-
+/*!
+ * @function emptyCellOrHoliday
+ * Handles _emptyTableCell, which is used, when a holiday or an empty cell is displayed.
+ */
 - (UITableViewCell *)emptyCellOrHoliday
     :(UITableView      *)actualTableView
     :(ScheduleEventDto *)actualScheduleEvent
@@ -1815,7 +2003,10 @@
 }
 
 
-
+/*!
+ * @function oneSlotOneRoomWithView
+ * Handles _oneSlotOneRoomTableCell, which is used, when one room and one time slot are displayed.
+ */
 - (UITableViewCell *)oneSlotOneRoomWithView:(UITableView *)actualTableView
     withScheduleEvent   :(ScheduleEventDto *)actualScheduleEvent
 {
@@ -1853,7 +2044,10 @@
 }
 
 
-
+/*!
+ * @function twoSlotsOneRoomWithView
+ * Handles _twoSlotsOneRoomTableCell, which is used, when one room and two time slots are displayed.
+ */
 - (UITableViewCell *)twoSlotsOneRoomWithView:(UITableView *)actualTableView
                             withScheduleEvent   :(ScheduleEventDto *)actualScheduleEvent
 {
@@ -1890,7 +2084,10 @@
     return _cell;
 }
 
-
+/*!
+ * @function threeSlotsOneRoomWithView
+ * Handles _threeSlotsOneRoomTableCell, which is used, when one room and three time slots are displayed.
+ */
 - (UITableViewCell *)threeSlotsOneRoomWithView:(UITableView *)actualTableView
                                 withScheduleEvent   :(ScheduleEventDto *)actualScheduleEvent
 {
@@ -1929,7 +2126,10 @@
     return _cell;        
 }
 
-
+/*!
+ * @function oneSlotTwoRoomsWithView
+ * Handles _oneSlotTwoRoomsTableCell, which is used, when two rooms and one time slot are displayed.
+ */
 - (UITableViewCell *)oneSlotTwoRoomsWithView:(UITableView *)actualTableView
                                             withScheduleEvent   :(ScheduleEventDto *)actualScheduleEvent
 {
@@ -1967,7 +2167,10 @@
     return _cell;
 }
 
-
+/*!
+ * @function twoSlotsTwoRoomsWithView
+ * Handles _twoSlotsTwoRoomsTableCell, which is used, when two rooms and two time slots are displayed.
+ */
 - (UITableViewCell *)twoSlotsTwoRoomsWithView           :(UITableView *)     actualTableView
                                     withScheduleEvent   :(ScheduleEventDto *)actualScheduleEvent
 {
@@ -2008,8 +2211,10 @@
 }
 
 
-
-
+/*!
+ * @function oneSlotThreeRoomsWithView
+ * Handles _oneSlotThreeRoomsTableCell, which is used, when three rooms and one time slot are displayed.
+ */
 - (UITableViewCell *)oneSlotThreeRoomsWithView:(UITableView *)actualTableView
                                         withScheduleEvent   :(ScheduleEventDto *)actualScheduleEvent
 {
@@ -2049,7 +2254,10 @@
 }
 
 
-
+/*!
+ * @function oneSlotFourRoomsWithView
+ * Handles _oneSlotFourRoomsTableCell, which is used, when four rooms and one time slot are displayed.
+ */
 - (UITableViewCell *)oneSlotFourRoomsWithView:(UITableView *)actualTableView
                                     withScheduleEvent   :(ScheduleEventDto *)actualScheduleEvent
 {
@@ -2091,8 +2299,10 @@
 }
 
 
-
-
+/*!
+ * @function oneSlotFiveRoomsWithView
+ * Handles _oneSlotFiveRoomsTableCell, which is used, when five rooms and one time slot are displayed.
+ */
 - (UITableViewCell *)oneSlotFiveRoomsWithView       :(UITableView *)     actualTableView
                                 withScheduleEvent   :(ScheduleEventDto *)actualScheduleEvent
 {
@@ -2136,7 +2346,10 @@
 }
 
 
-
+/*!
+ * @function oneSlotSixRoomsWithView
+ * Handles _oneSlotSixRoomsTableCell, which is used, when six rooms and one time slot are displayed.
+ */
 - (UITableViewCell *)oneSlotSixRoomsWithView            :(UITableView *)     actualTableView
                                     withScheduleEvent   :(ScheduleEventDto *)actualScheduleEvent
 {
@@ -2182,7 +2395,10 @@
 }
 
 
-
+/*!
+ * @function twoSlotsThreeRoomsWithView
+ * Handles _twoSlotsThreeRoomsTableCell, which is used, when three rooms and two time slots are displayed.
+ */
 - (UITableViewCell *)twoSlotsThreeRoomsWithView           :(UITableView *)     actualTableView
                                      withScheduleEvent   :(ScheduleEventDto *)actualScheduleEvent
 {
@@ -2224,7 +2440,10 @@
 }
 
 
-
+/*!
+ * @function twoSlotsFourRoomsWithView
+ * Handles _twoSlotsFourRoomsTableCell, which is used, when four rooms and two time slots are displayed.
+ */
 - (UITableViewCell *)twoSlotsFourRoomsWithView           :(UITableView *)     actualTableView
                                      withScheduleEvent   :(ScheduleEventDto *)actualScheduleEvent
 {
@@ -2268,6 +2487,10 @@
 }
 
 
+/*!
+ * @function twoSlotsSixRoomsWithView
+ * Handles _twoSlotsSixRoomsTableCell, which is used, when six rooms and two time slots are displayed.
+ */
 - (UITableViewCell *)twoSlotsSixRoomsWithView            :(UITableView *)     actualTableView
                                     withScheduleEvent   :(ScheduleEventDto *)actualScheduleEvent
 {
@@ -2315,7 +2538,10 @@
 }
 
 
-
+/*!
+ * @function oneSlotSevenRoomsWithView
+ * Handles _oneSlotSevenRoomsTableCell, which is used, when seven rooms and one time slot are displayed.
+ */
 - (UITableViewCell *)oneSlotSevenRoomsWithView  :(UITableView *)     actualTableView
                             withScheduleEvent   :(ScheduleEventDto *)actualScheduleEvent
 {
@@ -2363,7 +2589,10 @@
 }
 
 
-
+/*!
+ * @function oneSlotEightRoomsWithView
+ * Handles _oneSlotEightRoomsTableCell, which is used, when eight rooms and one time slot are displayed.
+ */
 - (UITableViewCell *)oneSlotEightRoomsWithView      :(UITableView *)     actualTableView
                                 withScheduleEvent   :(ScheduleEventDto *)actualScheduleEvent
 {
@@ -2412,6 +2641,11 @@
     return _cell;
 }
 
+
+/*!
+ * @function threeSlotsTwoRoomsWithView
+ * Handles _threeSlotsTwoRoomsTableCell, which is used, when two rooms and three time slots are displayed.
+ */
 - (UITableViewCell *)threeSlotsTwoRoomsWithView     :(UITableView *)     actualTableView
                                 withScheduleEvent   :(ScheduleEventDto *)actualScheduleEvent
 {
@@ -2453,8 +2687,10 @@
 }
 
 
-
-
+/*!
+ * @function fourSlotsOneRoomWithView
+ * Handles _fourSlotsOneRoomTableCell, which is used, when one room and four time slots are displayed.
+ */
 - (UITableViewCell *)fourSlotsOneRoomWithView       :(UITableView *)actualTableView
                                 withScheduleEvent   :(ScheduleEventDto *)actualScheduleEvent
 {
@@ -2467,13 +2703,6 @@
         _cell = _fourSlotsOneRoomTableCell;
         self._fourSlotsOneRoomTableCell = nil;
     }
-    
-    // setting the labels with infos
-    // 1 => _labelTimeSlot1 -> first  timeslot
-    // 2 => _labelTimeSlot2 -> second timeslot
-    // 3 => _lectureButton  -> lecture title
-    // 4 => _roomButton     -> short room
-    // 5 => _detailButton   -> leads to detail page
     
     ScheduleEventRealizationDto *_localRealization = [actualScheduleEvent._scheduleEventRealizations objectAtIndex:0];
     SlotDto *_timeSlot1 = [actualScheduleEvent._slots objectAtIndex:0];
@@ -2503,7 +2732,10 @@
 }
 
 
-
+/*!
+ * @function fiveSlotsOneRoomWithView
+ * Handles _fiveSlotsOneRoomTableCell, which is used, when one room and five time slots are displayed.
+ */
 - (UITableViewCell *)fiveSlotsOneRoomWithView       :(UITableView *)     actualTableView
                                 withScheduleEvent   :(ScheduleEventDto *)actualScheduleEvent
 {
@@ -2547,6 +2779,10 @@
 }
 
 
+/*!
+ * @function sixSlotsOneRoomWithView
+ * Handles _sixSlotsOneRoomTableCell, which is used, when one room and six time slots are displayed.
+ */
 - (UITableViewCell *)sixSlotsOneRoomWithView        :(UITableView *)     actualTableView
                                 withScheduleEvent   :(ScheduleEventDto *)actualScheduleEvent
 {
@@ -2592,7 +2828,10 @@
 }
 
 
-
+/*!
+ * @function sixSlotsTwoRoomsWithView
+ * Handles _sixSlotsTwoRoomsTableCell, which is used, when two rooms and six time slots are displayed.
+ */
 - (UITableViewCell *)sixSlotsTwoRoomsWithView       :(UITableView *)     actualTableView
                                 withScheduleEvent   :(ScheduleEventDto *)actualScheduleEvent
 {
@@ -2641,6 +2880,10 @@
 }
 
 
+/*!
+ * @function fourSlotsTwoRoomsWithView
+ * Handles _fourSlotsTwoRoomsTableCell, which is used, when two rooms and four time slots are displayed.
+ */
 - (UITableViewCell *)fourSlotsTwoRoomsWithView      :(UITableView *)     actualTableView
                                 withScheduleEvent   :(ScheduleEventDto *)actualScheduleEvent
 {
@@ -2684,6 +2927,10 @@
 }
 
 
+/*!
+ * @function threeSlotsThreeRoomsWithView
+ * Handles _threeSlotsThreeRoomsTableCell, which is used, when three rooms and three time slots are displayed.
+ */
 - (UITableViewCell *)threeSlotsThreeRoomsWithView       :(UITableView *)     actualTableView
                            withScheduleEvent            :(ScheduleEventDto *)actualScheduleEvent
 {
@@ -2727,7 +2974,10 @@
 }
 
 
-
+/*!
+ * @function fourSlotsThreeRoomsWithView
+ * Handles _fourSlotsThreeRoomsTableCell, which is used, when three rooms and four time slots are displayed.
+ */
 - (UITableViewCell *)fourSlotsThreeRoomsWithView      :(UITableView *)     actualTableView
                                   withScheduleEvent   :(ScheduleEventDto *)actualScheduleEvent
 {
@@ -2773,6 +3023,10 @@
 }
 
 
+/*!
+ * @function fourSlotsFourRoomsWithView
+ * Handles _fourSlotsFourRoomsTableCell, which is used, when four rooms and four time slots are displayed.
+ */
 - (UITableViewCell *)fourSlotsFourRoomsWithView       :(UITableView *)     actualTableView
                                   withScheduleEvent   :(ScheduleEventDto *)actualScheduleEvent
 {
@@ -2820,7 +3074,10 @@
 }
 
 
-
+/*!
+ * @function fourSlotsFiveRoomsWithView
+ * Handles _fourSlotsFiveRoomsTableCell, which is used, when five rooms and four time slots are displayed.
+ */
 - (UITableViewCell *)fourSlotsFiveRoomsWithView     :(UITableView *)     actualTableView
                                 withScheduleEvent   :(ScheduleEventDto *)actualScheduleEvent
 {
@@ -2871,6 +3128,10 @@
 }
 
 
+/*!
+ * @function sevenSlotsOneRoomWithView
+ * Handles _sevenSlotsOneRoomTableCell, which is used, when one room and seven time slots are displayed.
+ */
 - (UITableViewCell *)sevenSlotsOneRoomWithView      :(UITableView *)     actualTableView
                                  withScheduleEvent   :(ScheduleEventDto *)actualScheduleEvent
 {
@@ -2919,6 +3180,10 @@
 }
 
 
+/*!
+ * @function sevenSlotsEightRoomsWithView
+ * Handles _sevenSlotsEightRoomsTableCell, which is used, when eight rooms and seven time slots are displayed.
+ */
 - (UITableViewCell *)sevenSlotsEightRoomsWithView   :(UITableView *)     actualTableView
                                 withScheduleEvent   :(ScheduleEventDto *)actualScheduleEvent
 {
@@ -2981,6 +3246,10 @@
 }
 
 
+/*!
+ * @function eightSlotsOneRoomWithView
+ * Handles _eightSlotsOneRoomTableCell, which is used, when one room and eight time slots are displayed.
+ */
 - (UITableViewCell *)eightSlotsOneRoomWithView      :(UITableView *)     actualTableView
                                 withScheduleEvent   :(ScheduleEventDto *)actualScheduleEvent
 {
@@ -3029,6 +3298,10 @@
     return _cell;
 }
 
+/*!
+ * @function nineSlotsThreeRoomsWithView
+ * Handles _nineSlotsThreeRoomsTableCell, which is used, when three rooms and nine time slots are displayed.
+ */
 - (UITableViewCell *)nineSlotsThreeRoomsWithView    :(UITableView *)     actualTableView
                                 withScheduleEvent   :(ScheduleEventDto *)actualScheduleEvent
 {
@@ -3085,8 +3358,11 @@
 }
 
 
-
-
+/*!
+ * @function cellForRowAtIndexPath
+ * The function is for customizing the table view cells.
+ * According to the number of time slots and rooms (scheduleEvents) the cell methods are called.   
+ */
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {   
     
@@ -3372,7 +3648,11 @@
 }
 
 
-
+/*!
+ * @function heightForRowAtIndexPath
+ * The function is for customizing the table view cells.
+ * It sets the height for each cell individually.
+ */
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     
     NSUInteger        _cellSelection = indexPath.section;
@@ -3478,7 +3758,10 @@
 }
 
 
-
+/*!
+ * @function heightForRowAtIndexPath
+ * The function supports row selection.
+ */
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     //NSLog(@"didSelectRowAtIndexPath");

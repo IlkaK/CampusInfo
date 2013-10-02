@@ -1,10 +1,36 @@
-//
-//  SettingsViewController.m
-//  CampusInfo1
-//
-//  Created by Ilka Kokemor on 13.05.13.
-//
-//
+/*
+ SettingsViewController.m
+ ZHAW Engineering CampusInfo
+ */
+
+/*!
+ * @header SettingsViewController.m
+ * @author Ilka Kokemor
+ * @copyright 2013 ZHAW
+ * @discussion
+ * <ul>
+ * <li> Responsibilities:
+ *   <ul>
+ *      <li> Control of SettingsViewController.xib, which shows the setting view, where an acronym for the time table can be stored. </li>
+ *      <li> Handling storage of a consistent acronym for the time table functionality. </li>
+ *  </ul>
+ * </li>
+ *
+ * <li> Receiving data:
+ *   <ul>
+ *      <li> This class is called either form MenuOverviewController or TimeTableOverviewController. But none passes any data. </li>
+ *   </ul>
+ * </li>
+ *
+ * <li> Sending data:
+ *   <ul>
+ *      <li> It stores the chosen acronym in NSNotificationCenter. </li>
+ *      <li> The delegate is passed back to TimeTableOverviewController or MenuOverviewController depending on the caller. </li>
+ *   </ul>
+ * </li>
+ *
+ * </ul>
+ */
 
 #import "SettingsViewController.h"
 #import "UIConstantStrings.h"
@@ -33,13 +59,23 @@
 
 @synthesize _zhawColor;
 
-
+/*!
+ * @function initWithNibName
+ * Initializiation of class.
+ */
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     return self;
 }
 
+
+/*!
+ * @function viewDidLoad
+ * The function is included, since class inherits from UIViewController.
+ * It is called first time, the view is started for initialization.
+ * It is only called once, after initialization, never again.
+ */
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -79,7 +115,10 @@
     [self._acronymAutocompleteTableView setSeparatorStyle:UITableViewCellSeparatorStyleNone];
 }
 
-
+/*!
+ * @function addValuesToAutocompleteCandidates
+ * Adds lecturers or students to autocomplete candidates which are shown in table.
+ */
 -(void)addValuesToAutocompleteCandidates
 {
     // all values must be summarized in suggestions array
@@ -110,7 +149,11 @@
 
 
 
-// IMPORTANT, OTHERWISE DATA WILL NOT BE UPDATED, WHEN APP IS STARTED FIRST TIME
+/*!
+ * @function viewWillAppear
+ * The function is included, since class inherits from UIViewController.
+ * It is called every time the view is called again.
+ */
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
@@ -127,13 +170,20 @@
 }
 
 
-
+/*!
+ * @function didReceiveMemoryWarning
+ * The function is included per default.
+ */
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
+/*!
+ @function viewDidUnload
+ * The function is included, since class inherits from UIViewController.
+ * It is called while the view is unloaded.
+ */
 - (void)viewDidUnload {
     [self set_acronymTextField:nil];
     _acronymTextField = nil;
@@ -146,6 +196,11 @@
     [super viewDidUnload];
 }
 
+/*!
+ @function moveBackToMenuOverview
+ Returns the delegate back to TimeTableOverviewController or MenuOverviewController depending on the caller.
+ @param sender
+ */
 - (void)moveBackToMenuOverview:(id)sender
 {
     NSString *_localAcronym = _acronymTextField.text;
@@ -164,13 +219,19 @@
     [self dismissModalViewControllerAnimated:YES];
 }
 
-
+/*!
+ * @function textFieldShouldReturn
+ * The function is included, since the class delegates its textFields on its own. (UITextFieldDelegate)
+ */
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
     [textField resignFirstResponder];
     return NO;
 }
 
-
+/*!
+ * @function getAcronymType
+ * Checks if acronym is of a students or lecturer and sets the acronym type accordingly.
+ */
 - (NSString *)getAcronymType:(NSString *)_newAcronym
 {
     // student : 8 digits, only letters and numbers
@@ -201,7 +262,11 @@
     return _localType;
 }
 
-
+/*!
+ @function acronymTextFieldChanged
+ Triggered, when the text in _acronymTextField is changed by the user. Then the table for suggestions needs to be updated accordingly.
+ @param sender
+ */
 - (IBAction)acronymTextFieldChanged:(id)sender
 {
     [self addValuesToAutocompleteCandidates];
@@ -218,12 +283,20 @@
 
 
 //---------- Handling of table for suggestions -----
+/*!
+ * @function numberOfSectionsInTableView
+ * The function defines the number of sections in _acronymAutocompleteTableView.
+ */
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
     return 1;
 }
 
 // Customize the number of rows in the table view.
+/*!
+ * @function numberOfRowsInSection
+ * The function defines the number of rows in _acronymAutocompleteTableView.
+ */
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     if ([_suggestions count] > 5)
@@ -238,7 +311,10 @@
 }
 
 
-// Customize the appearance of table view cells.
+/*!
+ * @function cellForRowAtIndexPath
+ * The function is for customizing the table view cells of _acronymAutocompleteTableView.
+ */
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
     static NSString *CellIdentifier = @"Cell";
@@ -258,13 +334,19 @@
     return cell;
 }
 
-// set cell hight
+/*!
+ * @function heightForRowAtIndexPath
+ * The function defines the cells height of _acronymAutocompleteTableView.
+ */
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     return 20;
 }
 
-// Override to support row selection in the table view.
+/*!
+ * @function didSelectRowAtIndexPath
+ * The function supports row selection of _acronymAutocompleteTableView.
+ */
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
 	_acronymTextField.text = [_suggestions objectAtIndex:indexPath.row];

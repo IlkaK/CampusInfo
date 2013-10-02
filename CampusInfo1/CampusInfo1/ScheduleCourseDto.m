@@ -1,10 +1,35 @@
-//
-//  ScheduleCourseDto.m
-//  CampusInfo1
-//
-//  Created by Ilka Kokemor on 07.05.12.
-//  Copyright (c) 2012 __MyCompanyName__. All rights reserved.
-//
+/*
+ ScheduleCourseDto.m
+ ZHAW Engineering CampusInfo
+ */
+
+/*!
+ * @header ScheduleCourseDto.m
+ * @author Ilka Kokemor
+ * @copyright 2013 ZHAW
+ * @discussion
+ * <ul>
+ * <li> Responsibilities:
+ *   <ul>
+ *      <li> Holds data for ScheduleCourse in TimeTableDto model. </li>
+ *  </ul>
+ * </li>
+ *
+ * <li> Receiving data:
+ *   <ul>
+ *      <li> It receives name and description to be initally set or a dictionary to browse the data itself. </li>
+ *   </ul>
+ * </li>
+ *
+ * <li> Sending data:
+ *   <ul>
+ *      <li> It returns itself when called. </li>
+ *   </ul>
+ * </li>
+ *
+ * </ul>
+ */
+
 
 #import "ScheduleCourseDto.h"
 
@@ -12,7 +37,12 @@
 
 @synthesize _name, _description;
 
-
+/*!
+ @function init
+ Needs to be called initally, when instance of ScheduleCourseDto is created.
+ @param newName
+ @param newDescription
+ */
 -(id) init 
 : (NSString *) newName
 : (NSString *) newDescription
@@ -25,7 +55,12 @@
     return self;
 }
 
-
+/*!
+ @function getScheduleCourseWithDictionary
+ Is called when a new ScheduleCourseDto instance should be created based on the dictionary information.
+ @param dictionary
+ @param key
+ */
 - (ScheduleCourseDto *) getScheduleCourseWithDictionary:(NSDictionary *)dictionary withKey:(id) key
 {
     ScheduleCourseDto *_localCourse       = nil;

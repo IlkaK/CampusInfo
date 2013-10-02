@@ -1,10 +1,12 @@
-//
-//  PublicStopViewController.h
-//  CampusInfo1
-//
-//  Created by Ilka Kokemor on 28.08.13.
-//
-//
+/*	PublicStopViewController.h
+ */
+
+/*!
+ @header PublicStopViewController.h
+ This class belongs to the corresponding PublicStopViewController.xib file.
+ That means, it controlls the view with which stations/stops can be searched to be used within the public transportation view.
+ */
+
 
 #import <UIKit/UIKit.h>
 #import "StationArrayDto.h"

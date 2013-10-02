@@ -1,10 +1,36 @@
-//
-//  TimeTableDetailController.m
-//  CampusInfo1
-//
-//  Created by Ilka Kokemor on 22.04.12.
-//  Copyright (c) 2012 __MyCompanyName__. All rights reserved.
-//
+/*
+ TimeTableDetailViewDelegate.m
+ ZHAW Engineering CampusInfo
+ */
+
+/*!
+ * @header TimeTableDetailViewDelegate.m
+ * @author Ilka Kokemor
+ * @copyright 2013 ZHAW
+ * @discussion
+ * <ul>
+ * <li> Responsibilities:
+ *   <ul>
+ *      <li> Control of TimeTableDetailViewDelegate.xib, which shows the detail aspects of a time table entry </li>
+ *      <li> Handling the details of a time table entry  </li>
+ *      <li> Tiggers loading another time table, if one of the details is activated </li>
+ *  </ul>
+ * </li>
+ *
+ * <li> Receiving data:
+ *   <ul>
+ *      <li> This class is delegated by TimeTableOverviewController, which sets the _scheduleEvent in which a time table entry is stored. </li>
+ *   </ul>
+ * </li>
+ *
+ * <li> Sending data:
+ *   <ul>
+ *      <li> It sends new acronym and acronym type back to TimeTableOverviewController to load the new time table. </li>
+ *   </ul>
+ * </li>
+ *
+ * </ul>
+ */
 
 #import "TimeTableDetailController.h"
 #import "ScheduleEventRealizationDto.h"
@@ -42,7 +68,10 @@
 
 @synthesize _zhawColors;
 
-
+/*!
+ * @function initWithNibName
+ * Initializiation of class.
+ */
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -50,19 +79,32 @@
 }
 
 
-
+/*!
+ @function moveBackToTimeTable
+ Function is called, when back button on navigation bar is hit, to move back to time table overview.
+ @param sender
+ */
 - (void)moveBackToTimeTable:(id)sender
 {
         [self dismissModalViewControllerAnimated:YES];
 }
 
-
+/*!
+ @function setNavigationTitle
+ Sets _timeTableDescriptionLabel to given string. Called by TimeTableOverviewController.
+ @param titleString String to be set for _timeTableDescriptionLabel.
+ */
 -(void)setNavigationTitle:(NSString *)titleString
 {
     _timeTableDescriptionLabel.text = [NSString stringWithFormat:@"%@", titleString];
 }
 
-
+/*!
+ * @function viewDidLoad
+ * The function is included, since class inherits from UIViewController.
+ * Is called first time, the view is started for initialization.
+ * Is only called once, after initialization, never again.
+ */
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -111,7 +153,11 @@
 
 }
 
-
+/*!
+ @function viewDidUnload
+ * The function is included, since class inherits from UIViewController.
+ * It is called while the view is unloaded.
+ */
 - (void)viewDidUnload
 {    
     _detailTable                = nil;
@@ -130,13 +176,19 @@
     [super viewDidUnload];
 }
 
-
+/*!
+ * @function shouldAutorotateToInterfaceOrientation
+ * Supports autorotation.
+ */
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
 }
 
-
+/*!
+ * @function threadWaitForChangeActivityIndicator
+ * Thread is called to start the activity indicator while waiting for data to be downloaded.
+ */
 - (void) threadWaitForChangeActivityIndicator:(id)data
 {
     _waitForChangeActivityIndicator.hidden = NO;
@@ -144,7 +196,10 @@
 }
 
 
-
+/*!
+ * @function splitScheduleToArray
+ * Splits the given schedule event into an array so all data can be displayed in seperate table cells.
+ */
 - (NSMutableArray *)splitScheduleToArray:(ScheduleEventDto *)scheduleEvent
 {
     NSMutableArray *_bothArrays       = [[NSMutableArray alloc]init];
@@ -263,6 +318,10 @@
 
 
 // ----- DETAIL TABLE -----
+/*!
+ * @function numberOfSectionsInTableView
+ * The function defines the number of sections in _acronymAutocompleteTableView.
+ */
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
     //NSLog(@" _timeString in Table %@",_timeString);
@@ -276,15 +335,20 @@
     return [_descriptionArray count];
 }
 
-
+/*!
+ * @function numberOfRowsInSection
+ * The function defines the number of rows in _acronymAutocompleteTableView.
+ */
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    //NSLog(@"numberOfRowsInSection");
     return 1;
 }
 
 
-
+/*!
+ * @function changeToSchedule
+ * If delegate is given back to TimeTableOverviewController the new type and acronym are set, while activity indicator is running until this is done.
+ */
 -(void) changeToSchedule:(id)sender event:(id)event
 {
     
@@ -314,11 +378,13 @@
     _waitForChangeActivityIndicator.hidden = YES;
     
     [self dismissModalViewControllerAnimated:YES];
-    
-
 }
 
 
+/*!
+ * @function cellForRowAtIndexPath
+ * The function is for customizing the table view cells of _acronymAutocompleteTableView.
+ */
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
 

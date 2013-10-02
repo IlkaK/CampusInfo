@@ -16,8 +16,8 @@
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "A35A34131520814700181E3F"
                BuildableName = "Engineering.app"
-               BlueprintName = "CampusInfo1"
-               ReferencedContainer = "container:CampusInfo1.xcodeproj">
+               BlueprintName = "Engineering"
+               ReferencedContainer = "container:Engineering.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -34,8 +34,8 @@
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "A35A34131520814700181E3F"
             BuildableName = "Engineering.app"
-            BlueprintName = "CampusInfo1"
-            ReferencedContainer = "container:CampusInfo1.xcodeproj">
+            BlueprintName = "Engineering"
+            ReferencedContainer = "container:Engineering.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
    </TestAction>
@@ -53,8 +53,8 @@
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "A35A34131520814700181E3F"
             BuildableName = "Engineering.app"
-            BlueprintName = "CampusInfo1"
-            ReferencedContainer = "container:CampusInfo1.xcodeproj">
+            BlueprintName = "Engineering"
+            ReferencedContainer = "container:Engineering.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
       <AdditionalOptions>
@@ -64,15 +64,15 @@
       shouldUseLaunchSchemeArgsEnv = "YES"
       savedToolIdentifier = ""
       useCustomWorkingDirectory = "NO"
-      buildConfiguration = "Debug"
+      buildConfiguration = "Release"
       debugDocumentVersioning = "YES">
       <BuildableProductRunnable>
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "A35A34131520814700181E3F"
             BuildableName = "Engineering.app"
-            BlueprintName = "CampusInfo1"
-            ReferencedContainer = "container:CampusInfo1.xcodeproj">
+            BlueprintName = "Engineering"
+            ReferencedContainer = "container:Engineering.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>
@@ -80,7 +80,7 @@
       buildConfiguration = "Debug">
    </AnalyzeAction>
    <ArchiveAction
-      buildConfiguration = "Debug"
+      buildConfiguration = "Release"
       revealArchiveInOrganizer = "YES">
    </ArchiveAction>
 </Scheme>

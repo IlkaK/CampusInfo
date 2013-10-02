@@ -1,11 +1,34 @@
-//
-//  PersonDto.m
-//  CampusInfo1
-//
-//  Created by Ilka Kokemor on 3/30/12.
-//  Copyright 2012 __MyCompanyName__. All rights reserved.
-//
+/*
+ PersonDto.m
+ ZHAW Engineering CampusInfo
+ */
 
+/*!
+ * @header PersonDto.m
+ * @author Ilka Kokemor
+ * @copyright 2013 ZHAW
+ * @discussion
+ * <ul>
+ * <li> Responsibilities:
+ *   <ul>
+ *      <li> Holds data for Person in TimeTableDto model. </li>
+ *  </ul>
+ * </li>
+ *
+ * <li> Receiving data:
+ *   <ul>
+ *      <li> It receives shortName, firstName, lastName, type and department to be initally set or a dictionary to browse the data itself. </li>
+ *   </ul>
+ * </li>
+ *
+ * <li> Sending data:
+ *   <ul>
+ *      <li> It returns itself when called. </li>
+ *   </ul>
+ * </li>
+ *
+ * </ul>
+ */
 #import "PersonDto.h"
 #import "DepartmentDto.h"
 
@@ -14,6 +37,15 @@
 
 @synthesize _shortName, _firstName, _lastName, _type, _department;
 
+/*!
+ @function init
+ Needs to be called initally, when instance of PersonDto is created.
+ @param newShortName
+ @param newFirstName
+ @param newLastName
+ @param newType
+ @param newDepartment
+ */
 -(id) init 
 : (NSString      *) newShortName
 : (NSString      *) newFirstName
@@ -33,7 +65,12 @@
     return self;
 }
 
-
+/*!
+ @function getPersonWithDictionary
+ Is called when a new PersonDto instance should be created based on the dictionary information.
+ @param dictionary
+ @param key
+ */
 - (PersonDto *) getPersonWithDictionary:(NSDictionary *)dictionary withKey:(id) key
 {
     PersonDto     *_localPerson      = nil;
@@ -86,8 +123,7 @@
                     //NSLog(@"_department._name: %@",_localDepartment._name);
                 }
             }
-            
-        } // end loop over keys
+        } 
     }
     _localPerson    = [[PersonDto alloc]init:_localShortName:_localFirstName:_localLastName: _localPersonType :_localDepartment];
     //NSLog(@"localPerson: %@", _localPerson._shortName);

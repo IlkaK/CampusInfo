@@ -1,10 +1,34 @@
-//
-//  ScheduleEventDto.m
-//  CampusInfo1
-//
-//  Created by Ilka Kokemor on 07.05.12.
-//  Copyright (c) 2012 __MyCompanyName__. All rights reserved.
-//
+/*
+ ScheduleEventDto.m
+ ZHAW Engineering CampusInfo
+ */
+
+/*!
+ * @header ScheduleEventDto.m
+ * @author Ilka Kokemor
+ * @copyright 2013 ZHAW
+ * @discussion
+ * <ul>
+ * <li> Responsibilities:
+ *   <ul>
+ *      <li> Holds data for ScheduleEvent in TimeTableDto model. </li>
+ *  </ul>
+ * </li>
+ *
+ * <li> Receiving data:
+ *   <ul>
+ *      <li> It receives description, startTime, endTime, name, slots, type and scheduleEventRealization to be initally set or a dictionary to browse the data itself. </li>
+ *   </ul>
+ * </li>
+ *
+ * <li> Sending data:
+ *   <ul>
+ *      <li> It returns itself when called. </li>
+ *   </ul>
+ * </li>
+ *
+ * </ul>
+ */
 
 #import "ScheduleEventDto.h"
 #import "ScheduleEventRealizationDto.h"
@@ -16,6 +40,17 @@
 @synthesize _description, _startTime, _endTime, _name, _slots, _type, _scheduleEventRealizations;
 @synthesize _dateFormatter;
 
+/*!
+ @function init
+ Needs to be called initally, when instance of ScheduleEventDto is created.
+ @param newDescription
+ @param newStartTime
+ @param newEndTime
+ @param newName
+ @param newSlots
+ @param newType
+ @param newScheduleEventRealizations
+ */
 -(id) init : (NSString       *) newDescription
            : (NSDate         *) newStartTime
            : (NSDate         *) newEndTime
@@ -40,6 +75,11 @@
     return self;
 }
 
+/*!
+ @function getEvent
+ Is called when a new ScheduleEventDto instance should be created based on the dictionary information.
+ @param eventDictionary
+ */
 - (ScheduleEventDto *) getEvent:(NSDictionary *)eventDictionary
 {
     ScheduleEventDto  *_localScheduleEvent;
