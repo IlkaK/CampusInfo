@@ -1374,7 +1374,6 @@
 }
 
 
-
 /*!
  * @function getSortedScheduleEvent
  * Sort schedule event according to time.

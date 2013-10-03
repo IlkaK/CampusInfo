@@ -1,10 +1,34 @@
-//
-//  SlotDto.m
-//  CampusInfo1
-//
-//  Created by Ilka Kokemor on 3/30/12.
-//  Copyright 2012 __MyCompanyName__. All rights reserved.
-//
+/*
+ SlotDto.m
+ ZHAW Engineering CampusInfo
+ */
+
+/*!
+ * @header SlotDto.m
+ * @author Ilka Kokemor
+ * @copyright 2013 ZHAW
+ * @discussion
+ * <ul>
+ * <li> Responsibilities:
+ *   <ul>
+ *      <li> Holds data for Slot in TimeTableDto model. </li>
+ *  </ul>
+ * </li>
+ *
+ * <li> Receiving data:
+ *   <ul>
+ *      <li> It receives start time and end time to be initally set or a dictionary to browse the data itself. </li>
+ *   </ul>
+ * </li>
+ *
+ * <li> Sending data:
+ *   <ul>
+ *      <li> It returns itself when called. </li>
+ *   </ul>
+ * </li>
+ *
+ * </ul>
+ */
 
 #import "SlotDto.h"
 
@@ -14,6 +38,12 @@
 @synthesize _startTime, _endTime;
 @synthesize _dateFormatter;
 
+/*!
+ @function init
+ Needs to be called initally, when instance of SlotDto is created.
+ @param newStartTime
+ @param newEndTime
+ */
 -(id) init : (NSDate         *) newStartTime
            : (NSDate         *) newEndTime
 
@@ -28,7 +58,11 @@
     return self;
 }
 
-
+/*!
+ @function getSlot
+ Is called when a new SlotDto instance should be created based on the dictionary information.
+ @param slotDictionary
+ */
 - (SlotDto *) getSlot:(NSDictionary *)slotDictionary
 {
     SlotDto        *_localSlot;
@@ -41,7 +75,6 @@
     {
         if ([slotKey isEqualToString:@"startTime"])
         {
-            
             // 2012-04-04T08:00:00+02:00
             //[str substringWithRange:NSMakeRange(3, [str length]-3)];
             
@@ -57,8 +90,7 @@
             _slotEndTime       = [[_dateFormatter _timeFormatter]  dateFromString:_slotEndTimeString];
             //NSLog(@"_slotEndTimeString: %@",_slotEndTimeString);
         }
-        
-    } // end loop over slotDictionary
+    } 
     
     _localSlot = [[SlotDto alloc]init: _slotStartTime :_slotEndTime];
     return _localSlot;

@@ -1,10 +1,36 @@
-//
-//  MenuOverviewController.m
-//  CampusInfo1
-//
-//  Created by Ilka Kokemor on 07.08.13.
-//
-//
+/*
+ MenuOverviewController.m
+ ZHAW Engineering CampusInfo
+ */
+
+/*!
+ * @header MenuOverviewController.m
+ * @author Ilka Kokemor
+ * @copyright 2013 ZHAW
+ * @discussion
+ * <ul>
+ * <li> Responsibilities:
+ *   <ul>
+ *      <li> Control of MenuOverviewController.xib, which shows all menu items. </li>
+ *      <li> Menu items are shown in a table. </li>
+ *      <li> Delegate is passed to clicked item in menu. </li>
+ *  </ul>
+ * </li>
+ *
+ * <li> Receiving data:
+ *   <ul>
+ *      <li> This class does not receive any data, but the delegate, when the back button is clicked in one of the menu items. </li>
+ *   </ul>
+ * </li>
+ *
+ * <li> Sending data:
+ *   <ul>
+ *      <li> This class does not pass any data, but the delegate. </li>
+ *   </ul>
+ * </li>
+ *
+ * </ul>
+ */
 
 #import "MenuOverviewController.h"
 #import "ColorSelection.h"
@@ -29,12 +55,22 @@
 @synthesize _mapsVC;
 @synthesize _socialMediaVC;
 
+/*!
+ * @function initWithNibName
+ * Initializiation of class.
+ */
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     return self;
 }
 
+/*!
+ * @function viewDidLoad
+ * The function is included, since class inherits from UIViewController.
+ * Is called first time, the view is started for initialization.
+ * Is only called once, after initialization, never again.
+ */
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -96,12 +132,21 @@
     _socialMediaVC.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
 }
 
+/*!
+ * @function didReceiveMemoryWarning
+ * The function is included per default.
+ */
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
 
+/*!
+ @function viewDidUnload
+ * The function is included, since class inherits from UIViewController.
+ * It is called while the view is unloaded.
+ */
 - (void)viewDidUnload {
     _menuTableView = nil;    
     _contactsVC = nil;
@@ -116,51 +161,86 @@
     [super viewDidUnload];
 }
 
+/*!
+ * @function moveToTimeTable
+ * The function passes the delgate to TimeTableOverviewController.
+ */
 -(void) moveToTimeTable:(id)sender event:(id)event
 {
     self.tabBarController.selectedIndex = 1;
     [self dismissModalViewControllerAnimated:YES];
 }
 
+/*!
+ * @function moveToMensa
+ * The function passes the delgate to MensaViewController.
+ */
 -(void) moveToMensa:(id)sender event:(id)event
 {
     self.tabBarController.selectedIndex = 2;
     [self dismissModalViewControllerAnimated:YES];
 }
 
+/*!
+ * @function moveToOev
+ * The function passes the delgate to PublicTransportViewController.
+ */
 -(void) moveToOev:(id)sender event:(id)event
 {
-    //[self presentModalViewController:_settingsVC animated:YES];
     self.tabBarController.selectedIndex = 3;
     [self dismissModalViewControllerAnimated:YES];
 }
 
+/*!
+ * @function moveToContacts
+ * The function passes the delgate to ContactsOverViewController.
+ */
 -(void) moveToContacts:(id)sender event:(id)event
 {
     self.tabBarController.selectedIndex = 4;
     [self dismissModalViewControllerAnimated:YES];
 }
 
+/*!
+ * @function moveToNews
+ * The function passes the delgate to NewsViewController.
+ */
 -(void) moveToNews:(id)sender event:(id)event
 {
    [self presentModalViewController:_newsVC animated:YES];
 }
 
+/*!
+ * @function moveToEvents
+ * The function passes the delgate to EventsViewController.
+ */
 -(void) moveToEvents:(id)sender event:(id)event
 {
     [self presentModalViewController:_eventsVC animated:YES];
 }
 
+/*!
+ * @function moveToSocialMedia
+ * The function passes the delgate to SocialMediaViewController.
+ */
 -(void) moveToSocialMedia:(id)sender event:(id)event
 {
     [self presentModalViewController:_socialMediaVC animated:YES];
 }
 
+/*!
+ * @function moveToSettings
+ * The function passes the delgate to SettingsViewController.
+ */
 -(void) moveToSettings:(id)sender event:(id)event
 {
     [self presentModalViewController:_settingsVC animated:YES];
 }
 
+/*!
+ * @function moveToMaps
+ * The function passes the delgate to MapsViewController.
+ */
 -(void) moveToMaps:(id)sender event:(id)event
 {
     [self presentModalViewController:_mapsVC animated:YES];
@@ -169,27 +249,41 @@
 
 
 
-// table and table cell handling
-
+// ------- MANAGE TABLE CELLS ----
+/*!
+ * @function numberOfSectionsInTableView
+ * The function defines the number of sections in _acronymAutocompleteTableView.
+ */
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
     return 3;
 }
 
-
+/*!
+ * @function numberOfRowsInSection
+ * The function defines the number of rows in _acronymAutocompleteTableView.
+ */
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     return 1;
 }
 
-
+/*!
+ * @function heightForRowAtIndexPath
+ * The function is for customizing the table view cells.
+ * It sets the height for each cell individually.
+ */
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     return 100;
 }
 
 
-
+/*!
+ * @function cellForRowAtIndexPath
+ * The function is for customizing the table view cells.
+ * According to the number of time slots and rooms (scheduleEvents) the cell methods are called.
+ */
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     NSUInteger        _cellSelection = indexPath.section;

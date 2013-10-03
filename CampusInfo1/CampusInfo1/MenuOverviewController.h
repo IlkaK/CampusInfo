@@ -1,10 +1,36 @@
-//
-//  MenuOverviewController.h
-//  CampusInfo1
-//
-//  Created by Ilka Kokemor on 07.08.13.
-//
-//
+/*
+ MenuOverviewController.h
+ ZHAW Engineering CampusInfo
+ */
+
+/*!
+ * @header MenuOverviewController.h
+ * @author Ilka Kokemor
+ * @copyright 2013 ZHAW
+ * @discussion
+ * <ul>
+ * <li> Responsibilities:
+ *   <ul>
+ *      <li> Control of MenuOverviewController.xib, which shows all menu items. </li>
+ *      <li> Menu items are shown in a table. </li>
+ *      <li> Delegate is passed to clicked item in menu. </li>
+ *  </ul>
+ * </li>
+ *
+ * <li> Receiving data:
+ *   <ul>
+ *      <li> This class does not receive any data, but the delegate, when the back button is clicked in one of the menu items. </li>
+ *   </ul>
+ * </li>
+ *
+ * <li> Sending data:
+ *   <ul>
+ *      <li> This class does not pass any data, but the delegate. </li>
+ *   </ul>
+ * </li>
+ *
+ * </ul>
+ */
 
 #import <UIKit/UIKit.h>
 #import "ContactsViewController.h"
@@ -26,19 +52,27 @@
 
 @interface MenuOverviewController : UIViewController<UITableViewDelegate>
 {
-    
-    IBOutlet UITableView                    *_menuTableView;    
+    /*! @var _menuTableView Table to display the menu items in ordered form */
+    IBOutlet UITableView                    *_menuTableView;
+     /*! @var _menuOverviewTableCell Handles cell, which displays three menu items in a row */
     IBOutlet UITableViewCell                *_menuOverviewTableCell;
     
-    UIColor                                 *_backgroundColor;
+    /*! @var _zhawColor Holds all color schemes needed */
     ColorSelection                          *_zhawColor;
     
+    /*! @var _contactsVC Handles delegate from and to ContactsViewController, which is triggered when the contacts button is clicked */
     IBOutlet ContactsViewController         *_contactsVC;
+    /*! @var _settingsVC Handles delegate from and to SettingsViewController, which is triggered when the settings button is clicked */
     IBOutlet SettingsViewController         *_settingsVC;
+    /*! @var _newsVC Handles delegate from and to NewsViewController, which is triggered when the news button is clicked */
     IBOutlet NewsViewController             *_newsVC;
+    /*! @var _publicTransportVC Handles delegate from and to PublicTransportViewController, which is triggered when the public transportation button is clicked */
     IBOutlet PublicTransportViewController  *_publicTransportVC;
+    /*! @var _eventsVC Handles delegate from and to EventsViewController, which is triggered when the events button is clicked */
     IBOutlet EventsViewController           *_eventsVC;
+    /*! @var _mapsVC Handles delegate from and to MapsViewController, which is triggered when the maps button is clicked */
     IBOutlet MapsViewController             *_mapsVC;
+    /*! @var _socialMediaVC Handles delegate from and to SocialMediaViewController, which is triggered when the social media button is clicked */
     IBOutlet SocialMediaViewController      *_socialMediaVC;
 
 }

@@ -1,10 +1,35 @@
-//
-//  SocialMediaViewController.m
-//  CampusInfo1
-//
-//  Created by Ilka Kokemor on 26.08.13.
-//
-//
+/*
+ SocialMediaViewController.m
+ ZHAW Engineering CampusInfo
+ */
+
+/*!
+ * @header SocialMediaViewController.m
+ * @author Ilka Kokemor
+ * @copyright 2013 ZHAW
+ * @discussion
+ * <ul>
+ * <li> Responsibilities:
+ *   <ul>
+ *      <li> Control of SocialMediaViewController.xib, which shows social media links </li>
+ *      <li> Listing social media links and browsing there when activated.  </li>
+ *  </ul>
+ * </li>
+ *
+ * <li> Receiving data:
+ *   <ul>
+ *      <li> This class only receives the delegate from MenuOverviewController and does not get any other data. </li>
+ *   </ul>
+ * </li>
+ *
+ * <li> Sending data:
+ *   <ul>
+ *      <li> This class only sends back the delegate to MenuOverviewController.</li>
+ *   </ul>
+ * </li>
+ *
+ * </ul>
+ */
 
 #import "SocialMediaViewController.h"
 #import "UIConstantStrings.h"
@@ -23,13 +48,22 @@
 
 @synthesize _zhawColor;
 
-
+/*!
+ * @function initWithNibName
+ * Initializiation of class.
+ */
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     return self;
 }
 
+/*!
+ * @function viewDidLoad
+ * The function is included, since class inherits from UIViewController.
+ * Is called first time, the view is started for initialization.
+ * Is only called once, after initialization, never again.
+ */
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -51,16 +85,30 @@
     [_titleNavigationLabel setTextAlignment:NSTextAlignmentCenter];
 }
 
+/*!
+ @function moveBackToMenuOverview
+ Function is called, when back button on navigation bar is hit, to move back to menu overview.
+ @param sender
+ */
 - (void)moveBackToMenuOverview:(id)sender
 {
     [self dismissModalViewControllerAnimated:YES];
 }
 
+/*!
+ * @function didReceiveMemoryWarning
+ * The function is included per default.
+ */
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
 }
 
+/*!
+ @function viewDidUnload
+ * The function is included, since class inherits from UIViewController.
+ * It is called while the view is unloaded.
+ */
 - (void)viewDidUnload {
     _titleNavigationBar = nil;
     _titleNavigationItem = nil;
@@ -70,25 +118,40 @@
 }
 
 
-// table and table cell handling
+// ----- HANDLING TABLE -----
+/*!
+ * @function numberOfSectionsInTableView
+ * The function defines the number of sections in table.
+ */
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
     return 1;
 }
 
-
+/*!
+ * @function numberOfRowsInSection
+ * The function defines the number of rows in table.
+ */
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     return 5;
 }
 
-
+/*!
+ * @function heightForRowAtIndexPath
+ * The function is for customizing the table view cells.
+ * It sets the height for each cell individually.
+ */
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     return 43;
 }
 
-
+/*!
+ * @function cellForRowAtIndexPath
+ * The function is for customizing the table view cells.
+ * According to the number of time slots and rooms (scheduleEvents) the cell methods are called.
+ */
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     NSUInteger        _cellSelection = indexPath.row; //indexPath.section;
@@ -189,6 +252,10 @@
     return _cell;
 }
 
+/*!
+ * @function openURLFacebook
+ * Switches to facebook app (if installed) or browser to open ZHAW School of Engineering page.
+ */
 -(void) openURLFacebook:(id)sender event:(id)event
 {
     if ([[UIApplication sharedApplication] canOpenURL:[NSURL URLWithString:URLFacebookApp]])
@@ -201,11 +268,19 @@
     }
 }
 
+/*!
+ * @function openURLYoutube
+ * Switches to browser to open ZHAW School of Engineering page within youtube.
+ */
 -(void) openURLYoutube:(id)sender event:(id)event
 {
     [[UIApplication sharedApplication] openURL:[NSURL URLWithString:URLYoutubeWeb]];
 }
 
+/*!
+ * @function openURLTwitter
+ * Switches to twitter app (if installed) or browser to open ZHAW School of Engineering page.
+ */
 -(void) openURLTwitter:(id)sender event:(id)event
 {
     if ([[UIApplication sharedApplication] canOpenURL:[NSURL URLWithString:URLTwitterApp]])
@@ -216,14 +291,21 @@
     {
         [[UIApplication sharedApplication] openURL:[NSURL URLWithString:URLTwitterWeb]];
     }
-    
 }
 
+/*!
+ * @function openURLIssuu
+ * Switches to browser to open ZHAW School of Engineering page within Issuu.
+ */
 -(void) openURLIssuu:(id)sender event:(id)event
 {
     [[UIApplication sharedApplication] openURL:[NSURL URLWithString:URLIssuuWeb]];
 }
 
+/*!
+ * @function openURLXing
+ * Switches to browser to open ZHAW School of Engineering page within Xing.
+ */
 -(void) openURLXing:(id)sender event:(id)event
 {
     [[UIApplication sharedApplication] openURL:[NSURL URLWithString:URLXingWeb]];

@@ -1,10 +1,35 @@
-//
-//  RoomsDto.m
-//  CampusInfo1
-//
-//  Created by Ilka Kokemor on 07.08.13.
-//
-//
+/*
+ RoomsDto.m
+ ZHAW Engineering CampusInfo
+ */
+
+/*!
+ * @header RoomsDto.m
+ * @author Ilka Kokemor
+ * @copyright 2013 ZHAW
+ * @discussion
+ * <ul>
+ * <li> Responsibilities:
+ *   <ul>
+ *      <li> Uses TimeTableAsyncRequestDelegate to connect to server and gain all acronyms of rooms. </li>
+ *      <li> Acronyms are stored in database, for that class DBCachingForAutocomplete is used. </li>
+ *  </ul>
+ * </li>
+ *
+ * <li> Receiving data:
+ *   <ul>
+ *      <li> It receives no data. </li>
+ *   </ul>
+ * </li>
+ *
+ * <li> Sending data:
+ *   <ul>
+ *      <li> If called it returns itself with an array of all room acronyms, gathered via server connection or from database. </li>
+ *   </ul>
+ * </li>
+ *
+ * </ul>
+ */
 
 #import "RoomsDto.h"
 #import "URLConstantStrings.h"
@@ -22,6 +47,10 @@
 
 @synthesize _generalDictionary;
 
+/*!
+ @function init
+ Initializes StudentsDto and its variables.
+ */
 - (id)init
 {
     _roomArray        = [[NSMutableArray alloc] init];
@@ -39,7 +68,11 @@
 //-------------------------------
 // asynchronous request
 //-------------------------------
-
+/*!
+ @function dataDownloadDidFinish
+ Needed since TimeTableAsyncRequest is used.
+ Function receives data, when download from server is finished.
+ */
 -(void) dataDownloadDidFinish:(NSData*) data
 {
     
@@ -89,13 +122,21 @@
     }
 }
 
-
+/*!
+ @function threadDone
+ Needed since TimeTableAsyncRequest is used.
+ If thread to download data is done, this function is called.
+ */
 -(void)threadDone:(NSNotification*)arg
 {
     //NSLog(@"Thread exiting");
 }
 
-
+/*!
+ @function downloadData
+ Needed since TimeTableAsyncRequest is used.
+ Function sends the request for data to server.
+ */
 -(void) downloadData
 {
     NSString *_urlString = URLRooms;
@@ -106,7 +147,12 @@
     [_asyncTimeTableRequest downloadData:_url];
 }
 
-
+/*!
+ @function getDictionaryFromUrl
+ Needed since TimeTableAsyncRequest is used.
+ TimeTableAsyncRequest is initialized and data download is triggered here.
+ If data is downloaded from server it is processed as well.
+ */
 - (NSDictionary *) getDictionaryFromUrl
 {
     _asyncTimeTableRequest = [[TimeTableAsyncRequest alloc] init];
@@ -139,7 +185,10 @@
     
 }
 
-
+/*!
+ @function getData
+ Initializes RoomsDto and gets room acronym array.
+ */
 -(void) getData
 {
     

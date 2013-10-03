@@ -1,10 +1,34 @@
-//
-//  DayDto.m
-//  CampusInfo1
-//
-//  Created by Ilka Kokemor on 3/31/12.
-//  Copyright 2012 __MyCompanyName__. All rights reserved.
-//
+/*
+ DayDto.m
+ ZHAW Engineering CampusInfo
+ */
+
+/*!
+ * @header DayDto.m
+ * @author Ilka Kokemor
+ * @copyright 2013 ZHAW
+ * @discussion
+ * <ul>
+ * <li> Responsibilities:
+ *   <ul>
+ *      <li> Holds data for Day in TimeTableDto model. </li>
+ *  </ul>
+ * </li>
+ *
+ * <li> Receiving data:
+ *   <ul>
+ *      <li> It receives date, array of events and array of slots to be initally set or a dictionary to browse the data itself. </li>
+ *   </ul>
+ * </li>
+ *
+ * <li> Sending data:
+ *   <ul>
+ *      <li> It returns itself when called. </li>
+ *   </ul>
+ * </li>
+ *
+ * </ul>
+ */
 
 #import "DayDto.h"
 #import "ScheduleEventDto.h"
@@ -15,6 +39,13 @@
 @synthesize _date, _events, _slots;
 @synthesize _dateFormatter;
 
+/*!
+ @function init
+ Needs to be called initally, when instance of DayDto is created.
+ @param newDate
+ @param newEvents
+ @param newSlots
+ */
 -(id) init : (NSDate         *) newDate
            : (NSMutableArray *) newEvents
            : (NSMutableArray *) newSlots
@@ -30,7 +61,11 @@
     return self;
 }
 
-
+/*!
+ @function getDay
+ Is called when a new DayDto instance should be created based on the dictionary information.
+ @param dayDictionary
+ */
 - (DayDto *) getDay:(NSDictionary *)dayDictionary
 {
     NSDate         *_dayDate;
@@ -56,7 +91,6 @@
             
             //NSLog(@"events to parse count: %i",[_eventArray count]);
             
-            // loop over slots
             int eventArrayI;
             ScheduleEventDto *_localEvent = [[ScheduleEventDto alloc] init:nil :nil :nil :nil :nil :nil :nil];
             for (eventArrayI = 0; eventArrayI < [_eventArray count]; eventArrayI++)
@@ -66,7 +100,6 @@
                 //NSLog(@"%i localEvent: %@", eventArrayI,  _localEvent._name);
                 
             }
-            
             //NSLog(@"event array count: %i",[_eventArrayToStore count]);
         }
         
@@ -83,12 +116,10 @@
                 _localSlot = [_localSlot getSlot:[_slotArray objectAtIndex:slotArrayI]];
                 [_slotArrayToStore addObject:_localSlot];
             }
-            
             //NSLog(@"slot array count: %i",[_slotArrayToStore count]);
         }
     }
     //NSLog(@"end parsing day");
-    
     return [[DayDto alloc]init: _dayDate : _eventArrayToStore: _slotArrayToStore ];
 }
 

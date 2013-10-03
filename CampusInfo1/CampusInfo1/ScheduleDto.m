@@ -1,10 +1,35 @@
-//
-//  ScheduleDto.m
-//  CampusInfo1
-//
-//  Created by Ilka Kokemor on 3/31/12.
-//  Copyright 2012 __MyCompanyName__. All rights reserved.
-//
+/*
+ ScheduleDto.m
+ ZHAW Engineering CampusInfo
+ */
+
+/*!
+ * @header ScheduleDto.m
+ * @author Ilka Kokemor
+ * @copyright 2013 ZHAW
+ * @discussion
+ * <ul>
+ * <li> Responsibilities:
+ *   <ul>
+ *      <li> Holds data for Schedule in TimeTableDto model. </li>
+ *      <li> Uses TimeTableAsyncRequestDelegate to connect to server and gain time table data from there. </li>
+ *  </ul>
+ * </li>
+ *
+ * <li> Receiving data:
+ *   <ul>
+ *      <li> It receives acronym, acronym type and date to build the url which is send to the server. </li>
+ *   </ul>
+ * </li>
+ *
+ * <li> Sending data:
+ *   <ul>
+ *      <li> Using TimeTableAsyncRequestDelegate it gets the date from server request. </li>
+ *   </ul>
+ * </li>
+ *
+ * </ul>
+ */
 
 #import "ScheduleDto.h"
 #import "DayDto.h"
@@ -43,7 +68,10 @@
 @synthesize _dateFormatter;
 
 
-
+/*!
+ @function getDaysWithDictionary
+ Is called when the days for the schedule are parsed using a dictionary
+ */
 - (NSMutableArray *) getDaysWithDictionary:(NSDictionary *)dictionary withKey:(id)key
 {
     NSMutableArray *_dayArrayToStore = [[NSMutableArray alloc]init];
@@ -88,7 +116,11 @@
 //-------------------------------
 // asynchronous request 
 //-------------------------------
-
+/*!
+ @function dataDownloadDidFinish
+ Needed since TimeTableAsyncRequest is used.
+ Function receives data, when download from server is finished.
+ */
 -(void) dataDownloadDidFinish:(NSData*) data {
     
     //NSLog(@"ScheduleDto dataDownloadDidFinish");
@@ -106,7 +138,11 @@
 }
 
 
-// triggered by schedule.init
+/*!
+ @function downloadData
+ Needed since TimeTableAsyncRequest is used.
+ Function sends the request for data to server.
+ */
 -(void) downloadData
 {
     NSURL *_url; 
@@ -156,16 +192,23 @@
 }
 
 
-
+/*!
+ @function threadDone
+ Needed since TimeTableAsyncRequest is used.
+ If thread to download data is done, this function is called.
+ */
 -(void)threadDone:(NSNotification*)arg
 {   
     //NSLog(@"Thread exiting");
 }
 
 
-
-
-
+/*!
+ @function getDictionaryFromUrl
+ Needed since TimeTableAsyncRequest is used.
+ TimeTableAsyncRequest is initialized and data download is triggered here.
+ If data is downloaded from server it is processed as well.
+ */
 - (NSDictionary *) getDictionaryFromUrl
 {
 
@@ -212,7 +255,10 @@
 
 
 
-
+/*!
+ @function getScheduleType
+ Returns the correct english term for given type.
+ */
 - (NSString *) getScheduleType:(NSString*)insertType
 {
     NSString *_scheduleType = nil; 
@@ -247,7 +293,10 @@
 }
 
 
-
+/*!
+ @function setTypeDetailsWithDictionary
+ Initializes the owner of the time table which can be a students, lecturer, course, class or room.
+ */
 -(void)setTypeDetailsWithDictionary:(NSDictionary *)dictionary withKey:(id)key
 {
     // get student information
@@ -286,7 +335,14 @@
     }           
 }
 
-
+/*!
+ @function initWithAcronym
+ Needs to be called initally, when instance of ScheduleDto is created.
+ It establishes a connection to the server and gets the schedule data from there.
+ @param newAcronymString
+ @param newAcronymType
+ @param newScheduleDate
+ */
 -(id) initWithAcronym
     :(NSString *)newAcronymString
     :(NSString *)newAcronymType
@@ -308,6 +364,12 @@
     return self;
 }
 
+/*!
+ @function initWithExampleDays
+ Is called if schedule is initialized and used with test data without connecting to server.
+ @param newExampleDays
+ @param newExampleType
+ */
 -(id) initWithExampleDays
     :(NSMutableArray *)newExampleDays
     :(NSString *)newExampleType
@@ -318,7 +380,13 @@
     return self;
 }
 
-
+/*!
+ @function loadScheduleWithAcronym
+ Is called if schedule is already initialized but a new schedule for a different acronym or date needs to be loaded.
+ @param newAcronymString
+ @param newAcronymType
+ @param newScheduleDate
+ */
 -(void) loadScheduleWithAcronym
     :(NSString *)newAcronymString
     :(NSString *)newAcronymType
