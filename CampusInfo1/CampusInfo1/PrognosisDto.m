@@ -1,10 +1,34 @@
-//
-//  PrognosisDto.m
-//  CampusInfo1
-//
-//  Created by Ilka Kokemor on 31.08.13.
-//
-//
+/*
+ PrognosisDto.m
+ ZHAW Engineering CampusInfo
+ */
+
+/*!
+ * @header PrognosisDto.m
+ * @author Ilka Kokemor
+ * @copyright 2013 ZHAW
+ * @discussion
+ * <ul>
+ * <li> Responsibilities:
+ *   <ul>
+ *      <li> Holds prognosis data for PublicTransportConnectionDto model. </li>
+ *  </ul>
+ * </li>
+ *
+ * <li> Receiving data:
+ *   <ul>
+ *      <li> It receives platform, arrival, departure and capacity ids to be initally set or a dictionary to browse the data itself. </li>
+ *   </ul>
+ * </li>
+ *
+ * <li> Sending data:
+ *   <ul>
+ *      <li> It returns itself when called. </li>
+ *   </ul>
+ * </li>
+ *
+ * </ul>
+ */
 
 #import "PrognosisDto.h"
 
@@ -16,6 +40,15 @@
 @synthesize _platform;
 @synthesize _dateFormatter;
 
+/*!
+ @function init
+ Needs to be called initally, when instance of PrognosisDto is created.
+ @param newPlatform
+ @param newArrival
+ @param newDeparture
+ @param newCapacity1st
+ @param newCapacity2nd
+ */
 -(id)                   init: (NSString *)newPlatform
                  withArrival: (NSDate *)newArrival
                withDeparture: (NSDate *)newDeparture
@@ -35,6 +68,11 @@
     return self;
 }
 
+/*!
+ @function getPrognosis
+ Is called when a new PrognosisDto instance should be created based on the dictionary information.
+ @param prognosisDictionary
+ */
 - (PrognosisDto *)getPrognosis:(NSDictionary *)prognosisDictionary
 {
     NSString        *_localPlatform;
@@ -81,16 +119,12 @@
             }
         }
     }
-    
     _localPrognosis = [_localPrognosis init:_localPlatform
                                 withArrival:_localArrival
                               withDeparture:_localDeparture
                             withCapacity1st:_localCapacity1st
                             withCapacity2nd:_localCapacity2nd];
     return _localPrognosis;
-
-    
-    
 }
 
 

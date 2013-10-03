@@ -1,10 +1,34 @@
-//
-//  ConnectionDto.m
-//  CampusInfo1
-//
-//  Created by Ilka Kokemor on 02.09.13.
-//
-//
+/*
+ ConnectionDto.m
+ ZHAW Engineering CampusInfo
+ */
+
+/*!
+ * @header ConnectionDto.m
+ * @author Ilka Kokemor
+ * @copyright 2013 ZHAW
+ * @discussion
+ * <ul>
+ * <li> Responsibilities:
+ *   <ul>
+ *      <li> Holds connection data for PublicTransportConnectionDto model. </li>
+ *  </ul>
+ * </li>
+ *
+ * <li> Receiving data:
+ *   <ul>
+ *      <li> It receives from, to duration, transfers, service, products, first and second capacity, sections to be initally set or a dictionary to browse the data itself. </li>
+ *   </ul>
+ * </li>
+ *
+ * <li> Sending data:
+ *   <ul>
+ *      <li> It returns itself when called. </li>
+ *   </ul>
+ * </li>
+ *
+ * </ul>
+ */
 
 #import "ConnectionDto.h"
 #import "SectionDto.h"
@@ -21,6 +45,19 @@
 @synthesize _to;
 @synthesize _transfers;
 
+/*!
+ @function init
+ Needs to be called initally, when instance of ConnectionDto is created.
+ @param newFrom
+ @param newTo
+ @param newDuration
+ @param newTransfers
+ @param newService
+ @param newProducts
+ @param newCapacity1st
+ @param newCapacity2nd
+ @param newSections
+ */
 -(id)                   init: (FromOrToDto *)newFrom
                       withTo: (FromOrToDto *)newTo
                 withDuration: (NSString *)newDuration
@@ -47,6 +84,11 @@
     return self;
 }
 
+/*!
+ @function getConnection
+ Is called when a new ConnectionDto instance should be created based on the dictionary information.
+ @param connectionDictionary
+ */
 - (ConnectionDto *)getConnection:(NSDictionary *)connectionDictionary
 {
     ConnectionDto *_localConnection = [[ConnectionDto alloc]init:nil withTo:nil withDuration:nil withTransfers:0 withService:nil withProducts:nil withCapacity1st:0 withCapacity2nd:0 withSections:nil];
@@ -105,7 +147,6 @@
             if ([connectionKey isEqualToString:@"duration"])
             {
                 //NSLog(@"ConnectionDto _localDuration: %@", [connectionDictionary objectForKey:connectionKey]);
-                
                 //00d01:26:00
                 
                 NSString *_storeDuration = [connectionDictionary objectForKey:connectionKey];
@@ -113,7 +154,6 @@
                 _localDays = [_localDays substringToIndex:2];
                 NSString *_localHours = [_storeDuration substringFromIndex:3];
                 _localHours = [_localHours substringToIndex:5];
-                
                 if (![_localDays isEqualToString:@"00"])
                 {
                     _localDuration = [NSString stringWithFormat:@"%@ d, %@ h",_localDays, _localHours];
@@ -122,7 +162,6 @@
                 {
                     _localDuration = [NSString stringWithFormat:@"%@ h",_localHours];
                 }
-                
             }
             
             if ([connectionKey isEqualToString:@"transfers"])
@@ -144,7 +183,6 @@
                 //NSLog(@"before count of _productArray: %i", [_productArray count]);
                 
                 NSString *_oneProduct;
-                
                 for (_productArrayI = 0; _productArrayI < [_productArray count]; _productArrayI++)
                 {
                     _oneProduct = [_productArray objectAtIndex:_productArrayI];
@@ -173,14 +211,12 @@
                 //NSLog(@"before count of _sectionArray: %i", [_sectionArray count]);
                 
                 SectionDto *_localSection = [[SectionDto alloc]init:nil withWalk:nil withDeparture:nil withArrival:nil];
-                
                 for (_sectionArrayI = 0; _sectionArrayI < [_sectionArray count]; _sectionArrayI++)
                 {
                     _localSection = [_localSection getSection:[_sectionArray objectAtIndex:_sectionArrayI]];
                     [_localSections addObject:_localSection];
                 }
                 //NSLog(@"after count of _sectionArray: %i", [_localSections count]);
-
             }
         }
     }

@@ -1,10 +1,35 @@
-//
-//  StationDto.m
-//  CampusInfo1
-//
-//  Created by Ilka Kokemor on 28.08.13.
-//
-//
+/*
+ StationDto.m
+ ZHAW Engineering CampusInfo
+ */
+
+/*!
+ * @header StationDto.m
+ * @author Ilka Kokemor
+ * @copyright 2013 ZHAW
+ * @discussion
+ * <ul>
+ * <li> Responsibilities:
+ *   <ul>
+ *      <li> Holds station data for PublicTransportDto model. </li>
+ *  </ul>
+ * </li>
+ *
+ * <li> Receiving data:
+ *   <ul>
+ *      <li> It receives station id, score, name, distance and coordinate to be initally set or a dictionary to browse the data itself. </li>
+ *   </ul>
+ * </li>
+ *
+ * <li> Sending data:
+ *   <ul>
+ *      <li> It returns itself when called. </li>
+ *   </ul>
+ * </li>
+ *
+ * </ul>
+ */
+
 
 #import "StationDto.h"
 
@@ -16,6 +41,15 @@
 @synthesize _score;
 @synthesize _stationId;
 
+/*!
+ @function init
+ Needs to be called initally, when instance of StationDto is created.
+ @param newStationId
+ @param newScore
+ @param newName
+ @param newDistance
+ @param newCoordinate
+ */
 -(id)                   init: (NSString *) newStationId
                    withScore: (int) newScore
                     withName: (NSString *)newName
@@ -34,7 +68,11 @@
     return self;
 }
 
-
+/*!
+ @function getStation
+ Is called when a new StationDto instance should be created based on the stationDictionary information.
+ @param stationDictionary
+ */
 - (StationDto *)getStation:(NSDictionary *)stationDictionary
 {
     NSString        *_localStationId;

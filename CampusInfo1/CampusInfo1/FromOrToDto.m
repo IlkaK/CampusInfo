@@ -1,10 +1,34 @@
-//
-//  FromOrToDto.m
-//  CampusInfo1
-//
-//  Created by Ilka Kokemor on 31.08.13.
-//
-//
+/*
+ FromOrToDto.m
+ ZHAW Engineering CampusInfo
+ */
+
+/*!
+ * @header FromOrToDto.m
+ * @author Ilka Kokemor
+ * @copyright 2013 ZHAW
+ * @discussion
+ * <ul>
+ * <li> Responsibilities:
+ *   <ul>
+ *      <li> Holds from or to data for PublicTransportConnectionDto model. </li>
+ *  </ul>
+ * </li>
+ *
+ * <li> Receiving data:
+ *   <ul>
+ *      <li> It receives station, location, prognosis, delay, arrival date/time, departure date/time and platform to be initally set or a dictionary to browse the data itself. </li>
+ *   </ul>
+ * </li>
+ *
+ * <li> Sending data:
+ *   <ul>
+ *      <li> It returns itself when called. </li>
+ *   </ul>
+ * </li>
+ *
+ * </ul>
+ */
 
 #import "FromOrToDto.h"
 
@@ -20,7 +44,19 @@
 @synthesize _station;
 @synthesize _dateFormatter;
 
-
+/*!
+ @function init
+ Needs to be called initally, when instance of FromOrToDto is created.
+ @param newStation
+ @param newLocation
+ @param newPrognosis
+ @param newDelay
+ @param newArrivalDate
+ @param newArrivalTime
+ @param newDepartureDate
+ @param newDepartureTime
+ @param newPlatform
+ */
 -(id)                   init: (StationDto *)newStation
                 withLocation: (StationDto *)newLocation
                withPrognosis: (PrognosisDto *)newPrognosis
@@ -49,12 +85,15 @@
     return self;
 }
 
-
+/*!
+ @function getFromOrTo
+ Is called when a new FromOrToDto instance should be created based on the dictionary information.
+ @param fromOrToDictionary
+ */
 - (FromOrToDto *)getFromOrTo:(NSDictionary *)fromOrToDictionary
 {
     StationDto        *_localStation = [[StationDto alloc]init:nil withScore:0 withName:nil withDistance:nil withCoordinate:nil];
     StationDto        *_localLocation = [[StationDto alloc]init:nil withScore:0 withName:nil withDistance:nil withCoordinate:nil];
-
     PrognosisDto      *_localPrognosis = [[PrognosisDto alloc]init:nil withArrival:nil withDeparture:nil withCapacity1st:0 withCapacity2nd:0];
     
     NSString          *_localDelay;
@@ -70,11 +109,9 @@
     {
         if ([fromOrToDictionary objectForKey:fromOrToKey] != [NSNull null])
         {
-            
             if ([fromOrToKey isEqualToString:@"arrival"])
             {
                 //NSLog(@"FromOrToDto arrival: %@", [fromOrToDictionary objectForKey:fromOrToKey]);
-
                 _localArrivalDate = [_dateFormatter parseDate:[fromOrToDictionary objectForKey:fromOrToKey]];
                 _localArrivalTime = [_dateFormatter parseTime:[fromOrToDictionary objectForKey:fromOrToKey]];
             }
@@ -82,7 +119,6 @@
             if ([fromOrToKey isEqualToString:@"departure"])
             {
                 //NSLog(@"FromOrToDto departure: %@", [fromOrToDictionary objectForKey:fromOrToKey]);
-                
                 _localDepartureDate = [_dateFormatter parseDate:[fromOrToDictionary objectForKey:fromOrToKey]];
                 _localDepartureTime = [_dateFormatter parseTime:[fromOrToDictionary objectForKey:fromOrToKey]];
             }
@@ -113,7 +149,6 @@
             }
         }
     }
-    
     _localFromOrTo = [_localFromOrTo init:_localStation
                              withLocation:_localLocation
                             withPrognosis:_localPrognosis
@@ -123,7 +158,6 @@
                         withDepartureDate:_localDepartureDate
                         withDepartureTime:_localDepartureTime
                              withPlatform:_localPlatform];
-    
     return _localFromOrTo;
 }
 

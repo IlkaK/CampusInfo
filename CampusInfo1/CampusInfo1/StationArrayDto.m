@@ -1,10 +1,35 @@
-//
-//  StationArrayDto.m
-//  CampusInfo1
-//
-//  Created by Ilka Kokemor on 28.08.13.
-//
-//
+/*
+ StationArrayDto.m
+ ZHAW Engineering CampusInfo
+ */
+
+/*!
+ * @header StationArrayDto.m
+ * @author Ilka Kokemor
+ * @copyright 2013 ZHAW
+ * @discussion
+ * <ul>
+ * <li> Responsibilities:
+ *   <ul>
+ *      <li> Holds station array in PublicTransportDto model. </li>
+ *      <li> Uses TimeTableAsyncRequestDelegate to connect to server and gain time table data from there. </li>
+ *  </ul>
+ * </li>
+ *
+ * <li> Receiving data:
+ *   <ul>
+ *      <li> It receives station name to build the url which is send to the server. </li>
+ *   </ul>
+ * </li>
+ *
+ * <li> Sending data:
+ *   <ul>
+ *      <li> Using TimeTableAsyncRequestDelegate it gets the date from server request. </li>
+ *   </ul>
+ * </li>
+ *
+ * </ul>
+ */
 
 #import "StationArrayDto.h"
 #import "StationDto.h"
@@ -23,7 +48,10 @@
 @synthesize _generalDictionary;
 @synthesize _url;
 
-
+/*!
+ @function init
+ Initializes StationArrayDto and its variables.
+ */
 -(id) init          :(NSMutableArray *) newStations
 {
     self = [super init];
@@ -38,7 +66,6 @@
             self._stations = newStations;
         }
     }
-    
     _asyncTimeTableRequest = [[TimeTableAsyncRequest alloc] init];
     _asyncTimeTableRequest._timeTableAsynchRequestDelegate = self;
     return self;
@@ -48,6 +75,11 @@
 //-------------------------------
 // asynchronous request
 //-------------------------------
+/*!
+ @function dataDownloadDidFinish
+ Needed since TimeTableAsyncRequest is used.
+ Function receives data, when download from server is finished.
+ */
 -(void) dataDownloadDidFinish:(NSData*) data
 {
     
@@ -109,19 +141,26 @@
                     }
                 }
                 //NSLog(@"nacher _stations count: %i", [_stations count]);
-                
             }
         }
     }
 }
 
-
+/*!
+ @function threadDone
+ Needed since TimeTableAsyncRequest is used.
+ If thread to download data is done, this function is called.
+ */
 -(void)threadDone:(NSNotification*)arg
 {
     //NSLog(@"Thread exiting");
 }
 
-
+/*!
+ @function downloadData
+ Needed since TimeTableAsyncRequest is used.
+ Function sends the request for data to server.
+ */
 -(void) downloadData
 {
     CharTranslation *_charTranslation = [CharTranslation alloc];
@@ -135,19 +174,20 @@
     [_asyncTimeTableRequest downloadData:_url];
 }
 
-
+/*!
+ @function getDictionaryFromUrl
+ Needed since TimeTableAsyncRequest is used.
+ TimeTableAsyncRequest is initialized and data download is triggered here.
+ If data is downloaded from server it is processed as well.
+ */
 - (NSDictionary *) getDictionaryFromUrl
 {
     [self performSelectorInBackground:@selector(downloadData) withObject:nil];
-    
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(threadDone:)
                                                  name:NSThreadWillExitNotification
                                                object:nil];
-    
-    NSError      *_error = nil;
-    
-    
+    NSError      *_error = nil;    
     if (_dataFromUrl == nil)
     {
         return nil;
@@ -164,8 +204,11 @@
     
 }
 
-
-
+/*!
+ @function getData
+ Gets station array for given actual station.
+ @param newActualStation
+ */
 -(void) getData:(NSString *)newActualStation
 {
     self._actualStation = newActualStation;

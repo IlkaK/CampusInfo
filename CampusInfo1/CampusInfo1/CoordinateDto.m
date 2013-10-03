@@ -1,10 +1,34 @@
-//
-//  CoordinateDto.m
-//  CampusInfo1
-//
-//  Created by Ilka Kokemor on 28.08.13.
-//
-//
+/*
+ CoordinateDto.m
+ ZHAW Engineering CampusInfo
+ */
+
+/*!
+ * @header CoordinateDto.m
+ * @author Ilka Kokemor
+ * @copyright 2013 ZHAW
+ * @discussion
+ * <ul>
+ * <li> Responsibilities:
+ *   <ul>
+ *      <li> Holds coordinate data for PublicTransportDto model. </li>
+ *  </ul>
+ * </li>
+ *
+ * <li> Receiving data:
+ *   <ul>
+ *      <li> It receives x, y and type to be initally set or a dictionary to browse the data itself. </li>
+ *   </ul>
+ * </li>
+ *
+ * <li> Sending data:
+ *   <ul>
+ *      <li> It returns itself when called. </li>
+ *   </ul>
+ * </li>
+ *
+ * </ul>
+ */
 
 #import "CoordinateDto.h"
 
@@ -16,6 +40,13 @@
 @synthesize _x;
 @synthesize _y;
 
+/*!
+ @function init
+ Needs to be called initally, when instance of CoordinateDto is created.
+ @param newType
+ @param newX
+ @param newY
+ */
 -(id)init: (NSString  *) newType
     withX: (double) newX
     withY: (double) newY
@@ -30,6 +61,11 @@
     return self;
 }
 
+/*!
+ @function getCoordinate
+ Is called when a new CoordinateDto instance should be created based on the dictionary information.
+ @param coordinateDictionary
+ */
 - (CoordinateDto *)getCoordinate:(NSDictionary *)coordinateDictionary
 {
     NSString *_localType;

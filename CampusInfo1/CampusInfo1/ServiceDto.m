@@ -1,10 +1,34 @@
-//
-//  ServiceDto.m
-//  CampusInfo1
-//
-//  Created by Ilka Kokemor on 31.08.13.
-//
-//
+/*
+ ServiceDto.m
+ ZHAW Engineering CampusInfo
+ */
+
+/*!
+ * @header ServiceDto.m
+ * @author Ilka Kokemor
+ * @copyright 2013 ZHAW
+ * @discussion
+ * <ul>
+ * <li> Responsibilities:
+ *   <ul>
+ *      <li> Holds the service data for PublicTransportConnectionDto model. </li>
+ *  </ul>
+ * </li>
+ *
+ * <li> Receiving data:
+ *   <ul>
+ *      <li> It receives regular and irregular to be initally set or a dictionary to browse the data itself. </li>
+ *   </ul>
+ * </li>
+ *
+ * <li> Sending data:
+ *   <ul>
+ *      <li> It returns itself when called. </li>
+ *   </ul>
+ * </li>
+ *
+ * </ul>
+ */
 
 #import "ServiceDto.h"
 
@@ -12,6 +36,12 @@
 @synthesize _irregular;
 @synthesize _regular;
 
+/*!
+ @function init
+ Needs to be called initally, when instance of ServiceDto is created.
+ @param newRegular
+ @param newIrregular
+ */
 -(id)                     init: (NSString *)newRegular
                  withIrregular: (NSString *)newIrregular
 {
@@ -24,7 +54,11 @@
     return self;
 }
 
-
+/*!
+ @function getService
+ Is called when a new ServiceDto instance should be created based on the dictionary information.
+ @param serviceDictionary
+ */
 - (ServiceDto *)getService:(NSDictionary *)serviceDictionary
 {
     ServiceDto *_localService = [[ServiceDto alloc]init:nil withIrregular:nil];

@@ -72,8 +72,8 @@
     NSData                *_dataFromUrl;
     /*! @var _errorMessage Stores the error message, if the connection to server had an error. */    
     NSString              *_errorMessage;
-    /*! @var _dateFormatter Class which provides methods to format date from NSString to NSDate or the other way around */
     
+    /*! @var _dateFormatter Class which provides methods to format date from NSString to NSDate or the other way around */
     DateFormation         *_dateFormatter;
 }
 

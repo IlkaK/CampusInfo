@@ -1,10 +1,34 @@
-//
-//  JourneyDto.m
-//  CampusInfo1
-//
-//  Created by Ilka Kokemor on 02.09.13.
-//
-//
+/*
+ JourneyDto.m
+ ZHAW Engineering CampusInfo
+ */
+
+/*!
+ * @header JourneyDto.m
+ * @author Ilka Kokemor
+ * @copyright 2013 ZHAW
+ * @discussion
+ * <ul>
+ * <li> Responsibilities:
+ *   <ul>
+ *      <li> Holds journey data for PublicTransportConnectionDto model. </li>
+ *  </ul>
+ * </li>
+ *
+ * <li> Receiving data:
+ *   <ul>
+ *      <li> It receives name, category, category code, journey number, operator, to, pass list, first and second capacity to be initally set or a dictionary to browse the data itself. </li>
+ *   </ul>
+ * </li>
+ *
+ * <li> Sending data:
+ *   <ul>
+ *      <li> It returns itself when called. </li>
+ *   </ul>
+ * </li>
+ *
+ * </ul>
+ */
 
 #import "JourneyDto.h"
 #import "FromOrToDto.h"
@@ -20,6 +44,19 @@
 @synthesize _passList;
 @synthesize _to;
 
+/*!
+ @function init
+ Needs to be called initally, when instance of JourneyDto is created.
+ @param newName
+ @param newCategory
+ @param newCategoryCode
+ @param newJourneyNumber
+ @param newOperator
+ @param newTo
+ @param newPassList
+ @param newCapacity1st
+ @param newCapacity2nd
+ */
 -(id)                   init: (NSString *)newName
                 withCategory: (NSString *)newCategory
             withCategoryCode: (int)newCategoryCode
@@ -48,7 +85,11 @@
 
 }
 
-
+/*!
+ @function getJourney
+ Is called when a new JourneyDto instance should be created based on the dictionary information.
+ @param journeyDictionary
+ */
 - (JourneyDto *)getJourney:(NSDictionary *)journeyDictionary
 {
     JourneyDto *_localJourney = [[JourneyDto alloc]init:nil
@@ -75,7 +116,6 @@
     {
         if ([journeyDictionary objectForKey:journeyKey] != [NSNull null])
         {
-            
             if ([journeyKey isEqualToString:@"name"])
             {
                 _localName = [journeyDictionary objectForKey:journeyKey];
@@ -150,7 +190,6 @@
             }
         }
     }
-    
     _localJourney =  [_localJourney    init:_localName
                                withCategory:_localCategory
                            withCategoryCode:_localCategoryCode
@@ -160,7 +199,6 @@
                                withPassList:_localPassList
                             withCapacity1st:_localCapacity1st
                             withCapacity2nd:_localCapacity2nd];
-    
     return _localJourney;
 }
 

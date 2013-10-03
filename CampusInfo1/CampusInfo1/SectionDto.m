@@ -1,10 +1,34 @@
-//
-//  SectionDto.m
-//  CampusInfo1
-//
-//  Created by Ilka Kokemor on 02.09.13.
-//
-//
+/*
+ SectionDto.h
+ ZHAW Engineering CampusInfo
+ */
+
+/*!
+ * @header SectionDto.h
+ * @author Ilka Kokemor
+ * @copyright 2013 ZHAW
+ * @discussion
+ * <ul>
+ * <li> Responsibilities:
+ *   <ul>
+ *      <li> Holds section data for PublicTransportConnectionDto model. </li>
+ *  </ul>
+ * </li>
+ *
+ * <li> Receiving data:
+ *   <ul>
+ *      <li> It receives journey, walk, departure and arrival to be initally set or a dictionary to browse the data itself. </li>
+ *   </ul>
+ * </li>
+ *
+ * <li> Sending data:
+ *   <ul>
+ *      <li> It returns itself when called. </li>
+ *   </ul>
+ * </li>
+ *
+ * </ul>
+ */
 
 #import "SectionDto.h"
 
@@ -15,6 +39,14 @@
 @synthesize _journey;
 @synthesize _walk;
 
+/*!
+ @function init
+ Needs to be called initally, when instance of SectionDto is created.
+ @param newJourney
+ @param newWalk
+ @param newDeparture
+ @param newArrival
+ */
 -(id)                     init:(JourneyDto *)newJourney
                       withWalk:(NSString *)newWalk
                  withDeparture:(FromOrToDto *)newDeparture
@@ -31,7 +63,11 @@
     return self;
 }
 
-
+/*!
+ @function getSection
+ Is called when a new SectionDto instance should be created based on the dictionary information.
+ @param sectionDictionary
+ */
 - (SectionDto *)getSection:(NSDictionary *)sectionDictionary
 {
     SectionDto *_localSection = [[SectionDto alloc]init:nil withWalk:nil withDeparture:nil withArrival:nil];
@@ -62,7 +98,6 @@
     {
         if ([sectionDictionary objectForKey:sectionKey] != [NSNull null])
         {
-            
             if ([sectionKey isEqualToString:@"journey"])
             {
                 _localJourney =  [_localJourney getJourney:[sectionDictionary objectForKey:sectionKey]];
@@ -88,12 +123,10 @@
             }
         }
     }
-    
     _localSection = [_localSection init:_localJourney
                                withWalk:_localWalk
                           withDeparture:_localDeparture
                             withArrival:_localArrival];
-    
     return _localSection;
 }
 
