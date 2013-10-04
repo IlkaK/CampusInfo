@@ -1,10 +1,38 @@
-//
-//  PublicTransportViewController.m
-//  CampusInfo1
-//
-//  Created by Ilka Kokemor on 14.08.13.
-//
-//
+/*
+ PublicTransportViewController.m
+ ZHAW Engineering CampusInfo
+ */
+
+/*!
+ * @header PublicTransportViewController.m
+ * @author Ilka Kokemor
+ * @copyright 2013 ZHAW
+ * @discussion
+ * <ul>
+ * <li> Responsibilities:
+ *   <ul>
+ *      <li> Control of PublicTransportViewController.xib, where data for public transport connection can be entered and the connections are displayed. </li>
+ *      <li> Getting and handling start and stop data as well as the connections.  </li>
+ *      <li> With two buttons it can be switched to PubliStopViewController to search for different stops. </li>
+ *      <li> Three start (from) and stop (to) stations are stored in database and handled here as well. </li>
+ *  </ul>
+ * </li>
+ *
+ * <li> Receiving data:
+ *   <ul>
+ *      <li> Receives delegate from MenuOverviewController and passes it back, if back button is clicked. </li>
+ *      <li> Receives chosen station from PublicStopViewController, if a new one is found. </li>
+ *   </ul>
+ * </li>
+ *
+ * <li> Sending data:
+ *   <ul>
+ *      <li> It passes the delegate to PublicStopViewController and receives it back from there. </li>
+ *   </ul>
+ * </li>
+ *
+ * </ul>
+ */
 
 #import "PublicTransportViewController.h"
 #import "ColorSelection.h"
@@ -65,22 +93,33 @@
 @synthesize _transfersTitleLabel;
 @synthesize _transportationTitleLabel;
 
-
-
+/*!
+ * @function initWithNibName
+ * Initializiation of class.
+ */
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     return self;
 }
 
-
+/*!
+ @function moveBackToMenuOverview
+ When back button is triggered, delegate is returned to MenuOverviewController.
+ @param sender
+ */
 - (void) moveBackToMenuOverview:(id)sender
 {
     [self dismissModalViewControllerAnimated:YES];
     self.tabBarController.selectedIndex = 0;
 }
 
-
+/*!
+ * @function viewDidLoad
+ * The function is included, since class inherits from UIViewController.
+ * Is called first time, the view is started for initialization.
+ * Is only called once, after initialization, never again.
+ */
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -171,7 +210,10 @@
     
 }
 
-
+/*!
+ * @function setStartFields
+ * Set cached start stations in according order.
+ */
 -(void)setStartFields:(NSString *)stringForLabel
 withStringForButton1:(NSString *)stringForButton1
 withStringForButton2:(NSString *)stringForButton2
@@ -181,17 +223,23 @@ withStringForButton2:(NSString *)stringForButton2
     [_lastStart2Button setTitle:stringForButton2 forState:UIControlStateNormal];
 }
 
+/*!
+ * @function setStopFields
+ * Set cached stop stations in according order.
+ */
 -(void)setStopFields:(NSString *)stringForLabel
  withStringForButton1:(NSString *)stringForButton1
  withStringForButton2:(NSString *)stringForButton2
 {
-    //NSLog(@"setStopFields -> stringForLabel: %@", stringForLabel);
     _stopLabel.text = stringForLabel;
     [_lastStop1Button setTitle:stringForButton1 forState:UIControlStateNormal];
     [_lastStop2Button setTitle:stringForButton2 forState:UIControlStateNormal];
 }
 
-
+/*!
+ * @function actualizeStartStationArray
+ * Actualizing the array of start stations according to the data in the database.
+ */
 - (void)actualizeStartStationArray
 {
     _storedStartStationArray = [_dbCachingForAutocomplete getStartStations];
@@ -200,7 +248,6 @@ withStringForButton2:(NSString *)stringForButton2
         [self setStartFields:[_storedStartStationArray objectAtIndex:2]
          withStringForButton1:[_storedStartStationArray objectAtIndex:1]
         withStringForButton2:[_storedStartStationArray objectAtIndex:0]];
-        
     }
     else
     {        
@@ -222,7 +269,10 @@ withStringForButton2:(NSString *)stringForButton2
     }
 }
 
-
+/*!
+ * @function actualizeStopStationArray
+ * Actualizing the array of stop stations according to the data in the database.
+ */
 - (void)actualizeStopStationArray
 {
     _storedStopStationArray = [_dbCachingForAutocomplete getStopStations];
@@ -231,7 +281,6 @@ withStringForButton2:(NSString *)stringForButton2
         [self setStopFields:[_storedStopStationArray objectAtIndex:2]
         withStringForButton1:[_storedStopStationArray objectAtIndex:1]
         withStringForButton2:[_storedStopStationArray objectAtIndex:0]];
-        
     }
     else
     {
@@ -253,8 +302,10 @@ withStringForButton2:(NSString *)stringForButton2
     }
 }
 
-
-// check if new start is already in cache
+/*!
+ * @function newStartAlreadyInArray
+ * Check if new start is already in cache
+ */
 - (BOOL)newStartAlreadyInArray:(NSString *)newStart
 {
     int     _startArrayI;
@@ -269,7 +320,10 @@ withStringForButton2:(NSString *)stringForButton2
     return _inStartArray;
 }
 
-// check if new stop is already in cache
+/*!
+ * @function newStopAlreadyInArray
+ * Check if new stop is already in cache
+ */
 - (BOOL)newStopAlreadyInArray:(NSString *)newStart
 {
     int     _stopArrayI;
@@ -284,19 +338,20 @@ withStringForButton2:(NSString *)stringForButton2
     return _inStopArray;
 }
 
-
+/*!
+ * @function viewWillAppear
+ * The function is included, since class inherits from UIViewController.
+ * It is called every time the view is called again.
+ */
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    
-    
     if(
             ([_publicStopVC._actualStationName length] > 0)
          && (_changedStopStation || _changedStartStation )
        )
     {
         NSString *_stationName =  _publicStopVC._actualStationName;
-
         if ([_publicStopVC._actualStationType isEqualToString:PublicTransportVCFromEnglish])
         {
             if ([self newStartAlreadyInArray:_stationName] == NO)
@@ -326,27 +381,26 @@ withStringForButton2:(NSString *)stringForButton2
             }
         }
     }
-    
-    //[self getConnectionArray];
 }
 
-
+/*!
+ * @function threadWaitForLoadingActivityIndicator
+ * Thread is called to start the activity indicator while waiting for data to be downloaded.
+ */
 - (void) threadWaitForChangeActivityIndicator:(id)data
 {
     _waitForChangeActivityIndicator.hidden = NO;
     [_waitForChangeActivityIndicator startAnimating];
 }
 
-
+/*!
+ * @function getConnectionArray
+ * Trigger search for new connections.
+ */
 - (void) getConnectionArray
 {
-    
-    //if ([_connectionArray._connections count] == 0
-    //    || _changedStartStation || _changedStopStation)
-    //{
     ConnectionDto *_localConnection = [[ConnectionDto alloc]init:nil withTo:nil withDuration:nil withTransfers:nil withService:nil withProducts:nil withCapacity1st:0 withCapacity2nd:0 withSections:nil];
     BOOL noValues = NO;
-    
     
     if (    [_connectionArray._connections lastObject] != nil
         &&  [_connectionArray._connections count] > 0)
@@ -369,7 +423,6 @@ withStringForButton2:(NSString *)stringForButton2
     //NSLog(@"_startLabel.text: %@ ", [_charTranslation replaceSpecialChars:_startLabel.text]);
     //NSLog(@"_stopLabel: %@ ", [_charTranslation replaceSpecialChars:_stopLabel.text]);
     
-    
     if (   [_startLabel.text length] > 0
         && [_stopLabel.text length] > 0
         && ![_startLabel.text isEqualToString:PublicTransportVCStart]
@@ -378,15 +431,13 @@ withStringForButton2:(NSString *)stringForButton2
     {
         //NSLog(@"getConnectionArray -> _startLabel.text: %@", _startLabel.text);
         //NSLog(@"getConnectionArray -> _startStation: %@", _connectionArray._startStation);
-        
         if ([_connectionArray._startStation length] == 0)
         {
             newStart = YES;
         }
         else
         {
-            if
-                ([[_charTranslation replaceSpecialCharsUTF8:_connectionArray._startStation] isEqualToString:[_charTranslation replaceSpecialCharsUTF8:_startLabel.text]]
+            if  ([[_charTranslation replaceSpecialCharsUTF8:_connectionArray._startStation] isEqualToString:[_charTranslation replaceSpecialCharsUTF8:_startLabel.text]]
                  )
             {
                 newStart = NO;
@@ -403,9 +454,8 @@ withStringForButton2:(NSString *)stringForButton2
         }
         else
         {
-        
             if  (  [[_charTranslation replaceSpecialCharsUTF8:_connectionArray._stopStation] isEqualToString:[_charTranslation replaceSpecialCharsUTF8:_stopLabel.text]]
-            )
+                 )
             {
                 newStop = NO;
             }
@@ -414,33 +464,35 @@ withStringForButton2:(NSString *)stringForButton2
                 newStop = YES;
             }
         }
-        
         if (newStart || newStop || noValues)
         {
             [NSThread detachNewThreadSelector:@selector(threadWaitForChangeActivityIndicator:) toTarget:self withObject:nil];
-        
             [_connectionArray getData: _startLabel.text
                       withStopStation:_stopLabel.text
                       withNewStations:newStart || newStop];
-            
         }
     }
-
     [_publicTransportTableView reloadData];
-    
     [_waitForChangeActivityIndicator stopAnimating];
     _waitForChangeActivityIndicator.hidden = YES;
 }
 
 
-
+/*!
+ * @function didReceiveMemoryWarning
+ * The function is included per default.
+ */
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
 
-
+/*!
+ @function viewDidUnload
+ * The function is included, since class inherits from UIViewController.
+ * It is called while the view is unloaded.
+ */
 - (void)viewDidUnload
 {
     _publicTransportNavigationBar = nil;
@@ -473,7 +525,12 @@ withStringForButton2:(NSString *)stringForButton2
     [super viewDidUnload];
 }
 
-
+/*!
+ @function changeStart
+ Triggers showing all last start stations.
+ It is triggered by detail button next to from label.
+ @param sender
+ */
 - (IBAction)changeStart:(id)sender
 {
     if (_changeStartButtonIsActivated)
@@ -497,11 +554,15 @@ withStringForButton2:(NSString *)stringForButton2
         _changeStopButtonIsActivated   = NO;
         
         _changeDirectionButton.hidden  = YES;
-        
         [_chooseNewStartButton setTitle:PublicTransportVCNew forState:UIControlStateNormal];
     }
 }
 
+/*!
+ @function changeStartToLast1
+ Changes start station to the one from the given button.
+ @param sender
+ */
 - (IBAction)changeStartToLast1:(id)sender
 {
     _lastStart1Button.hidden        = YES;
@@ -528,14 +589,16 @@ withStringForButton2:(NSString *)stringForButton2
             [_dbCachingForAutocomplete addStartStation:_lastStart1Button.titleLabel.text];
         }        
     }
-    
     [self actualizeStartStationArray];
-
     //NSLog(@"old _startLabel.text: %@ new _startLabel.text: %@", _startStation, _lastStart1Button.titleLabel.text);
-    
     [self getConnectionArray];
 }
 
+/*!
+ @function changeStartToLast2
+ Changes start station to the one from the given button.
+ @param sender
+ */
 - (IBAction)changeStartToLast2:(id)sender
 {
     _lastStart1Button.hidden        = YES;
@@ -558,7 +621,11 @@ withStringForButton2:(NSString *)stringForButton2
     [self getConnectionArray];
 }
 
-
+/*!
+ @function chooseNewStart
+ Switches delegate to PublicStopViewController to search for new start station.
+ @param sender
+ */
 - (IBAction)chooseNewStart:(id)sender
 {
     _changedStartStation            = YES;
@@ -576,8 +643,12 @@ withStringForButton2:(NSString *)stringForButton2
     [self presentModalViewController:_publicStopVC animated:YES];
 }
 
-
-
+/*!
+ @function changeStop
+ Triggers showing all last stop stations.
+ It is triggered by detail button next to to label.
+ @param sender
+ */
 - (IBAction)changeStop:(id)sender
 {
     if (_changeStopButtonIsActivated)
@@ -600,12 +671,15 @@ withStringForButton2:(NSString *)stringForButton2
         _lastStart1Button.hidden        = YES;
         _lastStart2Button.hidden        = YES;
         _chooseNewStartButton.hidden    = YES;
-        
         [_chooseNewStopButton setTitle:PublicTransportVCNew forState:UIControlStateNormal];
     }
 }
 
-
+/*!
+ @function changeStopToLast1
+ Changes stop station to the one from the given button.
+ @param sender
+ */
 - (IBAction)changeStopToLast1:(id)sender
 {
     _lastStop1Button.hidden        = YES;
@@ -632,15 +706,16 @@ withStringForButton2:(NSString *)stringForButton2
             [_dbCachingForAutocomplete addStopStation:_lastStop1Button.titleLabel.text];
         }
     }
-    
     [self actualizeStopStationArray];
-    
     //NSLog(@"old _startLabel.text: %@ new _startLabel.text: %@", _startStation, _lastStart1Button.titleLabel.text);
-    
     [self getConnectionArray];
 }
 
-
+/*!
+ @function changeStopToLast2
+ Changes stop station to the one from the given button.
+ @param sender
+ */
 - (IBAction)changeStopToLast2:(id)sender
 {
     _lastStop1Button.hidden        = YES;
@@ -663,7 +738,11 @@ withStringForButton2:(NSString *)stringForButton2
     [self getConnectionArray];
 }
 
-
+/*!
+ @function chooseNewStop
+ Switches delegate to PublicStopViewController to search for new stop station.
+ @param sender
+ */
 - (IBAction)chooseNewStop:(id)sender
 {
     _changedStopStation = YES;
@@ -681,6 +760,11 @@ withStringForButton2:(NSString *)stringForButton2
     [self presentModalViewController:_publicStopVC animated:YES];
 }
 
+/*!
+ @function startConnectionSearch
+ Triggers searching for new connections.
+ @param sender
+ */
 - (IBAction)startConnectionSearch:(id)sender
 {
     if (
@@ -697,7 +781,6 @@ withStringForButton2:(NSString *)stringForButton2
                                           delegate:self
                                           cancelButtonTitle:AlertViewOk
                                           otherButtonTitles:nil];
-        
         [_acronymAlertView show];
     }
     else
@@ -707,15 +790,18 @@ withStringForButton2:(NSString *)stringForButton2
     }
 }
 
+/*!
+ @function changeDirection
+ Switches start and stop station.
+ @param sender
+ */
 - (IBAction)changeDirection:(id)sender
 {
     NSString *_newStart = _stopLabel.text;
     NSString *_newStop  = _startLabel.text;
-    
     BOOL _newStartEqualsStart1 = NO;
     BOOL _newStartEqualsStart2 = NO;
     BOOL _newStartEqualsStartLabel = NO;
-    
     BOOL _newStopEqualsStop1 = NO;
     BOOL _newStopEqualsStop2 = NO;
     BOOL _newStopEqualsStopLabel = NO;
@@ -733,27 +819,22 @@ withStringForButton2:(NSString *)stringForButton2
     {
         _newStartEqualsStartLabel = YES;
     }
-
     [_dbCachingForAutocomplete deleteStartStation];
         
     if (_newStartEqualsStartLabel == YES || _newStartEqualsStart1 == YES)
     {
         [_dbCachingForAutocomplete addStartStation:_lastStart2Button.titleLabel.text];
     }
-        
     if (_newStartEqualsStart1 == NO)
     {
         [_dbCachingForAutocomplete addStartStation:_lastStart1Button.titleLabel.text];
     }
-        
     if (_newStartEqualsStartLabel == NO)
     {
         [_dbCachingForAutocomplete addStartStation:_startLabel.text];
     }
-    
     [_dbCachingForAutocomplete addStartStation:_newStart];
     [self actualizeStartStationArray];
-
     
     if([_newStop isEqualToString:_lastStop1Button.titleLabel.text])
     {
@@ -767,54 +848,59 @@ withStringForButton2:(NSString *)stringForButton2
     {
         _newStopEqualsStopLabel = YES;
     }
-
-
     [_dbCachingForAutocomplete deleteStopStation];
-    
     if (_newStopEqualsStopLabel == YES || _newStopEqualsStop1 == YES)
     {
         [_dbCachingForAutocomplete addStopStation:_lastStop2Button.titleLabel.text];
     }
-
     if (_newStopEqualsStop1 == NO)
     {
             [_dbCachingForAutocomplete addStopStation:_lastStop1Button.titleLabel.text];
     }
-    
     if (_newStopEqualsStopLabel == NO)
     {
             [_dbCachingForAutocomplete addStopStation:_stopLabel.text];
     }
-    
     [_dbCachingForAutocomplete addStopStation:_newStop];
     [self actualizeStopStationArray];
-    
 }
 
 
 
-// needed for textfield delegate
+/*!
+ * @function textFieldShouldReturn
+ * The function is included, since the class delegates its textFields on its own. (UITextFieldDelegate)
+ */
 -(BOOL) textFieldShouldReturn:(UITextField *)textField
 {    
     [textField resignFirstResponder];
     return YES;
 }
 
-
-// needed for table delegate
+// ------- MANAGE TABLE CELLS ----
+/*!
+ * @function numberOfSectionsInTableView
+ * The function defines the number of sections in table.
+ */
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
     return 1;
 }
 
-
+/*!
+ * @function numberOfRowsInSection
+ * The function defines the number of rows in table.
+ */
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     //NSLog(@"numberOfRowsInSection connection count: %i", [_connectionArray._connections count]);
     return [_connectionArray._connections count]; 
 }
 
-
+/*!
+ * @function cellForRowAtIndexPath
+ * The function is for customizing the table view cells.
+ */
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     NSUInteger        _cellRow = indexPath.row;
@@ -836,7 +922,6 @@ withStringForButton2:(NSString *)stringForButton2
     UILabel          *_stopDestinationLabel = (UILabel  *)[_cell viewWithTag:7];
     UILabel          *_stopDateLabel        = (UILabel  *)[_cell viewWithTag:8];
     UILabel          *_stopTimeLabel        = (UILabel  *)[_cell viewWithTag:9];
-
     [_startDestinationLabel     setTextColor:_zhawColor._zhawFontGrey];
     [_startDateLabel            setTextColor:_zhawColor._zhawFontGrey];
     [_startTimeLabel            setTextColor:_zhawColor._zhawFontGrey];
@@ -861,7 +946,6 @@ withStringForButton2:(NSString *)stringForButton2
             _durationLabel.text     = _localConnection._duration;
             _transfersLabel.text    = [NSString stringWithFormat:@"%i",_localConnection._transfers];
             
-            
             int _productsArrayI;
             NSString *_productsString;
             for (_productsArrayI=0; _productsArrayI < [_localConnection._products count]; _productsArrayI++)
@@ -877,28 +961,31 @@ withStringForButton2:(NSString *)stringForButton2
                 }
             }
             _transportationLabel.text = _productsString;
-            
-            _stopDestinationLabel.text       = _localConnection._to._station._name;
+            _stopDestinationLabel.text = _localConnection._to._station._name;
             _stopDateLabel.text   = [[_dateFormatter _dayFormatter] stringFromDate:_localConnection._to._arrivalDate];
             _stopTimeLabel.text   = [NSString stringWithFormat:@"%@ %@",PublicTransportVCToGerman, [[_dateFormatter _timeFormatter] stringFromDate:_localConnection._to._arrivalTime]];
     }
-        
     return _cell;
 }
 
-
+/*!
+ * @function heightForRowAtIndexPath
+ * The function is for customizing the table view cells.
+ * It sets the height for each cell individually.
+ */
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     return 70;
 }
 
-
+/*!
+ * @function didSelectRowAtIndexPath
+ * The function supports row selection.
+ */
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     //NSUInteger    _cellSelection = indexPath.section;
     
 }
-
-
 
 @end

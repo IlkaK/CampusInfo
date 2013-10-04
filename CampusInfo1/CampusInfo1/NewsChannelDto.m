@@ -1,10 +1,35 @@
-//
-//  NewsChannelDto.m
-//  CampusInfo1
-//
-//  Created by Ilka Kokemor on 15.08.13.
-//
-//
+/*
+ NewsChannelDto.m
+ ZHAW Engineering CampusInfo
+ */
+
+/*!
+ * @header NewsChannelDto.m
+ * @author Ilka Kokemor
+ * @copyright 2013 ZHAW
+ * @discussion
+ * <ul>
+ * <li> Responsibilities:
+ *   <ul>
+ *      <li> Holds data for news channel in NewsDto model. </li>
+ *      <li> Uses TimeTableAsyncRequestDelegate to connect to server and gain all news/events. </li>
+ *  </ul>
+ * </li>
+ *
+ * <li> Receiving data:
+ *   <ul>
+ *      <li> It receives a title, link, description, content, category, start date, start date and publishing date to be initally set. </li>
+ *   </ul>
+ * </li>
+ *
+ * <li> Sending data:
+ *   <ul>
+ *      <li> It returns itself when called. </li>
+ *   </ul>
+ * </li>
+ *
+ * </ul>
+ */
 
 #import "NewsChannelDto.h"
 #import "URLConstantStrings.h"
@@ -26,7 +51,6 @@
 
 @synthesize _dateFormatter;
 
-
 @synthesize delegate;
 
 @synthesize _description;
@@ -43,6 +67,11 @@
 
 @synthesize _dataType;
 
+/*!
+ @function initWithDataType
+ Needs to be called initally, when instance of NewsChannelDto is created.
+ @param newDataType
+ */
 - (id)initWithDataType:(NSString *)newDataType
 {
     self._connectionTrials = 1;
@@ -50,12 +79,10 @@
     _startChannel = NO;
     _startImage = NO;
     _startItem = NO;
-    
     _dateFormatter = [[DateFormation alloc] init]; 
     _newsItemArray = [[NSMutableArray alloc] init];
     
     self._dataType = newDataType;
-    
     if (self)
     {
         if ([_dataType isEqualToString:@"NEWS"])
@@ -72,7 +99,11 @@
 
 
 
-// handling XML parser stuff
+/*!
+ @function parser
+ Parses the received XML.
+ The function is included, since NewsChannelDto uses NSXMLParserDelegate.
+ */
 -   (void)parser:(NSXMLParser *)parser
  didStartElement:(NSString *)elementName
     namespaceURI:(NSString *)namespaceURI
@@ -111,7 +142,11 @@
     }
 }
 
-
+/*!
+ @function parser
+ Parses the received XML.
+ The function is included, since NewsChannelDto uses NSXMLParserDelegate.
+ */
 -   (void)parser:(NSXMLParser *)parser
  foundCharacters:(NSString *)string
 {
@@ -119,10 +154,8 @@
     _actualValue = string;
     if ([_actualEndElement isEqualToString:@""])
     {
-        
         if (_startChannel == YES && _startImage == NO && _startItem == NO)
         {
-
             if ([_actualStartElement isEqualToString:@"title"])
             {
                 //NSLog(@"- channel title: %@", _actualValue);
@@ -240,6 +273,11 @@
     }
 }
 
+/*!
+ @function parser
+ Parses the received XML.
+ The function is included, since NewsChannelDto uses NSXMLParserDelegate.
+ */
 -   (void)parser:(NSXMLParser *)parser
    didEndElement:(NSString *)elementName
     namespaceURI:(NSString *)namespaceURI
@@ -253,10 +291,7 @@
     {
         _startChannel = NO;
         //NSLog(@"finished parsing channel, how many item: %i", [_newsItemArray count]);
-        
         //NSLog(@"- finished parsing channel: %@ --- %@ --- %@ --- %@ --- %@ --- %@ --- %@", _title, _link, _description, _language, _generator, _docs, [[_dateFormatter _englishTimeAndDayFormatter] stringFromDate:_lastBuildDate]);
-
-    
     }
     
     // stop parsing for image
@@ -272,27 +307,24 @@
         _startItem = NO;
        [_newsItemArray addObject:_newsItem];
         //NSLog(@"-> item startdate: %@ title: %@", _newsItem._startdateString, _newsItem._title);
-        
         //NSLog(@"- finished parsing item: %@ --- %@ --- %@ --- %@ --- %@ --- %@", _newsItem._title, _newsItem._link, _newsItem._description, _newsItem._content, _newsItem._category,[[_dateFormatter _englishTimeAndDayFormatter] stringFromDate:_newsItem._pubDate]);
-
     }
-    
    //NSLog(@"element end %@", _actualEndElement);
-    
 }
 
 
 //-------------------------------
 // asynchronous request
 //-------------------------------
-
+/*!
+ @function dataDownloadDidFinish
+ Needed since TimeTableAsyncRequest is used.
+ Function receives data, when download from server is finished.
+ */
 -(void) dataDownloadDidFinish:(NSData*) data
 {
-    
     self._dataFromUrl = data;
-    
     // NSLog(@"dataDownloadDidFinish 1 %@",[NSThread callStackSymbols]);
-    
     if (self._dataFromUrl != nil)
     {
         //NSString *_receivedString = [[NSString alloc] initWithData:self._dataFromUrl encoding:NSASCIIStringEncoding];
@@ -304,10 +336,8 @@
         [XML parse];
         
         // Parse the XML into a dictionary
-        
         NSError         *_error;
         //NSDictionary    *_xmlDictionary = [XMLReader dictionaryForXMLString:_receivedString];
-        
         // Print the dictionary
         //NSLog(@"xmlDictionary: %@", [XML ]);
         
@@ -315,17 +345,24 @@
                               JSONObjectWithData:_dataFromUrl
                               options:kNilOptions
                               error:&_error];
-        
     }
 }
 
-
+/*!
+ @function threadDone
+ Needed since TimeTableAsyncRequest is used.
+ If thread to download data is done, this function is called.
+ */
 -(void)threadDone:(NSNotification*)arg
 {
     //NSLog(@"Thread exiting");
 }
 
-
+/*!
+ @function downloadData
+ Needed since TimeTableAsyncRequest is used.
+ Function sends the request for data to server.
+ */
 -(void) downloadData
 {
     NSString *_urlString;
@@ -345,7 +382,12 @@
     [_asyncTimeTableRequest downloadData:_url];
 }
 
-
+/*!
+ @function getDictionaryFromUrl
+ Needed since TimeTableAsyncRequest is used.
+ TimeTableAsyncRequest is initialized and data download is triggered here.
+ If data is downloaded from server it is processed as well.
+ */
 - (NSDictionary *) getDictionaryFromUrl
 {
     _asyncTimeTableRequest = [[TimeTableAsyncRequest alloc] init];
@@ -357,7 +399,6 @@
                                              selector:@selector(threadDone:)
                                                  name:NSThreadWillExitNotification
                                                object:nil];
-    
     if (_dataFromUrl == nil)
     {
         return nil;
@@ -374,24 +415,28 @@
                                              options:kNilOptions
                                              error:&_error];
         return _scheduleDictionary;
-        
     }
-    
 }
 
+/*!
+ @function getNewsData
+ Gets the channel data for news.
+ */
 -(void) getNewsData
 {
     self._generalDictionary = [self getDictionaryFromUrl];
     self._dataType = @"NEWS";
 }
 
+/*!
+ @function getEventData
+ Gets the channel data for events.
+ */
 -(void) getEventData
 {
     self._generalDictionary = [self getDictionaryFromUrl];
     self._dataType = @"EVENTS";
-     
 }
-
 
 
 @end

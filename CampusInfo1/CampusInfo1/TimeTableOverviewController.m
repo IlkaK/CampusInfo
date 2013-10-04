@@ -1145,7 +1145,6 @@
 
 
 
-
 // ------- MANAGE TABLE CELLS ----
 /*!
  * @function numberOfSectionsInTableView
@@ -1171,7 +1170,7 @@
 {
     return 1; 
 }
- 
+
 /*!
  * @function getCurrentScheduleEventArrayWithDay
  * Loops over dayDto to get the corresponding data fitting to given times.
@@ -3758,7 +3757,7 @@
 
 
 /*!
- * @function heightForRowAtIndexPath
+ * @function didSelectRowAtIndexPath
  * The function supports row selection.
  */
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath

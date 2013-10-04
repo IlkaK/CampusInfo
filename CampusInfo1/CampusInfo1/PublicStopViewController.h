@@ -1,10 +1,34 @@
-/*	PublicStopViewController.h
+/*
+ PublicStopViewController.h
+ ZHAW Engineering CampusInfo
  */
 
 /*!
- @header PublicStopViewController.h
- This class belongs to the corresponding PublicStopViewController.xib file.
- That means, it controlls the view with which stations/stops can be searched to be used within the public transportation view.
+ * @header PublicStopViewController.h
+ * @author Ilka Kokemor
+ * @copyright 2013 ZHAW
+ * @discussion
+ * <ul>
+ * <li> Responsibilities:
+ *   <ul>
+ *      <li> Control of PublicStopViewController.xib, where stations can be searched using autocomplete functionality. </li>
+ *      <li> While typing stations, tables shows suggestions for autocomplete. </li>
+ *  </ul>
+ * </li>
+ *
+ * <li> Receiving data:
+ *   <ul>
+ *      <li> Receives delegate from PublicTransportViewController and passes it back, if back button is clicked. </li>
+ *   </ul>
+ * </li>
+ *
+ * <li> Sending data:
+ *   <ul>
+ *      <li> It passes the found station back to PublicTransportViewController. </li>
+ *   </ul>
+ * </li>
+ *
+ * </ul>
  */
 
 
@@ -18,23 +42,35 @@
 
 @interface PublicStopViewController : UIViewController<UITextFieldDelegate>
 {
+    /*! @var _stationArray Holds the array with all found station suggestions */
     StationArrayDto                     *_stationArray;
-    NSString                            *_acutalStationName;
+    /*! @var _actualStationType Actual chosen station type */
+    NSString                            *_actualStationType;
+    /*! @var _actualStationName Actual chosen station */
     NSString                            *_actualStationName;
     
+    /*! @var _titleNavigationBar Used as background for title and acronym */
     IBOutlet UINavigationBar            *_titleNavigationBar;
+    /*! @var _titleNavigationItem Used as navigation item for title */
     IBOutlet UINavigationItem           *_titleNavigationItem;
+    /*! @var _titleNavigationLabel Shows the title */
     IBOutlet UILabel                    *_titleNavigationLabel;
     
+    /*! @var _publicStopTableView Shows all suggestions for given text in _publicStopTextField */
     IBOutlet UITableView                *_publicStopTableView;
-    
+    /*! @var _publicStopTextField Shows and stores the searched station */
     IBOutlet UITextField                *_publicStopTextField;
+    /*! @var _publicStopTextFieldString Holds the station in the text field _publicStopTextField */
     NSString                            *_publicStopTextFieldString;
     
+    /*! @var _dbCachingForAutocomplete Handles the interaction of the database to store and get student acronyms */
     DBCachingForAutocomplete            *_dbCachingForAutocomplete;
+    /*!  @var _suggestions Holds all actual suggestions for acronyms, which are displayed in _publicStopTableView */
     NSMutableArray                      *_suggestions;
+    /*! @var _autocomplete Handling the autocomplete functionality */
     Autocomplete                        *_autocomplete;
     
+    /*! @var _zhawColor Holds all color schemes needed */
     ColorSelection                      *_zhawColors;
 }
 
@@ -57,6 +93,11 @@
 
 @property (strong, nonatomic) ColorSelection                        *_zhawColors;
 
+/*!
+ @function publicStopTextFieldChanged
+ Triggered, when the text in _publicStopTextField is changed by the user. Then the table for suggestions needs to be updated accordingly.
+ @param sender
+ */
 - (IBAction)publicStopTextFieldChanged:(id)sender;
 
 @end

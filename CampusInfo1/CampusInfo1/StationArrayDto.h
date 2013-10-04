@@ -69,7 +69,7 @@
 /*!
  @function init
  Initializes StationArrayDto.
- @param newActualStation
+ @param newStations
  */
 -(id)   init : (NSMutableArray *) newStations;
 

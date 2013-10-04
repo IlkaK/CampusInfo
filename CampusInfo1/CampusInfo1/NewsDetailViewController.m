@@ -1,10 +1,36 @@
-//
-//  NewsDetailViewController.m
-//  CampusInfo1
-//
-//  Created by Ilka Kokemor on 16.08.13.
-//
-//
+/*
+ NewsDetailViewController.m
+ ZHAW Engineering CampusInfo
+ */
+
+/*!
+ * @header NewsDetailViewController.m
+ * @author Ilka Kokemor
+ * @copyright 2013 ZHAW
+ * @discussion
+ * <ul>
+ * <li> Responsibilities:
+ *   <ul>
+ *      <li> Control of NewsDetailViewController.xib, where all elements of a chosen news item displays. </li>
+ *      <li> Displaying one of the news items.  </li>
+ *  </ul>
+ * </li>
+ *
+ * <li> Receiving data:
+ *   <ul>
+ *      <li> Receives delegate from NewsViewController and passes it back, if back button is clicked. </li>
+ *      <li> It receives data from NewsViewController as well. </li>
+ *   </ul>
+ * </li>
+ *
+ * <li> Sending data:
+ *   <ul>
+ *      <li> It passes the delegate back to NewsViewController. </li>
+ *   </ul>
+ * </li>
+ *
+ * </ul>
+ */
 
 #import "NewsDetailViewController.h"
 #import "ColorSelection.h"
@@ -31,22 +57,29 @@
 @synthesize _titleNavigationBar;
 @synthesize _titleNavigationItem;
 
-
+/*!
+ * @function initWithNibName
+ * Initializiation of class.
+ */
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     return self;
 }
 
+/*!
+ * @function viewDidLoad
+ * The function is included, since class inherits from UIViewController.
+ * Is called first time, the view is started for initialization.
+ * Is only called once, after initialization, never again.
+ */
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-
     // general initialization
     ColorSelection *_zhawColor = [[ColorSelection alloc]init];
     _dateFormatter = [[DateFormation alloc] init];
     
-
     // title
     UIBarButtonItem *backButtonItem = [[UIBarButtonItem alloc] initWithTitle:LeftArrowSymbol style:UIBarButtonItemStylePlain target:self action:@selector(moveBackToMenuOverview:)];
     
@@ -68,14 +101,22 @@
     _descriptionNavigationItem.title = @"";
     
     [_dateLabel setTextColor:_zhawColor._zhawLightGrey];
-    
 }
 
+/*!
+ * @function didReceiveMemoryWarning
+ * The function is included per default.
+ */
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
 }
 
+/*!
+ @function viewDidUnload
+ * The function is included, since class inherits from UIViewController.
+ * It is called while the view is unloaded.
+ */
 - (void)viewDidUnload {
     _descriptionTitleLabel = nil;
     _dateLabel = nil;
@@ -89,12 +130,20 @@
     [super viewDidUnload];
 }
 
+/*!
+ @function openingURL
+ * Opens URL of link in news item in browser.
+ */
 -(void) openingURL:(id)sender event:(id)event
 {
     [[UIApplication sharedApplication] openURL:[NSURL URLWithString:_newsItem._link]];
 }
 
-
+/*!
+ * @function viewWillAppear
+ * The function is included, since class inherits from UIViewController.
+ * It is called every time the view is called again.
+ */
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
@@ -121,10 +170,14 @@
     }
 }
 
-
+/*!
+ @function moveBackToMenuOverview
+ When back button is triggered, delegate is returned to NewsViewController.
+ @param sender
+ */
 - (void)moveBackToMenuOverview:(id)sender
 {
-        [self dismissModalViewControllerAnimated:YES];
+    [self dismissModalViewControllerAnimated:YES];
 }
 
 

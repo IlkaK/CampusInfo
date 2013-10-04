@@ -1,10 +1,38 @@
-//
-//  NewsViewController.m
-//  CampusInfo1
-//
-//  Created by Ilka Kokemor on 14.08.13.
-//
-//
+/*
+ NewsViewController.m
+ ZHAW Engineering CampusInfo
+ */
+
+/*!
+ * @header NewsViewController.m
+ * @author Ilka Kokemor
+ * @copyright 2013 ZHAW
+ * @discussion
+ * <ul>
+ * <li> Responsibilities:
+ *   <ul>
+ *      <li> Control of NewsViewController.xib, where an overview of all news is displayed in a table. </li>
+ *      <li> Getting and handling news data via NewsChannelDto.  </li>
+ *  </ul>
+ * </li>
+ *
+ * <li> Receiving data:
+ *   <ul>
+ *      <li> Receives delegate from MenuOverviewController and passes it back, if back button is clicked. </li>
+ *      <li> It receives data from NewsChannelDto, which establishes a connection to server. </li>
+ *   </ul>
+ * </li>
+ *
+ * <li> Sending data:
+ *   <ul>
+ *      <li> It passes the data type to NewsChannelDto. </li>
+ *      <li> It passes the delegate to NewsDetailViewController. </li>
+ *      <li> It also passes the news channel data to NewsDetailViewController, so it can display the details. </li>
+ *   </ul>
+ * </li>
+ *
+ * </ul>
+ */
 
 #import "NewsViewController.h"
 #import "UIConstantStrings.h"
@@ -34,12 +62,22 @@
 
 @synthesize _waitForLoadingActivityIndicator;
 
+/*!
+ * @function initWithNibName
+ * Initializiation of class.
+ */
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     return self;
 }
 
+/*!
+ * @function viewDidLoad
+ * The function is included, since class inherits from UIViewController.
+ * Is called first time, the view is started for initialization.
+ * Is only called once, after initialization, never again.
+ */
 - (void)viewDidLoad
 {
     //NSLog(@"news view controller: viewDidLoad");
@@ -85,13 +123,20 @@
     _newsDetailVC.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
 }
 
+/*!
+ * @function didReceiveMemoryWarning
+ * The function is included per default.
+ */
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
 
-
+/*!
+ * @function sortNewsItems
+ * Sorts the news items dependent on their publishing date.
+ */
 -(void) sortNewsItems
 {
 
@@ -102,7 +147,6 @@
         //NSLog(@"before sorting _oneItem date %@ and title %@", [NSString stringWithFormat:@"%@"
         //                                                       ,[[_dateFormatter _dayFormatter] stringFromDate:_oneItem._pubDate]], _oneItem._title);
     //}
-    
        
        [_newsChannel._newsItemArray sortUsingComparator:^NSComparisonResult(NewsItemDto *a, NewsItemDto *b)
         {
@@ -119,9 +163,6 @@
             return [_compareInEnglishDateFormat1 compare:_compareInEnglishDateFormat2];
         }
         ];
-       
-       
-       
     //for (someArrayI = 0; someArrayI < [_newsChannel._newsItemArray count]; someArrayI++)
     //{
     //    NewsItemDto *_oneItem = [_newsChannel._newsItemArray objectAtIndex:someArrayI];
@@ -131,19 +172,33 @@
     //}
 }
 
-
+/*!
+ @function tryConnectionAgain
+ Triggered by clicking the _noConnectionButton, another trial to connect to server is started.
+ @param sender
+ */
 - (IBAction)tryConnectionAgain:(id)sender
 {
     [self startLoading];
     [self doneLoading];
 }
 
+/*!
+ @function moveBackToMenuOverview
+ When back button is triggered, delegate is returned to MenuOverviewController.
+ @param sender
+ */
 - (void)moveBackToMenuOverview:(id)sender
 {
     [self dismissModalViewControllerAnimated:YES];
     //self.tabBarController.selectedIndex = 0;
 }
 
+/*!
+ @function viewDidUnload
+ * The function is included, since class inherits from UIViewController.
+ * It is called while the view is unloaded.
+ */
 - (void)viewDidUnload {
     _newsTable = nil;
     _newsTableCell = nil;
@@ -157,12 +212,21 @@
     [super viewDidUnload];
 }
 
+/*!
+ * @function threadWaitForLoadingActivityIndicator
+ * Thread is called to start the activity indicator while waiting for data to be downloaded.
+ */
 - (void) threadWaitForLoadingActivityIndicator:(id)data
 {
     _waitForLoadingActivityIndicator.hidden = NO;
     [_waitForLoadingActivityIndicator startAnimating];
 }
 
+
+/*!
+ * @function startLoading
+ * Start loading, therefore hide no connection button and label and start activity indicator.
+ */
 -(void)startLoading
 {
     self._noConnectionButton.hidden = YES;
@@ -170,6 +234,11 @@
     [NSThread detachNewThreadSelector:@selector(threadWaitForLoadingActivityIndicator:) toTarget:self withObject:nil];
 }
 
+/*!
+ * @function doneLoading
+ * Loading is done, so stop activity indicator.
+ * If no data is found, display no connection button and label.
+ */
 -(void)doneLoading
 {
     self._newsChannel = [_newsChannel initWithDataType:@"NEWS"];
@@ -184,7 +253,11 @@
     }
 }
 
-
+/*!
+ * @function viewWillAppear
+ * The function is included, since class inherits from UIViewController.
+ * It is called every time the view is called again.
+ */
 - (void)viewWillAppear:(BOOL)animated
 {
 
@@ -192,12 +265,22 @@
     [self startLoading];
 }
 
+/*!
+ * @function viewDidAppear
+ * The function is included, since class inherits from UIViewController.
+ * It is called before viewWillAppear is called.
+ * It is needed to respond to the shaking gesture.
+ */
 -(void)viewDidAppear:(BOOL)animated
 {
     [self doneLoading];
 }
 
-
+/*!
+ * @function showNewsDetails
+ * If detail button in table cells is clicked, this method is called.
+ * It passes the news data and the delegate to NewsDetailViewController.
+ */
 -(void) showNewsDetails:(id)sender event:(id)event
 {
     NSSet       *_touches              = [event    allTouches];
@@ -218,22 +301,29 @@
 
 
 //---------- Handling of table  -----
+/*!
+ * @function numberOfSectionsInTableView
+ * The function defines the number of sections in table.
+ */
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
     return [_newsChannel._newsItemArray count];
 }
 
-
-
-// Customize the number of rows in the table view.
+/*!
+ * @function numberOfRowsInSection
+ * The function defines the number of rows in table.
+ */
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     return 1;
      
 }
 
-
-// Customize the appearance of table view cells.
+/*!
+ * @function cellForRowAtIndexPath
+ * The function is for customizing the table view cells.
+ */
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     NSUInteger        _cellSelection = indexPath.section;
@@ -288,13 +378,20 @@
     return _cell;
 }
 
-// set cell hight
+/*!
+ * @function heightForRowAtIndexPath
+ * The function is for customizing the table view cells.
+ * It sets the height for each cell individually.
+ */
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     return 126;
 }
 
-// Override to support row selection in the table view.
+/*!
+ * @function didSelectRowAtIndexPath
+ * The function supports row selection.
+ */
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
 	//_acronymTextField.text = [_suggestions objectAtIndex:indexPath.row];
