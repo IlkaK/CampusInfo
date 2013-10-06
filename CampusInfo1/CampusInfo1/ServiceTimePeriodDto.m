@@ -1,10 +1,34 @@
-//
-//  ServiceTimePeriodDto.m
-//  CampusInfo1
-//
-//  Created by Ilka Kokemor on 18.07.13.
-//
-//
+/*
+ ServiceTimePeriodDto.m
+ ZHAW Engineering CampusInfo
+ */
+
+/*!
+ * @header ServiceTimePeriodDto.m
+ * @author Ilka Kokemor
+ * @copyright 2013 ZHAW
+ * @discussion
+ * <ul>
+ * <li> Responsibilities:
+ *   <ul>
+ *      <li> Holds the service time period data in MensaOverviewDto model. </li>
+ *  </ul>
+ * </li>
+ *
+ * <li> Receiving data:
+ *   <ul>
+ *      <li> It receives the start and end date, id, lunch time and opening time plan to be initally set or a dictionary to browse the data itself. </li>
+ *   </ul>
+ * </li>
+ *
+ * <li> Sending data:
+ *   <ul>
+ *      <li> It returns itself when called. </li>
+ *   </ul>
+ * </li>
+ *
+ * </ul>
+ */
 
 #import "ServiceTimePeriodDto.h"
 #import "LunchTimePlanDto.h"
@@ -19,6 +43,15 @@
 @synthesize _openingTimePlan;
 @synthesize _dateFormatter;
 
+/*!
+ @function init
+ Initializes ServiceTimePeriodDto.
+ @param newStartsOn
+ @param newEndsOn
+ @param newServiceTimePeriodId
+ @param newLunchTimePlan
+ @param newOpeningTimePlan
+ */
 -(id)                  init: (NSDate *) newStartsOn
                  withEndsOn: (NSDate *) newEndsOn
     withServiceTimePeriodId: (int) newServiceTimePeriodId
@@ -38,7 +71,11 @@
     return self;
 }
 
-
+/*!
+ @function getServiceTimePeriod
+ Is called when a new ServiceTimePeriodDto instance should be created based on the dictionary information.
+ @param serviceTimePeriodDictionary
+ */
 - (ServiceTimePeriodDto *)getServiceTimePeriod:(NSDictionary *)serviceTimePeriodDictionary
 {
     ServiceTimePeriodDto *_localServiceTimePeriod = [[ServiceTimePeriodDto alloc] init:nil withEndsOn:nil withServiceTimePeriodId:0 withLunchTimePlan:nil withOpeningTimePlan:nil];

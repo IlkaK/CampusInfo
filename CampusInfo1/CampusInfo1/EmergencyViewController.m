@@ -1,10 +1,35 @@
-//
-//  EmergencyViewController.m
-//  CampusInfo1
-//
-//  Created by Ilka Kokemor on 02.08.13.
-//
-//
+/*
+ EmergencyViewController.m
+ ZHAW Engineering CampusInfo
+ */
+
+/*!
+ * @header EmergencyViewController.m
+ * @author Ilka Kokemor
+ * @copyright 2013 ZHAW
+ * @discussion
+ * <ul>
+ * <li> Responsibilities:
+ *   <ul>
+ *      <li> Control of EmergencyViewController.xib, which displays a table with all emergency contact information.  </li>
+ *  </ul>
+ * </li>
+ *
+ * <li> Receiving data:
+ *   <ul>
+ *      <li> Receives delegate from ContactsOverViewController and passes it back, if back button is clicked. </li>
+ *   </ul>
+ * </li>
+ *
+ * <li> Sending data:
+ *   <ul>
+ *      <li> If email is clicked, email app is startet and email is started.  </li>
+ *      <li> If phone number is clicked, a call is started.  </li>
+ *   </ul>
+ * </li>
+ *
+ * </ul>
+ */
 
 #import "EmergencyViewController.h"
 #import "ColorSelection.h"
@@ -27,14 +52,22 @@
 
 @synthesize _zhawColor;
 
-
+/*!
+ * @function initWithNibName
+ * Initializiation of class.
+ */
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     return self;
 }
 
-
+/*!
+ * @function viewDidLoad
+ * The function is included, since class inherits from UIViewController.
+ * Is called first time, the view is started for initialization.
+ * Is only called once, after initialization, never again.
+ */
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -55,13 +88,20 @@
     [_titleNavigationBar setTintColor:_zhawColor._zhawDarkerBlue];
 }
 
-
+/*!
+ @function moveBackToContactsOverview
+ When back button is triggered, delegate is returned to ContactsOverViewController.
+ @param sender
+ */
 - (void)moveBackToContactsOverview:(id)sender
 {
     [self dismissModalViewControllerAnimated:YES];
 }
 
-
+/*!
+ @function clickedButtonAtIndex
+ When phone number is clicked an alert is displayed and number is dialed if wanted.
+ */
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
 {
     if (buttonIndex != [alertView firstOtherButtonIndex])
@@ -72,7 +112,10 @@
     }
 }
 
-
+/*!
+ @function callGivenNumber
+ When phone number is clicked an alert is displayed and number is dialed if wanted.
+ */
 -(void) callGivenNumber:(id)sender event:(id)event
 {
     NSSet            *_touches              = [event    allTouches];
@@ -132,13 +175,21 @@
     // [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"tel://1456987452"]];
 }
 
-
+/*!
+ * @function didReceiveMemoryWarning
+ * The function is included per default.
+ */
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
 
+/*!
+ @function viewDidUnload
+ * The function is included, since class inherits from UIViewController.
+ * It is called while the view is unloaded.
+ */
 - (void)viewDidUnload {
     _emergencyTable = nil;
     _emergencyDetailTableCell = nil;
@@ -150,7 +201,11 @@
 }
 
 
-// table and table cell handling
+//---------- Handling of table  -----
+/*!
+ * @function titleForHeaderInSection
+ * The function defines the title of the sections.
+ */
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
 {
     NSString *_sectionName;
@@ -166,12 +221,19 @@
     return _sectionName;
 }
 
+/*!
+ * @function numberOfSectionsInTableView
+ * The function defines the number of sections in table.
+ */
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
     return 2;
 }
 
-
+/*!
+ * @function numberOfRowsInSection
+ * The function defines the number of rows in table.
+ */
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     NSInteger _numberRows;
@@ -187,7 +249,10 @@
     return _numberRows;
 }
 
-
+/*!
+ * @function heightForRowAtIndexPath
+ * The function defines the cells height of _acronymAutocompleteTableView.
+ */
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     NSUInteger        _cellSelection = indexPath.section;
@@ -203,7 +268,10 @@
     return _cellHeight;
 }
 
-
+/*!
+ * @function cellForRowAtIndexPath
+ * The function is for customizing the table view cells.
+ */
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     NSUInteger        _cellSelection = indexPath.section;

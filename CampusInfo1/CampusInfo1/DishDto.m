@@ -1,10 +1,34 @@
-//
-//  DishDto.m
-//  CampusInfo1
-//
-//  Created by Ilka Kokemor on 23.07.13.
-//
-//
+/*
+ DishDto.m
+ ZHAW Engineering CampusInfo
+ */
+
+/*!
+ * @header DishDto.m
+ * @author Ilka Kokemor
+ * @copyright 2013 ZHAW
+ * @discussion
+ * <ul>
+ * <li> Responsibilities:
+ *   <ul>
+ *      <li> Holds the dish data in MensaMenuDto model. </li>
+ *  </ul>
+ * </li>
+ *
+ * <li> Receiving data:
+ *   <ul>
+ *      <li> It receives dish id, external, internal, partner price, label, name, version and an array of side dishes to be initally set or a dictionary to browse the data itself. </li>
+ *   </ul>
+ * </li>
+ *
+ * <li> Sending data:
+ *   <ul>
+ *      <li> It returns itself when called. </li>
+ *   </ul>
+ * </li>
+ *
+ * </ul>
+ */
 
 #import "DishDto.h"
 #import "SideDishDto.h"
@@ -19,7 +43,18 @@
 @synthesize _priceForPartners;
 @synthesize _sideDishes;
 
-
+/*!
+ @function init
+ Initializes DishDto.
+ @param newDishId
+ @param newExternalPrice
+ @param newInternalPrice
+ @param newPriceForPartners
+ @param newLabel
+ @param newName
+ @param newVersion
+ @param newSideDishes
+ */
 -(id)   init              : (int) newDishId
         withExternalPrice : (double) newExternalPrice
         withInternalPrice : (double) newInternalPrice
@@ -44,7 +79,11 @@
     return self;
 }
 
-
+/*!
+ @function getDish
+ Is called when a new DishDto instance should be created based on the dictionary information.
+ @param dishDictionary
+ */
 - (DishDto *)getDish:(NSDictionary *)dishDictionary
 {
     DishDto *_localDish = [[DishDto alloc]init:0 withExternalPrice:0 withInternalPrice:0 withPriceForPartners:0 withLabel:nil withName:nil withVersion:nil withSideDishes:nil];
@@ -124,9 +163,7 @@
                       withVersion:_localDishVersion
                    withSideDishes:_localSideDishes
                   ];
-    
     return _localDish;
-
 }
 
 

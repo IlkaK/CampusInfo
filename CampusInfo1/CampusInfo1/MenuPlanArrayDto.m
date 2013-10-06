@@ -1,10 +1,35 @@
-//
-//  MenuPlanArrayDto.m
-//  CampusInfo1
-//
-//  Created by Ilka Kokemor on 20.08.13.
-//
-//
+/*
+ MenuPlanArrayDto.m
+ ZHAW Engineering CampusInfo
+ */
+
+/*!
+ * @header MenuPlanArrayDto.m
+ * @author Ilka Kokemor
+ * @copyright 2013 ZHAW
+ * @discussion
+ * <ul>
+ * <li> Responsibilities:
+ *   <ul>
+ *      <li> Holds menu plan array in MensaMenuDto model. </li>
+ *      <li> Uses TimeTableAsyncRequestDelegate to connect to server and gain mensa menu data from there. </li>
+ *  </ul>
+ * </li>
+ *
+ * <li> Receiving data:
+ *   <ul>
+ *      <li> It receives calendar week and year to build the url which is send to the server. </li>
+ *   </ul>
+ * </li>
+ *
+ * <li> Sending data:
+ *   <ul>
+ *      <li> Using TimeTableAsyncRequestDelegate it gets the date from server request. </li>
+ *   </ul>
+ * </li>
+ *
+ * </ul>
+ */
 
 #import "MenuPlanArrayDto.h"
 #import "MenuPlanDto.h"
@@ -23,6 +48,11 @@
 @synthesize _actualYear;
 @synthesize _actualCalendarWeek;
 
+/*!
+ @function init
+ Initializes MenuPlanArrayDto.
+ @param newMenuPlans
+ */
 -(id) init:(NSMutableArray *) newMenuPlans
 {
     self = [super init];
@@ -39,7 +69,11 @@
 //-------------------------------
 // asynchronous request
 //-------------------------------
-
+/*!
+ @function dataDownloadDidFinish
+ Needed since TimeTableAsyncRequest is used.
+ Function receives data, when download from server is finished.
+ */
 -(void) dataDownloadDidFinish:(NSData*) data
 {
     
@@ -98,12 +132,21 @@
     }
 }
 
+/*!
+ @function threadDone
+ Needed since TimeTableAsyncRequest is used.
+ If thread to download data is done, this function is called.
+ */
 -(void)threadDone:(NSNotification*)arg
 {
     //NSLog(@"Thread exiting");
 }
 
-
+/*!
+ @function downloadData
+ Needed since TimeTableAsyncRequest is used.
+ Function sends the request for data to server.
+ */
 -(void) downloadData
 {
     NSString *_urlString = [NSString stringWithFormat:URLMenuPlanArray,_actualYear, _actualCalendarWeek];
@@ -114,7 +157,12 @@
     [_asyncTimeTableRequest downloadData:_url];
 }
 
-
+/*!
+ @function getDictionaryFromUrl
+ Needed since TimeTableAsyncRequest is used.
+ TimeTableAsyncRequest is initialized and data download is triggered here.
+ If data is downloaded from server it is processed as well.
+ */
 - (NSDictionary *) getDictionaryFromUrl
 {
     _asyncTimeTableRequest = [[TimeTableAsyncRequest alloc] init];
@@ -141,6 +189,13 @@
     }
 }
 
+/*!
+ @function getData
+ Gets mensa menu plan array for given year, calendar week, actual date and gastro id.
+ @param newStartStation
+ @param newStopStation
+ @param newStations
+ */
 -(void) getData:(int)calendarWeek
        withYear:(int)year
  withActualDate:(NSDate *)actualDate
@@ -167,6 +222,12 @@
     }
 }
 
+/*!
+ @function getActualMenu
+ Gets the mensa menu plan for given date and gastro id.
+ @param actualDate
+ @param gastroId
+ */
 -(MenuDto *)getActualMenu:(NSDate *)actualDate
                  withGastroId:(int)gastroId
 {

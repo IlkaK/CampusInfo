@@ -19,6 +19,7 @@
 @interface MensaDetailViewController : UIViewController <ChooseDateViewDelegate, UITableViewDataSource, UITableViewDelegate>
 {
     GastronomicFacilityDto              *_actualGastronomy;
+    /*! @var _dateFormatter Class which provides methods to format date from NSString to NSDate or the other way around */
     DateFormation                       *_dateFormatter;
     MenuPlanArrayDto                    *_menuPlans;
     MenuDto                             *_actualMenu;

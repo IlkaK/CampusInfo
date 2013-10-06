@@ -1,10 +1,34 @@
-//
-//  LunchTimePlanDto.m
-//  CampusInfo1
-//
-//  Created by Ilka Kokemor on 18.07.13.
-//
-//
+/*
+ LunchTimePlanDto.m
+ ZHAW Engineering CampusInfo
+ */
+
+/*!
+ * @header LunchTimePlanDto.m
+ * @author Ilka Kokemor
+ * @copyright 2013 ZHAW
+ * @discussion
+ * <ul>
+ * <li> Responsibilities:
+ *   <ul>
+ *      <li> Holds the lunch time plan data in MensaOverviewDto model. </li>
+ *  </ul>
+ * </li>
+ *
+ * <li> Receiving data:
+ *   <ul>
+ *      <li> It receives an array of week days and plan type to be initally set or a dictionary to browse the data itself. </li>
+ *   </ul>
+ * </li>
+ *
+ * <li> Sending data:
+ *   <ul>
+ *      <li> It returns itself when called. </li>
+ *   </ul>
+ * </li>
+ *
+ * </ul>
+ */
 
 #import "LunchTimePlanDto.h"
 #import "WeekdayDto.h"
@@ -13,6 +37,12 @@
 @synthesize _weekdays;
 @synthesize _planType;
 
+/*!
+ @function init
+ Initializes LunchTimePlanDto.
+ @param newWeekdays
+ @param newPlanType
+ */
 -(id)           init: (NSMutableArray  *) newWeekdays
         withPlanType: (NSString *)newPlanType
 {
@@ -25,6 +55,11 @@
     return self;
 }
 
+/*!
+ @function getLunchTimePlan
+ Is called when a new LunchTimePlanDto instance should be created based on the dictionary information.
+ @param lunchTimePlanDictionary
+ */
 - (LunchTimePlanDto *)getLunchTimePlan:(NSDictionary *)lunchTimePlanDictionary
 {
     //NSLog(@"start getLunchTimePlan");

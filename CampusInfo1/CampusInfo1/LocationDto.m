@@ -1,10 +1,34 @@
-//
-//  LocationDto.m
-//  CampusInfo1
-//
-//  Created by Ilka Kokemor on 18.07.13.
-//
-//
+/*
+ LocationDto.m
+ ZHAW Engineering CampusInfo
+ */
+
+/*!
+ * @header LocationDto.m
+ * @author Ilka Kokemor
+ * @copyright 2013 ZHAW
+ * @discussion
+ * <ul>
+ * <li> Responsibilities:
+ *   <ul>
+ *      <li> Holds the location data in MensaOverviewDto model. </li>
+ *  </ul>
+ * </li>
+ *
+ * <li> Receiving data:
+ *   <ul>
+ *      <li> It receives location id, name and version to be initally set or a dictionary to browse the data itself. </li>
+ *   </ul>
+ * </li>
+ *
+ * <li> Sending data:
+ *   <ul>
+ *      <li> It returns itself when called. </li>
+ *   </ul>
+ * </li>
+ *
+ * </ul>
+ */
 
 #import "LocationDto.h"
 
@@ -13,6 +37,13 @@
 @synthesize _name;
 @synthesize _version;
 
+/*!
+ @function init
+ Initializes LocationDto.
+ @param newLocationId
+ @param newName
+ @param newVersion
+ */
 -(id)                   init: (int) newLocationId
                     withName: (NSString *)newName
                  withVersion: (NSString *)newVersion
@@ -27,7 +58,11 @@
     return self;
 }
 
-
+/*!
+ @function getLocation
+ Is called when a new LocationDto instance should be created based on the dictionary information.
+ @param locationDictionary
+ */
 - (LocationDto *)getLocation:(NSDictionary *)locationDictionary
 {
     int _localLocationId;

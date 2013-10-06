@@ -24,6 +24,8 @@
     GastronomicFacilityArrayDto         *_gastronomyFacilityArray;
     
     NSDate                              *_actualDate;
+    
+    /*! @var _dateFormatter Class which provides methods to format date from NSString to NSDate or the other way around */
     DateFormation                       *_dateFormatter;
     LanguageTranslation                 *_translator;
     ColorSelection                      *_zhawColor;

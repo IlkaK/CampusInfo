@@ -1,10 +1,34 @@
-//
-//  HolidayDto.m
-//  CampusInfo1
-//
-//  Created by Ilka Kokemor on 18.07.13.
-//
-//
+/*
+ HolidayDto.m
+ ZHAW Engineering CampusInfo
+ */
+
+/*!
+ * @header HolidayDto.m
+ * @author Ilka Kokemor
+ * @copyright 2013 ZHAW
+ * @discussion
+ * <ul>
+ * <li> Responsibilities:
+ *   <ul>
+ *      <li> Holds the holiday data in MensaOverviewDto model. </li>
+ *  </ul>
+ * </li>
+ *
+ * <li> Receiving data:
+ *   <ul>
+ *      <li> It receives holiday id, name, version, start and end date to be initally set or a dictionary to browse the data itself. </li>
+ *   </ul>
+ * </li>
+ *
+ * <li> Sending data:
+ *   <ul>
+ *      <li> It returns itself when called. </li>
+ *   </ul>
+ * </li>
+ *
+ * </ul>
+ */
 
 #import "HolidayDto.h"
 
@@ -16,6 +40,15 @@
 @synthesize _endsAt;
 @synthesize _dateFormatter;
 
+/*!
+ @function init
+ Initializes HolidayDto.
+ @param newHolidayId
+ @param newName
+ @param newVersion
+ @param newStartsAt
+ @param newEndsAt
+ */
 -(id)                   init: (int) newHolidayId
                     withName: (NSString *)newName
                  withVersion: (NSString *)newVersion
@@ -35,6 +68,11 @@
     return self;
 }
 
+/*!
+ @function getHoliday
+ Is called when a new HolidayDto instance should be created based on the dictionary information.
+ @param holidayDictionary
+ */
 - (HolidayDto *)getHoliday:(NSDictionary *)holidayDictionary
 {
     int _localHolidayId;

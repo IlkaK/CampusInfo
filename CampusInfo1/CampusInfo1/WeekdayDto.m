@@ -1,10 +1,34 @@
-//
-//  WeekdayDto.m
-//  CampusInfo1
-//
-//  Created by Ilka Kokemor on 17.07.13.
-//
-//
+/*
+ WeekdayDto.m
+ ZHAW Engineering CampusInfo
+ */
+
+/*!
+ * @header WeekdayDto.m
+ * @author Ilka Kokemor
+ * @copyright 2013 ZHAW
+ * @discussion
+ * <ul>
+ * <li> Responsibilities:
+ *   <ul>
+ *      <li> Holds the weekday data in MensaOverviewDto model. </li>
+ *  </ul>
+ * </li>
+ *
+ * <li> Receiving data:
+ *   <ul>
+ *      <li> It receives a type, start and stop time and timeplan type to be initally set or a dictionary to browse the data itself. </li>
+ *   </ul>
+ * </li>
+ *
+ * <li> Sending data:
+ *   <ul>
+ *      <li> It returns itself when called. </li>
+ *   </ul>
+ * </li>
+ *
+ * </ul>
+ */
 
 #import "WeekdayDto.h"
 
@@ -16,7 +40,14 @@
 @synthesize _timeplanType;
 @synthesize _dateFormatter;
 
-
+/*!
+ @function init
+ Initializes WeekdayDto.
+ @param newWeekdayType
+ @param newFromTime
+ @param newToTime
+ @param newTimeplanType
+ */
 -(id)   init : (NSString  *) newWeekdayType
  withFromTime: (NSDate *)newFromTime
    withToTime: (NSDate *)newToTime
@@ -34,7 +65,12 @@ withTimeplanType:(NSString *)newTimeplanType
     return self;
 }
 
-
+/*!
+ @function getWeekday
+ Is called when a new WeekdayDto instance should be created based on the dictionary information.
+ @param weekdayDictionary
+ @param weekdayType
+ */
 - (WeekdayDto *)getWeekday:(NSDictionary *)weekdayDictionary
            withWeekdayType:(NSString *)weekdayType
 {

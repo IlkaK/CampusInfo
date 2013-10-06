@@ -1,10 +1,34 @@
-//
-//  MenuPlanDto.m
-//  CampusInfo1
-//
-//  Created by Ilka Kokemor on 23.07.13.
-//
-//
+/*
+ MenuPlanDto.m
+ ZHAW Engineering CampusInfo
+ */
+
+/*!
+ * @header MenuPlanDto.m
+ * @author Ilka Kokemor
+ * @copyright 2013 ZHAW
+ * @discussion
+ * <ul>
+ * <li> Responsibilities:
+ *   <ul>
+ *      <li> Holds the calendar menu plan data in MensaMenuDto model. </li>
+ *  </ul>
+ * </li>
+ *
+ * <li> Receiving data:
+ *   <ul>
+ *      <li> It receives menu plan id, version, calendar week, gastronomy facility id and an array of menus to be initally set or a dictionary to browse the data itself. </li>
+ *   </ul>
+ * </li>
+ *
+ * <li> Sending data:
+ *   <ul>
+ *      <li> It returns itself when called. </li>
+ *   </ul>
+ * </li>
+ *
+ * </ul>
+ */
 
 #import "MenuPlanDto.h"
 #import "CalendarWeekDto.h"
@@ -17,8 +41,15 @@
 @synthesize _menuPlanId;
 @synthesize _menus;
 
-
-
+/*!
+ @function init
+ Initializes MenuPlanDto.
+ @param newMenuPlanId
+ @param newVersion
+ @param newCalendarWeek
+ @param newGastronomyFacilityIds
+ @param newMenus
+ */
 -(id)   init               : (int) newMenuPlanId
                 withVersion: (NSString *) newVersion
            withCalendarWeek: (CalendarWeekDto *) newCalendarWeek
@@ -37,7 +68,11 @@
     return self;
 }
 
-
+/*!
+ @function getMenuPlan
+ Is called when a new MenuPlanDto instance should be created based on the dictionary information.
+ @param menuPlanDictionary
+ */
 - (MenuPlanDto *)getMenuPlan:(NSDictionary *)menuPlanDictionary
 {
     MenuPlanDto *_localMenuPlan = [[MenuPlanDto alloc]init:0 withVersion:nil withCalendarWeek:nil withGastronomyFacilityIds:nil withMenus:nil];

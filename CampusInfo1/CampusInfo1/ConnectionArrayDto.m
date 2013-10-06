@@ -12,7 +12,7 @@
  * <li> Responsibilities:
  *   <ul>
  *      <li> Holds connections array in PublicTransportConnectionDto model. </li>
- *      <li> Uses TimeTableAsyncRequestDelegate to connect to server and gain time table data from there. </li>
+ *      <li> Uses TimeTableAsyncRequestDelegate to connect to server and gain public transportat connection data from there. </li>
  *  </ul>
  * </li>
  *
@@ -88,7 +88,6 @@
  Needed since TimeTableAsyncRequest is used.
  Function receives data, when download from server is finished.
  */
-
 -(void) dataDownloadDidFinish:(NSData*) data
 {
     

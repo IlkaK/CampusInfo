@@ -1,10 +1,36 @@
-//
-//  ServiceDeskViewController.m
-//  CampusInfo1
-//
-//  Created by Ilka Kokemor on 26.08.13.
-//
-//
+/*
+ ServiceDeskViewController.m
+ ZHAW Engineering CampusInfo
+ */
+
+/*!
+ * @header ServiceDeskViewController.m
+ * @author Ilka Kokemor
+ * @copyright 2013 ZHAW
+ * @discussion
+ * <ul>
+ * <li> Responsibilities:
+ *   <ul>
+ *      <li> Control of ServiceDeskViewController.xib, which displays the service desk contact information.  </li>
+ *      <li> Shows the service des contact information.  </li>
+ *  </ul>
+ * </li>
+ *
+ * <li> Receiving data:
+ *   <ul>
+ *      <li> Receives delegate from ContactsOverVieController and passes it back, if back button is clicked. </li>
+ *   </ul>
+ * </li>
+ *
+ * <li> Sending data:
+ *   <ul>
+ *      <li> If email is clicked, email app is startet and email is started.  </li>
+ *      <li> If phone number is clicked, a call is started.  </li>
+ *   </ul>
+ * </li>
+ *
+ * </ul>
+ */
 
 #import "ServiceDeskViewController.h"
 #import "ColorSelection.h"
@@ -27,12 +53,22 @@
 
 @synthesize _zhawColors;
 
+/*!
+ * @function initWithNibName
+ * Initializiation of class.
+ */
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     return self;
 }
 
+/*!
+ * @function viewDidLoad
+ * The function is included, since class inherits from UIViewController.
+ * Is called first time, the view is started for initialization.
+ * Is only called once, after initialization, never again.
+ */
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -54,12 +90,21 @@
     [_titleNavigationBar setTintColor:_zhawColors._zhawDarkerBlue];
 }
 
+/*!
+ * @function didReceiveMemoryWarning
+ * The function is included per default.
+ */
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
 
+/*!
+ @function viewDidUnload
+ * The function is included, since class inherits from UIViewController.
+ * It is called while the view is unloaded.
+ */
 - (void)viewDidUnload {
     _titleNavigationBar = nil;
     _titleNavigationItem = nil;
@@ -68,12 +113,21 @@
     [super viewDidUnload];
 }
 
+/*!
+ @function moveBackToContactsOverview
+ When back button is triggered, delegate is returned to ContactsOverViewController.
+ @param sender
+ */
 - (void)moveBackToContactsOverview:(id)sender
 {
     [self dismissModalViewControllerAnimated:YES];
 }
 
-
+/*!
+ @function clickedButtonAtIndex
+ When phone number is clicked an alert is displayed and number is dialed if wanted.
+ When email address is clicked an alert is displayed and email is started.
+ */
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
 {
     if (buttonIndex != [alertView firstOtherButtonIndex])
@@ -97,6 +151,10 @@
     }
 }
 
+/*!
+ @function sendEmailToGivenAdress
+ When email address is clicked an alert is displayed and email is started.
+ */
 -(void) sendEmailToGivenAdress:(id)sender event:(id)event
 {
     NSString *_email = ServiceDeskVCRealEmail;
@@ -114,7 +172,10 @@
     [_acronymAlertView show];
 }
 
-
+/*!
+ @function callGivenNumber
+ When phone number is clicked an alert is displayed and number is dialed if wanted.
+ */
 -(void) callGivenNumber:(id)sender event:(id)event
 {
     NSString        *_callWhom      = ServiceDeskVCTitle;
@@ -135,24 +196,29 @@
 }
 
 
-
-
-
-//---------- Handling of menu table -----
+//---------- Handling of table  -----
+/*!
+ * @function numberOfSectionsInTableView
+ * The function defines the number of sections in table.
+ */
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
     return 1;
 }
 
-// Customize the number of rows in the table view.
+/*!
+ * @function numberOfRowsInSection
+ * The function defines the number of rows in table.
+ */
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
 	return 2;
 }
 
-
-
-// Customize the appearance of table view cells.
+/*!
+ * @function cellForRowAtIndexPath
+ * The function is for customizing the table view cells.
+ */
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
     NSUInteger        _cellRow       = indexPath.row;

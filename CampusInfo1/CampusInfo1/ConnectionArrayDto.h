@@ -12,7 +12,7 @@
  * <li> Responsibilities:
  *   <ul>
  *      <li> Holds connections array in PublicTransportConnectionDto model. </li>
- *      <li> Uses TimeTableAsyncRequestDelegate to connect to server and gain time table data from there. </li>
+ *      <li> Uses TimeTableAsyncRequestDelegate to connect to server and gain public transport connection data from there. </li>
  *  </ul>
  * </li>
  *

@@ -1,10 +1,35 @@
-//
-//  ContactsOverViewController.m
-//  CampusInfo1
-//
-//  Created by Ilka Kokemor on 11.08.13.
-//
-//
+/*
+ ContactsOverViewController.m
+ ZHAW Engineering CampusInfo
+ */
+
+/*!
+ * @header ContactsOverViewController.m
+ * @author Ilka Kokemor
+ * @copyright 2013 ZHAW
+ * @discussion
+ * <ul>
+ * <li> Responsibilities:
+ *   <ul>
+ *      <li> Control of ContactsOverViewController.xib, which displays a table with which entries the contacts views can be called.  </li>
+ *  </ul>
+ * </li>
+ *
+ * <li> Receiving data:
+ *   <ul>
+ *      <li> Receives delegate from MenuOverviewController and passes it back, if back button is clicked. </li>
+ *      <li> It receives data from NewsChannelDto, which establishes a connection to server. </li>
+ *   </ul>
+ * </li>
+ *
+ * <li> Sending data:
+ *   <ul>
+ *      <li> It passes delegate to ContactsViewController, EmergencyViewController and ServiceDeskViewController and receives it back from them. </li>
+ *   </ul>
+ * </li>
+ *
+ * </ul>
+ */
 
 #import "ContactsOverViewController.h"
 #import "ColorSelection.h"
@@ -29,13 +54,22 @@
 
 @synthesize _zhawColor;
 
-
+/*!
+ * @function initWithNibName
+ * Initializiation of class.
+ */
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     return self;
 }
 
+/*!
+ * @function viewDidLoad
+ * The function is included, since class inherits from UIViewController.
+ * Is called first time, the view is started for initialization.
+ * Is only called once, after initialization, never again.
+ */
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -78,12 +112,21 @@
     
 }
 
+/*!
+ * @function didReceiveMemoryWarning
+ * The function is included per default.
+ */
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
 
+/*!
+ @function viewDidUnload
+ * The function is included, since class inherits from UIViewController.
+ * It is called while the view is unloaded.
+ */
 - (void)viewDidUnload {
     _contactsVC = nil;
     _emergencyVC = nil;
@@ -96,7 +139,11 @@
     [super viewDidUnload];
 }
 
-
+/*!
+ @function moveBackToMenuOverview
+ When back button is triggered, delegate is returned to MenuOverviewController.
+ @param sender
+ */
 - (void)moveBackToMenuOverview:(id)sender
 {
     [self dismissModalViewControllerAnimated:YES];
@@ -104,13 +151,20 @@
 }
 
 
-//---------- Handling of menu table -----
+//---------- Handling of table  -----
+/*!
+ * @function numberOfSectionsInTableView
+ * The function defines the number of sections in table.
+ */
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
     return 3;
 }
 
-// Customize the number of rows in the table view.
+/*!
+ * @function numberOfRowsInSection
+ * The function defines the number of rows in table.
+ */
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
 	if(section == 0)
@@ -124,7 +178,10 @@
 }
 
 
-// Override to support row selection in the table view.
+/*!
+ * @function didSelectRowAtIndexPath
+ * The function supports row selection.
+ */
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     NSUInteger        _cellSelection = indexPath.section;
@@ -142,8 +199,10 @@
     }
 }
 
-
-// Customize the appearance of table view cells.
+/*!
+ * @function cellForRowAtIndexPath
+ * The function is for customizing the table view cells.
+ */
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
     NSUInteger        _cellSelection = indexPath.section; //indexPath.section;
