@@ -18,13 +18,12 @@
  * <li> Receiving data:
  *   <ul>
  *      <li> Receives delegate from MenuOverviewController and passes it back, if back button is clicked. </li>
- *      <li> It receives data from NewsChannelDto, which establishes a connection to server. </li>
  *   </ul>
  * </li>
  *
  * <li> Sending data:
  *   <ul>
- *      <li> It passes delegate to ContactsViewController, EmergencyViewController and ServiceDeskViewController and receives it back from them. </li>
+ *      <li> It passes delegate to ContactsViewController, EmergencyViewController, InformationViewController and ServiceDeskViewController and receives it back from them. </li>
  *   </ul>
  * </li>
  *
@@ -44,6 +43,7 @@
 @synthesize _contactsVC;
 @synthesize _emergencyVC;
 @synthesize _serviceDeskVC;
+@synthesize _informationVC;
 
 @synthesize _menuTableView;
 @synthesize _menuTableCell;
@@ -110,6 +110,11 @@
 	}
     _serviceDeskVC.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
     
+    if (_informationVC == nil)
+    {
+		_informationVC = [[InformationViewController alloc] init];
+	}
+    _informationVC.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
 }
 
 /*!
@@ -136,6 +141,7 @@
     _titleNavigationItem = nil;
     _titleNavigationLabel = nil;
     _serviceDeskVC = nil;
+    _informationVC = nil;
     [super viewDidUnload];
 }
 
@@ -158,7 +164,7 @@
  */
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return 3;
+    return 4;
 }
 
 /*!
@@ -197,6 +203,10 @@
     {
         [self presentModalViewController:_serviceDeskVC animated:YES];
     }
+    if (_cellSelection == 3)
+    {
+        [self presentModalViewController:_informationVC animated:YES];
+    }
 }
 
 /*!
@@ -228,7 +238,11 @@
     {
         cell.textLabel.text = ServiceDeskVCTitle;
     }
-        
+    if (_cellSelection == 3)
+    {
+        cell.textLabel.text = InformationVCTitle;
+    }
+    
     return cell;
 }
 

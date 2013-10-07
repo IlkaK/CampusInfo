@@ -35,4 +35,6 @@ extern NSString * const URLTwitterWeb;
 extern NSString * const URLIssuuWeb;
 extern NSString * const URLXingWeb;
 
+extern NSString * const URLEngineeringApp;
+
 @end

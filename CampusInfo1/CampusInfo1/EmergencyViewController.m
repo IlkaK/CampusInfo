@@ -165,7 +165,7 @@
                                     , _callWhom, ContactsVCMessageCall, _callNumber];
     
     UIAlertView *_acronymAlertView = [[UIAlertView alloc]
-                                      initWithTitle:ContactsVCTitle
+                                      initWithTitle:EmergencyVCTitle
                                       message:_messageForCalling
                                       delegate:self
                                       cancelButtonTitle:AlertViewOk
@@ -251,7 +251,7 @@
 
 /*!
  * @function heightForRowAtIndexPath
- * The function defines the cells height of _acronymAutocompleteTableView.
+ * The function defines the cells height of table.
  */
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {

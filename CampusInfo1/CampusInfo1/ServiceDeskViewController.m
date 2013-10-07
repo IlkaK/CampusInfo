@@ -12,7 +12,7 @@
  * <li> Responsibilities:
  *   <ul>
  *      <li> Control of ServiceDeskViewController.xib, which displays the service desk contact information.  </li>
- *      <li> Shows the service des contact information.  </li>
+ *      <li> Shows the service desk information.  </li>
  *  </ul>
  * </li>
  *
@@ -185,7 +185,7 @@
                                     , _callWhom, ContactsVCMessageCall , _callNumber];
     
     UIAlertView *_acronymAlertView = [[UIAlertView alloc]
-                                      initWithTitle:ContactsVCTitle
+                                      initWithTitle:ServiceDeskVCTitle
                                       message:_messageForCalling
                                       delegate:self
                                       cancelButtonTitle:AlertViewOk
@@ -194,6 +194,7 @@
     _currentPhoneNumber = _callNumber;
     [_acronymAlertView show];
 }
+
 
 
 //---------- Handling of table  -----

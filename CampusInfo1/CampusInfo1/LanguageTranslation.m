@@ -48,7 +48,7 @@
     }
     if ([acronymType isEqualToString:TimeTableTypeStudent])
     {
-        _localTranslation = TimeTableTypeStudentEnglish;
+        _localTranslation = TimeTableTypeStudentEnglishPlural;
     }
     if ([acronymType isEqualToString:TimeTableTypeRaum])
     {

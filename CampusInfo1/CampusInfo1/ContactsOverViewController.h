@@ -18,13 +18,12 @@
  * <li> Receiving data:
  *   <ul>
  *      <li> Receives delegate from MenuOverviewController and passes it back, if back button is clicked. </li>
- *      <li> It receives data from NewsChannelDto, which establishes a connection to server. </li>
  *   </ul>
  * </li>
  *
  * <li> Sending data:
  *   <ul>
- *      <li> It passes delegate to ContactsViewController, EmergencyViewController and ServiceDeskViewController and receives it back from them. </li>
+ *      <li> It passes delegate to ContactsViewController, EmergencyViewController, InformationViewController and ServiceDeskViewController and receives it back from them. </li>
  *   </ul>
  * </li>
  *
@@ -35,6 +34,7 @@
 #import "ContactsViewController.h"
 #import "EmergencyViewController.h"
 #import "ServiceDeskViewController.h"
+#import "InformationViewController.h"
 #import "ColorSelection.h"
 
 @interface ContactsOverViewController : UIViewController<UITableViewDelegate>
@@ -45,6 +45,8 @@
     IBOutlet EmergencyViewController    *_emergencyVC;
     /*! @var _serviceDeskVC Handles delegate from and to ServiceDeskViewController, is triggered when the table cell is hit. */
     IBOutlet ServiceDeskViewController  *_serviceDeskVC;
+    /*! @var _informationVC Handles delegate from and to InformationViewController, is triggered when the table cell is hit. */
+    IBOutlet InformationViewController *_informationVC;
     
     /*! @var _menuTableView Table to display the contact view items */
     IBOutlet UITableView                *_menuTableView;
@@ -69,6 +71,7 @@
 @property (nonatomic, retain) IBOutlet ContactsViewController       *_contactsVC;
 @property (nonatomic, retain) IBOutlet EmergencyViewController      *_emergencyVC;
 @property (nonatomic, retain) IBOutlet ServiceDeskViewController    *_serviceDeskVC;
+@property (nonatomic, retain) IBOutlet InformationViewController    *_informationVC;
 
 @property (nonatomic, retain) IBOutlet UITableView                  *_menuTableView;
 @property (nonatomic, retain) IBOutlet UITableViewCell              *_menuTableCell;

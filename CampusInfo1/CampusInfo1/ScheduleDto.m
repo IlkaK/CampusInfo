@@ -224,9 +224,8 @@
     NSError      *_error = nil;
     NSDictionary *_scheduleDictionary;
     
-    
     //NSString *someString = [NSString stringWithFormat:@"%@", _dataFromUrl];
-    //NSLog(@"%@", someString);
+    //NSLog(@"xxx %@", someString);
     
     //NSString *someString = [[NSString alloc] initWithData:_dataFromUrl encoding:NSUTF8StringEncoding];
     //if ([someString length] > 100)

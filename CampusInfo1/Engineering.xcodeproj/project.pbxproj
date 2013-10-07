@@ -282,6 +282,14 @@
 		E1EC0FD617D4B98300AB4898 /* SectionDto.m in Sources */ = {isa = PBXBuildFile; fileRef = E1EC0FD517D4B98300AB4898 /* SectionDto.m */; };
 		E1EC0FD917D4C03C00AB4898 /* ConnectionDto.m in Sources */ = {isa = PBXBuildFile; fileRef = E1EC0FD817D4C03C00AB4898 /* ConnectionDto.m */; };
 		E1EC0FDF17D4C70600AB4898 /* ConnectionArrayDto.m in Sources */ = {isa = PBXBuildFile; fileRef = E1EC0FDE17D4C70500AB4898 /* ConnectionArrayDto.m */; };
+		E1EFE67A1802B3CC00C3E464 /* icon-120.png in Resources */ = {isa = PBXBuildFile; fileRef = E1EFE6791802B3CC00C3E464 /* icon-120.png */; };
+		E1EFE67C1802B52F00C3E464 /* icon-152.png in Resources */ = {isa = PBXBuildFile; fileRef = E1EFE67B1802B52F00C3E464 /* icon-152.png */; };
+		E1EFE67F1802B5A700C3E464 /* icon-60.png in Resources */ = {isa = PBXBuildFile; fileRef = E1EFE67D1802B5A700C3E464 /* icon-60.png */; };
+		E1EFE6801802B5A700C3E464 /* icon-76.png in Resources */ = {isa = PBXBuildFile; fileRef = E1EFE67E1802B5A700C3E464 /* icon-76.png */; };
+		E1EFE6841802D4F900C3E464 /* InformationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E1EFE6821802D4F900C3E464 /* InformationViewController.m */; };
+		E1EFE6851802D4F900C3E464 /* InformationViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E1EFE6831802D4F900C3E464 /* InformationViewController.xib */; };
+		E1EFE6891802D6DC00C3E464 /* InformationResponsibleTableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E1EFE6881802D6DC00C3E464 /* InformationResponsibleTableCell.xib */; };
+		E1EFE68B1802D6F700C3E464 /* InformationContactTableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E1EFE68A1802D6F700C3E464 /* InformationContactTableCell.xib */; };
 		E1F32A5117BCE4C4000D69F3 /* NewsChannelDto.m in Sources */ = {isa = PBXBuildFile; fileRef = E1F32A5017BCE4C4000D69F3 /* NewsChannelDto.m */; };
 		E1F32A5417BCE4DB000D69F3 /* NewsImageDto.m in Sources */ = {isa = PBXBuildFile; fileRef = E1F32A5317BCE4DB000D69F3 /* NewsImageDto.m */; };
 		E1F32A5717BCE4F9000D69F3 /* NewsItemDto.m in Sources */ = {isa = PBXBuildFile; fileRef = E1F32A5617BCE4F9000D69F3 /* NewsItemDto.m */; };
@@ -592,6 +600,15 @@
 		E1EC0FD817D4C03C00AB4898 /* ConnectionDto.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ConnectionDto.m; sourceTree = "<group>"; };
 		E1EC0FDD17D4C70500AB4898 /* ConnectionArrayDto.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConnectionArrayDto.h; sourceTree = "<group>"; };
 		E1EC0FDE17D4C70500AB4898 /* ConnectionArrayDto.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ConnectionArrayDto.m; sourceTree = "<group>"; };
+		E1EFE6791802B3CC00C3E464 /* icon-120.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon-120.png"; sourceTree = "<group>"; };
+		E1EFE67B1802B52F00C3E464 /* icon-152.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon-152.png"; sourceTree = "<group>"; };
+		E1EFE67D1802B5A700C3E464 /* icon-60.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon-60.png"; sourceTree = "<group>"; };
+		E1EFE67E1802B5A700C3E464 /* icon-76.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon-76.png"; sourceTree = "<group>"; };
+		E1EFE6811802D4F900C3E464 /* InformationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InformationViewController.h; sourceTree = "<group>"; };
+		E1EFE6821802D4F900C3E464 /* InformationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InformationViewController.m; sourceTree = "<group>"; };
+		E1EFE6831802D4F900C3E464 /* InformationViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = InformationViewController.xib; sourceTree = "<group>"; };
+		E1EFE6881802D6DC00C3E464 /* InformationResponsibleTableCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = InformationResponsibleTableCell.xib; sourceTree = "<group>"; };
+		E1EFE68A1802D6F700C3E464 /* InformationContactTableCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = InformationContactTableCell.xib; sourceTree = "<group>"; };
 		E1F32A4F17BCE4C4000D69F3 /* NewsChannelDto.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewsChannelDto.h; sourceTree = "<group>"; };
 		E1F32A5017BCE4C4000D69F3 /* NewsChannelDto.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewsChannelDto.m; sourceTree = "<group>"; };
 		E1F32A5217BCE4DB000D69F3 /* NewsImageDto.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewsImageDto.h; sourceTree = "<group>"; };
@@ -679,10 +696,12 @@
 		2724546417B7EBB7005F979C /* Contacts */ = {
 			isa = PBXGroup;
 			children = (
+				E1EFE6811802D4F900C3E464 /* InformationViewController.h */,
+				E1EFE6821802D4F900C3E464 /* InformationViewController.m */,
+				E1EFE6831802D4F900C3E464 /* InformationViewController.xib */,
 				E1252E5C17CB72AD00E61732 /* ServiceDeskViewController.h */,
 				E1252E5D17CB72AD00E61732 /* ServiceDeskViewController.m */,
 				E1252E5E17CB72AD00E61732 /* ServiceDeskViewController.xib */,
-				E1252E6117CB7E5800E61732 /* ServiceDeskTableCell.xib */,
 				2724546517B7EBE4005F979C /* ContactsOverViewController.h */,
 				2724546617B7EBE4005F979C /* ContactsOverViewController.m */,
 				2724546717B7EBE4005F979C /* ContactsOverViewController.xib */,
@@ -692,6 +711,8 @@
 				E16C642717ABDC4600BEDBB3 /* EmergencyViewController.h */,
 				E16C642817ABDC4600BEDBB3 /* EmergencyViewController.m */,
 				E16C642917ABDC4600BEDBB3 /* EmergencyViewController.xib */,
+				E1EFE6871802D68B00C3E464 /* InformationTableCells */,
+				E1EFE6861802D66F00C3E464 /* ServiceDeskTableCells */,
 				27AC5C7317AEADA7006A1774 /* EmergencyTableCells */,
 				27AC5C7417AEADD8006A1774 /* ContactsTableCells */,
 			);
@@ -861,6 +882,10 @@
 		A35A34091520814700181E3F = {
 			isa = PBXGroup;
 			children = (
+				E1EFE67D1802B5A700C3E464 /* icon-60.png */,
+				E1EFE67E1802B5A700C3E464 /* icon-76.png */,
+				E1EFE67B1802B52F00C3E464 /* icon-152.png */,
+				E1EFE6791802B3CC00C3E464 /* icon-120.png */,
 				E1292CD917F1A2E600F6C3C5 /* Icon.png */,
 				E1292CDA17F1A2E600F6C3C5 /* Icon@2x.png */,
 				E15C940D17E708B800F82EE4 /* stations.sql */,
@@ -1255,6 +1280,23 @@
 			name = PublicTransportDto;
 			sourceTree = "<group>";
 		};
+		E1EFE6861802D66F00C3E464 /* ServiceDeskTableCells */ = {
+			isa = PBXGroup;
+			children = (
+				E1252E6117CB7E5800E61732 /* ServiceDeskTableCell.xib */,
+			);
+			name = ServiceDeskTableCells;
+			sourceTree = "<group>";
+		};
+		E1EFE6871802D68B00C3E464 /* InformationTableCells */ = {
+			isa = PBXGroup;
+			children = (
+				E1EFE6881802D6DC00C3E464 /* InformationResponsibleTableCell.xib */,
+				E1EFE68A1802D6F700C3E464 /* InformationContactTableCell.xib */,
+			);
+			name = InformationTableCells;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -1463,6 +1505,13 @@
 				E15C940E17E708B800F82EE4 /* stations.sql in Resources */,
 				E1292CDB17F1A2E600F6C3C5 /* Icon.png in Resources */,
 				E1292CDC17F1A2E600F6C3C5 /* Icon@2x.png in Resources */,
+				E1EFE67A1802B3CC00C3E464 /* icon-120.png in Resources */,
+				E1EFE67C1802B52F00C3E464 /* icon-152.png in Resources */,
+				E1EFE67F1802B5A700C3E464 /* icon-60.png in Resources */,
+				E1EFE6801802B5A700C3E464 /* icon-76.png in Resources */,
+				E1EFE6851802D4F900C3E464 /* InformationViewController.xib in Resources */,
+				E1EFE6891802D6DC00C3E464 /* InformationResponsibleTableCell.xib in Resources */,
+				E1EFE68B1802D6F700C3E464 /* InformationContactTableCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1572,6 +1621,7 @@
 				E1EC0FDF17D4C70600AB4898 /* ConnectionArrayDto.m in Sources */,
 				E1CF302517E73D2900398830 /* CharTranslation.m in Sources */,
 				E1CF302817E75C5300398830 /* URLConstantStrings.m in Sources */,
+				E1EFE6841802D4F900C3E464 /* InformationViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1681,7 +1731,7 @@
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				CLANG_ENABLE_OBJC_ARC = YES;
-				CODE_SIGN_IDENTITY = "";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: School of Engineering ZHAW (PQ9M73T7N8)";
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PREPROCESSOR_DEFINITIONS = DEBUG;
@@ -1692,6 +1742,7 @@
 				HEADER_SEARCH_PATHS = "\"$(SOURCE_ROOT)\"";
 				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
 				OTHER_LDFLAGS = "";
+				PROVISIONING_PROFILE = "A7048E9D-D8B3-44FF-BD90-75076118980A";
 				SDKROOT = iphoneos;
 			};
 			name = Debug;
@@ -1701,7 +1752,7 @@
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				CLANG_ENABLE_OBJC_ARC = YES;
-				CODE_SIGN_IDENTITY = "";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: School of Engineering ZHAW (PQ9M73T7N8)";
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_VERSION = com.apple.compilers.llvmgcc42;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
@@ -1710,6 +1761,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
 				OTHER_LDFLAGS = "";
+				PROVISIONING_PROFILE = "A7048E9D-D8B3-44FF-BD90-75076118980A";
 				SDKROOT = iphoneos;
 			};
 			name = Release;
@@ -1718,7 +1770,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = YES;
-				CODE_SIGN_IDENTITY = "";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: School of Engineering ZHAW (PQ9M73T7N8)";
 				COPY_PHASE_STRIP = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1740,6 +1792,7 @@
 					"-all_load",
 				);
 				PRODUCT_NAME = Engineering;
+				PROVISIONING_PROFILE = "A7048E9D-D8B3-44FF-BD90-75076118980A";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = 1;
 				WRAPPER_EXTENSION = app;
@@ -1750,7 +1803,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = YES;
-				CODE_SIGN_IDENTITY = "";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: School of Engineering ZHAW (PQ9M73T7N8)";
 				COPY_PHASE_STRIP = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1771,6 +1824,7 @@
 					"-all_load",
 				);
 				PRODUCT_NAME = Engineering;
+				PROVISIONING_PROFILE = "A7048E9D-D8B3-44FF-BD90-75076118980A";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = 1;
 				VALIDATE_PRODUCT = YES;

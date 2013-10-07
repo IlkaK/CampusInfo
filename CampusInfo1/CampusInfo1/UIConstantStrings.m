@@ -74,6 +74,7 @@ NSString * const ContactsOverVCTitle    = @"Kontakte";
 NSString * const ContactsVCTitle        = @"Sekretariate";
 NSString * const EmergencyVCTitle       = @"Notfall";
 NSString * const ServiceDeskVCTitle     = @"Service Desk";
+NSString * const InformationVCTitle     = @"Infos zur App";
 
 // strings for contacts secretary
 NSString * const ContactsVCTitleBachelorSecretary                = @"Bachelorsekretariat";
@@ -207,6 +208,11 @@ NSString * const ServiceDeskVCRealEmail         = @"servicedesk@zhaw.ch";
 NSString * const ServiceDeskVCDisplayEmail      = @"servicedesk(at)zhaw.ch";
 NSString * const ServiceDeskVCDescriptionEmail  = @"Email:";
 NSString * const ServiceDeskVCDescriptionPhone  = @"Tel.:";
+
+NSString * const InformationVCDisplayEmail      = @"app.engineering(at)zhaw.ch";
+NSString * const InformationVCRealEmail         = @"app.engineering@zhaw.ch";
+NSString * const InformationVCRealisation       = @"Realisierung";
+NSString * const InformationVCContact           = @"Kontakt";
 
 // alert view button titles
 NSString * const AlertViewOk         = @"OK";

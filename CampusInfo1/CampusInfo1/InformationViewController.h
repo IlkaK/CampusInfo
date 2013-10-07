@@ -1,18 +1,18 @@
 /*
- ServiceDeskViewController.h
+ InformationViewController.h
  ZHAW Engineering CampusInfo
  */
 
 /*!
- * @header ServiceDeskViewController.h
+ * @header InformationViewController.h
  * @author Ilka Kokemor
  * @copyright 2013 ZHAW
  * @discussion
  * <ul>
  * <li> Responsibilities:
  *   <ul>
- *      <li> Control of ServiceDeskViewController.xib, which displays the service desk contact information.  </li>
- *      <li> Shows the service desk information.  </li>
+ *      <li> Control of InformationViewController.xib, which displays information about the app.  </li>
+ *      <li> Shows the service des contact information.  </li>
  *  </ul>
  * </li>
  *
@@ -35,18 +35,20 @@
 #import <UIKit/UIKit.h>
 #import "ColorSelection.h"
 
-@interface ServiceDeskViewController : UIViewController<UITableViewDelegate>
+@interface InformationViewController : UIViewController
 {
     /*! @var _titleNavigationBar Used as background for title */
-    IBOutlet UINavigationBar        *_titleNavigationBar;
+    IBOutlet UINavigationBar    *_titleNavigationBar;
     /*! @var _titleNavigationItem Used as navigation item for title */
-    IBOutlet UINavigationItem       *_titleNavigationItem;
+    IBOutlet UINavigationItem   *_titleNavigationItem;
     /*! @var _titleNavigationLabel Shows the title */
-    IBOutlet UILabel                *_titleNavigationLabel;
+    IBOutlet UILabel            *_titleNavigationLabel;
 
-    /*! @var _serviceDeskTableCell Handles cell, which displays the service desk information */
-    IBOutlet UITableViewCell        *_serviceDeskTableCell;
-
+    /*! @var _informationResponsibleTableCell Handles cell, which displays the responsible information */
+    IBOutlet UITableViewCell    *_informationResponsibleTableCell;
+    /*! @var _informationContactTableCell Handles cell, which displays the contact information */
+    IBOutlet UITableViewCell *_informationContactTableCell;
+    
     /*! @var _currentEmail Holds the current clicked email address */
     NSString                        *_currentEmail;
     /*! @var _currentPhoneNumber Holds the current clicked phone number */
@@ -60,11 +62,13 @@
 @property (nonatomic, retain) IBOutlet UINavigationItem             *_titleNavigationItem;
 @property (nonatomic, retain) IBOutlet UILabel                      *_titleNavigationLabel;
 
-@property (nonatomic, retain) IBOutlet UITableViewCell              *_serviceDeskTableCell;
+@property (nonatomic, retain) IBOutlet UITableViewCell              *_informationResponsibleTableCell;
+@property (nonatomic, retain) IBOutlet UITableViewCell              *_informationContactTableCell;
 
 @property (nonatomic, retain) NSString                              *_currentEmail;
 @property (nonatomic, retain) NSString                              *_currentPhoneNumber;
 
 @property (nonatomic, retain) ColorSelection                        *_zhawColors;
+
 
 @end

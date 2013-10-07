@@ -71,4 +71,6 @@ NSString * const URLIssuuWeb = @"http://issuu.com/engineeringzhaw";
 
 NSString * const URLXingWeb = @"https://www.xing.com/companies/zhawschoolofengineering";
 
+NSString * const URLEngineeringApp = @"http://apps.engineering.zhaw.ch";
+
 @end

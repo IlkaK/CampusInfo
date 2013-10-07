@@ -70,7 +70,7 @@ extern NSString * const ContactsOverVCTitle;
 extern NSString * const ContactsVCTitle;
 extern NSString * const EmergencyVCTitle;
 extern NSString * const ServiceDeskVCTitle;
-
+extern NSString * const InformationVCTitle;
 
 extern NSString * const ContactsVCTitleBachelorSecretary              ;
 extern NSString * const ContactsVCTitleMasterSecretary                ;
@@ -204,6 +204,12 @@ extern NSString * const ServiceDeskVCRealEmail       ;
 extern NSString * const ServiceDeskVCDisplayEmail    ;
 extern NSString * const ServiceDeskVCDescriptionEmail;
 extern NSString * const ServiceDeskVCDescriptionPhone;
+
+extern NSString * const InformationVCDisplayEmail;
+extern NSString * const InformationVCRealEmail;
+extern NSString * const InformationVCRealisation;
+extern NSString * const InformationVCContact;
+
 
 // alert view button titles
 extern NSString * const AlertViewOk     ;
