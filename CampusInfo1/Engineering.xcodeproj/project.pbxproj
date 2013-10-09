@@ -1731,7 +1731,7 @@
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				CLANG_ENABLE_OBJC_ARC = YES;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: School of Engineering ZHAW (PQ9M73T7N8)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Ilka Kokemor (KDNLZ5NT2X)";
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PREPROCESSOR_DEFINITIONS = DEBUG;
@@ -1742,7 +1742,7 @@
 				HEADER_SEARCH_PATHS = "\"$(SOURCE_ROOT)\"";
 				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
 				OTHER_LDFLAGS = "";
-				PROVISIONING_PROFILE = "A7048E9D-D8B3-44FF-BD90-75076118980A";
+				PROVISIONING_PROFILE = "63ED22B6-17FA-44A6-9143-79044761B220";
 				SDKROOT = iphoneos;
 			};
 			name = Debug;
@@ -1752,7 +1752,7 @@
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				CLANG_ENABLE_OBJC_ARC = YES;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: School of Engineering ZHAW (PQ9M73T7N8)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Ilka Kokemor (KDNLZ5NT2X)";
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_VERSION = com.apple.compilers.llvmgcc42;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
@@ -1761,7 +1761,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
 				OTHER_LDFLAGS = "";
-				PROVISIONING_PROFILE = "A7048E9D-D8B3-44FF-BD90-75076118980A";
+				PROVISIONING_PROFILE = "63ED22B6-17FA-44A6-9143-79044761B220";
 				SDKROOT = iphoneos;
 			};
 			name = Release;
@@ -1770,7 +1770,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = YES;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: School of Engineering ZHAW (PQ9M73T7N8)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Ilka Kokemor (KDNLZ5NT2X)";
 				COPY_PHASE_STRIP = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1792,7 +1792,7 @@
 					"-all_load",
 				);
 				PRODUCT_NAME = Engineering;
-				PROVISIONING_PROFILE = "A7048E9D-D8B3-44FF-BD90-75076118980A";
+				PROVISIONING_PROFILE = "63ED22B6-17FA-44A6-9143-79044761B220";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = 1;
 				WRAPPER_EXTENSION = app;
@@ -1803,7 +1803,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = YES;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: School of Engineering ZHAW (PQ9M73T7N8)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Ilka Kokemor (KDNLZ5NT2X)";
 				COPY_PHASE_STRIP = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1824,7 +1824,7 @@
 					"-all_load",
 				);
 				PRODUCT_NAME = Engineering;
-				PROVISIONING_PROFILE = "A7048E9D-D8B3-44FF-BD90-75076118980A";
+				PROVISIONING_PROFILE = "63ED22B6-17FA-44A6-9143-79044761B220";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = 1;
 				VALIDATE_PRODUCT = YES;

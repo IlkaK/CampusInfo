@@ -1,10 +1,37 @@
-//
-//  MensaDetailViewController.m
-//  CampusInfo1
-//
-//  Created by Ilka Kokemor on 22.07.13.
-//
-//
+/*
+ MensaDetailViewController.m
+ ZHAW Engineering CampusInfo
+ */
+
+/*!
+ * @header MensaDetailViewController.m
+ * @author Ilka Kokemor
+ * @copyright 2013 ZHAW
+ * @discussion
+ * <ul>
+ * <li> Responsibilities:
+ *   <ul>
+ *      <li> Control of MensaDetailViewController.xib, where a list of menus of a gastronomic facility is displayed. </li>
+ *      <li> Getting and handling the menu of a gastronomic facilitiy.  </li>
+ *  </ul>
+ * </li>
+ *
+ * <li> Receiving data:
+ *   <ul>
+ *      <li> Receives delegate from MensaViewController and passes it back, if back button is clicked. </li>
+ *      <li> Gets data from MensaMenuDto package for menus of a gastronomic facility. </li>
+ *      <li> It gets the actual chosen gastronomic facility from MensaViewController so it can show the menus of that gastronomic facility. </li>
+ *   </ul>
+ * </li>
+ *
+ * <li> Sending data:
+ *   <ul>
+ *      <li> It sets the gastronomic facility to menu array which then can build the url to get the desired menu data. </li>
+ *   </ul>
+ * </li>
+ *
+ * </ul>
+ */
 
 #import "MensaDetailViewController.h"
 
@@ -47,13 +74,22 @@
 
 @synthesize _zhawColor;
 
-
+/*!
+ * @function initWithNibName
+ * Initializiation of class.
+ */
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     return self;
 }
 
+/*!
+ * @function viewDidLoad
+ * The function is included, since class inherits from UIViewController.
+ * Is called first time, the view is started for initialization.
+ * Is only called once, after initialization, never again.
+ */
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -137,6 +173,10 @@
     [self.view bringSubviewToFront:_waitForChangeActivityIndicator];
 }
 
+/*!
+ * @function threadWaitForLoadingActivityIndicator
+ * Thread is called to start the activity indicator while waiting for data to be downloaded.
+ */
 - (void) threadWaitForChangeActivityIndicator:(id)data
 {
     _waitForChangeActivityIndicator.hidden = NO;
@@ -144,12 +184,19 @@
     //NSLog(@"start animating again");
 }
 
+/*!
+ * @function startLoading
+ * Called to start thread for the activity indicator to indicate data is loaded and the user needs to wait.
+ */
 -(void)startLoading
 {
     [NSThread detachNewThreadSelector:@selector(threadWaitForChangeActivityIndicator:) toTarget:self withObject:nil];
 }
 
-
+/*!
+ * @function setActualDate
+ * Sets given date as overall actual date.
+ */
 - (void)setActualDate:(NSDate *)newDate
 {
     //int _actualTrials = 0;
@@ -179,7 +226,10 @@
     _waitForChangeActivityIndicator.hidden = YES;
 }
 
-
+/*!
+ * @function dayBefore
+ * Switches to yesterday according to actual date.
+ */
 - (void) dayBefore:(id)sender
 {
     int daysToAdd = -1;
@@ -195,7 +245,10 @@
     [self setActualDate:_newDate];
 }
 
-
+/*!
+ * @function dayAfter
+ * Switches to tomorrow according to actual date.
+ */
 - (void) dayAfter:(id)sender
 {
     NSDate *_newDate = [self._actualDate dateByAddingTimeInterval:(1*24*60*60)];
@@ -222,7 +275,10 @@
     //NSLog(@"set actual Date: %@", [[self dayFormatter] stringFromDate:self._actualDate]);
 }
 
-
+/*!
+ * @function setDateInNavigatorWithActualDate
+ * Sets new date in navigation title.
+ */
 - (void) setDateInNavigatorWithActualDate:(NSDate *)showDate
 {
     NSString *_dateString = [NSString stringWithFormat:@"%@, %@"
@@ -238,30 +294,54 @@
     [_detailTable reloadData];
 }
 
-
+/*!
+ * @function didReceiveMemoryWarning
+ * The function is included per default.
+ */
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
 
+/*!
+ @function tryConnectionAgain
+ Triggered by clicking the _noConnectionButton, another trial to connect to server is started.
+ @param sender
+ */
 - (IBAction)tryConnectionAgain:(id)sender
 {
     [self startLoading];
     [self setActualDate:_actualDate];
 }
 
+/*!
+ @function backToMensaOverview
+ Function is called, when back button on navigation bar is hit, to move back to gastronomic facilties overview.
+ @param sender
+ */
 - (void)backToMensaOverview:(id)sender
 {
     [self dismissModalViewControllerAnimated:YES];
 }
 
+/*!
+ @function moveToChooseDateView
+ Switches to ChooseDateViewController, so a different date can be chosen.
+ @param sender
+ */
 - (IBAction)moveToChooseDateView:(id)sender
 {
     _chooseDateVC._actualDate = self._actualDate;
     [self presentModalViewController:_chooseDateVC animated:YES];
 }
 
+/*!
+ * @function viewDidLoad
+ * The function is included, since class inherits from UIViewController.
+ * Is called first time, the view is started for initialization.
+ * Is only called once, after initialization, never again.
+ */
 - (void)viewDidUnload
 {
     _dayNavigationItem = nil;
@@ -280,7 +360,11 @@
     [super viewDidUnload];
 }
 
-
+/*!
+ * @function viewWillAppear
+ * The function is included, since class inherits from UIViewController.
+ * It is called every time the view is called again.
+ */
 - (void)viewWillAppear:(BOOL)animated
 {
     //NSLog(@"viewWillAppear");
@@ -289,6 +373,12 @@
 
 }
 
+/*!
+ * @function viewDidAppear
+ * The function is included, since class inherits from UIViewController.
+ * It is called before viewWillAppear is called.
+ * It is needed to respond to the shaking gesture.
+ */
 -(void)viewDidAppear:(BOOL)animated
 {
     [self setActualDate:_actualDate];
@@ -296,11 +386,13 @@
 }
 
 
-// table and table cell handling
-
+// ------- MANAGE TABLE CELLS ----
+/*!
+ * @function numberOfSectionsInTableView
+ * The function defines the number of sections in table.
+ */
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    //return 3;
     //NSLog(@"number of sections in table view: %i", [_actualMenu._dishes count]);
     if ([_actualMenu._dishes  lastObject] == nil)
     {
@@ -312,19 +404,29 @@
     }
 }
 
-
+/*!
+ * @function numberOfRowsInSection
+ * The function defines the number of rows in table.
+ */
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     return 1;
 }
 
-
+/*!
+ * @function heightForRowAtIndexPath
+ * The function is for customizing the table view cells.
+ * It sets the height for each cell individually.
+ */
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     return 137;
 }
 
-
+/*!
+ * @function cellForRowAtIndexPath
+ * The function is for customizing the table view cells.
+ */
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {    
     //NSLog(@"start cellForRowAtIndexPath");
@@ -340,8 +442,6 @@
     }
     
     //NSLog(@"cellForRowAtIndexPath callStack %@",[NSThread callStackSymbols]);
-    
-    
     UILabel         *_labelTitle            = (UILabel *) [_cell viewWithTag:1];
     UILabel         *_labelMaincourse       = (UILabel *) [_cell viewWithTag:2];
     UILabel         *_labelSidedishes       = (UILabel *) [_cell viewWithTag:3];
@@ -377,7 +477,6 @@
         {
             _labelTitle.text            = @"keine Informationen über das Menü";
         }
-        
         _labelMaincourse.text           = @"";
         _labelSidedishes.text           = @"";
         _labelPriceInternal.text        = @"";
@@ -389,7 +488,6 @@
     }
     else
     {
-        
         SideDishDto     *_oneSideDish;
         int             sideDishI;
         NSString        *_sideDishString;
@@ -422,9 +520,7 @@
         _labelWriteInternalPrice.text = @"interner Preis";
         _labelWritePartnerPrice.text  = @"Partner";
         _labelWriteExternalPrice.text = @"externer Preis";
-
     }
-    
     return _cell;
 }
 

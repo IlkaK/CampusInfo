@@ -1,10 +1,22 @@
-//
-//  UIConstantStrings.h
-//  CampusInfo1
-//
-//  Created by Ilka Kokemor on 30.08.13.
-//
-//
+/*
+ UIConstantStrings.h
+ ZHAW Engineering CampusInfo
+ */
+
+/*!
+ * @header UIConstantStrings.h
+ * @author Ilka Kokemor
+ * @copyright 2013 ZHAW
+ * @discussion
+ * <ul>
+ * <li> Responsibilities:
+ *   <ul>
+ *      <li> Stores all constants which are used in the application. </li>
+ *      <li> There is no logic implemented, the class only holds the constants. </li>
+ *  </ul>
+ * </li> *
+ * </ul>
+ */
 
 #import <Foundation/Foundation.h>
 
@@ -296,13 +308,4 @@ extern NSString * const AppIconNewsFeedback;
 extern NSString * const AppIconEvents;
 extern NSString * const AppIconEventsFeedback;
 
-
-
 @end
-
-
-
-
-
-
-

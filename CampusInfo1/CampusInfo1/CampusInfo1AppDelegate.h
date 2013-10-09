@@ -1,10 +1,22 @@
-//
-//  CampusInfo1AppDelegate.h
-//  CampusInfo1
-//
-//  Created by Ilka Kokemor on 3/26/12.
-//  Copyright 2012 __MyCompanyName__. All rights reserved.
-//
+/*
+ CampusInfo1AppDelegate.h
+ ZHAW Engineering CampusInfo
+ */
+
+/*!
+ * @header CampusInfo1AppDelegate.h
+ * @author Ilka Kokemor
+ * @copyright 2013 ZHAW
+ * @discussion
+ * <ul>
+ * <li> Responsibilities:
+ *   <ul>
+ *      <li> Control of MainWindow.xib, which is the start of the application </li>
+ *      <li> MainWindow.xib defines the tab bar.  </li>
+ *  </ul>
+ * </li>
+ * </ul>
+ */
 
 #import <UIKit/UIKit.h>
 

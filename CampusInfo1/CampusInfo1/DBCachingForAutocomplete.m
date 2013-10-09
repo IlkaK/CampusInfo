@@ -1,10 +1,57 @@
-//
-//  DBCachingForAutocomplete.m
-//  CampusInfo1
-//
-//  Created by Ilka Kokemor on 02.07.13.
-//
-//
+/*
+ DBCachingForAutocomplete.m
+ ZHAW Engineering CampusInfo
+ */
+
+/*!
+ * @header DBCachingForAutocomplete.m
+ * @author Ilka Kokemor
+ * @copyright 2013 ZHAW
+ * @discussion
+ * <ul>
+ * <li> Responsibilities:
+ *   <ul>
+ *      <li> Handling data which is stored to database or got from there. </li>
+ *      <li> Stored data is: </li>
+ *      <ul>
+ *          <li> lecturer acronyms </li>
+ *          <li> room acronyms </li>
+ *          <li> class acronyms </li>
+ *          <li> course acronyms </li>
+ *          <li> student acronyms </li>
+ *          <li> the three last used start stations </li>
+ *          <li> all station suggestions  </li>
+ *      </ul>
+ *  </ul>
+ * </li>
+ *
+ * <li> Receiving data:
+ *   <ul>
+ *      <li> To store the data in the according databases it receives the following arrays: </li>
+ *      <ul>
+ *          <li> lecturer acronyms </li>
+ *          <li> room acronyms </li>
+ *          <li> class acronyms </li>
+ *          <li> course acronyms </li>
+ *          <li> student acronyms </li>
+ *      </ul>
+ *   </ul>
+ *      <li> To add item by item the following data is added item by item: </li>
+ *      <ul>
+ *          <li> the last used start station </li>
+ *          <li> the last used stop station </li>
+ *      </ul>
+ *      <li> The database with station suggestions is already imported and is not changed here. </li>
+ * </li>
+ *
+ * <li> Sending data:
+ *   <ul>
+ *      <li> Depending on the caller class the demanded arrays are returned. </li>
+ *   </ul>
+ * </li>
+ *
+ * </ul>
+ */
 
 #import "DBCachingForAutocomplete.h"
 
@@ -13,7 +60,10 @@
 @synthesize _timeTableDBPath;
 @synthesize _connectionDBPath;
 
-
+/*!
+ @function createTableWithName
+ Creates a new tables with given table name, if it does not exist yet.
+ */
 -(void) createTableWithName:(NSString *)tableName
                      withDB:(sqlite3  *)sqlite3DB
 {
@@ -28,10 +78,6 @@
     //{
     //    NSLog(@"Failed to drop table %@ with statement: %@", tableName, _dropStmtString);
     //}
-    //else
-    //{
-     //   NSLog(@"Dropped %@ table successfully", tableName);
-    //}
     //operationResult = sqlite3_step(_sqlite3stmt);
     //sqlite3_finalize(_sqlite3stmt);
     
@@ -43,15 +89,15 @@
     {
         NSLog(@"Failed to create table %@ with statement: %@", tableName, _stmtString);
     }
-    //else
-    //{
-    //    NSLog(@"Created %@ table successfully", tableName);
-    //}
     operationResult = sqlite3_step(_sqlite3stmt);
     sqlite3_finalize(_sqlite3stmt);
 }
 
-
+/*!
+ @function init
+ Initialization of the class.
+ Create tables, if they did not exist yet and sets the path strings.
+ */
 -(id) init
 {
     // DB for caching autocomplete data
@@ -81,7 +127,6 @@
         NSLog(@"Failed to open/create time table database");
     }
     
-    
     // for stations / public transportation autocomplete
     _connectionDBPath = [[NSBundle mainBundle]pathForResource:@"stations" ofType:@"sql"];
     //NSLog(@"_connectionDBPath = %@", _connectionDBPath);
@@ -97,11 +142,13 @@
     {
         NSLog(@"Failed to open/create stations database");
     }
-
     return self;
 }
 
-
+/*!
+ @function storeOnTable
+ Inserts given array into table of given name.
+ */
 -(void) storeOnTable:(NSString *)tableName
            withArray:(NSMutableArray *)arrayToStore
 {
@@ -141,8 +188,10 @@
     }
 }
 
-
-
+/*!
+ @function deleteFromTable
+ Deletes all data from table with given name.
+ */
 -(void) deleteFromTable:(NSString *)tableName
 {
     sqlite3_stmt    *_statement;
@@ -163,6 +212,10 @@
     }
 }
 
+/*!
+ @function addToTable
+ Inserts string into table for given name.
+ */
 -(void) addToTable:(NSString *)tableName
         withString:(NSString *)stringToStore
 {
@@ -184,7 +237,10 @@
     }
 }
 
-
+/*!
+ @function getNamesFromTable
+ Get all data into an arry from table with given name.
+ */
 -(NSMutableArray *)getNamesFromTable:(NSString *)tableName
 {
     NSMutableArray  *_nameArray = [[NSMutableArray alloc] init];
@@ -215,18 +271,30 @@
     return _nameArray;
 }
 
-
+/*!
+ @function storeLecturers
+ Stores the given array for lecturer acronyms.
+ @param lecturerArray
+ */
 -(void) storeLecturers:(NSMutableArray *)lecturerArray
 {
     [self storeOnTable:@"LECTURER" withArray:lecturerArray];
 }
 
+/*!
+ @function getLecturers
+ Returns an array of lecturer acronyms.
+ */
 -(NSMutableArray *)getLecturers
 {
     return [self getNamesFromTable:@"LECTURER"];
 }
 
-
+/*!
+ @function storeRooms
+ Stores the given array for room acronyms.
+ @param roomArray
+ */
 -(void) storeRooms:(NSMutableArray *)roomArray
 {
     //NSLog(@"storeRooms START");
@@ -234,77 +302,133 @@
     //NSLog(@"storeRooms FINISHED");
 }
 
+/*!
+ @function getRooms
+ Returns an array of room acronyms.
+ */
 -(NSMutableArray *) getRooms
 {
     //NSLog(@"getRooms");
     return [self getNamesFromTable:@"ROOMS"];
 }
 
-
+/*!
+ @function storeClasses
+ Stores the given array for class acronyms.
+ @param classArray
+ */
 -(void) storeClasses:(NSMutableArray *)classArray
 {
     [self storeOnTable:@"CLASSES" withArray:classArray];
 }
 
+/*!
+ @function getClasses
+ Returns an array of class acronyms.
+ */
 -(NSMutableArray *)getClasses
 {
     return [self getNamesFromTable:@"CLASSES"];
 }
 
-
+/*!
+ @function storeCourses
+ Stores the given array for course acronyms.
+ @param coursesArray
+ */
 -(void) storeCourses:(NSMutableArray *)coursesArray
 {
     [self storeOnTable:@"COURSES" withArray:coursesArray];
 }
 
+/*!
+ @function getCourses
+ Returns an array of course acronyms.
+ */
 -(NSMutableArray *)getCourses
 {
     return [self getNamesFromTable:@"COURSES"];
 }
 
+/*!
+ @function storeStudents
+ Stores the given array for student acronyms.
+ @param studentsArray
+ */
 -(void) storeStudents:(NSMutableArray *)studentsArray
 {
     [self storeOnTable:@"STUDENTS" withArray:studentsArray];
 }
 
+/*!
+ @function getStudents
+ Returns an array of student acronyms.
+ */
 -(NSMutableArray *)getStudents
 {
     return [self getNamesFromTable:@"STUDENTS"];
 }
 
-
-// public transportation
+/*!
+ @function getStartStations
+ Returns an array of the three last used start stations.
+ */
 -(NSMutableArray *)getStartStations
 {
     return [self getNamesFromTable:@"START_STATIONS"];
 }
 
+/*!
+ @function addStartStation
+ Adds a new start station to the array.
+ @param startStation
+ */
 -(void) addStartStation:(NSString *)startStation
 {
     [self addToTable:@"START_STATIONS" withString:startStation];
 }
 
+/*!
+ @function deleteStartStation
+ Deletes all start stations from database.
+ */
 -(void) deleteStartStation
 {
     [self deleteFromTable:@"START_STATIONS"];
 }
 
-
+/*!
+ @function getStopStations
+ Returns an array of the three last used stop stations.
+ */
 -(NSMutableArray *)getStopStations
 {
     return [self getNamesFromTable:@"STOP_STATIONS"];
 }
 
+/*!
+ @function addStopStation
+ Adds a new stop station to the array.
+ @param stopStation
+ */
 -(void) addStopStation:(NSString *)stopStation
 {
     [self addToTable:@"STOP_STATIONS" withString:stopStation];
 }
 
+/*!
+ @function deleteStartStation
+ Deletes all start stations from database.
+ */
 -(void) deleteStopStation
 {
     [self deleteFromTable:@"STOP_STATIONS"];
 }
 
+/*!
+ @function getDBStations
+ Returns an array of all possible stations.
+ */
 -(NSMutableArray *)getDBStations
 {
     NSMutableArray  *_nameArray = [[NSMutableArray alloc] init];

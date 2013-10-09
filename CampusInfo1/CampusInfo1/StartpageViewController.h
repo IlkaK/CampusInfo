@@ -1,10 +1,21 @@
-//
-//  StartpageViewController.h
-//  CampusInfo1
-//
-//  Created by Ilka Kokemor on 02.05.12.
-//  Copyright (c) 2012 __MyCompanyName__. All rights reserved.
-//
+/*
+ StartpageViewController.h
+ ZHAW Engineering CampusInfo
+ */
+
+/*!
+ * @header StartpageViewController.h
+ * @author Ilka Kokemor
+ * @copyright 2013 ZHAW
+ * @discussion
+ * <ul>
+ * <li> Responsibilities:
+ *   <ul>
+ *      <li> Control of StartpageViewController.xib, which works as backup view. </li>
+ *  </ul>
+ * </li>
+ * </ul>
+ */
 
 #import <UIKit/UIKit.h>
 

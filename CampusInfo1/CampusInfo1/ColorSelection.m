@@ -1,10 +1,22 @@
-//
-//  ColorSelection.m
-//  CampusInfo1
-//
-//  Created by Ilka Kokemor on 26.08.13.
-//
-//
+/*
+ ColorSelection.m
+ ZHAW Engineering CampusInfo
+ */
+
+/*!
+ * @header ColorSelection.m
+ * @author Ilka Kokemor
+ * @copyright 2013 ZHAW
+ * @discussion
+ * <ul>
+ * <li> Responsibilities:
+ *   <ul>
+ *      <li> Stores all colors used in the application. </li>
+ *      <li> There is no logic implemented, the class only holds the constants. </li>
+ *  </ul>
+ * </li> *
+ * </ul>
+ */
 
 #import "ColorSelection.h"
 
@@ -20,6 +32,10 @@
 @synthesize _zhawDarkerBlue;
 @synthesize _zhawFontGrey;
 
+/*!
+ @function init
+ Initialization of the class and setting all color values.
+ */
 -(id) init
 {
     self = [super init];
@@ -31,7 +47,6 @@
         self._zhawLightestBlue =  [UIColor colorWithRed:204.0/255.0 green:225.0/255.0 blue:252.0/255.0 alpha:1.0];
         self._zhawDarkerBlue   = [UIColor colorWithRed:0.0/255.0 green:67.0/255.0 blue:103.0/255.0 alpha:1.0];
 
-        
         // white
         self._zhawWhite         = [UIColor whiteColor];
         
@@ -45,8 +60,6 @@
     }
     return self;
 }
-
-
 
 
 @end

@@ -192,9 +192,10 @@
 /*!
  @function getData
  Gets mensa menu plan array for given year, calendar week, actual date and gastro id.
- @param newStartStation
- @param newStopStation
- @param newStations
+ @param calendarWeek
+ @param year
+ @param actualDate
+ @param gastroId
  */
 -(void) getData:(int)calendarWeek
        withYear:(int)year

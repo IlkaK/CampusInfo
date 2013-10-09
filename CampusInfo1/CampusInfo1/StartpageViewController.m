@@ -1,10 +1,21 @@
-//
-//  StartpageViewController.m
-//  CampusInfo1
-//
-//  Created by Ilka Kokemor on 02.05.12.
-//  Copyright (c) 2012 __MyCompanyName__. All rights reserved.
-//
+/*
+ StartpageViewController.m
+ ZHAW Engineering CampusInfo
+ */
+
+/*!
+ * @header StartpageViewController.m
+ * @author Ilka Kokemor
+ * @copyright 2013 ZHAW
+ * @discussion
+ * <ul>
+ * <li> Responsibilities:
+ *   <ul>
+ *      <li> Control of StartpageViewController.xib, which works as backup view. </li>
+ *  </ul>
+ * </li>
+ * </ul>
+ */
 
 #import "StartpageViewController.h"
 
@@ -14,28 +25,41 @@
 
 @implementation StartpageViewController
 
+/*!
+ * @function initWithNibName
+ * Initializiation of class.
+ */
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self) {
-        // Custom initialization
-    }
     return self;
 }
 
+/*!
+ * @function viewDidLoad
+ * The function is included, since class inherits from UIViewController.
+ * It is called first time, the view is started for initialization.
+ * It is only called once, after initialization, never again.
+ */
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    // Do any additional setup after loading the view from its nib.
 }
 
+/*!
+ @function viewDidUnload
+ * The function is included, since class inherits from UIViewController.
+ * It is called while the view is unloaded.
+ */
 - (void)viewDidUnload
 {
     [super viewDidUnload];
-    // Release any retained subviews of the main view.
-    // e.g. self.myOutlet = nil;
 }
 
+/*!
+ @function shouldAutorotateToInterfaceOrientation
+ * Supports autorotation.
+ */
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
     return (interfaceOrientation == UIInterfaceOrientationPortrait);

@@ -1,10 +1,33 @@
-//
-//  GradientButton.m
-//  CampusInfo1
-//
-//  Created by Ilka Kokemor on 30.05.13.
-//
-//
+/*
+ GradientButton.m
+ ZHAW Engineering CampusInfo
+ */
+
+/*!
+ * @header GradientButton.m
+ * @author Ilka Kokemor
+ * @copyright 2013 ZHAW
+ * @discussion
+ * <ul>
+ * <li> Responsibilities:
+ *   <ul>
+ *      <li> Inherits from UIButton to create new outfit for buttons. </li>
+ *  </ul>
+ * </li>
+ * <li> Receiving data:
+ *   <ul>
+ *      <li> The class does not receive any data. </li>
+ *   </ul>
+ * </li>
+ *
+ * <li> Sending data:
+ *   <ul>
+ *      <li> The class inherits from UIButton and returns itself when called. </li>
+ *   </ul>
+ * </li>
+ *
+ * </ul>
+ */
 
 #import "GradientButton.h"
 #import "ColorSelection.h"
@@ -12,8 +35,14 @@
 @interface GradientButton()
 @property (nonatomic, readonly) CGGradientRef normalGradient;
 @property (nonatomic, readonly) CGGradientRef highlightGradient;
-- (void)hesitateUpdate; // Used to catch and fix problem where quick taps don't get updated back to normal state
+
+/*!
+ @function hesitateUpdate
+ Used to catch and fix problem where quick taps don't get updated back to normal state
+ */
+- (void)hesitateUpdate; 
 @end
+
 #pragma mark -
 
 @implementation GradientButton
@@ -24,6 +53,11 @@
 @synthesize cornerRadius;
 @synthesize strokeWeight, strokeColor;
 @synthesize normalGradient, highlightGradient;
+
+/*!
+ @function normalGradient
+ Returns a normal gradient button.
+ */
 #pragma mark -
 - (CGGradientRef)normalGradient
 {
@@ -43,6 +77,11 @@
     }
     return normalGradient;
 }
+
+/*!
+ @function highlightGradient
+ Returns a highlighted gradient button.
+ */
 - (CGGradientRef)highlightGradient
 {
     
@@ -61,6 +100,11 @@
     }
     return highlightGradient;
 }
+
+/*!
+ @function initWithFrame
+ Initialization with a frame.
+ */
 #pragma mark -
 - (id)initWithFrame:(CGRect)frame
 {
@@ -72,6 +116,12 @@
 	}
 	return self;
 }
+
+
+/*!
+ @function useAlertStyle
+ Defines the alert style to be used on the button.
+ */
 #pragma mark -
 #pragma mark Appearances
 - (void)useAlertStyle
@@ -83,8 +133,6 @@
     //ColorSelection *_zhawColor = [[ColorSelection alloc]init];
     //[colors addObject:(id)[_zhawColor._zhawLighterBlue CGColor]];
     color = [UIColor colorWithRed:5.0/255 green:40.0/255 blue:114.0/255 alpha:1.0];
-    
-    
     [colors addObject:(id)[color CGColor]];
     
     //UIColor *color = [UIColor colorWithRed:0.283 green:0.32 blue:0.414 alpha:1.0];
@@ -108,7 +156,6 @@
                                     [NSNumber numberWithFloat:1.0f],
                                     [NSNumber numberWithFloat:0.483f],
                                     nil];
-    
     NSMutableArray *colors2 = [NSMutableArray arrayWithCapacity:4];
     color = [UIColor colorWithRed:0.0 green:0.0 blue:0.0 alpha:1.0];
     [colors2 addObject:(id)[color CGColor]];
@@ -128,8 +175,12 @@
     self.cornerRadius = 7.0f;
     [self setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     [self setTitleColor:[UIColor whiteColor] forState:UIControlStateHighlighted];
-    
 }
+
+/*!
+ @function useRedDeleteStyle
+ Defines that red is used on the button.
+ */
 - (void)useRedDeleteStyle
 {
     NSMutableArray *colors = [NSMutableArray arrayWithCapacity:5];
@@ -151,7 +202,6 @@
                                     [NSNumber numberWithFloat:0.418f],
                                     [NSNumber numberWithFloat:0.346],
                                     nil];
-    
     NSMutableArray *colors2 = [NSMutableArray arrayWithCapacity:5];
     color = [UIColor colorWithRed:0.467 green:0.009 blue:0.005 alpha:1.0];
     [colors2 addObject:(id)[color CGColor]];
@@ -163,7 +213,6 @@
     [colors2 addObject:(id)[color CGColor]];
     color = [UIColor colorWithRed:0.388 green:0.004 blue:0.0 alpha:1.0];
     [colors addObject:(id)[color CGColor]];
-    
     self.highlightGradientColors = colors;
     self.highlightGradientLocations = [NSArray arrayWithObjects:
                                        [NSNumber numberWithFloat:0.0f],
@@ -174,8 +223,12 @@
                                        nil];
     self.cornerRadius = 9.f;
     [self setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-    
 }
+
+/*!
+ @function useWhiteStyle
+ Defines that white style is used on the button.
+ */
 - (void)useWhiteStyle
 {
     NSMutableArray *colors = [NSMutableArray arrayWithCapacity:3];
@@ -191,7 +244,6 @@
                                     [NSNumber numberWithFloat:1.0f],
                                     [NSNumber numberWithFloat:0.601f],
                                     nil];
-    
     NSMutableArray *colors2 = [NSMutableArray arrayWithCapacity:3];
 	color = [UIColor colorWithRed:0.692 green:0.692 blue:0.691 alpha:1.0];
 	[colors2 addObject:(id)[color CGColor]];
@@ -205,11 +257,15 @@
                                        [NSNumber numberWithFloat:1.0f],
                                        [NSNumber numberWithFloat:0.601f],
                                        nil];
-    
     self.cornerRadius = 9.f;
     [self setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
     [self setTitleColor:[UIColor darkGrayColor] forState:UIControlStateHighlighted];
 }
+
+/*!
+ @function useBlackStyle
+ Defines that black style is used on the button.
+ */
 - (void)useBlackStyle
 {
     NSMutableArray *colors = [NSMutableArray arrayWithCapacity:4];
@@ -229,7 +285,6 @@
                                     [NSNumber numberWithFloat:0.462f],
                                     nil];
     self.cornerRadius = 9.0f;
-    
     NSMutableArray *colors2 = [NSMutableArray arrayWithCapacity:4];
 	color = [UIColor colorWithRed:0.199 green:0.199 blue:0.199 alpha:1.0];
 	[colors2 addObject:(id)[color CGColor]];
@@ -239,7 +294,6 @@
 	[colors2 addObject:(id)[color CGColor]];
 	color = [UIColor colorWithRed:0.112 green:0.112 blue:0.112 alpha:1.0];
 	[colors2 addObject:(id)[color CGColor]];
-    
     self.highlightGradientColors = colors2;
     self.highlightGradientLocations = [NSMutableArray arrayWithObjects:
                                        [NSNumber numberWithFloat:0.0f],
@@ -249,6 +303,11 @@
                                        nil];
     [self setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
 }
+
+/*!
+ @function useWhiteActionSheetStyle
+ Defines that white is used on the button.
+ */
 - (void)useWhiteActionSheetStyle
 {
     NSMutableArray *colors = [NSMutableArray arrayWithCapacity:3];
@@ -264,7 +323,6 @@
                                     [NSNumber numberWithFloat:1.0f],
                                     [NSNumber numberWithFloat:0.601f],
                                     nil];
-    
 	NSMutableArray *colors2 = [NSMutableArray arrayWithCapacity:7];
 	color = [UIColor colorWithRed:0.033 green:0.251 blue:0.673 alpha:1.0];
 	[colors2 addObject:(id)[color CGColor]];
@@ -290,11 +348,15 @@
                                        [NSNumber numberWithFloat:0.185f],
                                        [NSNumber numberWithFloat:0.812f],
                                        nil];
-    
     self.cornerRadius = 9.f;
     [self setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
     [self setTitleColor:[UIColor whiteColor] forState:UIControlStateHighlighted];
 }
+
+/*!
+ @function useBlackActionSheetStyle
+ Defines that black is used on the button.
+ */
 - (void)useBlackActionSheetStyle
 {
     NSMutableArray *colors = [NSMutableArray arrayWithCapacity:4];
@@ -314,7 +376,6 @@
                                     [NSNumber numberWithFloat:0.462f],
                                     nil];
     self.cornerRadius = 9.0f;
-    
 	NSMutableArray *colors2 = [NSMutableArray arrayWithCapacity:7];
 	color = [UIColor colorWithRed:0.033 green:0.251 blue:0.673 alpha:1.0];
 	[colors2 addObject:(id)[color CGColor]];
@@ -343,6 +404,11 @@
     [self setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     [self setTitleColor:[UIColor whiteColor] forState:UIControlStateHighlighted];
 }
+
+/*!
+ @function useSimpleOrangeStyle
+ Defines that orange is used on the button.
+ */
 - (void)useSimpleOrangeStyle
 {
     NSMutableArray *colors = [NSMutableArray arrayWithCapacity:2];
@@ -355,7 +421,6 @@
                                     [NSNumber numberWithFloat:0.0f],
                                     [NSNumber numberWithFloat:1.0f],
                                     nil];
-    
     NSMutableArray *colors2 = [NSMutableArray arrayWithCapacity:3];
 	color = [UIColor colorWithRed:0.914 green:0.309 blue:0.0 alpha:1.0];
 	[colors2 addObject:(id)[color CGColor]];
@@ -369,10 +434,14 @@
                                        [NSNumber numberWithFloat:1.0f],
                                        [NSNumber numberWithFloat:0.498f],
                                        nil];
-    
     self.cornerRadius = 9.f;
     [self setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
 }
+
+/*!
+ @function useGreenConfirmStyle
+ Defines that green is used for confirmation.
+ */
 - (void)useGreenConfirmStyle
 {
     NSMutableArray *colors = [NSMutableArray arrayWithCapacity:5];
@@ -394,7 +463,6 @@
                                     [NSNumber numberWithFloat:0.418f],
                                     [NSNumber numberWithFloat:0.346],
                                     nil];
-    
     NSMutableArray *colors2 = [NSMutableArray arrayWithCapacity:5];
     color = [UIColor colorWithRed:0.009 green:0.467 blue:0.005 alpha:1.0];
     [colors2 addObject:(id)[color CGColor]];
@@ -406,7 +474,6 @@
     [colors2 addObject:(id)[color CGColor]];
     color = [UIColor colorWithRed:0.004 green:0.388 blue:0.0 alpha:1.0];
     [colors addObject:(id)[color CGColor]];
-    
     self.highlightGradientColors = colors;
     self.highlightGradientLocations = [NSMutableArray arrayWithObjects:
                                        [NSNumber numberWithFloat:0.0f],
@@ -417,8 +484,12 @@
                                        nil];
     self.cornerRadius = 9.f;
     [self setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-    
 }
+
+/*!
+ @function drawRect
+ Draws button rectangle.
+ */
 #pragma mark -
 - (void)drawRect:(CGRect)rect
 {
@@ -519,37 +590,67 @@
 	CGContextAddPath(context, path);
 	CGContextStrokePath(context);
 	CGPathRelease(path);
-    
 }
+
+/*!
+ @function hesitateUpdate
+ Hesitate while updating.
+ */
 #pragma mark -
 #pragma mark Touch Handling
 - (void)hesitateUpdate
 {
     [self setNeedsDisplay];
 }
+
+/*!
+ @function touchesBegan
+ Touch on button started.
+ */
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
 {
     [super touchesBegan:touches withEvent:event];
     [self setNeedsDisplay];
 }
+
+/*!
+ @function touchesCancelled
+ Touch on button cancelled.
+ */
 - (void)touchesCancelled:(NSSet *)touches withEvent:(UIEvent *)event
 {
     [super touchesCancelled:touches withEvent:event];
     [self setNeedsDisplay];
     [self performSelector:@selector(hesitateUpdate) withObject:nil afterDelay:0.1];
 }
+
+/*!
+ @function touchesEnded
+ Touch on button ended.
+ */
 - (void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event
 {
     [super touchesMoved:touches withEvent:event];
     [self setNeedsDisplay];
     
 }
+
+/*!
+ @function touchesEnded
+ Touch on button ended.
+ */
 - (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
 {
     [super touchesEnded:touches withEvent:event];
     [self setNeedsDisplay];
     [self performSelector:@selector(hesitateUpdate) withObject:nil afterDelay:0.1];
 }
+
+
+/*!
+ @function encodeWithCoder
+ Encoder with given encoder.
+ */
 #pragma mark -
 #pragma mark NSCoding
 - (void)encodeWithCoder:(NSCoder *)encoder
@@ -561,6 +662,10 @@
     [encoder encodeObject:[self highlightGradientLocations] forKey:@"highlightGradientLocations"];
 }
 
+/*!
+ @function initWithCoder
+ Initilialization with decoder.
+ */
 - (id)initWithCoder:(NSCoder *)decoder
 {
     if (self = [super initWithCoder:decoder])

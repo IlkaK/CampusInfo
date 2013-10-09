@@ -1,10 +1,35 @@
-//
-//  TimeTableAsyncRequest.m
-//  CampusInfo1
-//
-//  Created by Ilka Kokemor on 15.04.12.
-//  Copyright (c) 2012 __MyCompanyName__. All rights reserved.
-//
+/*
+ TimeTableAsyncRequest.m
+ ZHAW Engineering CampusInfo
+ */
+
+/*!
+ * @header TimeTableAsyncRequest.m
+ * @author Ilka Kokemor
+ * @copyright 2013 ZHAW
+ * @discussion
+ * <ul>
+ * <li> Responsibilities:
+ *   <ul>
+ *      <li> Handling sending requests to server asynchronously and synchronously and handling getting the data back from server. </li>
+ *  </ul>
+ * </li>
+ *
+ * <li> Receiving data:
+ *   <ul>
+ *      <li> The class receives the url which it sends to server. </li>
+ *      <li> The class receives the response from server for its request. </li>
+ *   </ul>
+ * </li>
+ *
+ * <li> Sending data:
+ *   <ul>
+ *      <li> It sends the url request to server. </li>
+ *   </ul>
+ * </li>
+ *
+ * </ul>
+ */
 
 #import "TimeTableAsyncRequest.h"
 
@@ -14,30 +39,21 @@
 @synthesize _timeTableAsynchRequestDelegate;
 @synthesize _receivedData;
 
-// called by schedule.downloadData via schedule.init
+/*!
+ @function downloadData
+ Url is send to server.
+ @param url
+ */
 -(void) downloadData:(NSURL*) url 
 {  
    // NSLog(@" download data with url %@", [url absoluteString]);
-    
 
    NSMutableURLRequest      *_request= [[NSMutableURLRequest alloc]initWithURL
-                                    :url
-                                        //cachePolicy
-//                                    :NSURLRequestReloadIgnoringLocalCacheData  //timeoutInterval
-//                                   :20.0
-                                        ];
-
- //   NSString *userAgent = [NSString stringWithFormat:@"%@ %@",[UIDevice currentDevice].systemName,[UIDevice currentDevice].systemVersion];
-   // [_request setValue:userAgent forHTTPHeaderField:@"User-Agent"];
-    
-    
+                                    :url];
     
     NSDictionary *_agent_headers = [NSDictionary dictionaryWithObject:
                              @"ZHAWCampusInfoForIPhone (http://www.init.zhaw.ch)" forKey:@"User-Agent"];
     [_request setAllHTTPHeaderFields:_agent_headers];
-    
-    
-    //[_request setValue:userAgent forHTTPHeaderField:@"ZHAWCampusInfoForIPhone"];
     
     //NSLog(@"_request all http header fields: %@", [_request allHTTPHeaderFields]);
     //NSLog(@"_request value for http header field: %@",[_request valueForHTTPHeaderField:field]);
@@ -55,43 +71,32 @@
     CFRunLoopRun(); // Avoid thread exiting
 } 
 
-
+/*!
+ @function didReceiveResponse
+ This method is called when the server has determined that it has enough information to create the NSURLResponse.
+ It can be called multiple times, for example in the case of a redirect, so each time we reset the data.
+ */
 - (void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response
 {
-    // This method is called when the server has determined that it
-    // has enough information to create the NSURLResponse.
-	
-    // It can be called multiple times, for example in the case of a
-    // redirect, so each time we reset the data.
-	
     // receivedData is an instance variable declared elsewhere.
-    
     [_receivedData setLength:0];
 }
 
+/*!
+ @function didReceiveData
+ Append the new data to receivedData.
+ */
 - (void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)data
 {
-    // Append the new data to receivedData.
     // receivedData is an instance variable declared elsewhere.
-    //NSString *receivedString = [[NSString alloc] initWithData:data encoding:NSASCIIStringEncoding];
-    //NSLog(@"3 didReceiveData %@", receivedString);
-    
     [_receivedData appendData:data];
-    
-    //if (self._receivedData != nil)
-    //{
-    //    NSString *_receivedString = [[NSString alloc] initWithData:_receivedData encoding:NSASCIIStringEncoding];
-    //    NSLog(@"didReceiveData %@", _receivedString);
-    //}
-    //else
-    //{
-    //    NSLog(@"didReceiveData NO DATA");
-    //}
-    
     [_timeTableAsynchRequestDelegate dataDownloadDidFinish:_receivedData];
 }
 
-
+/*!
+ @function connectionDidFinishLoading
+ Is called when data is downloaded.
+ */
 - (void)connectionDidFinishLoading:(NSURLConnection *)connection
 {
     self._receivedData = [NSMutableData data];
@@ -110,29 +115,30 @@
     
 }
 
-
-
+/*!
+ @function didFailWithError
+ Is called when an error occured.
+ */
 - (void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error
 {
-
-    /*
-    // inform the user
-    UIAlertView *didFailWithErrorMessage = [[UIAlertView alloc] initWithTitle: @"NSURLConnection " message: @"didFailWithError"  delegate: self cancelButtonTitle: @"Ok" otherButtonTitles: nil];
-    [didFailWithErrorMessage show];
-    [didFailWithErrorMessage release];
-	*/
     //inform the user
     NSLog(@"Connection failed! Error - %@",
           [error localizedDescription]);
-
     CFRunLoopStop(CFRunLoopGetCurrent());
 }
 
-
+/*!
+ @function canAuthenticateAgainstProtectionSpace
+ Authentication is set.
+ */
 - (BOOL)connection:(NSURLConnection *)connection canAuthenticateAgainstProtectionSpace:(NSURLProtectionSpace *)protectionSpace {
     return [protectionSpace.authenticationMethod isEqualToString:NSURLAuthenticationMethodServerTrust];
 }
 
+/*!
+ @function didReceiveAuthenticationChallenge
+ Authentication is set.
+ */
 - (void)connection:(NSURLConnection *)connection didReceiveAuthenticationChallenge:(NSURLAuthenticationChallenge *)challenge {
     
     [challenge.sender useCredential:[NSURLCredential credentialForTrust:challenge.protectionSpace.serverTrust] forAuthenticationChallenge:challenge];

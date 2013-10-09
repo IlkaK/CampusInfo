@@ -1,10 +1,37 @@
-//
-//  MensaViewController.m
-//  CampusInfo1
-//
-//  Created by Ilka Kokemor on 17.07.13.
-//
-//
+/*
+ MensaViewController.m
+ ZHAW Engineering CampusInfo
+ */
+
+/*!
+ * @header MensaViewController.m
+ * @author Ilka Kokemor
+ * @copyright 2013 ZHAW
+ * @discussion
+ * <ul>
+ * <li> Responsibilities:
+ *   <ul>
+ *      <li> Control of MensaViewController.xib, where a list of gastronomic facilities is displayed. </li>
+ *      <li> Getting and handling gastronomic facilities with opening and eating times.  </li>
+ *  </ul>
+ * </li>
+ *
+ * <li> Receiving data:
+ *   <ul>
+ *      <li> Receives delegate from MenuOverviewController and passes it back, if back button is clicked. </li>
+ *      <li> Gets data from MensaOverviewDto package for gastronomic facilities, their opening and eating times. </li>
+ *   </ul>
+ * </li>
+ *
+ * <li> Sending data:
+ *   <ul>
+ *      <li> It passes the delegate to MensaDetailViewController and receives it back from there. </li>
+ *      <li> It sets the actual chosen gastronomic facility on MensaDetailViewController so it can show the menus of that gastronomic facility. </li>
+ *   </ul>
+ * </li>
+ *
+ * </ul>
+ */
 
 #import "MensaViewController.h"
 #import "GastronomicFacilityDto.h"
@@ -44,13 +71,22 @@
 
 @synthesize _zhawColor;
 
+/*!
+ * @function initWithNibName
+ * Initializiation of class.
+ */
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     return self;
 }
 
-
+/*!
+ * @function viewDidLoad
+ * The function is included, since class inherits from UIViewController.
+ * Is called first time, the view is started for initialization.
+ * Is only called once, after initialization, never again.
+ */
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -109,14 +145,24 @@
     _mensaDetailVC.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
 }
 
-
+/*!
+ * @function didReceiveMemoryWarning
+ * The function is included per default.
+ */
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
 
-- (void)viewDidUnload {
+/*!
+ * @function viewDidLoad
+ * The function is included, since class inherits from UIViewController.
+ * Is called first time, the view is started for initialization.
+ * Is only called once, after initialization, never again.
+ */
+- (void)viewDidUnload
+{
     [self set_mensaOverviewTable:nil];
     _mensaOverviewTable = nil;
     _mensaOverviewTableCell = nil;
@@ -132,20 +178,31 @@
     [super viewDidUnload];
 }
 
+/*!
+ @function moveBackToMenuOverview
+ Function is called, when back button on navigation bar is hit, to move back to gastronomic facilties overview.
+ @param sender
+ */
 - (void)moveBackToMenuOverview:(id)sender
 {
     [self dismissModalViewControllerAnimated:YES];
     self.tabBarController.selectedIndex = 0;
 }
 
-
+/*!
+ * @function threadWaitForLoadingActivityIndicator
+ * Thread is called to start the activity indicator while waiting for data to be downloaded.
+ */
 - (void) threadWaitForChangeActivityIndicator:(id)data
 {
     _waitForChangeActivityIndicator.hidden = NO;
     [_waitForChangeActivityIndicator startAnimating];
 }
 
-
+/*!
+ * @function startLoading
+ * Called to start thread for the activity indicator to indicate data is loaded and the user needs to wait.
+ */
 -(void)startLoading
 {
     self._noConnectionButton.hidden = YES;
@@ -153,6 +210,10 @@
     [NSThread detachNewThreadSelector:@selector(threadWaitForChangeActivityIndicator:) toTarget:self withObject:nil];
 }
 
+/*!
+ * @function doneLoading
+ * Called to trigger loading all data and stop the thread for the activity indicator.
+ */
 -(void)doneLoading
 {
     [_gastronomyFacilityArray getData];
@@ -167,13 +228,22 @@
     }
 }
 
+/*!
+ @function tryConnectionAgain
+ Triggered by clicking the _noConnectionButton, another trial to connect to server is started.
+ @param sender
+ */
 - (IBAction)tryConnectionAgain:(id)sender
 {
     [self startLoading];
     [self doneLoading];
 }
 
-
+/*!
+ * @function viewWillAppear
+ * The function is included, since class inherits from UIViewController.
+ * It is called every time the view is called again.
+ */
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
@@ -181,25 +251,41 @@
     [self startLoading];
 }
 
+/*!
+ * @function viewDidAppear
+ * The function is included, since class inherits from UIViewController.
+ * It is called before viewWillAppear is called.
+ * It is needed to respond to the shaking gesture.
+ */
 -(void)viewDidAppear:(BOOL)animated
 {
     [self doneLoading];
 }
 
 
-//---------- Handling of table  -----
+// ------- MANAGE TABLE CELLS ----
+/*!
+ * @function numberOfSectionsInTableView
+ * The function defines the number of sections in table.
+ */
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
     return 1;
 }
 
-
+/*!
+ * @function numberOfRowsInSection
+ * The function defines the number of rows in table.
+ */
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     return [_gastronomyFacilityArray._gastronomicFacilities count];
 }
 
-
+/*!
+ * @function showGastronomy
+ * Method to show the single gastronomic facility in one table cell.
+ */
 - (UITableViewCell *)showGastronomy:(UITableView *)actualTableView
                  withGastronomyName:(NSString *)gastronomyName
                  withGastronomyType:(NSString *)gastronomyType
@@ -233,7 +319,10 @@
     return _cell;
 }
 
-
+/*!
+ * @function cellForRowAtIndexPath
+ * The function is for customizing the table view cells.
+ */
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     NSUInteger    _cellRow = indexPath.row;
@@ -386,17 +475,20 @@
             withLunchTime       :_lunchTime];
 }
 
-
+/*!
+ * @function heightForRowAtIndexPath
+ * The function is for customizing the table view cells.
+ * It sets the height for each cell individually.
+ */
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     return 66;
 }
 
-
-
-
-// method necessary for UITableViewDelegate
-
+/*!
+ * @function didSelectRowAtIndexPath
+ * The function supports row selection.
+ */
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     NSUInteger    _cellSelection = indexPath.row;
@@ -412,6 +504,10 @@
     
 }
 
+/*!
+ * @function scrollViewDidScroll
+ * Triggers reload of data while scrolling.
+ */
 -(void)scrollViewDidScroll:(UIScrollView *)scrollView
 {
     //NSLog(@"scrolling table");

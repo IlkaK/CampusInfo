@@ -1,10 +1,22 @@
-//
-//  ColorSelection.h
-//  CampusInfo1
-//
-//  Created by Ilka Kokemor on 26.08.13.
-//
-//
+/*
+ ColorSelection.h
+ ZHAW Engineering CampusInfo
+ */
+
+/*!
+ * @header ColorSelection.h
+ * @author Ilka Kokemor
+ * @copyright 2013 ZHAW
+ * @discussion
+ * <ul>
+ * <li> Responsibilities:
+ *   <ul>
+ *      <li> Stores all colors used in the application. </li>
+ *      <li> There is no logic implemented, the class only holds the constants. </li>
+ *  </ul>
+ * </li> *
+ * </ul>
+ */
 
 #import <Foundation/Foundation.h>
 
