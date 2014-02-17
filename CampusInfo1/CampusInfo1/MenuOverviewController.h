@@ -49,13 +49,12 @@
 @class PublicTransportViewController;
 @class MapsViewController;
 @class SocialMediaViewController;
+@class TryNewMenuViewController;
 
 @interface MenuOverviewController : UIViewController<UITableViewDelegate>
 {
-    /*! @var _menuTableView Table to display the menu items in ordered form */
-    IBOutlet UITableView                    *_menuTableView;
-     /*! @var _menuOverviewTableCell Handles cell, which displays three menu items in a row */
-    IBOutlet UITableViewCell                *_menuOverviewTableCell;
+    /*! @var _menuCollectionView CollectionView to display the menu items in ordered form */
+    IBOutlet UICollectionView               *_menuCollectionView;
     
     /*! @var _zhawColor Holds all color schemes needed */
     ColorSelection                          *_zhawColor;
@@ -77,8 +76,7 @@
 
 }
 
-@property (nonatomic, retain) IBOutlet UITableView                          *_menuTableView;
-@property (nonatomic, retain) IBOutlet UITableViewCell                      *_menuOverviewTableCell;
+@property (nonatomic, retain) IBOutlet UICollectionView                     *_menuCollectionView;
 
 @property (nonatomic, retain) UIColor                                       *_backgroundColor;
 @property (nonatomic, retain) ColorSelection                                *_zhawColor;

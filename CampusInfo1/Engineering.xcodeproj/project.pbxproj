@@ -176,7 +176,6 @@
 		E13AA95D17B269580061E0ED /* ClassesDto.m in Sources */ = {isa = PBXBuildFile; fileRef = E13AA95C17B269580061E0ED /* ClassesDto.m */; };
 		E13AA96517B285600061E0ED /* MenuOverviewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E13AA96317B285600061E0ED /* MenuOverviewController.m */; };
 		E13AA96617B285600061E0ED /* MenuOverviewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E13AA96417B285600061E0ED /* MenuOverviewController.xib */; };
-		E13AA96A17B28E400061E0ED /* MenuOverviewTableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E13AA96917B28E400061E0ED /* MenuOverviewTableCell.xib */; };
 		E13D3B5B17412F0500F534DB /* ChooseDateViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E13D3B5917412F0500F534DB /* ChooseDateViewController.m */; };
 		E13D3B5C17412F0500F534DB /* ChooseDateViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E13D3B5A17412F0500F534DB /* ChooseDateViewController.xib */; };
 		E155A998179E777800726C39 /* SideDishDto.m in Sources */ = {isa = PBXBuildFile; fileRef = E155A997179E777800726C39 /* SideDishDto.m */; };
@@ -277,6 +276,8 @@
 		E1D7EFF7178DA03D00100293 /* DateFormation.m in Sources */ = {isa = PBXBuildFile; fileRef = E1D7EFF6178DA03D00100293 /* DateFormation.m */; };
 		E1DA967C1740E41C00CA206F /* SettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E1DA967A1740E41C00CA206F /* SettingsViewController.m */; };
 		E1DA967D1740E41C00CA206F /* SettingsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E1DA967B1740E41C00CA206F /* SettingsViewController.xib */; };
+		E1DB914B18AE24980094D506 /* MenuOverviewCollectionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E1DB914A18AE24980094D506 /* MenuOverviewCollectionCell.xib */; };
+		E1DB914D18AE542D0094D506 /* MenuOverviewCollectionReusableView.xib in Resources */ = {isa = PBXBuildFile; fileRef = E1DB914C18AE542D0094D506 /* MenuOverviewCollectionReusableView.xib */; };
 		E1DC175317D09D5D00DB51F6 /* UIConstantStrings.m in Sources */ = {isa = PBXBuildFile; fileRef = E1DC175217D09D5D00DB51F6 /* UIConstantStrings.m */; };
 		E1EC0FD317D4A8BC00AB4898 /* JourneyDto.m in Sources */ = {isa = PBXBuildFile; fileRef = E1EC0FD217D4A8BC00AB4898 /* JourneyDto.m */; };
 		E1EC0FD617D4B98300AB4898 /* SectionDto.m in Sources */ = {isa = PBXBuildFile; fileRef = E1EC0FD517D4B98300AB4898 /* SectionDto.m */; };
@@ -516,7 +517,6 @@
 		E13AA96217B285600061E0ED /* MenuOverviewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MenuOverviewController.h; sourceTree = "<group>"; };
 		E13AA96317B285600061E0ED /* MenuOverviewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MenuOverviewController.m; sourceTree = "<group>"; };
 		E13AA96417B285600061E0ED /* MenuOverviewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MenuOverviewController.xib; sourceTree = "<group>"; };
-		E13AA96917B28E400061E0ED /* MenuOverviewTableCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MenuOverviewTableCell.xib; sourceTree = "<group>"; };
 		E13D3B5817412F0500F534DB /* ChooseDateViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChooseDateViewController.h; sourceTree = "<group>"; };
 		E13D3B5917412F0500F534DB /* ChooseDateViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChooseDateViewController.m; sourceTree = "<group>"; };
 		E13D3B5A17412F0500F534DB /* ChooseDateViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ChooseDateViewController.xib; sourceTree = "<group>"; };
@@ -590,6 +590,8 @@
 		E1DA96791740E41C00CA206F /* SettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingsViewController.h; sourceTree = "<group>"; };
 		E1DA967A1740E41C00CA206F /* SettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingsViewController.m; sourceTree = "<group>"; };
 		E1DA967B1740E41C00CA206F /* SettingsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SettingsViewController.xib; sourceTree = "<group>"; };
+		E1DB914A18AE24980094D506 /* MenuOverviewCollectionCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MenuOverviewCollectionCell.xib; sourceTree = "<group>"; };
+		E1DB914C18AE542D0094D506 /* MenuOverviewCollectionReusableView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MenuOverviewCollectionReusableView.xib; sourceTree = "<group>"; };
 		E1DC175117D09D5C00DB51F6 /* UIConstantStrings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIConstantStrings.h; sourceTree = "<group>"; };
 		E1DC175217D09D5D00DB51F6 /* UIConstantStrings.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIConstantStrings.m; sourceTree = "<group>"; };
 		E1EC0FD117D4A8BC00AB4898 /* JourneyDto.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JourneyDto.h; sourceTree = "<group>"; };
@@ -892,9 +894,9 @@
 				279F0A2C17DF227F006A599D /* Default-568h@2x.png */,
 				279F0A2A17DF2255006A599D /* Default@2x.png */,
 				279F0A2517DF2207006A599D /* Default.png */,
+				A35A341E1520814800181E3F /* CampusInfo1 */,
 				E195FF35178188A30065DF05 /* libsqlite3.dylib */,
 				A35A344E152082F600181E3F /* Resources */,
-				A35A341E1520814800181E3F /* CampusInfo1 */,
 				E12AD04C17B0E9E4009A9B1B /* CampusInfoLogicTests */,
 				A35A34171520814800181E3F /* Frameworks */,
 				A35A34151520814800181E3F /* Products */,
@@ -1168,7 +1170,8 @@
 				E13AA96217B285600061E0ED /* MenuOverviewController.h */,
 				E13AA96317B285600061E0ED /* MenuOverviewController.m */,
 				E13AA96417B285600061E0ED /* MenuOverviewController.xib */,
-				E13AA96917B28E400061E0ED /* MenuOverviewTableCell.xib */,
+				E1DB914A18AE24980094D506 /* MenuOverviewCollectionCell.xib */,
+				E1DB914C18AE542D0094D506 /* MenuOverviewCollectionReusableView.xib */,
 			);
 			name = MenuOverview;
 			sourceTree = "<group>";
@@ -1389,6 +1392,7 @@
 				27C1ED1D157A6867000DF028 /* FiveSlotsOneRoomTableCell.xib in Resources */,
 				2700DD211699DD1A002906D0 /* EightSlotsOneRoomTableCell.xib in Resources */,
 				2700DD241699E730002906D0 /* OneSlotFourRoomsTableCell.xib in Resources */,
+				E1DB914B18AE24980094D506 /* MenuOverviewCollectionCell.xib in Resources */,
 				2700DD2A1699EC2C002906D0 /* OneSlotSevenRoomsTableCell.xib in Resources */,
 				2700DD2D1699F2C4002906D0 /* ThreeSlotsTwoRoomsTableCell.xib in Resources */,
 				2700DD2F1699F854002906D0 /* ThreeSlotsThreeRoomsTableCell.xib in Resources */,
@@ -1408,13 +1412,13 @@
 				E1BC5623179D290A007E235D /* MensaDetailViewController.xib in Resources */,
 				E1BC5628179D7638007E235D /* MensaDetailTableCell.xib in Resources */,
 				E16C642617ABDC0100BEDBB3 /* ContactsViewController.xib in Resources */,
+				E1DB914D18AE542D0094D506 /* MenuOverviewCollectionReusableView.xib in Resources */,
 				E16C642B17ABDC4600BEDBB3 /* EmergencyViewController.xib in Resources */,
 				271CB2BE17AD196A005CC185 /* EmergencyDetailTableCell.xib in Resources */,
 				271CB2C217AD26F3005CC185 /* EmergencyInformTableCell.xib in Resources */,
 				27AC5C7A17AEAF9B006A1774 /* ContactsPhoneTableCell.xib in Resources */,
 				2709DED417AEDEF5002E714F /* ContactsPlaceTableCell.xib in Resources */,
 				E13AA96617B285600061E0ED /* MenuOverviewController.xib in Resources */,
-				E13AA96A17B28E400061E0ED /* MenuOverviewTableCell.xib in Resources */,
 				2724546917B7EBE4005F979C /* ContactsOverViewController.xib in Resources */,
 				E101909517BBAE9D00242A87 /* NewsViewController.xib in Resources */,
 				E10190A317BBE3E300242A87 /* EventsViewController.xib in Resources */,

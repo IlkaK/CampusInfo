@@ -41,8 +41,7 @@
 @end
 
 @implementation MenuOverviewController
-@synthesize _menuTableView;
-@synthesize _menuOverviewTableCell;
+@synthesize _menuCollectionView;
 
 @synthesize _backgroundColor;
 @synthesize _zhawColor;
@@ -54,6 +53,7 @@
 @synthesize _publicTransportVC;
 @synthesize _mapsVC;
 @synthesize _socialMediaVC;
+
 
 /*!
  * @function initWithNibName
@@ -74,20 +74,19 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    // set table controller
-    if (_menuTableView == nil) {
-		_menuTableView = [[UITableView alloc] init];
-	}
-    
     _zhawColor = [[ColorSelection alloc]init];
     _backgroundColor = _zhawColor._zhawOriginalBlue;
     
-    [_menuTableView setSeparatorColor:[UIColor clearColor]];
-    _menuTableView.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
-    _menuTableView.scrollEnabled = NO;
-    
     [self.view setBackgroundColor:_backgroundColor];
-    [_menuTableView setBackgroundColor:_backgroundColor];
+    
+    UINib *cellNib = [UINib nibWithNibName:@"MenuOverviewCollectionCell" bundle:nil];
+    [self._menuCollectionView registerNib:cellNib forCellWithReuseIdentifier:@"MenuOverviewCollectionCell"];
+    
+    UINib *reusableViewNib = [UINib nibWithNibName:@"MenuOverviewCollectionReusableView" bundle:nil];
+    [self._menuCollectionView registerNib:reusableViewNib forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:@"MenuOverviewCollectionReusableView"];
+    
+    [_menuCollectionView setBackgroundColor:_backgroundColor];
+    
     
     if (_contactsVC == nil)
     {
@@ -130,6 +129,7 @@
 		_socialMediaVC = [[SocialMediaViewController alloc] init];
 	}
     _socialMediaVC.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
+
 }
 
 /*!
@@ -147,8 +147,8 @@
  * The function is included, since class inherits from UIViewController.
  * It is called while the view is unloaded.
  */
-- (void)viewDidUnload {
-    _menuTableView = nil;    
+- (void)viewDidUnload
+{
     _contactsVC = nil;
     _settingsVC = nil;
     _newsVC = nil;
@@ -156,8 +156,6 @@
     _publicTransportVC = nil;    
     _mapsVC = nil;
     _socialMediaVC = nil;
-    
-    _menuOverviewTableCell = nil;
     [super viewDidUnload];
 }
 
@@ -249,158 +247,155 @@
 
 
 
-// ------- MANAGE TABLE CELLS ----
+// ------- MANAGE COLLECTION CELLS ----
 /*!
  * @function numberOfSectionsInTableView
- * The function defines the number of sections in _acronymAutocompleteTableView.
+ * The function defines the number of sections in collectionView.
  */
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
+-(NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView
 {
     return 3;
 }
 
 /*!
- * @function numberOfRowsInSection
- * The function defines the number of rows in _acronymAutocompleteTableView.
+ * @function numberOfItemsInSection
+ * The function defines the number of items in each section in collectionView.
  */
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+-(NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
-    return 1;
+    return 3;
 }
 
 /*!
- * @function heightForRowAtIndexPath
- * The function is for customizing the table view cells.
- * It sets the height for each cell individually.
+ * @function viewForSupplementaryElementOfKind
+ * The function sets header line in each section of the colleciton view.
  */
-- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+- (UICollectionReusableView *)collectionView:(UICollectionView *)collectionView viewForSupplementaryElementOfKind:(NSString *)kind atIndexPath:(NSIndexPath *)indexPath
 {
-    return 100;
+    UICollectionReusableView *reusableview = nil;
+    
+    if (kind == UICollectionElementKindSectionHeader)
+    {
+        UICollectionReusableView *headerView = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:@"MenuOverviewCollectionReusableView" forIndexPath:indexPath];
+        
+        UIImageView *line = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 320, 1)];
+        line.backgroundColor = _zhawColor._zhawWhite;
+        [headerView addSubview:line];
+        
+        reusableview = headerView;
+    }
+    return reusableview;
 }
 
-
 /*!
- * @function cellForRowAtIndexPath
- * The function is for customizing the table view cells.
- * According to the number of time slots and rooms (scheduleEvents) the cell methods are called.
+ * @function cellForItemAtIndexPath
+ * The function is for customizing the collection view cells.
+ * According to the position of the cell the given view is called.
  */
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+-(UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    NSUInteger        _cellSelection = indexPath.section;
-    NSString         *_cellIdentifier;
-    UITableViewCell  *_cell = nil;
-
-    _cellIdentifier  = @"MenuOverviewTableCell";
-    _cell            = [tableView dequeueReusableCellWithIdentifier:_cellIdentifier];
-    if (_cell == nil)
+    NSUInteger        _cellRow = indexPath.section;
+    NSUInteger        _cellTab = indexPath.item;
+    
+    NSString         *_cellIdentifier   = @"MenuOverviewCollectionCell";
+    UICollectionViewCell *_cell         = [collectionView dequeueReusableCellWithReuseIdentifier:_cellIdentifier forIndexPath:indexPath];
+    
+    [_cell setBackgroundColor:_backgroundColor];
+    _cell.contentView.backgroundColor = _backgroundColor;
+    UIButton *_iconButton = (UIButton *) [_cell viewWithTag:1];
+    _iconButton.enabled = true;
+    
+    // customizing each cell according to its position
+    if (_cellRow == 0)
     {
-        [[NSBundle mainBundle] loadNibNamed:@"MenuOverviewTableCell" owner:self options:nil];
-        _cell = _menuOverviewTableCell;
-        self._menuOverviewTableCell = nil;
+        if (_cellTab == 0)
+        {
+            // time table
+            [_iconButton addTarget:self action:@selector(moveToTimeTable:event:) forControlEvents:UIControlEventTouchUpInside];
+            [_iconButton setImage:[UIImage imageNamed:AppIconTimeTable] forState:UIControlStateNormal];
+            [_iconButton setImage:[UIImage imageNamed:AppIconTimeTableFeedback] forState:UIControlStateSelected];
+            [_iconButton setImage:[UIImage imageNamed:AppIconTimeTableFeedback] forState:UIControlStateHighlighted];
+        }
+        if (_cellTab == 1)
+        {
+            // mensa
+            [_iconButton addTarget:self action:@selector(moveToMensa:event:) forControlEvents:UIControlEventTouchUpInside];
+            [_iconButton setImage:[UIImage imageNamed:AppIconMensa] forState:UIControlStateNormal];
+            [_iconButton setImage:[UIImage imageNamed:AppIconMensaFeedback] forState:UIControlStateSelected];
+            [_iconButton setImage:[UIImage imageNamed:AppIconMensaFeedback] forState:UIControlStateHighlighted];
+        }
+        if (_cellTab == 2)
+        {
+            //OeV
+            [_iconButton addTarget:self action:@selector(moveToOev:event:) forControlEvents:UIControlEventTouchUpInside];
+            [_iconButton setImage:[UIImage imageNamed:AppIconPublicTransport] forState:UIControlStateNormal];
+            [_iconButton setImage:[UIImage imageNamed:AppIconPublicTransportFeedback] forState:UIControlStateSelected];
+            [_iconButton setImage:[UIImage imageNamed:AppIconPublicTransportFeedback] forState:UIControlStateHighlighted];
+        }
     }
     
-    // put a line above each cell
-    UIImageView *line = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 320, 1)];
-    line.backgroundColor = _zhawColor._zhawWhite;
-    [_cell addSubview:line];    
-    
-    if (_cellSelection == 0)
+    if (_cellRow == 1)
     {
-        // time table
-        UIButton *_timeTableIconButton  = (UIButton *) [_cell viewWithTag:1];
-        _timeTableIconButton.enabled = true;
-        [_timeTableIconButton addTarget:self action:@selector(moveToTimeTable:event:) forControlEvents:UIControlEventTouchUpInside];
-        [_timeTableIconButton setImage:[UIImage imageNamed:AppIconTimeTable] forState:UIControlStateNormal];
-        [_timeTableIconButton setImage:[UIImage imageNamed:AppIconTimeTableFeedback] forState:UIControlStateSelected];
-        [_timeTableIconButton setImage:[UIImage imageNamed:AppIconTimeTableFeedback] forState:UIControlStateHighlighted];
-        
-        // mensa
-        UIButton *_mensaIconButton  = (UIButton *) [_cell viewWithTag:2];
-        _mensaIconButton.enabled = true;
-        [_mensaIconButton addTarget:self action:@selector(moveToMensa:event:) forControlEvents:UIControlEventTouchUpInside];
-        [_mensaIconButton setImage:[UIImage imageNamed:AppIconMensa] forState:UIControlStateNormal];
-        [_mensaIconButton setImage:[UIImage imageNamed:AppIconMensaFeedback] forState:UIControlStateSelected];
-        [_mensaIconButton setImage:[UIImage imageNamed:AppIconMensaFeedback] forState:UIControlStateHighlighted];
-        
-        //OeV
-        UIButton *_oevIconButton  = (UIButton *) [_cell viewWithTag:3];
-        _oevIconButton.enabled = true;
-        [_oevIconButton addTarget:self action:@selector(moveToOev:event:) forControlEvents:UIControlEventTouchUpInside];
-        [_oevIconButton setImage:[UIImage imageNamed:AppIconPublicTransport] forState:UIControlStateNormal];
-        [_oevIconButton setImage:[UIImage imageNamed:AppIconPublicTransportFeedback] forState:UIControlStateSelected];
-        [_oevIconButton setImage:[UIImage imageNamed:AppIconPublicTransportFeedback] forState:UIControlStateHighlighted];
-        
-        _cell.contentView.backgroundColor = _backgroundColor;
-        _cell.backgroundColor = _cell.contentView.backgroundColor;
-        _cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        if (_cellTab == 0)
+        {
+            // contact
+            [_iconButton addTarget:self action:@selector(moveToContacts:event:) forControlEvents:UIControlEventTouchUpInside];
+            [_iconButton setImage:[UIImage imageNamed:AppIconContacts] forState:UIControlStateNormal];
+            [_iconButton setImage:[UIImage imageNamed:AppIconContactsFeedback] forState:UIControlStateSelected];
+            [_iconButton setImage:[UIImage imageNamed:AppIconContactsFeedback] forState:UIControlStateHighlighted];
+        }
+        if (_cellTab == 1)
+        {
+            // card
+            [_iconButton addTarget:self action:@selector(moveToMaps:event:) forControlEvents:UIControlEventTouchUpInside];
+            [_iconButton setImage:[UIImage imageNamed:AppIconMaps] forState:UIControlStateNormal];
+            [_iconButton setImage:[UIImage imageNamed:AppIconMapsFeedback] forState:UIControlStateSelected];
+            [_iconButton setImage:[UIImage imageNamed:AppIconMapsFeedback] forState:UIControlStateHighlighted];
+        }
+        if (_cellTab == 2)
+        {
+            // social Media
+            [_iconButton addTarget:self action:@selector(moveToSocialMedia:event:) forControlEvents:UIControlEventTouchUpInside];
+            [_iconButton setImage:[UIImage imageNamed:AppIconSocialMedia] forState:UIControlStateNormal];
+            [_iconButton setImage:[UIImage imageNamed:AppIconSocialMediaFeedback] forState:UIControlStateSelected];
+            [_iconButton setImage:[UIImage imageNamed:AppIconSocialMediaFeedback] forState:UIControlStateHighlighted];
+        }
     }
     
-    if (_cellSelection == 1)
+    if (_cellRow == 2)
     {
-
-        // contact
-        UIButton *_contactsIconButton  = (UIButton *) [_cell viewWithTag:1];
-        _contactsIconButton.enabled = true;
-        [_contactsIconButton addTarget:self action:@selector(moveToContacts:event:) forControlEvents:UIControlEventTouchUpInside];
-        [_contactsIconButton setImage:[UIImage imageNamed:AppIconContacts] forState:UIControlStateNormal];
-        [_contactsIconButton setImage:[UIImage imageNamed:AppIconContactsFeedback] forState:UIControlStateSelected];
-        [_contactsIconButton setImage:[UIImage imageNamed:AppIconContactsFeedback] forState:UIControlStateHighlighted];
-
-        // card
-        UIButton *_cardIconButton  = (UIButton *) [_cell viewWithTag:2];
-        _cardIconButton.enabled = true;
-        [_cardIconButton addTarget:self action:@selector(moveToMaps:event:) forControlEvents:UIControlEventTouchUpInside];
-        [_cardIconButton setImage:[UIImage imageNamed:AppIconMaps] forState:UIControlStateNormal];
-        [_cardIconButton setImage:[UIImage imageNamed:AppIconMapsFeedback] forState:UIControlStateSelected];
-        [_cardIconButton setImage:[UIImage imageNamed:AppIconMapsFeedback] forState:UIControlStateHighlighted];
-
-        // social Media
-        UIButton *_socialMediaIconButton  = (UIButton *) [_cell viewWithTag:3];
-        _socialMediaIconButton.enabled = true;
-        [_socialMediaIconButton addTarget:self action:@selector(moveToSocialMedia:event:) forControlEvents:UIControlEventTouchUpInside];
-        [_socialMediaIconButton setImage:[UIImage imageNamed:AppIconSocialMedia] forState:UIControlStateNormal];
-        [_socialMediaIconButton setImage:[UIImage imageNamed:AppIconSocialMediaFeedback] forState:UIControlStateSelected];
-        [_socialMediaIconButton setImage:[UIImage imageNamed:AppIconSocialMediaFeedback] forState:UIControlStateHighlighted];
-        
-        _cell.contentView.backgroundColor = _backgroundColor;
-        _cell.backgroundColor = _cell.contentView.backgroundColor;
-        _cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        if (_cellTab == 0)
+        {
+            // settings
+            [_iconButton addTarget:self action:@selector(moveToSettings:event:) forControlEvents:UIControlEventTouchUpInside];
+            [_iconButton setImage:[UIImage imageNamed:AppIconSettings] forState:UIControlStateNormal];
+            [_iconButton setImage:[UIImage imageNamed:AppIconSettingsFeedback] forState:UIControlStateSelected];
+            [_iconButton setImage:[UIImage imageNamed:AppIconSettingsFeedback] forState:UIControlStateHighlighted];
+        }
+        if (_cellTab == 1)
+        {
+            // news
+            [_iconButton addTarget:self action:@selector(moveToNews:event:) forControlEvents:UIControlEventTouchUpInside];
+            [_iconButton setImage:[UIImage imageNamed:AppIconNews] forState:UIControlStateNormal];
+            [_iconButton setImage:[UIImage imageNamed:AppIconNewsFeedback] forState:UIControlStateSelected];
+            [_iconButton setImage:[UIImage imageNamed:AppIconNewsFeedback] forState:UIControlStateHighlighted];
+        }
+        if (_cellTab == 2)
+        {
+            // events
+            [_iconButton addTarget:self action:@selector(moveToEvents:event:) forControlEvents:UIControlEventTouchUpInside];
+            [_iconButton setImage:[UIImage imageNamed:AppIconEvents] forState:UIControlStateNormal];
+            [_iconButton setImage:[UIImage imageNamed:AppIconEventsFeedback] forState:UIControlStateSelected];
+            [_iconButton setImage:[UIImage imageNamed:AppIconEventsFeedback] forState:UIControlStateHighlighted];
+        }
     }
-    
-    if (_cellSelection == 2)
-    {
-        // settings
-        UIButton *_settingsIconButton  = (UIButton *) [_cell viewWithTag:1];
-        _settingsIconButton.enabled = true;
-        [_settingsIconButton addTarget:self action:@selector(moveToSettings:event:) forControlEvents:UIControlEventTouchUpInside];
-        [_settingsIconButton setImage:[UIImage imageNamed:AppIconSettings] forState:UIControlStateNormal];
-        [_settingsIconButton setImage:[UIImage imageNamed:AppIconSettingsFeedback] forState:UIControlStateSelected];
-        [_settingsIconButton setImage:[UIImage imageNamed:AppIconSettingsFeedback] forState:UIControlStateHighlighted];
-        
-        // news
-        UIButton *_newsIconButton  = (UIButton *) [_cell viewWithTag:2];
-        _newsIconButton.enabled = true;
-        [_newsIconButton addTarget:self action:@selector(moveToNews:event:) forControlEvents:UIControlEventTouchUpInside];
-        [_newsIconButton setImage:[UIImage imageNamed:AppIconNews] forState:UIControlStateNormal];
-        [_newsIconButton setImage:[UIImage imageNamed:AppIconNewsFeedback] forState:UIControlStateSelected];
-        [_newsIconButton setImage:[UIImage imageNamed:AppIconNewsFeedback] forState:UIControlStateHighlighted];
-        
-        // events
-        UIButton *_eventsIconButton  = (UIButton *) [_cell viewWithTag:3];
-        _eventsIconButton.enabled = true;
-        [_eventsIconButton addTarget:self action:@selector(moveToEvents:event:) forControlEvents:UIControlEventTouchUpInside];
-        [_eventsIconButton setImage:[UIImage imageNamed:AppIconEvents] forState:UIControlStateNormal];
-        [_eventsIconButton setImage:[UIImage imageNamed:AppIconEventsFeedback] forState:UIControlStateSelected];
-        [_eventsIconButton setImage:[UIImage imageNamed:AppIconEventsFeedback] forState:UIControlStateHighlighted];
-        
-        _cell.contentView.backgroundColor = _backgroundColor;
-        _cell.backgroundColor = _cell.contentView.backgroundColor;
-        _cell.selectionStyle = UITableViewCellSelectionStyleNone;
-    }
-    
-    //NSLog(@"_cellSelection: %i", _cellSelection);
     return _cell;
 }
+
+
+
+
+
 
 
 @end
