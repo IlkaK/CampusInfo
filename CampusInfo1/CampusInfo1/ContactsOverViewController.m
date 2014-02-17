@@ -78,9 +78,10 @@
     _zhawColor = [[ColorSelection alloc]init];
     
     // title
-    UIBarButtonItem *backButtonItem = [[UIBarButtonItem alloc] initWithTitle:LeftArrowSymbol style:UIBarButtonItemStylePlain target:self action:@selector(moveBackToMenuOverview:)];
+    UIBarButtonItem *backButtonItem = [[UIBarButtonItem alloc] initWithTitle:LeftArrowSymbol style:UIBarButtonItemStyleBordered target:self action:@selector(moveBackToMenuOverview:)];
     
-    [backButtonItem setTintColor:_zhawColor._zhawOriginalBlue];
+    [backButtonItem setTitleTextAttributes:@{NSForegroundColorAttributeName:_zhawColor._zhawWhite} forState:UIControlStateNormal];
+
     [_titleNavigationItem setLeftBarButtonItem :backButtonItem animated :true];
     
     [_titleNavigationLabel setTextColor:_zhawColor._zhawWhite];
@@ -88,8 +89,11 @@
     _titleNavigationItem.title = @"";
     
     [_titleNavigationLabel setTextAlignment:NSTextAlignmentCenter];
-    [_titleNavigationBar setTintColor:_zhawColor._zhawDarkerBlue];
+    [_titleNavigationBar setTintColor:_zhawColor._zhawOriginalBlue];
     
+    _titleNavigationBar.barStyle = UIBarStyleBlackTranslucent;
+    
+    [[UINavigationBar appearance] setBarTintColor: _zhawColor._zhawOriginalBlue];
     
     // set view controllers
     if (_contactsVC == nil)
