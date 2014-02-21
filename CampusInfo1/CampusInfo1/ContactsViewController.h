@@ -52,8 +52,6 @@
     IBOutlet UINavigationBar    *_titleNavigationBar;
     /*! @var _titleNavigationItem Used as navigation item for title */
     IBOutlet UINavigationItem   *_titleNavigationItem;
-    /*! @var _titleNavigationLabel Shows the title */
-    IBOutlet UILabel            *_titleNavigationLabel;
 
     /*! @var _zhawColor Holds all color schemes needed */
     ColorSelection              *_zhawColor;
@@ -68,7 +66,6 @@
 
 @property (nonatomic, retain) IBOutlet UINavigationBar      *_titleNavigationBar;
 @property (nonatomic, retain) IBOutlet UINavigationItem     *_titleNavigationItem;
-@property (nonatomic, retain) IBOutlet UILabel              *_titleNavigationLabel;
 
 @property (nonatomic, retain) ColorSelection                *_zhawColor;
 

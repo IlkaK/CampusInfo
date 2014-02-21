@@ -26,6 +26,13 @@
 extern NSString * const LeftArrowSymbol;
 extern NSString * const RightArrowSymbol;
 
+// background for navigation bars
+extern NSString * const NavigationBarBackground;
+// title for navigation bars
+extern NSString * const NavigationBarFont;
+extern float const NavigationBarTitleSize;
+
+
 // strings for maps/standorte
 extern NSString * const MapsVCTitle    ;
 extern NSString * const MapsVCTechnikum;

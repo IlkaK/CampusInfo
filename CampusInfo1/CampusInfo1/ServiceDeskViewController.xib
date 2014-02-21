@@ -9,7 +9,6 @@
             <connections>
                 <outlet property="_titleNavigationBar" destination="6" id="47"/>
                 <outlet property="_titleNavigationItem" destination="7" id="48"/>
-                <outlet property="_titleNavigationLabel" destination="5" id="49"/>
                 <outlet property="view" destination="1" id="3"/>
             </connections>
         </placeholder>
@@ -25,14 +24,7 @@
                         <navigationItem id="7" userLabel="TitleNavigationItem"/>
                     </items>
                 </navigationBar>
-                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5" userLabel="TitleLabel">
-                    <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                    <nil key="highlightedColor"/>
-                </label>
-                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" translatesAutoresizingMaskIntoConstraints="NO" id="38">
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" bounces="NO" alwaysBounceVertical="YES" scrollEnabled="NO" style="grouped" separatorStyle="default" allowsSelection="NO" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" translatesAutoresizingMaskIntoConstraints="NO" id="38">
                     <rect key="frame" x="0.0" y="44" width="320" height="471"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                     <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
@@ -50,13 +42,9 @@
                 <constraint firstItem="6" firstAttribute="trailing" secondItem="1" secondAttribute="trailing" id="11"/>
                 <constraint firstItem="6" firstAttribute="leading" secondItem="1" secondAttribute="leading" id="15"/>
                 <constraint firstItem="6" firstAttribute="top" secondItem="1" secondAttribute="top" id="19"/>
-                <constraint firstItem="5" firstAttribute="trailing" secondItem="1" secondAttribute="trailing" id="23"/>
-                <constraint firstItem="5" firstAttribute="bottom" secondItem="6" secondAttribute="bottom" id="24"/>
-                <constraint firstItem="5" firstAttribute="top" secondItem="1" secondAttribute="top" id="25"/>
                 <constraint firstItem="38" firstAttribute="leading" secondItem="1" secondAttribute="leading" id="39"/>
                 <constraint firstItem="38" firstAttribute="top" secondItem="6" secondAttribute="bottom" id="40"/>
                 <constraint firstItem="38" firstAttribute="trailing" secondItem="1" secondAttribute="trailing" id="43"/>
-                <constraint firstItem="5" firstAttribute="leading" secondItem="1" secondAttribute="leading" id="50"/>
             </constraints>
             <simulatedStatusBarMetrics key="simulatedStatusBarMetrics"/>
             <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>

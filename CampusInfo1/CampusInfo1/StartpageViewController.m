@@ -35,6 +35,11 @@
     return self;
 }
 
+-(BOOL) prefersStatusBarHidden
+{
+    return YES;
+}
+
 /*!
  * @function viewDidLoad
  * The function is included, since class inherits from UIViewController.

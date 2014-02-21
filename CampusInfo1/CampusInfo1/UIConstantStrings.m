@@ -24,8 +24,14 @@
 
 // arrows for navigation bars and back buttons
 NSString * const LeftArrowSymbol  = @"\U000025C0\U0000FE0E";
+//NSString * const LeftArrowSymbol  = @"\U000025C1\U0000FE0E";
 NSString * const RightArrowSymbol = @"\U000025B6\U0000FE0E";
 
+// background for navigation bars
+NSString * const NavigationBarBackground = @"NavigationBarBackground.png";
+// title for navigation bars
+NSString * const NavigationBarFont = @"HelveticaNeue";
+float const NavigationBarTitleSize = 17.0;
 
 // strings for maps/standorte
 NSString * const MapsVCTitle        = @"Standorte";

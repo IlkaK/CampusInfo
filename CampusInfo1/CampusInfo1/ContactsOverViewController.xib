@@ -14,7 +14,6 @@
                 <outlet property="_serviceDeskVC" destination="114" id="115"/>
                 <outlet property="_titleNavigationBar" destination="86" id="109"/>
                 <outlet property="_titleNavigationItem" destination="90" id="110"/>
-                <outlet property="_titleNavigationLabel" destination="88" id="111"/>
                 <outlet property="view" destination="1" id="3"/>
             </connections>
         </placeholder>
@@ -23,20 +22,13 @@
             <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="86" userLabel="TitleNavigationBar">
+                <navigationBar contentMode="scaleToFill" translucent="NO" translatesAutoresizingMaskIntoConstraints="NO" id="86" userLabel="TitleNavigationBar">
                     <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                     <items>
                         <navigationItem id="90" userLabel="TitleNavigationItem"/>
                     </items>
                 </navigationBar>
-                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="88" userLabel="TitleLabel">
-                    <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                    <nil key="highlightedColor"/>
-                </label>
                 <tableView clipsSubviews="YES" contentMode="scaleToFill" bounces="NO" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" bouncesZoom="NO" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" translatesAutoresizingMaskIntoConstraints="NO" id="57" userLabel="MenuTableView">
                     <rect key="frame" x="0.0" y="44" width="320" height="428"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -57,10 +49,6 @@
                 <constraint firstItem="86" firstAttribute="trailing" secondItem="1" secondAttribute="trailing" id="91"/>
                 <constraint firstItem="86" firstAttribute="leading" secondItem="1" secondAttribute="leading" id="93"/>
                 <constraint firstItem="86" firstAttribute="top" secondItem="1" secondAttribute="top" id="99"/>
-                <constraint firstItem="88" firstAttribute="trailing" secondItem="1" secondAttribute="trailing" id="105"/>
-                <constraint firstItem="88" firstAttribute="bottom" secondItem="86" secondAttribute="bottom" id="106"/>
-                <constraint firstItem="88" firstAttribute="top" secondItem="1" secondAttribute="top" id="107"/>
-                <constraint firstItem="88" firstAttribute="leading" secondItem="1" secondAttribute="leading" id="116"/>
                 <constraint firstItem="57" firstAttribute="top" secondItem="86" secondAttribute="bottom" id="121"/>
             </constraints>
             <simulatedStatusBarMetrics key="simulatedStatusBarMetrics"/>

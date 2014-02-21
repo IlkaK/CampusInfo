@@ -48,7 +48,6 @@
 
 @synthesize _titleNavigationBar;
 @synthesize _titleNavigationItem;
-@synthesize _titleNavigationLabel;
 
 @synthesize _zhawColor;
 
@@ -60,6 +59,15 @@
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     return self;
+}
+
+/*!
+ * @function prefersStatusBarHidden
+ * Used to hide the iOS status bar with time and battery symbol.
+ */
+-(BOOL) prefersStatusBarHidden
+{
+    return YES;
 }
 
 /*!
@@ -75,17 +83,17 @@
     _zhawColor = [[ColorSelection alloc]init];
     _emergencyCallNumber = @"";
     
-    UIBarButtonItem *backButtonItem = [[UIBarButtonItem alloc] initWithTitle:LeftArrowSymbol style:UIBarButtonItemStylePlain target:self action:@selector(moveBackToContactsOverview:)];
-    
-    [backButtonItem setTintColor:_zhawColor._zhawOriginalBlue];
-    [_titleNavigationItem setLeftBarButtonItem :backButtonItem animated :true];
-    
-    [_titleNavigationLabel setTextColor:_zhawColor._zhawWhite];
-    _titleNavigationLabel.text = EmergencyVCTitle;
-    _titleNavigationItem.title = @"";
-    
-    [_titleNavigationLabel setTextAlignment:NSTextAlignmentCenter];
-    [_titleNavigationBar setTintColor:_zhawColor._zhawDarkerBlue];
+    // title
+    UIBarButtonItem *_backButtonItem = [[UIBarButtonItem alloc] initWithTitle:LeftArrowSymbol style:UIBarButtonItemStyleBordered target:self action:@selector(moveBackToContactsOverview:)];
+    [_backButtonItem setTitleTextAttributes:@{NSForegroundColorAttributeName:_zhawColor._zhawWhite} forState:UIControlStateNormal];
+    [_titleNavigationItem setLeftBarButtonItem :_backButtonItem animated :true];
+    [_titleNavigationItem setTitle:EmergencyVCTitle];
+    [[UINavigationBar appearance] setTitleTextAttributes:@{
+                                                           UITextAttributeTextColor: _zhawColor._zhawWhite,
+                                                           UITextAttributeFont: [UIFont fontWithName:NavigationBarFont size:NavigationBarTitleSize],
+                                                           }];
+    [[UINavigationBar appearance] setBackgroundImage:[UIImage imageNamed:NavigationBarBackground] forBarMetrics:UIBarMetricsDefault];
+
 }
 
 /*!
@@ -196,7 +204,6 @@
     _emergencyInformTableCell = nil;
     _titleNavigationBar = nil;
     _titleNavigationItem = nil;
-    _titleNavigationLabel = nil;
     [super viewDidUnload];
 }
 

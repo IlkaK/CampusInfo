@@ -37,12 +37,10 @@
 
 @interface InformationViewController : UIViewController
 {
-    /*! @var _titleNavigationBar Used as background for title */
+    /*! @var _titleNavigationBar Shows the title */
     IBOutlet UINavigationBar    *_titleNavigationBar;
     /*! @var _titleNavigationItem Used as navigation item for title */
     IBOutlet UINavigationItem   *_titleNavigationItem;
-    /*! @var _titleNavigationLabel Shows the title */
-    IBOutlet UILabel            *_titleNavigationLabel;
 
     /*! @var _informationResponsibleTableCell Handles cell, which displays the responsible information */
     IBOutlet UITableViewCell    *_informationResponsibleTableCell;
@@ -55,12 +53,11 @@
     NSString                        *_currentPhoneNumber;
     
     /*! @var _zhawColor Holds all color schemes needed */
-    ColorSelection                  *_zhawColors;
+    ColorSelection                  *_zhawColor;
 }
 
 @property (nonatomic, retain) IBOutlet UINavigationBar              *_titleNavigationBar;
 @property (nonatomic, retain) IBOutlet UINavigationItem             *_titleNavigationItem;
-@property (nonatomic, retain) IBOutlet UILabel                      *_titleNavigationLabel;
 
 @property (nonatomic, retain) IBOutlet UITableViewCell              *_informationResponsibleTableCell;
 @property (nonatomic, retain) IBOutlet UITableViewCell              *_informationContactTableCell;
@@ -68,7 +65,7 @@
 @property (nonatomic, retain) NSString                              *_currentEmail;
 @property (nonatomic, retain) NSString                              *_currentPhoneNumber;
 
-@property (nonatomic, retain) ColorSelection                        *_zhawColors;
+@property (nonatomic, retain) ColorSelection                        *_zhawColor;
 
 
 @end

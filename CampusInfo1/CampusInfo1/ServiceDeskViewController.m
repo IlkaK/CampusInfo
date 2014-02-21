@@ -44,14 +44,13 @@
 
 @synthesize _titleNavigationBar;
 @synthesize _titleNavigationItem;
-@synthesize _titleNavigationLabel;
 
 @synthesize _currentEmail;
 @synthesize _currentPhoneNumber;
 
 @synthesize _serviceDeskTableCell;
 
-@synthesize _zhawColors;
+@synthesize _zhawColor;
 
 /*!
  * @function initWithNibName
@@ -61,6 +60,15 @@
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     return self;
+}
+
+/*!
+* @function prefersStatusBarHidden
+* Used to hide the iOS status bar with time and battery symbol.
+*/
+-(BOOL) prefersStatusBarHidden
+{
+    return YES;
 }
 
 /*!
@@ -74,20 +82,18 @@
     [super viewDidLoad];
     
     // general initialization
-    _zhawColors = [[ColorSelection alloc]init];
+    _zhawColor = [[ColorSelection alloc]init];
     
     // title
-    UIBarButtonItem *backButtonItem = [[UIBarButtonItem alloc] initWithTitle:LeftArrowSymbol style:UIBarButtonItemStylePlain target:self action:@selector(moveBackToContactsOverview:)];
-    
-    [backButtonItem setTintColor:_zhawColors._zhawOriginalBlue];
-    [_titleNavigationItem setLeftBarButtonItem :backButtonItem animated :true];
-    
-    [_titleNavigationLabel setTextColor:_zhawColors._zhawWhite];
-    _titleNavigationLabel.text = ServiceDeskVCTitle;
-    _titleNavigationItem.title = @"";
-    
-    [_titleNavigationLabel setTextAlignment:NSTextAlignmentCenter];
-    [_titleNavigationBar setTintColor:_zhawColors._zhawDarkerBlue];
+    UIBarButtonItem *_backButtonItem = [[UIBarButtonItem alloc] initWithTitle:LeftArrowSymbol style:UIBarButtonItemStyleBordered target:self action:@selector(moveBackToContactsOverview:)];
+    [_backButtonItem setTitleTextAttributes:@{NSForegroundColorAttributeName:_zhawColor._zhawWhite} forState:UIControlStateNormal];
+    [_titleNavigationItem setLeftBarButtonItem :_backButtonItem animated :true];
+    [_titleNavigationItem setTitle:ServiceDeskVCTitle];
+    [[UINavigationBar appearance] setTitleTextAttributes:@{
+                                                           UITextAttributeTextColor: _zhawColor._zhawWhite,
+                                                           UITextAttributeFont: [UIFont fontWithName:NavigationBarFont size:NavigationBarTitleSize],
+                                                           }];
+    [[UINavigationBar appearance] setBackgroundImage:[UIImage imageNamed:NavigationBarBackground] forBarMetrics:UIBarMetricsDefault];
 }
 
 /*!
@@ -108,7 +114,6 @@
 - (void)viewDidUnload {
     _titleNavigationBar = nil;
     _titleNavigationItem = nil;
-    _titleNavigationLabel = nil;
     _serviceDeskTableCell = nil;
     [super viewDidUnload];
 }
@@ -240,7 +245,7 @@
     UIButton        *_actionButton   = (UIButton *) [_cell viewWithTag:2];
     NSString        *_buttonNumberTitle;
     
-    [_labelTitle setTextColor:_zhawColors._zhawFontGrey];
+    [_labelTitle setTextColor:_zhawColor._zhawFontGrey];
     
     if (_cellRow == 0)
     {
@@ -258,7 +263,7 @@
     _actionButton.enabled = true;
     NSMutableAttributedString *_titleString = [[NSMutableAttributedString alloc] initWithString:_buttonNumberTitle];
     [_titleString addAttribute:NSUnderlineStyleAttributeName value:[NSNumber numberWithInteger:NSUnderlineStyleSingle] range:NSMakeRange(0, [_titleString length])];
-    [_titleString addAttribute:NSForegroundColorAttributeName value:_zhawColors._zhawFontGrey range:NSMakeRange(0, [_titleString length])];
+    [_titleString addAttribute:NSForegroundColorAttributeName value:_zhawColor._zhawFontGrey range:NSMakeRange(0, [_titleString length])];
     
     [_actionButton setAttributedTitle:_titleString forState:UIControlStateNormal];
     

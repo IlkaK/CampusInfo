@@ -50,7 +50,6 @@
 
 @synthesize _titleNavigationBar;
 @synthesize _titleNavigationItem;
-@synthesize _titleNavigationLabel;
 
 @synthesize _zhawColor;
 
@@ -62,6 +61,15 @@
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     return self;
+}
+
+/*!
+ * @function prefersStatusBarHidden
+ * Used to hide the iOS status bar with time and battery symbol.
+ */
+-(BOOL) prefersStatusBarHidden
+{
+    return YES;
 }
 
 /*!
@@ -78,22 +86,15 @@
     _zhawColor = [[ColorSelection alloc]init];
     
     // title
-    UIBarButtonItem *backButtonItem = [[UIBarButtonItem alloc] initWithTitle:LeftArrowSymbol style:UIBarButtonItemStyleBordered target:self action:@selector(moveBackToMenuOverview:)];
-    
-    [backButtonItem setTitleTextAttributes:@{NSForegroundColorAttributeName:_zhawColor._zhawWhite} forState:UIControlStateNormal];
-
-    [_titleNavigationItem setLeftBarButtonItem :backButtonItem animated :true];
-    
-    [_titleNavigationLabel setTextColor:_zhawColor._zhawWhite];
-    _titleNavigationLabel.text = ContactsOverVCTitle;
-    _titleNavigationItem.title = @"";
-    
-    [_titleNavigationLabel setTextAlignment:NSTextAlignmentCenter];
-    [_titleNavigationBar setTintColor:_zhawColor._zhawOriginalBlue];
-    
-    _titleNavigationBar.barStyle = UIBarStyleBlackTranslucent;
-    
-    [[UINavigationBar appearance] setBarTintColor: _zhawColor._zhawOriginalBlue];
+    UIBarButtonItem *_backButtonItem = [[UIBarButtonItem alloc] initWithTitle:LeftArrowSymbol style:UIBarButtonItemStyleBordered target:self action:@selector(moveBackToMenuOverview:)];
+    [_backButtonItem setTitleTextAttributes:@{NSForegroundColorAttributeName:_zhawColor._zhawWhite} forState:UIControlStateNormal];
+    [_titleNavigationItem setLeftBarButtonItem :_backButtonItem animated :true];
+    [_titleNavigationItem setTitle:ContactsOverVCTitle];
+    [[UINavigationBar appearance] setTitleTextAttributes:@{
+                                                           UITextAttributeTextColor: _zhawColor._zhawWhite,
+                                                           UITextAttributeFont: [UIFont fontWithName:NavigationBarFont size:NavigationBarTitleSize],
+                                                           }];
+    [[UINavigationBar appearance] setBackgroundImage:[UIImage imageNamed:NavigationBarBackground] forBarMetrics:UIBarMetricsDefault];
     
     // set view controllers
     if (_contactsVC == nil)
@@ -121,6 +122,24 @@
     _informationVC.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
 }
 
+
+/*!
+ * @function viewWillAppear
+ * The function is included, since class inherits from UIViewController.
+ * It is called every time the view is called again.
+ * Here the selected table cell is descelected again.
+ */
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    for (NSIndexPath *indexPath in _menuTableView.indexPathsForSelectedRows)
+    {
+        [_menuTableView deselectRowAtIndexPath:indexPath animated:NO];
+    }
+}
+
+
+
 /*!
  * @function didReceiveMemoryWarning
  * The function is included per default.
@@ -143,7 +162,6 @@
     _menuTableCell = nil;
     _titleNavigationBar = nil;
     _titleNavigationItem = nil;
-    _titleNavigationLabel = nil;
     _serviceDeskVC = nil;
     _informationVC = nil;
     [super viewDidUnload];
