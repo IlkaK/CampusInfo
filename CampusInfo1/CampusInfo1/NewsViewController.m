@@ -46,6 +46,9 @@
 
 @synthesize _newsTable;
 @synthesize _newsTableCell;
+@synthesize _newsSmallTableCell;
+@synthesize _newsNormalTableCell;
+@synthesize _newsLargeTableCell;
 
 @synthesize _dateFormatter;
 @synthesize _zhawColor;
@@ -57,7 +60,6 @@
 @synthesize _noConnectionLabel;
 
 @synthesize _titleNavigationBar;
-@synthesize _titleNavigationLabel;
 @synthesize _titleNavigationItem;
 
 @synthesize _waitForLoadingActivityIndicator;
@@ -70,6 +72,15 @@
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     return self;
+}
+
+/*!
+ * @function prefersStatusBarHidden
+ * Used to hide the iOS status bar with time and battery symbol.
+ */
+-(BOOL) prefersStatusBarHidden
+{
+    return YES;
 }
 
 /*!
@@ -89,31 +100,34 @@
     _zhawColor     = [[ColorSelection alloc]init];
 
     self._actualTrials = 1;
-
+    
     // title
-    UIBarButtonItem *backButtonItem = [[UIBarButtonItem alloc] initWithTitle:LeftArrowSymbol style:UIBarButtonItemStylePlain target:self action:@selector(moveBackToMenuOverview:)];
-    
-    [backButtonItem setTintColor:_zhawColor._zhawOriginalBlue];
-    [_titleNavigationItem setLeftBarButtonItem :backButtonItem animated :true];
-    
-    [_titleNavigationLabel setTextColor:_zhawColor._zhawWhite];
-    _titleNavigationLabel.text = NewsVCTitle;
-    _titleNavigationItem.title = @"";
-    
-    [_titleNavigationBar setTintColor:_zhawColor._zhawDarkerBlue];
-    [_titleNavigationLabel setTextAlignment:UITextAlignmentCenter];
+    UIBarButtonItem *_backButtonItem = [[UIBarButtonItem alloc] initWithTitle:LeftArrowSymbol style:UIBarButtonItemStyleBordered target:self action:@selector(moveBackToMenuOverview:)];
+    [_backButtonItem setTitleTextAttributes:@{NSForegroundColorAttributeName:_zhawColor._zhawWhite} forState:UIControlStateNormal];
+    [_titleNavigationItem setLeftBarButtonItem :_backButtonItem animated :true];
+    [_titleNavigationItem setTitle:NewsVCTitle];
+    [[UINavigationBar appearance] setTitleTextAttributes:@{
+                                                           UITextAttributeTextColor: _zhawColor._zhawWhite,
+                                                           UITextAttributeFont: [UIFont fontWithName:NavigationBarFont size:NavigationBarTitleSize],
+                                                           }];
+    [[UINavigationBar appearance] setBackgroundImage:[UIImage imageNamed:NavigationBarBackground] forBarMetrics:UIBarMetricsDefault];
+
     
     // set no connection button and label
     _noConnectionButton.hidden = YES;
     _noConnectionLabel.hidden = YES;
     [_noConnectionButton useAlertStyle];
     [_noConnectionLabel setTextColor:_zhawColor._zhawFontGrey];
+    [_noConnectionLabel setBackgroundColor:_zhawColor._zhawWhite];
+    [self.view bringSubviewToFront:_noConnectionButton];
+    [self.view bringSubviewToFront:_noConnectionLabel];
     
     // set activity indicator
     _waitForLoadingActivityIndicator.hidesWhenStopped = YES;
     _waitForLoadingActivityIndicator.hidden = YES;
     [_waitForLoadingActivityIndicator setColor:_zhawColor._zhawOriginalBlue];
     [self.view bringSubviewToFront:_waitForLoadingActivityIndicator];
+
     
     // ----- DETAIL PAGE -----
     if (_newsDetailVC == nil)
@@ -202,12 +216,14 @@
 - (void)viewDidUnload {
     _newsTable = nil;
     _newsTableCell = nil;
+    _newsSmallTableCell = nil;
+    _newsNormalTableCell = nil;
+    _newsLargeTableCell = nil;
     _newsDetailVC = nil;
     _noConnectionButton = nil;
     _noConnectionLabel = nil;
     _titleNavigationBar = nil;
     _titleNavigationItem = nil;
-    _titleNavigationLabel = nil;
     _waitForLoadingActivityIndicator = nil;
     [super viewDidUnload];
 }
@@ -330,27 +346,6 @@
     NSString         *_cellIdentifier;
     UITableViewCell  *_cell = nil;
     
-    
-    _cellIdentifier  = @"NewsTableCell";
-    _cell            = [tableView dequeueReusableCellWithIdentifier:_cellIdentifier];
-    
-    if (_cell == nil)
-    {
-         [[NSBundle mainBundle] loadNibNamed:@"NewsTableCell" owner:self options:nil];
-         _cell = _newsTableCell;
-         self._newsTableCell = nil;
-    }
-    
-    UILabel *_oneTitleLabel     = (UILabel *) [_cell viewWithTag:1];
-    UILabel *_dateLabel         = (UILabel *) [_cell viewWithTag:2];
-    UILabel *_descriptionLabel  = (UILabel *) [_cell viewWithTag:3];
-    UIButton *_detailButton     = (UIButton *)[_cell viewWithTag:4];
-    _detailButton.hidden        = YES;
-    
-    [_oneTitleLabel     setTextColor:_zhawColor._zhawOriginalBlue];
-    [_dateLabel         setTextColor:_zhawColor._zhawLightGrey];
-    [_descriptionLabel  setTextColor:_zhawColor._zhawFontGrey];
-    
     if([_newsChannel._newsItemArray count] > 0)
     {
         //NSLog(@"item array count: %i >= _cellSelection: %i", [_newsChannel._newsItemArray count], _cellSelection);
@@ -362,14 +357,61 @@
         {
             NewsItemDto *_newsItem = [_newsChannel._newsItemArray objectAtIndex:_cellSelection];
             
-            //NSLog(@"_newsItem._title: %@ - _cellSelection: %i", _newsItem._title, _cellSelection);
+            if ([_newsItem._description length] <= 100)
+            {
+                _cellIdentifier  = @"NewsSmallTableCell";
+                _cell            = [tableView dequeueReusableCellWithIdentifier:_cellIdentifier];
+                
+                if (_cell == nil)
+                {
+                    [[NSBundle mainBundle] loadNibNamed:@"NewsSmallTableCell" owner:self options:nil];
+                    _cell = _newsSmallTableCell;
+                    self._newsSmallTableCell = nil;
+                }
+            }
+            else
+            {
+                if ([_newsItem._description length] >= 200)
+                {
+                    _cellIdentifier  = @"NewsLargeTableCell";
+                    _cell            = [tableView dequeueReusableCellWithIdentifier:_cellIdentifier];
+                    
+                    if (_cell == nil)
+                    {
+                        [[NSBundle mainBundle] loadNibNamed:@"NewsLargeTableCell" owner:self options:nil];
+                        _cell = _newsLargeTableCell;
+                        self._newsLargeTableCell = nil;
+                    }
+                }
+                else
+                {
+                    _cellIdentifier  = @"NewsNormalTableCell";
+                    _cell            = [tableView dequeueReusableCellWithIdentifier:_cellIdentifier];
+                    
+                    if (_cell == nil)
+                    {
+                        [[NSBundle mainBundle] loadNibNamed:@"NewsNormalTableCell" owner:self options:nil];
+                        _cell = _newsNormalTableCell;
+                        self._newsNormalTableCell = nil;
+                    }
+                }
+            }
             
+    
+            UILabel *_oneTitleLabel     = (UILabel *) [_cell viewWithTag:1];
+            UILabel *_dateLabel         = (UILabel *) [_cell viewWithTag:2];
+            UILabel *_descriptionLabel  = (UILabel *) [_cell viewWithTag:3];
+            UIButton *_detailButton     = (UIButton *)[_cell viewWithTag:4];
+            _detailButton.hidden        = YES;
+    
+            [_oneTitleLabel     setTextColor:_zhawColor._zhawOriginalBlue];
+            [_dateLabel         setTextColor:_zhawColor._zhawLightGrey];
+            [_descriptionLabel  setTextColor:_zhawColor._zhawFontGrey];
+    
             _oneTitleLabel.text     = _newsItem._title;
             _dateLabel.text         = [NSString stringWithFormat:@"%@"
                                        ,[[_dateFormatter _dayFormatter] stringFromDate:_newsItem._pubDate]];
             _descriptionLabel.text  = _newsItem._description;
-    
-
         
             [_detailButton addTarget:self action:@selector(showNewsDetails  :event:) forControlEvents:UIControlEventTouchUpInside];
             _detailButton.hidden    = NO;
@@ -385,7 +427,34 @@
  */
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return 126;
+    NSUInteger        _cellSelection = indexPath.section;
+    CGFloat           _finalHeight = 126;;
+    
+    if([_newsChannel._newsItemArray count] > 0)
+    {
+        //NSLog(@"item array count: %i >= _cellSelection: %i", [_newsChannel._newsItemArray count], _cellSelection);
+        
+        // might need to delay indexing the objects within array too early
+        int newsItemArrayCount = [_newsChannel._newsItemArray count];
+        
+        if (newsItemArrayCount >= _cellSelection)
+        {
+            NewsItemDto *_newsItem = [_newsChannel._newsItemArray objectAtIndex:_cellSelection];
+            
+            if ([_newsItem._description length] <= 100)
+            {
+                _finalHeight = 90;
+            }
+            else
+            {
+                if ([_newsItem._description length] >= 200)
+                {
+                    _finalHeight = 160;
+                }
+            }
+        }
+    }
+    return _finalHeight;
 }
 
 /*!

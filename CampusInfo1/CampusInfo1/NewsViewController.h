@@ -54,6 +54,11 @@
     /*! @var _newsTableCell Handles cell, which displays the solo news */
     IBOutlet UITableViewCell            *_newsTableCell;
     
+    IBOutlet UITableViewCell *_newsSmallTableCell;
+    IBOutlet UITableViewCell *_newsNormalTableCell;
+    IBOutlet UITableViewCell *_newsLargeTableCell;
+    
+    
     /*! @var _dateFormatter Class which provides methods to format date from NSString to NSDate or the other way around */
     DateFormation                       *_dateFormatter;
     
@@ -70,12 +75,10 @@
     /*! @var _noConnectionLabel If there is no connection to server, the label is displayed to inform the user */
     IBOutlet UILabel                    *_noConnectionLabel;
     
-    /*! @var _titleNavigationBar Used as background for title */
+    /*! @var _titleNavigationBar Shows the title */
     IBOutlet UINavigationBar            *_titleNavigationBar;
     /*! @var _titleNavigationItem Used as navigation item for title */
     IBOutlet UINavigationItem           *_titleNavigationItem;
-    /*! @var _titleNavigationLabel Shows the title */
-    IBOutlet UILabel                    *_titleNavigationLabel;
     
     /*! @var _waitForLoadingActivityIndicator Waiting indicator to show the user something is loading */
     IBOutlet UIActivityIndicatorView    *_waitForLoadingActivityIndicator;
@@ -85,10 +88,13 @@
 
 @property (nonatomic, retain) IBOutlet UINavigationBar              *_titleNavigationBar;
 @property (nonatomic, retain) IBOutlet UINavigationItem             *_titleNavigationItem;
-@property (nonatomic, retain) IBOutlet UILabel                      *_titleNavigationLabel;
 
 @property (nonatomic, retain) IBOutlet UITableView                  *_newsTable;
 @property (nonatomic, retain) IBOutlet UITableViewCell              *_newsTableCell;
+
+@property (nonatomic, retain) IBOutlet UITableViewCell              *_newsSmallTableCell;
+@property (nonatomic, retain) IBOutlet UITableViewCell              *_newsNormalTableCell;
+@property (nonatomic, retain) IBOutlet UITableViewCell              *_newsLargeTableCell;
 
 @property (nonatomic, retain) DateFormation                         *_dateFormatter;
 @property (nonatomic, retain) ColorSelection                        *_zhawColor;

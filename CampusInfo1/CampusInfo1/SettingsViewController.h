@@ -64,12 +64,10 @@
     /*! @var _lecturers Handling the connection to class LecturersDto, which is used to get all lecturer acronyms */
     LecturersDto                            *_lecturers;
     
-    /*! @var _titleNavigationBar Used as background for the title in the view */
+    /*! @var _titleNavigationBar Shows the title in the view */
     IBOutlet UINavigationBar                *_titleNavigationBar;
     /*! @var _titleNavigationItem Used to show the back button to return to MenuOverviewController or TimeTableOverviewController */
     IBOutlet UINavigationItem               *_titleNavigationItem;
-    /*! @var _titleNavigationLabel Shows the title of the view */
-    IBOutlet UILabel                        *_titleNavigationLabel;
     
     /*! @var _zhawColor Holds all color schemes needed */
     ColorSelection                          *_zhawColor;
@@ -88,7 +86,6 @@
 
 @property (nonatomic, retain) IBOutlet UINavigationBar              *_titleNavigationBar;
 @property (nonatomic, retain) IBOutlet UINavigationItem             *_titleNavigationItem;
-@property (nonatomic, retain) IBOutlet UILabel                      *_titleNavigationLabel;
 
 @property (nonatomic, retain) ColorSelection                        *_zhawColor;
 

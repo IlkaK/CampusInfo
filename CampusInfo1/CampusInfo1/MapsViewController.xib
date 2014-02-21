@@ -11,7 +11,6 @@
                 <outlet property="_technikumVC" destination="7" id="55"/>
                 <outlet property="_titleNavigationBar" destination="106" id="128"/>
                 <outlet property="_titleNavigationItem" destination="110" id="129"/>
-                <outlet property="_titleNavigationLabel" destination="108" id="130"/>
                 <outlet property="view" destination="1" id="3"/>
             </connections>
         </placeholder>
@@ -27,13 +26,6 @@
                         <navigationItem id="110" userLabel="TitleNavigationItem"/>
                     </items>
                 </navigationBar>
-                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="108" userLabel="TitleLabel">
-                    <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                    <nil key="highlightedColor"/>
-                </label>
                 <tableView clipsSubviews="YES" contentMode="scaleToFill" bounces="NO" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" bouncesZoom="NO" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" translatesAutoresizingMaskIntoConstraints="NO" id="71" userLabel="MenuTableView">
                     <rect key="frame" x="0.0" y="44" width="320" height="428"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -54,10 +46,6 @@
                 <constraint firstItem="106" firstAttribute="leading" secondItem="1" secondAttribute="leading" id="112"/>
                 <constraint firstItem="106" firstAttribute="trailing" secondItem="1" secondAttribute="trailing" id="117"/>
                 <constraint firstItem="106" firstAttribute="top" secondItem="1" secondAttribute="top" id="119"/>
-                <constraint firstItem="108" firstAttribute="trailing" secondItem="1" secondAttribute="trailing" id="124"/>
-                <constraint firstItem="108" firstAttribute="bottom" secondItem="106" secondAttribute="bottom" id="125"/>
-                <constraint firstItem="108" firstAttribute="top" secondItem="1" secondAttribute="top" id="127"/>
-                <constraint firstItem="108" firstAttribute="leading" secondItem="1" secondAttribute="leading" id="135"/>
                 <constraint firstItem="71" firstAttribute="top" secondItem="106" secondAttribute="bottom" id="136"/>
             </constraints>
             <simulatedStatusBarMetrics key="simulatedStatusBarMetrics"/>

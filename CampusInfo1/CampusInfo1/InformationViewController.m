@@ -64,6 +64,15 @@
 }
 
 /*!
+ * @function prefersStatusBarHidden
+ * Used to hide the iOS status bar with time and battery symbol.
+ */
+-(BOOL) prefersStatusBarHidden
+{
+    return YES;
+}
+
+/*!
  * @function viewDidLoad
  * The function is included, since class inherits from UIViewController.
  * Is called first time, the view is started for initialization.

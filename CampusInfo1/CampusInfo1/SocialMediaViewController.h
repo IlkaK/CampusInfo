@@ -37,12 +37,10 @@
 @interface SocialMediaViewController : UIViewController<UITableViewDelegate>
 {
 
-    /*! @var _titleNavigationBar Used as background for the title in the view */
+    /*! @var _titleNavigationBar Shows the title in the view */
     IBOutlet UINavigationBar        *_titleNavigationBar;
     /*! @var _titleNavigationItem Used to show the back button to return to main menu in title */
     IBOutlet UINavigationItem       *_titleNavigationItem;
-    /*! @var _titleNavigationLabel Shows the title of the view */
-    IBOutlet UILabel                *_titleNavigationLabel;
     
     /*! @var _socialMediaTableCell Table cell to show social media link with description */
     IBOutlet UITableViewCell        *_socialMediaTableCell;
@@ -53,7 +51,6 @@
 
 @property (nonatomic, retain) IBOutlet UINavigationBar              *_titleNavigationBar;
 @property (nonatomic, retain) IBOutlet UINavigationItem             *_titleNavigationItem;
-@property (nonatomic, retain) IBOutlet UILabel                      *_titleNavigationLabel;
 @property (nonatomic, retain) IBOutlet UITableViewCell              *_socialMediaTableCell;
 
 @property (nonatomic, retain) ColorSelection                        *_zhawColor;

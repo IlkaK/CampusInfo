@@ -58,12 +58,10 @@
     /*! @var _noConnectionButton If there is no connection to server, the button is displayed, so the user can trigger another trial to connect to the server */
     IBOutlet GradientButton             *_noConnectionButton;
 
-    /*! @var _titleNavigationBar Used as background for title */
+    /*! @var _titleNavigationBar Shows the title */
     IBOutlet UINavigationBar            *_titleNavigationBar;
     /*! @var _titleNavigationItem Used as navigation item for title */
     IBOutlet UINavigationItem           *_titleNavigationItem;
-    /*! @var _titleNavigationLabel Shows the title */
-    IBOutlet UILabel                    *_titleNavigationLabel;
     
     /*! @var _zhawColor Holds all color schemes needed */
     ColorSelection                      *_zhawColor;
@@ -79,7 +77,6 @@
 
 @property (nonatomic, retain) IBOutlet UINavigationBar              *_titleNavigationBar;
 @property (nonatomic, retain) IBOutlet UINavigationItem             *_titleNavigationItem;
-@property (nonatomic, retain) IBOutlet UILabel                      *_titleNavigationLabel;
 
 @property (nonatomic, retain) IBOutlet UITableView                  *_eventsTable;
 @property (nonatomic, retain) IBOutlet UITableViewCell              *_eventsTableCell;

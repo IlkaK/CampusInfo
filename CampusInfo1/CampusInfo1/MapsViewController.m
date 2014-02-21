@@ -48,7 +48,6 @@
 
 @synthesize _titleNavigationBar;
 @synthesize _titleNavigationItem;
-@synthesize _titleNavigationLabel;
 
 @synthesize _zhawColor;
 
@@ -63,6 +62,15 @@
 }
 
 /*!
+ * @function prefersStatusBarHidden
+ * Used to hide the iOS status bar with time and battery symbol.
+ */
+-(BOOL) prefersStatusBarHidden
+{
+    return YES;
+}
+
+/*!
  * @function viewDidLoad
  * The function is included, since class inherits from UIViewController.
  * Is called first time, the view is started for initialization.
@@ -74,20 +82,17 @@
     
     // general initialization
     _zhawColor = [[ColorSelection alloc]init];
-
+    
     // title
-    UIBarButtonItem *backButtonItem = [[UIBarButtonItem alloc] initWithTitle:LeftArrowSymbol style:UIBarButtonItemStylePlain target:self action:@selector(moveBackToMenuOverview:)];
-    [backButtonItem setTintColor:_zhawColor._zhawOriginalBlue];
-    
-    [_titleNavigationItem setLeftBarButtonItem :backButtonItem animated :true];
-    
-    [_titleNavigationLabel setTextColor:_zhawColor._zhawWhite];
-    _titleNavigationLabel.text = MapsVCTitle;
-    _titleNavigationItem.title = @"";
-    
-    [_titleNavigationBar setTintColor:_zhawColor._zhawDarkerBlue];
-    [_titleNavigationLabel setTextAlignment:NSTextAlignmentCenter];
-
+    UIBarButtonItem *_backButtonItem = [[UIBarButtonItem alloc] initWithTitle:LeftArrowSymbol style:UIBarButtonItemStyleBordered target:self action:@selector(moveBackToMenuOverview:)];
+    [_backButtonItem setTitleTextAttributes:@{NSForegroundColorAttributeName:_zhawColor._zhawWhite} forState:UIControlStateNormal];
+    [_titleNavigationItem setLeftBarButtonItem :_backButtonItem animated :true];
+    [_titleNavigationItem setTitle:MapsVCTitle];
+    [[UINavigationBar appearance] setTitleTextAttributes:@{
+                                                           UITextAttributeTextColor: _zhawColor._zhawWhite,
+                                                           UITextAttributeFont: [UIFont fontWithName:NavigationBarFont size:NavigationBarTitleSize],
+                                                           }];
+    [[UINavigationBar appearance] setBackgroundImage:[UIImage imageNamed:NavigationBarBackground] forBarMetrics:UIBarMetricsDefault];
     
     // view controller
     if (_technikumVC == nil)
@@ -128,9 +133,23 @@
     _menuTableView = nil;
     _titleNavigationBar = nil;
     _titleNavigationItem = nil;
-    _titleNavigationLabel = nil;
     
     [super viewDidUnload];
+}
+
+/*!
+ * @function viewWillAppear
+ * The function is included, since class inherits from UIViewController.
+ * It is called every time the view is called again.
+ * Here the selected table cell is descelected again.
+ */
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    for (NSIndexPath *indexPath in _menuTableView.indexPathsForSelectedRows)
+    {
+        [_menuTableView deselectRowAtIndexPath:indexPath animated:NO];
+    }
 }
 
 

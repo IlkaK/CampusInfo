@@ -40,12 +40,10 @@
 
 @interface MapsViewController : UIViewController<UITableViewDelegate>
 {
-    /*! @var _titleNavigationBar Used as background for the title in the view */
+    /*! @var _titleNavigationBar Shows the title in the view */
     IBOutlet UINavigationBar            *_titleNavigationBar;
     /*! @var _titleNavigationItem Used to show the back button to return to MenuOverviewController */
     IBOutlet UINavigationItem           *_titleNavigationItem;
-    /*! @var _titleNavigationLabel Shows the title of the view */
-    IBOutlet UILabel                    *_titleNavigationLabel;
 
     /*! @var _technikumVC Handles delegate from and to TechnikumViewController, which is triggered when one of the maps is clicked. */
     IBOutlet TechnikumViewController    *_technikumVC;
@@ -62,7 +60,6 @@
 
 @property (nonatomic, retain) IBOutlet UINavigationBar              *_titleNavigationBar;
 @property (nonatomic, retain) IBOutlet UINavigationItem             *_titleNavigationItem;
-@property (nonatomic, retain) IBOutlet UILabel                      *_titleNavigationLabel;
 
 @property (nonatomic, retain) IBOutlet TechnikumViewController      *_technikumVC;
 

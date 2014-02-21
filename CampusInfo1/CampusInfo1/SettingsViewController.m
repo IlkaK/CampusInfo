@@ -53,9 +53,8 @@
 @synthesize _lecturers;
 @synthesize _students;
 
-@synthesize _titleNavigationLabel;
-@synthesize _titleNavigationItem;
 @synthesize _titleNavigationBar;
+@synthesize _titleNavigationItem;
 
 @synthesize _zhawColor;
 
@@ -69,6 +68,14 @@
     return self;
 }
 
+/*!
+ * @function prefersStatusBarHidden
+ * Used to hide the iOS status bar with time and battery symbol.
+ */
+-(BOOL) prefersStatusBarHidden
+{
+    return YES;
+}
 
 /*!
  * @function viewDidLoad
@@ -87,17 +94,15 @@
     _lecturers = [[LecturersDto alloc]init];
 
     // title
-    UIBarButtonItem *backButtonItem = [[UIBarButtonItem alloc] initWithTitle:LeftArrowSymbol style:UIBarButtonItemStylePlain target:self action:@selector(moveBackToMenuOverview:)];
-    
-    [backButtonItem setTintColor:_zhawColor._zhawOriginalBlue];
-    [_titleNavigationItem setLeftBarButtonItem :backButtonItem animated :true];
-    
-    [_titleNavigationLabel setTextColor:_zhawColor._zhawWhite];
-    _titleNavigationLabel.text = SettingsVCTitle;
-    _titleNavigationItem.title = @"";
-    
-    [_titleNavigationBar setTintColor:_zhawColor._zhawDarkerBlue];
-    [_titleNavigationLabel setTextAlignment:NSTextAlignmentCenter];
+    UIBarButtonItem *_backButtonItem = [[UIBarButtonItem alloc] initWithTitle:LeftArrowSymbol style:UIBarButtonItemStyleBordered target:self action:@selector(moveBackToMenuOverview:)];
+    [_backButtonItem setTitleTextAttributes:@{NSForegroundColorAttributeName:_zhawColor._zhawWhite} forState:UIControlStateNormal];
+    [_titleNavigationItem setLeftBarButtonItem :_backButtonItem animated :true];
+    [_titleNavigationItem setTitle:SettingsVCTitle];
+    [[UINavigationBar appearance] setTitleTextAttributes:@{
+                                                           UITextAttributeTextColor: _zhawColor._zhawWhite,
+                                                           UITextAttributeFont: [UIFont fontWithName:NavigationBarFont size:NavigationBarTitleSize],
+                                                           }];
+    [[UINavigationBar appearance] setBackgroundImage:[UIImage imageNamed:NavigationBarBackground] forBarMetrics:UIBarMetricsDefault];
     
     // set timetable title and description label
     [_timetableSettingsTitle setTextColor:_zhawColor._zhawFontGrey];
@@ -141,10 +146,8 @@
             [_autocomplete._candidates addObject:[_students._studentArray objectAtIndex:studentArrayI]];
         }
     }
-    
     //NSLog(@"acronymTextFieldChanged autocomplete candidates: %i ", [_autocomplete._candidates count]);
     //NSLog(@"6 lecturers array after: %i", [_lecturers._lecturerArray count]);
-    
 }
 
 
@@ -191,7 +194,6 @@
     _timetableSettingsTitle = nil;
     _titleNavigationBar = nil;
     _titleNavigationItem = nil;
-    _titleNavigationLabel = nil;
     _timetableSettingsDescriptionLabel = nil;
     [super viewDidUnload];
 }

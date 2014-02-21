@@ -13,7 +13,6 @@
                 <outlet property="_noConnectionLabel" destination="124" id="158"/>
                 <outlet property="_titleNavigationBar" destination="163" id="189"/>
                 <outlet property="_titleNavigationItem" destination="167" id="190"/>
-                <outlet property="_titleNavigationLabel" destination="165" id="191"/>
                 <outlet property="_waitForLoadingActivityIndicator" destination="226" id="231"/>
                 <outlet property="view" destination="1" id="192"/>
             </connections>
@@ -30,16 +29,6 @@
                         <navigationItem id="167" userLabel="TitleNavigationItem"/>
                     </items>
                 </navigationBar>
-                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Label" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="262" translatesAutoresizingMaskIntoConstraints="NO" id="165" userLabel="TitleLabel">
-                    <rect key="frame" x="60" y="0.0" width="262" height="44"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <constraints>
-                        <constraint firstAttribute="width" constant="262" id="198"/>
-                    </constraints>
-                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                    <nil key="highlightedColor"/>
-                </label>
                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="keine Verbindung" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="124" userLabel="NoConnectionLabel">
                     <rect key="frame" x="134" y="49" width="90" height="21"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -51,6 +40,18 @@
                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="33" userLabel="NewsTableView">
+                    <rect key="frame" x="0.0" y="44" width="320" height="524"/>
+                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="524" id="202"/>
+                    </constraints>
+                    <connections>
+                        <outlet property="dataSource" destination="-1" id="95"/>
+                        <outlet property="delegate" destination="-1" id="96"/>
+                    </connections>
+                </tableView>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="125" userLabel="TryAgainButton" customClass="GradientButton">
                     <rect key="frame" x="224" y="49" width="95" height="24"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -70,18 +71,6 @@
                         <action selector="tryConnectionAgain:" destination="-1" eventType="touchUpInside" id="160"/>
                     </connections>
                 </button>
-                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="33" userLabel="NewsTableView">
-                    <rect key="frame" x="0.0" y="80" width="320" height="364"/>
-                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    <constraints>
-                        <constraint firstAttribute="height" constant="364" id="202"/>
-                    </constraints>
-                    <connections>
-                        <outlet property="dataSource" destination="-1" id="95"/>
-                        <outlet property="delegate" destination="-1" id="96"/>
-                    </connections>
-                </tableView>
                 <activityIndicatorView opaque="NO" contentMode="scaleToFill" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="226" userLabel="WaitForLoadingActivityIndicator">
                     <rect key="frame" x="141" y="266" width="37" height="37"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -95,12 +84,9 @@
                 <constraint firstItem="163" firstAttribute="trailing" secondItem="1" secondAttribute="trailing" id="168"/>
                 <constraint firstItem="163" firstAttribute="leading" secondItem="1" secondAttribute="leading" id="175"/>
                 <constraint firstItem="163" firstAttribute="top" secondItem="1" secondAttribute="top" id="179"/>
-                <constraint firstItem="165" firstAttribute="bottom" secondItem="163" secondAttribute="bottom" id="185"/>
-                <constraint firstItem="165" firstAttribute="top" secondItem="1" secondAttribute="top" id="186"/>
-                <constraint firstItem="165" firstAttribute="leading" secondItem="1" secondAttribute="leading" constant="60" id="199"/>
                 <constraint firstAttribute="trailing" secondItem="125" secondAttribute="trailing" constant="1" id="201"/>
                 <constraint firstItem="124" firstAttribute="leading" secondItem="1" secondAttribute="leading" constant="134" id="207"/>
-                <constraint firstItem="33" firstAttribute="top" secondItem="1" secondAttribute="top" constant="80" id="221"/>
+                <constraint firstItem="33" firstAttribute="top" secondItem="1" secondAttribute="top" constant="44" id="221"/>
                 <constraint firstItem="124" firstAttribute="top" secondItem="1" secondAttribute="top" constant="49" id="222"/>
                 <constraint firstItem="125" firstAttribute="top" secondItem="124" secondAttribute="top" id="225"/>
                 <constraint firstItem="226" firstAttribute="centerY" secondItem="1" secondAttribute="centerY" id="227"/>

@@ -12,7 +12,6 @@
                 <outlet property="_noConnectionLabel" destination="32" id="87"/>
                 <outlet property="_titleNavigationBar" destination="94" id="118"/>
                 <outlet property="_titleNavigationItem" destination="96" id="119"/>
-                <outlet property="_titleNavigationLabel" destination="93" id="120"/>
                 <outlet property="_waitForLoadingActivityIndicator" destination="157" id="163"/>
                 <outlet property="view" destination="1" id="3"/>
             </connections>
@@ -29,16 +28,6 @@
                         <navigationItem id="96" userLabel="TitleNavigationItem"/>
                     </items>
                 </navigationBar>
-                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Label" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="339" translatesAutoresizingMaskIntoConstraints="NO" id="93" userLabel="TitleLabel">
-                    <rect key="frame" x="25" y="0.0" width="339" height="44"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <constraints>
-                        <constraint firstAttribute="width" constant="339" id="127"/>
-                    </constraints>
-                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                    <nil key="highlightedColor"/>
-                </label>
                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="keine Verbindung" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="32" userLabel="NoConnectionLabel">
                     <rect key="frame" x="134" y="50" width="90" height="21"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -71,7 +60,7 @@
                         <action selector="tryConnectionAgain:" destination="-1" eventType="touchUpInside" id="89"/>
                     </connections>
                 </button>
-                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="30" userLabel="NewsTableView">
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" allowsSelection="NO" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="30" userLabel="NewsTableView">
                     <rect key="frame" x="0.0" y="81" width="320" height="363"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -96,9 +85,6 @@
                 <constraint firstItem="94" firstAttribute="trailing" secondItem="1" secondAttribute="trailing" id="100"/>
                 <constraint firstItem="94" firstAttribute="leading" secondItem="1" secondAttribute="leading" id="102"/>
                 <constraint firstItem="94" firstAttribute="top" secondItem="1" secondAttribute="top" id="110"/>
-                <constraint firstItem="93" firstAttribute="bottom" secondItem="94" secondAttribute="bottom" id="116"/>
-                <constraint firstItem="93" firstAttribute="top" secondItem="1" secondAttribute="top" id="117"/>
-                <constraint firstItem="93" firstAttribute="leading" secondItem="1" secondAttribute="leading" constant="25" id="131"/>
                 <constraint firstItem="31" firstAttribute="baseline" secondItem="32" secondAttribute="baseline" id="138"/>
                 <constraint firstItem="30" firstAttribute="top" secondItem="31" secondAttribute="bottom" constant="8" symbolic="YES" id="142"/>
                 <constraint firstAttribute="trailing" secondItem="31" secondAttribute="trailing" constant="1" id="143"/>

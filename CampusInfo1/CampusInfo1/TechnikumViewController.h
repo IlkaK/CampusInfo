@@ -40,14 +40,9 @@
     IBOutlet UINavigationBar    *_titleNavigationBar;
     /*! @var _titleNavigationItem Used to show the back button to return to MapsOverviewController */
     IBOutlet UINavigationItem   *_titleNavigationItem;
+    
     /*! @var _titleNavigationLabel Shows the title of the view */
-    IBOutlet UILabel            *_titleNavigationLabel;
-
-    /*! @var _descriptionNavigationBar Used as background for the description in the view */
-    IBOutlet UINavigationBar    *_descriptionNavigationBar;
-    /*! @var _descriptionNavigationItem Works as background for the description */
-    IBOutlet UINavigationItem   *_descriptionNavigationItem;
-    /*! @var _descriptionLabel Shows the description text */
+    IBOutlet UILabel            *_titleLabel;
     IBOutlet UILabel            *_descriptionLabel;
     
     /*! @var _technikumWebView Shows the map, accordingly to _fileName and _fileFormat */
@@ -67,10 +62,7 @@
 
 @property (nonatomic, retain) IBOutlet UINavigationBar                  *_titleNavigationBar;
 @property (nonatomic, retain) IBOutlet UINavigationItem                 *_titleNavigationItem;
-@property (nonatomic, retain) IBOutlet UILabel                          *_titleNavigationLabel;
-
-@property (nonatomic, retain) IBOutlet UINavigationBar                  *_descriptionNavigationBar;
-@property (nonatomic, retain) IBOutlet UINavigationItem                 *_descriptionNavigationItem;
+@property (nonatomic, retain) IBOutlet UILabel                          *_titleLabel;
 @property (nonatomic, retain) IBOutlet UILabel                          *_descriptionLabel;
 
 @property (nonatomic, retain) IBOutlet UIWebView                        *_technikumWebView;

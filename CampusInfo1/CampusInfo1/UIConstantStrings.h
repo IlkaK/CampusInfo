@@ -31,6 +31,7 @@ extern NSString * const NavigationBarBackground;
 // title for navigation bars
 extern NSString * const NavigationBarFont;
 extern float const NavigationBarTitleSize;
+extern float const NavigationBarDescriptionSize;
 
 
 // strings for maps/standorte

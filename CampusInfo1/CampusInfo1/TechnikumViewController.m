@@ -42,12 +42,9 @@
 @implementation TechnikumViewController
 
 @synthesize _titleNavigationBar;
-@synthesize _titleNavigationLabel;
 @synthesize _titleNavigationItem;
-
+@synthesize _titleLabel;
 @synthesize _descriptionLabel;
-@synthesize _descriptionNavigationBar;
-@synthesize _descriptionNavigationItem;
 
 @synthesize _technikumWebView;
 
@@ -68,6 +65,15 @@
 }
 
 /*!
+ * @function prefersStatusBarHidden
+ * Used to hide the iOS status bar with time and battery symbol.
+ */
+-(BOOL) prefersStatusBarHidden
+{
+    return YES;
+}
+
+/*!
  * @function viewDidLoad
  * The function is included, since class inherits from UIViewController.
  * Is called first time, the view is started for initialization.
@@ -80,28 +86,24 @@
     // initialization
     _zhawColor = [[ColorSelection alloc]init];
     
+    //----
+    UIBarButtonItem *_backButtonItem = [[UIBarButtonItem alloc] initWithTitle:LeftArrowSymbol style:UIBarButtonItemStyleBordered target:self action:@selector(moveBackToMaps:)];
+    [_backButtonItem setTitleTextAttributes:@{NSForegroundColorAttributeName:_zhawColor._zhawWhite} forState:UIControlStateNormal];
+    [_titleNavigationItem setLeftBarButtonItem :_backButtonItem animated :true];
+    [_titleNavigationItem setTitle:@""];
     
-    // title
-    UIBarButtonItem *backButtonItem = [[UIBarButtonItem alloc] initWithTitle:LeftArrowSymbol style:UIBarButtonItemStylePlain target:self action:@selector(moveBackToMaps:)];
-    [backButtonItem setTintColor:_zhawColor._zhawOriginalBlue];
+    [_titleLabel setTextColor:_zhawColor._zhawWhite];
+    [_titleLabel setTextAlignment:NSTextAlignmentCenter];
+    [_titleLabel setFont:[UIFont fontWithName:NavigationBarFont size:NavigationBarTitleSize]];
+    [_titleLabel setText:MapsVCTitle];
     
-    [_titleNavigationItem setLeftBarButtonItem :backButtonItem animated :true];
-    
-    [_titleNavigationLabel setTextColor:_zhawColor._zhawWhite];
-    _titleNavigationLabel.text = MapsVCTitle;
-    _titleNavigationItem.title = @"";
-    
-    [_titleNavigationBar setTintColor:_zhawColor._zhawDarkerBlue];
-    [_titleNavigationLabel setTextAlignment:NSTextAlignmentCenter];
-    
+    [[UINavigationBar appearance] setBackgroundImage:[UIImage imageNamed:NavigationBarBackground] forBarMetrics:UIBarMetricsDefault];
     
     [_descriptionLabel setTextColor:_zhawColor._zhawWhite];
-    
-    _descriptionNavigationItem.title = @"";
-    
-    [_descriptionNavigationBar setTintColor:_zhawColor._zhawDarkerBlue];
     [_descriptionLabel setTextAlignment:NSTextAlignmentCenter];
-    _descriptionLabel.text = _description;
+    [_descriptionLabel setFont:[UIFont fontWithName:NavigationBarFont size:NavigationBarDescriptionSize]];
+    [_descriptionLabel setText: _description];
+    
     
     // web view
     NSURL        *_targetURL  = [[NSBundle mainBundle] URLForResource:_fileName withExtension:_fileFormat];
@@ -119,7 +121,7 @@
 {
     [super viewWillAppear:animated];
     
-    _descriptionLabel.text = _description;
+    [_descriptionLabel setText: _description];
     
     // web view
     NSURL        *_targetURL  = [[NSBundle mainBundle] URLForResource:_fileName withExtension:_fileFormat];
@@ -156,9 +158,7 @@
     _technikumWebView = nil;
     _titleNavigationBar = nil;
     _titleNavigationItem = nil;
-    _titleNavigationLabel = nil;
-    _descriptionNavigationBar = nil;
-    _descriptionNavigationItem = nil;
+    _titleLabel = nil;
     _descriptionLabel = nil;
     [super viewDidUnload];
 }
