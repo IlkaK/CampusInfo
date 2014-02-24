@@ -51,6 +51,8 @@
 
 @synthesize _titleNavigationItem;
 @synthesize _titleNavigationBar;
+@synthesize _titleLabel;
+@synthesize _descriptionLabel;
 
 @synthesize _zhawColor;
 
@@ -101,12 +103,19 @@
     UIBarButtonItem *_backButtonItem = [[UIBarButtonItem alloc] initWithTitle:LeftArrowSymbol style:UIBarButtonItemStyleBordered target:self action:@selector(moveBackToContactsOverview:)];
     [_backButtonItem setTitleTextAttributes:@{NSForegroundColorAttributeName:_zhawColor._zhawWhite} forState:UIControlStateNormal];
     [_titleNavigationItem setLeftBarButtonItem :_backButtonItem animated :true];
-    [_titleNavigationItem setTitle:ContactsVCTitle];
-    [[UINavigationBar appearance] setTitleTextAttributes:@{
-                                                           UITextAttributeTextColor: _zhawColor._zhawWhite,
-                                                           UITextAttributeFont: [UIFont fontWithName:NavigationBarFont size:NavigationBarTitleSize],
-                                                           }];
+    [_titleNavigationItem setTitle:@""];
+    
+    [_titleLabel setTextColor:_zhawColor._zhawWhite];
+    [_titleLabel setTextAlignment:NSTextAlignmentCenter];
+    [_titleLabel setFont:[UIFont fontWithName:NavigationBarFont size:NavigationBarTitleSize]];
+    [_titleLabel setText:ContactsOverVCTitle];
+    
     [[UINavigationBar appearance] setBackgroundImage:[UIImage imageNamed:NavigationBarBackground] forBarMetrics:UIBarMetricsDefault];
+    
+    [_descriptionLabel setTextColor:_zhawColor._zhawWhite];
+    [_descriptionLabel setTextAlignment:NSTextAlignmentCenter];
+    [_descriptionLabel setFont:[UIFont fontWithName:NavigationBarFont size:NavigationBarDescriptionSize]];
+    [_descriptionLabel setText: ContactsVCTitle];
 }
 
 

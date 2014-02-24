@@ -7,7 +7,9 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="EmergencyViewController">
             <connections>
+                <outlet property="_descriptionLabel" destination="gmT-7c-ld4" id="v76-H7-9bc"/>
                 <outlet property="_emergencyTable" destination="51" id="60"/>
+                <outlet property="_titleLabel" destination="5TA-i8-yz1" id="Ttc-L9-0tA"/>
                 <outlet property="_titleNavigationBar" destination="155" id="178"/>
                 <outlet property="_titleNavigationItem" destination="156" id="179"/>
                 <outlet property="view" destination="1" id="3"/>
@@ -25,6 +27,22 @@
                         <navigationItem id="156" userLabel="TitleNavigationItem"/>
                     </items>
                 </navigationBar>
+                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5TA-i8-yz1" userLabel="TitleLabel">
+                    <rect key="frame" x="0.0" y="1" width="320" height="22"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="22" id="knA-h7-Uoz"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gmT-7c-ld4" userLabel="DescriptionLabel">
+                    <rect key="frame" x="0.0" y="20" width="320" height="0.0"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <nil key="highlightedColor"/>
+                </label>
                 <tableView clipsSubviews="YES" contentMode="scaleToFill" bounces="NO" scrollEnabled="NO" style="grouped" separatorStyle="default" allowsSelection="NO" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" translatesAutoresizingMaskIntoConstraints="NO" id="51">
                     <rect key="frame" x="0.0" y="44" width="320" height="425"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -46,6 +64,12 @@
                 <constraint firstItem="51" firstAttribute="top" secondItem="155" secondAttribute="bottom" id="212"/>
                 <constraint firstItem="51" firstAttribute="trailing" secondItem="1" secondAttribute="trailing" id="218"/>
                 <constraint firstItem="51" firstAttribute="leading" secondItem="1" secondAttribute="leading" id="219"/>
+                <constraint firstItem="5TA-i8-yz1" firstAttribute="trailing" secondItem="155" secondAttribute="trailing" id="CNd-r4-D58"/>
+                <constraint firstItem="51" firstAttribute="top" secondItem="5TA-i8-yz1" secondAttribute="bottom" constant="21" id="X5z-rS-s69"/>
+                <constraint firstItem="5TA-i8-yz1" firstAttribute="trailing" secondItem="gmT-7c-ld4" secondAttribute="trailing" id="Z3E-pu-Djc"/>
+                <constraint firstItem="5TA-i8-yz1" firstAttribute="leading" secondItem="gmT-7c-ld4" secondAttribute="leading" id="esG-7a-aub"/>
+                <constraint firstItem="5TA-i8-yz1" firstAttribute="leading" secondItem="155" secondAttribute="leading" id="jky-C3-dJJ"/>
+                <constraint firstItem="gmT-7c-ld4" firstAttribute="top" secondItem="1" secondAttribute="top" constant="20" symbolic="YES" id="ywg-OC-33b"/>
             </constraints>
             <simulatedStatusBarMetrics key="simulatedStatusBarMetrics"/>
             <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>

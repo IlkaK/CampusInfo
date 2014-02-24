@@ -55,15 +55,13 @@
 @synthesize _translator;
 @synthesize _mensaDetailVC;
 
-@synthesize _dateLabel;
-@synthesize _dateNavigationBar;
-
 @synthesize _noConnectionLabel;
 @synthesize _noConnectionButton;
 
-@synthesize _titleNavigationLabel;
-@synthesize _titleNavigationItem;
 @synthesize _titleNavigationBar;
+@synthesize _titleNavigationItem;
+@synthesize _dateNavigationBar;
+@synthesize _dateNavigationItem;
 
 @synthesize _waitForChangeActivityIndicator;
 
@@ -79,6 +77,15 @@
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     return self;
+}
+
+/*!
+ * @function prefersStatusBarHidden
+ * Used to hide the iOS status bar with time and battery symbol.
+ */
+-(BOOL) prefersStatusBarHidden
+{
+    return YES;
 }
 
 /*!
@@ -101,26 +108,27 @@
     self._actualDate = [NSDate date];
     //self._actualDate    = [[_dateFormatter _dayFormatter] dateFromString:@"20.02.2013"];
     
+    
+    // title
+    UIBarButtonItem *_backButtonItem = [[UIBarButtonItem alloc] initWithTitle:LeftArrowSymbol style:UIBarButtonItemStyleBordered target:self action:@selector(moveBackToMenuOverview:)];
+    [_backButtonItem setTitleTextAttributes:@{NSForegroundColorAttributeName:_zhawColor._zhawWhite} forState:UIControlStateNormal];
+    [_titleNavigationItem setLeftBarButtonItem :_backButtonItem animated :true];
+    [_titleNavigationItem setTitle:MensaVCTitle];
+
+    [[UINavigationBar appearance] setTitleTextAttributes:@{
+                                                           UITextAttributeTextColor: _zhawColor._zhawWhite,
+                                                           UITextAttributeFont: [UIFont fontWithName:NavigationBarFont size:NavigationBarTitleSize],
+                                                           }];
+    [[UINavigationBar appearance] setBackgroundImage:[UIImage imageNamed:NavigationBarBackground] forBarMetrics:UIBarMetricsDefault];
+    
+    
+    
     NSString *_dateString = [NSString stringWithFormat:@"%@, %@"
                              ,[[_dateFormatter _weekDayFormatter] stringFromDate:self._actualDate]
                              ,[[_dateFormatter _dayFormatter]     stringFromDate:self._actualDate]];
     
-    _dateLabel.text = _dateString;
-    
-    UIBarButtonItem *backButtonItem = [[UIBarButtonItem alloc] initWithTitle:LeftArrowSymbol style:UIBarButtonItemStylePlain target:self action:@selector(moveBackToMenuOverview:)];
-    [backButtonItem setTintColor:_zhawColor._zhawOriginalBlue];
-    
-    [_titleNavigationItem setLeftBarButtonItem :backButtonItem animated :true];
-    
-    [_titleNavigationLabel setTextColor:_zhawColor._zhawWhite];
-    _titleNavigationLabel.text = MensaVCTitle;
-    _titleNavigationItem.title = @"";
-    
-    [_titleNavigationLabel setTextAlignment:NSTextAlignmentCenter];
-    [_titleNavigationBar setTintColor:_zhawColor._zhawDarkerBlue];
-    
-    [_dateNavigationBar setTintColor:_zhawColor._zhawDarkerBlue];
-    [_dateLabel setTextColor:_zhawColor._zhawWhite];
+    [_titleNavigationItem setTitle:MensaVCTitle];
+    [_dateNavigationItem setTitle:_dateString];
     
     // set default values for spinner/activity indicator
     _waitForChangeActivityIndicator.hidesWhenStopped = YES;
@@ -130,7 +138,6 @@
     
     [self.view bringSubviewToFront:_noConnectionButton];
     [self.view bringSubviewToFront:_noConnectionLabel];
-    [self.view bringSubviewToFront:_dateLabel];
     
     _noConnectionButton.hidden = YES;
     _noConnectionLabel.hidden = YES;
@@ -166,15 +173,16 @@
     [self set_mensaOverviewTable:nil];
     _mensaOverviewTable = nil;
     _mensaOverviewTableCell = nil;
-    _dateLabel = nil;
     _mensaDetailVC = nil;
+    
     _titleNavigationBar = nil;
     _titleNavigationItem = nil;
-    _titleNavigationLabel = nil;
+    _dateNavigationBar = nil;
+    _dateNavigationItem = nil;
+    
     _waitForChangeActivityIndicator = nil;
     _noConnectionLabel = nil;
     _noConnectionButton = nil;
-    _dateNavigationBar = nil;
     [super viewDidUnload];
 }
 

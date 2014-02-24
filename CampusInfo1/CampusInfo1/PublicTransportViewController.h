@@ -47,12 +47,11 @@
 
 @interface PublicTransportViewController : UIViewController<UITableViewDelegate, UITextFieldDelegate>
 {
-    /*! @var _publicTransportNavigationBar Used as background for title */
-    IBOutlet UINavigationBar            *_publicTransportNavigationBar;
+    
+    /*! @var _publicTransportNavigationBar Shows the title */
+    IBOutlet UINavigationBar            *_titleNavigationBar;
     /*! @var _publicTransportNavigationItem Used as navigation item for title */
-    IBOutlet UINavigationItem           *_publicTransportNavigationItem;
-    /*! @var _publicTransportNavigationLabel Shows the title */
-    IBOutlet UILabel                    *_publicTransportNavigationLabel;
+    IBOutlet UINavigationItem           *_titleNavigationItem;
     
     /*! @var _pubilcTransportOverviewTableCell Handles cell, which displays the solo connections */
     IBOutlet UITableViewCell            *_pubilcTransportOverviewTableCell;
@@ -134,10 +133,8 @@
 }
 
 
-@property (nonatomic, retain) IBOutlet UINavigationBar              *_publicTransportNavigationBar;
-@property (nonatomic, retain) IBOutlet UINavigationItem             *_publicTransportNavigationItem;
-@property (nonatomic, retain) IBOutlet UILabel                      *_publicTransportNavigationLabel;
-
+@property (nonatomic, retain) IBOutlet UINavigationBar              *_titleNavigationBar;
+@property (nonatomic, retain) IBOutlet UINavigationItem             *_titleNavigationItem;
 
 @property (nonatomic, retain) IBOutlet UITableViewCell              *_pubilcTransportOverviewTableCell;
 @property (nonatomic, retain) IBOutlet UITableView                  *_publicTransportTableView;

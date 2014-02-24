@@ -41,6 +41,8 @@
     IBOutlet UINavigationBar        *_titleNavigationBar;
     /*! @var _titleNavigationItem Used as navigation item for title */
     IBOutlet UINavigationItem       *_titleNavigationItem;
+    IBOutlet UILabel                *_titleLabel;
+    IBOutlet UILabel                *_descriptionLabel;
 
     /*! @var _serviceDeskTableCell Handles cell, which displays the service desk information */
     IBOutlet UITableViewCell        *_serviceDeskTableCell;
@@ -56,6 +58,8 @@
 
 @property (nonatomic, retain) IBOutlet UINavigationBar              *_titleNavigationBar;
 @property (nonatomic, retain) IBOutlet UINavigationItem             *_titleNavigationItem;
+@property (nonatomic, retain) IBOutlet UILabel                      *_titleLabel;
+@property (nonatomic, retain) IBOutlet UILabel                      *_descriptionLabel;
 
 @property (nonatomic, retain) IBOutlet UITableViewCell              *_serviceDeskTableCell;
 

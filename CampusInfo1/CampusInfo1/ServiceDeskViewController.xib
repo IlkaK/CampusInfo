@@ -7,6 +7,8 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ServiceDeskViewController">
             <connections>
+                <outlet property="_descriptionLabel" destination="sLj-Ki-kcz" id="xUM-Xn-aSD"/>
+                <outlet property="_titleLabel" destination="2cM-4D-4a8" id="6xV-y1-1u3"/>
                 <outlet property="_titleNavigationBar" destination="6" id="47"/>
                 <outlet property="_titleNavigationItem" destination="7" id="48"/>
                 <outlet property="view" destination="1" id="3"/>
@@ -24,6 +26,22 @@
                         <navigationItem id="7" userLabel="TitleNavigationItem"/>
                     </items>
                 </navigationBar>
+                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2cM-4D-4a8" userLabel="TitleLabel">
+                    <rect key="frame" x="0.0" y="1" width="320" height="22"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="22" id="ZBU-zC-mId"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sLj-Ki-kcz" userLabel="DescriptionLabel">
+                    <rect key="frame" x="0.0" y="20" width="320" height="0.0"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <nil key="highlightedColor"/>
+                </label>
                 <tableView clipsSubviews="YES" contentMode="scaleToFill" bounces="NO" alwaysBounceVertical="YES" scrollEnabled="NO" style="grouped" separatorStyle="default" allowsSelection="NO" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" translatesAutoresizingMaskIntoConstraints="NO" id="38">
                     <rect key="frame" x="0.0" y="44" width="320" height="471"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -45,6 +63,12 @@
                 <constraint firstItem="38" firstAttribute="leading" secondItem="1" secondAttribute="leading" id="39"/>
                 <constraint firstItem="38" firstAttribute="top" secondItem="6" secondAttribute="bottom" id="40"/>
                 <constraint firstItem="38" firstAttribute="trailing" secondItem="1" secondAttribute="trailing" id="43"/>
+                <constraint firstItem="38" firstAttribute="top" secondItem="2cM-4D-4a8" secondAttribute="bottom" constant="21" id="2KU-Et-tvJ"/>
+                <constraint firstItem="2cM-4D-4a8" firstAttribute="leading" secondItem="sLj-Ki-kcz" secondAttribute="leading" id="7lr-3z-Dhr"/>
+                <constraint firstItem="sLj-Ki-kcz" firstAttribute="top" secondItem="1" secondAttribute="top" constant="20" symbolic="YES" id="hDg-UF-UwS"/>
+                <constraint firstItem="2cM-4D-4a8" firstAttribute="trailing" secondItem="6" secondAttribute="trailing" id="id3-Im-cCL"/>
+                <constraint firstItem="2cM-4D-4a8" firstAttribute="trailing" secondItem="sLj-Ki-kcz" secondAttribute="trailing" id="lsf-Xd-5uL"/>
+                <constraint firstItem="2cM-4D-4a8" firstAttribute="leading" secondItem="6" secondAttribute="leading" id="tvO-qM-DdK"/>
             </constraints>
             <simulatedStatusBarMetrics key="simulatedStatusBarMetrics"/>
             <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>

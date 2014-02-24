@@ -270,6 +270,7 @@ NSString * const NewsWebViewFont   = @"helvetica";
 
 // public transportation
 NSString * const PublicTransportVCTitle         = @"Fahrplan";
+NSString * const PublicTransportVCSearchStop    = @"Stationssuche";
 NSString * const PublicTransportVCHint          = @"Bitte Start und Ziel eingeben.";
 NSString * const PublicTransportVCStart         = @"Start";
 NSString * const PublicTransportVCGoal          = @"Ziel";

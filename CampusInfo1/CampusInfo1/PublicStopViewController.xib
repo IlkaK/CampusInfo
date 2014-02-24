@@ -7,11 +7,12 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="PublicStopViewController">
             <connections>
+                <outlet property="_descriptionLabel" destination="ncN-Sh-7Tz" id="edk-iD-Rrs"/>
                 <outlet property="_publicStopTableView" destination="29" id="38"/>
                 <outlet property="_publicStopTextField" destination="69" id="83"/>
+                <outlet property="_titleLabel" destination="6" id="6HL-0l-xfC"/>
                 <outlet property="_titleNavigationBar" destination="4" id="26"/>
                 <outlet property="_titleNavigationItem" destination="8" id="27"/>
-                <outlet property="_titleNavigationLabel" destination="6" id="28"/>
                 <outlet property="view" destination="1" id="3"/>
             </connections>
         </placeholder>
@@ -27,11 +28,17 @@
                         <navigationItem id="8" userLabel="TitleNavigationItem"/>
                     </items>
                 </navigationBar>
-                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6" userLabel="TitleLabel">
-                    <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6" userLabel="TitleLabel">
+                    <rect key="frame" x="0.0" y="2" width="320" height="20"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ncN-Sh-7Tz" userLabel="DescriptionLabel">
+                    <rect key="frame" x="0.0" y="12" width="320" height="32"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="69" userLabel="PublicStopTextField">
@@ -65,8 +72,8 @@
                 <constraint firstItem="4" firstAttribute="leading" secondItem="1" secondAttribute="leading" id="16"/>
                 <constraint firstItem="4" firstAttribute="top" secondItem="1" secondAttribute="top" id="19"/>
                 <constraint firstItem="6" firstAttribute="trailing" secondItem="1" secondAttribute="trailing" id="23"/>
-                <constraint firstItem="6" firstAttribute="bottom" secondItem="4" secondAttribute="bottom" id="24"/>
-                <constraint firstItem="6" firstAttribute="top" secondItem="1" secondAttribute="top" id="25"/>
+                <constraint firstItem="6" firstAttribute="bottom" secondItem="4" secondAttribute="bottom" constant="-22" id="24"/>
+                <constraint firstItem="6" firstAttribute="top" secondItem="1" secondAttribute="top" constant="2" id="25"/>
                 <constraint firstItem="29" firstAttribute="leading" secondItem="1" secondAttribute="leading" id="31"/>
                 <constraint firstItem="29" firstAttribute="trailing" secondItem="1" secondAttribute="trailing" id="34"/>
                 <constraint firstItem="69" firstAttribute="top" secondItem="1" secondAttribute="top" constant="57" id="103"/>

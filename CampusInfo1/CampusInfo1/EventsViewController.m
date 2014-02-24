@@ -106,9 +106,6 @@
     [[UINavigationBar appearance] setBackgroundImage:[UIImage imageNamed:NavigationBarBackground] forBarMetrics:UIBarMetricsDefault];
     
     
-    
-    
-    
     // set no connection label and button
     _noConnectionButton.hidden = YES;
     _noConnectionLabel.hidden = YES;

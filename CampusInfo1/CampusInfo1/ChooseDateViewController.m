@@ -51,9 +51,8 @@
 @synthesize _chooseDateSegmentedControl;
 @synthesize _segmentedControlNavigationBAr;
 
-@synthesize _titleNavigationLabel;
-@synthesize _titleNavigationItem;
 @synthesize _titleNavigationBar;
+@synthesize _titleNavigationItem;
 
 /*!
  * @function initWithNibName
@@ -64,6 +63,16 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     return self;
 }
+
+/*!
+ * @function prefersStatusBarHidden
+ * Used to hide the iOS status bar with time and battery symbol.
+ */
+-(BOOL) prefersStatusBarHidden
+{
+    return YES;
+}
+
 
 /*!
  * @function threadWaitForLoadingActivityIndicator
@@ -196,31 +205,34 @@
     
     ColorSelection *_zhawColor = [[ColorSelection alloc]init];
     
-    // set title
-    UIBarButtonItem *backButtonItem = [[UIBarButtonItem alloc] initWithTitle:LeftArrowSymbol style:UIBarButtonItemStylePlain target:self action:@selector(moveBackToTimeTable:)];
-    
-    [backButtonItem setTintColor:_zhawColor._zhawOriginalBlue];
-    [_titleNavigationItem setLeftBarButtonItem :backButtonItem animated :true];
-    
-    [_titleNavigationLabel setTextColor:_zhawColor._zhawWhite];
-    _titleNavigationLabel.text = ChooseDateVCTitle;
-    _titleNavigationItem.title = @"";
-    
-    [_titleNavigationBar setTintColor:_zhawColor._zhawDarkerBlue];
+    // title
+    UIBarButtonItem *_backButtonItem = [[UIBarButtonItem alloc] initWithTitle:LeftArrowSymbol style:UIBarButtonItemStyleBordered target:self action:@selector(moveBackToTimeTable:)];
+    [_backButtonItem setTitleTextAttributes:@{NSForegroundColorAttributeName:_zhawColor._zhawWhite} forState:UIControlStateNormal];
+    [_titleNavigationItem setLeftBarButtonItem :_backButtonItem animated :true];
+    [_titleNavigationItem setTitle:ChooseDateVCTitle];
+    [[UINavigationBar appearance] setTitleTextAttributes:@{
+                                                           UITextAttributeTextColor: _zhawColor._zhawWhite,
+                                                           UITextAttributeFont: [UIFont fontWithName:NavigationBarFont size:NavigationBarTitleSize],
+                                                           }];
+    [[UINavigationBar appearance] setBackgroundImage:[UIImage imageNamed:NavigationBarBackground] forBarMetrics:UIBarMetricsDefault];
 
-    [_titleNavigationLabel setTextAlignment:UITextAlignmentCenter];
+    // segmented controls
+    //[_chooseDateSegmentedControl setTintColor:_zhawColor._zhawOriginalBlue];
+    [self.view bringSubviewToFront:_chooseDateSegmentedControl];
+    //[_segmentedControlNavigationBAr setTintColor:_zhawColor._zhawDarkerBlue];
+    [_chooseDateSegmentedControl setTitleTextAttributes:@{
+                                                          NSForegroundColorAttributeName : _zhawColor._zhawWhite,
+                                                          UITextAttributeTextColor: _zhawColor._zhawWhite,
+                                                          UITextAttributeFont: [UIFont fontWithName:NavigationBarFont size:NavigationBarDescriptionSize],
+                                                          }
+                                               forState:UIControlStateNormal];
     
     // set activity indicator
     _waitForChangeActivityIndicator.hidesWhenStopped = YES;
     _waitForChangeActivityIndicator.hidden = YES;
-    [_waitForChangeActivityIndicator setColor:_zhawColor._zhawOriginalBlue];
-    //[_waitForChangeActivityIndicator setBackgroundColor:_zhawColor._zhawOriginalBlue];
+    [_waitForChangeActivityIndicator setColor:_zhawColor._zhawWhite];
     [self.view bringSubviewToFront:_waitForChangeActivityIndicator];
     
-    // segmented controls
-    [_chooseDateSegmentedControl setTintColor:_zhawColor._zhawOriginalBlue];
-    [self.view bringSubviewToFront:_chooseDateSegmentedControl];
-    [_segmentedControlNavigationBAr setTintColor:_zhawColor._zhawDarkerBlue];
     
     // set date picker
     if (_actualDate == nil)
@@ -255,7 +267,6 @@
     _chooseDateSegmentedControl = nil;
     _titleNavigationBar = nil;
     _titleNavigationItem = nil;
-    _titleNavigationLabel = nil;
     _segmentedControlNavigationBAr = nil;
     [super viewDidUnload];
 }

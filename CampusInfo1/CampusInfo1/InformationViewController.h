@@ -41,7 +41,9 @@
     IBOutlet UINavigationBar    *_titleNavigationBar;
     /*! @var _titleNavigationItem Used as navigation item for title */
     IBOutlet UINavigationItem   *_titleNavigationItem;
-
+    IBOutlet UILabel            *_titleLabel;
+    IBOutlet UILabel            *_descriptionLabel;
+    
     /*! @var _informationResponsibleTableCell Handles cell, which displays the responsible information */
     IBOutlet UITableViewCell    *_informationResponsibleTableCell;
     /*! @var _informationContactTableCell Handles cell, which displays the contact information */
@@ -58,6 +60,9 @@
 
 @property (nonatomic, retain) IBOutlet UINavigationBar              *_titleNavigationBar;
 @property (nonatomic, retain) IBOutlet UINavigationItem             *_titleNavigationItem;
+@property (nonatomic, retain) IBOutlet UILabel                      *_titleLabel;
+@property (nonatomic, retain) IBOutlet UILabel                      *_descriptionLabel;
+
 
 @property (nonatomic, retain) IBOutlet UITableViewCell              *_informationResponsibleTableCell;
 @property (nonatomic, retain) IBOutlet UITableViewCell              *_informationContactTableCell;

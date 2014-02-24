@@ -34,22 +34,22 @@
                         <navigationItem id="430" userLabel="TitleNavigationItem"/>
                     </items>
                 </navigationBar>
-                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="428" userLabel="TitleLabel">
-                    <rect key="frame" x="43" y="0.0" width="277" height="22"/>
+                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="428" userLabel="TitleLabel">
+                    <rect key="frame" x="0.0" y="1" width="320" height="22"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="22" id="636"/>
-                        <constraint firstAttribute="width" constant="277" id="645"/>
+                        <constraint firstAttribute="width" constant="320" id="645"/>
                     </constraints>
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="62" userLabel="GastronomyNameLabel">
-                    <rect key="frame" x="43" y="22" width="277" height="22"/>
+                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="62" userLabel="GastronomyNameLabel">
+                    <rect key="frame" x="1" y="12" width="320" height="32"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <constraints>
-                        <constraint firstAttribute="height" constant="22" id="638"/>
+                        <constraint firstAttribute="height" constant="32" id="638"/>
                     </constraints>
                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
@@ -104,15 +104,15 @@
                 <constraint firstItem="427" firstAttribute="leading" secondItem="1" secondAttribute="leading" id="435"/>
                 <constraint firstItem="427" firstAttribute="trailing" secondItem="1" secondAttribute="trailing" id="436"/>
                 <constraint firstItem="428" firstAttribute="trailing" secondItem="1" secondAttribute="trailing" id="447"/>
-                <constraint firstItem="428" firstAttribute="top" secondItem="1" secondAttribute="top" id="448"/>
+                <constraint firstItem="428" firstAttribute="top" secondItem="1" secondAttribute="top" constant="1" id="448"/>
                 <constraint firstItem="361" firstAttribute="top" secondItem="1" secondAttribute="top" constant="255" id="556"/>
                 <constraint firstItem="427" firstAttribute="top" secondItem="1" secondAttribute="top" id="576"/>
                 <constraint firstItem="361" firstAttribute="leading" secondItem="1" secondAttribute="leading" constant="140" id="603"/>
                 <constraint firstItem="16" firstAttribute="top" secondItem="427" secondAttribute="bottom" id="628"/>
                 <constraint firstItem="49" firstAttribute="top" secondItem="16" secondAttribute="bottom" id="629"/>
-                <constraint firstItem="62" firstAttribute="trailing" secondItem="1" secondAttribute="trailing" id="640"/>
+                <constraint firstItem="62" firstAttribute="trailing" secondItem="1" secondAttribute="trailing" constant="1" id="640"/>
                 <constraint firstItem="16" firstAttribute="top" secondItem="62" secondAttribute="bottom" id="643"/>
-                <constraint firstItem="428" firstAttribute="leading" secondItem="62" secondAttribute="leading" id="644"/>
+                <constraint firstItem="428" firstAttribute="leading" secondItem="62" secondAttribute="leading" constant="-1" id="644"/>
             </constraints>
             <simulatedStatusBarMetrics key="simulatedStatusBarMetrics"/>
             <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>

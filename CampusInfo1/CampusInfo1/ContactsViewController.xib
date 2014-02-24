@@ -8,6 +8,8 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ContactsViewController">
             <connections>
                 <outlet property="_contactsTable" destination="23" id="32"/>
+                <outlet property="_descriptionLabel" destination="k2l-lV-zoF" id="jFW-Ui-ZEn"/>
+                <outlet property="_titleLabel" destination="fR2-Xn-mZm" id="O8g-sZ-JnZ"/>
                 <outlet property="_titleNavigationBar" destination="99" id="126"/>
                 <outlet property="_titleNavigationItem" destination="103" id="127"/>
                 <outlet property="view" destination="1" id="3"/>
@@ -25,6 +27,22 @@
                         <navigationItem id="103" userLabel="DescriptionNavigationItem"/>
                     </items>
                 </navigationBar>
+                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fR2-Xn-mZm" userLabel="TitleLabel">
+                    <rect key="frame" x="0.0" y="1" width="320" height="22"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="22" id="pc3-5N-wuB"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="k2l-lV-zoF" userLabel="DescriptionLabel">
+                    <rect key="frame" x="0.0" y="20" width="320" height="0.0"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <nil key="highlightedColor"/>
+                </label>
                 <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="grouped" separatorStyle="default" allowsSelection="NO" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" translatesAutoresizingMaskIntoConstraints="NO" id="23" userLabel="ContactsTableView">
                     <rect key="frame" x="0.0" y="44" width="320" height="425"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -46,6 +64,12 @@
                 <constraint firstItem="23" firstAttribute="top" secondItem="99" secondAttribute="bottom" id="125"/>
                 <constraint firstItem="23" firstAttribute="leading" secondItem="1" secondAttribute="leading" id="134"/>
                 <constraint firstItem="23" firstAttribute="trailing" secondItem="1" secondAttribute="trailing" id="135"/>
+                <constraint firstItem="fR2-Xn-mZm" firstAttribute="leading" secondItem="k2l-lV-zoF" secondAttribute="leading" id="C9R-Ve-1xJ"/>
+                <constraint firstItem="fR2-Xn-mZm" firstAttribute="leading" secondItem="99" secondAttribute="leading" id="CvM-6p-4Ac"/>
+                <constraint firstItem="fR2-Xn-mZm" firstAttribute="trailing" secondItem="k2l-lV-zoF" secondAttribute="trailing" id="Ztz-kF-ZJd"/>
+                <constraint firstItem="23" firstAttribute="top" secondItem="fR2-Xn-mZm" secondAttribute="bottom" constant="21" id="eLu-fS-wbj"/>
+                <constraint firstItem="k2l-lV-zoF" firstAttribute="top" secondItem="1" secondAttribute="top" constant="20" symbolic="YES" id="fbh-4h-Lf0"/>
+                <constraint firstItem="fR2-Xn-mZm" firstAttribute="trailing" secondItem="99" secondAttribute="trailing" id="x13-p1-lj8"/>
             </constraints>
             <simulatedStatusBarMetrics key="simulatedStatusBarMetrics"/>
             <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>

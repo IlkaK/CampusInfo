@@ -85,6 +85,15 @@
 }
 
 /*!
+ * @function prefersStatusBarHidden
+ * Used to hide the iOS status bar with time and battery symbol.
+ */
+-(BOOL) prefersStatusBarHidden
+{
+    return YES;
+}
+
+/*!
  * @function viewDidLoad
  * The function is included, since class inherits from UIViewController.
  * Is called first time, the view is started for initialization.
@@ -102,20 +111,22 @@
     self._actualCalendarWeek = 0;
     
     // title
-    UIBarButtonItem *backButtonItem = [[UIBarButtonItem alloc] initWithTitle:LeftArrowSymbol style:UIBarButtonItemStylePlain target:self action:@selector(backToMensaOverview:)];
-    [backButtonItem setTintColor:_zhawColor._zhawOriginalBlue];
-    [_titleNavigationItem setLeftBarButtonItem :backButtonItem animated :true];
+    UIBarButtonItem *_backButtonItem = [[UIBarButtonItem alloc] initWithTitle:LeftArrowSymbol style:UIBarButtonItemStyleBordered target:self action:@selector(backToMensaOverview:)];
+    [_backButtonItem setTitleTextAttributes:@{NSForegroundColorAttributeName:_zhawColor._zhawWhite} forState:UIControlStateNormal];
+    [_titleNavigationItem setLeftBarButtonItem :_backButtonItem animated :true];
+    [_titleNavigationItem setTitle:@""];
     
     [_titleNavigationLabel setTextColor:_zhawColor._zhawWhite];
-    [_titleNavigationLabel setTextAlignment:UITextAlignmentCenter];
-    _titleNavigationLabel.text = MensaVCTitle;
-    _titleNavigationItem.title = @"";
+    [_titleNavigationLabel setTextAlignment:NSTextAlignmentCenter];
+    [_titleNavigationLabel setFont:[UIFont fontWithName:NavigationBarFont size:NavigationBarTitleSize]];
+    [_titleNavigationLabel setText:MensaVCTitle];
     
-    [_titleNavigationBar setTintColor:_zhawColor._zhawDarkerBlue];
+    [[UINavigationBar appearance] setBackgroundImage:[UIImage imageNamed:NavigationBarBackground] forBarMetrics:UIBarMetricsDefault];
     
-    _gastronomyLabel.text = [NSString stringWithFormat:@"%@",_actualGastronomy._name];
     [_gastronomyLabel setTextColor:_zhawColor._zhawWhite];
-    [_gastronomyLabel setTextAlignment:UITextAlignmentCenter];
+    [_gastronomyLabel setTextAlignment:NSTextAlignmentCenter];
+    [_gastronomyLabel setFont:[UIFont fontWithName:NavigationBarFont size:NavigationBarDescriptionSize]];
+    [_gastronomyLabel setText: [NSString stringWithFormat:@"%@",_actualGastronomy._name]];
     
     //----- Navigation Bar ----
     // set current day
@@ -123,20 +134,19 @@
 
     // set day navigator
     UIBarButtonItem *_rightButton = [[UIBarButtonItem alloc] initWithTitle:RightArrowSymbol
-                                                                     style:UIBarButtonItemStylePlain
+                                                                     style:UIBarButtonItemStyleBordered
                                                                     target:self
                                                                     action:@selector(dayAfter:)];
     UIBarButtonItem *_leftButton = [[UIBarButtonItem alloc] initWithTitle:LeftArrowSymbol
-                                                                    style:UIBarButtonItemStylePlain
+                                                                    style:UIBarButtonItemStyleBordered
                                                                    target:self
                                                                    action:@selector(dayBefore:)];
-    [_rightButton setTintColor:_zhawColor._zhawOriginalBlue];
-    [_leftButton  setTintColor:_zhawColor._zhawOriginalBlue];
+    [_rightButton setTitleTextAttributes:@{NSForegroundColorAttributeName:_zhawColor._zhawWhite} forState:UIControlStateNormal];
+    [_leftButton setTitleTextAttributes:@{NSForegroundColorAttributeName:_zhawColor._zhawWhite} forState:UIControlStateNormal];
     [_dayNavigationItem setLeftBarButtonItem :_leftButton animated :true];
     [_dayNavigationItem setRightBarButtonItem:_rightButton animated:true];
     
     [_dateButton useAlertStyle];
-    [_dateNavigationBar setTintColor:_zhawColor._zhawDarkerBlue];
     
     
     // ------ CHOOSE DATE FREELY ----

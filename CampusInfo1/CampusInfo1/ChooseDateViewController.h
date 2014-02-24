@@ -53,6 +53,7 @@
     IBOutlet UISegmentedControl         *_chooseDateSegmentedControl;
     /*! @var _segmentedControlNavigationBAr Used as background for the segmented control */
     IBOutlet UINavigationBar            *_segmentedControlNavigationBAr;
+    
     /*! @var _waitForChangeActivityIndicator Waiting indicator to show the user something is loading */
     IBOutlet UIActivityIndicatorView    *_waitForChangeActivityIndicator;
 
@@ -60,14 +61,11 @@
     IBOutlet UINavigationBar            *_titleNavigationBar;
     /*! @var _titleNavigationItem Used to show the back button to return to TimeTableOverviewController or MensaDetailViewController */
     IBOutlet UINavigationItem           *_titleNavigationItem;
-    /*! @var _titleNavigationLabel Shows the title of the view */
-    IBOutlet UILabel                    *_titleNavigationLabel;
 }
 
 
 @property (nonatomic, retain) IBOutlet UINavigationBar          *_titleNavigationBar;
 @property (nonatomic, retain) IBOutlet UINavigationItem         *_titleNavigationItem;
-@property (nonatomic, retain) IBOutlet UILabel                  *_titleNavigationLabel;
 
 @property (nonatomic, retain) NSDate                            *_actualDate;
 @property (nonatomic, retain) IBOutlet UIDatePicker             *_datePicker;

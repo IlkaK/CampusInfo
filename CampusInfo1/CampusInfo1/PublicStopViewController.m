@@ -48,7 +48,8 @@
 
 @synthesize _titleNavigationBar;
 @synthesize _titleNavigationItem;
-@synthesize _titleNavigationLabel;
+@synthesize _titleLabel;
+@synthesize _descriptionLabel;
 
 @synthesize _publicStopTableView;
 
@@ -59,7 +60,7 @@
 @synthesize _autocomplete;
 @synthesize _suggestions;
 
-@synthesize _zhawColors;
+@synthesize _zhawColor;
 
 /*!
  * @function initWithNibName
@@ -70,6 +71,16 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     return self;
 }
+
+/*!
+ * @function prefersStatusBarHidden
+ * Used to hide the iOS status bar with time and battery symbol.
+ */
+-(BOOL) prefersStatusBarHidden
+{
+    return YES;
+}
+
 
 /*!
  @function moveBackToPublicTransport
@@ -112,7 +123,7 @@
     [super viewDidLoad];
     
     // general initialization
-    _zhawColors = [[ColorSelection alloc]init];
+    _zhawColor = [[ColorSelection alloc]init];
     
     // handling of autocompletion while using station db
     _dbCachingForAutocomplete = [[DBCachingForAutocomplete alloc]init];
@@ -121,28 +132,31 @@
     //NSLog(@"count db station array: %i", [_stationDBArray count]);
     _autocomplete = [[Autocomplete alloc] initWithArray:_stationDBArray];
 
-    
     // title
-    UIBarButtonItem *backButtonItem = [[UIBarButtonItem alloc] initWithTitle:LeftArrowSymbol style:UIBarButtonItemStylePlain target:self action:@selector(moveBackToPublicTransport:)];
+    UIBarButtonItem *_backButtonItem = [[UIBarButtonItem alloc] initWithTitle:LeftArrowSymbol style:UIBarButtonItemStyleBordered target:self action:@selector(moveBackToPublicTransport:)];
+    [_backButtonItem setTitleTextAttributes:@{NSForegroundColorAttributeName:_zhawColor._zhawWhite} forState:UIControlStateNormal];
+    [_titleNavigationItem setLeftBarButtonItem :_backButtonItem animated :true];
+    [_titleNavigationItem setTitle:@""];
     
-    [backButtonItem setTintColor:_zhawColors._zhawOriginalBlue];
-    [_titleNavigationItem setLeftBarButtonItem :backButtonItem animated :true];
+    [_titleLabel setTextColor:_zhawColor._zhawWhite];
+    [_titleLabel setTextAlignment:NSTextAlignmentCenter];
+    [_titleLabel setFont:[UIFont fontWithName:NavigationBarFont size:NavigationBarTitleSize]];
+    [_titleLabel setText:PublicTransportVCTitle];
     
-    [_titleNavigationLabel setTextColor:[UIColor whiteColor]];
-    _titleNavigationLabel.text = PublicTransportVCTitle;
-    _titleNavigationItem.title = @"";
+    [[UINavigationBar appearance] setBackgroundImage:[UIImage imageNamed:NavigationBarBackground] forBarMetrics:UIBarMetricsDefault];
     
-    [_titleNavigationLabel setTextAlignment:UITextAlignmentCenter];
+    [_descriptionLabel setTextColor:_zhawColor._zhawWhite];
+    [_descriptionLabel setTextAlignment:NSTextAlignmentCenter];
+    [_descriptionLabel setFont:[UIFont fontWithName:NavigationBarFont size:NavigationBarDescriptionSize]];
+    [_descriptionLabel setText: PublicTransportVCSearchStop];
     
-    [_titleNavigationBar setTintColor:_zhawColors._zhawDarkerBlue];
-    
+    // initialize variables/ fields
     self._stationArray = [[StationArrayDto alloc] init:nil];
-    
     _actualStationName = @"";
     
     self._publicStopTextField.delegate = self;
  	_publicStopTextField.autocorrectionType = UITextAutocorrectionTypeNo;
-    [_publicStopTextField setTextColor:_zhawColors._zhawFontGrey];
+    [_publicStopTextField setTextColor:_zhawColor._zhawFontGrey];
 }
 
 /*!
@@ -177,7 +191,6 @@
 {
     _titleNavigationBar = nil;
     _titleNavigationItem = nil;
-    _titleNavigationLabel = nil;
     _publicStopTableView = nil;
     _publicStopTextField = nil;
     [super viewDidUnload];
@@ -228,10 +241,9 @@
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
     }
     cell.textLabel.text = [_suggestions objectAtIndex:indexPath.row];
-    [cell.textLabel setTextColor:_zhawColors._zhawFontGrey];
+    [cell.textLabel setTextColor:_zhawColor._zhawFontGrey];
     return cell;
 }
-
 
 
 @end

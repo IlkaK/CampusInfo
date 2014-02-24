@@ -65,20 +65,17 @@
     /*! @var _mensaDetailVC Handles delegate from and to MensaDetailViewController, is triggered when one of the table cells (gastronomic facilities) is chosen. */    
     IBOutlet MensaDetailViewController  *_mensaDetailVC;
 
-    /*! @var _titleNavigationBar Used as background for title */
+    /*! @var _titleNavigationBar Shows the title */
     IBOutlet UINavigationBar            *_titleNavigationBar;
     /*! @var _titleNavigationItem Used as navigation item for title */
     IBOutlet UINavigationItem           *_titleNavigationItem;
-    /*! @var _titleNavigationLabel Shows the title */
-    IBOutlet UILabel                    *_titleNavigationLabel;
+    /*! @var _dateNavigationBar Shows the date */
+    IBOutlet UINavigationBar            *_dateNavigationBar;
+    /*! @var _titleNavigationItem Used as navigation item for date */
+    IBOutlet UINavigationItem           *_dateNavigationItem;
     
     /*! @var _waitForChangeActivityIndicator Waiting indicator to show the user something is loading */
     IBOutlet UIActivityIndicatorView    *_waitForChangeActivityIndicator;
-    
-    /*! @var _dateNavigationBar Used as background for showing the date */
-    IBOutlet UINavigationBar            *_dateNavigationBar;
-    /*! @var _dateLabel Shows the actual date */
-    IBOutlet UILabel                    *_dateLabel;
     
     /*! @var _noConnectionLabel If there is no connection to server, the label is displayed to inform the user */
     IBOutlet UILabel                    *_noConnectionLabel;
@@ -94,7 +91,8 @@
 
 @property (nonatomic, retain) IBOutlet UINavigationBar              *_titleNavigationBar;
 @property (nonatomic, retain) IBOutlet UINavigationItem             *_titleNavigationItem;
-@property (nonatomic, retain) IBOutlet UILabel                      *_titleNavigationLabel;
+@property (nonatomic, retain) IBOutlet UINavigationBar              *_dateNavigationBar;
+@property (nonatomic, retain) IBOutlet UINavigationItem             *_dateNavigationItem;
 
 @property (nonatomic, retain) IBOutlet UIActivityIndicatorView      *_waitForChangeActivityIndicator;
 
@@ -106,12 +104,8 @@
 @property (nonatomic, retain) LanguageTranslation                   *_translator;
 @property (nonatomic, retain) ColorSelection                        *_zhawColor;
 
-@property (nonatomic, retain) IBOutlet UILabel                      *_dateLabel;
-@property (nonatomic, retain) IBOutlet UINavigationBar              *_dateNavigationBar;
-
 @property (nonatomic, retain) IBOutlet UILabel                      *_noConnectionLabel;
 @property (nonatomic, retain) IBOutlet GradientButton               *_noConnectionButton;
-
 
 @property (nonatomic, assign) int                                       _tableRows;
 

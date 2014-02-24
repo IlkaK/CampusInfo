@@ -12,7 +12,6 @@
                 <outlet property="_segmentedControlNavigationBAr" destination="443" id="449"/>
                 <outlet property="_titleNavigationBar" destination="328" id="356"/>
                 <outlet property="_titleNavigationItem" destination="332" id="357"/>
-                <outlet property="_titleNavigationLabel" destination="330" id="358"/>
                 <outlet property="_waitForChangeActivityIndicator" destination="287" id="299"/>
                 <outlet property="view" destination="1" id="3"/>
             </connections>
@@ -29,18 +28,11 @@
                         <navigationItem id="332" userLabel="TitleNavigationItem"/>
                     </items>
                 </navigationBar>
-                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Label" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="320" translatesAutoresizingMaskIntoConstraints="NO" id="330" userLabel="TitleLabel">
-                    <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                    <nil key="highlightedColor"/>
-                </label>
                 <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="443" userLabel="ButtonNavigationBar">
                     <rect key="frame" x="0.0" y="44" width="320" height="44"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                     <items>
-                        <navigationItem title="Title" id="444"/>
+                        <navigationItem id="444"/>
                     </items>
                 </navigationBar>
                 <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="bar" translatesAutoresizingMaskIntoConstraints="NO" id="300" userLabel="ChooseDateSegmentedControl">
@@ -76,7 +68,7 @@
                     </date>
                     <locale key="locale" localeIdentifier="de_CH"/>
                     <timeZone key="timeZone" name="America/Los_Angeles">
-                        <mutableData key="data">
+                        <data key="data">
 VFppZgAAAAAAAAAAAAAAAAAAAAAAAAAEAAAABAAAAAAAAAC5AAAABAAAABCepkign7sVkKCGKqChmveQ
 y4kaoNIj9HDSYSYQ1v50INiArZDa/tGg28CQENzes6DdqayQ3r6VoN+JjpDgnneg4WlwkOJ+WaDjSVKQ
 5F47oOUpNJDmR1gg5xJREOgnOiDo8jMQ6gccIOrSFRDr5v4g7LH3EO3G4CDukdkQ76/8oPBxuxDxj96g
@@ -94,7 +86,7 @@ f5gqkAABAAECAwEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEA
 AQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEA
 AQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEA
 AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
-</mutableData>
+</data>
                     </timeZone>
                     <connections>
                         <action selector="datePickerChanged:" destination="-1" eventType="valueChanged" id="424"/>
@@ -108,18 +100,14 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                 <constraint firstItem="328" firstAttribute="leading" secondItem="1" secondAttribute="leading" id="337"/>
                 <constraint firstItem="328" firstAttribute="trailing" secondItem="1" secondAttribute="trailing" id="340"/>
                 <constraint firstItem="328" firstAttribute="top" secondItem="1" secondAttribute="top" id="345"/>
-                <constraint firstItem="330" firstAttribute="trailing" secondItem="1" secondAttribute="trailing" id="353"/>
-                <constraint firstItem="330" firstAttribute="top" secondItem="1" secondAttribute="top" id="355"/>
                 <constraint firstItem="287" firstAttribute="centerX" secondItem="300" secondAttribute="centerX" id="370"/>
                 <constraint firstItem="287" firstAttribute="top" secondItem="1" secondAttribute="top" constant="180" id="438"/>
                 <constraint firstItem="443" firstAttribute="leading" secondItem="1" secondAttribute="leading" id="445"/>
                 <constraint firstItem="443" firstAttribute="centerX" secondItem="300" secondAttribute="centerX" id="447"/>
                 <constraint firstItem="443" firstAttribute="trailing" secondItem="1" secondAttribute="trailing" id="448"/>
                 <constraint firstItem="443" firstAttribute="top" secondItem="328" secondAttribute="bottom" id="453"/>
-                <constraint firstItem="443" firstAttribute="top" secondItem="330" secondAttribute="bottom" id="454"/>
                 <constraint firstItem="4" firstAttribute="top" secondItem="300" secondAttribute="bottom" constant="8" symbolic="YES" id="455"/>
                 <constraint firstItem="4" firstAttribute="top" secondItem="443" secondAttribute="bottom" id="456"/>
-                <constraint firstItem="330" firstAttribute="leading" secondItem="1" secondAttribute="leading" id="457"/>
             </constraints>
             <simulatedStatusBarMetrics key="simulatedStatusBarMetrics"/>
             <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>

@@ -7,15 +7,14 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="MensaViewController">
             <connections>
-                <outlet property="_dateLabel" destination="28" id="32"/>
                 <outlet property="_dateNavigationBar" destination="270" id="323"/>
+                <outlet property="_dateNavigationItem" destination="271" id="6F0-eU-OxK"/>
                 <outlet property="_mensaDetailVC" destination="48" id="49"/>
                 <outlet property="_mensaOverviewTable" destination="12" id="24"/>
                 <outlet property="_noConnectionButton" destination="182" id="249"/>
                 <outlet property="_noConnectionLabel" destination="181" id="248"/>
                 <outlet property="_titleNavigationBar" destination="132" id="171"/>
                 <outlet property="_titleNavigationItem" destination="136" id="172"/>
-                <outlet property="_titleNavigationLabel" destination="134" id="173"/>
                 <outlet property="_waitForChangeActivityIndicator" destination="177" id="180"/>
                 <outlet property="view" destination="1" id="3"/>
             </connections>
@@ -32,13 +31,6 @@
                         <navigationItem id="136" userLabel="TitleNavigationItem"/>
                     </items>
                 </navigationBar>
-                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="134" userLabel="TitleLabel">
-                    <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                    <nil key="highlightedColor"/>
-                </label>
                 <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="270" userLabel="DateNavigationBar">
                     <rect key="frame" x="0.0" y="44" width="320" height="44"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
@@ -46,13 +38,6 @@
                         <navigationItem id="271"/>
                     </items>
                 </navigationBar>
-                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Date" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="28" userLabel="DateLabel">
-                    <rect key="frame" x="0.0" y="44" width="320" height="44"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    <nil key="highlightedColor"/>
-                </label>
                 <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="12" userLabel="MensaTableView">
                     <rect key="frame" x="0.0" y="89" width="320" height="351"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -102,27 +87,19 @@
                 <constraint firstItem="132" firstAttribute="leading" secondItem="1" secondAttribute="leading" id="140"/>
                 <constraint firstItem="132" firstAttribute="trailing" secondItem="1" secondAttribute="trailing" id="144"/>
                 <constraint firstItem="132" firstAttribute="top" secondItem="1" secondAttribute="top" id="148"/>
-                <constraint firstItem="134" firstAttribute="trailing" secondItem="1" secondAttribute="trailing" id="154"/>
-                <constraint firstItem="28" firstAttribute="leading" secondItem="1" secondAttribute="leading" id="175"/>
-                <constraint firstItem="28" firstAttribute="trailing" secondItem="1" secondAttribute="trailing" id="176"/>
                 <constraint firstItem="177" firstAttribute="top" secondItem="1" secondAttribute="top" constant="255" id="198"/>
                 <constraint firstItem="270" firstAttribute="leading" secondItem="1" secondAttribute="leading" id="281"/>
                 <constraint firstItem="270" firstAttribute="trailing" secondItem="1" secondAttribute="trailing" id="283"/>
                 <constraint firstItem="12" firstAttribute="leading" secondItem="1" secondAttribute="leading" id="287"/>
                 <constraint firstItem="12" firstAttribute="trailing" secondItem="1" secondAttribute="trailing" id="288"/>
-                <constraint firstItem="134" firstAttribute="leading" secondItem="1" secondAttribute="leading" id="290"/>
                 <constraint firstItem="270" firstAttribute="top" secondItem="132" secondAttribute="bottom" id="308"/>
-                <constraint firstItem="28" firstAttribute="centerX" secondItem="177" secondAttribute="centerX" id="309"/>
                 <constraint firstItem="12" firstAttribute="top" secondItem="1" secondAttribute="top" constant="89" id="310"/>
-                <constraint firstItem="28" firstAttribute="top" secondItem="132" secondAttribute="bottom" id="322"/>
-                <constraint firstItem="134" firstAttribute="bottom" secondItem="132" secondAttribute="bottom" id="324"/>
-                <constraint firstItem="134" firstAttribute="top" secondItem="1" secondAttribute="top" id="325"/>
-                <constraint firstItem="28" firstAttribute="bottom" secondItem="270" secondAttribute="bottom" id="326"/>
                 <constraint firstItem="181" firstAttribute="top" secondItem="1" secondAttribute="top" constant="99" id="328"/>
                 <constraint firstItem="182" firstAttribute="bottom" secondItem="181" secondAttribute="bottom" id="330"/>
                 <constraint firstItem="182" firstAttribute="top" secondItem="181" secondAttribute="top" id="331"/>
                 <constraint firstItem="181" firstAttribute="leading" secondItem="1" secondAttribute="leading" constant="134" id="332"/>
                 <constraint firstAttribute="trailing" secondItem="182" secondAttribute="trailing" constant="1" id="334"/>
+                <constraint firstItem="177" firstAttribute="centerX" secondItem="270" secondAttribute="centerX" id="JmR-8f-RfP"/>
             </constraints>
             <simulatedStatusBarMetrics key="simulatedStatusBarMetrics"/>
             <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>

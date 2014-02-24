@@ -53,8 +53,11 @@
     IBOutlet UINavigationBar            *_titleNavigationBar;
     /*! @var _titleNavigationItem Used as navigation item for title */
     IBOutlet UINavigationItem           *_titleNavigationItem;
-    /*! @var _titleNavigationLabel Shows the title */
-    IBOutlet UILabel                    *_titleNavigationLabel;
+    /*! @var _titleLabel Shows the title */
+    IBOutlet UILabel                    *_titleLabel;
+    /*! @var _descriptionLabel Shows the description */
+    IBOutlet UILabel                    *_descriptionLabel;
+    
     
     /*! @var _publicStopTableView Shows all suggestions for given text in _publicStopTextField */
     IBOutlet UITableView                *_publicStopTableView;
@@ -71,7 +74,7 @@
     Autocomplete                        *_autocomplete;
     
     /*! @var _zhawColor Holds all color schemes needed */
-    ColorSelection                      *_zhawColors;
+    ColorSelection                      *_zhawColor;
 }
 
 @property (nonatomic, retain) StationArrayDto                       *_stationArray;
@@ -80,7 +83,8 @@
 
 @property (nonatomic, retain) IBOutlet UINavigationBar              *_titleNavigationBar;
 @property (nonatomic, retain) IBOutlet UINavigationItem             *_titleNavigationItem;
-@property (nonatomic, retain) IBOutlet UILabel                      *_titleNavigationLabel;
+@property (nonatomic, retain) IBOutlet UILabel                      *_titleLabel;
+@property (nonatomic, retain) IBOutlet UILabel                      *_descriptionLabel;
 
 @property (nonatomic, retain) IBOutlet UITableView                  *_publicStopTableView;
 
@@ -91,7 +95,7 @@
 @property (strong, nonatomic) NSMutableArray                        *_suggestions;
 @property (strong, nonatomic) Autocomplete                          *_autocomplete;
 
-@property (strong, nonatomic) ColorSelection                        *_zhawColors;
+@property (strong, nonatomic) ColorSelection                        *_zhawColor;
 
 /*!
  @function publicStopTextFieldChanged
