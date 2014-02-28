@@ -8,7 +8,7 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="EventsViewController">
             <connections>
                 <outlet property="_eventsTable" destination="30" id="85"/>
-                <outlet property="_noConnectionButton" destination="31" id="123"/>
+                <outlet property="_noConnectionButton" destination="31" id="HvF-pY-Kcq"/>
                 <outlet property="_noConnectionLabel" destination="32" id="87"/>
                 <outlet property="_titleNavigationBar" destination="94" id="118"/>
                 <outlet property="_titleNavigationItem" destination="96" id="119"/>
@@ -39,15 +39,15 @@
                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="31" userLabel="TryAgainButton" customClass="GradientButton">
-                    <rect key="frame" x="195" y="51" width="90" height="21"/>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="31" userLabel="TryAgainButton">
+                    <rect key="frame" x="195" y="51" width="90" height="22"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <color key="backgroundColor" red="1" green="0.975308642" blue="0.975308642" alpha="1" colorSpace="calibratedRGB"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="90" id="44"/>
-                        <constraint firstAttribute="height" constant="21" id="45"/>
+                        <constraint firstAttribute="height" constant="22" id="45"/>
                     </constraints>
-                    <fontDescription key="fontDescription" name="Helvetica-Bold" family="Helvetica" pointSize="10"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="10"/>
                     <color key="tintColor" red="1" green="0.9825405733" blue="0.99563514330000003" alpha="1" colorSpace="calibratedRGB"/>
                     <state key="normal" title="erneut versuchen">
                         <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
@@ -61,11 +61,11 @@
                     </connections>
                 </button>
                 <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" allowsSelection="NO" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="30" userLabel="NewsTableView">
-                    <rect key="frame" x="0.0" y="81" width="320" height="363"/>
+                    <rect key="frame" x="0.0" y="44" width="320" height="524"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <constraints>
-                        <constraint firstAttribute="height" constant="363" id="132"/>
+                        <constraint firstAttribute="height" constant="524" id="132"/>
                     </constraints>
                     <connections>
                         <outlet property="dataSource" destination="-1" id="91"/>
@@ -85,8 +85,8 @@
                 <constraint firstItem="94" firstAttribute="trailing" secondItem="1" secondAttribute="trailing" id="100"/>
                 <constraint firstItem="94" firstAttribute="leading" secondItem="1" secondAttribute="leading" id="102"/>
                 <constraint firstItem="94" firstAttribute="top" secondItem="1" secondAttribute="top" id="110"/>
-                <constraint firstItem="31" firstAttribute="baseline" secondItem="32" secondAttribute="baseline" constant="-7" id="138"/>
-                <constraint firstItem="30" firstAttribute="top" secondItem="31" secondAttribute="bottom" constant="9" id="142"/>
+                <constraint firstItem="31" firstAttribute="baseline" secondItem="32" secondAttribute="baseline" constant="-6" id="138"/>
+                <constraint firstItem="30" firstAttribute="top" secondItem="31" secondAttribute="bottom" constant="-29" id="142"/>
                 <constraint firstAttribute="trailing" secondItem="31" secondAttribute="trailing" constant="35" id="143"/>
                 <constraint firstItem="32" firstAttribute="top" secondItem="31" secondAttribute="top" constant="1" id="154"/>
                 <constraint firstItem="32" firstAttribute="top" secondItem="1" secondAttribute="top" constant="52" id="155"/>

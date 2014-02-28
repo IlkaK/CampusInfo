@@ -109,8 +109,10 @@
     // set no connection label and button
     _noConnectionButton.hidden = YES;
     _noConnectionLabel.hidden = YES;
-    [_noConnectionButton useAlertStyle];
+    [_noConnectionButton setTitleColor:_zhawColor._zhawWhite forState:UIControlStateNormal];
+    [_noConnectionButton setBackgroundImage:[UIImage imageNamed:NoConnectionButtonBackground]  forState:UIControlStateNormal];
     [_noConnectionLabel setTextColor:_zhawColor._zhawFontGrey];
+    
     
     // set activity indicator
     _waitForLoadingActivityIndicator.hidesWhenStopped = YES;

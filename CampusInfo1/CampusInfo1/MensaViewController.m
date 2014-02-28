@@ -141,7 +141,8 @@
     
     _noConnectionButton.hidden = YES;
     _noConnectionLabel.hidden = YES;
-    [_noConnectionButton useAlertStyle];
+    [_noConnectionButton setTitleColor:_zhawColor._zhawWhite forState:UIControlStateNormal];
+    [_noConnectionButton setBackgroundImage:[UIImage imageNamed:NoConnectionButtonBackground]  forState:UIControlStateNormal];
     [_noConnectionLabel setTextColor:_zhawColor._zhawFontGrey];
     
     // ----- DETAIL PAGE -----

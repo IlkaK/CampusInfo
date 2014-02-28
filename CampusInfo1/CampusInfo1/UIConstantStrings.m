@@ -33,6 +33,9 @@ NSString * const NavigationBarBackground = @"NavigationBarBackground.png";
 NSString * const NavigationBarFont = @"HelveticaNeue";
 float const NavigationBarTitleSize = 17.0;
 float const NavigationBarDescriptionSize = 14.0;
+NSString * const SegmentedControlBackground = @"segmentedcontrol.png";
+NSString * const DateButtonBackground = @"dateButton.png";
+NSString * const NoConnectionButtonBackground = @"noConnectionButton";
 
 // strings for maps/standorte
 NSString * const MapsVCTitle        = @"Standorte";

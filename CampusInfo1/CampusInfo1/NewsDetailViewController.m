@@ -53,7 +53,6 @@
 @synthesize _descriptionNavigationItem;
 @synthesize _descriptionTitleLabel;
 
-@synthesize _titleNavigationLabel;
 @synthesize _titleNavigationBar;
 @synthesize _titleNavigationItem;
 
@@ -91,24 +90,22 @@
     _dateFormatter = [[DateFormation alloc] init];
     
     // title
-    UIBarButtonItem *backButtonItem = [[UIBarButtonItem alloc] initWithTitle:LeftArrowSymbol style:UIBarButtonItemStylePlain target:self action:@selector(moveBackToMenuOverview:)];
+    UIBarButtonItem *_backButtonItem = [[UIBarButtonItem alloc] initWithTitle:LeftArrowSymbol style:UIBarButtonItemStyleBordered target:self action:@selector(moveBackToMenuOverview:)];
+    [_backButtonItem setTitleTextAttributes:@{NSForegroundColorAttributeName:_zhawColor._zhawWhite} forState:UIControlStateNormal];
+    [_titleNavigationItem setLeftBarButtonItem :_backButtonItem animated :true];
+    [_titleNavigationItem setTitle:NewsDetailVCTitle];
     
-    [backButtonItem setTintColor:_zhawColor._zhawOriginalBlue];
-    [_titleNavigationItem setLeftBarButtonItem :backButtonItem animated :true];
-    
-    [_titleNavigationLabel setTextColor:_zhawColor._zhawWhite];
-    _titleNavigationLabel.text = NewsDetailVCTitle;
-    _titleNavigationItem.title = @"";
-    
-    [_titleNavigationBar setTintColor:_zhawColor._zhawDarkerBlue];
-    [_titleNavigationLabel setTextAlignment:NSTextAlignmentCenter];
+    [[UINavigationBar appearance] setTitleTextAttributes:@{
+                                                           UITextAttributeTextColor: _zhawColor._zhawWhite,
+                                                           UITextAttributeFont: [UIFont fontWithName:NavigationBarFont size:NavigationBarTitleSize],
+                                                           }];
+    [[UINavigationBar appearance] setBackgroundImage:[UIImage imageNamed:NavigationBarBackground] forBarMetrics:UIBarMetricsDefault];
 
-    
     // setting description and date labels
     [_descriptionTitleLabel setTextColor:_zhawColor._zhawWhite];
     [_descriptionTitleLabel setTextAlignment:NSTextAlignmentCenter];
-    [_descriptionNavigationBar setTintColor:_zhawColor._zhawDarkerBlue];    
-    _descriptionNavigationItem.title = @"";
+    [_descriptionTitleLabel setFont:[UIFont fontWithName:NavigationBarFont size:NavigationBarDescriptionSize]];
+    [_descriptionNavigationItem setTitle:@""];
     
     [_dateLabel setTextColor:_zhawColor._zhawLightGrey];
 }
@@ -134,7 +131,6 @@
     _contentWebView = nil;
     _titleNavigationBar = nil;
     _titleNavigationItem = nil;
-    _titleNavigationLabel = nil;
     _descriptionNavigationBar = nil;
     _descriptionNavigationItem = nil;
     [super viewDidUnload];

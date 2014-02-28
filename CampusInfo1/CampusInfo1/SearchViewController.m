@@ -59,7 +59,6 @@
 
 @synthesize _titleNavigationBar;
 @synthesize _titleNavigationItem;
-@synthesize _titleNavigationLabel;
 
 @synthesize _waitForChangeActivityIndicator;
 
@@ -92,24 +91,26 @@
     
     
     // set title
-    UIBarButtonItem *backButtonItem = [[UIBarButtonItem alloc] initWithTitle:LeftArrowSymbol style:UIBarButtonItemStylePlain target:self action:@selector(moveBackToTimeTable:)];
+    // title
+    UIBarButtonItem *_backButtonItem = [[UIBarButtonItem alloc] initWithTitle:LeftArrowSymbol style:UIBarButtonItemStyleBordered target:self action:@selector(moveBackToTimeTable:)];
+    [_backButtonItem setTitleTextAttributes:@{NSForegroundColorAttributeName:_zhawColor._zhawWhite} forState:UIControlStateNormal];
+    [_titleNavigationItem setLeftBarButtonItem :_backButtonItem animated :true];
+    [_titleNavigationItem setTitle:SearchVCTitle];
+    [[UINavigationBar appearance] setTitleTextAttributes:@{
+                                                           UITextAttributeTextColor: _zhawColor._zhawWhite,
+                                                           UITextAttributeFont: [UIFont fontWithName:NavigationBarFont size:NavigationBarTitleSize],
+                                                           }];
+    [[UINavigationBar appearance] setBackgroundImage:[UIImage imageNamed:NavigationBarBackground] forBarMetrics:UIBarMetricsDefault];
     
-    [backButtonItem setTintColor:_zhawColor._zhawOriginalBlue];
-    [_titleNavigationItem setLeftBarButtonItem :backButtonItem animated :true];
-    
-    [_titleNavigationLabel setTextColor:_zhawColor._zhawWhite];
-    _titleNavigationLabel.text = SearchVCTitle;
-    _titleNavigationItem.title = @"";
-    [_titleNavigationLabel setTextAlignment:NSTextAlignmentCenter];
-    
-    [_titleNavigationBar setTintColor:_zhawColor._zhawDarkerBlue];
-    
-    
-    // set segmented control
-    [_searchSegmentedControl setTintColor:_zhawColor._zhawOriginalBlue];
+    // segmented controls
     [self.view bringSubviewToFront:_searchSegmentedControl];
-    [_segmentedControlNavigationBar setTintColor:_zhawColor._zhawDarkerBlue];
-    
+    [_searchSegmentedControl setBackgroundImage:[UIImage imageNamed:SegmentedControlBackground] forState:UIControlStateNormal barMetrics:UIBarMetricsDefault];
+    [_searchSegmentedControl setTitleTextAttributes:@{
+                                                          NSForegroundColorAttributeName : _zhawColor._zhawWhite,
+                                                          UITextAttributeTextColor: _zhawColor._zhawWhite,
+                                                          UITextAttributeFont: [UIFont fontWithName:NavigationBarFont size:NavigationBarDescriptionSize],
+                                                          }
+                                               forState:UIControlStateNormal];
     
     // set picker view
     [_chooseSearchType selectRow:1 inComponent:0 animated:NO];
@@ -127,6 +128,16 @@
     _waitForChangeActivityIndicator.hidden = YES;
     [_waitForChangeActivityIndicator setColor:_zhawColor._zhawOriginalBlue];
     [self.view bringSubviewToFront:_waitForChangeActivityIndicator];
+}
+
+
+/*!
+ * @function prefersStatusBarHidden
+ * Used to hide the iOS status bar with time and battery symbol.
+ */
+-(BOOL) prefersStatusBarHidden
+{
+    return YES;
 }
 
 /*!
@@ -253,7 +264,6 @@
     _searchSegmentedControl = nil;
     _titleNavigationBar = nil;
     _titleNavigationItem = nil;
-    _titleNavigationLabel = nil;
     _segmentedControlNavigationBar = nil;
     _waitForChangeActivityIndicator = nil;
     [super viewDidUnload];

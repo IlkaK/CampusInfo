@@ -150,6 +150,16 @@
 }
 
 
+
+/*!
+ * @function prefersStatusBarHidden
+ * Used to hide the iOS status bar with time and battery symbol.
+ */
+-(BOOL) prefersStatusBarHidden
+{
+    return YES;
+}
+
 /*!
  * @function setNewScheduleWithAcronym
  * Sets title and strings to new acronym data, also loads new ScheduleDto for it.
@@ -567,29 +577,35 @@
 	}
     // clear border colour between table cells
     _timeTable.separatorColor = _zhawColor._zhawLightGrey;
-    
+    // --
     
     // title
-    //[_acronymLabel setBackgroundColor:_zhawColor._zhawOriginalBlue];
-    [_acronymLabel setTextColor:_zhawColor._zhawWhite];
-    [_acronymLabel setTextAlignment:NSTextAlignmentCenter];
-    
-    UIBarButtonItem *backButtonItem = [[UIBarButtonItem alloc] initWithTitle:LeftArrowSymbol style:UIBarButtonItemStylePlain target:self action:@selector(moveBackToMenuOverview:)];
-    [backButtonItem setTintColor:_zhawColor._zhawOriginalBlue];
-    
-    [_titleNavigationItem setLeftBarButtonItem :backButtonItem animated :true];
+    UIBarButtonItem *_backButtonItem = [[UIBarButtonItem alloc] initWithTitle:LeftArrowSymbol style:UIBarButtonItemStyleBordered target:self action:@selector(moveBackToMenuOverview:)];
+    [_backButtonItem setTitleTextAttributes:@{NSForegroundColorAttributeName:_zhawColor._zhawWhite} forState:UIControlStateNormal];
+    [_titleNavigationItem setLeftBarButtonItem :_backButtonItem animated :true];
+    [_titleNavigationItem setTitle:@""];
     
     [_titleNavigationLabel setTextColor:_zhawColor._zhawWhite];
-    _titleNavigationLabel.text = TimeTableOverVCTitle;
-    _titleNavigationItem.title = @"";
-    
-    [_titleNavigationBar setTintColor:_zhawColor._zhawDarkerBlue];
     [_titleNavigationLabel setTextAlignment:NSTextAlignmentCenter];
+    [_titleNavigationLabel setFont:[UIFont fontWithName:NavigationBarFont size:NavigationBarTitleSize]];
+    [_titleNavigationLabel setText:TimeTableOverVCTitle];
+    
+    [[UINavigationBar appearance] setBackgroundImage:[UIImage imageNamed:NavigationBarBackground] forBarMetrics:UIBarMetricsDefault];
+    
+    [_acronymLabel setTextColor:_zhawColor._zhawWhite];
+    [_acronymLabel setTextAlignment:NSTextAlignmentCenter];
+    [_acronymLabel setFont:[UIFont fontWithName:NavigationBarFont size:NavigationBarDescriptionSize]];
+   
     
     // segmented controls below the title
-    [_timeTableSegmentedControl setTintColor:_zhawColor._zhawOriginalBlue];
     [self.view bringSubviewToFront:_timeTableSegmentedControl];
-    [_segmentedControlNavigationBar setTintColor:_zhawColor._zhawDarkerBlue];
+    [_timeTableSegmentedControl setBackgroundImage:[UIImage imageNamed:SegmentedControlBackground] forState:UIControlStateNormal barMetrics:UIBarMetricsDefault];
+    [_timeTableSegmentedControl setTitleTextAttributes:@{
+                                                          NSForegroundColorAttributeName : _zhawColor._zhawWhite,
+                                                          UITextAttributeTextColor: _zhawColor._zhawWhite,
+                                                          UITextAttributeFont: [UIFont fontWithName:NavigationBarFont size:NavigationBarDescriptionSize],
+                                                          }
+                                               forState:UIControlStateNormal];
     
     // set activity indicator
     _waitForLoadingActivityIndicator.hidesWhenStopped = YES;
@@ -604,21 +620,20 @@
     
     // set day navigator
     UIBarButtonItem *_rightButton = [[UIBarButtonItem alloc] initWithTitle:RightArrowSymbol
-                                                                     style:UIBarButtonItemStylePlain
+                                                                     style:UIBarButtonItemStyleBordered
                                                                     target:self
                                                                     action:@selector(dayAfter:)];
     UIBarButtonItem *_leftButton = [[UIBarButtonItem alloc] initWithTitle:LeftArrowSymbol
-                                                                    style:UIBarButtonItemStylePlain
+                                                                    style:UIBarButtonItemStyleBordered
                                                                    target:self
                                                                    action:@selector(dayBefore:)];
-    [_rightButton setTintColor:_zhawColor._zhawOriginalBlue];
-    [_leftButton  setTintColor:_zhawColor._zhawOriginalBlue];
+    [_rightButton setTitleTextAttributes:@{NSForegroundColorAttributeName:_zhawColor._zhawWhite} forState:UIControlStateNormal];
+    [_leftButton setTitleTextAttributes:@{NSForegroundColorAttributeName:_zhawColor._zhawWhite} forState:UIControlStateNormal];
+
     [_dayNavigator setLeftBarButtonItem :_leftButton animated :true];
     [_dayNavigator setRightBarButtonItem:_rightButton animated:true];
-    [_dayNavigationBar setTintColor:_zhawColor._zhawDarkerBlue];
-    
-    
-    [_dateButton useAlertStyle];
+    [_dateButton setTitleColor:_zhawColor._zhawWhite forState:UIControlStateNormal];
+    [_dateButton setBackgroundImage:[UIImage imageNamed:DateButtonBackground]  forState:UIControlStateNormal];
 
     // ----- DETAIL PAGE -----
     if (_detailsVC == nil)
@@ -664,10 +679,11 @@
 
     
     // ------ INITIALIZE NO CONNECTION BUTTON ------
-    [_noConnectionButton useAlertStyle];
     _noConnectionButton.hidden = YES;
     _noConnectionLabel.hidden = YES;
     [_noConnectionLabel setTextColor:_zhawColor._zhawFontGrey];
+    [_noConnectionButton setTitleColor:_zhawColor._zhawWhite forState:UIControlStateNormal];
+    [_noConnectionButton setBackgroundImage:[UIImage imageNamed:NoConnectionButtonBackground]  forState:UIControlStateNormal];
      [self.view bringSubviewToFront:_noConnectionButton];
      [self.view bringSubviewToFront:_noConnectionLabel];
      

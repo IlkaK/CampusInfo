@@ -195,10 +195,13 @@
 		E16C642A17ABDC4600BEDBB3 /* EmergencyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E16C642817ABDC4600BEDBB3 /* EmergencyViewController.m */; };
 		E16C642B17ABDC4600BEDBB3 /* EmergencyViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E16C642917ABDC4600BEDBB3 /* EmergencyViewController.xib */; };
 		E17842D2178309160059EA3C /* DBCachingForAutocomplete.m in Sources */ = {isa = PBXBuildFile; fileRef = E17842D1178309160059EA3C /* DBCachingForAutocomplete.m */; };
+		E1817F9118C080AC001351C1 /* dateButton.png in Resources */ = {isa = PBXBuildFile; fileRef = E1817F9018C080AC001351C1 /* dateButton.png */; };
+		E1817F9318C0814B001351C1 /* noConnectionButton.png in Resources */ = {isa = PBXBuildFile; fileRef = E1817F9218C0814B001351C1 /* noConnectionButton.png */; };
 		E184106B18B75CCB007CD204 /* NavigationBarBackground@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E184106A18B75CCB007CD204 /* NavigationBarBackground@2x.png */; };
 		E184106D18B75CE1007CD204 /* NavigationBarHome@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E184106C18B75CE1007CD204 /* NavigationBarHome@2x.png */; };
 		E184107118B79205007CD204 /* NewsSmallTableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E184107018B79205007CD204 /* NewsSmallTableCell.xib */; };
 		E184107318B79219007CD204 /* NewsLargeTableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E184107218B79219007CD204 /* NewsLargeTableCell.xib */; };
+		E19313DE18BF4D8300A37F23 /* segmentedcontrol.png in Resources */ = {isa = PBXBuildFile; fileRef = E19313DD18BF4D8300A37F23 /* segmentedcontrol.png */; };
 		E195FF36178188A30065DF05 /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = E195FF35178188A30065DF05 /* libsqlite3.dylib */; };
 		E198FD5317BE240400D5BE9B /* NewsDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E198FD5117BE240400D5BE9B /* NewsDetailViewController.m */; };
 		E198FD5417BE240400D5BE9B /* NewsDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E198FD5217BE240400D5BE9B /* NewsDetailViewController.xib */; };
@@ -277,7 +280,6 @@
 		E1CF302517E73D2900398830 /* CharTranslation.m in Sources */ = {isa = PBXBuildFile; fileRef = E1CF302417E73D2900398830 /* CharTranslation.m */; };
 		E1CF302817E75C5300398830 /* URLConstantStrings.m in Sources */ = {isa = PBXBuildFile; fileRef = E1CF302717E75C5300398830 /* URLConstantStrings.m */; };
 		E1D35BD717C3593300CCDB1D /* MenuPlanArrayDto.m in Sources */ = {isa = PBXBuildFile; fileRef = E1D35BD617C3593300CCDB1D /* MenuPlanArrayDto.m */; };
-		E1D48A5B1757856400BB1652 /* GradientButton.m in Sources */ = {isa = PBXBuildFile; fileRef = E1D48A5A1757856400BB1652 /* GradientButton.m */; };
 		E1D7EFF7178DA03D00100293 /* DateFormation.m in Sources */ = {isa = PBXBuildFile; fileRef = E1D7EFF6178DA03D00100293 /* DateFormation.m */; };
 		E1DA967C1740E41C00CA206F /* SettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E1DA967A1740E41C00CA206F /* SettingsViewController.m */; };
 		E1DA967D1740E41C00CA206F /* SettingsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E1DA967B1740E41C00CA206F /* SettingsViewController.xib */; };
@@ -552,10 +554,13 @@
 		E16C642917ABDC4600BEDBB3 /* EmergencyViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EmergencyViewController.xib; sourceTree = "<group>"; };
 		E17842D0178309160059EA3C /* DBCachingForAutocomplete.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DBCachingForAutocomplete.h; sourceTree = "<group>"; };
 		E17842D1178309160059EA3C /* DBCachingForAutocomplete.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DBCachingForAutocomplete.m; sourceTree = "<group>"; };
+		E1817F9018C080AC001351C1 /* dateButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = dateButton.png; path = CampusInfo1/resources/button/dateButton.png; sourceTree = "<group>"; };
+		E1817F9218C0814B001351C1 /* noConnectionButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = noConnectionButton.png; path = CampusInfo1/resources/button/noConnectionButton.png; sourceTree = "<group>"; };
 		E184106A18B75CCB007CD204 /* NavigationBarBackground@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "NavigationBarBackground@2x.png"; path = "CampusInfo1/resources/navigationbar/NavigationBarBackground@2x.png"; sourceTree = "<group>"; };
 		E184106C18B75CE1007CD204 /* NavigationBarHome@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "NavigationBarHome@2x.png"; path = "CampusInfo1/resources/navigationbar/NavigationBarHome@2x.png"; sourceTree = "<group>"; };
 		E184107018B79205007CD204 /* NewsSmallTableCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NewsSmallTableCell.xib; sourceTree = "<group>"; };
 		E184107218B79219007CD204 /* NewsLargeTableCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NewsLargeTableCell.xib; sourceTree = "<group>"; };
+		E19313DD18BF4D8300A37F23 /* segmentedcontrol.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = segmentedcontrol.png; path = CampusInfo1/resources/segmented_control/segmentedcontrol.png; sourceTree = "<group>"; };
 		E195FF35178188A30065DF05 /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
 		E198FD5017BE240400D5BE9B /* NewsDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewsDetailViewController.h; sourceTree = "<group>"; };
 		E198FD5117BE240400D5BE9B /* NewsDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewsDetailViewController.m; sourceTree = "<group>"; };
@@ -593,8 +598,6 @@
 		E1CF302717E75C5300398830 /* URLConstantStrings.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = URLConstantStrings.m; sourceTree = "<group>"; };
 		E1D35BD517C3593300CCDB1D /* MenuPlanArrayDto.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MenuPlanArrayDto.h; sourceTree = "<group>"; };
 		E1D35BD617C3593300CCDB1D /* MenuPlanArrayDto.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MenuPlanArrayDto.m; sourceTree = "<group>"; };
-		E1D48A591757856400BB1652 /* GradientButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GradientButton.h; sourceTree = "<group>"; };
-		E1D48A5A1757856400BB1652 /* GradientButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GradientButton.m; sourceTree = "<group>"; };
 		E1D7EFF5178DA03D00100293 /* DateFormation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DateFormation.h; sourceTree = "<group>"; };
 		E1D7EFF6178DA03D00100293 /* DateFormation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DateFormation.m; sourceTree = "<group>"; };
 		E1DA96791740E41C00CA206F /* SettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingsViewController.h; sourceTree = "<group>"; };
@@ -981,6 +984,8 @@
 		A35A344E152082F600181E3F /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				E1817F8D18C07DB2001351C1 /* button */,
+				E19313DA18BF4B1300A37F23 /* segmented_control */,
 				279F09AF17DF0FB3006A599D /* navigationbar */,
 				E1C0388B17D8B8580064966D /* social_media */,
 				27222D5017D784B100279075 /* menuOverview */,
@@ -1233,6 +1238,23 @@
 			name = Settings;
 			sourceTree = "<group>";
 		};
+		E1817F8D18C07DB2001351C1 /* button */ = {
+			isa = PBXGroup;
+			children = (
+				E1817F9218C0814B001351C1 /* noConnectionButton.png */,
+				E1817F9018C080AC001351C1 /* dateButton.png */,
+			);
+			name = button;
+			sourceTree = "<group>";
+		};
+		E19313DA18BF4B1300A37F23 /* segmented_control */ = {
+			isa = PBXGroup;
+			children = (
+				E19313DD18BF4D8300A37F23 /* segmentedcontrol.png */,
+			);
+			name = segmented_control;
+			sourceTree = "<group>";
+		};
 		E1A6AAD317CF366400CC0EDD /* maps */ = {
 			isa = PBXGroup;
 			children = (
@@ -1255,8 +1277,6 @@
 				E13D3B5817412F0500F534DB /* ChooseDateViewController.h */,
 				E13D3B5917412F0500F534DB /* ChooseDateViewController.m */,
 				E13D3B5A17412F0500F534DB /* ChooseDateViewController.xib */,
-				E1D48A591757856400BB1652 /* GradientButton.h */,
-				E1D48A5A1757856400BB1652 /* GradientButton.m */,
 				E104C047178C397C0020EEB4 /* LanguageTranslation.h */,
 				E104C048178C397C0020EEB4 /* LanguageTranslation.m */,
 				E1D7EFF5178DA03D00100293 /* DateFormation.h */,
@@ -1418,6 +1438,7 @@
 				2700DD2F1699F854002906D0 /* ThreeSlotsThreeRoomsTableCell.xib in Resources */,
 				276ED474173BE5CA00EF79D5 /* EmptyTableCell.xib in Resources */,
 				275ACACD173D36C90091B266 /* SixSlotsTwoRoomsTableCell.xib in Resources */,
+				E1817F9318C0814B001351C1 /* noConnectionButton.png in Resources */,
 				275ACACF173D3BB60091B266 /* SixSlotsOneRoomTableCell.xib in Resources */,
 				275ACAD1173D4AD20091B266 /* TwoSlotSixRoomsTableCell.xib in Resources */,
 				E1DA967D1740E41C00CA206F /* SettingsViewController.xib in Resources */,
@@ -1483,6 +1504,7 @@
 				E184107118B79205007CD204 /* NewsSmallTableCell.xib in Resources */,
 				279F09CE17DF0FE6006A599D /* NavigationBarSocialMedia.png in Resources */,
 				279F09CF17DF0FE6006A599D /* NavigationBarSocialMedia@2x.png in Resources */,
+				E19313DE18BF4D8300A37F23 /* segmentedcontrol.png in Resources */,
 				279F09D017DF0FE6006A599D /* NavigationBarStandorte.png in Resources */,
 				E184106D18B75CE1007CD204 /* NavigationBarHome@2x.png in Resources */,
 				279F09D117DF0FE6006A599D /* NavigationBarStandorte@2x.png in Resources */,
@@ -1525,6 +1547,7 @@
 				279F0A1E17DF168A006A599D /* AppIconsSchriftStandorteFeedback.png in Resources */,
 				279F0A1F17DF168A006A599D /* AppIconsSchriftStandorteFeedback@2x.png in Resources */,
 				279F0A2017DF168A006A599D /* AppIconsSchriftStundenplanFeedback.png in Resources */,
+				E1817F9118C080AC001351C1 /* dateButton.png in Resources */,
 				E184106B18B75CCB007CD204 /* NavigationBarBackground@2x.png in Resources */,
 				279F0A2117DF168A006A599D /* AppIconsSchriftStundenplanFeedback@2x.png in Resources */,
 				279F0A2317DF1FC6006A599D /* NavigationBarHome.png in Resources */,
@@ -1594,7 +1617,6 @@
 				277EDF79155D60DC002BCE1F /* ScheduleCourseDto.m in Sources */,
 				E1DA967C1740E41C00CA206F /* SettingsViewController.m in Sources */,
 				E13D3B5B17412F0500F534DB /* ChooseDateViewController.m in Sources */,
-				E1D48A5B1757856400BB1652 /* GradientButton.m in Sources */,
 				E1BC14C2175F8D4900FE2854 /* Autocomplete.m in Sources */,
 				E17842D2178309160059EA3C /* DBCachingForAutocomplete.m in Sources */,
 				E104C049178C397C0020EEB4 /* LanguageTranslation.m in Sources */,

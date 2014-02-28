@@ -11,7 +11,7 @@
                 <outlet property="_dateNavigationItem" destination="271" id="6F0-eU-OxK"/>
                 <outlet property="_mensaDetailVC" destination="48" id="49"/>
                 <outlet property="_mensaOverviewTable" destination="12" id="24"/>
-                <outlet property="_noConnectionButton" destination="182" id="249"/>
+                <outlet property="_noConnectionButton" destination="182" id="GRr-hr-hKA"/>
                 <outlet property="_noConnectionLabel" destination="181" id="248"/>
                 <outlet property="_titleNavigationBar" destination="132" id="171"/>
                 <outlet property="_titleNavigationItem" destination="136" id="172"/>
@@ -51,7 +51,7 @@
                     </connections>
                 </tableView>
                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="keine Verbindung" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="181" userLabel="NoConnectionLabel">
-                    <rect key="frame" x="134" y="99" width="90" height="21"/>
+                    <rect key="frame" x="79" y="99" width="90" height="21"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="21" id="192"/>
@@ -61,13 +61,13 @@
                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="182" userLabel="TryAgainButton" customClass="GradientButton">
-                    <rect key="frame" x="224" y="99" width="95" height="21"/>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="182" userLabel="TryAgainButton">
+                    <rect key="frame" x="177" y="99" width="90" height="22"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <constraints>
-                        <constraint firstAttribute="width" constant="95" id="191"/>
+                        <constraint firstAttribute="width" constant="90" id="191"/>
                     </constraints>
-                    <fontDescription key="fontDescription" name="Helvetica-Bold" family="Helvetica" pointSize="10"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="10"/>
                     <state key="normal" title="erneut versuchen">
                         <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -95,10 +95,10 @@
                 <constraint firstItem="270" firstAttribute="top" secondItem="132" secondAttribute="bottom" id="308"/>
                 <constraint firstItem="12" firstAttribute="top" secondItem="1" secondAttribute="top" constant="89" id="310"/>
                 <constraint firstItem="181" firstAttribute="top" secondItem="1" secondAttribute="top" constant="99" id="328"/>
-                <constraint firstItem="182" firstAttribute="bottom" secondItem="181" secondAttribute="bottom" id="330"/>
+                <constraint firstItem="182" firstAttribute="bottom" secondItem="181" secondAttribute="bottom" constant="1" id="330"/>
                 <constraint firstItem="182" firstAttribute="top" secondItem="181" secondAttribute="top" id="331"/>
-                <constraint firstItem="181" firstAttribute="leading" secondItem="1" secondAttribute="leading" constant="134" id="332"/>
-                <constraint firstAttribute="trailing" secondItem="182" secondAttribute="trailing" constant="1" id="334"/>
+                <constraint firstItem="181" firstAttribute="leading" secondItem="1" secondAttribute="leading" constant="79" id="332"/>
+                <constraint firstAttribute="trailing" secondItem="182" secondAttribute="trailing" constant="53" id="334"/>
                 <constraint firstItem="177" firstAttribute="centerX" secondItem="270" secondAttribute="centerX" id="JmR-8f-RfP"/>
             </constraints>
             <simulatedStatusBarMetrics key="simulatedStatusBarMetrics"/>

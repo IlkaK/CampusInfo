@@ -35,13 +35,11 @@
 
 #import <UIKit/UIKit.h>
 #import "GastronomicFacilityDto.h"
-#import "GradientButton.h"
 #import "DateFormation.h"
 #import "ChooseDateViewController.h"
 #import "MenuDto.h"
 #import "MenuPlanArrayDto.h"
 #import "ColorSelection.h"
-#import "GradientButton.h"
 
 @interface MensaDetailViewController : UIViewController <ChooseDateViewDelegate, UITableViewDataSource, UITableViewDelegate>
 {
@@ -67,8 +65,8 @@
     IBOutlet UINavigationItem           *_dayNavigationItem;
     /*! @var _dateNavigationBar Used as background for showing the date */
     IBOutlet UINavigationBar            *_dateNavigationBar;
-    /*! @var _dateButton Used to switch to ChooseDateViewController to change the date */    
-    IBOutlet GradientButton             *_dateButton;
+    /*! @var _dateButton Used to switch to ChooseDateViewController to change the date */
+    IBOutlet UIButton                   *_dateButton;
     
     /*! @var _chooseDateVC Handles delegate from and to ChooseDateViewController, is triggered when _dateButton is clicked */
     IBOutlet ChooseDateViewController   *_chooseDateVC;
@@ -96,9 +94,9 @@
 
 @property (nonatomic, retain) GastronomicFacilityDto                    *_actualGastronomy;
 
-@property (nonatomic, retain) IBOutlet UINavigationItem                 *_dayNavigationItem;
-@property (nonatomic, retain) IBOutlet GradientButton                   *_dateButton;
 @property (nonatomic, retain) IBOutlet UINavigationBar                  *_dateNavigationBar;
+@property (nonatomic, retain) IBOutlet UINavigationItem                 *_dayNavigationItem;
+@property (nonatomic, retain) IBOutlet UIButton                         *_dateButton;
 
 @property (nonatomic, retain) DateFormation                             *_dateFormatter;
 

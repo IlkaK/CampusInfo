@@ -39,7 +39,6 @@
 #import "MensaDetailViewController.h"
 #import "GastronomicFacilityDto.h"
 #import "GastronomicFacilityArrayDto.h"
-#import "GradientButton.h"
 #import "ColorSelection.h"
 
 @interface MensaViewController : UIViewController<UITableViewDelegate>
@@ -80,8 +79,7 @@
     /*! @var _noConnectionLabel If there is no connection to server, the label is displayed to inform the user */
     IBOutlet UILabel                    *_noConnectionLabel;
     /*! @var _noConnectionButton If there is no connection to server, the button is displayed, so the user can trigger another trial to connect to the server */
-    IBOutlet GradientButton             *_noConnectionButton;
-
+    IBOutlet UIButton                   *_noConnectionButton;
     /*! @var _tableRows Holds the number of table rows */
     int                                 _tableRows;
 }
@@ -105,7 +103,7 @@
 @property (nonatomic, retain) ColorSelection                        *_zhawColor;
 
 @property (nonatomic, retain) IBOutlet UILabel                      *_noConnectionLabel;
-@property (nonatomic, retain) IBOutlet GradientButton               *_noConnectionButton;
+@property (nonatomic, retain) IBOutlet UIButton                     *_noConnectionButton;
 
 @property (nonatomic, assign) int                                       _tableRows;
 

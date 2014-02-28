@@ -217,9 +217,8 @@
     [[UINavigationBar appearance] setBackgroundImage:[UIImage imageNamed:NavigationBarBackground] forBarMetrics:UIBarMetricsDefault];
 
     // segmented controls
-    //[_chooseDateSegmentedControl setTintColor:_zhawColor._zhawOriginalBlue];
     [self.view bringSubviewToFront:_chooseDateSegmentedControl];
-    //[_segmentedControlNavigationBAr setTintColor:_zhawColor._zhawDarkerBlue];
+    [_chooseDateSegmentedControl setBackgroundImage:[UIImage imageNamed:SegmentedControlBackground] forState:UIControlStateNormal barMetrics:UIBarMetricsDefault];
     [_chooseDateSegmentedControl setTitleTextAttributes:@{
                                                           NSForegroundColorAttributeName : _zhawColor._zhawWhite,
                                                           UITextAttributeTextColor: _zhawColor._zhawWhite,

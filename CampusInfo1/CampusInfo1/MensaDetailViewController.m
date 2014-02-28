@@ -146,8 +146,8 @@
     [_dayNavigationItem setLeftBarButtonItem :_leftButton animated :true];
     [_dayNavigationItem setRightBarButtonItem:_rightButton animated:true];
     
-    [_dateButton useAlertStyle];
-    
+    [_dateButton setTitleColor:_zhawColor._zhawWhite forState:UIControlStateNormal];
+    [_dateButton setBackgroundImage:[UIImage imageNamed:DateButtonBackground]  forState:UIControlStateNormal];
     
     // ------ CHOOSE DATE FREELY ----
     if (_chooseDateVC == nil)

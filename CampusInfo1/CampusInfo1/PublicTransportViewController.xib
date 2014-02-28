@@ -7,7 +7,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="PublicTransportViewController">
             <connections>
-                <outlet property="_changeDirectionButton" destination="1463" id="1507"/>
+                <outlet property="_changeDirectionButton" destination="1463" id="gcG-t9-vky"/>
                 <outlet property="_chooseNewStartButton" destination="543" id="1058"/>
                 <outlet property="_chooseNewStopButton" destination="1012" id="1066"/>
                 <outlet property="_dateTitleLabel" destination="320" id="1792"/>
@@ -20,7 +20,7 @@
                 <outlet property="_lastStop2Button" destination="986" id="1064"/>
                 <outlet property="_publicStopVC" destination="207" id="264"/>
                 <outlet property="_publicTransportTableView" destination="198" id="291"/>
-                <outlet property="_searchButton" destination="189" id="213"/>
+                <outlet property="_searchButton" destination="189" id="eLQ-zB-pGx"/>
                 <outlet property="_startLabel" destination="702" id="1053"/>
                 <outlet property="_stopLabel" destination="898" id="1060"/>
                 <outlet property="_timeTitleLabel" destination="324" id="1793"/>
@@ -223,14 +223,14 @@
                         <action selector="changeStopToLast2:" destination="-1" eventType="touchUpInside" id="1065"/>
                     </connections>
                 </button>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="189" userLabel="searchButton" customClass="GradientButton">
-                    <rect key="frame" x="10" y="165" width="134" height="32"/>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="189" userLabel="searchButton">
+                    <rect key="frame" x="10" y="160" width="134" height="32"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="134" id="1750"/>
                         <constraint firstAttribute="height" constant="32" id="1753"/>
                     </constraints>
-                    <fontDescription key="fontDescription" type="boldSystem" pointSize="13"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="10"/>
                     <state key="normal" title="Verbindung suchen">
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
@@ -238,13 +238,13 @@
                         <action selector="startConnectionSearch:" destination="-1" eventType="touchUpInside" id="212"/>
                     </connections>
                 </button>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1463" userLabel="changeDirectionButton" customClass="GradientButton">
-                    <rect key="frame" x="160" y="165" width="98" height="32"/>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1463" userLabel="changeDirectionButton">
+                    <rect key="frame" x="164" y="160" width="90" height="32"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <constraints>
-                        <constraint firstAttribute="width" constant="98" id="1491"/>
+                        <constraint firstAttribute="width" constant="90" id="1491"/>
                     </constraints>
-                    <fontDescription key="fontDescription" type="boldSystem" pointSize="13"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="10"/>
                     <state key="normal" title="Gegenrichtung">
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
@@ -315,11 +315,11 @@
                     <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                 </label>
                 <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="198" userLabel="connectionTableView">
-                    <rect key="frame" x="0.0" y="243" width="320" height="216"/>
+                    <rect key="frame" x="0.0" y="243" width="320" height="325"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <constraints>
-                        <constraint firstAttribute="height" constant="216" id="1627"/>
+                        <constraint firstAttribute="height" constant="325" id="1627"/>
                     </constraints>
                     <connections>
                         <outlet property="dataSource" destination="-1" id="265"/>
@@ -383,13 +383,13 @@
                 <constraint firstItem="189" firstAttribute="trailing" secondItem="320" secondAttribute="trailing" id="1752"/>
                 <constraint firstItem="986" firstAttribute="top" secondItem="1" secondAttribute="top" constant="163" id="1763"/>
                 <constraint firstItem="319" firstAttribute="top" secondItem="1" secondAttribute="top" constant="200" id="1769"/>
-                <constraint firstItem="1463" firstAttribute="trailing" secondItem="322" secondAttribute="trailing" id="1777"/>
+                <constraint firstItem="1463" firstAttribute="trailing" secondItem="322" secondAttribute="trailing" constant="-4" id="1777"/>
                 <constraint firstAttribute="trailing" secondItem="323" secondAttribute="trailing" constant="16" id="1778"/>
                 <constraint firstItem="189" firstAttribute="top" secondItem="1463" secondAttribute="top" id="1782"/>
                 <constraint firstItem="189" firstAttribute="bottom" secondItem="1463" secondAttribute="bottom" id="1784"/>
                 <constraint firstItem="324" firstAttribute="top" secondItem="322" secondAttribute="top" id="1785"/>
                 <constraint firstItem="324" firstAttribute="top" secondItem="320" secondAttribute="top" id="1786"/>
-                <constraint firstItem="1463" firstAttribute="bottom" secondItem="986" secondAttribute="bottom" id="1787"/>
+                <constraint firstItem="1463" firstAttribute="bottom" secondItem="986" secondAttribute="bottom" constant="-5" id="1787"/>
                 <constraint firstItem="321" firstAttribute="top" secondItem="1" secondAttribute="top" constant="201" id="1788"/>
                 <constraint firstAttribute="bottom" secondItem="1431" secondAttribute="bottom" constant="211" id="1798"/>
             </constraints>

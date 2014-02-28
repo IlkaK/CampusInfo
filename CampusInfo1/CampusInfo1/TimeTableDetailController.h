@@ -94,7 +94,7 @@
     IBOutlet UILabel                    *_timeLabel;
 
     /*! @var _zhawColors Holds all color schemes needed */
-    ColorSelection                      *_zhawColors;
+    ColorSelection                      *_zhawColor;
 }
 
 @property (nonatomic, retain) id<TimeTableDetailViewDelegate>   _timeTableDetailViewDelegate;
@@ -115,7 +115,7 @@
 @property (nonatomic, retain) IBOutlet UINavigationItem         *_timeNavigationItem;
 @property (nonatomic, retain) IBOutlet UILabel                  *_timeLabel;
 
-@property (nonatomic, retain) ColorSelection                    *_zhawColors;
+@property (nonatomic, retain) ColorSelection                    *_zhawColor;
 
 @property (nonatomic, retain) IBOutlet UIActivityIndicatorView  *_waitForChangeActivityIndicator;
 

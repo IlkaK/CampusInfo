@@ -38,12 +38,10 @@
 
 @interface NewsDetailViewController : UIViewController
 {
-    /*! @var _titleNavigationBar Used as background for title */
+    /*! @var _titleNavigationBar Shows the title */
     IBOutlet UINavigationBar    *_titleNavigationBar;
     /*! @var _titleNavigationItem Used as navigation item for title */
     IBOutlet UINavigationItem   *_titleNavigationItem;
-    /*! @var _titleNavigationLabel Shows the title */
-    IBOutlet UILabel            *_titleNavigationLabel;    
     
     /*! @var _descriptionNavigationBar Used as background for description of the news item */
     IBOutlet UINavigationBar    *_descriptionNavigationBar;
@@ -67,7 +65,6 @@
 
 @property (nonatomic, retain) UINavigationBar                       *_titleNavigationBar;
 @property (nonatomic, retain) UINavigationItem                      *_titleNavigationItem;
-@property (nonatomic, retain) UILabel                               *_titleNavigationLabel;
 
 @property (nonatomic, retain) UINavigationBar                       *_descriptionNavigationBar;
 @property (nonatomic, retain) UINavigationItem                      *_descriptionNavigationItem;

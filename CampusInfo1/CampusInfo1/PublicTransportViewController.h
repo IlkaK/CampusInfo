@@ -35,7 +35,6 @@
  */
 
 #import <UIKit/UIKit.h>
-#import "GradientButton.h"
 #import "PublicStopViewController.h"
 #import "ConnectionArrayDto.h"
 #import "DateFormation.h"
@@ -107,10 +106,9 @@
     IBOutlet UIButton                   *_chooseNewStopButton;
     
     /*! @var _searchButton Triggers searching for new connections */
-    IBOutlet GradientButton             *_searchButton;
+    IBOutlet UIButton                   *_searchButton;
     /*! @var _changeDirectionButton Switches start and stop station*/
-    IBOutlet GradientButton             *_changeDirectionButton;
-    
+    IBOutlet UIButton *_changeDirectionButton;
     /*! @var _waitForChangeActivityIndicator Waiting indicator to show the user something is loading */
     IBOutlet UIActivityIndicatorView    *_waitForChangeActivityIndicator;
     
@@ -166,8 +164,8 @@
 @property (nonatomic, retain) IBOutlet UIButton                     *_lastStop2Button;
 @property (nonatomic, retain) IBOutlet UIButton                     *_chooseNewStopButton;
 
-@property (nonatomic, retain) IBOutlet GradientButton               *_searchButton;
-@property (nonatomic, retain) IBOutlet GradientButton               *_changeDirectionButton;
+@property (nonatomic, retain) IBOutlet UIButton                     *_searchButton;
+@property (nonatomic, retain) IBOutlet UIButton                     *_changeDirectionButton;
 
 @property (nonatomic, retain) IBOutlet UIActivityIndicatorView      *_waitForChangeActivityIndicator;
 

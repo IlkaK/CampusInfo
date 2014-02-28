@@ -66,7 +66,7 @@
 @synthesize _timeNavigationBar;
 @synthesize _timeNavigationItem;
 
-@synthesize _zhawColors;
+@synthesize _zhawColor;
 
 /*!
  * @function initWithNibName
@@ -76,6 +76,16 @@
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     return self;
+}
+
+
+/*!
+ * @function prefersStatusBarHidden
+ * Used to hide the iOS status bar with time and battery symbol.
+ */
+-(BOOL) prefersStatusBarHidden
+{
+    return YES;
 }
 
 
@@ -110,37 +120,38 @@
     [super viewDidLoad];
     
     // general initialization
-    _zhawColors = [[ColorSelection alloc]init];
+    _zhawColor = [[ColorSelection alloc]init];
 
     // set title
-    UIBarButtonItem *backButtonItem = [[UIBarButtonItem alloc] initWithTitle:LeftArrowSymbol style:UIBarButtonItemStylePlain target:self action:@selector(moveBackToTimeTable:)];
+    UIBarButtonItem *_backButtonItem = [[UIBarButtonItem alloc] initWithTitle:LeftArrowSymbol style:UIBarButtonItemStyleBordered target:self action:@selector(moveBackToTimeTable:)];
+    [_backButtonItem setTitleTextAttributes:@{NSForegroundColorAttributeName:_zhawColor._zhawWhite} forState:UIControlStateNormal];
+    [_titleNavigationItem setLeftBarButtonItem :_backButtonItem animated :true];
+    [_titleNavigationItem setTitle:@""];
     
-    [backButtonItem setTintColor:_zhawColors._zhawOriginalBlue];
-    [_titleNavigationItem setLeftBarButtonItem :backButtonItem animated :true];
-    _titleNavigationItem.title = @"";
-    [_titleNavigationBar setTintColor:_zhawColors._zhawDarkerBlue];
-    
-    [_titleNavigationLabel setTextColor:_zhawColors._zhawWhite];
-    _titleNavigationLabel.text = TimeTableOverVCTitle;
+    [_titleNavigationLabel setTextColor:_zhawColor._zhawWhite];
     [_titleNavigationLabel setTextAlignment:NSTextAlignmentCenter];
+    [_titleNavigationLabel setFont:[UIFont fontWithName:NavigationBarFont size:NavigationBarTitleSize]];
+    [_titleNavigationLabel setText:TimeTableOverVCTitle];
     
-    [_timeTableDescriptionLabel setTextColor:_zhawColors._zhawWhite];
-    [_timeTableDescriptionLabel setText:_dayAndAcronymString];
+    [[UINavigationBar appearance] setBackgroundImage:[UIImage imageNamed:NavigationBarBackground] forBarMetrics:UIBarMetricsDefault];
+    
+    [_timeTableDescriptionLabel setTextColor:_zhawColor._zhawWhite];
     [_timeTableDescriptionLabel setTextAlignment:NSTextAlignmentCenter];
+    [_timeTableDescriptionLabel setFont:[UIFont fontWithName:NavigationBarFont size:NavigationBarDescriptionSize]];
+    [_timeTableDescriptionLabel setText:_dayAndAcronymString];
     
     
     [_timeNavigationItem setTitle:@""];
-    [_timeNavigationBar setTintColor:_zhawColors._zhawDarkerBlue];
     
-    [_timeLabel setTextColor:_zhawColors._zhawWhite];
-    [_timeLabel setText:_timeString];
+    [_timeLabel setTextColor:_zhawColor._zhawWhite];
     [_timeLabel setTextAlignment:NSTextAlignmentCenter];
-    
+    [_timeLabel setFont:[UIFont fontWithName:NavigationBarFont size:NavigationBarDescriptionSize]];
+    [_timeLabel setText:_timeString];    
 
     // set default values for spinner/activity indicator
     _waitForChangeActivityIndicator.hidesWhenStopped = YES;
     _waitForChangeActivityIndicator.hidden = YES;
-    [_waitForChangeActivityIndicator setColor:_zhawColors._zhawOriginalBlue];
+    [_waitForChangeActivityIndicator setColor:_zhawColor._zhawOriginalBlue];
     [self.view bringSubviewToFront:_waitForChangeActivityIndicator];
     
     // set table controller
@@ -416,8 +427,8 @@
         UILabel         *_labelValue       = (UILabel *) [_cell viewWithTag:2];
         UIButton        *_detailButton     = (UIButton *)[_cell viewWithTag:3];
         
-        [_labelDescription setTextColor:_zhawColors._zhawFontGrey];
-        [_labelValue setTextColor:_zhawColors._zhawFontGrey];
+        [_labelDescription setTextColor:_zhawColor._zhawFontGrey];
+        [_labelValue setTextColor:_zhawColor._zhawFontGrey];
     
         _labelDescription.text  = [_descriptionArray objectAtIndex:indexPath.section];
         _labelValue.text        = [_detailArray      objectAtIndex:indexPath.section];;
@@ -445,14 +456,14 @@
         UIButton        *_valueButton      = (UIButton *) [_cell viewWithTag:2];
         UIButton        *_detailButton     = (UIButton *) [_cell viewWithTag:3];
         
-        [_labelDescription setTextColor:_zhawColors._zhawFontGrey];
+        [_labelDescription setTextColor:_zhawColor._zhawFontGrey];
         
         _labelDescription.text  = [_descriptionArray objectAtIndex:indexPath.section];
 
         NSMutableAttributedString *_titleValueButton = [[NSMutableAttributedString alloc] initWithString:[_detailArray objectAtIndex:indexPath.section]];
         
         [_titleValueButton addAttribute:NSUnderlineStyleAttributeName value:[NSNumber numberWithInteger:NSUnderlineStyleSingle] range:NSMakeRange(0, [_titleValueButton length])];
-        [_titleValueButton addAttribute:NSForegroundColorAttributeName value:_zhawColors._zhawFontGrey range:NSMakeRange(0, [_titleValueButton length])];        
+        [_titleValueButton addAttribute:NSForegroundColorAttributeName value:_zhawColor._zhawFontGrey range:NSMakeRange(0, [_titleValueButton length])];
         
         [_valueButton setAttributedTitle:_titleValueButton forState:UIControlStateNormal];
         [_valueButton addTarget:self action:@selector(changeToSchedule:event:) forControlEvents:UIControlEventTouchUpInside];

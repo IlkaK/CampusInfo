@@ -47,7 +47,6 @@
 #import "SearchViewController.h"
 #import "SettingsViewController.h"
 #import "ColorSelection.h"
-#import "GradientButton.h"
 
 @class ScheduleDto;
 @class DayDto;
@@ -55,7 +54,6 @@
 @class TimeTableDetailController;
 @class SearchViewController;
 @class SettingsViewController;
-@class GradientButton;
 
 @interface TimeTableOverviewController : 
 UIViewController 
@@ -93,8 +91,8 @@ UIViewController
     IBOutlet UINavigationItem           *_dayNavigator;
     /*! @var _dayNavigationBar Used as background for the date buttons (back, forth, date switch) */
     IBOutlet UINavigationBar            *_dayNavigationBar;
-    /*! @var _dateButton Used to switch to ChooseDateViewController to change the date */    
-    IBOutlet GradientButton             *_dateButton;
+    /*! @var _dateButton Used to switch to ChooseDateViewController to change the date */
+    IBOutlet UIButton                     *_dateButton;
     
     /*! @var _timeTableSegmentedControl Has three buttons to switch to own stored acronym, today or search view */
     IBOutlet UISegmentedControl         *_timeTableSegmentedControl;
@@ -182,7 +180,7 @@ UIViewController
     IBOutlet UITableViewCell            *_errorMessageCell;
     
     /*! @var _noConnectionButton If there is no connection to server, the button is displayed, so the user can trigger another trial to connect to the server */
-    IBOutlet GradientButton             *_noConnectionButton;
+    IBOutlet UIButton                     *_noConnectionButton;
     /*! @var _noConnectionLabel If there is no connection to server, the label is displayed to inform the user */
     IBOutlet UILabel                    *_noConnectionLabel;
     
@@ -227,7 +225,7 @@ UIViewController
 
 @property (nonatomic, retain) IBOutlet UINavigationBar           *_dayNavigationBar;
 @property (nonatomic, retain) IBOutlet UINavigationItem          *_dayNavigator;
-@property (nonatomic, retain) IBOutlet GradientButton            *_dateButton;
+@property (nonatomic, retain) IBOutlet UIButton                  *_dateButton;
 
 @property (nonatomic, retain) IBOutlet UILabel                   *_acronymLabel;
 @property (nonatomic, retain) IBOutlet UILabel                   *_titleNavigationLabel;

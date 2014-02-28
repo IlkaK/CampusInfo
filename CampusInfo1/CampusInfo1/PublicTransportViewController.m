@@ -156,8 +156,10 @@
                                                            }];
     [[UINavigationBar appearance] setBackgroundImage:[UIImage imageNamed:NavigationBarBackground] forBarMetrics:UIBarMetricsDefault];
     
-    [_searchButton useAlertStyle];
-    [_changeDirectionButton useAlertStyle];
+    [_searchButton setTitleColor:_zhawColor._zhawWhite forState:UIControlStateNormal];
+    [_searchButton setBackgroundImage:[UIImage imageNamed:NoConnectionButtonBackground]  forState:UIControlStateNormal];
+    [_changeDirectionButton setTitleColor:_zhawColor._zhawWhite forState:UIControlStateNormal];
+    [_changeDirectionButton setBackgroundImage:[UIImage imageNamed:NoConnectionButtonBackground]  forState:UIControlStateNormal];
     
     if (_publicStopVC == nil)
     {

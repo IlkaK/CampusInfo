@@ -84,12 +84,10 @@
     /*! @var _classes Handling the connection to class ClassesDto, which is used to get all class acronyms */
     ClassesDto                      *_classes;
     
-    /*! @var _titleNavigationBar Used as background for the title in the view */
+    /*! @var _titleNavigationBar Shows the title in the view */
     IBOutlet UINavigationBar        *_titleNavigationBar;
     /*! @var _titleNavigationItem Used to show the back button to return to TimeTableOverviewController */
     IBOutlet UINavigationItem       *_titleNavigationItem;
-    /*! @var _titleNavigationLabel Shows the title of the view */
-    IBOutlet UILabel                *_titleNavigationLabel;
 
     /*! @var _waitForChangeActivityIndicator Waiting indicator to show the user something is loading */
     IBOutlet UIActivityIndicatorView *_waitForChangeActivityIndicator;
@@ -119,7 +117,6 @@
 
 @property (nonatomic, retain) IBOutlet UINavigationBar              *_titleNavigationBar;
 @property (nonatomic, retain) IBOutlet UINavigationItem             *_titleNavigationItem;
-@property (nonatomic, retain) IBOutlet UILabel                      *_titleNavigationLabel;
 
 @property (nonatomic, retain) IBOutlet UIActivityIndicatorView      *_waitForChangeActivityIndicator;
 

@@ -32,6 +32,9 @@ extern NSString * const NavigationBarBackground;
 extern NSString * const NavigationBarFont;
 extern float const NavigationBarTitleSize;
 extern float const NavigationBarDescriptionSize;
+extern NSString * const SegmentedControlBackground;
+extern NSString * const DateButtonBackground;
+extern NSString * const NoConnectionButtonBackground;
 
 
 // strings for maps/standorte
