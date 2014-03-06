@@ -272,6 +272,8 @@ extern NSString * const PublicTransportVCFromGerman ;
 extern NSString * const PublicTransportVCFromEnglish;
 extern NSString * const PublicTransportVCToGerman   ;
 extern NSString * const PublicTransportVCToEnglish  ;
+extern NSString * const PublicTransportVCStartGerman;
+extern NSString * const PublicTransportVCStopGerman ;
 
 // time table
 extern NSString * const TimeTableOverVCTitle;

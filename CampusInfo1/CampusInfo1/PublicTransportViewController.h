@@ -83,32 +83,10 @@
     /*! @var _storedStopStationArray Stores the last three stop stations searched so far */
     NSMutableArray                      *_storedStopStationArray;
     
-    /*! @var _startLabel Shows the start station used for searching the connections */
-    IBOutlet UILabel                    *_startLabel;
-    /*! @var _changeStartButtonIsActivated Stores if the start button is clicked */
-    BOOL                                _changeStartButtonIsActivated;
-    /*! @var _lastStart1Button Switches to the last searched start station */
-    IBOutlet UIButton                   *_lastStart1Button;
-    /*! @var _lastStart2Button Switches to the second last searched start station */
-    IBOutlet UIButton                   *_lastStart2Button;
-    /*! @var _chooseNewStartButton Enabled switching to PublicStopViewController to search for a new start station */
-    IBOutlet UIButton                   *_chooseNewStartButton;
-    
-    /*! @var _stopLabel Shows the stop station used for searching the connections */
-    IBOutlet UILabel                    *_stopLabel;
-    /*! @var _changeStopButtonIsActivated Stores if the stop button is clicked */
-    BOOL                                _changeStopButtonIsActivated;
-    /*! @var _lastStop1Button Switches to the last searched stop station */
-    IBOutlet UIButton                   *_lastStop1Button;
-    /*! @var _lastStop2Button Switches to the second last searched stop station */
-    IBOutlet UIButton                   *_lastStop2Button;
-    /*! @var _chooseNewStopButton Enabled switching to PublicStopViewController to search for a new stop station */
-    IBOutlet UIButton                   *_chooseNewStopButton;
-    
     /*! @var _searchButton Triggers searching for new connections */
     IBOutlet UIButton                   *_searchButton;
     /*! @var _changeDirectionButton Switches start and stop station*/
-    IBOutlet UIButton *_changeDirectionButton;
+    IBOutlet UIButton                   *_changeDirectionButton;
     /*! @var _waitForChangeActivityIndicator Waiting indicator to show the user something is loading */
     IBOutlet UIActivityIndicatorView    *_waitForChangeActivityIndicator;
     
@@ -128,6 +106,11 @@
     IBOutlet UILabel                    *_transfersTitleLabel;
     /*! @var _transportationTitleLabel Shows the title transportation */
     IBOutlet UILabel                    *_transportationTitleLabel;
+    
+    
+    IBOutlet UICollectionView           *_publicTransportCollectionView;
+
+
 }
 
 
@@ -152,18 +135,6 @@
 @property (nonatomic, retain) NSMutableArray                        *_storedStartStationArray;
 @property (nonatomic, retain) NSMutableArray                        *_storedStopStationArray;
 
-@property (nonatomic, retain) IBOutlet UILabel                      *_startLabel;
-@property (nonatomic, assign) BOOL                                  _changeStartButtonIsActivated;
-@property (nonatomic, retain) IBOutlet UIButton                     *_lastStart1Button;
-@property (nonatomic, retain) IBOutlet UIButton                     *_lastStart2Button;
-@property (nonatomic, retain) IBOutlet UIButton                     *_chooseNewStartButton;
-
-@property (nonatomic, retain) IBOutlet UILabel                      *_stopLabel;
-@property (nonatomic, assign) BOOL                                  _changeStopButtonIsActivated;
-@property (nonatomic, retain) IBOutlet UIButton                     *_lastStop1Button;
-@property (nonatomic, retain) IBOutlet UIButton                     *_lastStop2Button;
-@property (nonatomic, retain) IBOutlet UIButton                     *_chooseNewStopButton;
-
 @property (nonatomic, retain) IBOutlet UIButton                     *_searchButton;
 @property (nonatomic, retain) IBOutlet UIButton                     *_changeDirectionButton;
 
@@ -178,6 +149,8 @@
 @property (nonatomic, retain) IBOutlet IBOutlet UILabel             *_transfersTitleLabel;
 @property (nonatomic, retain) IBOutlet IBOutlet UILabel             *_transportationTitleLabel;
 
+@property (nonatomic, retain) IBOutlet IBOutlet UICollectionView           *_publicTransportCollectionView;
+
 /*!
  @function startConnectionSearch
  Triggers searching for new connections.
@@ -191,64 +164,5 @@
  @param sender
  */
 - (IBAction)changeDirection:(id)sender;
-
-/*!
- @function changeStart
- Triggers showing all last start stations.
- It is triggered by detail button next to from label.
- @param sender
- */
-- (IBAction)changeStart:(id)sender;
-
-/*!
- @function changeStartToLast1
- Changes start station to the one from the given button.
- @param sender
- */
-- (IBAction)changeStartToLast1:(id)sender;
-
-/*!
- @function changeStartToLast2
- Changes start station to the one from the given button.
- @param sender
- */
-- (IBAction)changeStartToLast2:(id)sender;
-
-/*!
- @function chooseNewStart
- Switches delegate to PublicStopViewController to search for new start station.
- @param sender
- */
-- (IBAction)chooseNewStart:(id)sender;
-
-/*!
- @function changeStop
- Triggers showing all last stop stations.
- It is triggered by detail button next to to label.
- @param sender
- */
-- (IBAction)changeStop:(id)sender;
-
-/*!
- @function changeStopToLast1
- Changes stop station to the one from the given button.
- @param sender
- */
-- (IBAction)changeStopToLast1:(id)sender;
-
-/*!
- @function changeStopToLast2
- Changes stop station to the one from the given button.
- @param sender
- */
-- (IBAction)changeStopToLast2:(id)sender;
-
-/*!
- @function chooseNewStop
- Switches delegate to PublicStopViewController to search for new stop station.
- @param sender
- */
-- (IBAction)chooseNewStop:(id)sender;
-
 
 @end

@@ -151,6 +151,8 @@
 		E10B72FB1797DE42005D9D32 /* OpeningTimePlanDto.m in Sources */ = {isa = PBXBuildFile; fileRef = E10B72FA1797DE42005D9D32 /* OpeningTimePlanDto.m */; };
 		E10B72FE1797DE73005D9D32 /* LocationDto.m in Sources */ = {isa = PBXBuildFile; fileRef = E10B72FD1797DE73005D9D32 /* LocationDto.m */; };
 		E10B73011797DFAF005D9D32 /* HolidayDto.m in Sources */ = {isa = PBXBuildFile; fileRef = E10B73001797DFAF005D9D32 /* HolidayDto.m */; };
+		E11084F118C0C32200B59853 /* PublicTransportButtonCollectionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E11084F018C0C32200B59853 /* PublicTransportButtonCollectionCell.xib */; };
+		E11084F518C0C73F00B59853 /* PublicTransportDetailCollectionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E11084F418C0C73F00B59853 /* PublicTransportDetailCollectionCell.xib */; };
 		E1252E5517CB423400E61732 /* SocialMediaViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E1252E5317CB423400E61732 /* SocialMediaViewController.m */; };
 		E1252E5617CB423400E61732 /* SocialMediaViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E1252E5417CB423400E61732 /* SocialMediaViewController.xib */; };
 		E1252E5917CB4BB100E61732 /* ColorSelection.m in Sources */ = {isa = PBXBuildFile; fileRef = E1252E5817CB4BB100E61732 /* ColorSelection.m */; };
@@ -197,6 +199,7 @@
 		E17842D2178309160059EA3C /* DBCachingForAutocomplete.m in Sources */ = {isa = PBXBuildFile; fileRef = E17842D1178309160059EA3C /* DBCachingForAutocomplete.m */; };
 		E1817F9118C080AC001351C1 /* dateButton.png in Resources */ = {isa = PBXBuildFile; fileRef = E1817F9018C080AC001351C1 /* dateButton.png */; };
 		E1817F9318C0814B001351C1 /* noConnectionButton.png in Resources */ = {isa = PBXBuildFile; fileRef = E1817F9218C0814B001351C1 /* noConnectionButton.png */; };
+		E1817F9518C09BB5001351C1 /* PublicTransportLabelCollectionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E1817F9418C09BB5001351C1 /* PublicTransportLabelCollectionCell.xib */; };
 		E184106B18B75CCB007CD204 /* NavigationBarBackground@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E184106A18B75CCB007CD204 /* NavigationBarBackground@2x.png */; };
 		E184106D18B75CE1007CD204 /* NavigationBarHome@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E184106C18B75CE1007CD204 /* NavigationBarHome@2x.png */; };
 		E184107118B79205007CD204 /* NewsSmallTableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E184107018B79205007CD204 /* NewsSmallTableCell.xib */; };
@@ -486,6 +489,8 @@
 		E10B72FD1797DE73005D9D32 /* LocationDto.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LocationDto.m; sourceTree = "<group>"; };
 		E10B72FF1797DFAF005D9D32 /* HolidayDto.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HolidayDto.h; sourceTree = "<group>"; };
 		E10B73001797DFAF005D9D32 /* HolidayDto.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HolidayDto.m; sourceTree = "<group>"; };
+		E11084F018C0C32200B59853 /* PublicTransportButtonCollectionCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PublicTransportButtonCollectionCell.xib; sourceTree = "<group>"; };
+		E11084F418C0C73F00B59853 /* PublicTransportDetailCollectionCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PublicTransportDetailCollectionCell.xib; sourceTree = "<group>"; };
 		E1252E5217CB423400E61732 /* SocialMediaViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SocialMediaViewController.h; sourceTree = "<group>"; };
 		E1252E5317CB423400E61732 /* SocialMediaViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SocialMediaViewController.m; sourceTree = "<group>"; };
 		E1252E5417CB423400E61732 /* SocialMediaViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SocialMediaViewController.xib; sourceTree = "<group>"; };
@@ -556,6 +561,7 @@
 		E17842D1178309160059EA3C /* DBCachingForAutocomplete.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DBCachingForAutocomplete.m; sourceTree = "<group>"; };
 		E1817F9018C080AC001351C1 /* dateButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = dateButton.png; path = CampusInfo1/resources/button/dateButton.png; sourceTree = "<group>"; };
 		E1817F9218C0814B001351C1 /* noConnectionButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = noConnectionButton.png; path = CampusInfo1/resources/button/noConnectionButton.png; sourceTree = "<group>"; };
+		E1817F9418C09BB5001351C1 /* PublicTransportLabelCollectionCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PublicTransportLabelCollectionCell.xib; sourceTree = "<group>"; };
 		E184106A18B75CCB007CD204 /* NavigationBarBackground@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "NavigationBarBackground@2x.png"; path = "CampusInfo1/resources/navigationbar/NavigationBarBackground@2x.png"; sourceTree = "<group>"; };
 		E184106C18B75CE1007CD204 /* NavigationBarHome@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "NavigationBarHome@2x.png"; path = "CampusInfo1/resources/navigationbar/NavigationBarHome@2x.png"; sourceTree = "<group>"; };
 		E184107018B79205007CD204 /* NewsSmallTableCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NewsSmallTableCell.xib; sourceTree = "<group>"; };
@@ -1083,6 +1089,9 @@
 				E1C23D6317CE295B00C58E10 /* PublicStopViewController.m */,
 				E1C23D6417CE295B00C58E10 /* PublicStopViewController.xib */,
 				E1C23D6717CE2C3500C58E10 /* PublicTransportOverviewTableCell.xib */,
+				E1817F9418C09BB5001351C1 /* PublicTransportLabelCollectionCell.xib */,
+				E11084F018C0C32200B59853 /* PublicTransportButtonCollectionCell.xib */,
+				E11084F418C0C73F00B59853 /* PublicTransportDetailCollectionCell.xib */,
 			);
 			name = PublicTransport;
 			sourceTree = "<group>";
@@ -1464,6 +1473,7 @@
 				2724546917B7EBE4005F979C /* ContactsOverViewController.xib in Resources */,
 				E101909517BBAE9D00242A87 /* NewsViewController.xib in Resources */,
 				E10190A317BBE3E300242A87 /* EventsViewController.xib in Resources */,
+				E1817F9518C09BB5001351C1 /* PublicTransportLabelCollectionCell.xib in Resources */,
 				E10190A917BBE5A700242A87 /* PublicTransportViewController.xib in Resources */,
 				E1F32A5917BCFD9A000D69F3 /* NewsNormalTableCell.xib in Resources */,
 				E198FD5417BE240400D5BE9B /* NewsDetailViewController.xib in Resources */,
@@ -1499,6 +1509,7 @@
 				279F09C917DF0FE6006A599D /* NavigationBarKontakte@2x.png in Resources */,
 				279F09CA17DF0FE6006A599D /* NavigationBarMensa.png in Resources */,
 				279F09CB17DF0FE6006A599D /* NavigationBarMensa@2x.png in Resources */,
+				E11084F518C0C73F00B59853 /* PublicTransportDetailCollectionCell.xib in Resources */,
 				279F09CC17DF0FE6006A599D /* NavigationBarNews.png in Resources */,
 				279F09CD17DF0FE6006A599D /* NavigationBarNews@2x.png in Resources */,
 				E184107118B79205007CD204 /* NewsSmallTableCell.xib in Resources */,
@@ -1536,6 +1547,7 @@
 				279F0A1317DF168A006A599D /* AppIconsSchriftEventsFeedback@2x.png in Resources */,
 				279F0A1417DF168A006A599D /* AppIconsSchriftFahrplanFeedback.png in Resources */,
 				279F0A1517DF168A006A599D /* AppIconsSchriftFahrplanFeedback@2x.png in Resources */,
+				E11084F118C0C32200B59853 /* PublicTransportButtonCollectionCell.xib in Resources */,
 				279F0A1617DF168A006A599D /* AppIconsSchriftKontakteFeedback.png in Resources */,
 				279F0A1717DF168A006A599D /* AppIconsSchriftKontakteFeedback@2x.png in Resources */,
 				279F0A1817DF168A006A599D /* AppIconsSchriftMensaFeedback.png in Resources */,

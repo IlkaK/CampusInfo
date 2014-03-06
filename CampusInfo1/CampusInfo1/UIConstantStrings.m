@@ -282,6 +282,10 @@ NSString * const PublicTransportVCFromGerman    = @"ab";
 NSString * const PublicTransportVCFromEnglish   = @"from";
 NSString * const PublicTransportVCToGerman      = @"an";
 NSString * const PublicTransportVCToEnglish     = @"to";
+NSString * const PublicTransportVCStartGerman   = @"von";
+NSString * const PublicTransportVCStopGerman    = @"nach";
+
+
 
 
 // time table

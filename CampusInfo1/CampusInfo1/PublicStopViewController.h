@@ -74,6 +74,14 @@
     
     /*! @var _zhawColor Holds all color schemes needed */
     ColorSelection                      *_zhawColor;
+    
+    IBOutlet UIButton                   *_lastStationButton1;
+    IBOutlet UIButton                   *_lastStationButton2;
+    
+    NSString                            *_lastStation1;
+    NSString                            *_lastStation2;
+
+    
 }
 
 @property (nonatomic, retain) StationArrayDto                       *_stationArray;
@@ -96,11 +104,19 @@
 
 @property (strong, nonatomic) ColorSelection                        *_zhawColor;
 
+@property (nonatomic, retain) IBOutlet UIButton                     *_lastStationButton1;
+@property (nonatomic, retain) IBOutlet UIButton                     *_lastStationButton2;
+@property (nonatomic, retain) NSString                              *_lastStation1;
+@property (nonatomic, retain) NSString                              *_lastStation2;
+
+
 /*!
  @function publicStopTextFieldChanged
  Triggered, when the text in _publicStopTextField is changed by the user. Then the table for suggestions needs to be updated accordingly.
  @param sender
  */
 - (IBAction)publicStopTextFieldChanged:(id)sender;
+- (IBAction)changeToLastStation1:(id)sender;
+- (IBAction)changeToLastStation2:(id)sender;
 
 @end

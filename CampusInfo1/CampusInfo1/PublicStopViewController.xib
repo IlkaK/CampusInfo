@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="4514" systemVersion="13B42" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="4514" systemVersion="13C64" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <deployment version="1536" defaultVersion="1296" identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3747"/>
@@ -8,6 +8,8 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="PublicStopViewController">
             <connections>
                 <outlet property="_descriptionLabel" destination="ncN-Sh-7Tz" id="edk-iD-Rrs"/>
+                <outlet property="_lastStationButton1" destination="FcT-lB-QOy" id="NIu-ad-DG6"/>
+                <outlet property="_lastStationButton2" destination="Oq6-xV-hr2" id="g8M-bZ-CNz"/>
                 <outlet property="_publicStopTableView" destination="29" id="38"/>
                 <outlet property="_publicStopTextField" destination="69" id="83"/>
                 <outlet property="_titleLabel" destination="6" id="6HL-0l-xfC"/>
@@ -41,8 +43,43 @@
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                     <nil key="highlightedColor"/>
                 </label>
+                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Letzte Stationen" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hl2-JL-O2o" userLabel="LastStationLabel">
+                    <rect key="frame" x="0.0" y="44" width="125" height="21"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FcT-lB-QOy" userLabel="LastStationButton1">
+                    <rect key="frame" x="10" y="78" width="300" height="20"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <state key="normal">
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <connections>
+                        <action selector="changeToLastStation1:" destination="-1" eventType="touchUpInside" id="4Gx-yb-ye8"/>
+                    </connections>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Oq6-xV-hr2" userLabel="LastStationButton2">
+                    <rect key="frame" x="10" y="106" width="300" height="20"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <state key="normal" title=""/>
+                    <connections>
+                        <action selector="changeToLastStation2:" destination="-1" eventType="touchUpInside" id="4Hh-uT-cRm"/>
+                    </connections>
+                </button>
+                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Neue Station" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="J52-77-sLO" userLabel="NewStationLabel">
+                    <rect key="frame" x="0.0" y="159" width="100" height="21"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <searchBar contentMode="redraw" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="irC-y1-08u" userLabel="NewStationSearchBar">
+                    <rect key="frame" x="0.0" y="187" width="320" height="44"/>
+                    <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                    <textInputTraits key="textInputTraits"/>
+                </searchBar>
                 <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="69" userLabel="PublicStopTextField">
-                    <rect key="frame" x="11" y="57" width="160" height="30"/>
+                    <rect key="frame" x="0.0" y="269" width="160" height="30"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="160" id="100"/>
@@ -54,11 +91,11 @@
                     </connections>
                 </textField>
                 <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="29" userLabel="PublicStopTableView">
-                    <rect key="frame" x="0.0" y="104" width="320" height="464"/>
+                    <rect key="frame" x="0.0" y="315" width="320" height="253"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <constraints>
-                        <constraint firstAttribute="height" constant="464" id="109"/>
+                        <constraint firstAttribute="height" constant="253" id="109"/>
                     </constraints>
                     <connections>
                         <outlet property="dataSource" destination="-1" id="36"/>
@@ -76,9 +113,9 @@
                 <constraint firstItem="6" firstAttribute="top" secondItem="1" secondAttribute="top" constant="2" id="25"/>
                 <constraint firstItem="29" firstAttribute="leading" secondItem="1" secondAttribute="leading" id="31"/>
                 <constraint firstItem="29" firstAttribute="trailing" secondItem="1" secondAttribute="trailing" id="34"/>
-                <constraint firstItem="69" firstAttribute="top" secondItem="1" secondAttribute="top" constant="57" id="103"/>
-                <constraint firstItem="69" firstAttribute="leading" secondItem="1" secondAttribute="leading" constant="11" id="110"/>
-                <constraint firstItem="29" firstAttribute="top" secondItem="1" secondAttribute="top" constant="104" id="111"/>
+                <constraint firstItem="69" firstAttribute="top" secondItem="1" secondAttribute="top" constant="269" id="103"/>
+                <constraint firstItem="69" firstAttribute="leading" secondItem="1" secondAttribute="leading" id="110"/>
+                <constraint firstItem="29" firstAttribute="top" secondItem="1" secondAttribute="top" constant="315" id="111"/>
                 <constraint firstItem="6" firstAttribute="leading" secondItem="1" secondAttribute="leading" id="114"/>
             </constraints>
             <simulatedStatusBarMetrics key="simulatedStatusBarMetrics"/>

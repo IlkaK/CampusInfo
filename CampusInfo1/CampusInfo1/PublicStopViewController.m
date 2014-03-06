@@ -62,6 +62,11 @@
 
 @synthesize _zhawColor;
 
+@synthesize _lastStationButton1;
+@synthesize _lastStationButton2;
+@synthesize _lastStation1;
+@synthesize _lastStation2;
+
 /*!
  * @function initWithNibName
  * Initializiation of class.
@@ -104,6 +109,18 @@
     _publicStopTextFieldString = ((UITextField*)sender).text;
     _publicStopTableView.hidden = NO;
     [_publicStopTableView reloadData];
+}
+
+- (IBAction)changeToLastStation1:(id)sender
+{
+    _actualStationName = _lastStationButton1.titleLabel.text;
+        [self dismissModalViewControllerAnimated:YES];
+}
+
+- (IBAction)changeToLastStation2:(id)sender
+{
+    _actualStationName = _lastStationButton2.titleLabel.text;
+        [self dismissModalViewControllerAnimated:YES];
 }
 
 
@@ -150,6 +167,12 @@
     [_descriptionLabel setFont:[UIFont fontWithName:NavigationBarFont size:NavigationBarDescriptionSize]];
     [_descriptionLabel setText: PublicTransportVCSearchStop];
     
+    
+    [_lastStationButton1 setBackgroundImage:[UIImage imageNamed:DateButtonBackground]  forState:UIControlStateNormal];
+    [_lastStationButton2 setBackgroundImage:[UIImage imageNamed:DateButtonBackground]  forState:UIControlStateNormal];
+    [_lastStationButton1 setTitleColor:_zhawColor._zhawWhite forState:UIControlStateNormal];
+    [_lastStationButton2 setTitleColor:_zhawColor._zhawWhite forState:UIControlStateNormal];
+    
     // initialize variables/ fields
     self._stationArray = [[StationArrayDto alloc] init:nil];
     _actualStationName = @"";
@@ -179,7 +202,26 @@
     [super viewWillAppear:animated];
     _actualStationName = @"";
     _publicStopTableView.hidden = YES;
-
+    
+    if(_lastStation1.length > 0)
+    {
+        [_lastStationButton1 setTitle:_lastStation1 forState:UIControlStateNormal];
+        [_lastStationButton1 setHidden:NO];
+    }
+    else
+    {
+        [_lastStationButton1 setHidden:YES];
+    }
+    
+    if(_lastStation2.length > 0)
+    {
+        [_lastStationButton2 setTitle:_lastStation2 forState:UIControlStateNormal];
+        [_lastStationButton2 setHidden:NO];
+    }
+    else
+    {
+        [_lastStationButton2 setHidden:YES];
+    }
 }
 
 /*!
