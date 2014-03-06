@@ -12,6 +12,7 @@
                 <outlet property="_lastStationButton2" destination="Oq6-xV-hr2" id="g8M-bZ-CNz"/>
                 <outlet property="_publicStopTableView" destination="29" id="38"/>
                 <outlet property="_publicStopTextField" destination="69" id="83"/>
+                <outlet property="_stationSearchBar" destination="irC-y1-08u" id="CND-n8-PjI"/>
                 <outlet property="_titleLabel" destination="6" id="6HL-0l-xfC"/>
                 <outlet property="_titleNavigationBar" destination="4" id="26"/>
                 <outlet property="_titleNavigationItem" destination="8" id="27"/>

@@ -80,6 +80,9 @@
     
     NSString                            *_lastStation1;
     NSString                            *_lastStation2;
+    
+    IBOutlet UISearchBar                *_stationSearchBar;
+    
 
     
 }

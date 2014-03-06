@@ -68,19 +68,8 @@
 @synthesize _storedStartStationArray;
 @synthesize _storedStopStationArray;
 
-@synthesize _searchButton;
-@synthesize _changeDirectionButton;
-
 @synthesize _waitForChangeActivityIndicator;
 
-@synthesize _dateTitleLabel;
-@synthesize _destinationTitleLabel;
-@synthesize _durationTitleLabel;
-@synthesize _fromLabel;
-@synthesize _timeTitleLabel;
-@synthesize _toLabel;
-@synthesize _transfersTitleLabel;
-@synthesize _transportationTitleLabel;
 
 
 /*!
@@ -145,10 +134,6 @@
                                                            }];
     [[UINavigationBar appearance] setBackgroundImage:[UIImage imageNamed:NavigationBarBackground] forBarMetrics:UIBarMetricsDefault];
     
-    [_searchButton setTitleColor:_zhawColor._zhawWhite forState:UIControlStateNormal];
-    [_searchButton setBackgroundImage:[UIImage imageNamed:NoConnectionButtonBackground]  forState:UIControlStateNormal];
-    [_changeDirectionButton setTitleColor:_zhawColor._zhawWhite forState:UIControlStateNormal];
-    [_changeDirectionButton setBackgroundImage:[UIImage imageNamed:NoConnectionButtonBackground]  forState:UIControlStateNormal];
     
     if (_publicStopVC == nil)
     {
@@ -165,21 +150,13 @@
     UINib *cellNib3 = [UINib nibWithNibName:@"PublicTransportDetailCollectionCell" bundle:nil];
     [self._publicTransportCollectionView registerNib:cellNib3 forCellWithReuseIdentifier:@"PublicTransportDetailCollectionCell"];
 
+    UINib *cellNib4 = [UINib nibWithNibName:@"PublicTransportPushCollectionCell" bundle:nil];
+    [self._publicTransportCollectionView registerNib:cellNib4 forCellWithReuseIdentifier:@"PublicTransportPushCollectionCell"];
     
     [_publicTransportCollectionView setBackgroundColor:_zhawColor._zhawWhite];
     
     [self actualizeStartStationArray];
     [self actualizeStopStationArray];
-    
-    // set font color for labels
-    [_dateTitleLabel setTextColor:_zhawColor._zhawFontGrey];
-    [_destinationTitleLabel setTextColor:_zhawColor._zhawFontGrey];
-    [_durationTitleLabel setTextColor:_zhawColor._zhawFontGrey];
-    [_fromLabel setTextColor:_zhawColor._zhawFontGrey];
-    [_timeTitleLabel setTextColor:_zhawColor._zhawFontGrey];
-    [_toLabel setTextColor:_zhawColor._zhawFontGrey];
-    [_transfersTitleLabel setTextColor:_zhawColor._zhawFontGrey];
-    [_transportationTitleLabel setTextColor:_zhawColor._zhawFontGrey];    
     
     // set activity indicator
     _waitForChangeActivityIndicator.hidesWhenStopped = YES;
@@ -572,21 +549,10 @@
  */
 - (void)viewDidUnload
 {
-    _searchButton = nil;
     _pubilcTransportOverviewTableCell = nil;
     _publicStopVC = nil;
     _publicTransportTableView = nil;
     _waitForChangeActivityIndicator = nil;
-    _changeDirectionButton = nil;
-    _changeDirectionButton = nil;
-    _fromLabel = nil;
-    _toLabel = nil;
-    _destinationTitleLabel = nil;
-    _dateTitleLabel = nil;
-    _timeTitleLabel = nil;
-    _durationTitleLabel = nil;
-    _transfersTitleLabel = nil;
-    _transportationTitleLabel = nil;
     [super viewDidUnload];
 }
 
@@ -658,12 +624,14 @@
 }
 
 
+
 /*!
  @function startConnectionSearch
  Triggers searching for new connections.
  @param sender
+ @param event
  */
-- (IBAction)startConnectionSearch:(id)sender
+-(void) startConnectionSearch:(id)sender event:(id)event
 {
     if (
            [_startStation length] == 0
@@ -688,16 +656,17 @@
 }
 
 
+
 /*!
  @function changeDirection
  Switches start and stop station.
  @param sender
+ @param event
  */
-- (IBAction)changeDirection:(id)sender
+-(void) changeDirection:(id)sender event:(id)event
 {
     NSString *_newStart = _stopStation;
     NSString *_newStop  = _startStation;
-    
     [self addToStartArray:_newStart];
     [self addToStopArray:_newStop]; 
 }
@@ -725,7 +694,7 @@
  */
 -(NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView
 {
-    return 2;
+    return 3;
 }
 
 /*!
@@ -734,7 +703,10 @@
  */
 -(NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
-    return 3;
+    if (section == 0 || section == 1)
+        return 3;
+    else // section == 2
+        return 1;
 }
 
 
@@ -761,8 +733,9 @@
     
         UILabel *_descrLabel = (UILabel *)[_cell viewWithTag:1];
         [_descrLabel setTextAlignment:UITextAlignmentRight];
-        [_descrLabel setText:@""];
-    
+        [_descrLabel setTextColor:_zhawColor._zhawFontGrey];
+        [_descrLabel setFont:[UIFont fontWithName:NavigationBarFont size:NavigationBarDescriptionSize]];
+        
         if (_cellRow == 0 && _cellTab == 0)
         {
             [_descrLabel setText:PublicTransportVCStartGerman];
@@ -774,33 +747,38 @@
     }
     
     if (
-            (_cellRow == 0 && _cellTab == 1) // Abfahrtsort
-        ||  (_cellRow == 1 && _cellTab == 1) // Zielort
+            (_cellRow == 0 && _cellTab == 1) // start
+        ||  (_cellRow == 1 && _cellTab == 1) // stop
         )
     {
         static NSString *_cellIdentifier = @"PublicTransportButtonCollectionCell";
         _cell           = [collectionView dequeueReusableCellWithReuseIdentifier:_cellIdentifier forIndexPath:indexPath];
-        UIButton *_doButton = (UIButton *)[_cell viewWithTag:1];
-        [_doButton setTitleColor:_zhawColor._zhawDarkGrey forState:UIControlStateNormal];
+        UILabel *_connectionLabel =(UILabel *)[_cell viewWithTag:1];
+        [_connectionLabel setTextAlignment:UITextAlignmentLeft];
+        [_connectionLabel setTextColor:_zhawColor._zhawFontGrey];
+        [_connectionLabel setFont:[UIFont fontWithName:NavigationBarFont size:NavigationBarDescriptionSize]];
         
         if (_cellRow == 0 && _cellTab == 1)
         {
-            [_doButton setTitle:_startStation forState:UIControlStateNormal];
+            [_connectionLabel setText:_startStation];
         }
         if (_cellRow == 1 && _cellTab == 1)
         {
-            [_doButton setTitle:_stopStation forState:UIControlStateNormal];
+            [_connectionLabel setText:_stopStation];
         }
     }
     
     if (
-            (_cellRow == 0 && _cellTab == 2) // show starts
-        ||  (_cellRow == 1 && _cellTab == 2) // show stops
+            (_cellRow == 0 && _cellTab == 2) // show starts, detail button
+        ||  (_cellRow == 1 && _cellTab == 2) // show stops, detail button
         )
     {
         static NSString *_cellIdentifier = @"PublicTransportDetailCollectionCell";
         _cell           = [collectionView dequeueReusableCellWithReuseIdentifier:_cellIdentifier forIndexPath:indexPath];
         UIButton *_newStationButton = (UIButton *)[_cell viewWithTag:1];
+        [_newStationButton removeTarget:nil
+                           action:NULL
+                 forControlEvents:UIControlEventAllEvents];
         
         if (_cellRow == 0 && _cellTab == 2)
         {
@@ -811,9 +789,66 @@
             [_newStationButton addTarget:self action:@selector(getNewStop:event:) forControlEvents:UIControlEventTouchUpInside];
         }
     }
+    
+    if (
+            (_cellRow == 2 && _cellTab == 0) // start searching and reverse direction
+        )
+    {
+        static NSString *_cellIdentifier = @"PublicTransportPushCollectionCell";
+        _cell           = [collectionView dequeueReusableCellWithReuseIdentifier:_cellIdentifier forIndexPath:indexPath];
+        UIButton    *_searchConnectionButton    = (UIButton *)[_cell viewWithTag:1];
+        UIButton    *_reverseConnectionButton   = (UIButton *)[_cell viewWithTag:2];
+        
+        [_searchConnectionButton setTitleColor:_zhawColor._zhawWhite forState:UIControlStateNormal];
+        [_searchConnectionButton setBackgroundImage:[UIImage imageNamed:NoConnectionButtonBackground]  forState:UIControlStateNormal];
+        [_searchConnectionButton addTarget:self action:@selector(startConnectionSearch:event:) forControlEvents:UIControlEventTouchUpInside];
+        [_searchConnectionButton setTitle:@"Verbindung suchen" forState:UIControlStateNormal];
+        
+        [_reverseConnectionButton setTitleColor:_zhawColor._zhawWhite forState:UIControlStateNormal];
+        [_reverseConnectionButton setBackgroundImage:[UIImage imageNamed:NoConnectionButtonBackground]  forState:UIControlStateNormal];
+        [_reverseConnectionButton addTarget:self action:@selector(changeDirection:event:) forControlEvents:UIControlEventTouchUpInside];
+        [_reverseConnectionButton setTitle:@"Gegenrichtung" forState:UIControlStateNormal];
+    }
+    
     return _cell;
 }
 
+
+- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    NSUInteger        _cellRow = indexPath.section;
+    NSUInteger        _cellTab = indexPath.item;
+    
+    if (
+            (_cellRow == 0 && _cellTab == 0) // from
+        ||  (_cellRow == 1 && _cellTab == 0) // to
+        )
+    {
+        return CGSizeMake(100, 30);
+    }
+    if (
+            (_cellRow == 0 && _cellTab == 1) // start
+        ||  (_cellRow == 1 && _cellTab == 1) // stop
+        )
+    {
+        return CGSizeMake(140, 30);
+    }
+    if (
+            (_cellRow == 0 && _cellTab == 2) // show starts, detail button
+        ||  (_cellRow == 1 && _cellTab == 2) // show stops, detail button
+        )
+    {
+        return CGSizeMake(50, 30);
+    }
+    if (
+            (_cellRow == 2 && _cellTab == 0) // start searching and reverse direction
+        )
+    {
+        return CGSizeMake(290, 40);
+    }
+    
+    return CGSizeMake(50, 30);
+}
 
 
 //-------------------------------------------------

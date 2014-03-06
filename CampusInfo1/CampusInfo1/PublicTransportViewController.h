@@ -83,34 +83,10 @@
     /*! @var _storedStopStationArray Stores the last three stop stations searched so far */
     NSMutableArray                      *_storedStopStationArray;
     
-    /*! @var _searchButton Triggers searching for new connections */
-    IBOutlet UIButton                   *_searchButton;
-    /*! @var _changeDirectionButton Switches start and stop station*/
-    IBOutlet UIButton                   *_changeDirectionButton;
     /*! @var _waitForChangeActivityIndicator Waiting indicator to show the user something is loading */
     IBOutlet UIActivityIndicatorView    *_waitForChangeActivityIndicator;
     
-    /*! @var _fromLabel Shows the title from */
-    IBOutlet UILabel                    *_fromLabel;
-    /*! @var _toLabel Shows the title to */
-    IBOutlet UILabel                    *_toLabel;
-    /*! @var _destinationTitleLabel Shows the title destination */
-    IBOutlet UILabel                    *_destinationTitleLabel;
-    /*! @var _dateTitleLabel Shows the title date */
-    IBOutlet UILabel                    *_dateTitleLabel;
-    /*! @var _timeTitleLabel Shows the title time */
-    IBOutlet UILabel                    *_timeTitleLabel;
-    /*! @var _durationTitleLabel Shows the title duration */
-    IBOutlet UILabel                    *_durationTitleLabel;
-    /*! @var _transfersTitleLabel Shows the title transfers */
-    IBOutlet UILabel                    *_transfersTitleLabel;
-    /*! @var _transportationTitleLabel Shows the title transportation */
-    IBOutlet UILabel                    *_transportationTitleLabel;
-    
-    
     IBOutlet UICollectionView           *_publicTransportCollectionView;
-
-
 }
 
 
@@ -135,34 +111,8 @@
 @property (nonatomic, retain) NSMutableArray                        *_storedStartStationArray;
 @property (nonatomic, retain) NSMutableArray                        *_storedStopStationArray;
 
-@property (nonatomic, retain) IBOutlet UIButton                     *_searchButton;
-@property (nonatomic, retain) IBOutlet UIButton                     *_changeDirectionButton;
-
 @property (nonatomic, retain) IBOutlet UIActivityIndicatorView      *_waitForChangeActivityIndicator;
 
-@property (nonatomic, retain) IBOutlet IBOutlet UILabel             *_fromLabel;
-@property (nonatomic, retain) IBOutlet IBOutlet UILabel             *_toLabel;
-@property (nonatomic, retain) IBOutlet IBOutlet UILabel             *_destinationTitleLabel;
-@property (nonatomic, retain) IBOutlet IBOutlet UILabel             *_dateTitleLabel;
-@property (nonatomic, retain) IBOutlet IBOutlet UILabel             *_timeTitleLabel;
-@property (nonatomic, retain) IBOutlet IBOutlet UILabel             *_durationTitleLabel;
-@property (nonatomic, retain) IBOutlet IBOutlet UILabel             *_transfersTitleLabel;
-@property (nonatomic, retain) IBOutlet IBOutlet UILabel             *_transportationTitleLabel;
-
-@property (nonatomic, retain) IBOutlet IBOutlet UICollectionView           *_publicTransportCollectionView;
-
-/*!
- @function startConnectionSearch
- Triggers searching for new connections.
- @param sender
- */
-- (IBAction)startConnectionSearch:(id)sender;
-
-/*!
- @function changeDirection
- Switches start and stop station.
- @param sender
- */
-- (IBAction)changeDirection:(id)sender;
+@property (nonatomic, retain) IBOutlet IBOutlet UICollectionView    *_publicTransportCollectionView;
 
 @end
