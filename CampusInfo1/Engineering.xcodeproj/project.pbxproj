@@ -171,6 +171,10 @@
 		E12B400417968F7E000555AE /* MensaOverviewTableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E12B400317968F7E000555AE /* MensaOverviewTableCell.xib */; };
 		E12B40081796B786000555AE /* WeekdayDto.m in Sources */ = {isa = PBXBuildFile; fileRef = E12B40071796B786000555AE /* WeekdayDto.m */; };
 		E12B400B1796D25C000555AE /* GastronomicFacilityDto.m in Sources */ = {isa = PBXBuildFile; fileRef = E12B400A1796D25C000555AE /* GastronomicFacilityDto.m */; };
+		E13555CA18C9CB2D00DD7E37 /* StationSearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E13555C818C9CB2D00DD7E37 /* StationSearchViewController.m */; };
+		E13555CB18C9CB2D00DD7E37 /* StationSearchViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E13555C918C9CB2D00DD7E37 /* StationSearchViewController.xib */; };
+		E13555CD18C9CCB300DD7E37 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E13555CC18C9CCB300DD7E37 /* CoreData.framework */; };
+		E13555CE18C9CCC000DD7E37 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E13555CC18C9CCB300DD7E37 /* CoreData.framework */; };
 		E13AA95117B2416B0061E0ED /* StudentsDto.m in Sources */ = {isa = PBXBuildFile; fileRef = E13AA95017B2416B0061E0ED /* StudentsDto.m */; };
 		E13AA95417B248620061E0ED /* LecturersDto.m in Sources */ = {isa = PBXBuildFile; fileRef = E13AA95317B248620061E0ED /* LecturersDto.m */; };
 		E13AA95717B269330061E0ED /* CoursesDto.m in Sources */ = {isa = PBXBuildFile; fileRef = E13AA95617B269330061E0ED /* CoursesDto.m */; };
@@ -517,6 +521,10 @@
 		E12B40071796B786000555AE /* WeekdayDto.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WeekdayDto.m; sourceTree = "<group>"; };
 		E12B40091796D25C000555AE /* GastronomicFacilityDto.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GastronomicFacilityDto.h; sourceTree = "<group>"; };
 		E12B400A1796D25C000555AE /* GastronomicFacilityDto.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GastronomicFacilityDto.m; sourceTree = "<group>"; };
+		E13555C718C9CB2D00DD7E37 /* StationSearchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StationSearchViewController.h; sourceTree = "<group>"; };
+		E13555C818C9CB2D00DD7E37 /* StationSearchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StationSearchViewController.m; sourceTree = "<group>"; };
+		E13555C918C9CB2D00DD7E37 /* StationSearchViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = StationSearchViewController.xib; sourceTree = "<group>"; };
+		E13555CC18C9CCB300DD7E37 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		E13AA94F17B2416B0061E0ED /* StudentsDto.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StudentsDto.h; sourceTree = "<group>"; };
 		E13AA95017B2416B0061E0ED /* StudentsDto.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StudentsDto.m; sourceTree = "<group>"; };
 		E13AA95217B248620061E0ED /* LecturersDto.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LecturersDto.h; sourceTree = "<group>"; };
@@ -646,6 +654,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E13555CD18C9CCB300DD7E37 /* CoreData.framework in Frameworks */,
 				E195FF36178188A30065DF05 /* libsqlite3.dylib in Frameworks */,
 				A35A34191520814800181E3F /* UIKit.framework in Frameworks */,
 				A35A341B1520814800181E3F /* Foundation.framework in Frameworks */,
@@ -657,6 +666,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E13555CE18C9CCC000DD7E37 /* CoreData.framework in Frameworks */,
 				E1CA086817E9D5C200D38462 /* libsqlite3.dylib in Frameworks */,
 				E12AD04917B0E9E4009A9B1B /* SenTestingKit.framework in Frameworks */,
 				E12AD04A17B0E9E4009A9B1B /* UIKit.framework in Frameworks */,
@@ -939,6 +949,7 @@
 		A35A34171520814800181E3F /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				E13555CC18C9CCB300DD7E37 /* CoreData.framework */,
 				A35A34181520814800181E3F /* UIKit.framework */,
 				A35A341A1520814800181E3F /* Foundation.framework */,
 				A35A341C1520814800181E3F /* CoreGraphics.framework */,
@@ -1095,6 +1106,9 @@
 				E11084F018C0C32200B59853 /* PublicTransportButtonCollectionCell.xib */,
 				E11084F418C0C73F00B59853 /* PublicTransportDetailCollectionCell.xib */,
 				E19AB82A18C8A26F0016885E /* PublicTransportPushCollectionCell.xib */,
+				E13555C718C9CB2D00DD7E37 /* StationSearchViewController.h */,
+				E13555C818C9CB2D00DD7E37 /* StationSearchViewController.m */,
+				E13555C918C9CB2D00DD7E37 /* StationSearchViewController.xib */,
 			);
 			name = PublicTransport;
 			sourceTree = "<group>";
@@ -1492,6 +1506,7 @@
 				270A753B17CCE8D100DEAA94 /* FourSlotsFourRoomsTableCell.xib in Resources */,
 				270A753D17CCEA2500DEAA94 /* NineSlotsThreeRoomsTableCell.xib in Resources */,
 				270A753F17CCEB7000DEAA94 /* SevenSlotsEightRoomsTableCell.xib in Resources */,
+				E13555CB18C9CB2D00DD7E37 /* StationSearchViewController.xib in Resources */,
 				E1C23D6617CE295B00C58E10 /* PublicStopViewController.xib in Resources */,
 				E1C23D6817CE2C3500C58E10 /* PublicTransportOverviewTableCell.xib in Resources */,
 				E1A6AAD717CF367800CC0EDD /* Technikumstrasse.pdf in Resources */,
@@ -1673,6 +1688,7 @@
 				E1252E5517CB423400E61732 /* SocialMediaViewController.m in Sources */,
 				E1252E5917CB4BB100E61732 /* ColorSelection.m in Sources */,
 				E1252E5F17CB72AD00E61732 /* ServiceDeskViewController.m in Sources */,
+				E13555CA18C9CB2D00DD7E37 /* StationSearchViewController.m in Sources */,
 				E1C23D6117CDDA1E00C58E10 /* GastronomicFacilityArrayDto.m in Sources */,
 				E1C23D6517CE295B00C58E10 /* PublicStopViewController.m in Sources */,
 				E1C23D6C17CE33BA00C58E10 /* StationArrayDto.m in Sources */,

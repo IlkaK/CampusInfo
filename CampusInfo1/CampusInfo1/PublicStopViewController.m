@@ -53,7 +53,6 @@
 
 @synthesize _publicStopTableView;
 
-@synthesize _publicStopTextField;
 @synthesize _publicStopTextFieldString;
 
 @synthesize _dbCachingForAutocomplete;
@@ -66,6 +65,8 @@
 @synthesize _lastStationButton2;
 @synthesize _lastStation1;
 @synthesize _lastStation2;
+
+@synthesize _stationSearchBar;
 
 /*!
  * @function initWithNibName
@@ -94,22 +95,10 @@
  */
 - (void)moveBackToPublicTransport:(id)sender
 {    
-    _actualStationName = _publicStopTextField.text;
+    _actualStationName = _stationSearchBar.text; //_publicStopTextField.text;
     [self dismissModalViewControllerAnimated:YES];
 }
 
-/*!
- @function publicStopTextFieldChanged
- Triggered, when the text in _publicStopTextField is changed by the user. Then the table for suggestions needs to be updated accordingly.
- @param sender
- */
-- (IBAction)publicStopTextFieldChanged:(id)sender
-{
-    _suggestions = [[NSMutableArray alloc] initWithArray:[_autocomplete GetSuggestions:((UITextField*)sender).text]];
-    _publicStopTextFieldString = ((UITextField*)sender).text;
-    _publicStopTableView.hidden = NO;
-    [_publicStopTableView reloadData];
-}
 
 - (IBAction)changeToLastStation1:(id)sender
 {
@@ -123,11 +112,6 @@
         [self dismissModalViewControllerAnimated:YES];
 }
 
-
-- (BOOL)textFieldShouldReturn:(UITextField *)textField {
-    [textField resignFirstResponder];
-    return NO;
-}
 
 /*!
  * @function viewDidLoad
@@ -176,10 +160,6 @@
     // initialize variables/ fields
     self._stationArray = [[StationArrayDto alloc] init:nil];
     _actualStationName = @"";
-    
-    self._publicStopTextField.delegate = self;
- 	_publicStopTextField.autocorrectionType = UITextAutocorrectionTypeNo;
-    [_publicStopTextField setTextColor:_zhawColor._zhawFontGrey];
 }
 
 /*!
@@ -234,12 +214,30 @@
     _titleNavigationBar = nil;
     _titleNavigationItem = nil;
     _publicStopTableView = nil;
-    _publicStopTextField = nil;
     [super viewDidUnload];
 }
 
 
+//-----------------------------------
+// ------- MANAGE SEARCH BAR ----
+//-----------------------------------
+/*!
+ @function publicStopTextFieldChanged
+ Triggered, when the text in _publicStopTextField is changed by the user. Then the table for suggestions needs to be updated accordingly.
+ @param sender
+ */
+- (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText
+{
+    _suggestions = [[NSMutableArray alloc] initWithArray:[_autocomplete GetSuggestions:searchText]];
+    _publicStopTextFieldString = searchText;
+    _publicStopTableView.hidden = NO;
+    [_publicStopTableView reloadData];
+}
+
+
+//-----------------------------------
 // ------- MANAGE TABLE CELLS ----
+//-----------------------------------
 /*!
  * @function numberOfSectionsInTableView
  * The function defines the number of sections in table.
@@ -264,9 +262,9 @@
  */
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    _publicStopTextField.text = [_suggestions objectAtIndex:indexPath.row];
+    _stationSearchBar.text = [_suggestions objectAtIndex:indexPath.row];
     _publicStopTableView.hidden = YES;
-    _actualStationName = _publicStopTextField.text;
+    _actualStationName = _stationSearchBar.text;
     [self dismissModalViewControllerAnimated:YES];
 }
 
@@ -286,6 +284,7 @@
     [cell.textLabel setTextColor:_zhawColor._zhawFontGrey];
     return cell;
 }
+
 
 
 @end

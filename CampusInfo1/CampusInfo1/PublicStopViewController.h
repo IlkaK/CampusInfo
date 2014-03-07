@@ -39,7 +39,7 @@
 #import "Autocomplete.h"
 #import "ColorSelection.h"
 
-@interface PublicStopViewController : UIViewController<UITextFieldDelegate>
+@interface PublicStopViewController : UIViewController<UISearchBarDelegate>
 {
     /*! @var _stationArray Holds the array with all found station suggestions */
     StationArrayDto                     *_stationArray;
@@ -60,8 +60,6 @@
     
     /*! @var _publicStopTableView Shows all suggestions for given text in _publicStopTextField */
     IBOutlet UITableView                *_publicStopTableView;
-    /*! @var _publicStopTextField Shows and stores the searched station */
-    IBOutlet UITextField                *_publicStopTextField;
     /*! @var _publicStopTextFieldString Holds the station in the text field _publicStopTextField */
     NSString                            *_publicStopTextFieldString;
     
@@ -82,9 +80,6 @@
     NSString                            *_lastStation2;
     
     IBOutlet UISearchBar                *_stationSearchBar;
-    
-
-    
 }
 
 @property (nonatomic, retain) StationArrayDto                       *_stationArray;
@@ -98,7 +93,6 @@
 
 @property (nonatomic, retain) IBOutlet UITableView                  *_publicStopTableView;
 
-@property (nonatomic, retain) IBOutlet UITextField                  *_publicStopTextField;
 @property (nonatomic, retain) NSString                              *_publicStopTextFieldString;
 
 @property (nonatomic, retain) DBCachingForAutocomplete              *_dbCachingForAutocomplete;
@@ -112,13 +106,9 @@
 @property (nonatomic, retain) NSString                              *_lastStation1;
 @property (nonatomic, retain) NSString                              *_lastStation2;
 
+@property (nonatomic, retain) UISearchBar                              *_stationSearchBar;
 
-/*!
- @function publicStopTextFieldChanged
- Triggered, when the text in _publicStopTextField is changed by the user. Then the table for suggestions needs to be updated accordingly.
- @param sender
- */
-- (IBAction)publicStopTextFieldChanged:(id)sender;
+
 - (IBAction)changeToLastStation1:(id)sender;
 - (IBAction)changeToLastStation2:(id)sender;
 

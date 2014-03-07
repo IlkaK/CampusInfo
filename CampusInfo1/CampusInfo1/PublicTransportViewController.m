@@ -567,7 +567,6 @@
     _publicStopVC._actualStationName            = @"";
     _publicStopVC._publicStopTextFieldString    = @"";
     _publicStopVC._stationArray                 = nil;
-    _publicStopVC._publicStopTextField.text     = @"";
     
     _storedStartStationArray = [_dbCachingForAutocomplete getStartStations];
     if([_storedStartStationArray count] >= 3)
@@ -600,7 +599,6 @@
     _publicStopVC._actualStationName            = @"";
     _publicStopVC._publicStopTextFieldString    = @"";
     _publicStopVC._stationArray                 = nil;
-    _publicStopVC._publicStopTextField.text     = @"";
     
     _storedStopStationArray = [_dbCachingForAutocomplete getStopStations];
     if([_storedStopStationArray count] >= 3)
