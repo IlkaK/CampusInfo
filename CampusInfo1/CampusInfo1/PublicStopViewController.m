@@ -95,7 +95,8 @@
  */
 - (void)moveBackToPublicTransport:(id)sender
 {    
-    _actualStationName = _stationSearchBar.text; //_publicStopTextField.text;
+    _actualStationName = _stationSearchBar.text;
+    _stationSearchBar.text = @"";
     [self dismissModalViewControllerAnimated:YES];
 }
 
@@ -265,6 +266,7 @@
     _stationSearchBar.text = [_suggestions objectAtIndex:indexPath.row];
     _publicStopTableView.hidden = YES;
     _actualStationName = _stationSearchBar.text;
+    _stationSearchBar.text = @"";
     [self dismissModalViewControllerAnimated:YES];
 }
 

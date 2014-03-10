@@ -108,6 +108,10 @@
 		279F0A2B17DF2255006A599D /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 279F0A2A17DF2255006A599D /* Default@2x.png */; };
 		279F0A2D17DF227F006A599D /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 279F0A2C17DF227F006A599D /* Default-568h@2x.png */; };
 		27AC5C7A17AEAF9B006A1774 /* ContactsPhoneTableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 27AC5C7917AEAF9B006A1774 /* ContactsPhoneTableCell.xib */; };
+		27B3EF1D18CDE42C00A77A3B /* DetailTransportViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 27B3EF1B18CDE42C00A77A3B /* DetailTransportViewController.m */; };
+		27B3EF1E18CDE42C00A77A3B /* DetailTransportViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 27B3EF1C18CDE42C00A77A3B /* DetailTransportViewController.xib */; };
+		27B3EF2018CE0E0300A77A3B /* DetailTransportConnectionTableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 27B3EF1F18CE0E0300A77A3B /* DetailTransportConnectionTableCell.xib */; };
+		27B3EF2218CE0E2400A77A3B /* DetailTransportSectionTableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 27B3EF2118CE0E2400A77A3B /* DetailTransportSectionTableCell.xib */; };
 		27B5144417EDF76700E3E7E2 /* MensaOverviewDtoTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 27B5144317EDF76700E3E7E2 /* MensaOverviewDtoTest.m */; };
 		27B66927153AE0D8004D3ABC /* TimeTableAsyncRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 27B66926153AE0D8004D3ABC /* TimeTableAsyncRequest.m */; };
 		27BEC5D41567845A00F9AA4E /* TwoSlotsOneRoomTableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 27BEC5D31567845A00F9AA4E /* TwoSlotsOneRoomTableCell.xib */; };
@@ -171,8 +175,6 @@
 		E12B400417968F7E000555AE /* MensaOverviewTableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E12B400317968F7E000555AE /* MensaOverviewTableCell.xib */; };
 		E12B40081796B786000555AE /* WeekdayDto.m in Sources */ = {isa = PBXBuildFile; fileRef = E12B40071796B786000555AE /* WeekdayDto.m */; };
 		E12B400B1796D25C000555AE /* GastronomicFacilityDto.m in Sources */ = {isa = PBXBuildFile; fileRef = E12B400A1796D25C000555AE /* GastronomicFacilityDto.m */; };
-		E13555CA18C9CB2D00DD7E37 /* StationSearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E13555C818C9CB2D00DD7E37 /* StationSearchViewController.m */; };
-		E13555CB18C9CB2D00DD7E37 /* StationSearchViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E13555C918C9CB2D00DD7E37 /* StationSearchViewController.xib */; };
 		E13555CD18C9CCB300DD7E37 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E13555CC18C9CCB300DD7E37 /* CoreData.framework */; };
 		E13555CE18C9CCC000DD7E37 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E13555CC18C9CCB300DD7E37 /* CoreData.framework */; };
 		E13AA95117B2416B0061E0ED /* StudentsDto.m in Sources */ = {isa = PBXBuildFile; fileRef = E13AA95017B2416B0061E0ED /* StudentsDto.m */; };
@@ -424,6 +426,11 @@
 		279F0A2A17DF2255006A599D /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
 		279F0A2C17DF227F006A599D /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		27AC5C7917AEAF9B006A1774 /* ContactsPhoneTableCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ContactsPhoneTableCell.xib; sourceTree = "<group>"; };
+		27B3EF1A18CDE42C00A77A3B /* DetailTransportViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DetailTransportViewController.h; sourceTree = "<group>"; };
+		27B3EF1B18CDE42C00A77A3B /* DetailTransportViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DetailTransportViewController.m; sourceTree = "<group>"; };
+		27B3EF1C18CDE42C00A77A3B /* DetailTransportViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DetailTransportViewController.xib; sourceTree = "<group>"; };
+		27B3EF1F18CE0E0300A77A3B /* DetailTransportConnectionTableCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DetailTransportConnectionTableCell.xib; sourceTree = "<group>"; };
+		27B3EF2118CE0E2400A77A3B /* DetailTransportSectionTableCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DetailTransportSectionTableCell.xib; sourceTree = "<group>"; };
 		27B5144217EDF76700E3E7E2 /* MensaOverviewDtoTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MensaOverviewDtoTest.h; sourceTree = "<group>"; };
 		27B5144317EDF76700E3E7E2 /* MensaOverviewDtoTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MensaOverviewDtoTest.m; sourceTree = "<group>"; };
 		27B66925153AE0D8004D3ABC /* TimeTableAsyncRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TimeTableAsyncRequest.h; sourceTree = "<group>"; };
@@ -521,9 +528,6 @@
 		E12B40071796B786000555AE /* WeekdayDto.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WeekdayDto.m; sourceTree = "<group>"; };
 		E12B40091796D25C000555AE /* GastronomicFacilityDto.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GastronomicFacilityDto.h; sourceTree = "<group>"; };
 		E12B400A1796D25C000555AE /* GastronomicFacilityDto.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GastronomicFacilityDto.m; sourceTree = "<group>"; };
-		E13555C718C9CB2D00DD7E37 /* StationSearchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StationSearchViewController.h; sourceTree = "<group>"; };
-		E13555C818C9CB2D00DD7E37 /* StationSearchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StationSearchViewController.m; sourceTree = "<group>"; };
-		E13555C918C9CB2D00DD7E37 /* StationSearchViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = StationSearchViewController.xib; sourceTree = "<group>"; };
 		E13555CC18C9CCB300DD7E37 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		E13AA94F17B2416B0061E0ED /* StudentsDto.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StudentsDto.h; sourceTree = "<group>"; };
 		E13AA95017B2416B0061E0ED /* StudentsDto.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StudentsDto.m; sourceTree = "<group>"; };
@@ -1106,9 +1110,11 @@
 				E11084F018C0C32200B59853 /* PublicTransportButtonCollectionCell.xib */,
 				E11084F418C0C73F00B59853 /* PublicTransportDetailCollectionCell.xib */,
 				E19AB82A18C8A26F0016885E /* PublicTransportPushCollectionCell.xib */,
-				E13555C718C9CB2D00DD7E37 /* StationSearchViewController.h */,
-				E13555C818C9CB2D00DD7E37 /* StationSearchViewController.m */,
-				E13555C918C9CB2D00DD7E37 /* StationSearchViewController.xib */,
+				27B3EF1A18CDE42C00A77A3B /* DetailTransportViewController.h */,
+				27B3EF1B18CDE42C00A77A3B /* DetailTransportViewController.m */,
+				27B3EF1C18CDE42C00A77A3B /* DetailTransportViewController.xib */,
+				27B3EF1F18CE0E0300A77A3B /* DetailTransportConnectionTableCell.xib */,
+				27B3EF2118CE0E2400A77A3B /* DetailTransportSectionTableCell.xib */,
 			);
 			name = PublicTransport;
 			sourceTree = "<group>";
@@ -1464,6 +1470,7 @@
 				2700DD2F1699F854002906D0 /* ThreeSlotsThreeRoomsTableCell.xib in Resources */,
 				276ED474173BE5CA00EF79D5 /* EmptyTableCell.xib in Resources */,
 				275ACACD173D36C90091B266 /* SixSlotsTwoRoomsTableCell.xib in Resources */,
+				27B3EF2018CE0E0300A77A3B /* DetailTransportConnectionTableCell.xib in Resources */,
 				E1817F9318C0814B001351C1 /* noConnectionButton.png in Resources */,
 				275ACACF173D3BB60091B266 /* SixSlotsOneRoomTableCell.xib in Resources */,
 				275ACAD1173D4AD20091B266 /* TwoSlotSixRoomsTableCell.xib in Resources */,
@@ -1506,7 +1513,6 @@
 				270A753B17CCE8D100DEAA94 /* FourSlotsFourRoomsTableCell.xib in Resources */,
 				270A753D17CCEA2500DEAA94 /* NineSlotsThreeRoomsTableCell.xib in Resources */,
 				270A753F17CCEB7000DEAA94 /* SevenSlotsEightRoomsTableCell.xib in Resources */,
-				E13555CB18C9CB2D00DD7E37 /* StationSearchViewController.xib in Resources */,
 				E1C23D6617CE295B00C58E10 /* PublicStopViewController.xib in Resources */,
 				E1C23D6817CE2C3500C58E10 /* PublicTransportOverviewTableCell.xib in Resources */,
 				E1A6AAD717CF367800CC0EDD /* Technikumstrasse.pdf in Resources */,
@@ -1574,6 +1580,7 @@
 				279F0A1A17DF168A006A599D /* AppIconsSchriftNewsFeedback.png in Resources */,
 				279F0A1B17DF168A006A599D /* AppIconsSchriftNewsFeedback@2x.png in Resources */,
 				279F0A1C17DF168A006A599D /* AppIconsSchriftSocialMediaFeedback.png in Resources */,
+				27B3EF2218CE0E2400A77A3B /* DetailTransportSectionTableCell.xib in Resources */,
 				279F0A1D17DF168A006A599D /* AppIconsSchriftSocialMediaFeedback@2x.png in Resources */,
 				279F0A1E17DF168A006A599D /* AppIconsSchriftStandorteFeedback.png in Resources */,
 				279F0A1F17DF168A006A599D /* AppIconsSchriftStandorteFeedback@2x.png in Resources */,
@@ -1583,6 +1590,7 @@
 				279F0A2117DF168A006A599D /* AppIconsSchriftStundenplanFeedback@2x.png in Resources */,
 				279F0A2317DF1FC6006A599D /* NavigationBarHome.png in Resources */,
 				279F0A2817DF2207006A599D /* Default.png in Resources */,
+				27B3EF1E18CDE42C00A77A3B /* DetailTransportViewController.xib in Resources */,
 				279F0A2B17DF2255006A599D /* Default@2x.png in Resources */,
 				279F0A2D17DF227F006A599D /* Default-568h@2x.png in Resources */,
 				E15C940E17E708B800F82EE4 /* stations.sql in Resources */,
@@ -1670,6 +1678,7 @@
 				E16C642A17ABDC4600BEDBB3 /* EmergencyViewController.m in Sources */,
 				E13AA95117B2416B0061E0ED /* StudentsDto.m in Sources */,
 				E13AA95417B248620061E0ED /* LecturersDto.m in Sources */,
+				27B3EF1D18CDE42C00A77A3B /* DetailTransportViewController.m in Sources */,
 				E13AA95717B269330061E0ED /* CoursesDto.m in Sources */,
 				E13AA95A17B269480061E0ED /* RoomsDto.m in Sources */,
 				E13AA95D17B269580061E0ED /* ClassesDto.m in Sources */,
@@ -1688,7 +1697,6 @@
 				E1252E5517CB423400E61732 /* SocialMediaViewController.m in Sources */,
 				E1252E5917CB4BB100E61732 /* ColorSelection.m in Sources */,
 				E1252E5F17CB72AD00E61732 /* ServiceDeskViewController.m in Sources */,
-				E13555CA18C9CB2D00DD7E37 /* StationSearchViewController.m in Sources */,
 				E1C23D6117CDDA1E00C58E10 /* GastronomicFacilityArrayDto.m in Sources */,
 				E1C23D6517CE295B00C58E10 /* PublicStopViewController.m in Sources */,
 				E1C23D6C17CE33BA00C58E10 /* StationArrayDto.m in Sources */,

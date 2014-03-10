@@ -40,7 +40,7 @@
 #import "DateFormation.h"
 #import "DBCachingForAutocomplete.h"
 #import "ColorSelection.h"
-
+#import "DetailTransportViewController.h"
 
 @class PublicStopViewController;
 
@@ -58,7 +58,9 @@
     IBOutlet UITableView                *_publicTransportTableView;
     
     /*! @var _publicStopVC Handles delegate from and to PublicStopViewController, is triggered when start or stop station is searched (new Button clicked) */
-    IBOutlet PublicStopViewController   *_publicStopVC;
+    IBOutlet PublicStopViewController       *_publicStopVC;
+    IBOutlet DetailTransportViewController  *_detailVC;
+    
     
     /*! @var _connectionArray Holds the array with all connections */
     ConnectionArrayDto                  *_connectionArray;
@@ -87,6 +89,9 @@
     IBOutlet UIActivityIndicatorView    *_waitForChangeActivityIndicator;
     
     IBOutlet UICollectionView           *_publicTransportCollectionView;
+    
+    NSDate                              *_veryNextConnectionDate;
+    NSDate                              *_veryNextConnectionTime;
 }
 
 
@@ -96,7 +101,8 @@
 @property (nonatomic, retain) IBOutlet UITableViewCell              *_pubilcTransportOverviewTableCell;
 @property (nonatomic, retain) IBOutlet UITableView                  *_publicTransportTableView;
 
-@property (nonatomic, retain) IBOutlet PublicStopViewController     *_publicStopVC;
+@property (nonatomic, retain) IBOutlet PublicStopViewController         *_publicStopVC;
+@property (nonatomic, retain) IBOutlet DetailTransportViewController    *_detailVC;
 
 @property (nonatomic, retain) ConnectionArrayDto                    *_connectionArray;
 @property (nonatomic, retain) DateFormation                         *_dateFormatter;
@@ -110,6 +116,10 @@
 @property (nonatomic, retain) DBCachingForAutocomplete              *_dbCachingForAutocomplete;
 @property (nonatomic, retain) NSMutableArray                        *_storedStartStationArray;
 @property (nonatomic, retain) NSMutableArray                        *_storedStopStationArray;
+
+@property (nonatomic, retain) NSDate                                *_veryNextConnectionDate;
+@property (nonatomic, retain) NSDate                                *_veryNextConnectionTime;
+
 
 @property (nonatomic, retain) IBOutlet UIActivityIndicatorView      *_waitForChangeActivityIndicator;
 

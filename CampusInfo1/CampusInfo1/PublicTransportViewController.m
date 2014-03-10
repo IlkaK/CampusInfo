@@ -35,6 +35,7 @@
  */
 
 #import "PublicTransportViewController.h"
+#import "DetailTransportViewController.h"
 #import "ColorSelection.h"
 #import "UIConstantStrings.h"
 #import "ConnectionDto.h"
@@ -54,6 +55,7 @@
 @synthesize _publicTransportTableView;
 
 @synthesize _publicStopVC;
+@synthesize _detailVC;
 
 @synthesize _connectionArray;
 @synthesize _dateFormatter;
@@ -70,7 +72,8 @@
 
 @synthesize _waitForChangeActivityIndicator;
 
-
+@synthesize _veryNextConnectionDate;
+@synthesize _veryNextConnectionTime;
 
 /*!
  * @function initWithNibName
@@ -140,6 +143,13 @@
 		_publicStopVC = [[PublicStopViewController alloc] init];
 	}
     _publicStopVC.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
+
+    if (_detailVC == nil)
+    {
+		_detailVC = [[DetailTransportViewController alloc] init];
+	}
+    _detailVC.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
+    
     
     UINib *cellNib1 = [UINib nibWithNibName:@"PublicTransportLabelCollectionCell" bundle:nil];
     [self._publicTransportCollectionView registerNib:cellNib1 forCellWithReuseIdentifier:@"PublicTransportLabelCollectionCell"];
@@ -469,6 +479,7 @@
     CharTranslation *_charTranslation = [CharTranslation alloc];
     BOOL newStart = NO;
     BOOL newStop = NO;
+    BOOL newTime = NO;
 
     //NSLog(@"_localConnection._from._station._name: %@ ", [_charTranslation replaceSpecialChars:_localConnection._from._station._name]);
     //NSLog(@"_localConnection._to._station._name: %@ ", [_charTranslation replaceSpecialChars:_localConnection._to._station._name]);
@@ -485,6 +496,8 @@
     {
         //NSLog(@"getConnectionArray -> _startLabel.text: %@", _startLabel.text);
         //NSLog(@"getConnectionArray -> _startStation: %@", _connectionArray._startStation);
+        
+        // check if there is a new start station
         if ([_connectionArray._startStation length] == 0)
         {
             newStart = YES;
@@ -502,6 +515,7 @@
             }
         }
         
+        // check if there is a new stop station
         if ([_connectionArray._stopStation length] == 0)
         {
             newStart = YES;
@@ -518,12 +532,37 @@
                 newStop = YES;
             }
         }
-        if (newStart || newStop || noValues)
+        
+        // check if either the connection date or the time is old
+
+        NSString *_actualDayString        = [[_dateFormatter _dayFormatter] stringFromDate:[NSDate date]];
+        NSString *_lastConnectionDaySting = [[_dateFormatter _dayFormatter] stringFromDate:_veryNextConnectionDate];
+        
+        // if dates are different search new connections
+        if (!([_actualDayString isEqualToString: _lastConnectionDaySting]))
+        {
+            newTime = YES;
+            //NSLog(@"not the same dates: %@ = %@", _actualDayString, _lastConnectionDaySting);
+        }
+        
+        NSString *_lastConnectionTimeString = [[_dateFormatter _timeFormatter] stringFromDate: _veryNextConnectionTime];
+        NSString *_actualTimeString         = [[_dateFormatter _timeFormatter] stringFromDate: [NSDate date]];
+        
+        // last connection needs to be before actual time, than trigger new search
+       if(  [_actualTimeString compare: _lastConnectionTimeString] == NSOrderedDescending
+        )
+       {
+           newTime = YES;
+           //NSLog(@"time is either the same or after: %@ = %@", _actualTimeString, _lastConnectionTimeString);
+       }
+        
+
+        if (newStart || newStop || noValues || newTime)
         {
             [NSThread detachNewThreadSelector:@selector(threadWaitForChangeActivityIndicator:) toTarget:self withObject:nil];
             [_connectionArray getData: _startStation
                       withStopStation:_stopStation
-                      withNewStations:newStart || newStop];
+                      withNewStations:newStart || newStop || newTime];
         }
     }
     [_publicTransportTableView reloadData];
@@ -551,6 +590,7 @@
 {
     _pubilcTransportOverviewTableCell = nil;
     _publicStopVC = nil;
+    _detailVC = nil;
     _publicTransportTableView = nil;
     _waitForChangeActivityIndicator = nil;
     [super viewDidUnload];
@@ -912,6 +952,13 @@
             &&  [_connectionArray._connections count] > _cellRow)
     {
             ConnectionDto *_localConnection = [_connectionArray._connections objectAtIndex:_cellRow];
+        
+            // store the very next departure time and date to check if another search is needed
+            if(_cellRow == 0)
+            {
+                _veryNextConnectionDate = _localConnection._from._departureDate;
+                _veryNextConnectionTime = _localConnection._from._departureTime;
+            }
             
             _startDestinationLabel.text        = _localConnection._from._station._name;
             _startDateLabel.text    = [[_dateFormatter _dayFormatter] stringFromDate:_localConnection._from._departureDate];
@@ -958,6 +1005,7 @@
  */
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+   [self presentModalViewController:_detailVC animated:YES];
     //NSUInteger    _cellSelection = indexPath.section;
     
 }

@@ -264,6 +264,7 @@ extern NSString * const NewsWebViewFont;
 // public transportation
 extern NSString * const PublicTransportVCTitle;
 extern NSString * const PublicTransportVCSearchStop;
+extern NSString * const PublicTransportVCDetails;
 extern NSString * const PublicTransportVCHint;
 extern NSString * const PublicTransportVCStart;
 extern NSString * const PublicTransportVCGoal;
