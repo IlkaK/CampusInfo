@@ -39,23 +39,7 @@ extern NSString * const DateButtonBackground;
 extern NSString * const NoConnectionButtonBackground;
 
 
-// strings for maps/standorte
-extern NSString * const MapsVCTitle    ;
-extern NSString * const MapsVCTechnikum;
-extern NSString * const MapsVCZurich   ;
-extern NSString * const MapsVCToessfeld;
 
-extern NSString * const ZurichVCTitle     ;
-extern NSString * const ZurichVCFileName  ;
-extern NSString * const ZurichVCFileFormat;
-
-extern NSString * const TechnikumVCTitle     ;
-extern NSString * const TechnikumVCFileName  ;
-extern NSString * const TechnikumVCFileFormat;
-
-extern NSString * const ToessfeldVCTitle     ;
-extern NSString * const ToessfeldVCFileName  ;
-extern NSString * const ToessfeldVCFileFormat;
 
 // strings for settings
 extern NSString * const TimeTableTypeStudent     ;
@@ -240,19 +224,9 @@ extern NSString * const InformationVCContact;
 extern NSString * const AlertViewOk     ;
 extern NSString * const AlertViewCancel ;
 
+extern NSString * const PublicTransportVCFromEnglish;
+extern NSString * const PublicTransportVCToEnglish;
 
-// social media
-extern NSString * const SocialMediaVCTitle;
-extern NSString * const SocialMediaFacebook       ;
-extern NSString * const SocialMediaFacebookPNG    ;
-extern NSString * const SocialMediaYoutube        ;
-extern NSString * const SocialMediaYoutubePNG     ;
-extern NSString * const SocialMediaTwitter        ;
-extern NSString * const SocialMediaTwitterPNG     ;
-extern NSString * const SocialMediaIssuu          ;
-extern NSString * const SocialMediaIssuuPNG       ;
-extern NSString * const SocialMediaXing           ;
-extern NSString * const SocialMediaXingPNG        ;
 
 // news and events
 extern NSString * const NewsVCTitle;
@@ -262,21 +236,6 @@ extern NSString * const EventsVCTitle;
 extern NSString * const EventsVCSmallTitle;
 extern NSString * const NewsWebViewHtml;
 extern NSString * const NewsWebViewFont;
-
-// public transportation
-extern NSString * const PublicTransportVCTitle;
-extern NSString * const PublicTransportVCSearchStop;
-extern NSString * const PublicTransportVCDetails;
-extern NSString * const PublicTransportVCHint;
-extern NSString * const PublicTransportVCStart;
-extern NSString * const PublicTransportVCGoal;
-extern NSString * const PublicTransportVCNew        ;
-extern NSString * const PublicTransportVCFromGerman ;
-extern NSString * const PublicTransportVCFromEnglish;
-extern NSString * const PublicTransportVCToGerman   ;
-extern NSString * const PublicTransportVCToEnglish  ;
-extern NSString * const PublicTransportVCStartGerman;
-extern NSString * const PublicTransportVCStopGerman ;
 
 // time table
 extern NSString * const TimeTableOverVCTitle;

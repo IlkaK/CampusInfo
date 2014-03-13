@@ -35,6 +35,7 @@
 #import "MapsViewController.h"
 #import "ColorSelection.h"
 #import "UIConstantStrings.h"
+#import "PicConstantStrings.h"
 
 @interface MapsViewController ()
 
@@ -87,7 +88,7 @@
     UIBarButtonItem *_backButtonItem = [[UIBarButtonItem alloc] initWithTitle:LeftArrowSymbol style:UIBarButtonItemStyleBordered target:self action:@selector(moveBackToMenuOverview:)];
     [_backButtonItem setTitleTextAttributes:@{NSForegroundColorAttributeName:_zhawColor._zhawWhite} forState:UIControlStateNormal];
     [_titleNavigationItem setLeftBarButtonItem :_backButtonItem animated :true];
-    [_titleNavigationItem setTitle:MapsVCTitle];
+    [_titleNavigationItem setTitle:NSLocalizedString(@"MapsVCTitle", nil)];
     [[UINavigationBar appearance] setTitleTextAttributes:@{
                                                            UITextAttributeTextColor: _zhawColor._zhawWhite,
                                                            UITextAttributeFont: [UIFont fontWithName:NavigationBarFont size:NavigationBarTitleSize],
@@ -183,7 +184,7 @@
     
     if (_cellSelection == 0)
     {
-        _technikumVC._description   = TechnikumVCTitle;
+        _technikumVC._description   = NSLocalizedString(@"TechnikumVCTitle", nil);
         _technikumVC._fileName      = TechnikumVCFileName;
         _technikumVC._fileFormat    = TechnikumVCFileFormat;
         [self presentModalViewController:_technikumVC animated:YES];
@@ -191,7 +192,7 @@
     
     if (_cellSelection == 1)
     {
-        _technikumVC._description   = ZurichVCTitle;
+        _technikumVC._description   = NSLocalizedString(@"ZurichVCTitle", nil);
         _technikumVC._fileName      = ZurichVCFileName;
         _technikumVC._fileFormat    = ZurichVCFileFormat;
         [self presentModalViewController:_technikumVC animated:YES];
@@ -199,7 +200,7 @@
     
     if (_cellSelection == 2)
     {
-        _technikumVC._description   = ToessfeldVCTitle;
+        _technikumVC._description   = NSLocalizedString(@"ToessfeldVCTitle", nil);
         _technikumVC._fileName      = ToessfeldVCFileName;
         _technikumVC._fileFormat    = ToessfeldVCFileFormat;
         [self presentModalViewController:_technikumVC animated:YES];
@@ -223,15 +224,15 @@
     
     if (_cellSelection == 0)
     {
-        cell.textLabel.text = MapsVCTechnikum;
+        cell.textLabel.text = NSLocalizedString(@"MapsVCTechnikum", nil);
     }
     if (_cellSelection == 1)
     {
-        cell.textLabel.text = MapsVCZurich;
+        cell.textLabel.text = NSLocalizedString(@"MapsVCZurich", nil);
     }
     if (_cellSelection == 2)
     {
-        cell.textLabel.text = MapsVCToessfeld;
+        cell.textLabel.text = NSLocalizedString(@"MapsVCToessfeld", nil);
     }
 
     return cell;

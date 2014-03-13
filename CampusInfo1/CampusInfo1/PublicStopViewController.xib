@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="4514" systemVersion="13C64" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="5053" systemVersion="13C64" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <deployment version="1536" defaultVersion="1296" identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3747"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3733"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="PublicStopViewController">
@@ -10,11 +10,13 @@
                 <outlet property="_descriptionLabel" destination="ncN-Sh-7Tz" id="edk-iD-Rrs"/>
                 <outlet property="_lastStationButton1" destination="FcT-lB-QOy" id="NIu-ad-DG6"/>
                 <outlet property="_lastStationButton2" destination="Oq6-xV-hr2" id="g8M-bZ-CNz"/>
+                <outlet property="_lastStationLabel" destination="hl2-JL-O2o" id="s15-po-krJ"/>
                 <outlet property="_publicStopTableView" destination="29" id="38"/>
                 <outlet property="_stationSearchBar" destination="irC-y1-08u" id="CND-n8-PjI"/>
                 <outlet property="_titleLabel" destination="6" id="6HL-0l-xfC"/>
                 <outlet property="_titleNavigationBar" destination="4" id="26"/>
                 <outlet property="_titleNavigationItem" destination="8" id="27"/>
+                <outlet property="_veryNewStationLabel" destination="J52-77-sLO" id="tfB-ds-X5V"/>
                 <outlet property="view" destination="1" id="3"/>
             </connections>
         </placeholder>
@@ -43,8 +45,8 @@
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Letzte Stationen" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hl2-JL-O2o" userLabel="LastStationLabel">
-                    <rect key="frame" x="0.0" y="44" width="125" height="21"/>
+                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hl2-JL-O2o" userLabel="LastStationLabel">
+                    <rect key="frame" x="20" y="49" width="300" height="25"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                     <nil key="highlightedColor"/>
@@ -67,8 +69,8 @@
                         <action selector="changeToLastStation2:" destination="-1" eventType="touchUpInside" id="4Hh-uT-cRm"/>
                     </connections>
                 </button>
-                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Neue Station" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="J52-77-sLO" userLabel="NewStationLabel">
-                    <rect key="frame" x="0.0" y="159" width="100" height="21"/>
+                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="J52-77-sLO" userLabel="NewStationLabel">
+                    <rect key="frame" x="20" y="162" width="300" height="25"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                     <nil key="highlightedColor"/>

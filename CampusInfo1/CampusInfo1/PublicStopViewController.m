@@ -67,6 +67,8 @@
 @synthesize _lastStation2;
 
 @synthesize _stationSearchBar;
+@synthesize _lastStationLabel;
+@synthesize _veryNewStationLabel;
 
 /*!
  * @function initWithNibName
@@ -143,14 +145,14 @@
     [_titleLabel setTextColor:_zhawColor._zhawWhite];
     [_titleLabel setTextAlignment:NSTextAlignmentCenter];
     [_titleLabel setFont:[UIFont fontWithName:NavigationBarFont size:NavigationBarTitleSize]];
-    [_titleLabel setText:PublicTransportVCTitle];
+    [_titleLabel setText:NSLocalizedString(@"PublicTransportVCTitle", nil)];
     
     [[UINavigationBar appearance] setBackgroundImage:[UIImage imageNamed:NavigationBarBackground] forBarMetrics:UIBarMetricsDefault];
     
     [_descriptionLabel setTextColor:_zhawColor._zhawWhite];
     [_descriptionLabel setTextAlignment:NSTextAlignmentCenter];
     [_descriptionLabel setFont:[UIFont fontWithName:NavigationBarFont size:NavigationBarDescriptionSize]];
-    [_descriptionLabel setText: PublicTransportVCSearchStop];
+    [_descriptionLabel setText: NSLocalizedString(@"PublicTransportVCSearchStop", nil)];
     
     
     [_lastStationButton1 setBackgroundImage:[UIImage imageNamed:DateButtonBackground]  forState:UIControlStateNormal];
@@ -161,6 +163,14 @@
     // initialize variables/ fields
     self._stationArray = [[StationArrayDto alloc] init:nil];
     _actualStationName = @"";
+    
+    [_lastStationLabel setTextColor:_zhawColor._zhawFontGrey];
+    [_lastStationLabel setFont:[UIFont fontWithName:NavigationBarFont size:NavigationBarDescriptionSize]];
+    [_lastStationLabel setText: NSLocalizedString(@"PublicTransportVCLastStop", nil)];
+
+    [_veryNewStationLabel setTextColor:_zhawColor._zhawFontGrey];
+    [_veryNewStationLabel setFont:[UIFont fontWithName:NavigationBarFont size:NavigationBarDescriptionSize]];
+    [_veryNewStationLabel setText: NSLocalizedString(@"PublicTransportVCNewStop", nil)];    
 }
 
 /*!

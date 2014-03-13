@@ -50,6 +50,15 @@
     [self dismissModalViewControllerAnimated:YES];
 }
 
+/*!
+ * @function prefersStatusBarHidden
+ * Used to hide the iOS status bar with time and battery symbol.
+ */
+-(BOOL) prefersStatusBarHidden
+{
+    return YES;
+}
+
 
 
 - (void)viewDidLoad
@@ -69,14 +78,14 @@
     [_titleLabel setTextColor:_zhawColor._zhawWhite];
     [_titleLabel setTextAlignment:NSTextAlignmentCenter];
     [_titleLabel setFont:[UIFont fontWithName:NavigationBarFont size:NavigationBarTitleSize]];
-    [_titleLabel setText:PublicTransportVCTitle];
+    [_titleLabel setText:NSLocalizedString(@"PublicTransportVCTitle", nil)];
     
     [[UINavigationBar appearance] setBackgroundImage:[UIImage imageNamed:NavigationBarBackground] forBarMetrics:UIBarMetricsDefault];
     
     [_descriptionLabel setTextColor:_zhawColor._zhawWhite];
     [_descriptionLabel setTextAlignment:NSTextAlignmentCenter];
     [_descriptionLabel setFont:[UIFont fontWithName:NavigationBarFont size:NavigationBarDescriptionSize]];
-    [_descriptionLabel setText: PublicTransportVCDetails];
+    [_descriptionLabel setText: NSLocalizedString(@"PublicTransportVCDetails", nil)];
     
 }
 
@@ -161,27 +170,33 @@
             self._detailTransportConnectionTableCell = nil;
         }
         
-        UILabel          *_fromLabel        = (UILabel  *)[_cell viewWithTag:1];
-        UILabel          *_toLabel          = (UILabel  *)[_cell viewWithTag:2];
-        UILabel          *_dateLabel        = (UILabel  *)[_cell viewWithTag:3];
-        UILabel          *_timeLabel        = (UILabel  *)[_cell viewWithTag:4];
-        UILabel          *_durationLabel    = (UILabel  *)[_cell viewWithTag:5];
-        UILabel          *_moveLabel        = (UILabel  *)[_cell viewWithTag:6];
+        UILabel          *_fromTitleLabel   = (UILabel  *)[_cell viewWithTag:1];
+        UILabel          *_fromLabel        = (UILabel  *)[_cell viewWithTag:2];
+        UILabel          *_toTitleLabel     = (UILabel  *)[_cell viewWithTag:3];
+        UILabel          *_toLabel          = (UILabel  *)[_cell viewWithTag:4];
+        UILabel          *_dateLabel        = (UILabel  *)[_cell viewWithTag:5];
+        UILabel          *_timeLabel        = (UILabel  *)[_cell viewWithTag:6];
+        UILabel          *_durationLabel    = (UILabel  *)[_cell viewWithTag:7];
+        UILabel          *_moveLabel        = (UILabel  *)[_cell viewWithTag:8];
         
+        [_fromTitleLabel setFont:[UIFont fontWithName:BoldFont size:NavigationBarDescriptionSize]];
         [_fromLabel setFont:[UIFont fontWithName:BoldFont size:NavigationBarDescriptionSize]];
+        [_toTitleLabel setFont:[UIFont fontWithName:BoldFont size:NavigationBarDescriptionSize]];
         [_toLabel setFont:[UIFont fontWithName:BoldFont size:NavigationBarDescriptionSize]];
         [_dateLabel setFont:[UIFont fontWithName:NavigationBarFont size:NavigationBarDescriptionSize]];
         [_timeLabel setFont:[UIFont fontWithName:NavigationBarFont size:NavigationBarDescriptionSize]];
         [_durationLabel setFont:[UIFont fontWithName:NavigationBarFont size:NavigationBarDescriptionSize]];
         [_moveLabel setFont:[UIFont fontWithName:NavigationBarFont size:NavigationBarDescriptionSize]];
         
+        _fromTitleLabel.text   = [NSString stringWithFormat:@"%@", NSLocalizedString(@"PublicTransportVCFrom2", nil)];
         _fromLabel.text        = [NSString stringWithFormat:@"%@", _actualConnection._from._station._name];
+        _toTitleLabel.text     = [NSString stringWithFormat:@"%@", NSLocalizedString(@"PublicTransportVCTo2", nil)];
         _toLabel.text          = [NSString stringWithFormat:@"%@", _actualConnection._to._station._name];
-        _dateLabel.text        = [NSString stringWithFormat:@"am: %@", [[_dateFormatter _dayFormatter] stringFromDate:_actualConnection._from._departureDate]];
-        _timeLabel.text        = [NSString stringWithFormat:@"um: %@", [[_dateFormatter _timeFormatter] stringFromDate:_actualConnection._from._departureTime]];
+        _dateLabel.text        = [NSString stringWithFormat:@"%@: %@",NSLocalizedString(@"PublicTransportVCWhen", nil), [[_dateFormatter _dayFormatter] stringFromDate:_actualConnection._from._departureDate]];
+        _timeLabel.text        = [NSString stringWithFormat:@"%@: %@",NSLocalizedString(@"PublicTransportVCDate", nil), [[_dateFormatter _timeFormatter] stringFromDate:_actualConnection._from._departureTime]];
         
-        _durationLabel.text     = [NSString stringWithFormat:@"Reisedauer: %@",_actualConnection._duration];
-        _moveLabel.text         = [NSString stringWithFormat:@"Umsteigen: %i",_actualConnection._transfers];
+        _durationLabel.text     = [NSString stringWithFormat:@"%@: %@",NSLocalizedString(@"PublicTransportVCDuration", nil) ,_actualConnection._duration];
+        _moveLabel.text         = [NSString stringWithFormat:@"%@: %i",NSLocalizedString(@"PublicTransportVCChange", nil),_actualConnection._transfers];
         
     }
     else // _cellRow => 1 // loop through sections
@@ -220,20 +235,20 @@
         {
             SectionDto *_localSection = [_actualConnection._sections objectAtIndex:_cntSection];
             
-            _fromLabel.text = [NSString stringWithFormat:@"von: %@", _localSection._departure._station._name];
-            _fromTimeLabel.text = [NSString stringWithFormat:@"ab: %@", [[_dateFormatter _timeFormatter] stringFromDate:_localSection._departure._departureTime]];
-            _toLabel.text   = [NSString stringWithFormat:@"nach: %@", _localSection._arrival._station._name];
-            _toTimeLabel.text = [NSString stringWithFormat:@"an: %@", [[_dateFormatter _timeFormatter] stringFromDate:_localSection._arrival._arrivalTime]];
+            _fromLabel.text = [NSString stringWithFormat:@"%@: %@", NSLocalizedString(@"PublicTransportVCFrom2", nil), _localSection._departure._station._name];
+            _fromTimeLabel.text = [NSString stringWithFormat:@"%@: %@",NSLocalizedString(@"PublicTransportVCFrom1", nil), [[_dateFormatter _timeFormatter] stringFromDate:_localSection._departure._departureTime]];
+            _toLabel.text   = [NSString stringWithFormat:@"%@: %@", NSLocalizedString(@"PublicTransportVCTo2", nil), _localSection._arrival._station._name];
+            _toTimeLabel.text = [NSString stringWithFormat:@"%@: %@",NSLocalizedString(@"PublicTransportVCTo1", nil), [[_dateFormatter _timeFormatter] stringFromDate:_localSection._arrival._arrivalTime]];
 
             if (_localSection._walkTime != nil)
             {
-                _transportationLabel.text = [NSString stringWithFormat:@"Fussweg: %@ min", [[_dateFormatter _minutesAndSecondsFormatter] stringFromDate:_localSection._walkTime]];
+                _transportationLabel.text = [NSString stringWithFormat:@"%@: %@ %@", NSLocalizedString(@"PublicTransportVCWalk", nil),[[_dateFormatter _minutesAndSecondsFormatter] stringFromDate:_localSection._walkTime], NSLocalizedString(@"PublicTransportVCMin", nil)];
                 _directionLabel.text = @"";
             }
             else
             {
-                _transportationLabel.text = [NSString stringWithFormat:@"Reise mit: %@ %@", _localSection._journey._category, _localSection._journey._journeyNumber];
-                _directionLabel.text = [NSString stringWithFormat:@"Richtung: %@",_localSection._journey._to];
+                _transportationLabel.text = [NSString stringWithFormat:@"%@: %@ %@", NSLocalizedString(@"PublicTransportVCTravelWith", nil), _localSection._journey._category, _localSection._journey._journeyNumber];
+                _directionLabel.text = [NSString stringWithFormat:@"%@: %@",NSLocalizedString(@"PublicTransportVCDirection", nil), _localSection._journey._to];
             }
         }
         

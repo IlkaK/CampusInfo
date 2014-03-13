@@ -32,8 +32,9 @@
  */
 
 #import "SocialMediaViewController.h"
-#import "UIConstantStrings.h"
+#import "PicConstantStrings.h"
 #import "URLConstantStrings.h"
+#import "UIConstantStrings.h"
 
 @interface SocialMediaViewController ()
 
@@ -84,7 +85,7 @@
     UIBarButtonItem *_backButtonItem = [[UIBarButtonItem alloc] initWithTitle:LeftArrowSymbol style:UIBarButtonItemStyleBordered target:self action:@selector(moveBackToMenuOverview:)];
     [_backButtonItem setTitleTextAttributes:@{NSForegroundColorAttributeName:_zhawColor._zhawWhite} forState:UIControlStateNormal];
     [_titleNavigationItem setLeftBarButtonItem :_backButtonItem animated :true];
-    [_titleNavigationItem setTitle:SocialMediaVCTitle];
+    [_titleNavigationItem setTitle:NSLocalizedString(@"SocialMediaVCTitle", nil)];
     [[UINavigationBar appearance] setTitleTextAttributes:@{
                                                            UITextAttributeTextColor: _zhawColor._zhawWhite,
                                                            UITextAttributeFont: [UIFont fontWithName:NavigationBarFont size:NavigationBarTitleSize],
@@ -181,7 +182,7 @@
     // facebook
     if (_cellSelection == 0)
     {
-        _socialMediaButtonTitle   = [NSString stringWithFormat:@"   %@",SocialMediaFacebook];
+        _socialMediaButtonTitle   = [NSString stringWithFormat:@"   %@",NSLocalizedString(@"SocialMediaFacebook", nil)];
         [_socialMediaButton addTarget:self action:@selector(openURLFacebook  :event:) forControlEvents:UIControlEventTouchUpInside];
         
         NSMutableAttributedString *_titleString = [[NSMutableAttributedString alloc] initWithString:_socialMediaButtonTitle];
@@ -197,7 +198,7 @@
     // youtube
     if (_cellSelection == 1)
     {
-        _socialMediaButtonTitle   = [NSString stringWithFormat:@"   %@",SocialMediaYoutube];
+        _socialMediaButtonTitle   = [NSString stringWithFormat:@"   %@",NSLocalizedString(@"SocialMediaYoutube", nil)];
         [_socialMediaButton addTarget:self action:@selector(openURLYoutube  :event:) forControlEvents:UIControlEventTouchUpInside];
         
         NSMutableAttributedString *_titleString = [[NSMutableAttributedString alloc] initWithString:_socialMediaButtonTitle];
@@ -212,7 +213,7 @@
 
     if (_cellSelection == 2)
     {
-        _socialMediaButtonTitle   = [NSString stringWithFormat:@"   %@",SocialMediaTwitter];
+        _socialMediaButtonTitle   = [NSString stringWithFormat:@"   %@",NSLocalizedString(@"SocialMediaTwitter", nil)];
         [_socialMediaButton addTarget:self action:@selector(openURLTwitter  :event:) forControlEvents:UIControlEventTouchUpInside];
         
         NSMutableAttributedString *_titleString = [[NSMutableAttributedString alloc] initWithString:_socialMediaButtonTitle];
@@ -227,7 +228,7 @@
 
     if (_cellSelection == 3)
     {
-        _socialMediaButtonTitle   = [NSString stringWithFormat:@"   %@",SocialMediaIssuu];
+        _socialMediaButtonTitle   = [NSString stringWithFormat:@"   %@",NSLocalizedString(@"SocialMediaIssuu", nil)];
         [_socialMediaButton addTarget:self action:@selector(openURLIssuu  :event:) forControlEvents:UIControlEventTouchUpInside];
         
         NSMutableAttributedString *_titleString = [[NSMutableAttributedString alloc] initWithString:_socialMediaButtonTitle];
@@ -242,7 +243,7 @@
 
     if (_cellSelection == 4)
     {
-        _socialMediaButtonTitle   = [NSString stringWithFormat:@"   %@",SocialMediaXing];
+        _socialMediaButtonTitle   = [NSString stringWithFormat:@"   %@",NSLocalizedString(@"SocialMediaXing", nil)];
         [_socialMediaButton addTarget:self action:@selector(openURLXing  :event:) forControlEvents:UIControlEventTouchUpInside];
         
         NSMutableAttributedString *_titleString = [[NSMutableAttributedString alloc] initWithString:_socialMediaButtonTitle];

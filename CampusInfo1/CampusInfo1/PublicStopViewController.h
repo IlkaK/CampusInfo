@@ -80,6 +80,9 @@
     NSString                            *_lastStation2;
     
     IBOutlet UISearchBar                *_stationSearchBar;
+    
+    IBOutlet UILabel                    *_lastStationLabel;
+    IBOutlet UILabel                    *_veryNewStationLabel;
 }
 
 @property (nonatomic, retain) StationArrayDto                       *_stationArray;
@@ -106,7 +109,10 @@
 @property (nonatomic, retain) NSString                              *_lastStation1;
 @property (nonatomic, retain) NSString                              *_lastStation2;
 
-@property (nonatomic, retain) UISearchBar                              *_stationSearchBar;
+@property (nonatomic, retain) UISearchBar                           *_stationSearchBar;
+
+@property (nonatomic, retain) UILabel                               *_lastStationLabel;
+@property (nonatomic, retain) UILabel                               *_veryNewStationLabel;
 
 
 - (IBAction)changeToLastStation1:(id)sender;

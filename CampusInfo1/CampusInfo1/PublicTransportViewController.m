@@ -130,7 +130,7 @@
     UIBarButtonItem *_backButtonItem = [[UIBarButtonItem alloc] initWithTitle:LeftArrowSymbol style:UIBarButtonItemStyleBordered target:self action:@selector(moveBackToMenuOverview:)];
     [_backButtonItem setTitleTextAttributes:@{NSForegroundColorAttributeName:_zhawColor._zhawWhite} forState:UIControlStateNormal];
     [_titleNavigationItem setLeftBarButtonItem :_backButtonItem animated :true];
-    [_titleNavigationItem setTitle:PublicTransportVCTitle];
+    [_titleNavigationItem setTitle:NSLocalizedString(@"PublicTransportVCTitle", nil)];
     [[UINavigationBar appearance] setTitleTextAttributes:@{
                                                            UITextAttributeTextColor: _zhawColor._zhawWhite,
                                                            UITextAttributeFont: [UIFont fontWithName:NavigationBarFont size:NavigationBarTitleSize],
@@ -490,8 +490,8 @@
     
     if (   [_startStation length] > 0
         && [_stopStation  length] > 0
-        && ![_startStation isEqualToString:PublicTransportVCStart]
-        && ![_stopStation  isEqualToString:PublicTransportVCGoal]
+        //&& ![_startStation isEqualToString:PublicTransportVCStart]
+        //&& ![_stopStation  isEqualToString:PublicTransportVCGoal]
         )
     {
         //NSLog(@"getConnectionArray -> _startLabel.text: %@", _startLabel.text);
@@ -674,13 +674,13 @@
     if (
            [_startStation length] == 0
         || [_stopStation  length] == 0
-        || [_startStation isEqualToString:PublicTransportVCStart]
-        || [_stopStation  isEqualToString:PublicTransportVCGoal]
+        //|| [_startStation isEqualToString:PublicTransportVCStart]
+        //|| [_stopStation  isEqualToString:PublicTransportVCGoal]
         )
     {
         UIAlertView *_acronymAlertView = [[UIAlertView alloc]
-                                          initWithTitle:PublicTransportVCTitle
-                                          message:PublicTransportVCHint
+                                          initWithTitle:NSLocalizedString(@"PublicTransportVCTitle", nil)
+                                        message:NSLocalizedString(@"PublicTransportVCHint", nil)
                                           delegate:self
                                           cancelButtonTitle:AlertViewOk
                                           otherButtonTitles:nil];
@@ -776,11 +776,11 @@
         
         if (_cellRow == 0 && _cellTab == 0)
         {
-            [_descrLabel setText:PublicTransportVCStartGerman];
+            [_descrLabel setText:NSLocalizedString(@"PublicTransportVCFrom2", nil)];
         }
         if (_cellRow == 1 && _cellTab == 0)
         {
-            [_descrLabel setText:PublicTransportVCStopGerman];
+            [_descrLabel setText:NSLocalizedString(@"PublicTransportVCTo2", nil)];
         }
     }
     
@@ -840,12 +840,12 @@
         [_searchConnectionButton setTitleColor:_zhawColor._zhawWhite forState:UIControlStateNormal];
         [_searchConnectionButton setBackgroundImage:[UIImage imageNamed:NoConnectionButtonBackground]  forState:UIControlStateNormal];
         [_searchConnectionButton addTarget:self action:@selector(startConnectionSearch:event:) forControlEvents:UIControlEventTouchUpInside];
-        [_searchConnectionButton setTitle:@"Verbindung suchen" forState:UIControlStateNormal];
+        [_searchConnectionButton setTitle:NSLocalizedString(@"PublicTransportSearchConnection", nil) forState:UIControlStateNormal];
         
         [_reverseConnectionButton setTitleColor:_zhawColor._zhawWhite forState:UIControlStateNormal];
         [_reverseConnectionButton setBackgroundImage:[UIImage imageNamed:NoConnectionButtonBackground]  forState:UIControlStateNormal];
         [_reverseConnectionButton addTarget:self action:@selector(changeDirection:event:) forControlEvents:UIControlEventTouchUpInside];
-        [_reverseConnectionButton setTitle:@"Gegenrichtung" forState:UIControlStateNormal];
+        [_reverseConnectionButton setTitle:NSLocalizedString(@"PublicTransportOppositeDirection", nil) forState:UIControlStateNormal];
     }
     
     return _cell;
@@ -931,8 +931,6 @@
     UILabel          *_startDateLabel       = (UILabel  *)[_cell viewWithTag:2];
     UILabel          *_startTimeLabel       = (UILabel  *)[_cell viewWithTag:3];
     UILabel          *_durationLabel        = (UILabel  *)[_cell viewWithTag:4];
-    //UILabel          *_transfersLabel       = (UILabel  *)[_cell viewWithTag:5];
-    //UILabel          *_transportationLabel  = (UILabel  *)[_cell viewWithTag:6];
     UILabel          *_stopDestinationLabel = (UILabel  *)[_cell viewWithTag:5];
     UILabel          *_stopDateLabel        = (UILabel  *)[_cell viewWithTag:6];
     UILabel          *_stopTimeLabel        = (UILabel  *)[_cell viewWithTag:7];
@@ -940,8 +938,6 @@
     [_startDateLabel            setTextColor:_zhawColor._zhawFontGrey];
     [_startTimeLabel            setTextColor:_zhawColor._zhawFontGrey];
     [_durationLabel             setTextColor:_zhawColor._zhawFontGrey];
-    //[_transfersLabel            setTextColor:_zhawColor._zhawFontGrey];
-    //[_transportationLabel       setTextColor:_zhawColor._zhawFontGrey];
     [_stopDestinationLabel      setTextColor:_zhawColor._zhawFontGrey];
     [_stopDateLabel             setTextColor:_zhawColor._zhawFontGrey];
     [_stopTimeLabel             setTextColor:_zhawColor._zhawFontGrey];
@@ -962,29 +958,12 @@
             
             _startDestinationLabel.text        = _localConnection._from._station._name;
             _startDateLabel.text    = [[_dateFormatter _dayFormatter] stringFromDate:_localConnection._from._departureDate];
-            _startTimeLabel.text    = [NSString stringWithFormat:@"%@ %@",PublicTransportVCFromGerman, [[_dateFormatter _timeFormatter] stringFromDate:_localConnection._from._departureTime]];
+            _startTimeLabel.text    = [NSString stringWithFormat:@"%@ %@",NSLocalizedString(@"PublicTransportVCFrom1", nil), [[_dateFormatter _timeFormatter] stringFromDate:_localConnection._from._departureTime]];
             
             _durationLabel.text     = _localConnection._duration;
-            //_transfersLabel.text    = [NSString stringWithFormat:@"%i",_localConnection._transfers];
-            
-            int _productsArrayI;
-            NSString *_productsString;
-            for (_productsArrayI=0; _productsArrayI < [_localConnection._products count]; _productsArrayI++)
-            {
-                NSString *_oneProduct = [_localConnection._products objectAtIndex:_productsArrayI];
-                if (_productsArrayI > 0)
-                {   
-                    _productsString = [NSString stringWithFormat:@"%@, %@",_productsString, _oneProduct];
-                }
-                else
-                {
-                    _productsString = [NSString stringWithFormat:@"%@",_oneProduct];
-                }
-            }
-            //_transportationLabel.text = _productsString;
             _stopDestinationLabel.text = _localConnection._to._station._name;
             _stopDateLabel.text   = [[_dateFormatter _dayFormatter] stringFromDate:_localConnection._to._arrivalDate];
-            _stopTimeLabel.text   = [NSString stringWithFormat:@"%@ %@",PublicTransportVCToGerman, [[_dateFormatter _timeFormatter] stringFromDate:_localConnection._to._arrivalTime]];
+            _stopTimeLabel.text   = [NSString stringWithFormat:@"%@ %@",NSLocalizedString(@"PublicTransportVCTo1", nil), [[_dateFormatter _timeFormatter] stringFromDate:_localConnection._to._arrivalTime]];
     }
     return _cell;
 }
@@ -1014,9 +993,6 @@
         [self presentModalViewController:_detailVC animated:YES];
 
     }
-    
-    //NSUInteger    _cellSelection = indexPath.section;
-    
 }
 
 @end

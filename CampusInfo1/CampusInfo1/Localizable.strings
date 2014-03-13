@@ -1,0 +1,59 @@
+/* 
+  Localizable.strings
+  Engineering
+
+  Created by Ilka Kokemor on 13.03.14.
+
+*/
+
+"KEY" = "CONTENT";
+
+// social media
+"SocialMediaVCTitle"         = "Social Media";
+"SocialMediaFacebook"        = "Facebook";
+"SocialMediaYoutube"         = "Youtube";
+"SocialMediaTwitter"         = "Twitter";
+"SocialMediaIssuu"           = "Issuu";
+"SocialMediaXing"            = "Xing";
+
+// strings for maps/standorte
+"MapsVCTitle"        = "Standorte";
+"MapsVCTechnikum"    = "Winterthur, Technikum";
+"MapsVCZurich"       = "Zürich, Lagerstrasse";
+"MapsVCToessfeld"    = "Winterthur, Tössfeld";
+
+"ZurichVCTitle"      = "Zürich - Campus Lagerstrasse";
+"TechnikumVCTitle"   = "Winterthur - Campus Technikumstrasse";
+"ToessfeldVCTitle"   = "Winterthur - Campus Tössfeld";
+
+
+// public transportation
+"PublicTransportVCTitle"         = "Fahrplan";
+"PublicTransportVCHint"          = "Bitte Start und Ziel eingeben.";
+
+"PublicTransportVCSearchStop"    = "Stationssuche";
+"PublicTransportVCDetails"       = "Details";
+
+"PublicTransportVCStart"         = "Start";
+"PublicTransportVCGoal"          = "Ziel";
+
+"PublicTransportVCFrom1"    		 = "ab";
+"PublicTransportVCTo1"      		 = "an";
+
+"PublicTransportVCFrom2"    		 = "von";
+"PublicTransportVCTo2"      		 = "nach";
+
+"PublicTransportSearchConnection"  = "Verbindung suchen";
+"PublicTransportOppositeDirection" = "Gegenrichtung";
+
+"PublicTransportVCLastStop"         = "Letzte Station";
+"PublicTransportVCNewStop"          = "Neue Station";
+
+"PublicTransportVCWhen"             = "am";
+"PublicTransportVCDate"             = "um";
+"PublicTransportVCDuration"         = "Reisedauer";
+"PublicTransportVCChange"           = "Umsteigen";
+"PublicTransportVCWalk"             = "Fussweg";
+"PublicTransportVCMin"              = "min";
+"PublicTransportVCTravelWith"       = "Reise mit";
+"PublicTransportVCDirection"        = "Richtung";

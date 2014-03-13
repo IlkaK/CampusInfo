@@ -39,23 +39,7 @@ NSString * const SegmentedControlBackground = @"segmentedcontrol.png";
 NSString * const DateButtonBackground = @"dateButton.png";
 NSString * const NoConnectionButtonBackground = @"noConnectionButton";
 
-// strings for maps/standorte
-NSString * const MapsVCTitle        = @"Standorte";
-NSString * const MapsVCTechnikum    = @"Winterthur, Technikum";
-NSString * const MapsVCZurich       = @"Zürich, Lagerstrasse";
-NSString * const MapsVCToessfeld    = @"Winterthur, Tössfeld";
 
-NSString * const ZurichVCTitle      = @"Zürich - Campus Lagerstrasse";
-NSString * const ZurichVCFileName   = @"Zuerich";
-NSString * const ZurichVCFileFormat = @"pdf";
-
-NSString * const TechnikumVCTitle      = @"Winterthur - Campus Technikumstrasse";
-NSString * const TechnikumVCFileName   = @"Technikumstrasse";
-NSString * const TechnikumVCFileFormat = @"pdf";
-
-NSString * const ToessfeldVCTitle      = @"Winterthur - Campus Tössfeld";
-NSString * const ToessfeldVCFileName   = @"Toessfeld";
-NSString * const ToessfeldVCFileFormat = @"pdf";
 
 
 // strings for settings/ time table details
@@ -242,18 +226,7 @@ NSString * const InformationVCContact           = @"Kontakt";
 NSString * const AlertViewOk         = @"OK";
 NSString * const AlertViewCancel     = @"Cancel";
 
-// social media
-NSString * const SocialMediaVCTitle         = @"Social Media";
-NSString * const SocialMediaFacebook        = @"Facebook";
-NSString * const SocialMediaFacebookPNG     = @"facebook.png";
-NSString * const SocialMediaYoutube         = @"Youtube";
-NSString * const SocialMediaYoutubePNG      = @"youtube.png";
-NSString * const SocialMediaTwitter         = @"Twitter";
-NSString * const SocialMediaTwitterPNG      = @"twitter.png";
-NSString * const SocialMediaIssuu           = @"Issuu";
-NSString * const SocialMediaIssuuPNG        = @"issuu.png";
-NSString * const SocialMediaXing            = @"Xing";
-NSString * const SocialMediaXingPNG         = @"xing.png";
+
 
 
 // news and events
@@ -273,21 +246,10 @@ NSString * const NewsWebViewHtml    = @"<html> \n"
 NSString * const NewsWebViewFont   = @"helvetica";
 
 
-// public transportation
-NSString * const PublicTransportVCTitle         = @"Fahrplan";
-NSString * const PublicTransportVCSearchStop    = @"Stationssuche";
-NSString * const PublicTransportVCDetails       = @"Details";
-NSString * const PublicTransportVCHint          = @"Bitte Start und Ziel eingeben.";
-NSString * const PublicTransportVCStart         = @"Start";
-NSString * const PublicTransportVCGoal          = @"Ziel";
-NSString * const PublicTransportVCNew           = @"neu...";
-NSString * const PublicTransportVCFromGerman    = @"ab";
-NSString * const PublicTransportVCFromEnglish   = @"from";
-NSString * const PublicTransportVCToGerman      = @"an";
-NSString * const PublicTransportVCToEnglish     = @"to";
-NSString * const PublicTransportVCStartGerman   = @"von";
-NSString * const PublicTransportVCStopGerman    = @"nach";
-
+// constants needed to compare start and stop station in
+// PublicTransportViewController and PublicStopViewController
+NSString * const PublicTransportVCFromEnglish = @"from";
+NSString * const PublicTransportVCToEnglish   = @"to";
 
 
 

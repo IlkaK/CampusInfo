@@ -210,6 +210,8 @@
 		E184106D18B75CE1007CD204 /* NavigationBarHome@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E184106C18B75CE1007CD204 /* NavigationBarHome@2x.png */; };
 		E184107118B79205007CD204 /* NewsSmallTableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E184107018B79205007CD204 /* NewsSmallTableCell.xib */; };
 		E184107318B79219007CD204 /* NewsLargeTableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E184107218B79219007CD204 /* NewsLargeTableCell.xib */; };
+		E18D0BBE18D1FE46001A9FE7 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = E18D0BBD18D1FE46001A9FE7 /* Localizable.strings */; };
+		E18D0BC118D1FEA4001A9FE7 /* PicConstantStrings.m in Sources */ = {isa = PBXBuildFile; fileRef = E18D0BC018D1FEA4001A9FE7 /* PicConstantStrings.m */; };
 		E19313DE18BF4D8300A37F23 /* segmentedcontrol.png in Resources */ = {isa = PBXBuildFile; fileRef = E19313DD18BF4D8300A37F23 /* segmentedcontrol.png */; };
 		E195FF36178188A30065DF05 /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = E195FF35178188A30065DF05 /* libsqlite3.dylib */; };
 		E198FD5317BE240400D5BE9B /* NewsDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E198FD5117BE240400D5BE9B /* NewsDetailViewController.m */; };
@@ -579,6 +581,9 @@
 		E184106C18B75CE1007CD204 /* NavigationBarHome@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "NavigationBarHome@2x.png"; path = "CampusInfo1/resources/navigationbar/NavigationBarHome@2x.png"; sourceTree = "<group>"; };
 		E184107018B79205007CD204 /* NewsSmallTableCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NewsSmallTableCell.xib; sourceTree = "<group>"; };
 		E184107218B79219007CD204 /* NewsLargeTableCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NewsLargeTableCell.xib; sourceTree = "<group>"; };
+		E18D0BBD18D1FE46001A9FE7 /* Localizable.strings */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; path = Localizable.strings; sourceTree = "<group>"; };
+		E18D0BBF18D1FEA4001A9FE7 /* PicConstantStrings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PicConstantStrings.h; sourceTree = "<group>"; };
+		E18D0BC018D1FEA4001A9FE7 /* PicConstantStrings.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PicConstantStrings.m; sourceTree = "<group>"; };
 		E19313DD18BF4D8300A37F23 /* segmentedcontrol.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = segmentedcontrol.png; path = CampusInfo1/resources/segmented_control/segmentedcontrol.png; sourceTree = "<group>"; };
 		E195FF35178188A30065DF05 /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
 		E198FD5017BE240400D5BE9B /* NewsDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewsDetailViewController.h; sourceTree = "<group>"; };
@@ -965,6 +970,7 @@
 		A35A341E1520814800181E3F /* CampusInfo1 */ = {
 			isa = PBXGroup;
 			children = (
+				E18D0BBA18D1FC6B001A9FE7 /* Constants */,
 				E13AA95E17B284DF0061E0ED /* MenuOverview */,
 				E1252E5117CB41E900E61732 /* SocialMedia */,
 				E15AA5A517C23111007E9F00 /* Maps */,
@@ -1279,6 +1285,22 @@
 			name = button;
 			sourceTree = "<group>";
 		};
+		E18D0BBA18D1FC6B001A9FE7 /* Constants */ = {
+			isa = PBXGroup;
+			children = (
+				E1CF302617E75C5300398830 /* URLConstantStrings.h */,
+				E1CF302717E75C5300398830 /* URLConstantStrings.m */,
+				E1252E5717CB4BB100E61732 /* ColorSelection.h */,
+				E1252E5817CB4BB100E61732 /* ColorSelection.m */,
+				E1DC175117D09D5C00DB51F6 /* UIConstantStrings.h */,
+				E1DC175217D09D5D00DB51F6 /* UIConstantStrings.m */,
+				E18D0BBD18D1FE46001A9FE7 /* Localizable.strings */,
+				E18D0BBF18D1FEA4001A9FE7 /* PicConstantStrings.h */,
+				E18D0BC018D1FEA4001A9FE7 /* PicConstantStrings.m */,
+			);
+			name = Constants;
+			sourceTree = "<group>";
+		};
 		E19313DA18BF4B1300A37F23 /* segmented_control */ = {
 			isa = PBXGroup;
 			children = (
@@ -1313,14 +1335,8 @@
 				E104C048178C397C0020EEB4 /* LanguageTranslation.m */,
 				E1D7EFF5178DA03D00100293 /* DateFormation.h */,
 				E1D7EFF6178DA03D00100293 /* DateFormation.m */,
-				E1252E5717CB4BB100E61732 /* ColorSelection.h */,
-				E1252E5817CB4BB100E61732 /* ColorSelection.m */,
-				E1DC175117D09D5C00DB51F6 /* UIConstantStrings.h */,
-				E1DC175217D09D5D00DB51F6 /* UIConstantStrings.m */,
 				E1CF302317E73D2900398830 /* CharTranslation.h */,
 				E1CF302417E73D2900398830 /* CharTranslation.m */,
-				E1CF302617E75C5300398830 /* URLConstantStrings.h */,
-				E1CF302717E75C5300398830 /* URLConstantStrings.m */,
 			);
 			name = Helper;
 			sourceTree = "<group>";
@@ -1515,6 +1531,7 @@
 				270A753D17CCEA2500DEAA94 /* NineSlotsThreeRoomsTableCell.xib in Resources */,
 				270A753F17CCEB7000DEAA94 /* SevenSlotsEightRoomsTableCell.xib in Resources */,
 				E1C23D6617CE295B00C58E10 /* PublicStopViewController.xib in Resources */,
+				E18D0BBE18D1FE46001A9FE7 /* Localizable.strings in Resources */,
 				E1C23D6817CE2C3500C58E10 /* PublicTransportOverviewTableCell.xib in Resources */,
 				E1A6AAD717CF367800CC0EDD /* Technikumstrasse.pdf in Resources */,
 				E184107318B79219007CD204 /* NewsLargeTableCell.xib in Resources */,
@@ -1691,6 +1708,7 @@
 				E1F32A5117BCE4C4000D69F3 /* NewsChannelDto.m in Sources */,
 				E1F32A5417BCE4DB000D69F3 /* NewsImageDto.m in Sources */,
 				E1F32A5717BCE4F9000D69F3 /* NewsItemDto.m in Sources */,
+				E18D0BC118D1FEA4001A9FE7 /* PicConstantStrings.m in Sources */,
 				E198FD5317BE240400D5BE9B /* NewsDetailViewController.m in Sources */,
 				E15AA5A917C23155007E9F00 /* MapsViewController.m in Sources */,
 				E15AA5AE17C23167007E9F00 /* TechnikumViewController.m in Sources */,
