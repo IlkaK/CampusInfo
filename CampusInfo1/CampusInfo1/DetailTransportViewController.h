@@ -24,8 +24,12 @@
     
     /*! @var _zhawColor Holds all color schemes needed */
     ColorSelection                      *_zhawColor;
-
+    /*! @var _dateFormatter Class which provides methods to format date from NSString to NSDate or the other way around */
+    DateFormation                       *_dateFormatter;
+    
     IBOutlet UITableView                *_detailTableView;
+    IBOutlet UITableViewCell            *_detailTransportConnectionTableCell;
+    IBOutlet UITableViewCell            *_detailTransportSectionTableCell;
     
     ConnectionDto                       *_actualConnection;
     
@@ -36,7 +40,12 @@
 @property (nonatomic, retain) IBOutlet UILabel                      *_titleLabel;
 @property (nonatomic, retain) IBOutlet UILabel                      *_descriptionLabel;
 
+@property (nonatomic, retain) IBOutlet UITableView                  *_detailTableView;
+@property (nonatomic, retain) IBOutlet UITableViewCell              *_detailTransportConnectionTableCell;
+@property (nonatomic, retain) IBOutlet UITableViewCell              *_detailTransportSectionTableCell;
+
 @property (strong, nonatomic) ColorSelection                        *_zhawColor;
+@property (nonatomic, retain) DateFormation                         *_dateFormatter;
 @property (strong, nonatomic) ConnectionDto                         *_actualConnection;
 
 @end

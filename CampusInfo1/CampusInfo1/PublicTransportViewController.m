@@ -1005,7 +1005,16 @@
  */
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-   [self presentModalViewController:_detailVC animated:YES];
+    NSUInteger        _cellRow = indexPath.row;
+    ConnectionDto *_localConnection;
+    if ( [_connectionArray._connections count] > _cellRow)
+    {
+        _localConnection = [_connectionArray._connections objectAtIndex:_cellRow];
+        _detailVC._actualConnection = _localConnection;
+        [self presentModalViewController:_detailVC animated:YES];
+
+    }
+    
     //NSUInteger    _cellSelection = indexPath.section;
     
 }

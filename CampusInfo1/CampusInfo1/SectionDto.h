@@ -38,16 +38,21 @@
 {
     /*! @var _journey Stores the journey of the section */
     JourneyDto      *_journey;
-    /*! @var _walk Stores the walk of the section */
-    NSString        *_walk;
+    /*! @var _walk Stores the duration of walk of the section */
+    NSDate        *_walkTime;
     /*! @var _departure Stores the departure of the section */
     FromOrToDto     *_departure;
     /*! @var _arrival Stores the arrival of the section */
     FromOrToDto     *_arrival;
+    
+    /*! @var _dateFormatter Class which provides methods to format date from NSString to NSDate or the other way around */
+    DateFormation       *_dateFormatter;
 }
 
+@property (nonatomic, retain) DateFormation     *_dateFormatter;
+
 @property (nonatomic, retain) JourneyDto        *_journey;
-@property (nonatomic, retain) NSString          *_walk;
+@property (nonatomic, retain) NSDate            *_walkTime;
 @property (nonatomic, retain) FromOrToDto       *_departure;
 @property (nonatomic, retain) FromOrToDto       *_arrival;
 
@@ -60,7 +65,7 @@
  @param newArrival
  */
 -(id)                     init:(JourneyDto *)newJourney
-                      withWalk:(NSString *)newWalk
+                  withWalkTime:(NSDate *)newWalkTime
                  withDeparture:(FromOrToDto *)newDeparture
                    withArrival:(FromOrToDto *)newArrival;
 

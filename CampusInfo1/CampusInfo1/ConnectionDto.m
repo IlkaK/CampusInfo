@@ -203,14 +203,14 @@
                 //NSLog(@"ConnectionDto _localCapacity2nd: %i", _localCapacity1st);
             }
             
-            if ([connectionKey isEqualToString:@"passList"])
+            if ([connectionKey isEqualToString:@"sections"]) 
             {
                 _sectionArray = [connectionDictionary objectForKey:connectionKey];
                 int _sectionArrayI;
                 
                 //NSLog(@"before count of _sectionArray: %i", [_sectionArray count]);
                 
-                SectionDto *_localSection = [[SectionDto alloc]init:nil withWalk:nil withDeparture:nil withArrival:nil];
+                SectionDto *_localSection = [[SectionDto alloc]init:nil withWalkTime:nil withDeparture:nil withArrival:nil];
                 for (_sectionArrayI = 0; _sectionArrayI < [_sectionArray count]; _sectionArrayI++)
                 {
                     _localSection = [_localSection getSection:[_sectionArray objectAtIndex:_sectionArrayI]];

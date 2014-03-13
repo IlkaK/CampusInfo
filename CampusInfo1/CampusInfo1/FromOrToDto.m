@@ -111,9 +111,10 @@
         {
             if ([fromOrToKey isEqualToString:@"arrival"])
             {
-                //NSLog(@"FromOrToDto arrival: %@", [fromOrToDictionary objectForKey:fromOrToKey]);
                 _localArrivalDate = [_dateFormatter parseDate:[fromOrToDictionary objectForKey:fromOrToKey]];
                 _localArrivalTime = [_dateFormatter parseTime:[fromOrToDictionary objectForKey:fromOrToKey]];
+                //NSLog(@"FromOrToDto _localArrivalTime: %@", [[_dateFormatter _timeFormatter] stringFromDate:_localArrivalTime]);
+                
             }
             
             if ([fromOrToKey isEqualToString:@"departure"])

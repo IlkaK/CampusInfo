@@ -36,6 +36,7 @@
 
 @synthesize _dayFormatter;
 @synthesize _timeFormatter;
+@synthesize _minutesAndSecondsFormatter;
 @synthesize _weekDayFormatter;
 @synthesize _englishTimeAndDayFormatter;
 @synthesize _englishDayFormatter;
@@ -65,6 +66,10 @@
         [_timeFormatter setDateFormat:@"HH:mm"];
         [_timeFormatter setDefaultDate:[NSDate date]];
         
+        _minutesAndSecondsFormatter      = [[NSDateFormatter alloc]init];
+        [_minutesAndSecondsFormatter setTimeZone:_timeZone];
+        [_minutesAndSecondsFormatter setDateFormat:@"mm:ss"];
+        [_minutesAndSecondsFormatter setDefaultDate:[NSDate date]];
         
         _englishDayFormatter = [[NSDateFormatter alloc]init];
         [_englishDayFormatter setTimeZone:_timeZone];
@@ -93,6 +98,27 @@
     //NSLog(@"_localDate: %@", [[self _englishDayFormatter] stringFromDate:_localDate]);
     return _localDate;
 }
+
+/*!
+ @function parseMinutesAndSeconds
+ Parses the given string into minutes and seconds (former format 00:00:00).
+ @param dateString
+ */
+- (NSDate *) parseMinutesAndSeconds:(NSString *)dateString
+{
+    NSDate   *_localTime;
+    NSString *_localString = [dateString substringFromIndex:3];
+    //NSLog(@"1 _localString: %@",_localString);
+    
+    _localString = [_localString substringToIndex:5];
+    //NSLog(@"2 _localString: %@",_localString);
+    _localTime   = [[self _minutesAndSecondsFormatter] dateFromString:_localString];
+    
+    //NSLog(@"_localTime: %@", [[self _timeFormatter] stringFromDate:_localTime]);
+    return _localTime;
+}
+
+
 
 /*!
  @function parseTime

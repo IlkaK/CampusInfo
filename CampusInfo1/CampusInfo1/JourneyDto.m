@@ -119,37 +119,37 @@
             if ([journeyKey isEqualToString:@"name"])
             {
                 _localName = [journeyDictionary objectForKey:journeyKey];
-                //NSLog(@"StationDto _localName: %@", _localName);
+                //NSLog(@"JourneyDto _localName: %@", _localName);
             }
             
             if ([journeyKey isEqualToString:@"category"])
             {
                 _localCategory = [journeyDictionary objectForKey:journeyKey];
-                //NSLog(@"StationDto _localName: %@", _localName);
+                //NSLog(@"JourneyDto _localCategory: %@", _localCategory);
             }
             
             if ([journeyKey isEqualToString:@"categoryCode"])
             {
                 _localCategoryCode = [[journeyDictionary objectForKey:journeyKey] intValue];
-                //NSLog(@"StationDto _localDistance: %@", _localDistance);
+                //NSLog(@"JourneyDto _localCategoryCode: %i", _localCategoryCode);
             }
             
             if ([journeyKey isEqualToString:@"number"])
             {
                 _localJourneyNumber = [journeyDictionary objectForKey:journeyKey];
-                //NSLog(@"StationDto _localDistance: %@", _localDistance);
+                //NSLog(@"JourneyDto _localJourneyNumber: %@", _localJourneyNumber);
             }
             
             if ([journeyKey isEqualToString:@"operator"])
             {
                 _localOperator = [journeyDictionary objectForKey:journeyKey];
-                //NSLog(@"StationDto _localDistance: %@", _localDistance);
+                //NSLog(@"JourneyDto _localOperator: %@", _localOperator);
             }
             
             if ([journeyKey isEqualToString:@"to"])
             {
                 _localTo = [journeyDictionary objectForKey:journeyKey];
-                //NSLog(@"StationDto _localDistance: %@", _localDistance);
+                //NSLog(@"JourneyDto _localTo: %@", _localTo);
             }
             
             if ([journeyKey isEqualToString:@"passList"])

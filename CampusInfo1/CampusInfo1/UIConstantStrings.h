@@ -30,6 +30,8 @@ extern NSString * const RightArrowSymbol;
 extern NSString * const NavigationBarBackground;
 // title for navigation bars
 extern NSString * const NavigationBarFont;
+extern NSString * const BoldFont;
+
 extern float const NavigationBarTitleSize;
 extern float const NavigationBarDescriptionSize;
 extern NSString * const SegmentedControlBackground;

@@ -1411,6 +1411,7 @@
 		A35A340B1520814700181E3F /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				LastTestingUpgradeCheck = 0510;
 				LastUpgradeCheck = 0500;
 				TargetAttributes = {
 					A35A34131520814700181E3F = {

@@ -43,6 +43,8 @@
     NSDateFormatter *_weekDayFormatter;
     /*! @var _timeFormatter Holds the date formatter to format time */
     NSDateFormatter *_timeFormatter;
+    /*! @var _minutesAndSecondsFormatter Holds the date formatter to format time with minutes and seconds */
+    NSDateFormatter *_minutesAndSecondsFormatter;
     /*! @var _englishTimeAndDayFormatter Holds the date formatter to format dates in english date and time formats */
     NSDateFormatter *_englishTimeAndDayFormatter;
 }
@@ -50,6 +52,7 @@
 @property (nonatomic, retain) NSDateFormatter *_dayFormatter;
 @property (nonatomic, retain) NSDateFormatter *_weekDayFormatter;
 @property (nonatomic, retain) NSDateFormatter *_timeFormatter;
+@property (nonatomic, retain) NSDateFormatter *_minutesAndSecondsFormatter;
 @property (nonatomic, retain) NSDateFormatter *_englishDayFormatter;
 @property (nonatomic, retain) NSDateFormatter *_englishTimeAndDayFormatter;
 
@@ -72,6 +75,13 @@
  @param dateString
  */
 - (NSDate *) parseTime:(NSString *)dateString;
+
+/*!
+ @function parseMinutesAndSeconds
+ Parses the given string into minutes and seconds (former format 00:00:00).
+ @param dateString
+ */
+- (NSDate *) parseMinutesAndSeconds:(NSString *)dateString;
 
 /*!
  @function parseDateFromXMLString

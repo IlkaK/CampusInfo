@@ -37,7 +37,8 @@
 @synthesize _arrival;
 @synthesize _departure;
 @synthesize _journey;
-@synthesize _walk;
+@synthesize _walkTime;
+@synthesize _dateFormatter;
 
 /*!
  @function init
@@ -48,15 +49,16 @@
  @param newArrival
  */
 -(id)                     init:(JourneyDto *)newJourney
-                      withWalk:(NSString *)newWalk
+                      withWalkTime:(NSDate *)newWalkTime
                  withDeparture:(FromOrToDto *)newDeparture
                    withArrival:(FromOrToDto *)newArrival
 {
     self = [super init];
+    _dateFormatter  = [[DateFormation alloc] init];
     if (self)
     {
         self._journey           = newJourney;
-        self._walk              = newWalk;
+        self._walkTime          = newWalkTime;
         self._departure         = newDeparture;
         self._arrival           = newArrival;
     }
@@ -70,9 +72,9 @@
  */
 - (SectionDto *)getSection:(NSDictionary *)sectionDictionary
 {
-    SectionDto *_localSection = [[SectionDto alloc]init:nil withWalk:nil withDeparture:nil withArrival:nil];
+    SectionDto *_localSection = [[SectionDto alloc]init:nil withWalkTime:nil withDeparture:nil withArrival:nil];
     JourneyDto      *_localJourney = [[JourneyDto alloc]init:nil withCategory:nil withCategoryCode:0 withJourneyNumber:0 withOperator:nil withTo:nil withPassList:nil withCapacity1st:0 withCapacity2nd:0];
-    NSString        *_localWalk;
+    NSDate          *_localWalkTime;
     
     FromOrToDto     *_localDeparture = [[FromOrToDto alloc]init:nil
                                                    withLocation:nil
@@ -101,30 +103,42 @@
             if ([sectionKey isEqualToString:@"journey"])
             {
                 _localJourney =  [_localJourney getJourney:[sectionDictionary objectForKey:sectionKey]];
-                //NSLog(@"StationDto _localStationId: %i", _localStationId);
+                //NSLog(@"SectionDto _localStationId: %i", _localStationId);
             }
             
             if ([sectionKey isEqualToString:@"walk"])
             {
-                _localWalk = [sectionDictionary objectForKey:sectionKey];
-                //NSLog(@"StationDto _localScore: %i", _localScore);
+                NSDictionary *_walkDictionary = [sectionDictionary objectForKey:sectionKey];
+                for (id walkKey in _walkDictionary)
+                {
+                    if ([_walkDictionary objectForKey:walkKey] != [NSNull null])
+                    {
+                        if ([walkKey isEqualToString:@"duration"])
+                        {
+                            _localWalkTime = [_dateFormatter parseMinutesAndSeconds:[_walkDictionary objectForKey:walkKey]];
+                        }
+                        //NSLog(@"SectionDto _localWalkTime: %@", [[_dateFormatter _minutesAndSecondsFormatter] stringFromDate:_localWalkTime]);
+                    }
+                }
             }
             
             if ([sectionKey isEqualToString:@"departure"])
             {
                 _localDeparture = [_localDeparture getFromOrTo:[sectionDictionary objectForKey:sectionKey]];
-                //NSLog(@"StationDto _localName: %@", _localName);
+                //NSLog(@"SectionDto _localName: %@", _localName);
             }
             
             if ([sectionKey isEqualToString:@"arrival"])
             {
                 _localArrival = [_localArrival getFromOrTo:[sectionDictionary objectForKey:sectionKey]];
-                //NSLog(@"StationDto _localDistance: %@", _localDistance);
+                
+                //NSLog(@"arrival time of section %@", [[_dateFormatter _timeFormatter] stringFromDate:_localArrival._departureTime]);
+                //NSLog(@"SectionDto _localDistance: %@", _localDistance);
             }
         }
     }
     _localSection = [_localSection init:_localJourney
-                               withWalk:_localWalk
+                           withWalkTime:_localWalkTime
                           withDeparture:_localDeparture
                             withArrival:_localArrival];
     return _localSection;

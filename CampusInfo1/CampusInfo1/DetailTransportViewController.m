@@ -9,6 +9,7 @@
 #import "DetailTransportViewController.h"
 #import "ColorSelection.h"
 #import "UIConstantStrings.h"
+#import "SectionDto.h"
 
 @interface DetailTransportViewController ()
 
@@ -22,9 +23,13 @@
 @synthesize _descriptionLabel;
 
 @synthesize _zhawColor;
+@synthesize _dateFormatter;
 
 @synthesize _actualConnection;
 
+@synthesize _detailTableView;
+@synthesize _detailTransportConnectionTableCell;
+@synthesize _detailTransportSectionTableCell;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -53,13 +58,13 @@
     
     // general initialization
     _zhawColor                  = [[ColorSelection alloc]init];
-
+    _dateFormatter              = [[DateFormation alloc] init];
+    
     // title
     UIBarButtonItem *_backButtonItem = [[UIBarButtonItem alloc] initWithTitle:LeftArrowSymbol style:UIBarButtonItemStyleBordered target:self action:@selector(moveBackToPublicTransport:)];
     [_backButtonItem setTitleTextAttributes:@{NSForegroundColorAttributeName:_zhawColor._zhawWhite} forState:UIControlStateNormal];
     [_titleNavigationItem setLeftBarButtonItem :_backButtonItem animated :true];
     [_titleNavigationItem setTitle:@""];
-    
     
     [_titleLabel setTextColor:_zhawColor._zhawWhite];
     [_titleLabel setTextAlignment:NSTextAlignmentCenter];
@@ -74,6 +79,22 @@
     [_descriptionLabel setText: PublicTransportVCDetails];
     
 }
+
+/*!
+ * @function viewWillAppear
+ * The function is included, since class inherits from UIViewController.
+ * It is called every time the view is called again.
+ */
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    //NSLog(@"%@ ", [[_dateFormatter _timeFormatter] stringFromDate:_actualConnection._from._departureTime]);
+    //NSLog(@"3 count sections %i", [_actualConnection._sections count]);
+    
+    [_detailTableView reloadData];
+    
+}
+
 
 - (void)didReceiveMemoryWarning
 {
@@ -106,6 +127,7 @@
     return 1;
 }
 
+
 /*!
  * @function numberOfRowsInSection
  * The function defines the number of rows in table.
@@ -113,8 +135,10 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     //NSLog(@"numberOfRowsInSection connection count: %i", [_connectionArray._connections count]);
-    return 1;
+    //NSLog(@"1 count sections %i", [_actualConnection._sections count]);
+    return 1 + [_actualConnection._sections count];
 }
+
 
 /*!
  * @function cellForRowAtIndexPath
@@ -122,79 +146,101 @@
  */
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    NSUInteger        _cellRow = indexPath.row;
-    static NSString *_cellIdentifier = @"DetailTransportTableCell";
-    UITableViewCell *_cell           = [tableView dequeueReusableCellWithIdentifier:_cellIdentifier];
-    /*
-    if (_cell == nil)
+    NSUInteger          _cellRow = indexPath.row;
+    UITableViewCell     *_cell;
+    
+    if (_cellRow == 0)
     {
-        [[NSBundle mainBundle] loadNibNamed:@"DetailTransportTableCell" owner:self options:nil];
-        _cell = _detailTransportTableCell;
-        self._detailTransportTableCell = nil;
-    }
+        static NSString *_cellIdentifier = @"DetailTransportConnectionTableCell";
+        _cell = [tableView dequeueReusableCellWithIdentifier:_cellIdentifier];
     
-    UILabel          *_startDestinationLabel = (UILabel  *)[_cell viewWithTag:1];
-    UILabel          *_startDateLabel       = (UILabel  *)[_cell viewWithTag:2];
-    UILabel          *_startTimeLabel       = (UILabel  *)[_cell viewWithTag:3];
-    UILabel          *_durationLabel        = (UILabel  *)[_cell viewWithTag:4];
-    //UILabel          *_transfersLabel       = (UILabel  *)[_cell viewWithTag:5];
-    //UILabel          *_transportationLabel  = (UILabel  *)[_cell viewWithTag:6];
-    UILabel          *_stopDestinationLabel = (UILabel  *)[_cell viewWithTag:5];
-    UILabel          *_stopDateLabel        = (UILabel  *)[_cell viewWithTag:6];
-    UILabel          *_stopTimeLabel        = (UILabel  *)[_cell viewWithTag:7];
-    [_startDestinationLabel     setTextColor:_zhawColor._zhawFontGrey];
-    [_startDateLabel            setTextColor:_zhawColor._zhawFontGrey];
-    [_startTimeLabel            setTextColor:_zhawColor._zhawFontGrey];
-    [_durationLabel             setTextColor:_zhawColor._zhawFontGrey];
-    //[_transfersLabel            setTextColor:_zhawColor._zhawFontGrey];
-    //[_transportationLabel       setTextColor:_zhawColor._zhawFontGrey];
-    [_stopDestinationLabel      setTextColor:_zhawColor._zhawFontGrey];
-    [_stopDateLabel             setTextColor:_zhawColor._zhawFontGrey];
-    [_stopTimeLabel             setTextColor:_zhawColor._zhawFontGrey];
-    
-    //NSLog(@" cellForRowAtIndexPath - connection count: %i _cellRow: %i", [_connectionArray._connections count], _cellRow);
-    
-    if (    [_connectionArray._connections lastObject] != nil
-        &&  [_connectionArray._connections count] > _cellRow)
-    {
-        ConnectionDto *_localConnection = [_connectionArray._connections objectAtIndex:_cellRow];
-        
-        // store the very next departure time and date to check if another search is needed
-        if(_cellRow == 0)
+        if (_cell == nil)
         {
-            _veryNextConnectionDate = _localConnection._from._departureDate;
-            _veryNextConnectionTime = _localConnection._from._departureTime;
+            [[NSBundle mainBundle] loadNibNamed:@"DetailTransportConnectionTableCell" owner:self options:nil];
+            _cell = _detailTransportConnectionTableCell;
+            self._detailTransportConnectionTableCell = nil;
         }
         
-        _startDestinationLabel.text        = _localConnection._from._station._name;
-        _startDateLabel.text    = [[_dateFormatter _dayFormatter] stringFromDate:_localConnection._from._departureDate];
-        _startTimeLabel.text    = [NSString stringWithFormat:@"%@ %@",PublicTransportVCFromGerman, [[_dateFormatter _timeFormatter] stringFromDate:_localConnection._from._departureTime]];
+        UILabel          *_fromLabel        = (UILabel  *)[_cell viewWithTag:1];
+        UILabel          *_toLabel          = (UILabel  *)[_cell viewWithTag:2];
+        UILabel          *_dateLabel        = (UILabel  *)[_cell viewWithTag:3];
+        UILabel          *_timeLabel        = (UILabel  *)[_cell viewWithTag:4];
+        UILabel          *_durationLabel    = (UILabel  *)[_cell viewWithTag:5];
+        UILabel          *_moveLabel        = (UILabel  *)[_cell viewWithTag:6];
         
-        _durationLabel.text     = _localConnection._duration;
-        //_transfersLabel.text    = [NSString stringWithFormat:@"%i",_localConnection._transfers];
+        [_fromLabel setFont:[UIFont fontWithName:BoldFont size:NavigationBarDescriptionSize]];
+        [_toLabel setFont:[UIFont fontWithName:BoldFont size:NavigationBarDescriptionSize]];
+        [_dateLabel setFont:[UIFont fontWithName:NavigationBarFont size:NavigationBarDescriptionSize]];
+        [_timeLabel setFont:[UIFont fontWithName:NavigationBarFont size:NavigationBarDescriptionSize]];
+        [_durationLabel setFont:[UIFont fontWithName:NavigationBarFont size:NavigationBarDescriptionSize]];
+        [_moveLabel setFont:[UIFont fontWithName:NavigationBarFont size:NavigationBarDescriptionSize]];
         
-        int _productsArrayI;
-        NSString *_productsString;
-        for (_productsArrayI=0; _productsArrayI < [_localConnection._products count]; _productsArrayI++)
+        _fromLabel.text        = [NSString stringWithFormat:@"%@", _actualConnection._from._station._name];
+        _toLabel.text          = [NSString stringWithFormat:@"%@", _actualConnection._to._station._name];
+        _dateLabel.text        = [NSString stringWithFormat:@"am: %@", [[_dateFormatter _dayFormatter] stringFromDate:_actualConnection._from._departureDate]];
+        _timeLabel.text        = [NSString stringWithFormat:@"um: %@", [[_dateFormatter _timeFormatter] stringFromDate:_actualConnection._from._departureTime]];
+        
+        _durationLabel.text     = [NSString stringWithFormat:@"Reisedauer: %@",_actualConnection._duration];
+        _moveLabel.text         = [NSString stringWithFormat:@"Umsteigen: %i",_actualConnection._transfers];
+        
+    }
+    else // _cellRow => 1 // loop through sections
+    {
+        NSUInteger _cntSection = _cellRow - 1;
+        static NSString *_cellIdentifier = @"DetailTransportSectionTableCell";
+        _cell           = [tableView dequeueReusableCellWithIdentifier:_cellIdentifier];
+        
+        if (_cell == nil)
         {
-            NSString *_oneProduct = [_localConnection._products objectAtIndex:_productsArrayI];
-            if (_productsArrayI > 0)
+            [[NSBundle mainBundle] loadNibNamed:@"DetailTransportSectionTableCell" owner:self options:nil];
+            _cell = _detailTransportSectionTableCell;
+            self._detailTransportSectionTableCell = nil;
+        }
+        
+        //NSLog(@"2 count sections %i", [_actualConnection._sections count]);
+        
+        UILabel          *_fromLabel           = (UILabel  *)[_cell viewWithTag:1];
+        UILabel          *_fromTimeLabel       = (UILabel  *)[_cell viewWithTag:2];
+        UILabel          *_toLabel             = (UILabel  *)[_cell viewWithTag:3];
+        UILabel          *_toTimeLabel         = (UILabel  *)[_cell viewWithTag:4];
+        UILabel          *_transportationLabel = (UILabel  *)[_cell viewWithTag:5];
+        UILabel          *_directionLabel      = (UILabel  *)[_cell viewWithTag:6];
+
+        
+        [_fromLabel setFont:[UIFont fontWithName:NavigationBarFont size:NavigationBarDescriptionSize]];
+        [_fromTimeLabel setFont:[UIFont fontWithName:NavigationBarFont size:NavigationBarDescriptionSize]];
+        [_directionLabel setFont:[UIFont fontWithName:NavigationBarFont size:NavigationBarDescriptionSize]];
+        [_transportationLabel setFont:[UIFont fontWithName:NavigationBarFont size:NavigationBarDescriptionSize]];
+        [_toLabel setFont:[UIFont fontWithName:NavigationBarFont size:NavigationBarDescriptionSize]];
+        [_toTimeLabel setFont:[UIFont fontWithName:NavigationBarFont size:NavigationBarDescriptionSize]];
+
+        
+        if (    [_actualConnection._sections lastObject] != nil
+            &&  [_actualConnection._sections count] > _cntSection)
+        {
+            SectionDto *_localSection = [_actualConnection._sections objectAtIndex:_cntSection];
+            
+            _fromLabel.text = [NSString stringWithFormat:@"von: %@", _localSection._departure._station._name];
+            _fromTimeLabel.text = [NSString stringWithFormat:@"ab: %@", [[_dateFormatter _timeFormatter] stringFromDate:_localSection._departure._departureTime]];
+            _toLabel.text   = [NSString stringWithFormat:@"nach: %@", _localSection._arrival._station._name];
+            _toTimeLabel.text = [NSString stringWithFormat:@"an: %@", [[_dateFormatter _timeFormatter] stringFromDate:_localSection._arrival._arrivalTime]];
+
+            if (_localSection._walkTime != nil)
             {
-                _productsString = [NSString stringWithFormat:@"%@, %@",_productsString, _oneProduct];
+                _transportationLabel.text = [NSString stringWithFormat:@"Fussweg: %@ min", [[_dateFormatter _minutesAndSecondsFormatter] stringFromDate:_localSection._walkTime]];
+                _directionLabel.text = @"";
             }
             else
             {
-                _productsString = [NSString stringWithFormat:@"%@",_oneProduct];
+                _transportationLabel.text = [NSString stringWithFormat:@"Reise mit: %@ %@", _localSection._journey._category, _localSection._journey._journeyNumber];
+                _directionLabel.text = [NSString stringWithFormat:@"Richtung: %@",_localSection._journey._to];
             }
         }
-        //_transportationLabel.text = _productsString;
-        _stopDestinationLabel.text = _localConnection._to._station._name;
-        _stopDateLabel.text   = [[_dateFormatter _dayFormatter] stringFromDate:_localConnection._to._arrivalDate];
-        _stopTimeLabel.text   = [NSString stringWithFormat:@"%@ %@",PublicTransportVCToGerman, [[_dateFormatter _timeFormatter] stringFromDate:_localConnection._to._arrivalTime]];
+        
     }
-     */
     return _cell;
 }
+
 
 /*!
  * @function heightForRowAtIndexPath
@@ -203,7 +249,24 @@
  */
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return 70;
+    NSUInteger          _cellRow = indexPath.row;
+    NSUInteger          _cntSection = _cellRow - 1;
+    CGFloat             _cellSize = 105;
+    
+    if (_cellRow > 0)
+    {
+        if (    [_actualConnection._sections lastObject] != nil
+            &&  [_actualConnection._sections count] > _cntSection)
+        {
+            SectionDto *_localSection = [_actualConnection._sections objectAtIndex:_cntSection];
+            if (_localSection._walkTime != nil)
+            {
+                _cellSize = 88;
+            }
+        
+        }
+    }
+    return _cellSize;
 }
 
 

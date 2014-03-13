@@ -97,9 +97,9 @@
     
     if (self._dataFromUrl != nil)
     {
-        //NSString *_receivedString = [[NSString alloc] initWithData:self._dataFromUrl encoding:NSASCIIStringEncoding];
+        NSString *_receivedString = [[NSString alloc] initWithData:self._dataFromUrl encoding:NSASCIIStringEncoding];
         //_receivedString = [_receivedString substringToIndex:5000];
-        //NSLog(@"dataDownloadDidFinish for StationArrayDto: %@", _receivedString);
+        //NSLog(@"dataDownloadDidFinish for ConnectionArrayDto: %@", _receivedString);
         
         NSError *_error;
         
