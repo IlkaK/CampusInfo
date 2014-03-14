@@ -105,7 +105,7 @@
     UIBarButtonItem *_backButtonItem = [[UIBarButtonItem alloc] initWithTitle:LeftArrowSymbol style:UIBarButtonItemStyleBordered target:self action:@selector(moveBackToMenuOverview:)];
     [_backButtonItem setTitleTextAttributes:@{NSForegroundColorAttributeName:_zhawColor._zhawWhite} forState:UIControlStateNormal];
     [_titleNavigationItem setLeftBarButtonItem :_backButtonItem animated :true];
-    [_titleNavigationItem setTitle:NewsVCTitle];
+    [_titleNavigationItem setTitle:NSLocalizedString(@"NewsVCTitle", nil)];
     [[UINavigationBar appearance] setTitleTextAttributes:@{
                                                            UITextAttributeTextColor: _zhawColor._zhawWhite,
                                                            UITextAttributeFont: [UIFont fontWithName:NavigationBarFont size:NavigationBarTitleSize],
@@ -116,6 +116,8 @@
     // set no connection button and label
     _noConnectionButton.hidden = YES;
     _noConnectionLabel.hidden = YES;
+    [_noConnectionLabel setText:NSLocalizedString(@"noConnection", nil)];
+    [_noConnectionButton setTitle:NSLocalizedString(@"tryAgain", nil) forState:UIControlStateNormal];
     [_noConnectionButton setTitleColor:_zhawColor._zhawWhite forState:UIControlStateNormal];
     [_noConnectionButton setBackgroundImage:[UIImage imageNamed:NoConnectionButtonBackground]  forState:UIControlStateNormal];
     [_noConnectionLabel setTextColor:_zhawColor._zhawFontGrey];
@@ -206,7 +208,6 @@
 - (void)moveBackToMenuOverview:(id)sender
 {
     [self dismissModalViewControllerAnimated:YES];
-    //self.tabBarController.selectedIndex = 0;
 }
 
 /*!

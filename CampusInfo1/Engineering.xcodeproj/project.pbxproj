@@ -195,7 +195,7 @@
 		E15AA5AA17C23155007E9F00 /* MapsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E15AA5A817C23155007E9F00 /* MapsViewController.xib */; };
 		E15AA5AE17C23167007E9F00 /* TechnikumViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E15AA5AC17C23167007E9F00 /* TechnikumViewController.m */; };
 		E15AA5AF17C23167007E9F00 /* TechnikumViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E15AA5AD17C23167007E9F00 /* TechnikumViewController.xib */; };
-		E15AA5BE17C24D38007E9F00 /* EventsTableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E15AA5BD17C24D38007E9F00 /* EventsTableCell.xib */; };
+		E15AA5BE17C24D38007E9F00 /* EventsNormalTableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E15AA5BD17C24D38007E9F00 /* EventsNormalTableCell.xib */; };
 		E15BBA4418B62BBC00166188 /* NavigationBarBackground.png in Resources */ = {isa = PBXBuildFile; fileRef = E15BBA4318B62BBC00166188 /* NavigationBarBackground.png */; };
 		E15C940E17E708B800F82EE4 /* stations.sql in Resources */ = {isa = PBXBuildFile; fileRef = E15C940D17E708B800F82EE4 /* stations.sql */; };
 		E16C642517ABDC0100BEDBB3 /* ContactsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E16C642317ABDC0100BEDBB3 /* ContactsViewController.m */; };
@@ -220,6 +220,11 @@
 		E1A6AAD717CF367800CC0EDD /* Technikumstrasse.pdf in Resources */ = {isa = PBXBuildFile; fileRef = E1A6AAD417CF367800CC0EDD /* Technikumstrasse.pdf */; };
 		E1A6AAD817CF367800CC0EDD /* Toessfeld.pdf in Resources */ = {isa = PBXBuildFile; fileRef = E1A6AAD517CF367800CC0EDD /* Toessfeld.pdf */; };
 		E1A6AAD917CF367800CC0EDD /* Zuerich.pdf in Resources */ = {isa = PBXBuildFile; fileRef = E1A6AAD617CF367800CC0EDD /* Zuerich.pdf */; };
+		E1B649AD18D304530091FA72 /* EventsSmallTableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E1B649AC18D304530091FA72 /* EventsSmallTableCell.xib */; };
+		E1B649AF18D304B40091FA72 /* EventsLargeTableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E1B649AE18D304B40091FA72 /* EventsLargeTableCell.xib */; };
+		E1B649B118D30CE70091FA72 /* EventsExtraLargeTableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E1B649B018D30CE70091FA72 /* EventsExtraLargeTableCell.xib */; };
+		E1B649B318D312770091FA72 /* EventsXXLTableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E1B649B218D312770091FA72 /* EventsXXLTableCell.xib */; };
+		E1B649B518D327DC0091FA72 /* EventsNextSmallTableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E1B649B418D327DC0091FA72 /* EventsNextSmallTableCell.xib */; };
 		E1BC14C2175F8D4900FE2854 /* Autocomplete.m in Sources */ = {isa = PBXBuildFile; fileRef = E1BC14C1175F8D4900FE2854 /* Autocomplete.m */; };
 		E1BC5622179D290A007E235D /* MensaDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E1BC5620179D290A007E235D /* MensaDetailViewController.m */; };
 		E1BC5623179D290A007E235D /* MensaDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E1BC5621179D290A007E235D /* MensaDetailViewController.xib */; };
@@ -563,7 +568,7 @@
 		E15AA5AB17C23167007E9F00 /* TechnikumViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TechnikumViewController.h; sourceTree = "<group>"; };
 		E15AA5AC17C23167007E9F00 /* TechnikumViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TechnikumViewController.m; sourceTree = "<group>"; };
 		E15AA5AD17C23167007E9F00 /* TechnikumViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TechnikumViewController.xib; sourceTree = "<group>"; };
-		E15AA5BD17C24D38007E9F00 /* EventsTableCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EventsTableCell.xib; sourceTree = "<group>"; };
+		E15AA5BD17C24D38007E9F00 /* EventsNormalTableCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EventsNormalTableCell.xib; sourceTree = "<group>"; };
 		E15BBA4318B62BBC00166188 /* NavigationBarBackground.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = NavigationBarBackground.png; path = CampusInfo1/resources/navigationbar/NavigationBarBackground.png; sourceTree = "<group>"; };
 		E15C940D17E708B800F82EE4 /* stations.sql */ = {isa = PBXFileReference; lastKnownFileType = file; path = stations.sql; sourceTree = "<group>"; };
 		E16C642217ABDC0100BEDBB3 /* ContactsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContactsViewController.h; sourceTree = "<group>"; };
@@ -593,6 +598,11 @@
 		E1A6AAD417CF367800CC0EDD /* Technikumstrasse.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; name = Technikumstrasse.pdf; path = CampusInfo1/resources/maps/Technikumstrasse.pdf; sourceTree = "<group>"; };
 		E1A6AAD517CF367800CC0EDD /* Toessfeld.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; name = Toessfeld.pdf; path = CampusInfo1/resources/maps/Toessfeld.pdf; sourceTree = "<group>"; };
 		E1A6AAD617CF367800CC0EDD /* Zuerich.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; name = Zuerich.pdf; path = CampusInfo1/resources/maps/Zuerich.pdf; sourceTree = "<group>"; };
+		E1B649AC18D304530091FA72 /* EventsSmallTableCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EventsSmallTableCell.xib; sourceTree = "<group>"; };
+		E1B649AE18D304B40091FA72 /* EventsLargeTableCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EventsLargeTableCell.xib; sourceTree = "<group>"; };
+		E1B649B018D30CE70091FA72 /* EventsExtraLargeTableCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EventsExtraLargeTableCell.xib; sourceTree = "<group>"; };
+		E1B649B218D312770091FA72 /* EventsXXLTableCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EventsXXLTableCell.xib; sourceTree = "<group>"; };
+		E1B649B418D327DC0091FA72 /* EventsNextSmallTableCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EventsNextSmallTableCell.xib; sourceTree = "<group>"; };
 		E1BC14C0175F8D4900FE2854 /* Autocomplete.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Autocomplete.h; sourceTree = "<group>"; };
 		E1BC14C1175F8D4900FE2854 /* Autocomplete.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Autocomplete.m; sourceTree = "<group>"; };
 		E1BC561F179D290A007E235D /* MensaDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MensaDetailViewController.h; sourceTree = "<group>"; };
@@ -1075,7 +1085,12 @@
 				E101909F17BBE3E300242A87 /* EventsViewController.h */,
 				E10190A017BBE3E300242A87 /* EventsViewController.m */,
 				E10190A117BBE3E300242A87 /* EventsViewController.xib */,
-				E15AA5BD17C24D38007E9F00 /* EventsTableCell.xib */,
+				E1B649AC18D304530091FA72 /* EventsSmallTableCell.xib */,
+				E1B649B418D327DC0091FA72 /* EventsNextSmallTableCell.xib */,
+				E15AA5BD17C24D38007E9F00 /* EventsNormalTableCell.xib */,
+				E1B649AE18D304B40091FA72 /* EventsLargeTableCell.xib */,
+				E1B649B018D30CE70091FA72 /* EventsExtraLargeTableCell.xib */,
+				E1B649B218D312770091FA72 /* EventsXXLTableCell.xib */,
 				E101909117BBAE9D00242A87 /* NewsViewController.h */,
 				E101909217BBAE9D00242A87 /* NewsViewController.m */,
 				E101909317BBAE9D00242A87 /* NewsViewController.xib */,
@@ -1521,7 +1536,7 @@
 				E198FD5417BE240400D5BE9B /* NewsDetailViewController.xib in Resources */,
 				E15AA5AA17C23155007E9F00 /* MapsViewController.xib in Resources */,
 				E15AA5AF17C23167007E9F00 /* TechnikumViewController.xib in Resources */,
-				E15AA5BE17C24D38007E9F00 /* EventsTableCell.xib in Resources */,
+				E15AA5BE17C24D38007E9F00 /* EventsNormalTableCell.xib in Resources */,
 				E1252E5617CB423400E61732 /* SocialMediaViewController.xib in Resources */,
 				E1252E5B17CB4D7800E61732 /* SocialMediaTableCell.xib in Resources */,
 				E1252E6017CB72AD00E61732 /* ServiceDeskViewController.xib in Resources */,
@@ -1534,10 +1549,12 @@
 				E18D0BBE18D1FE46001A9FE7 /* Localizable.strings in Resources */,
 				E1C23D6817CE2C3500C58E10 /* PublicTransportOverviewTableCell.xib in Resources */,
 				E1A6AAD717CF367800CC0EDD /* Technikumstrasse.pdf in Resources */,
+				E1B649B118D30CE70091FA72 /* EventsExtraLargeTableCell.xib in Resources */,
 				E184107318B79219007CD204 /* NewsLargeTableCell.xib in Resources */,
 				E1A6AAD817CF367800CC0EDD /* Toessfeld.pdf in Resources */,
 				E1A6AAD917CF367800CC0EDD /* Zuerich.pdf in Resources */,
 				E1C0389117D8B8900064966D /* facebook.png in Resources */,
+				E1B649AF18D304B40091FA72 /* EventsLargeTableCell.xib in Resources */,
 				E1C0389217D8B8900064966D /* issuu.png in Resources */,
 				E1C0389317D8B8900064966D /* twitter.png in Resources */,
 				E1C0389417D8B8900064966D /* xing.png in Resources */,
@@ -1564,6 +1581,7 @@
 				279F09D117DF0FE6006A599D /* NavigationBarStandorte@2x.png in Resources */,
 				279F09D217DF0FE6006A599D /* NavigationBarStundenplan.png in Resources */,
 				279F09D317DF0FE6006A599D /* NavigationBarStundenplan@2x.png in Resources */,
+				E1B649B318D312770091FA72 /* EventsXXLTableCell.xib in Resources */,
 				279F09D617DF1233006A599D /* HauptmenuLogo.png in Resources */,
 				279F09D717DF1233006A599D /* HauptmenuLogo@2x.png in Resources */,
 				279F09EC17DF1671006A599D /* AppIconsSchriftEinstellungen.png in Resources */,
@@ -1585,6 +1603,7 @@
 				279F09FC17DF1671006A599D /* AppIconsSchriftStundenplan.png in Resources */,
 				279F09FD17DF1671006A599D /* AppIconsSchriftStundenplan@2x.png in Resources */,
 				279F0A1017DF168A006A599D /* AppIconsEinstellungenFeedback.png in Resources */,
+				E1B649AD18D304530091FA72 /* EventsSmallTableCell.xib in Resources */,
 				279F0A1117DF168A006A599D /* AppIconsSchriftEinstellungenFeedback@2x.png in Resources */,
 				279F0A1217DF168A006A599D /* AppIconsSchriftEventsFeedback.png in Resources */,
 				279F0A1317DF168A006A599D /* AppIconsSchriftEventsFeedback@2x.png in Resources */,
@@ -1608,6 +1627,7 @@
 				279F0A2117DF168A006A599D /* AppIconsSchriftStundenplanFeedback@2x.png in Resources */,
 				279F0A2317DF1FC6006A599D /* NavigationBarHome.png in Resources */,
 				279F0A2817DF2207006A599D /* Default.png in Resources */,
+				E1B649B518D327DC0091FA72 /* EventsNextSmallTableCell.xib in Resources */,
 				27B3EF1E18CDE42C00A77A3B /* DetailTransportViewController.xib in Resources */,
 				279F0A2B17DF2255006A599D /* Default@2x.png in Resources */,
 				279F0A2D17DF227F006A599D /* Default-568h@2x.png in Resources */,

@@ -229,11 +229,6 @@ extern NSString * const PublicTransportVCToEnglish;
 
 
 // news and events
-extern NSString * const NewsVCTitle;
-extern NSString * const NewsVCSmallTitle;
-extern NSString * const NewsDetailVCTitle;
-extern NSString * const EventsVCTitle;
-extern NSString * const EventsVCSmallTitle;
 extern NSString * const NewsWebViewHtml;
 extern NSString * const NewsWebViewFont;
 

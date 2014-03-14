@@ -6,7 +6,9 @@
 
 */
 
-"KEY" = "CONTENT";
+// general
+"noConnection" = "keine Verbindung";
+"tryAgain" = "erneut versuchen";
 
 // social media
 "SocialMediaVCTitle"         = "Social Media";
@@ -57,3 +59,11 @@
 "PublicTransportVCMin"              = "min";
 "PublicTransportVCTravelWith"       = "Reise mit";
 "PublicTransportVCDirection"        = "Richtung";
+
+
+// events
+"EventsVCTitle"      = "Events - School of Engineering";
+
+// news
+"NewsVCTitle"        = "News - School of Engineering";
+"NewsDetailVCTitle"  = "News";

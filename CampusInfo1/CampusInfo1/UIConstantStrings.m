@@ -230,11 +230,6 @@ NSString * const AlertViewCancel     = @"Cancel";
 
 
 // news and events
-NSString * const NewsVCTitle        = @"News - School of Engineering";
-NSString * const NewsVCSmallTitle   = @"News";
-NSString * const NewsDetailVCTitle  = @"News";
-NSString * const EventsVCTitle      = @"Events - School of Engineering";
-NSString * const EventsVCSmallTitle = @"Events";
 NSString * const NewsWebViewHtml    = @"<html> \n"
 "<head> \n"
 "<style type=\"text/css\"> \n"

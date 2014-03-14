@@ -45,7 +45,12 @@
     /*! @var _eventsTable Table to display the events */
     IBOutlet UITableView                *_eventsTable;
     /*! @var _eventsTableCell Handles cell, which displays the solo event */
-    IBOutlet UITableViewCell            *_eventsTableCell;
+    IBOutlet UITableViewCell            *_eventsSmallTableCell;
+    IBOutlet UITableViewCell            *_eventsNextSmallTableCell;
+    IBOutlet UITableViewCell            *_eventsNormalTableCell;
+    IBOutlet UITableViewCell            *_eventsLargeTableCell;
+    IBOutlet UITableViewCell            *_eventsExtraLargeTableCell;
+    IBOutlet UITableViewCell            *_eventsXXLTableCell;
     
     /*! @var _dateFormatter Class which provides methods to format date from NSString to NSDate or the other way around */
     DateFormation                       *_dateFormatter;
@@ -55,8 +60,7 @@
     /*! @var _noConnectionLabel If there is no connection to server, the label is displayed to inform the user */
     IBOutlet UILabel                    *_noConnectionLabel;
     /*! @var _noConnectionButton If there is no connection to server, the button is displayed, so the user can trigger another trial to connect to the server */
-    //IBOutlet GradientButton             *_noConnectionButton;
-    IBOutlet UIButton                     *_noConnectionButton;
+    IBOutlet UIButton                   *_noConnectionButton;
 
     /*! @var _titleNavigationBar Shows the title */
     IBOutlet UINavigationBar            *_titleNavigationBar;
@@ -79,7 +83,12 @@
 @property (nonatomic, retain) IBOutlet UINavigationItem             *_titleNavigationItem;
 
 @property (nonatomic, retain) IBOutlet UITableView                  *_eventsTable;
-@property (nonatomic, retain) IBOutlet UITableViewCell              *_eventsTableCell;
+@property (nonatomic, retain) IBOutlet UITableViewCell              *_eventsSmallTableCell;
+@property (nonatomic, retain) IBOutlet UITableViewCell              *_eventsNextSmallTableCell;
+@property (nonatomic, retain) IBOutlet UITableViewCell              *_eventsNormalTableCell;
+@property (nonatomic, retain) IBOutlet UITableViewCell              *_eventsLargeTableCell;
+@property (nonatomic, retain) IBOutlet UITableViewCell              *_eventsExtraLargeTableCell;
+@property (nonatomic, retain) IBOutlet UITableViewCell              *_eventsXXLTableCell;
 
 @property (nonatomic, assign) int                                   _actualTrials;
 @property (nonatomic, retain) IBOutlet UIButton                     *_noConnectionButton;

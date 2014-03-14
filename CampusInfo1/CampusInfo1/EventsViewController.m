@@ -44,7 +44,12 @@
 @synthesize _newsChannel;
 
 @synthesize _eventsTable;
-@synthesize _eventsTableCell;
+@synthesize _eventsSmallTableCell;
+@synthesize _eventsNextSmallTableCell;
+@synthesize _eventsNormalTableCell;
+@synthesize _eventsLargeTableCell;
+@synthesize _eventsExtraLargeTableCell;
+@synthesize _eventsXXLTableCell;
 
 @synthesize _dateFormatter;
 @synthesize _zhawColor;
@@ -98,7 +103,7 @@
     UIBarButtonItem *_backButtonItem = [[UIBarButtonItem alloc] initWithTitle:LeftArrowSymbol style:UIBarButtonItemStyleBordered target:self action:@selector(moveBackToMenuOverview:)];
     [_backButtonItem setTitleTextAttributes:@{NSForegroundColorAttributeName:_zhawColor._zhawWhite} forState:UIControlStateNormal];
     [_titleNavigationItem setLeftBarButtonItem :_backButtonItem animated :true];
-    [_titleNavigationItem setTitle:EventsVCTitle];
+    [_titleNavigationItem setTitle:NSLocalizedString(@"EventsVCTitle", nil)];
     [[UINavigationBar appearance] setTitleTextAttributes:@{
                                                            UITextAttributeTextColor: _zhawColor._zhawWhite,
                                                            UITextAttributeFont: [UIFont fontWithName:NavigationBarFont size:NavigationBarTitleSize],
@@ -109,6 +114,8 @@
     // set no connection label and button
     _noConnectionButton.hidden = YES;
     _noConnectionLabel.hidden = YES;
+    [_noConnectionLabel setText:NSLocalizedString(@"noConnection", nil)];
+    [_noConnectionButton setTitle:NSLocalizedString(@"tryAgain", nil) forState:UIControlStateNormal];
     [_noConnectionButton setTitleColor:_zhawColor._zhawWhite forState:UIControlStateNormal];
     [_noConnectionButton setBackgroundImage:[UIImage imageNamed:NoConnectionButtonBackground]  forState:UIControlStateNormal];
     [_noConnectionLabel setTextColor:_zhawColor._zhawFontGrey];
@@ -163,7 +170,9 @@
     _noConnectionButton = nil;
     _noConnectionLabel = nil;
     _noConnectionButton = nil;
-    _eventsTableCell = nil;
+    _eventsNormalTableCell = nil;
+    _eventsSmallTableCell = nil;
+    _eventsLargeTableCell = nil;
     _titleNavigationBar = nil;
     _titleNavigationItem = nil;
     _waitForLoadingActivityIndicator = nil;
@@ -264,54 +273,123 @@
     NSString         *_cellIdentifier;
     UITableViewCell  *_cell = nil;
     
-    _cellIdentifier  = @"EventsTableCell";
-    _cell            = [tableView dequeueReusableCellWithIdentifier:_cellIdentifier];
-    
-    if (_cell == nil)
+    if(   [_newsChannel._newsItemArray count] > 0
+       && [_newsChannel._newsItemArray count] >= _cellSelection
+       )
     {
-        [[NSBundle mainBundle] loadNibNamed:@"EventsTableCell" owner:self options:nil];
-        _cell = _eventsTableCell;
-        self._eventsTableCell = nil;
-    }
-     
-    UILabel     *_oneTitleLabel         = (UILabel *) [_cell viewWithTag:1];
-    UIWebView   *_descriptionWebView    = (UIWebView *) [_cell viewWithTag:2];
-    UILabel     *_dateLabel             = (UILabel *) [_cell viewWithTag:3];
-    
-    _descriptionWebView.scrollView.scrollEnabled = NO;
-    _descriptionWebView.scrollView.bounces = NO;
-    _descriptionWebView.dataDetectorTypes = UIDataDetectorTypeNone;
-    [_dateLabel     setTextColor:_zhawColor._zhawLightGrey];
-    
-    if([_newsChannel._newsItemArray count] > 0)
-    {
-        //NSLog(@"item array count: %i >= _cellSelection: %i", [_newsChannel._newsItemArray count], _cellSelection);
+        NewsItemDto *_newsItem = [_newsChannel._newsItemArray objectAtIndex:_cellSelection];
+        NSString    *_descr    = [NSString stringWithFormat:NewsWebViewHtml, NewsWebViewFont, _newsItem._description];
+        int         _numberOfLines = 0;
+        int         _cntNoLIndex = 0; // count number of lines index
+        NSUInteger  _numberOfPs = [[_descr componentsSeparatedByString:@"<p>"] count] - 1;
         
-        if ([_newsChannel._newsItemArray count] >= _cellSelection)
+        for (_cntNoLIndex = 0, _numberOfLines = 0; _cntNoLIndex < [_descr length]; _numberOfLines++)
+            _cntNoLIndex = NSMaxRange([_descr lineRangeForRange:NSMakeRange(_cntNoLIndex, 0)]);
+        
+        //NSLog(@"%@", _descr);
+        
+        if ([_descr length] <= 340 && _numberOfPs <= 2)
         {
-            NewsItemDto *_newsItem = [_newsChannel._newsItemArray objectAtIndex:_cellSelection];
-            
-            //NSLog(@"_newsItem._title: %@ - _cellSelection: %i", _newsItem._title, _cellSelection);
-            
-            _oneTitleLabel.text     = _newsItem._title;
-            [_oneTitleLabel setTextColor:_zhawColor._zhawOriginalBlue];
-            
-            if([_newsItem._startdateString length] > 0 && [_newsItem._starttimeString length] > 0)
+            //NSLog(@"small cell for length: %i lines: %i ps: %i (%@)",[_descr length], _numberOfLines, _numberOfPs, _newsItem._title);
+            _cellIdentifier  = @"EventsSmallTableCell";
+            _cell            = [tableView dequeueReusableCellWithIdentifier:_cellIdentifier];
+            if (_cell == nil)
             {
-                _dateLabel.text = [NSString stringWithFormat:@"%@, %@",_newsItem._startdateString, _newsItem._starttimeString];
+                [[NSBundle mainBundle] loadNibNamed:@"EventsSmallTableCell" owner:self options:nil];
+                _cell = _eventsSmallTableCell;
+                self._eventsSmallTableCell = nil;
             }
-            else
-            {
-                if([_newsItem._startdateString length] > 0)
-                {
-                    _dateLabel.text = [NSString stringWithFormat:@"%@",_newsItem._startdateString];
-                }
-            }
-            
-            NSString *_descr = [NSString stringWithFormat:NewsWebViewHtml, NewsWebViewFont, _newsItem._description];
-            
-            [_descriptionWebView loadHTMLString:_descr baseURL:nil];            
         }
+        
+        if ([_descr length] > 340 && [_descr length] < 500)
+        {
+            //NSLog(@"next small cell for length: %i lines: %i ps: %i (%@)",[_descr length], _numberOfLines, _numberOfPs, _newsItem._title);
+            _cellIdentifier  = @"EventsNextSmallTableCell";
+            _cell            = [tableView dequeueReusableCellWithIdentifier:_cellIdentifier];
+            if (_cell == nil)
+            {
+                [[NSBundle mainBundle] loadNibNamed:@"EventsNextSmallTableCell" owner:self options:nil];
+                _cell = _eventsNextSmallTableCell;
+                self._eventsNextSmallTableCell = nil;
+            }
+        }
+        
+        if ([_descr length] >= 500 && [_descr length] < 800)
+        {
+            //NSLog(@"normal cell for length: %i lines: %i ps: %i (%@)",[_descr length], _numberOfLines, _numberOfPs, _newsItem._title);
+            _cellIdentifier  = @"EventsNormalTableCell";
+            _cell            = [tableView dequeueReusableCellWithIdentifier:_cellIdentifier];
+            if (_cell == nil)
+            {
+                [[NSBundle mainBundle] loadNibNamed:@"EventsNormalTableCell" owner:self options:nil];
+                _cell = _eventsNormalTableCell;
+                self._eventsNormalTableCell = nil;
+            }
+        }
+        
+        if ([_descr length] >= 800 || _numberOfPs >= 3)
+        {
+            //NSLog(@"large cell for length: %i lines: %i ps: %i (%@)",[_descr length], _numberOfLines, _numberOfPs, _newsItem._title);
+            _cellIdentifier  = @"EventsLargeTableCell";
+            _cell            = [tableView dequeueReusableCellWithIdentifier:_cellIdentifier];
+            if (_cell == nil)
+            {
+                [[NSBundle mainBundle] loadNibNamed:@"EventsLargeTableCell" owner:self options:nil];
+                _cell = _eventsLargeTableCell;
+                self._eventsLargeTableCell = nil;
+            }
+        }
+        
+        if ([_descr length] >= 1200 || _numberOfPs >= 5 || _numberOfLines >= 12)
+        {
+            //NSLog(@"extra large cell for length: %i lines: %i ps: %i (%@)",[_descr length], _numberOfLines, _numberOfPs, _newsItem._title);
+            _cellIdentifier  = @"EventsExtraLargeTableCell";
+            _cell            = [tableView dequeueReusableCellWithIdentifier:_cellIdentifier];
+            if (_cell == nil)
+            {
+                [[NSBundle mainBundle] loadNibNamed:@"EventsExtraLargeTableCell" owner:self options:nil];
+                _cell = _eventsExtraLargeTableCell;
+                self._eventsExtraLargeTableCell = nil;
+            }
+        }
+        
+        if ([_descr length] >= 2200 || _numberOfPs >= 7 || _numberOfLines >= 14)
+        {
+            //NSLog(@"XXL cell for length: %i lines: %i ps: %i (%@)",[_descr length], _numberOfLines, _numberOfPs, _newsItem._title);
+            _cellIdentifier  = @"EventsXXLTableCell";
+            _cell            = [tableView dequeueReusableCellWithIdentifier:_cellIdentifier];
+            if (_cell == nil)
+            {
+                [[NSBundle mainBundle] loadNibNamed:@"EventsXXLTableCell" owner:self options:nil];
+                _cell = _eventsXXLTableCell;
+                self._eventsXXLTableCell = nil;
+            }
+        }
+     
+        UILabel     *_oneTitleLabel         = (UILabel *)   [_cell viewWithTag:1];
+        UIWebView   *_descriptionWebView    = (UIWebView *) [_cell viewWithTag:2];
+        UILabel     *_dateLabel             = (UILabel *)   [_cell viewWithTag:3];
+    
+        _descriptionWebView.scrollView.scrollEnabled = NO;
+        _descriptionWebView.scrollView.bounces = NO;
+        _descriptionWebView.dataDetectorTypes = UIDataDetectorTypeNone;
+        [_dateLabel     setTextColor:_zhawColor._zhawLightGrey];
+    
+        _oneTitleLabel.text     = _newsItem._title;
+        [_oneTitleLabel setTextColor:_zhawColor._zhawOriginalBlue];
+            
+        if([_newsItem._startdateString length] > 0 && [_newsItem._starttimeString length] > 0)
+        {
+            _dateLabel.text = [NSString stringWithFormat:@"%@, %@",_newsItem._startdateString, _newsItem._starttimeString];
+        }
+        else
+        {
+            if([_newsItem._startdateString length] > 0)
+            {
+                _dateLabel.text = [NSString stringWithFormat:@"%@",_newsItem._startdateString];
+            }
+        }
+        [_descriptionWebView loadHTMLString:_descr baseURL:nil];
     }
     return _cell;
 }
@@ -323,7 +401,55 @@
  */
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return 179;
+    NSUInteger        _cellSelection = indexPath.section;
+    CGFloat           _cellHeight = 221;
+    
+    if(   [_newsChannel._newsItemArray count] > 0
+       && [_newsChannel._newsItemArray count] >= _cellSelection
+       )
+    {
+        NewsItemDto *_newsItem = [_newsChannel._newsItemArray objectAtIndex:_cellSelection];
+        NSString    *_descr    = [NSString stringWithFormat:NewsWebViewHtml, NewsWebViewFont, _newsItem._description];
+        int         _numberOfLines = 0;
+        int         _cntNoLIndex = 0;
+        NSUInteger _numberOfPs = [[_descr componentsSeparatedByString:@"<p>"] count] - 1;
+        
+        
+        for (_cntNoLIndex = 0, _numberOfLines = 0; _cntNoLIndex < [_descr length]; _numberOfLines++)
+            _cntNoLIndex = NSMaxRange([_descr lineRangeForRange:NSMakeRange(_cntNoLIndex, 0)]);
+        
+        if ([_descr length] <= 340 && _numberOfPs <= 2)
+        {
+            _cellHeight = 123;
+        }
+        
+        if ([_descr length] > 340 && [_descr length] < 500)
+        {
+            _cellHeight = 180;
+        }
+        
+        if ([_descr length] > 340 && [_descr length] < 800)
+        {
+            _cellHeight = 221;
+        }
+        
+        if ([_descr length] >= 800 || _numberOfPs >= 3)
+        {
+            _cellHeight = 291;
+        }
+        
+        if ([_descr length] >= 1200 || _numberOfPs >= 5 || _numberOfLines >= 12)
+        {
+            _cellHeight = 370;
+        }
+
+        if ([_descr length] >= 2200 || _numberOfPs >= 7 || _numberOfLines >= 14)
+        {
+            _cellHeight = 480;
+        }
+    }
+
+    return _cellHeight;
 }
 
 /*!

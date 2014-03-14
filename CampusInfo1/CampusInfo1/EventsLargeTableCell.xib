@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="5053" systemVersion="13C64" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
+    <dependencies>
+        <deployment version="1536" defaultVersion="1296" identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3733"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="EventsViewController">
+            <connections>
+                <outlet property="_eventsLargeTableCell" destination="3m7-M7-NZ3" id="tfU-yl-PfT"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="blue" indentationWidth="10" reuseIdentifier="EventsLargeTableCell" rowHeight="291" id="3m7-M7-NZ3">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="290"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="3m7-M7-NZ3" id="Ekp-xN-5Mz">
+                <rect key="frame" x="0.0" y="0.0" width="320" height="289"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="1" contentMode="left" text="" lineBreakMode="clip" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="317" translatesAutoresizingMaskIntoConstraints="NO" id="F5d-J7-vex" userLabel="TitleLabel">
+                        <rect key="frame" x="3" y="16" width="317" height="30"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="30" id="coX-Wg-9Pg"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="boldSystem" pointSize="13"/>
+                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                        <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </label>
+                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="3" contentMode="left" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="fTd-Gb-7vC" userLabel="DateLabel">
+                        <rect key="frame" x="3" y="0.0" width="317" height="17"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="17" id="8jO-qG-0ZG"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="13"/>
+                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                        <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </label>
+                    <webView userInteractionEnabled="NO" tag="2" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="TxC-6x-ZF9" userLabel="DescriptionWebView">
+                        <rect key="frame" x="3" y="45" width="317" height="244"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="244" id="4BC-Gv-ExW"/>
+                            <constraint firstAttribute="width" constant="317" id="Rwm-sK-mMU"/>
+                        </constraints>
+                        <dataDetectorType key="dataDetectorTypes" phoneNumber="YES" link="YES" address="YES" calendarEvent="YES"/>
+                    </webView>
+                </subviews>
+            </tableViewCellContentView>
+            <constraints>
+                <constraint firstItem="TxC-6x-ZF9" firstAttribute="leading" secondItem="F5d-J7-vex" secondAttribute="leading" id="6BT-RU-Ww4"/>
+                <constraint firstItem="F5d-J7-vex" firstAttribute="leading" secondItem="fTd-Gb-7vC" secondAttribute="leading" id="9u1-4q-Dr9"/>
+                <constraint firstItem="fTd-Gb-7vC" firstAttribute="top" secondItem="3m7-M7-NZ3" secondAttribute="top" id="EWq-iH-n1v"/>
+                <constraint firstItem="F5d-J7-vex" firstAttribute="trailing" secondItem="3m7-M7-NZ3" secondAttribute="trailing" id="IlO-HP-kno"/>
+                <constraint firstItem="fTd-Gb-7vC" firstAttribute="trailing" secondItem="3m7-M7-NZ3" secondAttribute="trailing" id="MkU-hF-bP9"/>
+                <constraint firstItem="TxC-6x-ZF9" firstAttribute="top" secondItem="3m7-M7-NZ3" secondAttribute="top" constant="45" id="Rt5-c3-IwN"/>
+                <constraint firstItem="F5d-J7-vex" firstAttribute="top" secondItem="3m7-M7-NZ3" secondAttribute="top" constant="16" id="fhE-v1-gdI"/>
+                <constraint firstItem="TxC-6x-ZF9" firstAttribute="trailing" secondItem="3m7-M7-NZ3" secondAttribute="trailing" id="m8W-mG-yKx"/>
+            </constraints>
+        </tableViewCell>
+    </objects>
+</document>
