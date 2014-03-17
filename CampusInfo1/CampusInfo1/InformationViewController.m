@@ -268,19 +268,28 @@
             self._informationResponsibleTableCell = nil;
         }
     
-        UILabel         *_label1     = (UILabel *)  [_cell viewWithTag:1];
-        UILabel         *_label2     = (UILabel *)  [_cell viewWithTag:2];
-        UILabel         *_label3     = (UILabel *)  [_cell viewWithTag:3];
-        UILabel         *_label4     = (UILabel *)  [_cell viewWithTag:4];
-        UILabel         *_label5     = (UILabel *)  [_cell viewWithTag:5];
-        UILabel         *_label6     = (UILabel *)  [_cell viewWithTag:6];
+        UILabel         *_responsibleLabel  = (UILabel *)  [_cell viewWithTag:1];
+        UILabel         *_schoolLabel       = (UILabel *)  [_cell viewWithTag:2];
+        UILabel         *_initLabel         = (UILabel *)  [_cell viewWithTag:3];
+        UILabel         *_teacherLabel      = (UILabel *)  [_cell viewWithTag:4];
+        UILabel         *_streetLabel       = (UILabel *)  [_cell viewWithTag:5];
+        UILabel         *_townLabel         = (UILabel *)  [_cell viewWithTag:6];
 
-        [_label1 setTextColor:_zhawColor._zhawFontGrey];
-        [_label2 setTextColor:_zhawColor._zhawFontGrey];
-        [_label3 setTextColor:_zhawColor._zhawFontGrey];
-        [_label4 setTextColor:_zhawColor._zhawFontGrey];
-        [_label5 setTextColor:_zhawColor._zhawFontGrey];
-        [_label6 setTextColor:_zhawColor._zhawFontGrey];
+        [_responsibleLabel setTextColor:_zhawColor._zhawFontGrey];
+        [_schoolLabel setTextColor:_zhawColor._zhawFontGrey];
+        [_initLabel setTextColor:_zhawColor._zhawFontGrey];
+        [_teacherLabel setTextColor:_zhawColor._zhawFontGrey];
+        [_streetLabel setTextColor:_zhawColor._zhawFontGrey];
+        [_townLabel setTextColor:_zhawColor._zhawFontGrey];
+        
+        [_responsibleLabel  setText:NSLocalizedString(@"InformationVCResponsible", nil)];
+        [_schoolLabel       setText:NSLocalizedString(@"InformationVCSchoolofEngineering", nil)];
+        [_initLabel         setText:NSLocalizedString(@"InformationVCInit", nil)];
+        [_teacherLabel      setText:NSLocalizedString(@"InformationVCTeacher", nil)];
+        [_streetLabel       setText:NSLocalizedString(@"InformationVCStreet", nil)];
+        [_townLabel         setText:NSLocalizedString(@"InformationVCTown", nil)];
+        
+        
     }
     else // cellRow == 0 && _cellSection == 1
     {
@@ -292,13 +301,17 @@
             _cell = _informationContactTableCell;
             self._informationContactTableCell = nil;
         }
-        UILabel         *_label1            = (UILabel *)  [_cell viewWithTag:1];
+        UILabel         *_responseLabel     = (UILabel *)  [_cell viewWithTag:1];
         UIButton        *_emailButton       = (UIButton *) [_cell viewWithTag:2];
-        UILabel         *_label2            = (UILabel *)  [_cell viewWithTag:3];
+        UILabel         *_furtherInfoLabel  = (UILabel *)  [_cell viewWithTag:3];
         UIButton        *_homepageButton    = (UIButton *) [_cell viewWithTag:4];
         
-        [_label1 setTextColor:_zhawColor._zhawFontGrey];
-        [_label2 setTextColor:_zhawColor._zhawFontGrey];
+        [_responseLabel setTextColor:_zhawColor._zhawFontGrey];
+        [_furtherInfoLabel setTextColor:_zhawColor._zhawFontGrey];
+        
+        [_responseLabel     setText:NSLocalizedString(@"InformationVCResponse", nil)];
+        [_furtherInfoLabel  setText:NSLocalizedString(@"InformationVCFurtherInformation", nil)];
+        
         
         [_emailButton addTarget:self action:@selector(sendEmailToGivenAdress  :event:) forControlEvents:UIControlEventTouchUpInside];
         

@@ -13,6 +13,15 @@
 "AlertViewOk"       = "OK";
 "AlertViewCancel"   = "Cancel";
 
+"Monday"    = "Montag";
+"Tuesday"   = "Dienstag";
+"Wednesday" = "Mittwoch";
+"Thursday"  = "Donnerstag";
+"Friday"    = "Freitag";
+"Saturday"  = "Samstag";
+"Sunday"    = "Sonntag";
+
+
 
 // social media
 "SocialMediaVCTitle"         = "Social Media";
@@ -86,6 +95,15 @@
 // info contact
 "InformationVCRealisation"      = "Realisierung";
 "InformationVCContact"          = "Kontakt";
+"InformationVCResponsible"      = "Verantwortlich";
+"InformationVCSchoolofEngineering" = "ZHAW School of Engineering";
+"InformationVCInit"                = "InIT Institut für angewandte Informationstechnologie";
+"InformationVCTeacher"             = "Prof. Dr. Hans-Peter Hutter";
+"InformationVCStreet"              = "Steinberggasse 13";
+"InformationVCTown"                = "8401 Winterthur";
+
+"InformationVCResponse"            = "Rückmeldung";
+"InformationVCFurtherInformation"  = "Weitere Informationen";
 
 // service desk
 "ServiceDeskVCDescriptionEmail"  = "Email";
@@ -137,8 +155,76 @@
 "EmergencyVCDisplayTitleRega"                   = "REGA";
 "EmergencyVCDisplayTextRega"                    = "Die REGA";
 
+// settings
+"SettingsVCTitle"               = "Einstellungen";
+"SettingsVCTimeTableSettings"   = "Stundenplan Einstellung";
+"SettingsVCTimeTableDescription" = "Bitte Kürzel eines Studenten oder Dozenten eingeben";
+
+"SettingsVCStudent" = "Student";
+"SettingsVCLecturer" = "Dozent";
+
+// mensa
+"MensaVCTitle"      = "Mensa";
+"MensaVCNoLunch"    = "kein Mittagsmenü";
+"MensaVCLunchFrom"  = "Mittagessen von";
+"MensaVCTo"         = "bis";
+"MensaVCOpenFrom"   = "offen von";
+"MensaVCClosed"     = "geschlossen";
+
+"MensaVCTypeMensa"     = "Mensa";
+"MensaVCTypeCafeteria" = "Cafeteria";
+
+// mensa details
+"MensaDetailVCNoInfoAboutMenu" = "keine Informationen über das Menü";
+"MensaDetailVCInternalPrice"   = "interner Preis";
+"MensaDetailVCPartnerPrice"    = "Partner";
+"MensaDetailVCExternalPrice"   = "externer Preis";
+
+// choose date
+"ChooseDateVCTitle"     = "Datum wählen";
+"ChooseDateVCStop"      = "abbrechen";
+"ChooseDateVCToday"     = "heute";
+"ChooseDateVCChoose"    = "auswählen";
+
+// time table search
+"SearchVCTitle"     = "Stundenplan Suche";
+"SearchVCStop"      = "abbrechen";
+"SearchVCChoose"    = "auswählen";
+"SearchVCHint"      = "Bitte ein Kürzel eingeben.";
 
 
+// general time table types
+"TimeTableTypeCourse" = "Kurs";
+"TimeTableTypeTeacher" = "Dozent";
+"TimeTableTypeStudent" = "Student";
+"TimeTableTypeRoom" = "Raum";
+"TimeTableTypeClass" = "Klasse";
 
 
+// time table
+"TimeTableOverVCTitle"   = "Stundenplan";
+"TimeTableOverVCAcronym" = "Kürzel";
+"TimeTableOverVCFrom"    = "von";
+"TimeTableOverVCToday"   = "heute";
+"TimeTableOverVCSearch"  = "suche";
+"TimeTableOverVCEnterAcronym" = "Bitte ein Kürzel in Suche oder Einstellungen eingeben.";
+"TimeTableOverVCOk"      = "OK";
+"TimeTableOverVCModulFor" = "Modul für den";
+"TimeTableOverVCTo"    = "bis";
+"TimeTableOverVCRoom"  = "Raum";
+"TimeTableOverVCCourse" = "Kurs";
 
+// time table detail
+"TimeTableDetailVCCourse" = "Kurs";
+"TimeTableDetailVCDescription" = "Beschreibung";
+"TimeTableDetailVCRoom" = "Raum";
+"TimeTableDetailVCTeacherPlural" = "Dozenten";
+"TimeTableDetailVCClassesPlural" = "Klassen";
+
+
+// time table error message
+"TimeTableOverVCStudentIdError" = "Der Stundenplan für den gesuchten Studenten konnte nicht gefunden werden. Bitte Schreibweise beachten und kein Datum wählen, welches zu weit in der Zukunft oder in der Vergangenheit liegt.";
+"TimeTableOverVCClassError" = "Der Stundenplan für die gesuchte Klasse konnte nicht gefunden werden. Bitte Schreibweise beachten (z.B. T_WI11a.BA) und kein Datum wählen, welches zu weit in der Zukunft oder in der Vergangenheit liegt.";
+"TimeTableOverVCRoomError" = "Der Stundenplan für den gesuchten Raum konnte nicht gefunden werden. Bitte Schreibweise beachten (z.B. te 223, th 344) und kein Datum wählen, welches zu weit in der Zukunft oder in der Vergangenheit liegt.";
+"TimeTableOverVCTeacherError" = "Der Stundenplan für den gesuchten Dozenten konnte nicht gefunden werden. Bitte Schreibweise beachten (z.B. huhp, rege) und kein Datum wählen, welches zu weit in der Zukunft oder in der Vergangenheit liegt.";
+"TimeTableOverVCCourseError" = "Der Stundenplan für den gesuchten Kurs konnte nicht gefunden werden. Bitte Schreibweise beachten (z.B. t.MARI-V) und kein Datum wählen, welches zu weit in der Zukunft oder in der Vergangenheit liegt.";

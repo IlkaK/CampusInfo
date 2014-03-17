@@ -97,7 +97,7 @@
     UIBarButtonItem *_backButtonItem = [[UIBarButtonItem alloc] initWithTitle:LeftArrowSymbol style:UIBarButtonItemStyleBordered target:self action:@selector(moveBackToMenuOverview:)];
     [_backButtonItem setTitleTextAttributes:@{NSForegroundColorAttributeName:_zhawColor._zhawWhite} forState:UIControlStateNormal];
     [_titleNavigationItem setLeftBarButtonItem :_backButtonItem animated :true];
-    [_titleNavigationItem setTitle:SettingsVCTitle];
+    [_titleNavigationItem setTitle:NSLocalizedString(@"SettingsVCTitle", nil)];
     [[UINavigationBar appearance] setTitleTextAttributes:@{
                                                            UITextAttributeTextColor: _zhawColor._zhawWhite,
                                                            UITextAttributeFont: [UIFont fontWithName:NavigationBarFont size:NavigationBarTitleSize],
@@ -106,7 +106,9 @@
     
     // set timetable title and description label
     [_timetableSettingsTitle setTextColor:_zhawColor._zhawFontGrey];
+    [_timetableSettingsTitle setText:NSLocalizedString(@"SettingsVCTimeTableSettings", nil)];
     [_timetableSettingsDescriptionLabel setTextColor:_zhawColor._zhawFontGrey];
+    [_timetableSettingsDescriptionLabel setText:NSLocalizedString(@"SettingsVCTimeTableDescription", nil)];
     
     // set text field
     self._acronymTextField.delegate = self;    
@@ -247,7 +249,7 @@
     {
         if ([[_newAcronym stringByTrimmingCharactersInSet:alphabecticalAndNumberSet] isEqualToString: _newAcronym])
         {
-            _localType = TimeTableTypeStudent;
+            _localType = NSLocalizedString(@"SettingsVCStudent", nil);
         }
     }
     else
@@ -257,7 +259,7 @@
             
             if ([[_newAcronym stringByTrimmingCharactersInSet:alphabecticalSet] isEqualToString: _newAcronym])
             {
-                _localType = TimeTableTypeDozent;
+                _localType = NSLocalizedString(@"SettingsVCLecturer", nil);
             }
         }
     }

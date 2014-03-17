@@ -209,7 +209,7 @@
     UIBarButtonItem *_backButtonItem = [[UIBarButtonItem alloc] initWithTitle:LeftArrowSymbol style:UIBarButtonItemStyleBordered target:self action:@selector(moveBackToTimeTable:)];
     [_backButtonItem setTitleTextAttributes:@{NSForegroundColorAttributeName:_zhawColor._zhawWhite} forState:UIControlStateNormal];
     [_titleNavigationItem setLeftBarButtonItem :_backButtonItem animated :true];
-    [_titleNavigationItem setTitle:ChooseDateVCTitle];
+    [_titleNavigationItem setTitle:NSLocalizedString(@"ChooseDateVCTitle", nil)];
     [[UINavigationBar appearance] setTitleTextAttributes:@{
                                                            UITextAttributeTextColor: _zhawColor._zhawWhite,
                                                            UITextAttributeFont: [UIFont fontWithName:NavigationBarFont size:NavigationBarTitleSize],
@@ -225,6 +225,9 @@
                                                           UITextAttributeFont: [UIFont fontWithName:NavigationBarFont size:NavigationBarDescriptionSize],
                                                           }
                                                forState:UIControlStateNormal];
+    [_chooseDateSegmentedControl setTitle:NSLocalizedString(@"ChooseDateVCStop", nil) forSegmentAtIndex:0];
+    [_chooseDateSegmentedControl setTitle:NSLocalizedString(@"ChooseDateVCToday", nil) forSegmentAtIndex:1];
+    [_chooseDateSegmentedControl setTitle:NSLocalizedString(@"ChooseDateVCChoose", nil) forSegmentAtIndex:2];
     
     // set activity indicator
     _waitForChangeActivityIndicator.hidesWhenStopped = YES;

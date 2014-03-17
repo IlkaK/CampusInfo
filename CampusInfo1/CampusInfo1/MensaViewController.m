@@ -113,7 +113,7 @@
     UIBarButtonItem *_backButtonItem = [[UIBarButtonItem alloc] initWithTitle:LeftArrowSymbol style:UIBarButtonItemStyleBordered target:self action:@selector(moveBackToMenuOverview:)];
     [_backButtonItem setTitleTextAttributes:@{NSForegroundColorAttributeName:_zhawColor._zhawWhite} forState:UIControlStateNormal];
     [_titleNavigationItem setLeftBarButtonItem :_backButtonItem animated :true];
-    [_titleNavigationItem setTitle:MensaVCTitle];
+    [_titleNavigationItem setTitle:NSLocalizedString(@"MensaVCTitle", nil)];
 
     [[UINavigationBar appearance] setTitleTextAttributes:@{
                                                            UITextAttributeTextColor: _zhawColor._zhawWhite,
@@ -127,7 +127,6 @@
                              ,[[_dateFormatter _weekDayFormatter] stringFromDate:self._actualDate]
                              ,[[_dateFormatter _dayFormatter]     stringFromDate:self._actualDate]];
     
-    [_titleNavigationItem setTitle:MensaVCTitle];
     [_dateNavigationItem setTitle:_dateString];
     
     // set default values for spinner/activity indicator
@@ -144,6 +143,8 @@
     [_noConnectionButton setTitleColor:_zhawColor._zhawWhite forState:UIControlStateNormal];
     [_noConnectionButton setBackgroundImage:[UIImage imageNamed:NoConnectionButtonBackground]  forState:UIControlStateNormal];
     [_noConnectionLabel setTextColor:_zhawColor._zhawFontGrey];
+    [_noConnectionLabel setText:NSLocalizedString(@"noConnection", nil)];
+    [_noConnectionButton setTitle:NSLocalizedString(@"tryAgain", nil) forState:UIControlStateNormal];
     
     // ----- DETAIL PAGE -----
     if (_mensaDetailVC == nil)
@@ -319,7 +320,7 @@
     [_lunchTimesLabel   setTextColor:_zhawColor._zhawFontGrey];
     
     _mensaLabel.text = [NSString stringWithFormat:@"%@ (%@)", gastronomyName
-                        ,[_translator getGermanGastronomyTypeTranslation:gastronomyType]
+                        ,[_translator getDisplayLanguageGastronomyTypeTranslation:gastronomyType]
                         ];
     
     _openingTimesLabel.text = openingTime;
@@ -400,7 +401,7 @@
         
         if (_isHoliday)
         {
-            _openingTime = MensaClosed;
+            _openingTime = NSLocalizedString(@"MensaVCClosed", nil);
         }
         else
         {
@@ -408,7 +409,7 @@
             
             if([ _oneGastronomy._serviceTimePeriods lastObject] == nil)
             {
-                _openingTime = MensaClosed;
+                _openingTime = NSLocalizedString(@"MensaVCClosed", nil);
             }
             else
             {
@@ -426,7 +427,7 @@
                         for (weekdaysArrayForOpeningTimePlanI = 0; weekdaysArrayForOpeningTimePlanI < [_openingTimePlan._weekdays count]; weekdaysArrayForOpeningTimePlanI++)
                         {
                             _oneWeekdayForOpeningTimePlan = [_openingTimePlan._weekdays objectAtIndex:weekdaysArrayForOpeningTimePlanI];
-                            _oneDayWeekdayGermanTranslation = [NSString stringWithFormat:@"%@",[_translator getGermanWeekdayTranslation:_oneWeekdayForOpeningTimePlan._weekdayType]];
+                            _oneDayWeekdayGermanTranslation = [NSString stringWithFormat:@"%@",[_translator getDisplayLanguageWeekdayTranslation:_oneWeekdayForOpeningTimePlan._weekdayType]];
                             
                             //NSLog(@"compare weekdays: %@ (%@) - %@", _oneWeekday._weekdayType, _oneDayWeekdayGermanTranslation, _actualDayWeekday);
                             
@@ -436,12 +437,14 @@
                             {
                                 if (_oneWeekdayForOpeningTimePlan._fromTime == nil && _oneWeekdayForOpeningTimePlan._toTime == nil)
                                 {
-                                    _openingTime = MensaClosed;
+                                    _openingTime = NSLocalizedString(@"MensaVCClosed", nil);
                                 }
                                 else
                                 {
-                                    _openingTime = [NSString stringWithFormat:@"offen von %@ bis %@",
-                                            [[_dateFormatter _timeFormatter] stringFromDate:_oneWeekdayForOpeningTimePlan._fromTime]
+                                    _openingTime = [NSString stringWithFormat:@"%@ %@ %@ %@"
+                                            ,NSLocalizedString(@"MensaVCOpenFrom", nil)
+                                            ,[[_dateFormatter _timeFormatter] stringFromDate:_oneWeekdayForOpeningTimePlan._fromTime]
+                                            ,NSLocalizedString(@"MensaVCTo", nil)
                                             ,[[_dateFormatter _timeFormatter] stringFromDate:_oneWeekdayForOpeningTimePlan._toTime]
                                             ];
                                     
@@ -450,7 +453,7 @@
                                         for (weekdaysArrayForLunchTimePlanI = 0; weekdaysArrayForLunchTimePlanI < [_lunchTimePlan._weekdays count]; weekdaysArrayForLunchTimePlanI++)
                                         {
                                             _oneWeekdayForLunchTimePlan = [_lunchTimePlan._weekdays objectAtIndex:weekdaysArrayForLunchTimePlanI];
-                                            _oneDayWeekdayGermanTranslation = [NSString stringWithFormat:@"%@",[_translator getGermanWeekdayTranslation:_oneWeekdayForLunchTimePlan._weekdayType]];
+                                            _oneDayWeekdayGermanTranslation = [NSString stringWithFormat:@"%@",[_translator getDisplayLanguageWeekdayTranslation:_oneWeekdayForLunchTimePlan._weekdayType]];
                                             
                                             //NSLog(@"compare weekdays: %@ (%@) - %@", _oneWeekdayForLunchTimePlan._weekdayType, _oneDayWeekdayGermanTranslation, _actualDayWeekday);
                                             
@@ -458,16 +461,18 @@
                                                ||  [_oneDayWeekdayGermanTranslation  caseInsensitiveCompare:_actualDayWeekday] == NSOrderedSame
                                                )
                                             {
-                                                _lunchTime = [NSString stringWithFormat:@"Mittagessen von %@ bis %@",
-                                                                 [[_dateFormatter _timeFormatter] stringFromDate:_oneWeekdayForLunchTimePlan._fromTime]
-                                                                 ,[[_dateFormatter _timeFormatter] stringFromDate:_oneWeekdayForLunchTimePlan._toTime]
-                                                                 ];
+                                                _lunchTime = [NSString stringWithFormat:@"%@ %@ %@ %@"
+                                                              ,NSLocalizedString(@"MensaVCLunchFrom", nil)
+                                                              ,[[_dateFormatter _timeFormatter] stringFromDate:_oneWeekdayForLunchTimePlan._fromTime]
+                                                              ,NSLocalizedString(@"MensaVCTo", nil)
+                                                              ,[[_dateFormatter _timeFormatter] stringFromDate:_oneWeekdayForLunchTimePlan._toTime]
+                                                            ];
                                             }
                                         }
                                     }
                                     else
                                     {
-                                        _lunchTime   = @"kein Mittagsmenü";
+                                        _lunchTime   = NSLocalizedString(@"MensaVCNoLunch", nil);
                                     }
                                 }
                             }

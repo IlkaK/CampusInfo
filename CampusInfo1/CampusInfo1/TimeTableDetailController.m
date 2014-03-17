@@ -131,7 +131,7 @@
     [_titleNavigationLabel setTextColor:_zhawColor._zhawWhite];
     [_titleNavigationLabel setTextAlignment:NSTextAlignmentCenter];
     [_titleNavigationLabel setFont:[UIFont fontWithName:NavigationBarFont size:NavigationBarTitleSize]];
-    [_titleNavigationLabel setText:TimeTableOverVCTitle];
+    [_titleNavigationLabel setText:NSLocalizedString(@"TimeTableOverVCTitle", nil)];
     
     [[UINavigationBar appearance] setBackgroundImage:[UIImage imageNamed:NavigationBarBackground] forBarMetrics:UIBarMetricsDefault];
     
@@ -225,12 +225,12 @@
     
     //NSString  *_string1 = [NSString stringWithFormat:@"Veranstaltung: %@", _allocation._name];
     
-    [_descriptionArray addObject:[NSString stringWithFormat:@"%@:",TimeTableTypeKurs]];
+    [_descriptionArray addObject:[NSString stringWithFormat:@"%@:",NSLocalizedString(@"TimeTableDetailVCCourse", nil)]];
     [_detailArray      addObject:[NSString stringWithFormat:@"%@", scheduleEvent._name]];
     [_acronymArray     addObject:[NSString stringWithFormat:@"%@", scheduleEvent._name]];
     [_typeButtonArray  addObject:[NSString stringWithFormat:@"%@", TimeTableTypeCourseEnglishPlural]];
     
-    [_descriptionArray addObject:[NSString stringWithFormat:@"%@:", TimeTableDescription]];
+    [_descriptionArray addObject:[NSString stringWithFormat:@"%@:", NSLocalizedString(@"TimeTableDetailVCDescription", nil)]];
     [_detailArray      addObject:[NSString stringWithFormat:@"%@", scheduleEvent._description]];
     [_acronymArray     addObject:[NSString stringWithFormat:@"%@", scheduleEvent._name]];
     [_typeButtonArray  addObject:[NSString stringWithFormat:@"NONE"]];
@@ -244,7 +244,7 @@
         _realization = [_scheduleEvent._scheduleEventRealizations objectAtIndex:realizationI];
         if (_realization._room != nil)
         {   
-            [_descriptionArray addObject:[NSString stringWithFormat:@"%@:", TimeTableTypeRaum]];
+            [_descriptionArray addObject:[NSString stringWithFormat:@"%@:",NSLocalizedString(@"TimeTableDetailVCRoom", nil)]];
             [_detailArray      addObject:[NSString stringWithFormat:@"%@", _realization._room._name]];
             [_acronymArray     addObject:[NSString stringWithFormat:@"%@", _realization._room._name]];
             [_typeButtonArray  addObject:[NSString stringWithFormat:@"%@", TimeTableTypeRoomEnglishPlural]];
@@ -271,7 +271,7 @@
             {
                 if (lecturerI == 0)
                 {
-                    [_descriptionArray addObject:[NSString stringWithFormat:@"%@:", TimeTableTypeDozentPlural]];
+                    [_descriptionArray addObject:[NSString stringWithFormat:@"%@:", NSLocalizedString(@"TimeTableDetailVCTeacherPlural", nil)]];
                    
                 }
                 else
@@ -306,7 +306,7 @@
             {
                 if (classI == 0)
                 {
-                    [_descriptionArray addObject:[NSString stringWithFormat:@"%@", TimeTableTypeKlassePlural]];
+                    [_descriptionArray addObject:[NSString stringWithFormat:@"%@:", NSLocalizedString(@"TimeTableDetailVCClassesPlural", nil)]];
                 }
                 else
                 {

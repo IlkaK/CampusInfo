@@ -11,12 +11,12 @@
  * <ul>
  * <li> Responsibilities:
  *   <ul>
- *      <li> Provides methods to transfer specific strings from English to German and vice versa. </li>
+ *      <li> Provides methods to transfer specific strings from English to display language and vice versa. </li>
  *  </ul>
  * </li>
  * <li> Receiving data:
  *   <ul>
- *      <li> Receives strings to transfer to English/German. </li>
+ *      <li> Receives strings to transfer to English/display language. </li>
  *   </ul>
  * </li>
  *
@@ -35,38 +35,38 @@
 @interface LanguageTranslation : NSObject
 
 /*!
- @function getGermanTypeTranslation
- Transfers the acronym type from English to German.
+ @function getDisplayLanguageTypeTranslation
+ Transfers the acronym type from English to display language.
  @param acronymType
  */
-- (NSString *)getGermanTypeTranslation:(NSString*)acronymType;
+- (NSString *)getDisplayLanguageTypeTranslation:(NSString*)acronymType;
 
 /*!
  @function getEnglishTypeTranslation
- Transfers the acronym type from German to English.
+ Transfers the acronym type from display language to English.
  @param acronymType
  */
 - (NSString *)getEnglishTypeTranslation:(NSString*)acronymType;
 
 /*!
- @function getGermanErrorMessageTranslation
- Transfers the given error message into German.
+ @function getDisplayLanguageErrorMessageTranslation
+ Transfers the given error message into display language.
  @param errorMessage
  */
-- (NSString *)getGermanErrorMessageTranslation:(NSString *)errorMessage;
+- (NSString *)getDisplayLanguageErrorMessageTranslation:(NSString *)errorMessage;
 
 /*!
- @function getGermanGastronomyTypeTranslation
- Transfers the given gastronomy type into German.
+ @function getDisplayLanguageGastronomyTypeTranslation
+ Transfers the given gastronomy type into display language.
  @param gastronomyType
  */
-- (NSString *)getGermanGastronomyTypeTranslation:(NSString*)gastronomyType;
+- (NSString *)getDisplayLanguageGastronomyTypeTranslation:(NSString*)gastronomyType;
 
 /*!
- @function getGermanWeekdayTranslation
- Transfers the given weekday into German.
+ @function getDisplayLanguageWeekdayTranslation
+ Transfers the given weekday into display language.
  @param englishWeekday
  */
--(NSString *)getGermanWeekdayTranslation:(NSString *)englishWeekday;
+-(NSString *)getDisplayLanguageWeekdayTranslation:(NSString *)englishWeekday;
 
 @end

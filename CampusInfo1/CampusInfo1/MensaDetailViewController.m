@@ -119,7 +119,7 @@
     [_titleNavigationLabel setTextColor:_zhawColor._zhawWhite];
     [_titleNavigationLabel setTextAlignment:NSTextAlignmentCenter];
     [_titleNavigationLabel setFont:[UIFont fontWithName:NavigationBarFont size:NavigationBarTitleSize]];
-    [_titleNavigationLabel setText:MensaVCTitle];
+    [_titleNavigationLabel setText:NSLocalizedString(@"MensaVCTitle", nil)];
     
     [[UINavigationBar appearance] setBackgroundImage:[UIImage imageNamed:NavigationBarBackground] forBarMetrics:UIBarMetricsDefault];
     
@@ -485,7 +485,7 @@
         }
         else
         {
-            _labelTitle.text            = @"keine Informationen über das Menü";
+            _labelTitle.text            = NSLocalizedString(@"MensaDetailVCNoInfoAboutMenu", nil);
         }
         _labelMaincourse.text           = @"";
         _labelSidedishes.text           = @"";
@@ -527,9 +527,9 @@
         _labelPriceExternal.text    = [NSString stringWithFormat:@"%.2f CHF",_oneDish._externalPrice];
         _labelPriceInternal.text    = [NSString stringWithFormat:@"%.2f CHF",_oneDish._internalPrice];
         _labelPricePartner.text     = [NSString stringWithFormat:@"%.2f CHF",_oneDish._priceForPartners];
-        _labelWriteInternalPrice.text = @"interner Preis";
-        _labelWritePartnerPrice.text  = @"Partner";
-        _labelWriteExternalPrice.text = @"externer Preis";
+        _labelWriteInternalPrice.text = NSLocalizedString(@"MensaDetailVCInternalPrice", nil);
+        _labelWritePartnerPrice.text  = NSLocalizedString(@"MensaDetailVCPartnerPrice", nil);
+        _labelWriteExternalPrice.text = NSLocalizedString(@"MensaDetailVCExternalPrice", nil);
     }
     return _cell;
 }

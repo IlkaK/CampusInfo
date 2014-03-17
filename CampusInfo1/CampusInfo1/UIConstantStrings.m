@@ -40,16 +40,7 @@ NSString * const DateButtonBackground = @"dateButton.png";
 NSString * const NoConnectionButtonBackground = @"noConnectionButton";
 
 
-
-
 // strings for settings/ time table details
-NSString * const TimeTableTypeStudent       = @"Student";
-NSString * const TimeTableTypeDozent        = @"Dozent";
-NSString * const TimeTableTypeDozentPlural  = @"Dozenten";
-NSString * const TimeTableTypeKurs          = @"Kurs";
-NSString * const TimeTableTypeRaum          = @"Raum";
-NSString * const TimeTableTypeKlasse        = @"Klasse";
-NSString * const TimeTableTypeKlassePlural  = @"Klassen:";
 
 NSString * const TimeTableTypeStudentEnglish            = @"student";
 NSString * const TimeTableTypeStudentEnglishPlural      = @"students";
@@ -62,18 +53,28 @@ NSString * const TimeTableTypeRoomEnglishPlural         = @"rooms";
 NSString * const TimeTableTypeClassEnglishPlural        = @"classes";
 NSString * const TimeTableTypeClassEnglish              = @"class";
 
-NSString * const TimeTableDescription = @"Beschreibung";
+// store acronym for own time table
+NSString * const TimeTableAcronym     = @"TimeTableAcronym";
 
+// error message for time table
+NSString * const TimeTableCourseError = @"Schedule for given course name could not be found.";
+NSString * const TimeTableTeacherError = @"Schedule for given lecturer id could not be found.";
+NSString * const TimeTableRoomError = @"Schedule for given room name could not be found.";
+NSString * const TimeTableClassError = @"Schedule for given school class could not be found.";
+NSString * const TimeTableStudentError = @"Schedule for given students id could not be found.";
 
-NSString * const SettingsVCTitle      = @"Einstellungen";
+//settings
 NSString * const SettingsVCSearchType = @"SearchType";
 NSString * const SettingsVCSearchText = @"SearchText";
 
-NSString * const SearchVCTitle        = @"Stundenplan Suche";
-NSString * const SearchVCHint         = @"Bitte ein Kürzel eingeben.";
 
-// store acronym for own time table
-NSString * const TimeTableAcronym     = @"TimeTableAcronym";
+
+
+
+
+// constants for mensa
+NSString * const MensaTypeCafeteria = @"Cafeteria";
+NSString * const MensaTypeCanteen   = @"Canteen";
 
 
 
@@ -145,8 +146,6 @@ NSString * const ContactsVCRealPhone2ContinuedEducation           = @"0041589348
 NSString * const ContactsVCResponsible2ContinuedEducation         = @"Erika Wentsch";
 
 
-
-
 NSString * const EmergencyVCDisplayPhonePolice          = @"117";
 NSString * const EmergencyVCRealPhonePolice             = @"117";
 
@@ -176,7 +175,6 @@ NSString * const InformationVCRealEmail         = @"app.engineering@zhaw.ch";
 
 
 
-
 // news and events
 NSString * const NewsWebViewHtml    = @"<html> \n"
 "<head> \n"
@@ -196,31 +194,14 @@ NSString * const PublicTransportVCToEnglish   = @"to";
 
 
 
-// time table
-NSString * const TimeTableOverVCTitle = @"Stundenplan";
-
-// mensa
-NSString * const MensaVCTitle = @"Mensa";
-NSString * const MensaClosed  = @"geschlossen";
-
-// choose date
-NSString * const ChooseDateVCTitle = @"Datum wählen";
-
 // language translation
 NSString * const MondayEnglish = @"monday";
-NSString * const MondayGerman  = @"Montag";
 NSString * const TuesdayEnglish = @"tuesday";
-NSString * const TuesdayGerman  = @"Dienstag";
 NSString * const WednesdayEnglish = @"wednesday";
-NSString * const WednesdayGerman  = @"Mittwoch";
 NSString * const ThursdayEnglish = @"thursday";
-NSString * const ThursdayGerman  = @"Donnerstag";
 NSString * const FridayEnglish = @"friday";
-NSString * const FridayGerman  = @"Freitag";
 NSString * const SaturdayEnglish = @"saturday";
-NSString * const SaturdayGerman  = @"Samstag";
 NSString * const SundayEnglish = @"sunday";
-NSString * const SundayGerman  = @"Sonntag";
 
 // menu overview png
 NSString * const AppIconTimeTable                   = @"AppIconsSchriftStundenplan.png";

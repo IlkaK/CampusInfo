@@ -39,17 +39,17 @@ extern NSString * const DateButtonBackground;
 extern NSString * const NoConnectionButtonBackground;
 
 
+extern NSString * const TimeTableAcronym;
+
+// time table error
+extern  NSString * const TimeTableCourseError;
+extern NSString * const TimeTableTeacherError;
+extern NSString * const TimeTableRoomError;
+extern NSString * const TimeTableClassError;
+extern NSString * const TimeTableStudentError;
 
 
-// strings for settings
-extern NSString * const TimeTableTypeStudent     ;
-extern NSString * const TimeTableTypeDozent      ;
-extern NSString * const TimeTableTypeDozentPlural;
-extern NSString * const TimeTableTypeKurs        ;
-extern NSString * const TimeTableTypeRaum        ;
-extern NSString * const TimeTableTypeKlasse      ;
-extern NSString * const TimeTableTypeKlassePlural;
-
+// time table types
 extern NSString * const TimeTableTypeStudentEnglish ;
 extern NSString * const TimeTableTypeStudentEnglishPlural;
 extern NSString * const TimeTableTypeLecturerEnglishPlural;
@@ -61,17 +61,15 @@ extern NSString * const TimeTableTypeRoomEnglishPlural  ;
 extern NSString * const TimeTableTypeClassEnglishPlural;
 extern NSString * const TimeTableTypeClassEnglish;
 
-extern NSString * const TimeTableDescription;
 
-extern NSString * const SettingsVCTitle;
+// settings
 extern NSString * const SettingsVCSearchType;
 extern NSString * const SettingsVCSearchText;
 
-extern NSString * const SearchVCTitle;
-extern NSString * const SearchVCHint;
 
-// store acronym for own time table
-extern NSString * const TimeTableAcronym;
+// strings for mensa
+extern NSString * const MensaTypeCafeteria;
+extern NSString * const MensaTypeCanteen;
 
 
 // strings for contactc
@@ -180,32 +178,16 @@ extern NSString * const PublicTransportVCToEnglish;
 extern NSString * const NewsWebViewHtml;
 extern NSString * const NewsWebViewFont;
 
-// time table
-extern NSString * const TimeTableOverVCTitle;
-
-// mensa
-extern NSString * const MensaVCTitle;
-extern NSString * const MensaClosed;
-
-// choose date
-extern NSString * const ChooseDateVCTitle;
 
 
 // language translation
 extern NSString * const MondayEnglish ;
-extern NSString * const MondayGerman  ;
 extern NSString * const TuesdayEnglish;
-extern NSString * const TuesdayGerman  ;
 extern NSString * const WednesdayEnglish ;
-extern NSString * const WednesdayGerman  ;
 extern NSString * const ThursdayEnglish ;
-extern NSString * const ThursdayGerman  ;
 extern NSString * const FridayEnglish ;
-extern NSString * const FridayGerman  ;
 extern NSString * const SaturdayEnglish ;
-extern NSString * const SaturdayGerman  ;
 extern NSString * const SundayEnglish ;
-extern NSString * const SundayGerman  ;
 
 // menu overview png
 extern NSString * const AppIconTimeTable;

@@ -11,12 +11,12 @@
  * <ul>
  * <li> Responsibilities:
  *   <ul>
- *      <li> Provides methods to transfer specific strings from English to German and vice versa. </li>
+ *      <li> Provides methods to transfer specific strings from English to display language and vice versa. </li>
  *  </ul>
  * </li>
  * <li> Receiving data:
  *   <ul>
- *      <li> Receives strings to transfer to English/German. </li>
+ *      <li> Receives strings to transfer to English/display language. </li>
  *   </ul>
  * </li>
  *
@@ -35,32 +35,32 @@
 @implementation LanguageTranslation
 
 /*!
- @function getGermanTypeTranslation
- Transfers the acronym type from English to German.
+ @function getDisplayLanguageTypeTranslation
+ Transfers the acronym type from English to display language.
  @param acronymType
  */
-- (NSString *)getGermanTypeTranslation:(NSString*)acronymType
+- (NSString *)getDisplayLanguageTypeTranslation:(NSString*)acronymType
 {
     NSString *_localTranslation;
     if ([acronymType isEqualToString:TimeTableTypeClassEnglishPlural])
     {
-        _localTranslation = TimeTableTypeKlasse;
+        _localTranslation = NSLocalizedString(@"TimeTableTypeClass", nil);
     }
     if ([acronymType isEqualToString:TimeTableTypeStudentEnglishPlural])
     {
-        _localTranslation = TimeTableTypeStudent;
+        _localTranslation = NSLocalizedString(@"TimeTableTypeStudent", nil);
     }
     if ([acronymType isEqualToString:TimeTableTypeRoomEnglishPlural])
     {
-        _localTranslation = TimeTableTypeRaum;
+        _localTranslation = NSLocalizedString(@"TimeTableTypeRoom", nil);
     }
     if ([acronymType isEqualToString:TimeTableTypeLecturerEnglishPlural])
     {
-        _localTranslation = TimeTableTypeDozent;
+        _localTranslation = NSLocalizedString(@"TimeTableTypeTeacher", nil);
     }
     if ([acronymType isEqualToString:TimeTableTypeCourseEnglishPlural])
     {
-        _localTranslation = TimeTableTypeKurs;
+        _localTranslation = NSLocalizedString(@"TimeTableTypeCourse", nil);
     }
     return _localTranslation;
 }
@@ -73,23 +73,23 @@
 - (NSString *)getEnglishTypeTranslation:(NSString*)acronymType
 {
     NSString *_localTranslation;
-    if ([acronymType isEqualToString:TimeTableTypeKlasse])
+    if ([acronymType isEqualToString:NSLocalizedString(@"TimeTableTypeClass", nil)])
     {
         _localTranslation = TimeTableTypeClassEnglishPlural;
     }
-    if ([acronymType isEqualToString:TimeTableTypeStudent])
+    if ([acronymType isEqualToString:NSLocalizedString(@"TimeTableTypeStudent", nil)])
     {
         _localTranslation = TimeTableTypeStudentEnglishPlural;
     }
-    if ([acronymType isEqualToString:TimeTableTypeRaum])
+    if ([acronymType isEqualToString:NSLocalizedString(@"TimeTableTypeRoom", nil)])
     {
         _localTranslation = TimeTableTypeRoomEnglishPlural;
     }
-    if ([acronymType isEqualToString:TimeTableTypeDozent])
+    if ([acronymType isEqualToString:NSLocalizedString(@"TimeTableTypeTeacher", nil)])
     {
         _localTranslation = TimeTableTypeLecturerEnglishPlural;
     }
-    if ([acronymType isEqualToString:TimeTableTypeKurs])
+    if ([acronymType isEqualToString:NSLocalizedString(@"TimeTableTypeCourse", nil)])
     {
         _localTranslation = TimeTableTypeCourseEnglishPlural;
     }
@@ -97,90 +97,90 @@
 }
 
 /*!
- @function getGermanErrorMessageTranslation
- Transfers the given error message into German.
+ @function getDisplayLanguageErrorMessageTranslation
+ Transfers the given error message into display language.
  @param errorMessage
  */
-- (NSString *)getGermanErrorMessageTranslation:(NSString *)errorMessage
+- (NSString *)getDisplayLanguageErrorMessageTranslation:(NSString *)errorMessage
 {
     NSString *_localTranslation = @"";
-    if ([errorMessage isEqualToString:@"Schedule for given course name could not be found."])
+    if ([errorMessage isEqualToString:TimeTableCourseError])
     {
-        _localTranslation = @"Der Stundenplan für den gesuchten Kurs konnte nicht gefunden werden. Bitte Schreibweise beachten (z.B. t.MARI-V) und kein Datum wählen, welches zu weit in der Zukunft oder in der Vergangenheit liegt.";
+        _localTranslation = NSLocalizedString(@"TimeTableOverVCCourseError", nil);
     }
-    if ([errorMessage isEqualToString:@"Schedule for given lecturer id could not be found."])
+    if ([errorMessage isEqualToString:TimeTableTeacherError])
     {
-        _localTranslation = @"Der Stundenplan für den gesuchten Dozenten konnte nicht gefunden werden. Bitte Schreibweise beachten (z.B. huhp, rege) und kein Datum wählen, welches zu weit in der Zukunft oder in der Vergangenheit liegt.";
+        _localTranslation = NSLocalizedString(@"TimeTableOverVCTeacherError", nil);
     }
-    if ([errorMessage isEqualToString:@"Schedule for given room name could not be found."])
+    if ([errorMessage isEqualToString:TimeTableRoomError])
     {
-        _localTranslation = @"Der Stundenplan für den gesuchten Raum konnte nicht gefunden werden. Bitte Schreibweise beachten (z.B. te 223, th 344) und kein Datum wählen, welches zu weit in der Zukunft oder in der Vergangenheit liegt.";
+        _localTranslation = NSLocalizedString(@"TimeTableOverVCRoomError", nil);
     }
-    if ([errorMessage isEqualToString:@"Schedule for given school class could not be found."])
+    if ([errorMessage isEqualToString:TimeTableClassError])
     {
-        _localTranslation = @"Der Stundenplan für die gesuchte Klasse konnte nicht gefunden werden. Bitte Schreibweise beachten (z.B. T_WI11a.BA) und kein Datum wählen, welches zu weit in der Zukunft oder in der Vergangenheit liegt.";
+        _localTranslation = NSLocalizedString(@"TimeTableOverVCClassError", nil);
     }
-    if ([errorMessage isEqualToString:@"Schedule for given students id could not be found."])
+    if ([errorMessage isEqualToString:TimeTableStudentError])
     {
-        _localTranslation = @"Der Stundenplan für den gesuchten Studenten konnte nicht gefunden werden. Bitte Schreibweise beachten und kein Datum wählen, welches zu weit in der Zukunft oder in der Vergangenheit liegt.";
+        _localTranslation = NSLocalizedString(@"TimeTableOverVCStudentIdError", nil);
     }
     return _localTranslation;
 }
 
 /*!
- @function getGermanGastronomyTypeTranslation
- Transfers the given gastronomy type into German.
+ @function getDisplayLanguageGastronomyTypeTranslation
+ Transfers the given gastronomy type into display language.
  @param gastronomyType
  */
-- (NSString *)getGermanGastronomyTypeTranslation:(NSString*)gastronomyType
+- (NSString *)getDisplayLanguageGastronomyTypeTranslation:(NSString*)gastronomyType
 {
     NSString *_localTranslation;
-    if ([gastronomyType isEqualToString:@"Cafeteria"])
+    if ([gastronomyType isEqualToString:MensaTypeCafeteria])
     {
-        _localTranslation = @"Cafeteria";
+        _localTranslation = NSLocalizedString(@"MensaVCTypeMensa", nil);
     }
-    if ([gastronomyType isEqualToString:@"Canteen"])
+    if ([gastronomyType isEqualToString:MensaTypeCanteen])
     {
-        _localTranslation = @"Mensa";
+        _localTranslation = NSLocalizedString(@"MensaVCTypeCafeteria", nil);
     }
     return _localTranslation;
 }
 
 /*!
- @function getGermanWeekdayTranslation
- Transfers the given weekday into German.
+ @function getDisplayLanguageWeekdayTranslation
+ Transfers the given weekday into display language.
  @param englishWeekday
  */
--(NSString *)getGermanWeekdayTranslation:(NSString *)englishWeekday
+-(NSString *)getDisplayLanguageWeekdayTranslation:(NSString *)englishWeekday
 {
     NSString *_localTranslation;
     if ([englishWeekday isEqualToString:MondayEnglish])
     {
-        _localTranslation = MondayGerman;
+        _localTranslation = NSLocalizedString(@"Monday", nil);
     }
     if ([englishWeekday isEqualToString:TuesdayEnglish])
     {
-        _localTranslation = TuesdayGerman;
+        _localTranslation = NSLocalizedString(@"Tuesday", nil);
     }
     if ([englishWeekday isEqualToString:WednesdayEnglish])
     {
-        _localTranslation = WednesdayGerman;
+        _localTranslation = NSLocalizedString(@"Wednesday", nil);
     }
     if ([englishWeekday isEqualToString:ThursdayEnglish])
     {
-        _localTranslation = ThursdayGerman;
+        _localTranslation = NSLocalizedString(@"Thursday", nil);
     }
     if ([englishWeekday isEqualToString:FridayEnglish])
     {
-        _localTranslation = FridayGerman;
+        _localTranslation = NSLocalizedString(@"Friday", nil);
     }
     if ([englishWeekday isEqualToString:SaturdayEnglish])
     {
-        _localTranslation = SaturdayGerman;
+        _localTranslation = NSLocalizedString(@"Saturday", nil);
     }
     if ([englishWeekday isEqualToString:SundayEnglish])
     {
-        _localTranslation = SundayGerman;
+        _localTranslation = NSLocalizedString(@"Sunday", nil);
     }
     return _localTranslation;
 }

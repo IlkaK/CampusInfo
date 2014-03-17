@@ -184,7 +184,7 @@
     }
     else
     {
-        [self._timeTableSegmentedControl setTitle:@"Kürzel" forSegmentAtIndex:0];
+        [self._timeTableSegmentedControl setTitle:NSLocalizedString(@"TimeTableOverVCAcronym", nil) forSegmentAtIndex:0];
     }
     
     self._actualShownAcronymTrials = 1;
@@ -195,9 +195,10 @@
     self._actualDayDto             = [self getDayDto];
     
     //NSLog(@"2 showScheduleDetails acronym: %@", self._actualShownAcronymString);
-    _detailsVC._dayAndAcronymString = [NSString stringWithFormat:@"von %@ (%@)"
+    _detailsVC._dayAndAcronymString = [NSString stringWithFormat:@"%@ %@ (%@)"
+                                       ,NSLocalizedString(@"TimeTableOverVCFrom", nil)
                                        ,newAcronym //self._actualShownAcronymString
-                                       ,[_translator getGermanTypeTranslation:newAcronymType] //self._actualShownAcronymType]
+                                       ,[_translator getDisplayLanguageTypeTranslation:newAcronymType] //self._actualShownAcronymType]
                                        ];
     
     [_timeTable reloadData];
@@ -335,7 +336,7 @@
                             withAcronymType:self._ownStoredAcronymType
                             withAcronymText:[NSString stringWithFormat:@"von %@ (%@)"
                                              ,_ownStoredAcronymString
-                                             ,[_translator getGermanTypeTranslation:_ownStoredAcronymType]
+                                             ,[_translator getDisplayLanguageTypeTranslation:_ownStoredAcronymType]
                                              ]
              ];
         }
@@ -494,23 +495,25 @@
 
         if (_ownStoredAcronymString != nil)
         {
-            _acronymLabel.text          = [NSString stringWithFormat:@"von %@ (%@)"
+            _acronymLabel.text          = [NSString stringWithFormat:@"%@ %@ (%@)"
+                                           ,NSLocalizedString(@"TimeTableOverVCFrom", nil)
                                            ,_ownStoredAcronymString
-                                           ,[_translator getGermanTypeTranslation:_ownStoredAcronymType]
+                                           ,[_translator getDisplayLanguageTypeTranslation:_ownStoredAcronymType]
                                            ];
             [self._timeTableSegmentedControl setTitle:_ownStoredAcronymString forSegmentAtIndex:0];
         }
         else
         {
             _acronymLabel.text          = [NSString stringWithFormat:@""];
-            [self._timeTableSegmentedControl setTitle:@"Kürzel" forSegmentAtIndex:0];
+            [self._timeTableSegmentedControl setTitle:NSLocalizedString(@"TimeTableOverVCAcronym", nil) forSegmentAtIndex:0];
         }
         
         [self setNewScheduleWithAcronym:_ownStoredAcronymString
          withAcronymType:_ownStoredAcronymType
-         withAcronymText:[NSString stringWithFormat:@"von %@ (%@)"
+         withAcronymText:[NSString stringWithFormat:@"%@ %@ (%@)"
+                                         ,NSLocalizedString(@"TimeTableOverVCFrom", nil)
                                          ,_ownStoredAcronymString
-                                         ,[_translator getGermanTypeTranslation:_ownStoredAcronymType]
+                                         ,[_translator getDisplayLanguageTypeTranslation:_ownStoredAcronymType]
                                          ]
          ];
     
@@ -547,9 +550,10 @@
     //NSLog(@"setNewAcronym");
     [self setNewScheduleWithAcronym:newAcronym
                     withAcronymType:newAcronymType
-                    withAcronymText:[NSString stringWithFormat:@"von %@ (%@)"
+                    withAcronymText:[NSString stringWithFormat:@"%@ %@ (%@)"
+                                     ,NSLocalizedString(@"TimeTableOverVCFrom", nil)
                                      ,newAcronym
-                                     ,[_translator getGermanTypeTranslation:newAcronymType]
+                                     ,[_translator getDisplayLanguageTypeTranslation:newAcronymType]
                                      ]
      ];
 }
@@ -588,7 +592,7 @@
     [_titleNavigationLabel setTextColor:_zhawColor._zhawWhite];
     [_titleNavigationLabel setTextAlignment:NSTextAlignmentCenter];
     [_titleNavigationLabel setFont:[UIFont fontWithName:NavigationBarFont size:NavigationBarTitleSize]];
-    [_titleNavigationLabel setText:TimeTableOverVCTitle];
+    [_titleNavigationLabel setText:NSLocalizedString(@"TimeTableOverVCTitle", nil)];
     
     [[UINavigationBar appearance] setBackgroundImage:[UIImage imageNamed:NavigationBarBackground] forBarMetrics:UIBarMetricsDefault];
     
@@ -606,6 +610,8 @@
                                                           UITextAttributeFont: [UIFont fontWithName:NavigationBarFont size:NavigationBarDescriptionSize],
                                                           }
                                                forState:UIControlStateNormal];
+    [_timeTableSegmentedControl setTitle:NSLocalizedString(@"TimeTableOverVCToday", nil) forSegmentAtIndex:1];
+    [_timeTableSegmentedControl setTitle:NSLocalizedString(@"TimeTableOverVCSearch", nil) forSegmentAtIndex:2];
     
     // set activity indicator
     _waitForLoadingActivityIndicator.hidesWhenStopped = YES;
@@ -684,9 +690,11 @@
     [_noConnectionLabel setTextColor:_zhawColor._zhawFontGrey];
     [_noConnectionButton setTitleColor:_zhawColor._zhawWhite forState:UIControlStateNormal];
     [_noConnectionButton setBackgroundImage:[UIImage imageNamed:NoConnectionButtonBackground]  forState:UIControlStateNormal];
-     [self.view bringSubviewToFront:_noConnectionButton];
-     [self.view bringSubviewToFront:_noConnectionLabel];
-     
+    [self.view bringSubviewToFront:_noConnectionButton];
+    [self.view bringSubviewToFront:_noConnectionLabel];
+    [_noConnectionLabel setText:NSLocalizedString(@"noConnection", nil)];
+    [_noConnectionButton setTitle:NSLocalizedString(@"tryAgain", nil) forState:UIControlStateNormal];
+    
     // initialize swipe gestures
     _rightSwipe = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(dayBefore:)];
     [_rightSwipe setDirection:(UISwipeGestureRecognizerDirectionRight)];
@@ -731,7 +739,11 @@
     
     [self setNewScheduleWithAcronym:self._searchText
                     withAcronymType:[_translator getEnglishTypeTranslation:self._searchType]
-                    withAcronymText:[NSString stringWithFormat:@"von %@ (%@)",self._searchText, self._searchType]
+                    withAcronymText:[NSString stringWithFormat:@"%@ %@ (%@)"
+                                     ,NSLocalizedString(@"TimeTableOverVCFrom", nil)
+                                     ,self._searchText
+                                     , self._searchType
+                                     ]
      ];
 }
 
@@ -763,7 +775,7 @@
     }
     else
     {
-        [self._timeTableSegmentedControl setTitle:@"Kürzel" forSegmentAtIndex:0];
+        [self._timeTableSegmentedControl setTitle:NSLocalizedString(@"TimeTableOverVCAcronym", nil) forSegmentAtIndex:0];
     }
     
     
@@ -801,25 +813,27 @@
 
             if (_ownStoredAcronymString != nil)
             {
-                self._acronymLabel.text          = [NSString stringWithFormat:@"von %@ (%@)"
+                self._acronymLabel.text          = [NSString stringWithFormat:@"%@ %@ (%@)"
+                                                    ,NSLocalizedString(@"TimeTableOverVCFrom", nil)
                                                     ,self._actualShownAcronymString
-                                                    ,[_translator getGermanTypeTranslation:self._actualShownAcronymType]
+                                                    ,[_translator getDisplayLanguageTypeTranslation:self._actualShownAcronymType]
                                                     ];
                 [self._timeTableSegmentedControl setTitle:_ownStoredAcronymString forSegmentAtIndex:0];
             }
             else
             {
                 self._acronymLabel.text          = [NSString stringWithFormat:@""];
-                [self._timeTableSegmentedControl setTitle:@"Kürzel" forSegmentAtIndex:0];
+                [self._timeTableSegmentedControl setTitle:NSLocalizedString(@"TimeTableOverVCAcronym", nil) forSegmentAtIndex:0];
             }
             
             //self._schedule                 = [[ScheduleDto alloc] initWithAcronym:_actualShownAcronymString:_actualShownAcronymType:_actualDate];
             
             
             //NSLog(@"2 showScheduleDetails acronym: %@", self._actualShownAcronymString);
-            _detailsVC._dayAndAcronymString = [NSString stringWithFormat:@"von %@ (%@)"
+            _detailsVC._dayAndAcronymString = [NSString stringWithFormat:@"%@ %@ (%@)"
+                                               ,NSLocalizedString(@"TimeTableOverVCFrom", nil)
                                                ,self._actualShownAcronymString
-                                               ,[_translator getGermanTypeTranslation:self._actualShownAcronymType]
+                                               ,[_translator getDisplayLanguageTypeTranslation:self._actualShownAcronymType]
                                                ];
             
             if (_actualShownAcronymTrials < 20)
@@ -882,10 +896,10 @@
         //NSLog(@"viewDidLoad noch kein Kürzel für den Stundenplan");
         
         UIAlertView *_acronymAlertView = [[UIAlertView alloc]
-                                          initWithTitle:@"Stundenplan"
-                                          message:@"Bitte ein Kürzel in Suche oder Einstellungen eingeben."
+                                          initWithTitle:NSLocalizedString(@"TimeTableOverVCTitle", nil)
+                                          message:NSLocalizedString(@"TimeTableOverVCEnterAcronym", nil)
                                           delegate:self
-                                          cancelButtonTitle:@"OK"
+                                          cancelButtonTitle:NSLocalizedString(@"TimeTableOverVCOk", nil)
                                           otherButtonTitles:nil];
         
         [_acronymAlertView show];
@@ -927,13 +941,13 @@
             
             if (_ownStoredAcronymString != nil)
             {
-                _acronymLabel.text                   = [NSString stringWithFormat:@"von %@",_actualShownAcronymString];
+                _acronymLabel.text                   = [NSString stringWithFormat:@"%@ %@",NSLocalizedString(@"TimeTableOverVCFrom", nil),_actualShownAcronymString];
                 [self._timeTableSegmentedControl setTitle:_ownStoredAcronymString forSegmentAtIndex:0];
             }
             else
             {
                 _acronymLabel.text                   = [NSString stringWithFormat:@""];
-                [self._timeTableSegmentedControl setTitle:@"Kürzel" forSegmentAtIndex:0];
+                [self._timeTableSegmentedControl setTitle:NSLocalizedString(@"TimeTableOverVCAcronym", nil) forSegmentAtIndex:0];
             }
             
             NSUserDefaults *_acronymUserDefaults = [NSUserDefaults standardUserDefaults];
@@ -1079,9 +1093,10 @@
         //NSLog(@"showScheduleDetails date   : %@",[[self dayFormatter] stringFromDate:_actualDate]);
         //NSLog(@"1 showScheduleDetails acronym: %@", self._actualShownAcronymString);
     
-        _detailsVC._dayAndAcronymString = [NSString stringWithFormat:@"von %@ (%@)"
+        _detailsVC._dayAndAcronymString = [NSString stringWithFormat:@"%@ %@ (%@)"
+                                           ,NSLocalizedString(@"TimeTableOverVCFrom", nil)
                                            , self._actualShownAcronymString
-                                           ,[_translator getGermanTypeTranslation:self._actualShownAcronymType]
+                                           ,[_translator getDisplayLanguageTypeTranslation:self._actualShownAcronymType]
                                            ];
     
         NSString *_fromString           = [[_dateFormatter _timeFormatter] stringFromDate: _detailsVC._scheduleEvent._startTime];
@@ -1089,9 +1104,12 @@
         
         //NSLog(@"schedule event end time %@", _toString);
         
-        _detailsVC._timeString          = [NSString stringWithFormat:@"Modul für den %@ von %@ bis %@"
+        _detailsVC._timeString          = [NSString stringWithFormat:@"%@ %@ %@ %@ %@ %@" // "Modul for" date "from" timeA "to" timeB
+                                           ,NSLocalizedString(@"TimeTableOverVCModulFor", nil)
                                            ,[[_dateFormatter _dayFormatter] stringFromDate:_actualDate]
+                                           ,NSLocalizedString(@"TimeTableOverVCFrom", nil)
                                            ,_fromString
+                                           ,NSLocalizedString(@"TimeTableOverVCTo", nil)
                                            ,_toString];
         _detailsVC._timeLabel.text      = _detailsVC._timeString;
         
@@ -1127,7 +1145,10 @@
         // SET NEW ACRONYM WITH ACTUAL DATE
         [self setNewScheduleWithAcronym:_roomString
                         withAcronymType:@"rooms"
-                        withAcronymText:[NSString stringWithFormat:@"von %@ (Raum)",_roomString]
+                        withAcronymText:[NSString stringWithFormat:@"%@ %@ (%@)"
+                                         ,NSLocalizedString(@"TimeTableOverVCFrom", nil)
+                                         ,_roomString
+                                         ,NSLocalizedString(@"TimeTableOverVCRoom", nil)]
          ];
         //NSLog(@"new room schedule is set");
     }
@@ -1155,7 +1176,11 @@
         // SET NEW ACRONYM WITH ACTUAL DATE
         [self setNewScheduleWithAcronym:_courseString
                         withAcronymType:@"courses"
-                        withAcronymText:[NSString stringWithFormat:@"von %@ (Kurs)",_courseString]];
+                        withAcronymText:[NSString stringWithFormat:@"%@ %@ (%@)"
+                                         ,NSLocalizedString(@"TimeTableOverVCFrom", nil)
+                                         ,_courseString
+                                         ,NSLocalizedString(@"TimeTableOverVCCourse", nil)]
+         ];
     }
 }
 
@@ -1917,7 +1942,7 @@
     
     if (actualSelection == 0)
     {
-        _messageLabel.text = [_translator getGermanErrorMessageTranslation:errorMessage];
+        _messageLabel.text = [_translator getDisplayLanguageErrorMessageTranslation:errorMessage];
     }
     else
     {
@@ -3771,23 +3796,6 @@
     return 44;
 }
 
-
-/*!
- * @function didSelectRowAtIndexPath
- * The function supports row selection.
- */
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    //NSLog(@"didSelectRowAtIndexPath");
-    // Navigation logic may go here. Create and push another view controller.
-    /*
-     <#DetailViewController#> *detailViewController = [[<#DetailViewController#> alloc] initWithNibName:@"<#Nib name#>" bundle:nil];
-     // ...
-     // Pass the selected object to the new view controller.
-     [self.navigationController pushViewController:detailViewController animated:YES];
-     [detailViewController release];
-     */
-}
 
 
 @end

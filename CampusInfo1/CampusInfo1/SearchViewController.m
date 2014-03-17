@@ -79,9 +79,13 @@
     _zhawColor = [[ColorSelection alloc]init];
     
     self._searchTypeArray = [[NSArray alloc] initWithObjects:
-                         TimeTableTypeKurs, TimeTableTypeDozent, TimeTableTypeStudent,
-                         TimeTableTypeRaum, TimeTableTypeKlasse, nil];
-    _searchType = TimeTableTypeDozent;
+                             NSLocalizedString(@"TimeTableTypeCourse", nil)
+                            ,NSLocalizedString(@"TimeTableTypeTeacher", nil)
+                            ,NSLocalizedString(@"TimeTableTypeStudent", nil)
+                            ,NSLocalizedString(@"TimeTableTypeRoom", nil)
+                            ,NSLocalizedString(@"TimeTableTypeClass", nil)
+                             ,nil];
+    _searchType = NSLocalizedString(@"TimeTableTypeTeacher", nil);
     
     _students   = [[StudentsDto alloc]init];
     _lecturers  = [[LecturersDto alloc]init];
@@ -95,7 +99,7 @@
     UIBarButtonItem *_backButtonItem = [[UIBarButtonItem alloc] initWithTitle:LeftArrowSymbol style:UIBarButtonItemStyleBordered target:self action:@selector(moveBackToTimeTable:)];
     [_backButtonItem setTitleTextAttributes:@{NSForegroundColorAttributeName:_zhawColor._zhawWhite} forState:UIControlStateNormal];
     [_titleNavigationItem setLeftBarButtonItem :_backButtonItem animated :true];
-    [_titleNavigationItem setTitle:SearchVCTitle];
+    [_titleNavigationItem setTitle:NSLocalizedString(@"SearchVCTitle", nil)];
     [[UINavigationBar appearance] setTitleTextAttributes:@{
                                                            UITextAttributeTextColor: _zhawColor._zhawWhite,
                                                            UITextAttributeFont: [UIFont fontWithName:NavigationBarFont size:NavigationBarTitleSize],
@@ -111,6 +115,9 @@
                                                           UITextAttributeFont: [UIFont fontWithName:NavigationBarFont size:NavigationBarDescriptionSize],
                                                           }
                                                forState:UIControlStateNormal];
+    
+    [_searchSegmentedControl setTitle:NSLocalizedString(@"SearchVCStop", nil) forSegmentAtIndex:0];
+    [_searchSegmentedControl setTitle:NSLocalizedString(@"SearchVCChoose", nil) forSegmentAtIndex:1];
     
     // set picker view
     [_chooseSearchType selectRow:1 inComponent:0 animated:NO];
@@ -146,23 +153,23 @@
  */
 -(void)loadDataWithSearchType
 {
-    if ([_searchType isEqualToString:TimeTableTypeKurs])
+    if ([_searchType isEqualToString:NSLocalizedString(@"TimeTableTypeCourse", nil)])
     {
         [_courses getData];
     }
-    if ([_searchType isEqualToString:TimeTableTypeDozent])
+    if ([_searchType isEqualToString:NSLocalizedString(@"TimeTableTypeTeacher", nil)])
     {
         [_lecturers getData];
     }
-    if ([_searchType isEqualToString:TimeTableTypeStudent])
+    if ([_searchType isEqualToString:NSLocalizedString(@"TimeTableTypeStudent", nil)])
     {
         [_students getData];
     }
-    if ([_searchType isEqualToString:TimeTableTypeRaum])
+    if ([_searchType isEqualToString:NSLocalizedString(@"TimeTableTypeRoom", nil)])
     {
         [_rooms getData];
     }
-    if ([_searchType isEqualToString:TimeTableTypeKlasse])
+    if ([_searchType isEqualToString:NSLocalizedString(@"TimeTableTypeClass", nil)])
     {
         [_classes getData];
     }
@@ -174,23 +181,23 @@
  */
 -(void) setTableWithSearchType
 {
-    if ([_searchType isEqualToString:TimeTableTypeKurs])
+    if ([_searchType isEqualToString:NSLocalizedString(@"TimeTableTypeCourse", nil)])
     {
         _autocomplete._candidates = _courses._courseArray;
     }
-    if ([_searchType isEqualToString:TimeTableTypeDozent])
+    if ([_searchType isEqualToString:NSLocalizedString(@"TimeTableTypeTeacher", nil)])
     {
         _autocomplete._candidates = _lecturers._lecturerArray;
     }
-    if ([_searchType isEqualToString:TimeTableTypeStudent])
+    if ([_searchType isEqualToString:NSLocalizedString(@"TimeTableTypeStudent", nil)])
     {
         _autocomplete._candidates = _students._studentArray;
     }
-    if ([_searchType isEqualToString:TimeTableTypeRaum])
+    if ([_searchType isEqualToString:NSLocalizedString(@"TimeTableTypeRoom", nil)])
     {
         _autocomplete._candidates = _rooms._roomArray;
     }
-    if ([_searchType isEqualToString:TimeTableTypeKlasse])
+    if ([_searchType isEqualToString:NSLocalizedString(@"TimeTableTypeClass", nil)])
     {
         _autocomplete._candidates = _classes._classArray;
     }
@@ -382,8 +389,8 @@
         if (_searchTextField.text == nil || [_searchTextField.text length] == 0)
         {
             UIAlertView *_acronymAlertView = [[UIAlertView alloc]
-                                              initWithTitle:SearchVCTitle
-                                              message:SearchVCHint
+                                              initWithTitle:NSLocalizedString(@"SearchVCTitle", nil)
+                                              message:NSLocalizedString(@"SearchVCHint", nil)
                                               delegate:self
                                               cancelButtonTitle:NSLocalizedString(@"AlertViewOk", nil)
                                               otherButtonTitles:nil];
