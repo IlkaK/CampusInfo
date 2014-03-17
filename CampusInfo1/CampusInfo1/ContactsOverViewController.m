@@ -89,7 +89,7 @@
     UIBarButtonItem *_backButtonItem = [[UIBarButtonItem alloc] initWithTitle:LeftArrowSymbol style:UIBarButtonItemStyleBordered target:self action:@selector(moveBackToMenuOverview:)];
     [_backButtonItem setTitleTextAttributes:@{NSForegroundColorAttributeName:_zhawColor._zhawWhite} forState:UIControlStateNormal];
     [_titleNavigationItem setLeftBarButtonItem :_backButtonItem animated :true];
-    [_titleNavigationItem setTitle:ContactsOverVCTitle];
+    [_titleNavigationItem setTitle:NSLocalizedString(@"ContactsOverVCTitle", nil)];
     [[UINavigationBar appearance] setTitleTextAttributes:@{
                                                            UITextAttributeTextColor: _zhawColor._zhawWhite,
                                                            UITextAttributeFont: [UIFont fontWithName:NavigationBarFont size:NavigationBarTitleSize],
@@ -250,19 +250,19 @@
     
     if (_cellSelection == 0)
     {
-        cell.textLabel.text = ContactsVCTitle;
+        cell.textLabel.text = NSLocalizedString(@"ContactsVCTitle", nil);
     }
     if (_cellSelection == 1)
     {
-        cell.textLabel.text = EmergencyVCTitle;
+        cell.textLabel.text = NSLocalizedString(@"EmergencyVCTitle", nil);
     }
     if (_cellSelection == 2)
     {
-        cell.textLabel.text = ServiceDeskVCTitle;
+        cell.textLabel.text = NSLocalizedString(@"ServiceDeskVCTitle", nil);
     }
     if (_cellSelection == 3)
     {
-        cell.textLabel.text = InformationVCTitle;
+        cell.textLabel.text = NSLocalizedString(@"InformationVCTitle", nil);
     }
     
     return cell;

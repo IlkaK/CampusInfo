@@ -94,14 +94,14 @@
     [_titleLabel setTextColor:_zhawColor._zhawWhite];
     [_titleLabel setTextAlignment:NSTextAlignmentCenter];
     [_titleLabel setFont:[UIFont fontWithName:NavigationBarFont size:NavigationBarTitleSize]];
-    [_titleLabel setText:ContactsOverVCTitle];
+    [_titleLabel setText:NSLocalizedString(@"ContactsOverVCTitle", nil)];
     
     [[UINavigationBar appearance] setBackgroundImage:[UIImage imageNamed:NavigationBarBackground] forBarMetrics:UIBarMetricsDefault];
     
     [_descriptionLabel setTextColor:_zhawColor._zhawWhite];
     [_descriptionLabel setTextAlignment:NSTextAlignmentCenter];
     [_descriptionLabel setFont:[UIFont fontWithName:NavigationBarFont size:NavigationBarDescriptionSize]];
-    [_descriptionLabel setText: EmergencyVCTitle];
+    [_descriptionLabel setText: NSLocalizedString(@"EmergencyVCTitle", nil)];
 }
 
 /*!
@@ -148,44 +148,44 @@
     
     if(_cellSelection == 0 && _cellRow == 0)
     {
-        _callWhom = EmergencyVCDisplayTextPolice;
+        _callWhom = NSLocalizedString(@"EmergencyVCDisplayTextPolice", nil);
         _callNumber = EmergencyVCRealPhonePolice;
     }
     if(_cellSelection == 0 && _cellRow == 1)
     {
-        _callWhom = EmergencyVCDisplayTextFire;
+        _callWhom = NSLocalizedString(@"EmergencyVCDisplayTextFire", nil);
         _callNumber = EmergencyVCRealPhoneFire;
     }
     if(_cellSelection == 0 && _cellRow == 2)
     {
-        _callWhom = EmergencyVCDisplayTextSanitary;
+        _callWhom = NSLocalizedString(@"EmergencyVCDisplayTextSanitary", nil);
         _callNumber = EmergencyVCRealPhoneSanitary;
     }
     if(_cellSelection == 0 && _cellRow == 3)
     {
-        _callWhom = EmergencyVCDisplayTextToxCentre;
+        _callWhom = NSLocalizedString(@"EmergencyVCDisplayTextToxCentre", nil);
         _callNumber = EmergencyVCRealPhoneToxCentre;
     }
     if(_cellSelection == 0 && _cellRow == 4)
     {
-        _callWhom = EmergencyVCDisplayTextRega;
+        _callWhom = NSLocalizedString(@"EmergencyVCDisplayTextRega", nil);
         _callNumber = EmergencyVCRealPhoneRega;
     }
     if(_cellSelection == 1 && _cellRow == 0)
     {
-        _callWhom = EmergencyVCDisplayTextZHAWEmergency;
+        _callWhom = NSLocalizedString(@"EmergencyVCDisplayTextZHAWEmergency", nil);
         _callNumber = EmergencyVCRealPhoneZHAWEmergency;
     }
     
     NSString *_messageForCalling = [NSString stringWithFormat:@"%@ %@ (%@)?"
-                                    , _callWhom, ContactsVCMessageCall, _callNumber];
+                                    , _callWhom, NSLocalizedString(@"ContactsVCMessageCall", nil), _callNumber];
     
     UIAlertView *_acronymAlertView = [[UIAlertView alloc]
-                                      initWithTitle:EmergencyVCTitle
+                                      initWithTitle:NSLocalizedString(@"EmergencyVCTitle", nil)
                                       message:_messageForCalling
                                       delegate:self
-                                      cancelButtonTitle:AlertViewOk
-                                      otherButtonTitles:AlertViewCancel, nil];
+                                      cancelButtonTitle:NSLocalizedString(@"AlertViewOk", nil)
+                                      otherButtonTitles:NSLocalizedString(@"AlertViewCancel", nil), nil];
     _emergencyCallNumber = _callNumber;
     [_acronymAlertView show];
     // [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"tel://1456987452"]];
@@ -227,10 +227,10 @@
     switch (section)
     {
         case 0:
-            _sectionName = EmergencyVCSectionTitleAlarm;
+            _sectionName = NSLocalizedString(@"EmergencyVCSectionTitleAlarm", nil);
             break;
         default:
-            _sectionName = EmergencyVCSectionTitleInform;
+            _sectionName = NSLocalizedString(@"EmergencyVCSectionTitleInform", nil);
             break;
     }
     return _sectionName;
@@ -311,11 +311,11 @@
         }
         UILabel         *_labelDescription      = (UILabel *) [_cell viewWithTag:1];
         [_labelDescription setTextColor:_zhawColor._zhawFontGrey];        
-        _labelDescription.text = EmergencyVCDisplayTitleZHAWEmergency;
+        _labelDescription.text = NSLocalizedString(@"EmergencyVCDisplayTitleZHAWEmergency", nil);
 
         UILabel         *_labelAvailability     = (UILabel *) [_cell viewWithTag:2];
         [_labelAvailability setTextColor:_zhawColor._zhawFontGrey];
-        _labelAvailability.text = EmergencyVCDisplayZHAWEmergencyAvailability;
+        _labelAvailability.text = NSLocalizedString(@"EmergencyVCDisplayZHAWEmergencyAvailability", nil);
         
         _buttonNumber          = (UIButton *) [_cell viewWithTag:3];
         _buttonNumberTitle     = EmergencyVCDisplayPhoneZHAWEmergency;
@@ -337,27 +337,27 @@
         
         if (_cellRow == 0)
         {
-            _labelDescription.text = EmergencyVCDisplayTitlePolice;
+            _labelDescription.text = NSLocalizedString(@"EmergencyVCDisplayTitlePolice", nil);
             _buttonNumberTitle = EmergencyVCDisplayPhonePolice;
         }
         if (_cellRow == 1)
         {
-            _labelDescription.text = EmergencyVCDisplayTitleFire;
+            _labelDescription.text = NSLocalizedString(@"EmergencyVCDisplayTitleFire", nil);
             _buttonNumberTitle = EmergencyVCDisplayPhoneFire;
         }
         if (_cellRow == 2)
         {
-            _labelDescription.text = EmergencyVCDisplayTitleSanitary;
+            _labelDescription.text = NSLocalizedString(@"EmergencyVCDisplayTitleSanitary", nil);
             _buttonNumberTitle = EmergencyVCDisplayPhoneSanitary;
         }
         if (_cellRow == 3)
         {
-            _labelDescription.text = EmergencyVCDisplayTitleToxCentre;
+            _labelDescription.text = NSLocalizedString(@"EmergencyVCDisplayTitleToxCentre", nil);
             _buttonNumberTitle = EmergencyVCDisplayPhoneToxCentre;
         }
         if (_cellRow == 4)
         {
-            _labelDescription.text = EmergencyVCDisplayTitleRega;
+            _labelDescription.text = NSLocalizedString(@"EmergencyVCDisplayTitleRega", nil);
             _buttonNumberTitle = EmergencyVCDisplayPhoneRega;
         }
     }

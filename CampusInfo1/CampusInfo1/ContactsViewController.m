@@ -108,14 +108,14 @@
     [_titleLabel setTextColor:_zhawColor._zhawWhite];
     [_titleLabel setTextAlignment:NSTextAlignmentCenter];
     [_titleLabel setFont:[UIFont fontWithName:NavigationBarFont size:NavigationBarTitleSize]];
-    [_titleLabel setText:ContactsOverVCTitle];
+    [_titleLabel setText:NSLocalizedString(@"ContactsOverVCTitle", nil)];
     
     [[UINavigationBar appearance] setBackgroundImage:[UIImage imageNamed:NavigationBarBackground] forBarMetrics:UIBarMetricsDefault];
     
     [_descriptionLabel setTextColor:_zhawColor._zhawWhite];
     [_descriptionLabel setTextAlignment:NSTextAlignmentCenter];
     [_descriptionLabel setFont:[UIFont fontWithName:NavigationBarFont size:NavigationBarDescriptionSize]];
-    [_descriptionLabel setText: ContactsVCTitle];
+    [_descriptionLabel setText: NSLocalizedString(@"ContactsVCTitle", nil)];
 }
 
 
@@ -210,15 +210,15 @@
     }
     
     NSString *_messageForCalling = [NSString stringWithFormat:@"%@ %@?"
-                                    , ContactsVCMessageSendEmail
+                                    , NSLocalizedString(@"ContactsVCMessageSendEmail", nil)
                                     , _email];
     
     UIAlertView *_acronymAlertView = [[UIAlertView alloc]
-                                      initWithTitle:ContactsVCTitle
+                                      initWithTitle:NSLocalizedString(@"ContactsVCTitle", nil)
                                       message:_messageForCalling
                                       delegate:self
-                                      cancelButtonTitle:AlertViewOk
-                                      otherButtonTitles:AlertViewCancel, nil];
+                                      cancelButtonTitle:NSLocalizedString(@"AlertViewOk", nil)
+                                      otherButtonTitles:NSLocalizedString(@"AlertViewCancel", nil), nil];
     _currentEmail       = _email;
     _currentPhoneNumber = nil;
     [_acronymAlertView show];
@@ -336,14 +336,14 @@
     }
     
     NSString *_messageForCalling = [NSString stringWithFormat:@"%@ %@ (%@)?"
-                                    , _callWhom, ContactsVCMessageCall, _callNumber];
+                                    , _callWhom, NSLocalizedString(@"ContactsVCMessageCall", nil), _callNumber];
     
     UIAlertView *_acronymAlertView = [[UIAlertView alloc]
-                                      initWithTitle:ContactsVCTitle
+                                      initWithTitle:NSLocalizedString(@"ContactsVCTitle", nil)
                                       message:_messageForCalling
                                       delegate:self
-                                      cancelButtonTitle:AlertViewOk
-                                      otherButtonTitles:AlertViewCancel, nil];
+                                      cancelButtonTitle:NSLocalizedString(@"AlertViewOk", nil)
+                                      otherButtonTitles:NSLocalizedString(@"AlertViewCancel", nil), nil];
     _currentEmail       = nil;
     _currentPhoneNumber = _callNumber;
     [_acronymAlertView show];
@@ -360,13 +360,13 @@
     switch (section)
     {
         case 0:
-            _sectionName = ContactsVCTitleBachelorSecretary;
+            _sectionName = NSLocalizedString(@"ContactsVCTitleBachelorSecretary", nil);
             break;
         case 1:
-            _sectionName = ContactsVCTitleMasterSecretary;
+            _sectionName = NSLocalizedString(@"ContactsVCTitleMasterSecretary", nil);
             break;
         default:
-            _sectionName = ContactsVCTitleContinuedEducationSecretary;
+            _sectionName = NSLocalizedString(@"ContactsVCTitleContinuedEducationSecretary", nil);
             break;
     }
     return _sectionName;
@@ -451,86 +451,86 @@
 
         if(_cellSelection == 0 && _cellRow == 0)
         {
-            _labelTitle.text = ContactsVCTitleAviatik;
+            _labelTitle.text = NSLocalizedString(@"ContactsVCTitleAviatik", nil);
             _labelPerson.text = ContactsVCResponsibleAviatik;
             _numberButtonTitle = ContactsVCDisplayPhoneAviatik;
         }
         if(_cellSelection == 0 && _cellRow == 1)
         {
-            _labelTitle.text = ContactsVCTitleElectricalEngineering;
+            _labelTitle.text = NSLocalizedString(@"ContactsVCTitleElectricalEngineering", nil);
             _labelPerson.text = ContactsVCResponsibleElectricalEngineering;
             _numberButtonTitle = ContactsVCDisplayPhoneElectricalEngineering;
         }
         if(_cellSelection == 0 && _cellRow == 2)
         {
-            _labelTitle.text = ContactsVCTitleEnvironmentEngineering;
+            _labelTitle.text = NSLocalizedString(@"ContactsVCTitleEnvironmentEngineering", nil);
             _labelPerson.text = ContactsVCResponsibleEnvironmentEngineering;
             _numberButtonTitle = ContactsVCDisplayPhoneEnvironmentEngineering;
         }
         if(_cellSelection == 0 && _cellRow == 3)
         {
-            _labelTitle.text = ContactsVCTitleComputerScienceWinterthur;
+            _labelTitle.text = NSLocalizedString(@"ContactsVCTitleComputerScienceWinterthur", nil);
             _labelPerson.text = ContactsVCResponsibleComputerScienceWinterthur;
             _numberButtonTitle = ContactsVCDisplayPhoneComputerScienceWinterthur;
         }
         if(_cellSelection == 0 && _cellRow == 4)
         {
-            _labelTitle.text = ContactsVCTitleComputerScienceZurich;
+            _labelTitle.text = NSLocalizedString(@"ContactsVCTitleComputerScienceZurich", nil);
             _labelPerson.text = ContactsVCResponsibleComputerScienceZurich;
             _numberButtonTitle = ContactsVCDisplayPhoneComputerScienceZurich;
         }
         if(_cellSelection == 0 && _cellRow == 5)
         {
-            _labelTitle.text = ContactsVCTitleMechanicalEngineering;
+            _labelTitle.text = NSLocalizedString(@"ContactsVCTitleMechanicalEngineering", nil);
             _labelPerson.text = ContactsVCResponsibleMechanicalEngineering;
             _numberButtonTitle = ContactsVCDisplayPhoneMechanicalEngineering;
         }
         if(_cellSelection == 0 && _cellRow == 6)
         {
-            _labelTitle.text = ContactsVCTitleChemicalEngineering;
+            _labelTitle.text = NSLocalizedString(@"ContactsVCTitleChemicalEngineering", nil);
             _labelPerson.text = ContactsVCResponsibleChemicalEngineering;
             _numberButtonTitle = ContactsVCDisplayPhoneChemicalEngineering;
         }
         if(_cellSelection == 0 && _cellRow == 7)
         {
-            _labelTitle.text = ContactsVCTitleSystemEngineering;
+            _labelTitle.text = NSLocalizedString(@"ContactsVCTitleSystemEngineering", nil);
             _labelPerson.text = ContactsVCResponsibleSystemEngineering;
             _numberButtonTitle = ContactsVCDisplayPhoneSystemEngineering;
         }
         if(_cellSelection == 0 && _cellRow == 8)
         {
-            _labelTitle.text = ContactsVCTitleTrafficEngineering;
+            _labelTitle.text = NSLocalizedString(@"ContactsVCTitleTrafficEngineering", nil);
             _labelPerson.text = ContactsVCResponsibleTrafficEngineering;
             _numberButtonTitle = ContactsVCDisplayPhoneTrafficEngineering;
         }
         if(_cellSelection == 0 && _cellRow == 9)
         {
-            _labelTitle.text = ContactsVCTitleBusinessEngineering;
+            _labelTitle.text = NSLocalizedString(@"ContactsVCTitleBusinessEngineering", nil);
             _labelPerson.text = ContactsVCResponsibleBusinessEngineering;
             _numberButtonTitle = ContactsVCDisplayPhoneBusinessEngineering;
         }
         
         if(_cellSelection == 1 && _cellRow == 0)
         {
-            _labelTitle.text = ContactsVCTitleMaster;
+            _labelTitle.text = NSLocalizedString(@"ContactsVCTitleMaster", nil);
             _labelPerson.text = ContactsVCResponsibleMaster;
             _numberButtonTitle = ContactsVCDisplayPhoneMaster;
         }
         if(_cellSelection == 2 && _cellRow == 0)
         {
-            _labelTitle.text = ContactsVCTitleContinuedEducation;
+            _labelTitle.text = NSLocalizedString(@"ContactsVCTitleContinuedEducation", nil);
             _labelPerson.text = ContactsVCResponsible0ContinuedEducation;
             _numberButtonTitle = ContactsVCDisplayPhone0ContinuedEducation;
         }
         if(_cellSelection == 2 && _cellRow == 1)
         {
-            _labelTitle.text = ContactsVCTitleContinuedEducation;
+            _labelTitle.text = NSLocalizedString(@"ContactsVCTitleContinuedEducation", nil);
             _labelPerson.text = ContactsVCResponsible1ContinuedEducation;
             _numberButtonTitle = ContactsVCDisplayPhone1ContinuedEducation;
         }
         if(_cellSelection == 2 && _cellRow == 2)
         {
-            _labelTitle.text = ContactsVCTitleContinuedEducation;
+            _labelTitle.text = NSLocalizedString(@"ContactsVCTitleContinuedEducation", nil);
             _labelPerson.text = ContactsVCResponsible2ContinuedEducation;
             _numberButtonTitle = ContactsVCDisplayPhone2ContinuedEducation;
         }
@@ -569,25 +569,25 @@
 
         if(_cellSelection == 0 && _cellRow == 10)
         {
-            _labelTitle.text    = ContactsVCSectionTitleEngineering;
+            _labelTitle.text    = NSLocalizedString(@"ContactsVCSectionTitleEngineering", nil);
             _emailButtonTitle   = ContactsVCDisplayEmailEngineering;
         }
         
         if(_cellSelection == 0 && _cellRow == 11)
         {
-            _labelTitle.text    = ContactsVCSectionTitleZurichEngineering;
+            _labelTitle.text    = NSLocalizedString(@"ContactsVCSectionTitleZurichEngineering", nil);
             _emailButtonTitle   = ContactsVCDisplayEmailZurichEngineering;
         }
         
         if(_cellSelection == 1 && _cellRow == 1)
         {
-            _labelTitle.text    = ContactsVCSectionTitleMaster;
+            _labelTitle.text    = NSLocalizedString(@"ContactsVCSectionTitleMaster", nil);
             _emailButtonTitle   = ContactsVCDisplayEmailMaster;
         }
         
         if(_cellSelection == 2 && _cellRow == 3)
         {
-            _labelTitle.text    = ContactsVCSectionTitleContinuedEducation;
+            _labelTitle.text    = NSLocalizedString(@"ContactsVCSectionTitleContinuedEducation", nil);
             _emailButtonTitle   = ContactsVCDisplayEmailContinuedEducation;
         }
             

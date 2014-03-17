@@ -682,7 +682,7 @@
                                           initWithTitle:NSLocalizedString(@"PublicTransportVCTitle", nil)
                                         message:NSLocalizedString(@"PublicTransportVCHint", nil)
                                           delegate:self
-                                          cancelButtonTitle:AlertViewOk
+                                          cancelButtonTitle:NSLocalizedString(@"AlertViewOk", nil)
                                           otherButtonTitles:nil];
         [_acronymAlertView show];
     }

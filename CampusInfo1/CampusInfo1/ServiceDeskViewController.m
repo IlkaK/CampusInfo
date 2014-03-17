@@ -95,14 +95,14 @@
     [_titleLabel setTextColor:_zhawColor._zhawWhite];
     [_titleLabel setTextAlignment:NSTextAlignmentCenter];
     [_titleLabel setFont:[UIFont fontWithName:NavigationBarFont size:NavigationBarTitleSize]];
-    [_titleLabel setText:ContactsOverVCTitle];
+    [_titleLabel setText:NSLocalizedString(@"ContactsOverVCTitle", nil)];
     
     [[UINavigationBar appearance] setBackgroundImage:[UIImage imageNamed:NavigationBarBackground] forBarMetrics:UIBarMetricsDefault];
     
     [_descriptionLabel setTextColor:_zhawColor._zhawWhite];
     [_descriptionLabel setTextAlignment:NSTextAlignmentCenter];
     [_descriptionLabel setFont:[UIFont fontWithName:NavigationBarFont size:NavigationBarDescriptionSize]];
-    [_descriptionLabel setText: ServiceDeskVCTitle];
+    [_descriptionLabel setText: NSLocalizedString(@"ServiceDeskVCTitle", nil)];
 }
 
 /*!
@@ -173,14 +173,14 @@
 {
     NSString *_email = ServiceDeskVCRealEmail;
     NSString *_messageForCalling = [NSString stringWithFormat:@"%@ %@?"
-                                    ,ContactsVCMessageSendEmail, _email];
+                                    ,NSLocalizedString(@"ContactsVCMessageSendEmail", nil), _email];
     
     UIAlertView *_acronymAlertView = [[UIAlertView alloc]
-                                      initWithTitle:ContactsVCTitle
+                                      initWithTitle:NSLocalizedString(@"ContactsVCTitle", nil)
                                       message:_messageForCalling
                                       delegate:self
-                                      cancelButtonTitle:AlertViewOk
-                                      otherButtonTitles:AlertViewCancel, nil];
+                                      cancelButtonTitle:NSLocalizedString(@"AlertViewOk", nil)
+                                      otherButtonTitles:NSLocalizedString(@"AlertViewCancel", nil), nil];
     _currentEmail       = _email;
     _currentPhoneNumber = nil;
     [_acronymAlertView show];
@@ -192,18 +192,18 @@
  */
 -(void) callGivenNumber:(id)sender event:(id)event
 {
-    NSString        *_callWhom      = ServiceDeskVCTitle;
+    NSString        *_callWhom      = NSLocalizedString(@"ServiceDeskVCTitle", nil);
     NSString        *_callNumber    = ServiceDeskVCRealPhone;
     
     NSString *_messageForCalling = [NSString stringWithFormat:@"%@ %@ (%@)?"
-                                    , _callWhom, ContactsVCMessageCall , _callNumber];
+                                    , _callWhom, NSLocalizedString(@"ContactsVCMessageCall", nil) , _callNumber];
     
     UIAlertView *_acronymAlertView = [[UIAlertView alloc]
-                                      initWithTitle:ServiceDeskVCTitle
+                                      initWithTitle:NSLocalizedString(@"ServiceDeskVCTitle", nil)
                                       message:_messageForCalling
                                       delegate:self
-                                      cancelButtonTitle:AlertViewOk
-                                      otherButtonTitles:AlertViewCancel, nil];
+                                      cancelButtonTitle:NSLocalizedString(@"AlertViewOk", nil)
+                                      otherButtonTitles:NSLocalizedString(@"AlertViewCancel", nil), nil];
     _currentEmail       = nil;
     _currentPhoneNumber = _callNumber;
     [_acronymAlertView show];
@@ -258,13 +258,13 @@
     
     if (_cellRow == 0)
     {
-        _labelTitle.text    = ServiceDeskVCDescriptionEmail;
+        _labelTitle.text    = [NSString stringWithFormat:@"%@:", NSLocalizedString(@"ServiceDeskVCDescriptionEmail", nil)];
         _buttonNumberTitle  = ServiceDeskVCDisplayEmail;
         [_actionButton addTarget:self action:@selector(sendEmailToGivenAdress  :event:) forControlEvents:UIControlEventTouchUpInside];
     }
     if (_cellRow == 1)
     {
-        _labelTitle.text    = ServiceDeskVCDescriptionPhone;
+        _labelTitle.text    = [NSString stringWithFormat:@"%@:",NSLocalizedString(@"ServiceDeskVCDescriptionPhone", nil)];
         _buttonNumberTitle  = ServiceDeskVCDisplayPhone;
         [_actionButton addTarget:self action:@selector(callGivenNumber  :event:) forControlEvents:UIControlEventTouchUpInside];
     }

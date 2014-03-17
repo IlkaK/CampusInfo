@@ -7,8 +7,12 @@
 */
 
 // general
-"noConnection" = "keine Verbindung";
-"tryAgain" = "erneut versuchen";
+"noConnection"  = "keine Verbindung";
+"tryAgain"      = "erneut versuchen";
+
+"AlertViewOk"       = "OK";
+"AlertViewCancel"   = "Cancel";
+
 
 // social media
 "SocialMediaVCTitle"         = "Social Media";
@@ -67,3 +71,74 @@
 // news
 "NewsVCTitle"        = "News - School of Engineering";
 "NewsDetailVCTitle"  = "News";
+
+
+// contacts
+"ContactsOverVCTitle"    = "Kontakte";
+"ContactsVCTitle"        = "Sekretariate";
+"EmergencyVCTitle"       = "Notfall";
+"ServiceDeskVCTitle"     = "Service Desk";
+"InformationVCTitle"     = "Infos zur App";
+
+"ContactsVCMessageSendEmail"    = "Sende E-mail an";
+"ContactsVCMessageCall"         = "anrufen";
+
+// info contact
+"InformationVCRealisation"      = "Realisierung";
+"InformationVCContact"          = "Kontakt";
+
+// service desk
+"ServiceDeskVCDescriptionEmail"  = "Email";
+"ServiceDeskVCDescriptionPhone"  = "Tel.";
+
+// contacts secretaries
+"ContactsVCTitleBachelorSecretary"              = "Bachelorsekretariat";
+"ContactsVCTitleMasterSecretary"                = "Mastersekretariat";
+"ContactsVCTitleContinuedEducationSecretary"    = "Weiterbildungssekretariat";
+
+"ContactsVCTitleAviatik"                        = "Aviatik";
+"ContactsVCTitleElectricalEngineering"          = "Elektrotechnik";
+"ContactsVCTitleEnvironmentEngineering"         = "Energie- und Umwelttechnik";
+"ContactsVCTitleComputerScienceWinterthur"      = "Informatik Standort Winterthur";
+"ContactsVCTitleComputerScienceZurich"          = "Informatik Standort Zürich";
+"ContactsVCTitleMechanicalEngineering"          = "Allgemeine Maschinentechnik";
+"ContactsVCTitleChemicalEngineering"            = "Material- und Verfahrenstechnik";
+"ContactsVCTitleSystemEngineering"              = "Systemtechnik";
+"ContactsVCTitleTrafficEngineering"             = "Verkehrssysteme";
+"ContactsVCTitleBusinessEngineering"            = "Wirtschaftsingenieurwesen";
+"ContactsVCTitleMaster"                         = "Master of Science in Engineering";
+"ContactsVCTitleContinuedEducation"             = "Weiterbildung (MAS, CAS, DAS und WBK)";
+
+"ContactsVCSectionTitleEngineering"             = "Standort Winterthur";
+"ContactsVCSectionTitleZurichEngineering"       = "Standort Zürich";
+"ContactsVCSectionTitleMaster"                  = "Masterstudiengang";
+"ContactsVCSectionTitleContinuedEducation"      = "Weiterbildung";
+
+// emergency
+"EmergencyVCSectionTitleAlarm"                  = "1. Alarmieren > wenn nötig";
+"EmergencyVCSectionTitleInform"                 = "2. Informieren > immer";
+
+"EmergencyVCDisplayTitleZHAWEmergency"          = "ZHAW-Notfallnummer";
+"EmergencyVCDisplayTextZHAWEmergency"           = "Die ZHAW-Notfallnummer";
+"EmergencyVCDisplayZHAWEmergencyAvailability"   = "(365 Tage/24 Stunden)";
+
+"EmergencyVCDisplayTitlePolice"                 = "Polizei";
+"EmergencyVCDisplayTextPolice"                  = "Die Polizei";
+
+"EmergencyVCDisplayTitleFire"                   = "Feuerwehr";
+"EmergencyVCDisplayTextFire"                    = "Die Feuerwehr";
+
+"EmergencyVCDisplayTitleSanitary"               = "Sanität";
+"EmergencyVCDisplayTextSanitary"                = "Die Sanität";
+
+"EmergencyVCDisplayTitleToxCentre"              = "Tox-Zentrum";
+"EmergencyVCDisplayTextToxCentre"               = "Das Tox-Zentrum";
+
+"EmergencyVCDisplayTitleRega"                   = "REGA";
+"EmergencyVCDisplayTextRega"                    = "Die REGA";
+
+
+
+
+
+

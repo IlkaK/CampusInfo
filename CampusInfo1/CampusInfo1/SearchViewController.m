@@ -385,7 +385,7 @@
                                               initWithTitle:SearchVCTitle
                                               message:SearchVCHint
                                               delegate:self
-                                              cancelButtonTitle:AlertViewOk
+                                              cancelButtonTitle:NSLocalizedString(@"AlertViewOk", nil)
                                               otherButtonTitles:nil];
             
             [_acronymAlertView show];

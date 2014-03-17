@@ -96,14 +96,14 @@
     [_titleLabel setTextColor:_zhawColor._zhawWhite];
     [_titleLabel setTextAlignment:NSTextAlignmentCenter];
     [_titleLabel setFont:[UIFont fontWithName:NavigationBarFont size:NavigationBarTitleSize]];
-    [_titleLabel setText:ContactsOverVCTitle];
+    [_titleLabel setText:NSLocalizedString(@"ContactsOverVCTitle", nil)];
     
     [[UINavigationBar appearance] setBackgroundImage:[UIImage imageNamed:NavigationBarBackground] forBarMetrics:UIBarMetricsDefault];
     
     [_descriptionLabel setTextColor:_zhawColor._zhawWhite];
     [_descriptionLabel setTextAlignment:NSTextAlignmentCenter];
     [_descriptionLabel setFont:[UIFont fontWithName:NavigationBarFont size:NavigationBarDescriptionSize]];
-    [_descriptionLabel setText: InformationVCTitle];
+    [_descriptionLabel setText: NSLocalizedString(@"InformationVCTitle", nil)];
 }
 
 /*!
@@ -169,14 +169,14 @@
 {
     NSString *_email = InformationVCRealEmail;
     NSString *_messageForCalling = [NSString stringWithFormat:@"%@ %@?"
-                                    ,ContactsVCMessageSendEmail, _email];
+                                    ,NSLocalizedString(@"ContactsVCMessageSendEmail", nil), _email];
     
     UIAlertView *_acronymAlertView = [[UIAlertView alloc]
-                                      initWithTitle:InformationVCTitle
+                                      initWithTitle:NSLocalizedString(@"InformationVCTitle", nil)
                                       message:_messageForCalling
                                       delegate:self
-                                      cancelButtonTitle:AlertViewOk
-                                      otherButtonTitles:AlertViewCancel, nil];
+                                      cancelButtonTitle:NSLocalizedString(@"AlertViewOk", nil)
+                                      otherButtonTitles:NSLocalizedString(@"AlertViewCancel", nil), nil];
     _currentEmail       = _email;
     [_acronymAlertView show];
 }
@@ -207,10 +207,10 @@
     switch (section)
     {
         case 0:
-            _sectionName = InformationVCRealisation;
+            _sectionName = NSLocalizedString(@"InformationVCRealisation", nil);
             break;
         default:
-            _sectionName = InformationVCContact;
+            _sectionName = NSLocalizedString(@"InformationVCContact", nil);
             break;
     }
     return _sectionName;
@@ -302,7 +302,7 @@
         
         [_emailButton addTarget:self action:@selector(sendEmailToGivenAdress  :event:) forControlEvents:UIControlEventTouchUpInside];
         
-        NSMutableAttributedString *_titleString = [[NSMutableAttributedString alloc] initWithString:InformationVCDisplayEmail];
+        NSMutableAttributedString *_titleString = [[NSMutableAttributedString alloc] initWithString:NSLocalizedString(@"InformationVCDisplayEmail", nil)];
         [_titleString addAttribute:NSUnderlineStyleAttributeName value:[NSNumber numberWithInteger:NSUnderlineStyleSingle] range:NSMakeRange(0, [_titleString length])];
         [_titleString addAttribute:NSForegroundColorAttributeName value:_zhawColor._zhawFontGrey range:NSMakeRange(0, [_titleString length])];
         
